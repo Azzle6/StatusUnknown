@@ -1,0 +1,35 @@
+.custom-label {
+    font-size: 20px;
+    -unity-font-style: bold;
+    color: rgb(68, 138, 255);
+}
+
+.horizontalSlotStyle {
+    flex-direction: row;
+    align-self: center;
+    flex-shrink: 0;
+    align-items: center;
+}
+
+.custom-text-field > .unity-base-field__label {
+    align-self: center;
+}
+
+.custom-text-input > .unity-text-field__input {
+    align-self: stretch;
+    flex-grow: 1;
+}
+
+.custom-grid-content-viewport .unity-scroll-view__content-viewport {
+    align-self: stretch;
+}
+
+.custom-grid-content-container .unity-scroll-view__content-container {
+    flex-direction: column-reverse;
+}
+
+.customGridResizeButton {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+}
