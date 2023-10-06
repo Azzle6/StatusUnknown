@@ -4,7 +4,7 @@ namespace Core.Pooler
     using SingletonsSO;
     using UnityEngine;
 
-    [CreateAssetMenu(fileName = "PoolOfObject", menuName = "CustomAsset/PoolOfObject", order = 1)]
+    [CreateAssetMenu(fileName = "PoolOfObject", menuName = "CustomAssets/PoolOfObject", order = 1)]
     public class PoolOfObject : SingletonSO<PoolOfObject>
     {
         public List<PoolKey> pool;
