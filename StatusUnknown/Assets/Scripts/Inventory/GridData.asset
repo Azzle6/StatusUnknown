@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 043d092d02ee10849b501f6c4efbef7e, type: 3}
   m_Name: GridData
   m_EditorClassIdentifier: 
-  gridShape:
-    gridSize: {x: 5, y: 5}
-    gridContent: 
+  shape:
+    shapeSize: {x: 5, y: 5}
+    anchor: {x: 1, y: 1}
+    shapeContent: 
   content:
     keys: []
