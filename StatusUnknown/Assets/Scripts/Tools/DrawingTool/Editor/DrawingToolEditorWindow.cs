@@ -72,7 +72,7 @@ namespace Tools.DrawingTool.Editor
         private List<Vector2Int> currentHighlightedSquares = new List<Vector2Int>();
         private Vector2 symmetryAxis;
 
-        [MenuItem("TLW/Window/DrawingTool")]
+        [MenuItem("Status/DrawingTool")]
         public static void Display()
         {
             DrawingToolEditorWindow wnd = GetWindow<DrawingToolEditorWindow>();
