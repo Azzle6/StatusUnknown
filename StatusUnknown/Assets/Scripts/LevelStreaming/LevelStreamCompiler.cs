@@ -15,15 +15,16 @@ namespace LevelStreaming
         [SerializeField] Camera viewCamera;
         [SerializeField] List<LevelStreamVolume> levelStreamVolumes = new List<LevelStreamVolume>();
 
+
         #region Data Register
         private void OnEnable()
         {
-            LevelStreamDataSO.Instance.UpdateDataEvent += UpdateData;
+            //LevelStreamDataSO.Instance.UpdateDataEvent += UpdateData;
         }
 
         private void OnDisable()
         {
-            LevelStreamDataSO.Instance.UpdateDataEvent -= UpdateData;
+            //LevelStreamDataSO.Instance.UpdateDataEvent -= UpdateData;
         }
         #endregion
 

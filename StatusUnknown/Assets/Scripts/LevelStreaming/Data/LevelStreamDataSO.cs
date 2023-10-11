@@ -6,20 +6,20 @@ namespace LevelStreaming.Data
     using UnityEditor;
     using Sirenix.OdinInspector;
     using System;
-    using static UnityEngine.InputManagerEntry;
 
     [CreateAssetMenu(fileName = "LevelStreamGlobalData", menuName = "CustomAssets/LevelStream", order = 2)]
     public class LevelStreamDataSO : SingletonSO<LevelStreamDataSO>
     {
-        [SerializeField] List<LevelStreamSceneData> sceneDatas = new List<LevelStreamSceneData>();
-        public IReadOnlyList<LevelStreamSceneData> SceneDatas { get { return sceneDatas.AsReadOnly(); } }
+        [SerializeField] public List<LevelStreamSceneData> SceneDatas = new List<LevelStreamSceneData>();
+        //public IReadOnlyList<LevelStreamSceneData> SceneDatas { get { return sceneDatas.AsReadOnly(); } }
         public event Action UpdateDataEvent;
         public void AddData(LevelStreamVolumeData levelStreamVolumeData)
         {
+           
             Debug.Log("Add data" + levelStreamVolumeData.SceneName);
-            if (sceneDatas == null) sceneDatas = new List<LevelStreamSceneData>();
+            if (SceneDatas == null) SceneDatas = new List<LevelStreamSceneData>();
 
-            foreach (var sceneData in sceneDatas)
+            foreach (var sceneData in SceneDatas)
             {
                 if(sceneData.SceneName == levelStreamVolumeData.SourceSceneName)
                 {
@@ -37,15 +37,15 @@ namespace LevelStreaming.Data
                     return;
                 }
             }
-            sceneDatas.Add(new LevelStreamSceneData(levelStreamVolumeData.SourceSceneName,new List<LevelStreamVolumeData>() { levelStreamVolumeData}));
+            SceneDatas.Add(new LevelStreamSceneData(levelStreamVolumeData.SourceSceneName,new List<LevelStreamVolumeData>() { levelStreamVolumeData}));
             UpdateData();
         }
         public List<LevelStreamVolumeData> GetLeveStreamVolumeDataFromScene(string sceneName)
         {
-            for (int i = 0; i < sceneDatas.Count; i++)
+            for (int i = 0; i < SceneDatas.Count; i++)
             {
-                if(sceneName == sceneDatas[i].SceneName)
-                    return sceneDatas[i].LevelStreamVolumeDatas;
+                if(sceneName == SceneDatas[i].SceneName)
+                    return SceneDatas[i].LevelStreamVolumeDatas;
             }
             return null;
         }
@@ -54,21 +54,22 @@ namespace LevelStreaming.Data
         void RefreshData()
         {
             // delete old data without valid asset path & potential duplicata
-            for(int i = sceneDatas.Count - 1; i >= 0; i--)
+            for(int i = SceneDatas.Count - 1; i >= 0; i--)
             {
-                for(int j = sceneDatas[i].LevelStreamVolumeDatas.Count-1; j >= 0 ; j--)
+                for(int j = SceneDatas[i].LevelStreamVolumeDatas.Count-1; j >= 0 ; j--)
                 {
-                    LevelStreamVolumeData volumeData = sceneDatas[i].LevelStreamVolumeDatas[j];
+                    LevelStreamVolumeData volumeData = SceneDatas[i].LevelStreamVolumeDatas[j];
                     if (AssetDatabase.LoadAssetAtPath(volumeData.SceneAssetPath, typeof(SceneAsset)) == null)
-                        sceneDatas[i].LevelStreamVolumeDatas.RemoveAt(j);
-                    if (sceneDatas[i].LevelStreamVolumeDatas.Count <= 0 )
-                        sceneDatas.RemoveAt(i);
+                        SceneDatas[i].LevelStreamVolumeDatas.RemoveAt(j);
+                    if (SceneDatas[i].LevelStreamVolumeDatas.Count <= 0 )
+                        SceneDatas.RemoveAt(i);
                 }
             }
             UpdateData();
         }
         void UpdateData()
         {
+            EditorUtility.SetDirty(this);
             if (UpdateDataEvent != null)
                 UpdateDataEvent();
         }
