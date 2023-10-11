@@ -1,12 +1,13 @@
-
-using UnityEditor;
-using UnityEditor.SceneManagement;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-
 namespace LevelStreaming.Editor
 {
-    public class LevelStreamEditor
+    using UnityEditor;
+    using UnityEditor.SceneManagement;
+    using UnityEngine;
+    using UnityEngine.SceneManagement;
+    using LevelStreaming.Data;
+    using System.Collections.Generic;
+
+    public static class LevelStreamEditor
     {
         [MenuItem("GameObject/GenerateLevelStreamVolume")]//TODO : disable command when no gameObjects are selected
         static void CreateLevelStreamVolume()
@@ -18,7 +19,8 @@ namespace LevelStreaming.Editor
             Transform parentTransform = sceneObject.transform.parent;
 
             Scene scene = CreateScene($"{Selection.activeTransform.name}_SubScene", folderPath, sceneObject);
-            CreateLevelStreamObject(sceneObject, parentTransform, scene.name, folderPath);
+            GenerateLevelStreamVolumeData(sceneObject, scene.name, folderPath);
+            //CreateLevelStreamObject(sceneObject, parentTransform, scene.name, folderPath);
 
         }
         static string CreateFolderPath()
@@ -26,7 +28,7 @@ namespace LevelStreaming.Editor
             // create folder
             Scene activeScene = SceneManager.GetActiveScene();
             string folderName = $"{activeScene.name}_SubScenes";
-            string folderPath = $"Assets";//TODO : Get Root scene path
+            string folderPath = $"Assets/Scenes/Levels";//TODO : Get Root scene path
 
             if (!AssetDatabase.IsValidFolder($"{folderPath}/{folderName}"))
                 AssetDatabase.CreateFolder(folderPath, folderName);
@@ -37,48 +39,75 @@ namespace LevelStreaming.Editor
         static Scene CreateScene(string name, string folder, GameObject sceneObject)
         {
             Scene mainScene = SceneManager.GetActiveScene();
-            string filePath = $"{folder}/{name}.unity";
-            Debug.Log(filePath);
+            string assetPath = $"{folder}/{name}.unity";
+            Debug.Log(assetPath);
 
             Scene newScene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Additive);
 
             //delete old scene
-            while (AssetDatabase.LoadAssetAtPath(filePath, typeof(SceneAsset)) != null)
-                AssetDatabase.DeleteAsset(filePath);
+            while (AssetDatabase.LoadAssetAtPath(assetPath, typeof(SceneAsset)) != null)
+                AssetDatabase.DeleteAsset(assetPath);
 
             //Move gameObject
             sceneObject.transform.parent = null;
             SceneManager.MoveGameObjectToScene(sceneObject, newScene);
 
-            EditorSceneManager.SaveScene(newScene, filePath);
+            EditorSceneManager.SaveScene(newScene, assetPath);
             AssetDatabase.Refresh();
 
             // refocus on the main scene
             SceneManager.SetActiveScene(mainScene);
             EditorSceneManager.SaveScene(mainScene);
             AssetDatabase.Refresh();
-
+            AddSceneToBuild(assetPath);
             return newScene;
         }
-        static GameObject CreateLevelStreamObject(GameObject originObject, Transform parentTransform, string sceneName, string folderPath)
+
+        static void AddSceneToBuild(string assetPath)
+        {
+            // Vérifiez si la scène est déjà dans les Build Settings
+            bool sceneAlreadyAdded = false;
+            EditorBuildSettingsScene[] buildScenes = EditorBuildSettings.scenes;
+            foreach (EditorBuildSettingsScene buildScene in buildScenes)
+            {
+                if (buildScene.path == assetPath)
+                {
+                    sceneAlreadyAdded = true;
+                    break;
+                }
+            }
+
+            if (!sceneAlreadyAdded)
+            {
+                // Créez une nouvelle liste de scènes qui inclut la scène existante et la nouvelle scène
+                List<EditorBuildSettingsScene> newSceneList = new List<EditorBuildSettingsScene>(buildScenes);
+                newSceneList.Add(new EditorBuildSettingsScene(assetPath, true));
+
+                // Attribuez la nouvelle liste de scènes aux Build Settings
+                EditorBuildSettings.scenes = newSceneList.ToArray();
+
+                // Marquez la scène comme modifiée
+                EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetSceneByPath(assetPath));
+
+                // Sauvegardez les modifications des scènes ouvertes
+                EditorSceneManager.SaveOpenScenes();
+            }
+        }
+        static void GenerateLevelStreamVolumeData(GameObject originObject,string createdSceneName,string folderPath)
         {
             Bounds bounds = GetObjectBounds(originObject);
-            string objectName = $"{originObject.name}_LevelStream";
+            string sourceSceneName = SceneManager.GetActiveScene().name;
+            LevelStreamVolumeData data = new LevelStreamVolumeData(sourceSceneName, createdSceneName, folderPath, originObject.transform.position, bounds.center, bounds.size);
+            LevelStreamDataSO.Instance.AddData(data);
+            Debug.Log("Add data from editor");
+        }
+        public static void MarkCurrentSceneDirty()
+        {
+            // Obtenez la scène active
+            Scene activeScene = SceneManager.GetActiveScene();
 
-            GameObject oldObject = GameObject.Find(objectName);
-            if (oldObject != null)
-                GameObject.DestroyImmediate(oldObject);
-
-            GameObject levelStreamObject = new GameObject(objectName);
-
-            levelStreamObject.transform.position = originObject.transform.position;
-            levelStreamObject.transform.parent = parentTransform;
-
-            LevelStreamVolume levelStreamZone = levelStreamObject.AddComponent<LevelStreamVolume>();
-            levelStreamZone.Initialize(sceneName, folderPath, bounds);
-
-            return levelStreamObject;
-
+            // Marquez la scène comme modifiée
+            EditorSceneManager.MarkSceneDirty(activeScene);
         }
 
         #region Bounds for childObjects

@@ -1,25 +1,24 @@
-using System;
-using UnityEngine;
-
-namespace LevelStreaming
+namespace LevelStreaming.Data
 {
+    using System;
+    using UnityEngine;
     [Serializable]
     public class LevelStreamVolumeData
     {
-        [field:SerializeField] public string SourceSceneName { get; private set; }
+        [field:SerializeField,HideInInspector] public string SourceSceneName { get; private set; }
         [field: SerializeField] public string SceneName { get; private set; }
         [field: SerializeField] public string SceneAssetPath { get; private set; }
 
-        [field: SerializeField] public Vector3 Position { get; private set; }
-        Vector3 boundsCenter;
-        Vector3 boundsSize;
+        public Vector3 Position { get; private set; }
+        [SerializeField,HideInInspector] Vector3 boundsCenter;
+        [SerializeField,HideInInspector] Vector3 boundsSize;
         [SerializeField] Vector3 boundsExpand;
 
-        public LevelStreamVolumeData(string sourceSceneName, string sceneName, string folderPath, Vector3 position, Vector3 boundsCenter, Vector3 boundsSize)
+        public LevelStreamVolumeData(string sourceSceneName, string createdSceneName, string folderPath, Vector3 position, Vector3 boundsCenter, Vector3 boundsSize)
         {
             this.SourceSceneName = sourceSceneName;
-            this.SceneName = sceneName;
-            this.SceneAssetPath = $"{folderPath}/{sceneName}.unity";
+            this.SceneName = createdSceneName;
+            this.SceneAssetPath = $"{folderPath}/{createdSceneName}.unity";
             this.Position = position;
             this.boundsCenter = boundsCenter;
             this.boundsSize = boundsSize;
