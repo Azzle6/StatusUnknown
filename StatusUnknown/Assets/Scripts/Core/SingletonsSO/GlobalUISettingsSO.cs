@@ -6,6 +6,9 @@ namespace Core.SingletonsSO
     [CreateAssetMenu(menuName = "CustomAssets/UISettingsSO", fileName = "UISettingsSO")]
     public class GlobalUISettingsSO : SingletonSO<GlobalUISettingsSO>
     {
-        public UIDocument baseGridUIDocument;
+        public VisualTreeAsset baseGridTreeAsset;
+        public VisualTreeAsset slotTemplate;
+
+        public string inventoryUIName, weaponUIName;
     }
 }

@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Scripts/Inventory/UIDocuments/InventoryGrid.uss?fileID=7433441132597879392&amp;guid=db0b77deef53c884e9b9895f03d90cfc&amp;type=3#InventoryGrid" />
-    <ui:VisualElement name="Background" style="background-color: rgb(180, 180, 180); align-self: center;">
-        <ui:VisualElement name="VerticalParent" style="align-self: center;" />
+    <ui:VisualElement name="background" style="background-color: rgb(180, 180, 180); align-self: center; align-items: center; justify-content: center;">
+        <ui:VisualElement name="verticalParent" style="align-self: center; flex-direction: column-reverse;" />
     </ui:VisualElement>
 </ui:UXML>

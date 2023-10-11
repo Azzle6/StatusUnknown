@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &11400000
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 32
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -10,6 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c4e0a04a4e1c9f4da3625491d2723df, type: 3}
-  m_Name: UISettingsSO
+  m_Name: UISettings
   m_EditorClassIdentifier: 
-  baseGridUIDOcument: {fileID: 0}
+  baseGridTreeAsset: {fileID: 9197481963319205126, guid: d76399139e4e88d4c91451f86a882183,
+    type: 3}
+  slotTemplate: {fileID: 9197481963319205126, guid: 55ed7195cc1d9b54b8819cc67b9aafe1,
+    type: 3}

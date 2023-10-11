@@ -4,11 +4,13 @@ namespace Tools.DrawingTool.Editor
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using Inventory;
     using UnityEditor;
     using UnityEditor.UIElements;
     using UnityEngine;
     using UnityEngine.UIElements;
-    
+    using Object = UnityEngine.Object;
+
     public class DrawingToolEditorWindow : EditorWindow
     {
         [SerializeField]
@@ -28,6 +30,8 @@ namespace Tools.DrawingTool.Editor
         private Button exportButton;
         private Button loadButton;
         private Button exportAsBrushButton;
+        private Button exportToSelectedItemButton;
+        private Button importFromSelectedItemButton;
     
         //Drawing references
         private ToolbarButton paintBrushButton;
@@ -71,6 +75,7 @@ namespace Tools.DrawingTool.Editor
         private Vector2Int gridSize;
         private List<Vector2Int> currentHighlightedSquares = new List<Vector2Int>();
         private Vector2 symmetryAxis;
+        private IShaped selectedItemScriptable;
 
         [MenuItem("Status/DrawingTool")]
         public static void Display()
@@ -110,6 +115,12 @@ namespace Tools.DrawingTool.Editor
 
             this.exportAsBrushButton = treeAsset.Q<Button>("exportAsBrushButton");
             this.exportAsBrushButton.clicked += this.OnExportBrushButtonClicked;
+
+            this.exportToSelectedItemButton = treeAsset.Q<Button>("exportToSelectedButton");
+            this.exportToSelectedItemButton.clicked += this.OnExportToSelectedItemButtonClicked;
+
+            this.importFromSelectedItemButton = treeAsset.Q<Button>("importFromSelectedButton");
+            this.importFromSelectedItemButton.clicked += this.OnImportFromSelectedItemButtonClicked;
 
             this.loadButton = treeAsset.Q<Button>("loadButton");
             this.loadButton.clicked += this.OnLoadButtonClicked;
@@ -185,7 +196,15 @@ namespace Tools.DrawingTool.Editor
             this.SetNewSymmetryAxisValue(Vector2.zero);
         
             this.OnSymmetryToolStateChanged(E_Axis.NONE);
+            
+            this.CheckSelectedItem();
         }
+
+        private void OnSelectionChange()
+        {
+            this.CheckSelectedItem();
+        }
+
         #endregion // UNITY_FLOW
 
         #region GRID_MANAGEMENT
@@ -782,6 +801,45 @@ namespace Tools.DrawingTool.Editor
             this.RefreshBrushesList();
         }
 
+        private void OnExportToSelectedItemButtonClicked()
+        {
+            if(this.selectedItemScriptable == null)
+                return;
+
+            (Vector2Int, Vector2Int) contentBounds = this.GetGridContentBounds();
+            Vector2Int newSize = (contentBounds.Item2 + Vector2Int.one) - contentBounds.Item1;
+            Debug.Log($"grid size = {newSize}. Min : {contentBounds.Item1}. Max : {contentBounds.Item2}.");
+            
+            List<bool> exportedShape = new List<bool>();
+
+            for (int y = 0; y < newSize.y; y++) //Inverted because the grid is visually inverted so we need to save data in good order
+            {
+                for (int x = 0; x < newSize.x; x++)
+                {
+                    Vector2Int relativePos = new Vector2Int(x, y) + contentBounds.Item1;
+                    Debug.Log($"Register slot {relativePos}.");
+                    bool value = this.squaresData[GridPositionToIndex(relativePos)].PointState > 0;
+                    exportedShape.Add(value);
+                }
+            }
+            this.selectedItemScriptable.Shape = new Shape(newSize, this.anchorPosition, exportedShape.ToArray());
+            EditorUtility.SetDirty((Object)this.selectedItemScriptable);
+        }
+
+        private void OnImportFromSelectedItemButtonClicked()
+        {
+            if (this.selectedItemScriptable == null)
+                return;
+
+            Shape loadedShape = this.selectedItemScriptable.Shape;
+            
+            this.ForceNewGrid(loadedShape.shapeSize);
+            this.SetNewAnchor(loadedShape.anchor);
+
+            for (int i = 0; i < loadedShape.shapeContent.Length; i++)
+                this.ChangeSquareState(this.squaresData[i], loadedShape.shapeContent[i] == false ? E_PointState.EMPTY : E_PointState.FILL);
+        }
+
         private void OnLoadButtonClicked()
         {
             this.LoadData(this.fileFolderPath.value, this.fileName.value);
@@ -840,24 +898,9 @@ namespace Tools.DrawingTool.Editor
         /// </summary>
         private string[] SerializeData()
         {
-            Vector2Int[] content = this.GetGridContentOnly();
-            Vector2Int lowerPosition = this.anchorPosition;
-            Vector2Int upperPosition = this.anchorPosition;
-        
-            foreach (Vector2Int coordinate in content)
-            {
-                if (coordinate.x < lowerPosition.x)
-                    lowerPosition.x = coordinate.x;
-                if (coordinate.y < lowerPosition.y)
-                    lowerPosition.y = coordinate.y;
-            
-                if (coordinate.x > upperPosition.x)
-                    upperPosition.x = coordinate.x;
-                if (coordinate.y > upperPosition.y)
-                    upperPosition.y = coordinate.y;
-            }
+            (Vector2Int, Vector2Int) contentBounds = this.GetGridContentBounds();
 
-            Vector2Int newSize = upperPosition - lowerPosition;
+            Vector2Int newSize = contentBounds.Item2 - contentBounds.Item1;
             Vector2Int newGridSize = newSize + Vector2Int.one;
         
             string[] result = new string[newGridSize.y + 1];
@@ -866,7 +909,7 @@ namespace Tools.DrawingTool.Editor
             result[0] = $"[{newGridSize.x};{newGridSize.y}]";
 
             //Anchor position
-            Vector2Int newAnchorPosition = this.anchorPosition - lowerPosition;
+            Vector2Int newAnchorPosition = this.anchorPosition - contentBounds.Item1;
             result[0] += $"[{newAnchorPosition.x};{newAnchorPosition.y}]";
         
             //Squares data
@@ -874,7 +917,7 @@ namespace Tools.DrawingTool.Editor
 
             for (int i = 0; i < this.squaresData.Length; i++)
             {
-                Vector2Int newCoordinates = this.IndexToGridPosition(i) - lowerPosition;
+                Vector2Int newCoordinates = this.IndexToGridPosition(i) - contentBounds.Item1;
 
                 if (newCoordinates is { x: >= 0, y: >= 0 } && newCoordinates.x <= newSize.x && newCoordinates.y <= newSize.y)
                 {
@@ -900,6 +943,14 @@ namespace Tools.DrawingTool.Editor
             }
 
             return result.ToArray();
+        }
+
+        private void CheckSelectedItem()
+        {
+            this.selectedItemScriptable = Selection.activeObject as IShaped;
+
+            this.exportToSelectedItemButton.SetEnabled(this.selectedItemScriptable != null);
+            this.importFromSelectedItemButton.SetEnabled(this.selectedItemScriptable != null);
         }
         #endregion //EXPORT_DATA
     
@@ -965,6 +1016,28 @@ namespace Tools.DrawingTool.Editor
             }
 
             return result;
+        }
+        
+        private (Vector2Int lowerBound, Vector2Int upperBound) GetGridContentBounds()
+        {
+            Vector2Int[] content = this.GetGridContentOnly();
+            Vector2Int lowerPosition = this.anchorPosition;
+            Vector2Int upperPosition = this.anchorPosition;
+        
+            foreach (Vector2Int coordinate in content)
+            {
+                if (coordinate.x < lowerPosition.x)
+                    lowerPosition.x = coordinate.x;
+                if (coordinate.y < lowerPosition.y)
+                    lowerPosition.y = coordinate.y;
+            
+                if (coordinate.x > upperPosition.x)
+                    upperPosition.x = coordinate.x;
+                if (coordinate.y > upperPosition.y)
+                    upperPosition.y = coordinate.y;
+            }
+
+            return (lowerPosition, upperPosition);
         }
         #endregion //UTILITIES
     
