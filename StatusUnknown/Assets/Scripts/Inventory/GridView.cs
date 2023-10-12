@@ -1,6 +1,7 @@
 namespace Inventory
 {
     using Core.SingletonsSO;
+    using Core.UI;
     using Sirenix.OdinInspector;
     using UnityEngine;
     using UnityEngine.UIElements;
@@ -39,7 +40,7 @@ namespace Inventory
         private void BuildGrid()
         {
             Shape gridShape = this.gridDataSo.Shape;
-            VisualTreeAsset slotTemplate = GlobalUISettingsSO.Instance.slotTemplate;
+            VisualTreeAsset slotTemplate = TestSingletonSO.Instance.slotAsset;//UIManager.Instance.settings.slotTreeAsset;
             VisualElement verticalParent = this.GetGridRoot.Q<VisualElement>("verticalParent");
             verticalParent.Clear();
 
