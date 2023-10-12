@@ -46,19 +46,19 @@ namespace Core.Player
         public void OnMove(Vector2 direction, InputAction.CallbackContext ctx)
         {
             if (ctx.started && direction.magnitude > 0.1f)
-                playerStateInterpretor.AddState("WalkingPlayerState",PlayerStateType.MOVEMENT);
+                playerStateInterpretor.AddState("WalkingPlayerState",PlayerStateType.MOVEMENT,false);
                 
 
             if ((direction == Vector2.zero) && (!ctx.performed) && (ctx.canceled))
             {
-                playerStateInterpretor.RemoveState(PlayerStateType.MOVEMENT);
+                playerStateInterpretor.RemoveStateCheck("WalkingPlayerState");
             }
             
             if (direction != Vector2.zero) 
             {
                 if (playerStateInterpretor.statesSlot[PlayerStateType.MOVEMENT] == null)
-                    playerStateInterpretor.AddState("WalkingPlayerState",PlayerStateType.MOVEMENT);
-                
+                    playerStateInterpretor.AddState("WalkingPlayerState",PlayerStateType.MOVEMENT,false);
+
                 playerStateInterpretor.Behave(direction,PlayerStateType.MOVEMENT);
             }
             CheckForLastDevice(ctx);
@@ -77,7 +77,7 @@ namespace Core.Player
         public void OnInteract(InputAction.CallbackContext ctx)
         {
             if (ctx.started)
-                playerStateInterpretor.AddState("InteractPlayerState", PlayerStateType.ACTION);
+                playerStateInterpretor.AddState("InteractPlayerState", PlayerStateType.ACTION,false);
             CheckForLastDevice(ctx);
         
         }

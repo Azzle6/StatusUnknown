@@ -24,7 +24,7 @@ namespace Core.Player
         private void Awake()
         {
             FillDictionary();
-            AddState("IdlePlayerState", PlayerStateType.MOVEMENT);
+            AddState("IdlePlayerState", PlayerStateType.MOVEMENT, true);
         }
 
         private void FillDictionary()
@@ -38,10 +38,16 @@ namespace Core.Player
             statesSlot.Add(PlayerStateType.MOVEMENT, movementState);
         }
     
-        public void AddState(string state, PlayerStateType playerStateType)
+        public void AddState(string state, PlayerStateType playerStateType, bool lockState)
         {
+            if (statesSlot[playerStateType] != null)
+            {
+                if (statesSlot[playerStateType].lockState)
+                    return;
+            }
             tempState = playerStates[state];
             statesSlot[playerStateType] = tempState;
+            statesSlot[playerStateType].lockState = lockState;
             tempState.OnStateEnter();
             Debug.Log("Added state: " + state);
             
@@ -53,7 +59,20 @@ namespace Core.Player
                 return;
             
             statesSlot[playerStateType].OnStateExit();
+            statesSlot[playerStateType].lockState = false;
             statesSlot[playerStateType] = null;
+        }
+        
+        public void RemoveStateCheck(string state)
+        {
+            if (statesSlot[playerStates[state].playerStateType] == null)
+                return;
+            if (statesSlot[playerStates[state].playerStateType] != playerStates[state])
+                return;
+            
+            statesSlot[playerStates[state].playerStateType].OnStateExit();
+            statesSlot[playerStates[state].playerStateType].lockState = false;
+            statesSlot[playerStates[state].playerStateType] = null;
         }
 
         public void LockPlayerInput()
@@ -66,7 +85,7 @@ namespace Core.Player
 
         public void UnlockPlayerInput()
         {
-            AddState("IdlePlayerState", PlayerStateType.MOVEMENT);
+            AddState("IdlePlayerState", PlayerStateType.MOVEMENT,false);
             playerInput.enabled = true;
         }
 

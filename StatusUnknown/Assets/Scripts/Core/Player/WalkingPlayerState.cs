@@ -8,6 +8,7 @@ namespace Core.Player
         private float inertiaTimer;
         private bool applyingInertia;
         private Vector3 lookDirection;
+        private Vector3 targetInertia;
         public override void OnStateEnter()
         {
             if (applyingInertia)
@@ -26,7 +27,7 @@ namespace Core.Player
         public override void OnStateExit()
         {
             StartCoroutine(ApplyInertia());
-            playerStateInterpretor.AddState("IdlePlayerState", PlayerStateType.MOVEMENT);
+            playerStateInterpretor.AddState("IdlePlayerState", PlayerStateType.MOVEMENT,false);
         }
 
         private void Move(Vector2 movement)
@@ -43,7 +44,7 @@ namespace Core.Player
             yield return new WaitForSeconds(0.05f);
             while (tempMovement.magnitude > 0.01f)
             {
-                playerStateInterpretor.rb.velocity = (tempMovement + new Vector3(0,playerStateInterpretor.rb.velocity.y,0)) * PlayerStat.Instance.moveSpeed;
+                playerStateInterpretor.rb.velocity = (tempMovement + new Vector3(0,playerStateInterpretor.rb.velocity.y*Time.deltaTime,0)) * PlayerStat.Instance.moveSpeed;
                 if (playerStateInterpretor.statesSlot[PlayerStateType.AIM] == null) 
                     playerStateInterpretor.transform.forward = Vector3.Slerp(new Vector3(playerStateInterpretor.transform.forward.x,0,playerStateInterpretor.transform.forward.z), tempMovement, PlayerStat.Instance.turnSpeed); 
                 yield return null;
@@ -61,7 +62,8 @@ namespace Core.Player
             while (inertiaTimer < PlayerStat.Instance.inertiaDuration)
             {
                 inertiaTimer += Time.deltaTime;
-                playerStateInterpretor.rb.velocity = Vector3.Lerp(initialVelocity, Vector3.zero, PlayerStat.Instance.inertiaCurve.Evaluate(inertiaTimer / PlayerStat.Instance.inertiaDuration));
+                targetInertia = Vector3.zero + new Vector3(0,playerStateInterpretor.rb.velocity.y,0);
+                playerStateInterpretor.rb.velocity = Vector3.Lerp(initialVelocity, targetInertia, PlayerStat.Instance.inertiaCurve.Evaluate(inertiaTimer / PlayerStat.Instance.inertiaDuration));
                 yield return null;
             }
             playerStateInterpretor.rb.velocity = Vector3.zero;
