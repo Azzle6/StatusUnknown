@@ -1,12 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class LevelStreamViewer : MonoBehaviour
+namespace LevelStreaming
 {
-    [SerializeField] Camera viewCam;
-    private void Update()
+    using System.Collections;
+    using System.Collections.Generic;
+    using UnityEngine;
+    public class LevelStreamViewer : MonoBehaviour
     {
-        LevelStreamHandler.UpdateViewPlanesFromCamera(viewCam);
+        [SerializeField] Camera viewCam;
+        private void Update()
+        {
+            LevelStreamHandler.UpdateViewPlanesFromCamera(viewCam);
+        }
     }
 }
