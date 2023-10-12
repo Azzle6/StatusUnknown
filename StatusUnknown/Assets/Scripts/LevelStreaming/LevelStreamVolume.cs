@@ -1,7 +1,6 @@
 namespace LevelStreaming
 {
     using System.Collections;
-    using System.Collections.Generic;
     using UnityEngine.SceneManagement;
     using UnityEngine;
     using Sirenix.OdinInspector;
@@ -14,7 +13,7 @@ namespace LevelStreaming
 #endif
     public partial class LevelStreamVolume : MonoBehaviour
     {
-        [field: SerializeField]
+        [field: SerializeField, Sirenix.OdinInspector.FilePath(RequireExistingPath = true)]
         public string SceneAssetPath { get; private set; } // TODO : Debug Missing Reference
         [SerializeField, HideInInspector]
         Vector3 boundsCenter, boundsSize;
@@ -69,6 +68,7 @@ namespace LevelStreaming
         }
         IEnumerator LoadingSceneOperation()
         {
+            // MAYBE : Keep 
             var AsyncOp = SceneManager.LoadSceneAsync(SceneAssetPath, LoadSceneMode.Additive);
 
             while (!AsyncOp.isDone)
@@ -76,6 +76,7 @@ namespace LevelStreaming
                 yield return null;
             }
             Scene loadedScene = SceneManager.GetSceneByPath(SceneAssetPath);
+
             // parent all root objects in the loaded scene to the loadRootObject
             var rootObjects = loadedScene.GetRootGameObjects();
             rootObjects[0].transform.parent = transform;
@@ -89,6 +90,7 @@ namespace LevelStreaming
             IsLoaded = false;
         }
         #endregion
+
         #region Bound Operations
         void UpdateBoundsFromOpenScene(Scene scene)
         {
@@ -110,14 +112,17 @@ namespace LevelStreaming
 #if UNITY_EDITOR
     public partial class LevelStreamVolume : MonoBehaviour
     {
-        [Button("ShowScene")]
+        bool sceneAssetPathIsValid { get { return AssetDatabase.LoadAssetAtPath(SceneAssetPath, typeof(SceneAsset)) != null; } }
+        [Button("ShowScene"),ShowIf("sceneAssetPathIsValid",true)]
         void ShowSceneInEditor()
         {
+
+            ;
             Scene scene = EditorSceneManager.OpenScene(SceneAssetPath, OpenSceneMode.Additive);
             UpdateBoundsFromOpenScene(scene);
         }
 
-        [Button("HideScene")]
+        [Button("HideScene"), ShowIf("sceneAssetPathIsValid", true)]
         void HideSceneInEditor()
         {
             Scene scene = SceneManager.GetSceneByPath(SceneAssetPath);
@@ -130,7 +135,7 @@ namespace LevelStreaming
             EditorSceneManager.CloseScene(scene, true);
         }
 
-
+        //TODO : Update Bounds Box
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.yellow;
