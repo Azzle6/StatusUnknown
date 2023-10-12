@@ -24,7 +24,7 @@ namespace Core.Player
         private void Awake()
         {
             FillDictionary();
-            AddState("IdlePlayerState", PlayerStateType.MOVEMENT, true);
+            AddState("IdlePlayerState", PlayerStateType.MOVEMENT, false);
         }
 
         private void FillDictionary()

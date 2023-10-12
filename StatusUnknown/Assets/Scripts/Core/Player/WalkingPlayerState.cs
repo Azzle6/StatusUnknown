@@ -6,16 +6,12 @@ namespace Core.Player
     {
         private Vector3 tempMovement;
         private float inertiaTimer;
-        private bool applyingInertia;
         private Vector3 lookDirection;
-        private Vector3 targetInertia;
+        [SerializeField] private float groundCheckDistance = 0.5f;
         public override void OnStateEnter()
         {
-            if (applyingInertia)
-            {
+            if (inertiaTimer >0.1)
                 StopAllCoroutines();
-                applyingInertia = false;
-            }
             StartCoroutine(ApplyMovement());
         }
 
@@ -44,7 +40,7 @@ namespace Core.Player
             yield return new WaitForSeconds(0.05f);
             while (tempMovement.magnitude > 0.01f)
             {
-                playerStateInterpretor.rb.velocity = (tempMovement + new Vector3(0,playerStateInterpretor.rb.velocity.y*Time.deltaTime,0)) * PlayerStat.Instance.moveSpeed;
+                playerStateInterpretor.rb.velocity = tempMovement * PlayerStat.Instance.moveSpeed + new Vector3(0,playerStateInterpretor.rb.velocity.y,0);
                 if (playerStateInterpretor.statesSlot[PlayerStateType.AIM] == null) 
                     playerStateInterpretor.transform.forward = Vector3.Slerp(new Vector3(playerStateInterpretor.transform.forward.x,0,playerStateInterpretor.transform.forward.z), tempMovement, PlayerStat.Instance.turnSpeed); 
                 yield return null;
@@ -54,20 +50,35 @@ namespace Core.Player
 
         IEnumerator ApplyInertia()
         {
-            applyingInertia = true;
             Vector3 initialVelocity = playerStateInterpretor.rb.velocity;
             tempMovement = Vector3.zero;
             inertiaTimer = 0;
 
             while (inertiaTimer < PlayerStat.Instance.inertiaDuration)
             {
+                if (!CheckForGround())
+                    inertiaTimer = PlayerStat.Instance.inertiaDuration;
+
                 inertiaTimer += Time.deltaTime;
-                targetInertia = Vector3.zero + new Vector3(0,playerStateInterpretor.rb.velocity.y,0);
-                playerStateInterpretor.rb.velocity = Vector3.Lerp(initialVelocity, targetInertia, PlayerStat.Instance.inertiaCurve.Evaluate(inertiaTimer / PlayerStat.Instance.inertiaDuration));
+                playerStateInterpretor.rb.velocity = Vector3.Lerp(initialVelocity, Vector3.zero, PlayerStat.Instance.inertiaCurve.Evaluate(inertiaTimer / PlayerStat.Instance.inertiaDuration));
                 yield return null;
             }
-            playerStateInterpretor.rb.velocity = Vector3.zero;
-            applyingInertia = false;
+        }
+
+        private bool CheckForGround()
+        {
+            RaycastHit hit;
+            Debug.Log("checkforground");
+
+            if (Physics.Raycast(playerStateInterpretor.transform.position, Vector3.down, out hit, groundCheckDistance))
+            {
+                Debug.DrawRay(transform.position, Vector3.down * groundCheckDistance, Color.yellow);
+                if (hit.collider != null)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
