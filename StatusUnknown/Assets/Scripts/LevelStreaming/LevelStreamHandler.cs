@@ -1,17 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public static class LevelStreamHandler 
 {
     static Plane[] viewPlanes { get; set; }
+    public static Action UpdateViewEvent;
     public static void UpdateViewPlanesFromCamera(Camera camera)
     {
         viewPlanes = GeometryUtility.CalculateFrustumPlanes(camera);
+        if (UpdateViewEvent != null)
+            UpdateViewEvent();
     }
     public static bool IsBoundsInView(Bounds bounds)
     {
         if(viewPlanes == null) return false;
         return GeometryUtility.TestPlanesAABB(viewPlanes, bounds);
     }
+
 }

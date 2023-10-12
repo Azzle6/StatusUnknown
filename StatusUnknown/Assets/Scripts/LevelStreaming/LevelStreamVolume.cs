@@ -11,13 +11,14 @@ using UnityEditor;
 
 public partial class LevelStreamVolume : MonoBehaviour
 {
-    public string SceneAssetPath;
+    [field: SerializeField]
+    public string SceneAssetPath { get; private set; } // TODO : Debug Missing Reference
     [SerializeField,HideInInspector]
     Vector3 boundsCenter, boundsSize;
     [SerializeField] Vector3 boundsExpand;
     GameObject loadRootObject;
-    [field : SerializeField] public bool FirstLoad {  get; private set; }
-    [field: SerializeField] public bool IsLoaded { get; private set; }
+    public bool FirstLoad {  get; private set; }
+    public bool IsLoaded { get; private set; }
     public Bounds Bounds 
     {
         get 
@@ -28,16 +29,30 @@ public partial class LevelStreamVolume : MonoBehaviour
         } 
     }
 
-    
-    // TODO : OPTIMISATION group all Update call from this script
-    private void Update()
+    private void OnEnable()
+    {
+        LevelStreamHandler.UpdateViewEvent += StreamVolume;
+    }
+
+    private void OnDisable()
+    {
+        LevelStreamHandler.UpdateViewEvent -= StreamVolume;
+    }
+    void StreamVolume()
     {
         bool inView = LevelStreamHandler.IsBoundsInView(Bounds);
-        if(inView && !IsLoaded)
+        if (inView && !IsLoaded)
             LoadStreamVolume();
         if (!inView && IsLoaded)
             UnLoadStreamVolume();
     }
+    public void Initialize(string sceneAssetPath, Bounds objectBounds)
+    {
+        SceneAssetPath= sceneAssetPath;
+        boundsCenter = objectBounds.center; 
+        boundsSize = objectBounds.size;
+    }
+    #region Load & Unload
     void LoadStreamVolume()
     {
         if (FirstLoad == false)
@@ -70,23 +85,24 @@ public partial class LevelStreamVolume : MonoBehaviour
             loadRootObject.SetActive(false);
         IsLoaded = false;
     }
-    void UpdateBoundsFromScene(Scene scene)
+    #endregion
+    #region Bound Operations
+    void UpdateBoundsFromOpenScene(Scene scene)
     {
         GameObject[] rootObjects = null;
         rootObjects = scene.GetRootGameObjects();
         UpdateBoundsFromRootObject(rootObjects[0]);
         
     }
-
     void UpdateBoundsFromRootObject(GameObject rootObject)
     {
         transform.position = rootObject.transform.position;
-        Bounds bounds = GetObjectBounds(rootObject);
+        Bounds bounds = BoundsHelper.GetObjectBounds(rootObject);
 
         boundsCenter = bounds.center;
         boundsSize = bounds.size;
     }
-
+    #endregion
 }
 #if UNITY_EDITOR
 public partial class LevelStreamVolume : MonoBehaviour
@@ -95,7 +111,7 @@ public partial class LevelStreamVolume : MonoBehaviour
     void ShowSceneInEditor()
     {
         Scene scene = EditorSceneManager.OpenScene(SceneAssetPath, OpenSceneMode.Additive);
-        UpdateBoundsFromScene(scene);
+        UpdateBoundsFromOpenScene(scene);
     }
 
     [Button("HideScene")]
@@ -104,7 +120,7 @@ public partial class LevelStreamVolume : MonoBehaviour
         Scene scene = SceneManager.GetSceneByPath(SceneAssetPath);
         if (scene.IsValid())
         {
-            UpdateBoundsFromScene(scene);
+            UpdateBoundsFromOpenScene(scene);
             EditorSceneManager.SaveScene(scene);
             AssetDatabase.Refresh();
         }
@@ -114,37 +130,10 @@ public partial class LevelStreamVolume : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(Bounds.center, Bounds.size);
     }
 
-    #region Bounds for childObjects
-    static Bounds GetObjectBounds(GameObject parentObject)
-    {
-        Bounds resultBounds = new Bounds();
-        if (parentObject == null) return resultBounds; //TODO : debugLog error
-
-
-        Renderer[] renderers = parentObject.GetComponentsInChildren<Renderer>();
-        if (renderers.Length <= 0) return resultBounds; //TODO : debugLog error
-
-        resultBounds = renderers[0].bounds;
-        for (int i = 0; i < renderers.Length; i++)
-        {
-            resultBounds = SummBounds(resultBounds, renderers[i].bounds);
-        }
-        return resultBounds;
-    }
-    static Bounds SummBounds(Bounds bounds1, Bounds bounds2)
-    {
-        Vector3 max = Vector3.Max(bounds1.max, bounds2.max);
-        Vector3 min = Vector3.Min(bounds1.min, bounds2.min);
-
-        Vector3 size = max - min;
-        Vector3 center = min + (size / 2);
-        return new Bounds(center, size);
-    }
-    #endregion
 
 }
 #endif
