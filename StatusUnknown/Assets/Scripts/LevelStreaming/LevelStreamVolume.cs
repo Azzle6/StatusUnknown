@@ -116,8 +116,6 @@ namespace LevelStreaming
         [Button("ShowScene"),ShowIf("sceneAssetPathIsValid",true)]
         void ShowSceneInEditor()
         {
-
-            ;
             Scene scene = EditorSceneManager.OpenScene(SceneAssetPath, OpenSceneMode.Additive);
             UpdateBoundsFromOpenScene(scene);
         }
