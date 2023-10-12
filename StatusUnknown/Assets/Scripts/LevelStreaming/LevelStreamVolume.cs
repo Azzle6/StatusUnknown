@@ -5,7 +5,6 @@ namespace LevelStreaming
     using UnityEngine;
     using Sirenix.OdinInspector;
     using LevelStreaming.Helper;
-    using LevelStreaming;
 
 #if UNITY_EDITOR
     using UnityEditor.SceneManagement;
@@ -17,7 +16,8 @@ namespace LevelStreaming
         public string SceneAssetPath { get; private set; } // TODO : Debug Missing Reference
         [SerializeField, HideInInspector]
         Vector3 boundsCenter, boundsSize;
-        [SerializeField] Vector3 boundsExpand;
+        [SerializeField] 
+        Vector3 boundsExpand;
         GameObject loadRootObject;
         public bool FirstLoad { get; private set; }
         public bool IsLoaded { get; private set; }
@@ -40,6 +40,7 @@ namespace LevelStreaming
         {
             LevelStreamHandler.UpdateViewEvent -= StreamVolume;
         }
+
         void StreamVolume()
         {
             bool inView = LevelStreamHandler.IsBoundsInView(Bounds);
@@ -48,12 +49,14 @@ namespace LevelStreaming
             if (!inView && IsLoaded)
                 UnLoadStreamVolume();
         }
+
         public void Initialize(string sceneAssetPath, Bounds objectBounds)
         {
             SceneAssetPath = sceneAssetPath;
             boundsCenter = objectBounds.center;
             boundsSize = objectBounds.size;
         }
+
         #region Load & Unload
         void LoadStreamVolume()
         {
@@ -62,13 +65,16 @@ namespace LevelStreaming
                 StartCoroutine(LoadingSceneOperation());
                 FirstLoad = true;
             }
+
             if (loadRootObject != null)
                 loadRootObject.SetActive(true);
+
             IsLoaded = true;
         }
+
         IEnumerator LoadingSceneOperation()
         {
-            // MAYBE : Keep 
+            // TODO :Maybe Keep scene for baking
             var AsyncOp = SceneManager.LoadSceneAsync(SceneAssetPath, LoadSceneMode.Additive);
 
             while (!AsyncOp.isDone)
@@ -99,6 +105,7 @@ namespace LevelStreaming
             UpdateBoundsFromRootObject(rootObjects[0]);
 
         }
+
         void UpdateBoundsFromRootObject(GameObject rootObject)
         {
             transform.position = rootObject.transform.position;
@@ -109,10 +116,16 @@ namespace LevelStreaming
         }
         #endregion
     }
+
 #if UNITY_EDITOR
     public partial class LevelStreamVolume : MonoBehaviour
     {
-        bool sceneAssetPathIsValid { get { return AssetDatabase.LoadAssetAtPath(SceneAssetPath, typeof(SceneAsset)) != null; } }
+        bool sceneAssetPathIsValid 
+        { get 
+            { 
+                return AssetDatabase.LoadAssetAtPath(SceneAssetPath, typeof(SceneAsset)) != null; 
+            } 
+        }
         [Button("ShowScene"),ShowIf("sceneAssetPathIsValid",true)]
         void ShowSceneInEditor()
         {

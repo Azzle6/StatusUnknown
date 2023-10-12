@@ -4,7 +4,7 @@ namespace LevelStreaming
     using System;
     public static class LevelStreamHandler
     {
-        static Plane[] viewPlanes { get; set; }
+        private static Plane[] viewPlanes;
         public static Action UpdateViewEvent;
         public static void UpdateViewPlanesFromCamera(Camera camera)
         {
@@ -14,7 +14,9 @@ namespace LevelStreaming
         }
         public static bool IsBoundsInView(Bounds bounds)
         {
-            if (viewPlanes == null) return false;
+            if (viewPlanes == null) 
+                return false;
+
             return GeometryUtility.TestPlanesAABB(viewPlanes, bounds);
         }
 

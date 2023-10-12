@@ -25,7 +25,7 @@ namespace LevelStreaming.Editor
             // create folder
             Scene activeScene = SceneManager.GetActiveScene();
             string folderName = $"{activeScene.name}_StreamScenes";
-            string folderPath = $"Assets/Scenes/Levels";//TODO : Get Root scene path
+            string folderPath = $"Assets/Scenes/Levels";
 
             if (!AssetDatabase.IsValidFolder($"{folderPath}/{folderName}"))
                 AssetDatabase.CreateFolder(folderPath, folderName);
@@ -100,8 +100,6 @@ namespace LevelStreaming.Editor
         [MenuItem("Assets/GenerateLevelStreamVolume")]
         static void GenerateLevelStreamVolume()
         {
-            Debug.Log("Generate LevelStreamVolume");
-
             string sceneAssetPath = RenamedAssetPathInSceneStream(Selection.activeObject);
             Scene streamScene = EditorSceneManager.OpenScene(sceneAssetPath, OpenSceneMode.Additive);
             GameObject rootStreamSceneObject = streamScene.GetRootGameObjects()[0];
@@ -110,7 +108,6 @@ namespace LevelStreaming.Editor
             Vector3 position = rootStreamSceneObject.transform.position;
             Bounds objectBounds = BoundsHelper.GetObjectBounds(rootStreamSceneObject);
             CreateLevelStreamVolumeObject(objectName, sceneAssetPath, position, objectBounds);
-            RenamedAssetPathInSceneStream(Selection.activeObject);
 
         }
         static string RenamedAssetPathInSceneStream(Object assetObject)

@@ -6,17 +6,17 @@ namespace LevelStreaming.Helper
         public static Bounds GetObjectBounds(GameObject parentObject)
         {
             Bounds resultBounds = new Bounds();
-            if (parentObject == null) return resultBounds; //TODO : debugLog error
-
+            if (parentObject == null) 
+                return resultBounds; //TODO : debugLog error
 
             Renderer[] renderers = parentObject.GetComponentsInChildren<Renderer>();
-            if (renderers.Length <= 0) return resultBounds; //TODO : debugLog error
+            if (renderers.Length <= 0)
+                return resultBounds; //TODO : debugLog error
 
             resultBounds = renderers[0].bounds;
             for (int i = 0; i < renderers.Length; i++)
-            {
                 resultBounds = SummBounds(resultBounds, renderers[i].bounds);
-            }
+
             return resultBounds;
         }
         public static Bounds SummBounds(Bounds bounds1, Bounds bounds2)
