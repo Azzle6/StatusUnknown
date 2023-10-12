@@ -18,12 +18,13 @@ namespace Core.Player
         [Header("Player Component")]
         [OdinSerialize] public Rigidbody rb;
         public Animator animator;
+        private PlayerAction playerInput;
+        
         private bool modifyingState;
         
         private void Awake()
         {
             FillDictionary();
-            //currentPlayerStates = new List<PlayerState>();
             AddState("IdlePlayerState", PlayerStateType.MOVEMENT);
         }
 
@@ -57,6 +58,20 @@ namespace Core.Player
             statesSlot[playerStateType].OnStateExit();
             statesSlot[playerStateType] = null;
             modifyingState = false;
+        }
+
+        public void LockPlayerInput()
+        {
+            playerInput.enabled = false;
+            RemoveState(PlayerStateType.AIM);
+            RemoveState(PlayerStateType.MOVEMENT);
+            RemoveState(PlayerStateType.ACTION);
+        }
+
+        public void UnlockPlayerInput()
+        {
+            AddState("IdlePlayerState", PlayerStateType.MOVEMENT);
+            playerInput.enabled = true;
         }
 
         public PlayerState LookForState(string state)

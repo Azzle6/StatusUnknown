@@ -1,3 +1,5 @@
+using UnityEngine.InputSystem.Users;
+
 namespace Core.Player
 {
     using UnityEngine;
@@ -31,12 +33,6 @@ namespace Core.Player
         
         public delegate void WeaponEvent(InputAction.CallbackContext ctx, int weaponNo);
         public event WeaponEvent OnWeapon;
-        
-        public delegate void GamepadPressedEvent(InputAction.CallbackContext ctx);
-        public event GamepadPressedEvent OnGamepadPressed;
-        
-        public delegate void KeyboardPressedEvent(InputAction.CallbackContext ctx);
-        public event KeyboardPressedEvent OnKeyboardPressed;
 
         private void Awake()
         {
@@ -48,7 +44,7 @@ namespace Core.Player
         {
             EnableBindings();
         }
-
+        
         private void EnableBindings()
         {
             playerInput.PlayerActionMaps.Movement.started += ctx => Movement(ctx.ReadValue<Vector2>(), ctx);
@@ -94,14 +90,8 @@ namespace Core.Player
             playerInput.PlayerActionMaps.Weapon2.started += ctx => Weapon(ctx, 1);
             playerInput.PlayerActionMaps.Weapon2.performed += ctx => Weapon(ctx, 1);
             playerInput.PlayerActionMaps.Weapon2.canceled += ctx => Weapon(ctx, 1);
-            
-            playerInput.PlayerActionMaps.GamepadPressed.performed += ctx => GamepadPressed(ctx);
-            playerInput.PlayerActionMaps.GamepadPressed.canceled += ctx => GamepadPressed(ctx);
-            
-            playerInput.PlayerActionMaps.KeyboardPressed.performed += ctx => KeyboardPressed(ctx);
-            playerInput.PlayerActionMaps.KeyboardPressed.canceled += ctx => KeyboardPressed(ctx);
         }
-
+        
 
         private void Movement(Vector2 movement, InputAction.CallbackContext ctx)
         {
@@ -143,17 +133,6 @@ namespace Core.Player
         {
             OnWeapon?.Invoke(ctx, weaponNo);
         }
-        
-        private void GamepadPressed(InputAction.CallbackContext ctx)
-        {
-            OnGamepadPressed?.Invoke(ctx);
-        }
-        
-        private void KeyboardPressed(InputAction.CallbackContext ctx)
-        {
-            OnKeyboardPressed?.Invoke(ctx);
-        }
-        
     }
 }
 

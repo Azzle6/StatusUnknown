@@ -28,8 +28,6 @@ namespace Core.Player
             playerInputController.OnReload += OnReload;
             playerInputController.OnAugment += OnAugment;
             playerInputController.OnWeapon += OnWeapon;
-            playerInputController.OnGamepadPressed += OnGamepadPressed;
-            playerInputController.OnKeyboardPressed += KeyboardPressed;
         }
 
         private void DisableEvent()
@@ -42,10 +40,9 @@ namespace Core.Player
             playerInputController.OnReload -= OnReload;
             playerInputController.OnAugment -= OnAugment;
             playerInputController.OnWeapon -= OnWeapon;
-            playerInputController.OnGamepadPressed -= OnGamepadPressed;
-            playerInputController.OnKeyboardPressed -= KeyboardPressed;
         }
-
+        
+        
         public void OnMove(Vector2 direction, InputAction.CallbackContext ctx)
         {
             if (ctx.started && direction.magnitude > 0.1f)
@@ -55,7 +52,6 @@ namespace Core.Player
             if ((direction == Vector2.zero) && (!ctx.performed) && (ctx.canceled))
             {
                 playerStateInterpretor.RemoveState(PlayerStateType.MOVEMENT);
-                Debug.Log("canceled by" + direction);
             }
             
             if (direction != Vector2.zero) 
@@ -64,54 +60,55 @@ namespace Core.Player
                     playerStateInterpretor.AddState("WalkingPlayerState",PlayerStateType.MOVEMENT);
                 
                 playerStateInterpretor.Behave(direction,PlayerStateType.MOVEMENT);
+                Debug.Log(ctx.control.device.name);
             }
+            CheckForLastDevice(ctx);
         }
     
         public void OnAim(Vector2 direction, InputAction.CallbackContext ctx)
         {
-            
+            CheckForLastDevice(ctx);
         }
     
         public void OnMedkit(InputAction.CallbackContext ctx)
-        {
-        
+        {            
+            CheckForLastDevice(ctx);
         }
     
         public void OnInteract(InputAction.CallbackContext ctx)
         {
             if (ctx.started)
                 playerStateInterpretor.AddState("InteractPlayerState", PlayerStateType.ACTION);
+            CheckForLastDevice(ctx);
         
         }
     
         public void OnInventory(InputAction.CallbackContext ctx)
         {
-        
+            CheckForLastDevice(ctx);
+
         }
     
         public void OnReload(InputAction.CallbackContext ctx)
         {
+            CheckForLastDevice(ctx);
         
         }
     
         public void OnAugment(InputAction.CallbackContext ctx, int augmentNo)
         {
+            CheckForLastDevice(ctx);
         
         }
     
         public void OnWeapon(InputAction.CallbackContext ctx, int weaponNo)
         {
-        
+            CheckForLastDevice(ctx);
         }
-    
-        public void OnGamepadPressed(InputAction.CallbackContext ctx)
+
+        private void CheckForLastDevice(InputAction.CallbackContext ctx)
         {
-        
-        }
-    
-        public void KeyboardPressed(InputAction.CallbackContext ctx)
-        {
-        
+            DeviceLog.Instance.currentDevice = ctx.control.device;
         }
     }
 }

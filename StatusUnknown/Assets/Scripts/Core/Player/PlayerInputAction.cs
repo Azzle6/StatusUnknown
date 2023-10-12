@@ -134,24 +134,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""GamepadPressed"",
-                    ""type"": ""Button"",
-                    ""id"": ""e2c6f4bd-50d1-43c3-b717-fc9bba5dde34"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""KeyboardPressed"",
-                    ""type"": ""Button"",
-                    ""id"": ""254729b3-0cc7-45ae-a6a2-f6dc8fadf3b4"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -377,17 +359,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""a415d53a-ea29-4fc3-9a12-33eeb1f9b939"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""GamepadPressed"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""5cd1e57d-5bd4-4f20-b27a-dea084318150"",
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
@@ -473,17 +444,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""0f48071f-cfac-4930-9d86-60b5386f4a1b"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""KeyboardPressed"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -495,17 +455,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             ""devices"": [
                 {
                     ""devicePath"": ""<Keyboard>"",
-                    ""isOptional"": true,
+                    ""isOptional"": false,
                     ""isOR"": false
                 },
                 {
                     ""devicePath"": ""<Mouse>"",
-                    ""isOptional"": true,
-                    ""isOR"": false
-                },
-                {
-                    ""devicePath"": ""<Gamepad>"",
-                    ""isOptional"": true,
+                    ""isOptional"": false,
                     ""isOR"": false
                 }
             ]
@@ -515,18 +470,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             ""bindingGroup"": ""Gamepad"",
             ""devices"": [
                 {
-                    ""devicePath"": ""<Keyboard>"",
-                    ""isOptional"": true,
-                    ""isOR"": false
-                },
-                {
-                    ""devicePath"": ""<Mouse>"",
-                    ""isOptional"": true,
-                    ""isOR"": false
-                },
-                {
                     ""devicePath"": ""<Gamepad>"",
-                    ""isOptional"": true,
+                    ""isOptional"": false,
                     ""isOR"": false
                 }
             ]
@@ -547,8 +492,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_PlayerActionMaps_Augment3 = m_PlayerActionMaps.FindAction("Augment3", throwIfNotFound: true);
         m_PlayerActionMaps_Weapon1 = m_PlayerActionMaps.FindAction("Weapon1", throwIfNotFound: true);
         m_PlayerActionMaps_Weapon2 = m_PlayerActionMaps.FindAction("Weapon2", throwIfNotFound: true);
-        m_PlayerActionMaps_GamepadPressed = m_PlayerActionMaps.FindAction("GamepadPressed", throwIfNotFound: true);
-        m_PlayerActionMaps_KeyboardPressed = m_PlayerActionMaps.FindAction("KeyboardPressed", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -622,8 +565,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActionMaps_Augment3;
     private readonly InputAction m_PlayerActionMaps_Weapon1;
     private readonly InputAction m_PlayerActionMaps_Weapon2;
-    private readonly InputAction m_PlayerActionMaps_GamepadPressed;
-    private readonly InputAction m_PlayerActionMaps_KeyboardPressed;
     public struct PlayerActionMapsActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -640,8 +581,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @Augment3 => m_Wrapper.m_PlayerActionMaps_Augment3;
         public InputAction @Weapon1 => m_Wrapper.m_PlayerActionMaps_Weapon1;
         public InputAction @Weapon2 => m_Wrapper.m_PlayerActionMaps_Weapon2;
-        public InputAction @GamepadPressed => m_Wrapper.m_PlayerActionMaps_GamepadPressed;
-        public InputAction @KeyboardPressed => m_Wrapper.m_PlayerActionMaps_KeyboardPressed;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActionMaps; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -687,12 +626,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Weapon2.started += instance.OnWeapon2;
             @Weapon2.performed += instance.OnWeapon2;
             @Weapon2.canceled += instance.OnWeapon2;
-            @GamepadPressed.started += instance.OnGamepadPressed;
-            @GamepadPressed.performed += instance.OnGamepadPressed;
-            @GamepadPressed.canceled += instance.OnGamepadPressed;
-            @KeyboardPressed.started += instance.OnKeyboardPressed;
-            @KeyboardPressed.performed += instance.OnKeyboardPressed;
-            @KeyboardPressed.canceled += instance.OnKeyboardPressed;
         }
 
         private void UnregisterCallbacks(IPlayerActionMapsActions instance)
@@ -733,12 +666,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Weapon2.started -= instance.OnWeapon2;
             @Weapon2.performed -= instance.OnWeapon2;
             @Weapon2.canceled -= instance.OnWeapon2;
-            @GamepadPressed.started -= instance.OnGamepadPressed;
-            @GamepadPressed.performed -= instance.OnGamepadPressed;
-            @GamepadPressed.canceled -= instance.OnGamepadPressed;
-            @KeyboardPressed.started -= instance.OnKeyboardPressed;
-            @KeyboardPressed.performed -= instance.OnKeyboardPressed;
-            @KeyboardPressed.canceled -= instance.OnKeyboardPressed;
         }
 
         public void RemoveCallbacks(IPlayerActionMapsActions instance)
@@ -788,7 +715,5 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnAugment3(InputAction.CallbackContext context);
         void OnWeapon1(InputAction.CallbackContext context);
         void OnWeapon2(InputAction.CallbackContext context);
-        void OnGamepadPressed(InputAction.CallbackContext context);
-        void OnKeyboardPressed(InputAction.CallbackContext context);
     }
 }

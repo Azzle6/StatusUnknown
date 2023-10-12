@@ -112,24 +112,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "GamepadPressed",
-                    "type": "Button",
-                    "id": "e2c6f4bd-50d1-43c3-b717-fc9bba5dde34",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "KeyboardPressed",
-                    "type": "Button",
-                    "id": "254729b3-0cc7-45ae-a6a2-f6dc8fadf3b4",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -355,17 +337,6 @@
                 },
                 {
                     "name": "",
-                    "id": "a415d53a-ea29-4fc3-9a12-33eeb1f9b939",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "GamepadPressed",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "5cd1e57d-5bd4-4f20-b27a-dea084318150",
                     "path": "<Mouse>/position",
                     "interactions": "",
@@ -451,17 +422,6 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "0f48071f-cfac-4930-9d86-60b5386f4a1b",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "KeyboardPressed",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         }
@@ -473,17 +433,12 @@
             "devices": [
                 {
                     "devicePath": "<Keyboard>",
-                    "isOptional": true,
+                    "isOptional": false,
                     "isOR": false
                 },
                 {
                     "devicePath": "<Mouse>",
-                    "isOptional": true,
-                    "isOR": false
-                },
-                {
-                    "devicePath": "<Gamepad>",
-                    "isOptional": true,
+                    "isOptional": false,
                     "isOR": false
                 }
             ]
@@ -493,18 +448,8 @@
             "bindingGroup": "Gamepad",
             "devices": [
                 {
-                    "devicePath": "<Keyboard>",
-                    "isOptional": true,
-                    "isOR": false
-                },
-                {
-                    "devicePath": "<Mouse>",
-                    "isOptional": true,
-                    "isOR": false
-                },
-                {
                     "devicePath": "<Gamepad>",
-                    "isOptional": true,
+                    "isOptional": false,
                     "isOR": false
                 }
             ]
