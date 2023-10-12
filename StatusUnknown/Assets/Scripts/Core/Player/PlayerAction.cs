@@ -66,6 +66,20 @@ namespace Core.Player
     
         public void OnAim(Vector2 direction, InputAction.CallbackContext ctx)
         {
+            if (ctx.started)
+                playerStateInterpretor.AddState("AimPlayerState",PlayerStateType.AIM,false);
+            
+            if ((direction == Vector2.zero) && (!ctx.performed) && (ctx.canceled))
+                playerStateInterpretor.RemoveStateCheck("AimPlayerState");
+            
+            if (direction != Vector2.zero)
+            {
+                if (playerStateInterpretor.statesSlot[PlayerStateType.AIM] == null)
+                    playerStateInterpretor.AddState("AimPlayerState",PlayerStateType.AIM,false);
+                
+                playerStateInterpretor.Behave(direction,PlayerStateType.AIM);
+            }
+            
             CheckForLastDevice(ctx);
         }
     

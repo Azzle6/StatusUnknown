@@ -6,7 +6,7 @@ namespace Core.Player
     {
         [SerializeField] protected PlayerStateInterpretor playerStateInterpretor;
         public PlayerStateType playerStateType;
-        public bool lockState;
+        [HideInInspector] public bool lockState;
 
         public abstract void OnStateEnter();
     

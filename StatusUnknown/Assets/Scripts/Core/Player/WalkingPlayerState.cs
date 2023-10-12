@@ -41,7 +41,7 @@ namespace Core.Player
             while (tempMovement.magnitude > 0.01f)
             {
                 playerStateInterpretor.rb.velocity = tempMovement * PlayerStat.Instance.moveSpeed + new Vector3(0,playerStateInterpretor.rb.velocity.y,0);
-                if (playerStateInterpretor.statesSlot[PlayerStateType.AIM] == null) 
+                if (playerStateInterpretor.statesSlot[PlayerStateType.AIM] == default) 
                     playerStateInterpretor.transform.forward = Vector3.Slerp(new Vector3(playerStateInterpretor.transform.forward.x,0,playerStateInterpretor.transform.forward.z), tempMovement, PlayerStat.Instance.turnSpeed); 
                 yield return null;
             }
@@ -72,11 +72,8 @@ namespace Core.Player
 
             if (Physics.Raycast(playerStateInterpretor.transform.position, Vector3.down, out hit, groundCheckDistance))
             {
-                Debug.DrawRay(transform.position, Vector3.down * groundCheckDistance, Color.yellow);
-                if (hit.collider != null)
-                {
+                if (hit.collider != default)
                     return true;
-                }
             }
             return false;
         }
