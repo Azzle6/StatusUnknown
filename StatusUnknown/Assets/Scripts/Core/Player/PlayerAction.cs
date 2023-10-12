@@ -60,7 +60,6 @@ namespace Core.Player
                     playerStateInterpretor.AddState("WalkingPlayerState",PlayerStateType.MOVEMENT);
                 
                 playerStateInterpretor.Behave(direction,PlayerStateType.MOVEMENT);
-                Debug.Log(ctx.control.device.name);
             }
             CheckForLastDevice(ctx);
         }

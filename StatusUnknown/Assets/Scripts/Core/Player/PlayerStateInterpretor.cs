@@ -20,7 +20,6 @@ namespace Core.Player
         public Animator animator;
         private PlayerAction playerInput;
         
-        private bool modifyingState;
         
         private void Awake()
         {
@@ -41,23 +40,20 @@ namespace Core.Player
     
         public void AddState(string state, PlayerStateType playerStateType)
         {
-            modifyingState = true;
             tempState = playerStates[state];
             statesSlot[playerStateType] = tempState;
             tempState.OnStateEnter();
             Debug.Log("Added state: " + state);
-            modifyingState = false;
+            
         }
     
         public void RemoveState(PlayerStateType playerStateType)
         {
             if (statesSlot[playerStateType] == null)
                 return;
-                
-            modifyingState = true;
+            
             statesSlot[playerStateType].OnStateExit();
             statesSlot[playerStateType] = null;
-            modifyingState = false;
         }
 
         public void LockPlayerInput()
@@ -81,7 +77,7 @@ namespace Core.Player
         
         public void Behave(PlayerStateType type)
         {
-            if ((modifyingState) || (statesSlot[type] == null))
+            if (statesSlot[type] == null)
                 return;
             
             statesSlot[type].Behave();
@@ -89,7 +85,7 @@ namespace Core.Player
         
         public void Behave(Vector2 v2, PlayerStateType type)
         {
-            if ((modifyingState) || (statesSlot[type] == null))
+            if (statesSlot[type] == null)
                 return;
             
             statesSlot[type].Behave(v2);
