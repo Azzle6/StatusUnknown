@@ -100,11 +100,27 @@ public static class LevelStreamEditor
     static void GenerateLevelStreamVolume()
     {
         Debug.Log("Generate LevelStreamVolume");
-        Scene mainScene = SceneManager.GetActiveScene();
-        string sceneAssetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
-        Scene streamScene = EditorSceneManager.OpenScene(sceneAssetPath,OpenSceneMode.Additive);
-    }
+        
+        string sceneAssetPath = RenamedAssetPathInSceneStream(Selection.activeObject);
+        Scene streamScene = EditorSceneManager.OpenScene(sceneAssetPath, OpenSceneMode.Additive);
+        GameObject rootStreamSceneObject = streamScene.GetRootGameObjects()[0];
 
+        string objectName = $"{rootStreamSceneObject.name}_LevelStreamVolume";
+        Vector3 position = rootStreamSceneObject.transform.position;
+        Bounds objectBounds = BoundsHelper.GetObjectBounds(rootStreamSceneObject);
+        CreateLevelStreamVolumeObject(objectName, sceneAssetPath, position, objectBounds);
+        RenamedAssetPathInSceneStream(Selection.activeObject);
+        
+    }
+    static string RenamedAssetPathInSceneStream(Object assetObject)
+    {
+        string sceneAssetPath = AssetDatabase.GetAssetPath(assetObject);
+        if (assetObject.name.Contains("_StreamScene"))
+            return sceneAssetPath;
+
+        string sceneStreamName = $"{assetObject.name}_StreamScene";
+        return AssetDatabase.RenameAsset(sceneAssetPath, sceneStreamName);
+    }
     [MenuItem("Assets/GenerateLevelStreamVolume",true)]
     static bool CheckLevelStreamVolume()
     {
