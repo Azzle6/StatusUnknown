@@ -102,12 +102,12 @@ namespace Core.Player
             statesSlot[type].Behave();
         }
         
-        public void Behave(Vector2 v2, PlayerStateType type)
+        public void Behave<T>(T x, PlayerStateType type)
         {
             if (statesSlot[type] == null)
                 return;
             
-            statesSlot[type].Behave(v2);
+            statesSlot[type].Behave<T>(x);
         }
     }
 }

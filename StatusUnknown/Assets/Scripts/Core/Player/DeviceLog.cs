@@ -8,5 +8,10 @@ namespace Core.Player
     public class DeviceLog : SingletonSO<DeviceLog>
     {
         public InputDevice currentDevice;
+        
+        public void SetDevice(InputDevice device)
+        {
+            currentDevice = device;
+        }
     }
 }

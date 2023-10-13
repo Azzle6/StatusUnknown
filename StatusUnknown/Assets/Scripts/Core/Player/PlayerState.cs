@@ -11,7 +11,7 @@ namespace Core.Player
         public abstract void OnStateEnter();
     
         public virtual void Behave() {}
-        public virtual void Behave(Vector2 v2) {}
+        public virtual void Behave<T>(T x) {} 
     
         public abstract void OnStateExit();
 

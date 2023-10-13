@@ -6,7 +6,7 @@ namespace Core.Player
 {
     using UnityEngine;
 
-    public class AimPlayerState : PlayerState
+    public class AimMousePlayerState : PlayerState
     {
         private Vector2 aimDirection;
         private Vector3 mouseDirection;
@@ -21,20 +21,18 @@ namespace Core.Player
         public override void OnStateEnter()
         {
             StopAllCoroutines();
-            if (Gamepad.current != null) 
-                StartCoroutine(AimWithJoystick());
 
             if (DeviceLog.Instance.currentDevice == Mouse.current)
-                StartCoroutine(AimWithMouse());
+                StartCoroutine(Aim());
         }
         
-        public override void Behave(Vector2 aim)
+        public override void Behave<T>(T x)
         {
-            aimDirection = aim;
-      
+            if (x is Vector2 aim)
+                aimDirection = aim;
         }
 
-        private IEnumerator AimWithMouse()
+        private IEnumerator Aim()
         {
             while (aimDirection.magnitude > 0.1f)
             {
@@ -56,14 +54,7 @@ namespace Core.Player
             }
         }
         
-        private IEnumerator AimWithJoystick()
-        {
-            while (aimDirection.magnitude > 0.1f)
-            {
-                playerStateInterpretor.transform.forward = Vector3.Slerp(new Vector3(playerStateInterpretor.transform.forward.x,0,playerStateInterpretor.transform.forward.z), aimDirection, PlayerStat.Instance.turnSpeed);
-                yield return null;
-            }
-        }
+
 
         private void TurnPlayerTowardAim()
         {

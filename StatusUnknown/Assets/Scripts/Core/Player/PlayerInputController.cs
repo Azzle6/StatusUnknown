@@ -1,5 +1,3 @@
-using UnityEngine.InputSystem.Users;
-
 namespace Core.Player
 {
     using UnityEngine;

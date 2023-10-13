@@ -15,9 +15,10 @@ namespace Core.Player
             StartCoroutine(ApplyMovement());
         }
 
-        public override void Behave(Vector2 movement)
+        public override void Behave<T>(T x)
         {
-            Move(movement);
+            if (x is Vector2 movement)
+                Move(movement);
         }
 
         public override void OnStateExit()
