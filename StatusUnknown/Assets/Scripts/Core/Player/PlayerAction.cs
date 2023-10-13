@@ -21,7 +21,8 @@ namespace Core.Player
         private void EnableEvent()
         {
             playerInputController.OnMovement += OnMove;
-            playerInputController.OnAim += OnAim;
+            playerInputController.OnAimK += OnAimK;
+            playerInputController.OnAimG += OnAimG;
             playerInputController.OnMedkit += OnMedkit;
             playerInputController.OnInteract += OnInteract;
             playerInputController.OnInventory += OnInventory;
@@ -33,7 +34,8 @@ namespace Core.Player
         private void DisableEvent()
         {
             playerInputController.OnMovement -= OnMove;
-            playerInputController.OnAim -= OnAim;
+            playerInputController.OnAimK -= OnAimK;
+            playerInputController.OnAimG -= OnAimG;
             playerInputController.OnMedkit -= OnMedkit;
             playerInputController.OnInteract -= OnInteract; 
             playerInputController.OnInventory -= OnInventory;
@@ -63,9 +65,34 @@ namespace Core.Player
             }
         }
     
-        public void OnAim(Vector2 direction, InputAction.CallbackContext ctx)
+        public void OnAimG(Vector2 direction, InputAction.CallbackContext ctx)
         {
-            if (DeviceLog.Instance.currentDevice == Mouse.current)
+            Debug.Log(direction);
+            if (DeviceLog.Instance.currentDevice == DeviceType.GAMEPAD) 
+            {
+                if (ctx.started)
+                {
+                    playerStateInterpretor.AddState("AimGamepadPlayerState",PlayerStateType.AIM,false);
+                    playerStateInterpretor.Behave(direction,PlayerStateType.AIM);
+                }
+
+                if (ctx.canceled)
+                    playerStateInterpretor.RemoveStateCheck("AimGamepadPlayerState");
+
+                if (ctx.performed)
+                {
+                    if (playerStateInterpretor.statesSlot[PlayerStateType.AIM] == null)
+                        playerStateInterpretor.AddState("AimGamepadPlayerState",PlayerStateType.AIM,false);
+                    
+                    playerStateInterpretor.Behave(direction,PlayerStateType.AIM);
+                }
+            }
+            
+        }
+        public void OnAimK(Vector2 direction, InputAction.CallbackContext ctx)
+        {
+            Debug.Log(direction);
+            if (DeviceLog.Instance.currentDevice == DeviceType.KEYBOARD)
             {
                 if (ctx.started)
                 {
@@ -84,12 +111,6 @@ namespace Core.Player
                     playerStateInterpretor.Behave(direction,PlayerStateType.AIM);
                 }
             }
-
-            if (DeviceLog.Instance.currentDevice == Gamepad.current) 
-            {
-         
-            }
-            
         }
     
         public void OnMedkit(InputAction.CallbackContext ctx)

@@ -37,9 +37,27 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Aim"",
+                    ""name"": ""AimK"",
                     ""type"": ""Value"",
                     ""id"": ""ad9b9a48-8d61-41ce-947d-e2b167f12429"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""AimK1"",
+                    ""type"": ""Value"",
+                    ""id"": ""6de54ee4-29b4-45c0-a163-5e66275cf8bc"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""AimG"",
+                    ""type"": ""Value"",
+                    ""id"": ""e548d08d-91da-40a6-8dd7-2030887fc364"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -364,18 +382,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Aim"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9f247c0e-0d59-43a7-ac1e-d336ae169db8"",
-                    ""path"": ""<Gamepad>/rightStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Aim"",
+                    ""action"": ""AimK"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -444,6 +451,39 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""88854856-41dd-41d4-b9b8-3a29def97da7"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""AimG"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1119a424-aae2-404d-8fa4-cf05e52c7475"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""AimG"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""de4f0f63-33a2-43cf-85d7-13e6e9629fd4"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""AimK1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -481,7 +521,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         // PlayerActionMaps
         m_PlayerActionMaps = asset.FindActionMap("PlayerActionMaps", throwIfNotFound: true);
         m_PlayerActionMaps_Movement = m_PlayerActionMaps.FindAction("Movement", throwIfNotFound: true);
-        m_PlayerActionMaps_Aim = m_PlayerActionMaps.FindAction("Aim", throwIfNotFound: true);
+        m_PlayerActionMaps_AimK = m_PlayerActionMaps.FindAction("AimK", throwIfNotFound: true);
+        m_PlayerActionMaps_AimK1 = m_PlayerActionMaps.FindAction("AimK1", throwIfNotFound: true);
+        m_PlayerActionMaps_AimG = m_PlayerActionMaps.FindAction("AimG", throwIfNotFound: true);
         m_PlayerActionMaps_Medkit = m_PlayerActionMaps.FindAction("Medkit", throwIfNotFound: true);
         m_PlayerActionMaps_Interact = m_PlayerActionMaps.FindAction("Interact", throwIfNotFound: true);
         m_PlayerActionMaps_Inventory = m_PlayerActionMaps.FindAction("Inventory", throwIfNotFound: true);
@@ -554,7 +596,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_PlayerActionMaps;
     private List<IPlayerActionMapsActions> m_PlayerActionMapsActionsCallbackInterfaces = new List<IPlayerActionMapsActions>();
     private readonly InputAction m_PlayerActionMaps_Movement;
-    private readonly InputAction m_PlayerActionMaps_Aim;
+    private readonly InputAction m_PlayerActionMaps_AimK;
+    private readonly InputAction m_PlayerActionMaps_AimK1;
+    private readonly InputAction m_PlayerActionMaps_AimG;
     private readonly InputAction m_PlayerActionMaps_Medkit;
     private readonly InputAction m_PlayerActionMaps_Interact;
     private readonly InputAction m_PlayerActionMaps_Inventory;
@@ -570,7 +614,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         private @PlayerInputAction m_Wrapper;
         public PlayerActionMapsActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_PlayerActionMaps_Movement;
-        public InputAction @Aim => m_Wrapper.m_PlayerActionMaps_Aim;
+        public InputAction @AimK => m_Wrapper.m_PlayerActionMaps_AimK;
+        public InputAction @AimK1 => m_Wrapper.m_PlayerActionMaps_AimK1;
+        public InputAction @AimG => m_Wrapper.m_PlayerActionMaps_AimG;
         public InputAction @Medkit => m_Wrapper.m_PlayerActionMaps_Medkit;
         public InputAction @Interact => m_Wrapper.m_PlayerActionMaps_Interact;
         public InputAction @Inventory => m_Wrapper.m_PlayerActionMaps_Inventory;
@@ -593,9 +639,15 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
-            @Aim.started += instance.OnAim;
-            @Aim.performed += instance.OnAim;
-            @Aim.canceled += instance.OnAim;
+            @AimK.started += instance.OnAimK;
+            @AimK.performed += instance.OnAimK;
+            @AimK.canceled += instance.OnAimK;
+            @AimK1.started += instance.OnAimK1;
+            @AimK1.performed += instance.OnAimK1;
+            @AimK1.canceled += instance.OnAimK1;
+            @AimG.started += instance.OnAimG;
+            @AimG.performed += instance.OnAimG;
+            @AimG.canceled += instance.OnAimG;
             @Medkit.started += instance.OnMedkit;
             @Medkit.performed += instance.OnMedkit;
             @Medkit.canceled += instance.OnMedkit;
@@ -633,9 +685,15 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
-            @Aim.started -= instance.OnAim;
-            @Aim.performed -= instance.OnAim;
-            @Aim.canceled -= instance.OnAim;
+            @AimK.started -= instance.OnAimK;
+            @AimK.performed -= instance.OnAimK;
+            @AimK.canceled -= instance.OnAimK;
+            @AimK1.started -= instance.OnAimK1;
+            @AimK1.performed -= instance.OnAimK1;
+            @AimK1.canceled -= instance.OnAimK1;
+            @AimG.started -= instance.OnAimG;
+            @AimG.performed -= instance.OnAimG;
+            @AimG.canceled -= instance.OnAimG;
             @Medkit.started -= instance.OnMedkit;
             @Medkit.performed -= instance.OnMedkit;
             @Medkit.canceled -= instance.OnMedkit;
@@ -704,7 +762,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     public interface IPlayerActionMapsActions
     {
         void OnMovement(InputAction.CallbackContext context);
-        void OnAim(InputAction.CallbackContext context);
+        void OnAimK(InputAction.CallbackContext context);
+        void OnAimK1(InputAction.CallbackContext context);
+        void OnAimG(InputAction.CallbackContext context);
         void OnMedkit(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);

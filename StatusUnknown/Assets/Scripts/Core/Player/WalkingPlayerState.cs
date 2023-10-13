@@ -69,8 +69,6 @@ namespace Core.Player
         private bool CheckForGround()
         {
             RaycastHit hit;
-            Debug.Log("checkforground");
-
             if (Physics.Raycast(playerStateInterpretor.transform.position, Vector3.down, out hit, groundCheckDistance))
             {
                 if (hit.collider != default)

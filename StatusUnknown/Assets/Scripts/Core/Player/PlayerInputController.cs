@@ -11,8 +11,11 @@ namespace Core.Player
         public delegate void MovementEvent(Vector2 movement, InputAction.CallbackContext ctx);
         public event MovementEvent OnMovement;
         
-        public delegate void AimEvent(Vector2 aimDir, InputAction.CallbackContext ctx);
-        public event AimEvent OnAim;
+        public delegate void AimKEvent(Vector2 aimDir, InputAction.CallbackContext ctx);
+        public event AimKEvent OnAimK;
+        
+        public delegate void AimGEvent(Vector2 aimDir, InputAction.CallbackContext ctx);
+        public event AimGEvent OnAimG;
         
         public delegate void MedkitEvent(InputAction.CallbackContext ctx);
         public event MedkitEvent OnMedkit;
@@ -49,9 +52,13 @@ namespace Core.Player
             playerInput.PlayerActionMaps.Movement.performed += ctx => Movement(ctx.ReadValue<Vector2>(), ctx);
             playerInput.PlayerActionMaps.Movement.canceled += ctx => Movement(ctx.ReadValue<Vector2>(), ctx);
             
-            playerInput.PlayerActionMaps.Aim.started += ctx => Aim(ctx.ReadValue<Vector2>(), ctx);
-            playerInput.PlayerActionMaps.Aim.performed += ctx => Aim(ctx.ReadValue<Vector2>(), ctx);
-            playerInput.PlayerActionMaps.Aim.canceled += ctx => Aim(ctx.ReadValue<Vector2>(), ctx);
+            playerInput.PlayerActionMaps.AimK.started += ctx => AimK(ctx.ReadValue<Vector2>(), ctx);
+            playerInput.PlayerActionMaps.AimK.performed += ctx => AimK(ctx.ReadValue<Vector2>(), ctx);
+            playerInput.PlayerActionMaps.AimK.canceled += ctx => AimK(ctx.ReadValue<Vector2>(), ctx);
+            
+            playerInput.PlayerActionMaps.AimG.started += ctx => AimG(ctx.ReadValue<Vector2>(), ctx);
+            playerInput.PlayerActionMaps.AimG.performed += ctx => AimG(ctx.ReadValue<Vector2>(), ctx);
+            playerInput.PlayerActionMaps.AimG.canceled += ctx => AimG(ctx.ReadValue<Vector2>(), ctx);
             
             playerInput.PlayerActionMaps.Medkit.started += ctx => Medkit(ctx);
             playerInput.PlayerActionMaps.Medkit.performed += ctx => Medkit(ctx);
@@ -97,9 +104,14 @@ namespace Core.Player
                 OnMovement(movement, ctx);
         }
         
-        private void Aim(Vector2 aimDir, InputAction.CallbackContext ctx)
+        private void AimK(Vector2 aimDir, InputAction.CallbackContext ctx)
         {
-            OnAim?.Invoke(aimDir, ctx);
+            OnAimK?.Invoke(aimDir, ctx);
+        }
+        
+        private void AimG(Vector2 aimDir, InputAction.CallbackContext ctx)
+        {
+            OnAimG?.Invoke(aimDir, ctx);
         }
         
         private void Medkit(InputAction.CallbackContext ctx)

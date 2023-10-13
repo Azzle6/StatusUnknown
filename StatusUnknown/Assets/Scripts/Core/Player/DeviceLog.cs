@@ -7,11 +7,17 @@ namespace Core.Player
     [CreateAssetMenu(fileName = "DeviceLog", menuName = "CustomAssets/DeviceLog", order = 1)]
     public class DeviceLog : SingletonSO<DeviceLog>
     {
-        public InputDevice currentDevice;
+        public DeviceType currentDevice = DeviceType.KEYBOARD;
         
-        public void SetDevice(InputDevice device)
+        public void SetDevice(DeviceType device)
         {
             currentDevice = device;
         }
+    }
+    
+    public enum DeviceType
+    {
+        KEYBOARD,
+        GAMEPAD
     }
 }

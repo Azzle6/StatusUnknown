@@ -1,11 +1,11 @@
 
-using System.Collections;
-using UnityEngine.InputSystem;
 
 namespace Core.Player
 {
     using UnityEngine;
-
+    using System.Collections;
+    using UnityEngine.InputSystem;
+    
     public class AimMousePlayerState : PlayerState
     {
         private Vector2 aimDirection;
@@ -21,9 +21,7 @@ namespace Core.Player
         public override void OnStateEnter()
         {
             StopAllCoroutines();
-
-            if (DeviceLog.Instance.currentDevice == Mouse.current)
-                StartCoroutine(Aim());
+            StartCoroutine(Aim());
         }
         
         public override void Behave<T>(T x)
@@ -52,12 +50,6 @@ namespace Core.Player
             }
         }
         
-
-
-        private void TurnPlayerTowardAim()
-        {
-            
-        }
 
         public override void OnStateExit()
         {
