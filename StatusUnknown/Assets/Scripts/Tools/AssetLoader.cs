@@ -46,13 +46,13 @@ public class AssetLoader : MonoBehaviour
     private static AsyncOperationHandle<SceneInstance> _SceneLoadOpHandle;
 
     // loading by label
-    private List<string> _WeaponKeys = new List<string>() { "enemy", "combat", "basic" };
+    private List<string> _WeaponKeys = new List<string>() { "weapon", "combat", "basic" };
     private AsyncOperationHandle<IList<GameObject>> _LoadByLabelOpHandle;
 
     // loading by label, better memory management (resource locators)
-    private List<string> _EnemyKeys = new List<string>() { "Hats", "Fancy" };
-    private AsyncOperationHandle<IList<IResourceLocation>> m_HatsLocationsOpHandle; // _LoadByResourceLocationOpHandle
-    private AsyncOperationHandle<GameObject> m_HatLoadOpHandle; // ResourceLocationOpHandle
+    private List<string> _CombatKeys = new List<string>() { "combat" };
+    private AsyncOperationHandle<IList<IResourceLocation>> _CombatLocationsOpHandle; // _LoadByResourceLocationOpHandle
+    private AsyncOperationHandle<GameObject> _CombatLoadOpHandle; // ResourceLocationOpHandle
 
     /// <summary>
     /// On the surface, you'll add AssetReferences to your scripts just like you would add direct references, through public fields and private serializable fields. 
@@ -137,13 +137,13 @@ public class AssetLoader : MonoBehaviour
 
     private void SetHandles_ByLabel()
     {
-        _LoadByLabelOpHandle = Addressables.LoadAssetsAsync<GameObject>(_EnemyKeys, null, Addressables.MergeMode.Intersection); // to only get enemies that are of basic type
+        _LoadByLabelOpHandle = Addressables.LoadAssetsAsync<GameObject>(_WeaponKeys, null, Addressables.MergeMode.Intersection); // to only get enemies that are of basic type
         OnLoadByLabels_AddListener(); 
     }
 
     private void SetHandles_ByLabel_MemoryOptimised()
     {
-        m_HatsLocationsOpHandle = Addressables.LoadResourceLocationsAsync(_EnemyKeys, Addressables.MergeMode.Intersection);
+        _CombatLocationsOpHandle = Addressables.LoadResourceLocationsAsync(_CombatKeys, Addressables.MergeMode.Intersection);
         OnLoadByLabels_MemoryOptimised_AddListener(); 
     }
 
@@ -172,7 +172,7 @@ public class AssetLoader : MonoBehaviour
 
     private void OnLoadByLabels_MemoryOptimised_AddListener()
     {
-        m_HatsLocationsOpHandle.Completed += OnLoadByLocationCompleted;
+        _CombatLocationsOpHandle.Completed += OnLoadByLocationCompleted;
     }
     #endregion
 
@@ -230,8 +230,8 @@ public class AssetLoader : MonoBehaviour
         int randomIndex = UnityEngine.Random.Range(0, list.Count);
         IResourceLocation tempResourceLocation = list[randomIndex];
 
-        m_HatLoadOpHandle = Addressables.LoadAssetAsync<GameObject>(tempResourceLocation);
-        m_HatLoadOpHandle.Completed += OnGameobjectLoadCompleted;
+        _CombatLoadOpHandle = Addressables.LoadAssetAsync<GameObject>(tempResourceLocation);
+        _CombatLoadOpHandle.Completed += OnGameobjectLoadCompleted;
     }
     #endregion
 
@@ -241,6 +241,6 @@ public class AssetLoader : MonoBehaviour
 
         _WeaponLoadOpHandle.Completed -= OnGameobjectLoadCompleted;
         _LoadByLabelOpHandle.Completed -= OnLoadByLabelsCompleted; 
-        m_HatsLocationsOpHandle.Completed -= OnLoadByLocationCompleted;
+        _CombatLocationsOpHandle.Completed -= OnLoadByLocationCompleted;
     }
 }
