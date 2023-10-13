@@ -10,6 +10,11 @@ using System.Reflection;
 
 public enum AssetLoadingType { FromAddress, FromReference, Scene, ByLabel, MemoryOptimised }
 
+//                                                                                      -- TO GET STARTED --
+// le switch case reflète l'utilisation des Addressables du plus simple au plus avancé. 
+
+
+//                                                                                       -- MORE --
 // lorsqu'il faudra build le jeu et mieux comprendre le workflow de ce plugin, cf
 // pour les bases : https://learn.unity.com/tutorial/build-content-using-addressables?uv=2022.1&courseId=64255c01edbc2a268fb0b800#645dc516edbc2a5a5e61ab22
 // pour le profiling : https://learn.unity.com/tutorial/manage-builds-with-profiles?uv=2022.3&courseId=64255c01edbc2a268fb0b800#645dc642edbc2a5a33028010 
