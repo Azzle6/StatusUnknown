@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 39810414}
   - component: {fileID: 39810413}
   - component: {fileID: 39810412}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1601516814}
 --- !u!33 &39810413
@@ -485,6 +485,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 101858966}
+  - component: {fileID: 101858968}
+  - component: {fileID: 101858967}
   m_Layer: 0
   m_Name: EnemyLevel
   m_TagString: Untagged
@@ -515,6 +517,44 @@ Transform:
   - {fileID: 678101459}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &101858967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101858965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 934bebe5dde61cd4fb500e011b6aba40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fieldMask:
+    serializedVersion: 2
+    m_Bits: 64
+  fieldCollider: {fileID: 101858968}
+  data: {fileID: 11400000, guid: d7c9eb72df8c1f344b0260e15a753733, type: 2}
+--- !u!65 &101858968
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101858965}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 1
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 30.36255, y: 9.642307, z: 34.77518}
+  m_Center: {x: 2.6556578, y: 4.3211536, z: -0.43832207}
 --- !u!1 &105609112
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,7 +569,7 @@ GameObject:
   - component: {fileID: 105609116}
   - component: {fileID: 105609115}
   - component: {fileID: 105609114}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -570,7 +610,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 950118523}
 --- !u!33 &105609115
@@ -1369,7 +1409,7 @@ GameObject:
   - component: {fileID: 190273684}
   - component: {fileID: 190273683}
   - component: {fileID: 190273682}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stairs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1410,7 +1450,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 836766904}
 --- !u!33 &190273683
@@ -3612,7 +3652,7 @@ GameObject:
   - component: {fileID: 479323583}
   - component: {fileID: 479323582}
   - component: {fileID: 479323581}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3653,7 +3693,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 462211632}
 --- !u!33 &479323582
@@ -4182,7 +4222,7 @@ GameObject:
   - component: {fileID: 678101462}
   - component: {fileID: 678101461}
   - component: {fileID: 678101460}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4223,9 +4263,9 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: 950118523}
+  m_Mesh: {fileID: 297407916}
 --- !u!33 &678101461
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -5086,7 +5126,7 @@ GameObject:
   - component: {fileID: 792740768}
   - component: {fileID: 792740767}
   - component: {fileID: 792740766}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5127,7 +5167,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1508630079}
 --- !u!33 &792740767
@@ -6264,7 +6304,7 @@ GameObject:
   - component: {fileID: 1571941365}
   - component: {fileID: 1571941364}
   - component: {fileID: 1571941363}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6305,7 +6345,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1447921690}
 --- !u!33 &1571941364
@@ -6782,7 +6822,7 @@ GameObject:
   - component: {fileID: 1985909526}
   - component: {fileID: 1985909525}
   - component: {fileID: 1985909524}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Prism
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6823,7 +6863,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1124671442}
 --- !u!33 &1985909525
