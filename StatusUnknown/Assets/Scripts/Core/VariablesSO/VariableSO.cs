@@ -4,6 +4,7 @@ namespace Core.VariablesSO
     using UnityEngine;
     public class VariableSO<T> : ScriptableObject
     {
+        [SerializeField]
         private T value;
 
         public T Value

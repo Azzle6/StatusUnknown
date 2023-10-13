@@ -1,6 +1,10 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="InventoryGrid" src="project://database/Assets/UI/Grid/InventoryGrid.uxml?fileID=9197481963319205126&amp;guid=d76399139e4e88d4c91451f86a882183&amp;type=3#InventoryGrid" />
+    <ui:Template name="InventoryGrid" src="project://database/Assets/UI/Grid/Grid.uxml?fileID=9197481963319205126&amp;guid=d76399139e4e88d4c91451f86a882183&amp;type=3#Grid" />
+    <Style src="project://database/Assets/UI/Root/MainGameUI.uss?fileID=7433441132597879392&amp;guid=019b92c3d6581974989b3593bcfaf4d7&amp;type=3#MainGameUI" />
     <ui:VisualElement name="mainRoot" style="flex-grow: 1;">
+        <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="first-selected" style="align-self: flex-start;" />
+        <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" style="align-self: flex-start;" />
+        <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" style="align-self: flex-start;" />
         <ui:VisualElement name="centerParent" style="align-self: center; justify-content: center; align-items: center; flex-grow: 1; flex-direction: row;">
             <ui:VisualElement name="inventoryDisplay" style="align-self: center;">
                 <ui:Instance template="InventoryGrid" name="inventoryGrid" />

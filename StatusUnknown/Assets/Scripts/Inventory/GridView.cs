@@ -1,6 +1,5 @@
 namespace Inventory
 {
-    using Core.SingletonsSO;
     using Core.UI;
     using Sirenix.OdinInspector;
     using UnityEngine;
@@ -24,23 +23,26 @@ namespace Inventory
             }
         }
 
-        [Button("Display")]
+        [Button("Display"), HideInEditorMode]
         public void DisplayGrid()
         {
             this.GetGridRoot.style.display = DisplayStyle.Flex;
-            this.BuildGrid();
+            VisualElement firstFocus = this.BuildGrid();
+            UIManager.Instance.inputsHandler.SetFocus(firstFocus);
         }
 
-        [Button("Hide")]
+        [Button("Hide"), HideInEditorMode]
         public void HideGrid()
         {
             this.GetGridRoot.style.display = DisplayStyle.None;
         }
 
-        private void BuildGrid()
+        private VisualElement BuildGrid()
         {
+            VisualElement firstFocusElement = null;
+            
             Shape gridShape = this.gridDataSo.Shape;
-            VisualTreeAsset slotTemplate = TestSingletonSO.Instance.slotAsset;//UIManager.Instance.settings.slotTreeAsset;
+            VisualTreeAsset slotTemplate = UIManager.Instance.settings.slotTreeAsset;
             VisualElement verticalParent = this.GetGridRoot.Q<VisualElement>("verticalParent");
             verticalParent.Clear();
 
@@ -54,12 +56,20 @@ namespace Inventory
                 {
                     VisualElement slot = slotTemplate.Instantiate();
                     
-                    if (!this.gridDataSo.Shape.GetContentFromPosition(new Vector2Int(x, y)))
-                        slot.AddToClassList("emptySlot");
-                    
                     horizontalParent.Insert(x, slot);
+                    VisualElement gridSlotElement = slot.Q<VisualElement>("gridSlot");
+
+                    if (this.gridDataSo.Shape.GetContentFromPosition(new Vector2Int(x, y)))
+                    {
+                        gridSlotElement.name = $"{x},{y}";
+                        UIManager.Instance.inputsHandler.RegisterVisualElementEvents(gridSlotElement);
+                        firstFocusElement ??= gridSlotElement;
+                    }
+                    else
+                        slot.AddToClassList("hiddenSlot");
                 }
             }
+            return firstFocusElement;
         }
     }
 }
