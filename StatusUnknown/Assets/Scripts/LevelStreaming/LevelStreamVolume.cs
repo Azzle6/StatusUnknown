@@ -132,6 +132,22 @@ namespace LevelStreaming
             Scene scene = EditorSceneManager.OpenScene(SceneAssetPath, OpenSceneMode.Additive);
             UpdateBoundsFromOpenScene(scene);
         }
+        [Button("UpdateStreamVolume"), ShowIf("sceneAssetPathIsValid", true)]
+        void UpdateStreamVolume()
+        {
+            Scene scene = SceneManager.GetSceneByPath(SceneAssetPath);
+            bool sceneIsOpen = scene.IsValid();
+
+            if (!sceneIsOpen)
+                scene = EditorSceneManager.OpenScene(SceneAssetPath, OpenSceneMode.Additive);
+
+                UpdateBoundsFromOpenScene(scene);
+                EditorSceneManager.SaveScene(scene);
+                AssetDatabase.Refresh();
+
+            if (!sceneIsOpen)
+                EditorSceneManager.CloseScene(scene, true);
+        }
 
         [Button("HideScene"), ShowIf("sceneAssetPathIsValid", true)]
         void HideSceneInEditor()
