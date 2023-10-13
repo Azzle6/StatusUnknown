@@ -68,15 +68,18 @@ namespace Core.Player
             if (DeviceLog.Instance.currentDevice == Mouse.current)
             {
                 if (ctx.started)
-                    playerStateInterpretor.AddState("AimPlayerState",PlayerStateType.AIM,false);
+                {
+                    playerStateInterpretor.AddState("AimMousePlayerState",PlayerStateType.AIM,false);
+                    playerStateInterpretor.Behave(direction,PlayerStateType.AIM);
+                }
             
-                if ((direction == Vector2.zero) && (!ctx.performed) && (ctx.canceled))
-                    playerStateInterpretor.RemoveStateCheck("AimPlayerState");
+                if (ctx.canceled)
+                    playerStateInterpretor.RemoveStateCheck("AimMousePlayerState");
             
-                if (direction != Vector2.zero)
+                if (ctx.performed)
                 {
                     if (playerStateInterpretor.statesSlot[PlayerStateType.AIM] == null)
-                        playerStateInterpretor.AddState("AimPlayerState",PlayerStateType.AIM,false);
+                        playerStateInterpretor.AddState("AimMousePlayerState",PlayerStateType.AIM,false);
                 
                     playerStateInterpretor.Behave(direction,PlayerStateType.AIM);
                 }

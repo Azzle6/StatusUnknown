@@ -9,6 +9,7 @@ namespace Core.Player
         private float holdTimer;
         public override void OnStateEnter()
         {
+            StopAllCoroutines();
             holdTimer = 0;
             Debug.Log("Player tried to interact");
         }

@@ -49,18 +49,16 @@ namespace Core.Player
             statesSlot[playerStateType] = tempState;
             statesSlot[playerStateType].lockState = lockState;
             tempState.OnStateEnter();
-            Debug.Log("Added state: " + state);
-            
         }
     
         public void RemoveState(PlayerStateType playerStateType)
         {
             if (statesSlot[playerStateType] == null)
                 return;
-            
-            statesSlot[playerStateType].OnStateExit();
+            tempState = statesSlot[playerStateType];
             statesSlot[playerStateType].lockState = false;
             statesSlot[playerStateType] = null;
+            tempState.OnStateExit();
         }
         
         public void RemoveStateCheck(string state)
@@ -69,10 +67,10 @@ namespace Core.Player
                 return;
             if (statesSlot[playerStates[state].playerStateType] != playerStates[state])
                 return;
-            
-            statesSlot[playerStates[state].playerStateType].OnStateExit();
+            tempState = statesSlot[playerStates[state].playerStateType];
             statesSlot[playerStates[state].playerStateType].lockState = false;
             statesSlot[playerStates[state].playerStateType] = null;
+            tempState.OnStateExit();
         }
 
         public void LockPlayerInput()

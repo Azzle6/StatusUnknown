@@ -10,12 +10,12 @@ namespace Core.Player
     {
         private Vector2 aimDirection;
         private Vector3 mouseDirection;
+        private Vector3 targetsForward;
         private Camera mainCamera;
         
         private void Awake()
         {
             mainCamera = Camera.main;
-            
         }
         
         public override void OnStateEnter()
@@ -43,10 +43,8 @@ namespace Core.Player
                     Debug.DrawRay(ray.origin, ray.direction * 100, Color.red);
                     if (hit.collider != null)
                     {
-                        mouseDirection = ( playerStateInterpretor.transform.position - hit.point ).normalized;
-                        Debug.Log(hit.point);
-                        playerStateInterpretor.transform.forward = Vector3.Slerp(new Vector3(playerStateInterpretor.transform.forward.x,0,playerStateInterpretor.transform.forward.z), aimDirection, PlayerStat.Instance.turnSpeed);
-
+                        mouseDirection = (hit.point - playerStateInterpretor.transform.position ).normalized;
+                        playerStateInterpretor.transform.forward = Vector3.Slerp(new Vector3(playerStateInterpretor.transform.forward.x,0,playerStateInterpretor.transform.forward.z), mouseDirection, PlayerStat.Instance.turnSpeed);
                     }
                 }
 
