@@ -35,12 +35,9 @@ namespace Core.Player
         
         private void Exploring()
         {
+            targetPos = playerTransform.position + CameraStat.Instance.defaultOffset;
             if (transform.position != targetPos)
-            {
-                targetPos = playerTransform.position + CameraStat.Instance.defaultOffset;
                 cam.transform.position = Vector3.Slerp(cam.transform.position, targetPos, CameraStat.Instance.smoothSpeed * Time.deltaTime);
-            }
-           
         }
 
         private void Fighting()

@@ -60,14 +60,12 @@ namespace Core.Player
             {
                 if (playerStateInterpretor.statesSlot[PlayerStateType.MOVEMENT].name != "WalkingPlayerState")
                     playerStateInterpretor.AddState("WalkingPlayerState",PlayerStateType.MOVEMENT,false);
-                Debug.Log("LeftStick");
                 playerStateInterpretor.Behave(direction,PlayerStateType.MOVEMENT);
             }
         }
     
         public void OnAimG(Vector2 direction, InputAction.CallbackContext ctx)
         {
-            Debug.Log(direction);
             if (DeviceLog.Instance.currentDevice == DeviceType.GAMEPAD) 
             {
                 if (ctx.started)

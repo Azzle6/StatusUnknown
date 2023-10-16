@@ -1,10 +1,7 @@
-
-
 namespace Core.Player
 {
     using UnityEngine;
     using System.Collections;
-    using UnityEngine.InputSystem;
     
     public class AimMousePlayerState : PlayerState
     {
@@ -12,6 +9,7 @@ namespace Core.Player
         private Vector3 mouseDirection;
         private Vector3 targetsForward;
         private Camera mainCamera;
+        private Transform snapTo;
         
         private void Awake()
         {
@@ -38,11 +36,32 @@ namespace Core.Player
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, 100))
                 {
-                    Debug.DrawRay(ray.origin, ray.direction * 100, Color.red);
                     if (hit.collider != null)
                     {
                         mouseDirection = (hit.point - playerStateInterpretor.transform.position ).normalized;
-                        playerStateInterpretor.transform.forward = Vector3.Slerp(new Vector3(playerStateInterpretor.transform.forward.x,0,playerStateInterpretor.transform.forward.z), mouseDirection, PlayerStat.Instance.turnSpeed);
+                        mouseDirection.y = 0;
+                        Ray ray2 = new Ray(playerStateInterpretor.transform.position, mouseDirection);
+                        RaycastHit hit2;
+                        if (Physics.Raycast(ray2, out hit2, 50))
+                        {
+                            if (hit2.collider.transform.TryGetComponent(out Target target))
+                            {
+                                snapTo = target.transform;                 
+                            }
+                            else
+                            {
+                                snapTo = default;
+                            }
+                        }
+                        Debug.DrawRay(playerStateInterpretor.transform.position, mouseDirection * 50, Color.green);
+                        if (snapTo == default)
+                        {
+                            playerStateInterpretor.transform.forward = Vector3.Slerp(new Vector3(playerStateInterpretor.transform.forward.x,0,playerStateInterpretor.transform.forward.z), mouseDirection, PlayerStat.Instance.turnSpeed);
+                        }
+                        else
+                        {
+                           playerStateInterpretor.transform.LookAt(snapTo.transform.parent.position);
+                        }
                     }
                 }
 
