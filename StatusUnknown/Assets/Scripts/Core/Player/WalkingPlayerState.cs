@@ -10,6 +10,8 @@ namespace Core.Player
         [SerializeField] private float groundCheckDistance = 0.5f;
         private Coroutine applyingMovement;
         private Coroutine applyingInertia;
+        private RaycastHit groundHit;
+        private RaycastHit slopeHit;
         
         public override void OnStateEnter()
         {
@@ -51,6 +53,7 @@ namespace Core.Player
             while (tempMovement.magnitude > 0.01f)
             {
                 playerStateInterpretor.rb.velocity = tempMovement * PlayerStat.Instance.moveSpeed + new Vector3(0,playerStateInterpretor.rb.velocity.y,0);
+                AdjustVelocityToSlope();
                 if (playerStateInterpretor.statesSlot[PlayerStateType.AIM] == null) 
                     playerStateInterpretor.transform.forward = Vector3.Slerp(new Vector3(playerStateInterpretor.transform.forward.x,0,playerStateInterpretor.transform.forward.z), tempMovement, PlayerStat.Instance.turnSpeed); 
                 yield return null;
@@ -75,12 +78,27 @@ namespace Core.Player
             }
         }
 
+        private void AdjustVelocityToSlope()
+        {
+            if (Physics.Raycast(playerStateInterpretor.transform.position, Vector3.down, out slopeHit, groundCheckDistance))
+            {
+                if (slopeHit.collider != default)
+                {
+                    if (slopeHit.normal != Vector3.up)
+                    {
+                        Debug.Log("Is on slope");
+                        Vector3 slopeDirection = Vector3.Cross(slopeHit.normal, Vector3.down);
+                        playerStateInterpretor.rb.velocity = Vector3.ProjectOnPlane(playerStateInterpretor.rb.velocity, slopeDirection);
+                    }
+                }
+            }
+        }
+
         private bool CheckForGround()
         {
-            RaycastHit hit;
-            if (Physics.Raycast(playerStateInterpretor.transform.position, Vector3.down, out hit, groundCheckDistance))
+            if (Physics.Raycast(playerStateInterpretor.transform.position, Vector3.down, out groundHit, groundCheckDistance))
             {
-                if (hit.collider != default)
+                if (groundHit.collider != default)
                     return true;
             }
             return false;
