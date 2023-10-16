@@ -51,16 +51,16 @@ namespace Core.Player
                 playerStateInterpretor.AddState("WalkingPlayerState",PlayerStateType.MOVEMENT,false);
                 
 
-            if ((direction == Vector2.zero) && (!ctx.performed) && (ctx.canceled))
+            if ((direction == Vector2.zero) && (ctx.canceled))
             {
                 playerStateInterpretor.RemoveStateCheck("WalkingPlayerState");
             }
             
-            if (direction != Vector2.zero) 
+            if (direction != Vector2.zero || ctx.performed) 
             {
-                if (playerStateInterpretor.statesSlot[PlayerStateType.MOVEMENT] == null)
+                if (playerStateInterpretor.statesSlot[PlayerStateType.MOVEMENT].name != "WalkingPlayerState")
                     playerStateInterpretor.AddState("WalkingPlayerState",PlayerStateType.MOVEMENT,false);
-
+                Debug.Log("LeftStick");
                 playerStateInterpretor.Behave(direction,PlayerStateType.MOVEMENT);
             }
         }
@@ -79,7 +79,7 @@ namespace Core.Player
                 if (ctx.canceled)
                     playerStateInterpretor.RemoveStateCheck("AimGamepadPlayerState");
 
-                if (ctx.performed)
+                if ((ctx.performed) || (direction != Vector2.zero))
                 {
                     if (playerStateInterpretor.statesSlot[PlayerStateType.AIM] == null)
                         playerStateInterpretor.AddState("AimGamepadPlayerState",PlayerStateType.AIM,false);
@@ -91,7 +91,6 @@ namespace Core.Player
         }
         public void OnAimK(Vector2 direction, InputAction.CallbackContext ctx)
         {
-            Debug.Log(direction);
             if (DeviceLog.Instance.currentDevice == DeviceType.KEYBOARD)
             {
                 if (ctx.started)

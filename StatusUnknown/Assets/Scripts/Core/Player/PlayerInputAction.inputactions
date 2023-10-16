@@ -10,14 +10,23 @@
                     "type": "Value",
                     "id": "2f5d643d-4914-45b8-8596-8037105eefb0",
                     "expectedControlType": "Vector2",
-                    "processors": "StickDeadzone",
+                    "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Aim",
+                    "name": "AimK",
                     "type": "Value",
                     "id": "ad9b9a48-8d61-41ce-947d-e2b167f12429",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "AimG",
+                    "type": "Value",
+                    "id": "e548d08d-91da-40a6-8dd7-2030887fc364",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -342,18 +351,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Aim",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9f247c0e-0d59-43a7-ac1e-d336ae169db8",
-                    "path": "<Gamepad>/rightStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Aim",
+                    "action": "AimK",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -420,6 +418,17 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "88854856-41dd-41d4-b9b8-3a29def97da7",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "AimG",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
