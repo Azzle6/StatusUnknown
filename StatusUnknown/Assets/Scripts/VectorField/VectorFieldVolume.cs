@@ -38,13 +38,13 @@ public class VectorFieldVolume : MonoBehaviour
     void RegisterNodeField()
     {
         Vector3[] boundsPoints = GetBoundsPoints(fieldCollider.bounds);
-        Debug.Log(boundsPoints.Length);
+        //Debug.Log(boundsPoints.Length);
         int sizeX = Mathf.CeilToInt(fieldCollider.bounds.size.x / fieldDensity);
         int sizeZ = Mathf.CeilToInt(fieldCollider.bounds.size.z / fieldDensity);
         
         data.ClearData();
         Dictionary<Vector3, Node> nodeField = new Dictionary<Vector3, Node>();
-
+        List<Node> nodes = new List<Node>();
         for (int i = 0; i < boundsPoints.Length; i++)
         {
             Ray ray = new Ray(boundsPoints[i], Vector3.down);
@@ -52,23 +52,28 @@ public class VectorFieldVolume : MonoBehaviour
             RaycastHit hit;
             // Collider MUST BE CONVEX !!!
             if (Physics.Raycast(ray, out hit, fieldDensity, fieldMask) && !Physics.CheckSphere(boundsPoints[i], 0.001f, fieldMask))
-                    data.AddNode(new Node(hit.point));
+                    nodes.Add(new Node(hit.point));
         }
+        data.SetNodes(nodes);
         data.SaveAsset();
     }
+
 
     private void OnDrawGizmos()
     {
         if(data == null) return;
         Gizmos.color = Color.blue;
-        foreach( var node in data.Nodes )
+        foreach( var node in data.Nodes)
             Gizmos.DrawSphere(node.position, 0.1f);
-        foreach (var pos in data.NodeBoundPosition)
-        {
 
-            //Gizmos.color = Physics.CheckSphere(pos, 0.1f, fieldMask) ? Color.red : Color.blue;
-            Gizmos.DrawWireSphere(pos, 0.2f);
+        for(int i = 0; i < data.linkedNodes.Count; i++)
+        {
+            foreach (var node in data.linkedNodes[i].nodes)
+                Gizmos.DrawLine(data.Nodes[i].position, node.position);
         }
-            
+
+
+
+
     }
 }
