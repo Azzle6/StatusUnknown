@@ -40,6 +40,7 @@ public class VectorFieldVolumeData : ScriptableObject
     public void SaveAsset()
     {
 #if UNITY_EDITOR
+        EditorUtility.SetDirty(this);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
 #endif

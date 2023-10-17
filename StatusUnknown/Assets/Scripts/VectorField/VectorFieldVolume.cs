@@ -16,6 +16,8 @@ public class VectorFieldVolume : MonoBehaviour
     [SerializeField] BoxCollider fieldCollider;
     [SerializeField] VectorFieldVolumeData data;
     bool isValidData { get { return data != null; } }
+    [Header("Debug")]
+    [SerializeField] Transform target;
 
     Vector3[] GetBoundsPoints(Bounds bounds) // Used in method " SetNodeField "
     {
@@ -72,8 +74,15 @@ public class VectorFieldVolume : MonoBehaviour
                 Gizmos.DrawLine(data.Nodes[i].position, node.position);
         }
 
-
-
+        if (target == null) return;
+        Node worldNode = VectorFieldNavigator.WorlPositiondToNode(target.position, data.NodeField);
+        if(worldNode != null)
+        {
+            Gizmos.color= Color.red;
+            Gizmos.DrawLine(target.position, worldNode.position);
+            Gizmos.DrawCube(worldNode.position, Vector3.one * 0.2f);
+        }
+            
 
     }
 }
