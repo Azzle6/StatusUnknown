@@ -1919,7 +1919,7 @@ Transform:
   m_GameObject: {fileID: 1196480677}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.2985226, y: -0.52374196, z: 3.867596}
   m_LocalScale: {x: 0.45143512, y: 4.3676, z: 4.3676}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2131,13 +2131,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1287144885}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.18301263, y: 0.68301296, z: 0.18301278, w: 0.6830124}
-  m_LocalPosition: {x: -7.53, y: -3.08, z: -12.65}
-  m_LocalScale: {x: 0.45143512, y: 4.3676, z: 1.1961983}
+  m_LocalRotation: {x: -0.1497771, y: 0.6910624, z: 0.14977723, w: 0.69106185}
+  m_LocalPosition: {x: -8, y: -3, z: -0.5}
+  m_LocalScale: {x: 3.1356232, y: 4.3676, z: 1.1961983}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -30, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: -24.458, y: 90, z: 0}
 --- !u!1 &1331155901
 GameObject:
   m_ObjectHideFlags: 0
@@ -2595,7 +2595,7 @@ MonoBehaviour:
   playerStateInterpretor: {fileID: 1593713464}
   playerStateType: 0
   lockState: 0
-  groundCheckDistance: 2
+  groundCheckDistance: 2.2
 --- !u!4 &1945583329
 Transform:
   m_ObjectHideFlags: 0
@@ -2864,9 +2864,9 @@ Light:
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 2
-  m_AreaSize: {x: 1, y: 1}
+  m_AreaSize: {x: 0.5, y: 0.5}
   m_BounceIntensity: 1
-  m_ColorTemperature: 6570
+  m_ColorTemperature: 5500
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: -2.5956243e+20, z: 0, w: -3.2654593e+15}
   m_UseBoundingSphereOverride: 0

@@ -12,6 +12,7 @@ namespace Core.Player
         private Coroutine applyingInertia;
         private RaycastHit groundHit;
         private RaycastHit slopeHit;
+        private bool slopeDetected;
         
         public override void OnStateEnter()
         {
@@ -74,6 +75,7 @@ namespace Core.Player
 
                 inertiaTimer += Time.deltaTime;
                 playerStateInterpretor.rb.velocity = Vector3.Lerp(initialVelocity, Vector3.zero, PlayerStat.Instance.inertiaCurve.Evaluate(inertiaTimer / PlayerStat.Instance.inertiaDuration));
+                AdjustVelocityToSlope();
                 yield return null;
             }
         }
@@ -86,13 +88,21 @@ namespace Core.Player
                 {
                     if (slopeHit.normal != Vector3.up)
                     {
-                        Debug.Log("Is on slope");
-                        Vector3 slopeDirection = Vector3.Cross(slopeHit.normal, Vector3.down);
-                        playerStateInterpretor.rb.velocity = Vector3.ProjectOnPlane(playerStateInterpretor.rb.velocity, slopeDirection);
+                        playerStateInterpretor.rb.velocity = Vector3.ProjectOnPlane(playerStateInterpretor.rb.velocity, slopeHit.normal);
+                        slopeDetected = true;
+                    }
+
+                    if ((slopeHit.normal == Vector3.up) && (slopeDetected))
+                    {
+                        playerStateInterpretor.rb.velocity = Vector3.zero;
+                        slopeDetected = false;
                     }
                 }
             }
         }
+        
+        
+        
 
         private bool CheckForGround()
         {
