@@ -137,6 +137,7 @@ GameObject:
   - component: {fileID: 902550758}
   - component: {fileID: 902550757}
   - component: {fileID: 902550759}
+  - component: {fileID: 902550760}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -366,14 +367,28 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 902550753}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f37b67f9f3a8e294aa48fd47176d4d57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   apiURL: https://pokeapi.co/api/v2/pokemon/
-  amountOfCharacters: 3
+  amountOfRequests: 3
   characters: []
+--- !u!114 &902550760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902550753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6caae20a3158410479a39b7e75195d92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  apiURL: https://eoqwdwiqsp807df.m.pipedream.net
+  amountOfRequests: 1
 --- !u!1 &2059700834
 GameObject:
   m_ObjectHideFlags: 0

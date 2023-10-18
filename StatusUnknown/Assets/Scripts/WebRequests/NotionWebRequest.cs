@@ -7,17 +7,11 @@ public class NotionWebRequest : WebRequestBase
 {
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        StartCoroutine(WebRequestHandler.HandleRequest(apiURL, OnRequestComplete));
     }
 
     protected override void Populate(UnityWebRequest uwb)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("REQUEST DONE"); 
     }
 }

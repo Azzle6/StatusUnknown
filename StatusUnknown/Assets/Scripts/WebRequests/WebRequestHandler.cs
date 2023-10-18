@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 public class WebRequestHandler : MonoBehaviour
 {
-    public static IEnumerator HandleRequest(string apiUrl, Action<UnityWebRequest> callback)
+    public static IEnumerator HandleRequest(string apiUrl, Action<UnityWebRequest> callback = null)
     {
         using UnityWebRequest request = UnityWebRequest.Get(apiUrl);
         yield return request.SendWebRequest();
