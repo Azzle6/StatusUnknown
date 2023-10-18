@@ -8,55 +8,47 @@ namespace StatusUnknown
 {
     namespace WebRequest
     {
-        public class PokeWebRequest : MonoBehaviour
+        public class PokeWebRequest : WebRequestBase
         {
-            [SerializeField] private string apiURL;
-            [SerializeField, Range(0, 10)] private int amountOfCharacters = 3;
             [SerializeField] private List<Character> characters = new List<Character>();
-            private Action<UnityWebRequest> OnComplete;
-
-            private void OnEnable()
-            {
-                OnComplete += PopulateCharacters;
-            }
+            private readonly List<AbilityData> characterAbilitiesData = new List<AbilityData>();
+            private StatsDataContainer[] allCharacterStatsContainers; 
 
             void Start()
             {
-                for (int i = 1; i <= amountOfCharacters; i++)
+                for (int i = 1; i <= amountOfRequests; i++)
                 {
-                    StartCoroutine(WebRequestHandler.HandleRequest(string.Concat(apiURL, i.ToString()), OnComplete));
+                    StartCoroutine(WebRequestHandler.HandleRequest(string.Concat(apiURL, i.ToString()), OnRequestComplete));
                 }
             }
 
-            private void PopulateCharacters(UnityWebRequest uwb)
+            protected override void Populate(UnityWebRequest uwb)
             {
-                // ABILITIES
-                string[] allCharacterAbilitiesJson = JsonHelper.GetJsonObjects(uwb.downloadHandler.text, "ability");
-                List<AbilityData> characterAbilitiesData = new List<AbilityData>();
-
-                foreach (string jsonObj in allCharacterAbilitiesJson)
-                {
-                    characterAbilitiesData.Add(JsonUtility.FromJson<AbilityData>(jsonObj));
-                }
-                Debug.Log(characterAbilitiesData);
-
-
-                // STATS
-                string[] allCharacterStatsJson = JsonHelper.GetJsonObjectArray(uwb.downloadHandler.text, "stats");
-                StatsDataContainer[] allCharacterStatsContainers = new StatsDataContainer[allCharacterStatsJson.Length];
-
-                for (int i = 0; i < allCharacterStatsContainers.Length; i++)
-                {
-                    allCharacterStatsContainers[i] = JsonUtility.FromJson<StatsDataContainer>(allCharacterStatsJson[i]);
-                }
+                PopulateAbilities(uwb);
+                PopulateStats(uwb);
 
                 characters.Add(new Character(uwb, allCharacterStatsContainers));
             }
 
-
-            private void OnDisable()
+            private void PopulateAbilities(UnityWebRequest uwb)
             {
-                OnComplete -= PopulateCharacters;
+                string[] jsonResponseToArray = JsonHelper.GetJsonObjects(uwb.downloadHandler.text, "ability");
+
+                foreach (string jsonObj in jsonResponseToArray)
+                {
+                    characterAbilitiesData.Add(JsonUtility.FromJson<AbilityData>(jsonObj));
+                }
+            }
+
+            private void PopulateStats(UnityWebRequest uwb)
+            {
+                string[] jsonResponseToArray = JsonHelper.GetJsonObjectArray(uwb.downloadHandler.text, "stats");
+                allCharacterStatsContainers = new StatsDataContainer[jsonResponseToArray.Length];
+
+                for (int i = 0; i < allCharacterStatsContainers.Length; i++)
+                {
+                    allCharacterStatsContainers[i] = JsonUtility.FromJson<StatsDataContainer>(jsonResponseToArray[i]);
+                }
             }
         }
     }

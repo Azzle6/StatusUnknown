@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class NotionWebRequest : MonoBehaviour
+public class NotionWebRequest : WebRequestBase
 {
-    // Start is called before the first frame update
     void Start()
     {
         
@@ -14,5 +14,10 @@ public class NotionWebRequest : MonoBehaviour
     void Update()
     {
         
+    }
+
+    protected override void Populate(UnityWebRequest uwb)
+    {
+        throw new System.NotImplementedException();
     }
 }
