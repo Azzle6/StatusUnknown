@@ -9,8 +9,6 @@ public class VectorFieldVolumeData : ScriptableObject
 {
     [SerializeField]
     public List<Node> Nodes;
-    [SerializeField]
-    public List<LinkedNodes> linkedNodes;
     public Dictionary<Vector3, Node> NodeField 
     { 
         get 
@@ -26,9 +24,8 @@ public class VectorFieldVolumeData : ScriptableObject
     {
        this.Nodes = Nodes;
         nodeField = VectorFieldNavigator.GenerateNodeField(Nodes);
-        linkedNodes = new List<LinkedNodes>();
         for(int i = 0; i < Nodes.Count; i++)
-            linkedNodes.Add(new LinkedNodes(VectorFieldNavigator.GetLinkNode(Nodes[i], NodeField))); 
+            VectorFieldNavigator.SetLinkNode(Nodes[i], nodeField); 
     }
 
     public void ClearData()

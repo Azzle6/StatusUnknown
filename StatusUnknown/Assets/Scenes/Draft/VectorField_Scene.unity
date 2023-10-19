@@ -535,6 +535,37 @@ MonoBehaviour:
   fieldCollider: {fileID: 101858968}
   data: {fileID: 11400000, guid: d7c9eb72df8c1f344b0260e15a753733, type: 2}
   target: {fileID: 370481826}
+  distanceGradient:
+    serializedVersion: 2
+    key0: {r: 0, g: 0.07727146, b: 1, a: 1}
+    key1: {r: 0, g: 1, b: 0.1465373, a: 1}
+    key2: {r: 1, g: 0.505315, b: 0, a: 0}
+    key3: {r: 1, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 26985
+    ctime2: 53006
+    ctime3: 65535
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 2
+    m_ColorSpace: 0
+    m_NumColorKeys: 4
+    m_NumAlphaKeys: 2
+  maxGradientDistance: 40
 --- !u!65 &101858968
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -586,7 +617,7 @@ Transform:
   m_GameObject: {fileID: 105609112}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.280785, y: 2.5062103, z: 7.01816}
+  m_LocalPosition: {x: 8.22, y: 2.5062103, z: 6.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3573,7 +3604,7 @@ Transform:
   m_GameObject: {fileID: 370481822}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.01, y: 7.88, z: -7.3}
+  m_LocalPosition: {x: -7.3, y: 8.21, z: 0.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

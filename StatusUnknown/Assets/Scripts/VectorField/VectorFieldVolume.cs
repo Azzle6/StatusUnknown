@@ -18,6 +18,9 @@ public class VectorFieldVolume : MonoBehaviour
     bool isValidData { get { return data != null; } }
     [Header("Debug")]
     [SerializeField] Transform target;
+    [SerializeField] Gradient distanceGradient;
+    [SerializeField] int maxGradientDistance;
+
 
     Vector3[] GetBoundsPoints(Bounds bounds) // Used in method " SetNodeField "
     {
@@ -59,28 +62,37 @@ public class VectorFieldVolume : MonoBehaviour
         data.SetNodes(nodes);
         data.SaveAsset();
     }
+    [Button("SetDistance"), ShowIf("isValidData", true)]
+    void SetDistance()
+    {
+        if(target == null) return;
+        VectorFieldNavigator.SetTargetDistance(target.position, data.NodeField);
+    }
 
 
     private void OnDrawGizmos()
     {
         if(data == null) return;
         Gizmos.color = Color.blue;
-        foreach( var node in data.Nodes)
-            Gizmos.DrawSphere(node.position, 0.1f);
-
-        for(int i = 0; i < data.linkedNodes.Count; i++)
+        foreach( var node in data.NodeField)
         {
-            foreach (var node in data.linkedNodes[i].nodes)
-                Gizmos.DrawLine(data.Nodes[i].position, node.position);
+            
+            Gizmos.DrawSphere(node.Value.Position, 0.2f);
+            Gizmos.color = distanceGradient.Evaluate(node.Value.DistanceFromTarget / maxGradientDistance);
+            Gizmos.DrawCube(node.Value.Position + Vector3.up * node.Value.DistanceFromTarget*0.05f, new Vector3(0.1f,0.4f + node.Value.DistanceFromTarget * 0.1f,0.1f));
+            foreach( var boundPosition in node.Value.linkedBoundPositions)
+                Gizmos.DrawLine(data.NodeField[boundPosition].Position, node.Value.Position);
         }
+            
 
         if (target == null) return;
+        VectorFieldNavigator.SetTargetDistance(target.position, data.NodeField);
         Node worldNode = VectorFieldNavigator.WorlPositiondToNode(target.position, data.NodeField);
         if(worldNode != null)
         {
             Gizmos.color= Color.red;
-            Gizmos.DrawLine(target.position, worldNode.position);
-            Gizmos.DrawCube(worldNode.position, Vector3.one * 0.2f);
+            Gizmos.DrawLine(target.position, worldNode.Position);
+            Gizmos.DrawCube(worldNode.Position, Vector3.one * 0.2f);
         }
             
 

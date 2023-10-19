@@ -19,15 +19,15 @@ public static class VectorFieldNavigator
     {
         Dictionary<Vector3,Node> nodeField = new Dictionary<Vector3,Node>();
         foreach (Node node in nodes)
-            nodeField.Add(PositionToBoundPosition(node.position), node);
+            nodeField.Add(PositionToBoundPosition(node.Position), node);
         return nodeField;
     }
-    public static List<Node> GetLinkNode(Node node, Dictionary<Vector3,Node> nodeField)
+    public static void SetLinkNode(Node node, Dictionary<Vector3,Node> nodeField)
     {
-        List<Node> linkedNodes = new List<Node>();
+
         foreach(var dir in linkNodeDirections)
         {
-            Vector3 nodeBoundPos = PositionToBoundPosition(node.position) + dir * fieldDensity;
+            Vector3 nodeBoundPos = PositionToBoundPosition(node.Position) + dir * fieldDensity;
             float depth = 0;
             while(!nodeField.ContainsKey(nodeBoundPos) && depth <= linkNodeDepth)
             {
@@ -36,18 +36,57 @@ public static class VectorFieldNavigator
             }
             // TODO : Restrain link rules
             if(nodeField.ContainsKey(nodeBoundPos))
-                linkedNodes.Add(nodeField[nodeBoundPos]);
+                node.linkedBoundPositions.Add(nodeBoundPos);
         }
-        return linkedNodes;
     }
-    public static Node WorlPositiondToNode(Vector3 position, Dictionary<Vector3, Node> nodeField)
+    public static Node WorlPositiondToNode(Vector3 position, Dictionary<Vector3, Node> nodeField, float depthLinkDistance = 1)
     {
-        Node node = null;
         Vector3 boundPosition = PositionToBoundPosition(position);
-        if(nodeField.ContainsKey(boundPosition))
-            node = nodeField[boundPosition];
+        int depthIteration = Mathf.FloorToInt(depthLinkDistance / fieldDensity);
+        for(int i = 0; i < depthIteration; i++)
+        {
+            if (nodeField.ContainsKey(boundPosition))
+                return nodeField[boundPosition];
+            boundPosition += Vector3.down * fieldDensity;
+        }
 
-        return node;
+        return null;
+    }
+
+    public static void SetTargetDistance(Vector3 targetPosition, Dictionary<Vector3, Node> nodeField)
+    {
+        Node targetNode = WorlPositiondToNode(targetPosition, nodeField);
+        if(targetNode == null) return;
+
+        HashSet<Node> checkedNode = new HashSet<Node>{targetNode};
+        Queue<Node> nodeToProcess = new Queue<Node>();
+
+        foreach (var boundPosition in targetNode.linkedBoundPositions)
+        {
+            Node node = nodeField[boundPosition];
+            node.DistanceFromTarget = 1;
+            checkedNode.Add(node);
+            nodeToProcess.Enqueue(node);
+        }
+            
+        while(nodeToProcess.Count > 0) { 
+            Node dequeueNode = nodeToProcess.Dequeue();
+            foreach (var boundPosition in dequeueNode.linkedBoundPositions)
+            {
+                Node enqueueNode = nodeField[boundPosition];
+
+                if (enqueueNode.DistanceFromTarget > dequeueNode.DistanceFromTarget + 1)
+                    enqueueNode.DistanceFromTarget = dequeueNode.DistanceFromTarget + 1;
+
+                if (!checkedNode.Contains(enqueueNode)){
+                    checkedNode.Add(enqueueNode);
+                    enqueueNode.DistanceFromTarget = dequeueNode.DistanceFromTarget + 1;
+                    nodeToProcess.Enqueue(enqueueNode);
+                }
+            }
+            
+        }
+
     }
 
 }
