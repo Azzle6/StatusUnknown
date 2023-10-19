@@ -7,24 +7,12 @@ namespace Core.Player
     
     public class AimMousePlayerState : PlayerState
     {
-        private Vector2 aimDirection;
-        private Vector3 mouseDirection;
-        private Vector3 targetsForward;
         private Camera mainCamera;
-        private Transform snapTo;
-        private int closestTargetIndex;
-        private float bestdistanceToClosestTarget;
-
-        private Vector3[] midPointToTarget;
-        private Vector3[] outPointToTarget;
-        private RaycastHit[] snapHitsIn;
-        private Ray reverseRay;
-        private RaycastHit reverseHit;
-
-        private Ray camRay;
-        private RaycastHit camHit;
-        
-        private Ray playerToMouseRay;
+        private Vector2 aimDirection;
+        private Vector2 mouseDirection;
+        private Coroutine aiming;
+        private Ray camToMouseRay;
+        private RaycastHit camToMouseHit;
 
         
         private void Awake()
@@ -34,8 +22,7 @@ namespace Core.Player
         
         public override void OnStateEnter()
         {
-            StopAllCoroutines();
-            StartCoroutine(Aim());
+            aiming = StartCoroutine(Aim());
         }
         
         public override void Behave<T>(T x)
@@ -48,90 +35,28 @@ namespace Core.Player
         {
             while (aimDirection.magnitude > 0.1f)
             {
-                //cam to mouse pos ray
-                camRay = mainCamera.ScreenPointToRay(aimDirection);
-                if (Physics.Raycast(camRay, out camHit, 100))
+                camToMouseRay = mainCamera.ScreenPointToRay(aimDirection);
+                Debug.DrawRay(camToMouseRay.origin, camToMouseRay.direction * 100, Color.blue);
+                if (Physics.Raycast(camToMouseRay, out camToMouseHit, 100))
                 {
-                    if (camHit.collider != default)
+                    if (camToMouseHit.collider != default)
                         yield return null;
-                    
-                    mouseDirection = (camHit.point - playerStateInterpretor.transform.position ).normalized;
-                    mouseDirection.y = 0;
-                    bestdistanceToClosestTarget = 100;
-                    //player to mouse pos ray 
-                    playerToMouseRay = new Ray(playerStateInterpretor.transform.position, mouseDirection);
-                    snapHitsIn = Physics.RaycastAll(playerToMouseRay, 50);
-                        
-                    SnapPlayerToTarget();
-                    if (snapHitsIn.Length == 0)
-                        yield return null;
-                        
-                    midPointToTarget = new Vector3[snapHitsIn.Length];
-                    outPointToTarget = new Vector3[snapHitsIn.Length];
-
-                    for (int x = 0; x < snapHitsIn.Length; x++)
-                    {
-                        reverseRay = new Ray(snapHitsIn[x].point+ (mouseDirection*30), -mouseDirection);
-                        Debug.DrawRay(snapHitsIn[x].point+ (mouseDirection*30), -mouseDirection * 50, Color.yellow);
-                        if (snapHitsIn[x].collider.Raycast(reverseRay, out reverseHit, 50f))
-                        {
-                            midPointToTarget[x] = (snapHitsIn[x].point + reverseHit.point) / 2;
-                            outPointToTarget[x] = reverseHit.point;
-                            bestdistanceToClosestTarget = Vector3.Distance(snapHitsIn[x].point, reverseHit.point);
-
-                            if (Vector3.Distance(snapHitsIn[x].point, reverseHit.point) < bestdistanceToClosestTarget)
-                            {
-                                closestTargetIndex = x;
-                                snapTo = snapHitsIn[x].collider.transform;
-                            }
-                        }
-                    }
-                        
-                        
-                    Debug.DrawRay(playerStateInterpretor.transform.position, mouseDirection * 50, Color.green);
-                    
+                    mouseDirection = new Vector2(camToMouseHit.point.x - playerStateInterpretor.transform.position.x, camToMouseHit.point.z - playerStateInterpretor.transform.position.z);
+                    playerStateInterpretor.transform.forward = Vector3.Slerp(new Vector3(playerStateInterpretor.transform.forward.x,0,playerStateInterpretor.transform.forward.z), new Vector3(mouseDirection.x,0,mouseDirection.y), PlayerStat.Instance.turnSpeed);
+                    //playerStateInterpretor.transform.LookAt(new Vector3(camToMouseHit.point.x,playerStateInterpretor.transform.position.y,camToMouseHit.point.z));
                 }
-
                 yield return null;
-            }
-        }
-
-        private void SnapPlayerToTarget()
-        {
-            if (snapTo != null)
-            {
-                playerStateInterpretor.transform.LookAt(snapTo.transform.parent.position);
-            }
-            else
-            {
-                playerStateInterpretor.transform.forward = Vector3.Slerp(new Vector3(playerStateInterpretor.transform.forward.x,0,playerStateInterpretor.transform.forward.z), mouseDirection, PlayerStat.Instance.turnSpeed);
             }
         }
         
 
         public override void OnStateExit()
         {
-            
+            if (aiming != default)
+                StopCoroutine(aiming);
         }
 
-        private void OnDrawGizmos()
-        {
-            if (snapHitsIn == null)
-                return;
-            if (snapHitsIn.Length == 0)
-                return;
-
-            for (int x = 0; x < snapHitsIn.Length; x++)
-            {
-                Gizmos.color = Color.blue;
-                Gizmos.DrawSphere(snapHitsIn[x].point, 0.5f);
-                Gizmos.color = Color.red;
-                Gizmos.DrawSphere(midPointToTarget[x], 0.5f);
-                Gizmos.color = Color.yellow;
-                Gizmos.DrawSphere(outPointToTarget[x], 0.5f);
-            }
-        }
-
+    
        
     }
     
