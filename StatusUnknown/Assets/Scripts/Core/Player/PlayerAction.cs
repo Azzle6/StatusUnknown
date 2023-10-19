@@ -141,6 +141,17 @@ namespace Core.Player
     
         public void OnWeapon(InputAction.CallbackContext ctx, int weaponNo)
         {
+            if (ctx.started)
+            {
+                playerStateInterpretor.AddState("ShootingPlayerState", PlayerStateType.ACTION,false);
+                playerStateInterpretor.Behave(weaponNo,PlayerStateType.ACTION);
+            }
+
+            if (ctx.canceled)
+            {
+                playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
+            }
+            
         }
         
     }
