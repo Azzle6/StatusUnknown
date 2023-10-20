@@ -25,7 +25,7 @@ public class VectorFieldVolumeData : ScriptableObject
        this.Nodes = Nodes;
         nodeField = VectorFieldNavigator.GenerateNodeField(Nodes);
         for(int i = 0; i < Nodes.Count; i++)
-            VectorFieldNavigator.SetLinkNode(Nodes[i], nodeField); 
+            VectorFieldNavigator.LinkNode(Nodes[i], nodeField); 
     }
 
     public void ClearData()

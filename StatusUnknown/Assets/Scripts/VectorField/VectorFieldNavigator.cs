@@ -6,7 +6,7 @@ public static class VectorFieldNavigator
 {
     public static float fieldDensity = 1; // TODO : Add this varaiable to inspector window in some way
     public static Vector3[] linkNodeDirections = new Vector3[] { Vector3.right, Vector3.forward, -Vector3.right, -Vector3.forward };
-    public static float linkNodeDepth = 0.1f;
+    public static float linkNodeYDist = 1.2f;
     public static Vector3 PositionToBoundPosition(Vector3 position)
     {
         int posX = Mathf.RoundToInt(position.x / fieldDensity);
@@ -22,21 +22,19 @@ public static class VectorFieldNavigator
             nodeField.Add(PositionToBoundPosition(node.Position), node);
         return nodeField;
     }
-    public static void SetLinkNode(Node node, Dictionary<Vector3,Node> nodeField)
+    public static void LinkNode(Node node, Dictionary<Vector3,Node> nodeField)
     {
-
         foreach(var dir in linkNodeDirections)
         {
-            Vector3 nodeBoundPos = PositionToBoundPosition(node.Position) + dir * fieldDensity;
-            float depth = 0;
-            while(!nodeField.ContainsKey(nodeBoundPos) && depth <= linkNodeDepth)
+            int linkIteration = Mathf.FloorToInt(linkNodeYDist / fieldDensity);
+            Vector3 originNodeBoundPos = PositionToBoundPosition(node.Position) + (dir + linkIteration * Vector3.up) * fieldDensity  ;
+
+            for(int i = 0; i < linkIteration * 2; i++)
             {
-                nodeBoundPos += Vector3.down * fieldDensity;
-                depth += fieldDensity;
+                if (nodeField.ContainsKey(originNodeBoundPos))
+                    node.linkedBoundPositions.Add(originNodeBoundPos);
+                originNodeBoundPos += Vector3.down * fieldDensity;
             }
-            // TODO : Restrain link rules
-            if(nodeField.ContainsKey(nodeBoundPos))
-                node.linkedBoundPositions.Add(nodeBoundPos);
         }
     }
     public static Node WorlPositiondToNode(Vector3 position, Dictionary<Vector3, Node> nodeField, float depthLinkDistance = 1)
