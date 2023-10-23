@@ -5,7 +5,7 @@ namespace Core.Player
     using UnityEngine.InputSystem;
 
     [CreateAssetMenu(fileName = "DeviceLog", menuName = "CustomAssets/DeviceLog", order = 1)]
-    public class DeviceLog : SingletonSO<DeviceLog>
+    public class DeviceLog : ScriptableObject
     {
         public DeviceType currentDevice = DeviceType.KEYBOARD;
         

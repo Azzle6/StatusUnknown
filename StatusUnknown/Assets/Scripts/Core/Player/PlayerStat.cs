@@ -4,7 +4,7 @@ namespace Core.Player
     using Core.SingletonsSO;
     
     [CreateAssetMenu(fileName = "PlayerStat", menuName = "CustomAssets/PlayerStat", order = 1)]
-    public class PlayerStat : SingletonSO<PlayerStat>
+    public class PlayerStat : ScriptableObject
     {
         [Header("Movement")]
         public float moveSpeed;

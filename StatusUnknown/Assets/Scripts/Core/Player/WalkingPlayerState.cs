@@ -13,6 +13,7 @@ namespace Core.Player
         private RaycastHit groundHit;
         private RaycastHit slopeHit;
         private bool slopeDetected;
+        [SerializeField] private PlayerStat playerStat;
         
         public override void OnStateEnter()
         {
@@ -53,10 +54,10 @@ namespace Core.Player
         {
             while (tempMovement.magnitude > 0.01f)
             {
-                playerStateInterpretor.rb.velocity = tempMovement * PlayerStat.Instance.moveSpeed + new Vector3(0,playerStateInterpretor.rb.velocity.y,0);
+                playerStateInterpretor.rb.velocity = tempMovement * playerStat.moveSpeed + new Vector3(0,playerStateInterpretor.rb.velocity.y,0);
                 AdjustVelocityToSlope();
                 if (playerStateInterpretor.statesSlot[PlayerStateType.AIM] == null) 
-                    playerStateInterpretor.transform.forward = Vector3.Slerp(new Vector3(playerStateInterpretor.transform.forward.x,0,playerStateInterpretor.transform.forward.z), tempMovement, PlayerStat.Instance.turnSpeed); 
+                    playerStateInterpretor.transform.forward = Vector3.Slerp(new Vector3(playerStateInterpretor.transform.forward.x,0,playerStateInterpretor.transform.forward.z), tempMovement, playerStat.turnSpeed); 
                 yield return null;
             }
         }
@@ -68,13 +69,13 @@ namespace Core.Player
             tempMovement = Vector3.zero;
             inertiaTimer = 0;
 
-            while (inertiaTimer < PlayerStat.Instance.inertiaDuration)
+            while (inertiaTimer < playerStat.inertiaDuration)
             {
                 if (!CheckForGround())
-                    inertiaTimer = PlayerStat.Instance.inertiaDuration;
+                    inertiaTimer = playerStat.inertiaDuration;
 
                 inertiaTimer += Time.deltaTime;
-                playerStateInterpretor.rb.velocity = Vector3.Lerp(initialVelocity, Vector3.zero, PlayerStat.Instance.inertiaCurve.Evaluate(inertiaTimer / PlayerStat.Instance.inertiaDuration));
+                playerStateInterpretor.rb.velocity = Vector3.Lerp(initialVelocity, Vector3.zero, playerStat.inertiaCurve.Evaluate(inertiaTimer / playerStat.inertiaDuration));
                 AdjustVelocityToSlope();
                 yield return null;
             }

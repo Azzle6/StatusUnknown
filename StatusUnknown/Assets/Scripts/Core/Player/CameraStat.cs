@@ -5,7 +5,7 @@ namespace Core.Player
     using UnityEngine;
 
     [CreateAssetMenu(fileName = "CameraStat", menuName = "CustomAssets/Camera Stat", order = 1)]
-    public class CameraStat : SingletonSO<CameraStat>
+    public class CameraStat : ScriptableObject
     {
         public float smoothSpeed = 2f;
         public Vector3 defaultOffset;

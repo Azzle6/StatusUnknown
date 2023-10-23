@@ -24,7 +24,7 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 4
+  m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
@@ -239,6 +239,7 @@ GameObject:
   - component: {fileID: 198794970}
   - component: {fileID: 198794969}
   - component: {fileID: 198794968}
+  - component: {fileID: 198794972}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -334,6 +335,18 @@ Transform:
   - {fileID: 743286865}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &198794972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198794967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5793bbec42669943a263dfaa1e5704a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &223800968
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,7 +543,6 @@ GameObject:
   - component: {fileID: 267150609}
   - component: {fileID: 267150612}
   - component: {fileID: 267150613}
-  - component: {fileID: 267150614}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -756,18 +768,7 @@ MonoBehaviour:
   playerTransform: {fileID: 1593713461}
   cam: {fileID: 267150610}
   currentCamState: 0
---- !u!114 &267150614
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 267150608}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5793bbec42669943a263dfaa1e5704a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  camStat: {fileID: 11400000, guid: 7a747ff65e6b9164c90c1d67f6d53fde, type: 2}
 --- !u!1 &301883387
 GameObject:
   m_ObjectHideFlags: 0
@@ -1202,6 +1203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputText: {fileID: 1704124588}
+  deviceLog: {fileID: 11400000, guid: 03f0add060b72a64482755963028eead, type: 2}
 --- !u!114 &889373407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2096,6 +2098,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInputController: {fileID: 1593713465}
   playerStateInterpretor: {fileID: 1593713464}
+  deviceLog: {fileID: 11400000, guid: 03f0add060b72a64482755963028eead, type: 2}
 --- !u!54 &1593713463
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2470,6 +2473,7 @@ MonoBehaviour:
   playerStateType: 0
   lockState: 0
   groundCheckDistance: 2.2
+  playerStat: {fileID: 11400000, guid: 96563a0c89298fe42a7e0015e37b4023, type: 2}
 --- !u!4 &1945583329
 Transform:
   m_ObjectHideFlags: 0
@@ -2530,6 +2534,7 @@ MonoBehaviour:
   playerStateInterpretor: {fileID: 1593713464}
   playerStateType: 1
   lockState: 0
+  playerStat: {fileID: 11400000, guid: 96563a0c89298fe42a7e0015e37b4023, type: 2}
 --- !u!114 &1945583333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2545,6 +2550,7 @@ MonoBehaviour:
   playerStateInterpretor: {fileID: 1593713464}
   playerStateType: 1
   lockState: 0
+  playerStat: {fileID: 11400000, guid: 96563a0c89298fe42a7e0015e37b4023, type: 2}
 --- !u!114 &1945583334
 MonoBehaviour:
   m_ObjectHideFlags: 0

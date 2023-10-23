@@ -7,22 +7,23 @@ using DeviceType = Core.Player.DeviceType;
 public class ToggleInputDevice : MonoBehaviour
 {
     [SerializeField] private Text inputText;
+    [SerializeField] private DeviceLog deviceLog;
     private void Awake()
     {
-        inputText.text = DeviceLog.Instance.currentDevice.ToString();
+        inputText.text = deviceLog.currentDevice.ToString();
     }
 
     public void SwitchInput()
     {
-        if (DeviceLog.Instance.currentDevice == DeviceType.GAMEPAD)
+        if (deviceLog.currentDevice == DeviceType.GAMEPAD)
         {
-            DeviceLog.Instance.SetDevice(DeviceType.KEYBOARD);
-            inputText.text = DeviceLog.Instance.currentDevice.ToString();
+            deviceLog.SetDevice(DeviceType.KEYBOARD);
+            inputText.text = deviceLog.currentDevice.ToString();
         }
         else
         {
-            DeviceLog.Instance.SetDevice(DeviceType.GAMEPAD);
-            inputText.text = DeviceLog.Instance.currentDevice.ToString();
+            deviceLog.SetDevice(DeviceType.GAMEPAD);
+            inputText.text = deviceLog.currentDevice.ToString();
         }
     }
 }

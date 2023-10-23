@@ -13,6 +13,7 @@ namespace Core.Player
         private Coroutine aiming;
         private Ray camToMouseRay;
         private RaycastHit camToMouseHit;
+        [SerializeField] private PlayerStat playerStat;
 
         
         private void Awake()
@@ -42,7 +43,7 @@ namespace Core.Player
                     if (camToMouseHit.collider != default)
                         yield return null;
                     mouseDirection = new Vector2(camToMouseHit.point.x - playerStateInterpretor.transform.position.x, camToMouseHit.point.z - playerStateInterpretor.transform.position.z);
-                    playerStateInterpretor.transform.forward = Vector3.Slerp(new Vector3(playerStateInterpretor.transform.forward.x,0,playerStateInterpretor.transform.forward.z), new Vector3(mouseDirection.x,0,mouseDirection.y), PlayerStat.Instance.turnSpeed);
+                    playerStateInterpretor.transform.forward = Vector3.Slerp(new Vector3(playerStateInterpretor.transform.forward.x,0,playerStateInterpretor.transform.forward.z), new Vector3(mouseDirection.x,0,mouseDirection.y), playerStat.turnSpeed);
                     //playerStateInterpretor.transform.LookAt(new Vector3(camToMouseHit.point.x,playerStateInterpretor.transform.position.y,camToMouseHit.point.z));
                 }
                 yield return null;

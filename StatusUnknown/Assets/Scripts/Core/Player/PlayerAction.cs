@@ -7,6 +7,7 @@ namespace Core.Player
     {
        [SerializeField] private PlayerInputController playerInputController;
        [SerializeField] private PlayerStateInterpretor playerStateInterpretor;
+       [SerializeField] private DeviceLog deviceLog;
 
         private void OnEnable()
         {
@@ -66,7 +67,7 @@ namespace Core.Player
     
         public void OnAimG(Vector2 direction, InputAction.CallbackContext ctx)
         {
-            if (DeviceLog.Instance.currentDevice == DeviceType.GAMEPAD) 
+            if (deviceLog.currentDevice == DeviceType.GAMEPAD) 
             {
                 if (ctx.started)
                 {
@@ -89,7 +90,7 @@ namespace Core.Player
         }
         public void OnAimK(Vector2 direction, InputAction.CallbackContext ctx)
         {
-            if (DeviceLog.Instance.currentDevice == DeviceType.KEYBOARD)
+            if (deviceLog.currentDevice == DeviceType.KEYBOARD)
             {
                 if (ctx.started)
                 {

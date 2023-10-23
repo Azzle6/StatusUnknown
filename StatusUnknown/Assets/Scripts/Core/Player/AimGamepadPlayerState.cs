@@ -7,6 +7,7 @@ namespace Core.Player
         private Vector2 aimDirection;
         private Coroutine aiming;
         private Transform snapTo;
+        [SerializeField] private PlayerStat playerStat;
         public override void OnStateEnter()
         {
             
@@ -27,7 +28,7 @@ namespace Core.Player
                 TargetDetection();
                 if (snapTo == null)
                 {
-                    playerStateInterpretor.transform.forward = Vector3.Slerp(new Vector3(playerStateInterpretor.transform.forward.x,0,playerStateInterpretor.transform.forward.z), new Vector3(aimDirection.x,0,aimDirection.y), PlayerStat.Instance.turnSpeed);
+                    playerStateInterpretor.transform.forward = Vector3.Slerp(new Vector3(playerStateInterpretor.transform.forward.x,0,playerStateInterpretor.transform.forward.z), new Vector3(aimDirection.x,0,aimDirection.y), playerStat.turnSpeed);
                 }
                 else
                 {

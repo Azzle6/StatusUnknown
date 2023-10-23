@@ -11,6 +11,7 @@ namespace Core.Player
         private float zoomTimer;
         private Vector3 targetPos;
         [SerializeField] private CamState currentCamState;
+        [SerializeField] private CameraStat camStat;
 
         private void LateUpdate()
         {
@@ -35,15 +36,15 @@ namespace Core.Player
         
         private void Exploring()
         {
-            targetPos = playerTransform.position + CameraStat.Instance.defaultOffset;
+            targetPos = playerTransform.position + camStat.defaultOffset;
             if (transform.position != targetPos)
-                cam.transform.position = Vector3.Slerp(cam.transform.position, targetPos, CameraStat.Instance.smoothSpeed * Time.deltaTime);
+                cam.transform.position = Vector3.Slerp(cam.transform.position, targetPos, camStat.smoothSpeed * Time.deltaTime);
         }
 
         private void Fighting()
         {
-            targetPos = playerTransform.position + CameraStat.Instance.fightModeOffset;
-            cam.transform.position = Vector3.Lerp(cam.transform.position, targetPos, CameraStat.Instance.smoothSpeed * Time.deltaTime);
+            targetPos = playerTransform.position + camStat.fightModeOffset;
+            cam.transform.position = Vector3.Lerp(cam.transform.position, targetPos, camStat.smoothSpeed * Time.deltaTime);
         }
         
     }
