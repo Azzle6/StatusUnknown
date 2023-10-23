@@ -14,6 +14,12 @@ namespace Core.Player
         private RaycastHit slopeHit;
         private bool slopeDetected;
         [SerializeField] private PlayerStat playerStat;
+        private Camera cam;
+        
+        private void Awake()
+        {
+            cam = Camera.main;
+        }
         
         public override void OnStateEnter()
         {
@@ -46,8 +52,10 @@ namespace Core.Player
             if (applyingMovement == default)
                 StartCoroutine(ApplyMovement());
             
-            tempMovement.x = movement.x;
-            tempMovement.z = movement.y;
+            tempMovement = new Vector3(movement.x,0,movement.y);
+            tempMovement = cam.transform.TransformDirection(tempMovement);
+            tempMovement.y = 0;
+            tempMovement.Normalize();
         }
 
         private IEnumerator ApplyMovement()
