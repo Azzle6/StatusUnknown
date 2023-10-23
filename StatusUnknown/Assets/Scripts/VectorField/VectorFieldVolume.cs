@@ -1,10 +1,9 @@
 using Sirenix.OdinInspector;
-using System.Collections;
+using Sirenix.Utilities;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
+
+
 
 public class VectorFieldVolume : MonoBehaviour
 {
@@ -20,6 +19,7 @@ public class VectorFieldVolume : MonoBehaviour
     [SerializeField] Transform target;
     [SerializeField] Gradient distanceGradient;
     [SerializeField] int maxGradientDistance;
+    [SerializeField] bool showLink, showArrow;
 
 
     Vector3[] GetBoundsPoints(Bounds bounds) // Used in method " SetNodeField "
@@ -62,12 +62,6 @@ public class VectorFieldVolume : MonoBehaviour
         data.SetNodes(nodes);
         data.SaveAsset();
     }
-    [Button("SetDistance"), ShowIf("isValidData", true)]
-    void SetDistance()
-    {
-        if(target == null) return;
-        VectorFieldNavigator.SetTargetDistance(target.position, data.NodeField);
-    }
 
 
     private void OnDrawGizmos()
@@ -77,11 +71,21 @@ public class VectorFieldVolume : MonoBehaviour
         foreach( var node in data.NodeField)
         {
             
-            Gizmos.DrawSphere(node.Value.Position, 0.2f);
+            // draw Node
+            
             Gizmos.color = distanceGradient.Evaluate(node.Value.DistanceFromTarget / maxGradientDistance);
-            Gizmos.DrawCube(node.Value.Position + Vector3.up * node.Value.DistanceFromTarget*0.05f, new Vector3(0.1f,0.4f + node.Value.DistanceFromTarget * 0.1f,0.1f));
-            foreach( var boundPosition in node.Value.linkedBoundPositions)
-                Gizmos.DrawLine(data.NodeField[boundPosition].Position, node.Value.Position);
+            Gizmos.DrawSphere(node.Value.Position, 0.1f);
+            //Gizmos.DrawCube(node.Value.Position + Vector3.up * node.Value.DistanceFromTarget*0.05f, new Vector3(0.1f,0.4f + node.Value.DistanceFromTarget * 0.1f,0.1f));
+
+            // draw link
+            if (showLink)
+            {
+                foreach (var boundPosition in node.Value.linkedBoundPositions)
+                    Gizmos.DrawLine(data.NodeField[boundPosition].Position, node.Value.Position);
+            }
+            
+            if(showArrow) // Draw arrow
+                DrawArrow.ForGizmo(node.Value.Position + Vector3.up * 0.1f, node.Value.targetDirection,0.35f,40) ;
         }
             
 
