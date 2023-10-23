@@ -8,11 +8,11 @@ namespace Core.Player
     {
         
         private Dictionary<string, PlayerState> playerStates = new Dictionary<string, PlayerState>();
-        [HideInInspector] public Dictionary<PlayerStateType, PlayerState> statesSlot = new Dictionary<PlayerStateType, PlayerState>();
-        [Header("States Slot")]
-        public PlayerState movementState;
-        public PlayerState aimState;
-        public PlayerState actionState;
+        public Dictionary<PlayerStateType, PlayerState> statesSlot = new Dictionary<PlayerStateType, PlayerState>();
+        
+        [HideInInspector] public PlayerState movementState;
+        [HideInInspector] public PlayerState aimState;
+        [HideInInspector] public PlayerState actionState;
         [SerializeField] private List<PlayerState> unusedPlayerStates;
         private PlayerState tempState;
         [Header("Player Component")]

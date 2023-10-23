@@ -42,7 +42,6 @@ namespace Core.Player
         {
             while (isShooting)
             {
-                Debug.Log("B");
                 SnapToTarget();
                 //need to check if gun is automatic or not
                 //need to check for the gun fire rate 
@@ -56,7 +55,6 @@ namespace Core.Player
             playerDirection = playerStateInterpretor.transform.forward;
             inRay = new Ray(playerStateInterpretor.transform.position, playerDirection);
             snapHitsIn = Physics.RaycastAll(inRay, 50);
-            Debug.Log("A");
             if (snapHitsIn.Length == 0)
                 return;
                         
