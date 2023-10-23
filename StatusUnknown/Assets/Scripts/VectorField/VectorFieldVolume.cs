@@ -21,7 +21,14 @@ public class VectorFieldVolume : MonoBehaviour
     [SerializeField] int maxGradientDistance;
     [SerializeField] bool showLink, showArrow;
 
-
+    private void OnEnable()
+    {
+        VectorFieldNavigator.RegisterVectorFieldVolume(this);
+    }
+    private void OnDisable()
+    {
+        VectorFieldNavigator.UnRegisterVectorFieldVolume(this);
+    }
     Vector3[] GetBoundsPoints(Bounds bounds) // Used in method " SetNodeField "
     {
         if (fieldDensity == 0) return new Vector3[0];
@@ -84,7 +91,7 @@ public class VectorFieldVolume : MonoBehaviour
                     Gizmos.DrawLine(data.NodeField[boundPosition].Position, node.Value.Position);
             }
             
-            if(showArrow) // Draw arrow
+            if(showArrow && node.Value.targetDirection != Vector3.zero) // Draw arrow
                 DrawArrow.ForGizmo(node.Value.Position + Vector3.up * 0.1f, node.Value.targetDirection,0.35f,40) ;
         }
             

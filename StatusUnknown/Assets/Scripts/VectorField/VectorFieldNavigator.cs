@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnityEngine;
 
 public static class VectorFieldNavigator 
 {
-    public static float fieldDensity = 1; // TODO : Add this varaiable to inspector window in some way
+    public static float fieldDensity = 1f; // TODO : Add this varaiable to inspector window in some way
     public static Vector3[] linkNodeDirections = new Vector3[] { Vector3.right, Vector3.forward, -Vector3.right, -Vector3.forward };
     public static float linkNodeYDist = 1.2f;
+    static Dictionary<Vector3, Node> nodeField;
+
     public static Vector3 PositionToBoundPosition(Vector3 position)
     {
         int posX = Mathf.RoundToInt(position.x / fieldDensity);
@@ -52,7 +55,6 @@ public static class VectorFieldNavigator
 
         return null;
     }
-
     public static void SetTargetDistance(Vector3 targetPosition, Dictionary<Vector3, Node> nodeField)
     {
         Node targetNode = WorlPositiondToNode(targetPosition, nodeField);
@@ -89,6 +91,16 @@ public static class VectorFieldNavigator
             }
             
         }
+
+    }
+
+    public static void RegisterVectorFieldVolume(VectorFieldVolume vectorFieldVolume)
+    {
+
+    }
+
+    public static void UnRegisterVectorFieldVolume(VectorFieldVolume vectorFieldVolume)
+    {
 
     }
 
