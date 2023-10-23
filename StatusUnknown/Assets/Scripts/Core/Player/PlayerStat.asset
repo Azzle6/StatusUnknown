@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f15fa3c1ef5e44848bfdc27077e89109, type: 3}
   m_Name: PlayerStat
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 7
+  inertiaDuration: 0.5
   inertiaCurve:
     serializedVersion: 2
     m_Curve:
@@ -37,5 +38,4 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  inertiaDuration: 0.5
   turnSpeed: 0.0461
