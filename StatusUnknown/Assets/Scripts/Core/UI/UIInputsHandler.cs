@@ -5,15 +5,15 @@ namespace Core.UI
 
     public class UIInputsHandler : MonoBehaviour
     {
-        private void Start()
+        /*private void Start()
         {
             this.SetFocus(UIManager.Instance.mainUI.rootVisualElement.Q<Button>("first-selected"));
-        }
+        }*/
         
-        public void RegisterVisualElementEvents(VisualElement element)
+        /*public void RegisterVisualElementEvents(VisualElement element)
         {
-            element.RegisterCallback<FocusEvent>(e => Debug.Log($"Focus on {element.name} from {((VisualElement)e.relatedTarget).name}."));
-        }
+            element.RegisterCallback<FocusEvent>(e => Debug.Log($"Focus on {element.name}."));
+        }*/
         
         public void SetFocus(VisualElement element)
         {

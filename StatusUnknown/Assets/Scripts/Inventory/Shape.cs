@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using Core.Helpers;
+
 namespace Inventory
 {
     using UnityEngine;
@@ -24,7 +27,18 @@ namespace Inventory
         #region UTILITIES
         public bool GetContentFromPosition(Vector2Int position)
         {
-            return this.shapeContent[position.y * this.shapeSize.x + position.x];
+            return shapeContent[position.y * this.shapeSize.x + position.x];
+        }
+
+        public Vector2Int[] GetPositionsRelativeToAnchor()
+        {
+            List<Vector2Int> result = new List<Vector2Int>();
+            for (int i = 0; i < shapeContent.Length; i++)
+            {
+                if (shapeContent[i])
+                    result.Add(GridHelper.GetGridPositionFromIndex(i, shapeSize.x) - anchor);
+            }
+            return result.ToArray();
         }
         #endregion
     }
