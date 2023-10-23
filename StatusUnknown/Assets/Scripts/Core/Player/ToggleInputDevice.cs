@@ -1,29 +1,29 @@
-using Core.Player;
-using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.UI;
-using DeviceType = Core.Player.DeviceType;
-
-public class ToggleInputDevice : MonoBehaviour
+namespace Core.Player
 {
-    [SerializeField] private Text inputText;
-    [SerializeField] private DeviceLog deviceLog;
-    private void Awake()
-    {
-        inputText.text = deviceLog.currentDevice.ToString();
-    }
+    using UnityEngine;
+    using UnityEngine.UI;
 
-    public void SwitchInput()
+    public class ToggleInputDevice : MonoBehaviour
     {
-        if (deviceLog.currentDevice == DeviceType.GAMEPAD)
+        [SerializeField] private Text inputText;
+        [SerializeField] private DeviceLog deviceLog;
+        private void Awake()
         {
-            deviceLog.SetDevice(DeviceType.KEYBOARD);
             inputText.text = deviceLog.currentDevice.ToString();
         }
-        else
+
+        public void SwitchInput()
         {
-            deviceLog.SetDevice(DeviceType.GAMEPAD);
-            inputText.text = deviceLog.currentDevice.ToString();
+            if (deviceLog.currentDevice == DeviceType.GAMEPAD)
+            {
+                deviceLog.SetDevice(DeviceType.KEYBOARD);
+                inputText.text = deviceLog.currentDevice.ToString();
+            }
+            else
+            {
+                deviceLog.SetDevice(DeviceType.GAMEPAD);
+                inputText.text = deviceLog.currentDevice.ToString();
+            }
         }
     }
 }

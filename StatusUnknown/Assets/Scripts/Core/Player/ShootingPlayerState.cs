@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Core.Player
 {
     using System.Collections;
@@ -21,6 +23,16 @@ namespace Core.Player
 
         private Ray playerToMouseRay;
         private bool isShooting;
+        private Camera mainCamera;
+        
+        private Collider[] visibleColliders;
+        private Plane[] frustumPlanes;
+        private List<Collider> confirmedInTheFrustrum;
+        
+        private void Awake()
+        {
+            mainCamera = Camera.main;
+        }
 
 
         public override void OnStateEnter()
@@ -42,13 +54,42 @@ namespace Core.Player
         {
             while (isShooting)
             {
-                SnapToTarget();
+                //use old method to shoot
+                //SnapToTarget();
+                //new method : 
+                FrustrumCulling();
                 //need to check if gun is automatic or not
                 //need to check for the gun fire rate 
                 //need to check for the gun ammo
                 yield return null;
             }
         }
+        
+        private void FrustrumCulling()
+        {
+            //need to check if the target is in the camera frustrum
+            //then direct gun to it
+            //then shoot
+            frustumPlanes = GeometryUtility.CalculateFrustumPlanes(mainCamera);
+            
+            //recover colliders in the frustrum 
+            visibleColliders = Physics.OverlapSphere(mainCamera.transform.position, 50f);
+            DebugDrawFrustrum();
+            confirmedInTheFrustrum = new List<Collider>();
+            foreach (Collider collider in visibleColliders)
+            {
+                if (GeometryUtility.TestPlanesAABB(frustumPlanes, collider.bounds))
+                {
+                    confirmedInTheFrustrum.Add(collider);
+                }
+            }
+        }
+
+        private void DebugDrawFrustrum()
+        {
+        }
+        
+        
         
         private void SnapToTarget()
         {
@@ -102,6 +143,11 @@ namespace Core.Player
         
         private void OnDrawGizmos()
         {
+            if (mainCamera == null)
+                return;
+            Gizmos.color = Color.green;
+            Gizmos.DrawSphere(mainCamera.transform.position, 50f);
+            
             if (snapHitsIn == null)
                 return;
             if (snapHitsIn.Length == 0)

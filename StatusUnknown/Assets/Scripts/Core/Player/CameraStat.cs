@@ -1,5 +1,3 @@
-using Core.SingletonsSO;
-
 namespace Core.Player
 {
     using UnityEngine;
