@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -156,8 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PanelSettings: {fileID: 11400000, guid: 69da892ffc2138f40ad579e3a2224bf1, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 656c9742cb6c7564f8e65a0eed7784bd,
-    type: 3}
+  sourceAsset: {fileID: 9197481963319205126, guid: 656c9742cb6c7564f8e65a0eed7784bd, type: 3}
   m_SortingOrder: 0
 --- !u!4 &284051422
 Transform:
@@ -189,6 +188,7 @@ MonoBehaviour:
   gridDataSo: {fileID: 11400000, guid: 9d7824d661902054db8419ba1d0d9e51, type: 2}
   uiDocument: {fileID: 284051421}
   gridParentName: inventoryGrid
+  content: []
 --- !u!114 &284051424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,6 +204,7 @@ MonoBehaviour:
   gridDataSo: {fileID: 11400000, guid: 9d7824d661902054db8419ba1d0d9e51, type: 2}
   uiDocument: {fileID: 284051421}
   gridParentName: weaponGrid
+  content: []
 --- !u!1 &1917496555
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,18 +270,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SendPointerHoverToParent: 1
-  m_MoveRepeatDelay: 0
-  m_MoveRepeatRate: 0.2
+  m_MoveRepeatDelay: 0.1
+  m_MoveRepeatRate: 0.1
   m_XRTrackingOrigin: {fileID: 0}
-  m_ActionsAsset: {fileID: -944628639613478452, guid: fedd5586976395a49801ffa91e3edf40,
-    type: 3}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: fedd5586976395a49801ffa91e3edf40, type: 3}
   m_PointAction: {fileID: 0}
-  m_MoveAction: {fileID: 1634950454199318706, guid: fedd5586976395a49801ffa91e3edf40,
-    type: 3}
-  m_SubmitAction: {fileID: -9069722017551883907, guid: fedd5586976395a49801ffa91e3edf40,
-    type: 3}
-  m_CancelAction: {fileID: 4553538442171683573, guid: fedd5586976395a49801ffa91e3edf40,
-    type: 3}
+  m_MoveAction: {fileID: 1634950454199318706, guid: fedd5586976395a49801ffa91e3edf40, type: 3}
+  m_SubmitAction: {fileID: -9069722017551883907, guid: fedd5586976395a49801ffa91e3edf40, type: 3}
+  m_CancelAction: {fileID: 4553538442171683573, guid: fedd5586976395a49801ffa91e3edf40, type: 3}
   m_LeftClickAction: {fileID: 0}
   m_MiddleClickAction: {fileID: 0}
   m_RightClickAction: {fileID: 0}
@@ -329,9 +326,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: fedd5586976395a49801ffa91e3edf40,
-    type: 3}
-  m_NotificationBehavior: 2
+  m_Actions: {fileID: -944628639613478452, guid: fedd5586976395a49801ffa91e3edf40, type: 3}
+  m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 1917496558}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -356,7 +352,7 @@ MonoBehaviour:
     m_ActionId: 1c3748a9-7ee4-4b25-b79b-ff256fbfaabf
     m_ActionName: UI/Submit[/XInputControllerWindows/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: ControllerScheme
+  m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: UI
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
