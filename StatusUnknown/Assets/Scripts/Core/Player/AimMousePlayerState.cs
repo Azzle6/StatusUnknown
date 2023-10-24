@@ -37,7 +37,7 @@ namespace Core.Player
             while (aimDirection.magnitude > 0.1f)
             {
                 camToMouseRay = mainCamera.ScreenPointToRay(aimDirection);
-                Debug.DrawRay(camToMouseRay.origin, camToMouseRay.direction * 100, Color.blue);
+                Debug.DrawRay(playerStateInterpretor.transform.position ,playerStateInterpretor.transform.forward *50, Color.blue);
                 if (Physics.Raycast(camToMouseRay, out camToMouseHit, 100))
                 {
                     if (camToMouseHit.collider != default)

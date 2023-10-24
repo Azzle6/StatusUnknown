@@ -66,9 +66,6 @@ namespace Core.Player
         
         private void FrustrumCulling()
         {
-            //need to check if the target is in the camera frustrum
-            //then direct gun to it
-            //then shoot
             frustumPlanes = GeometryUtility.CalculateFrustumPlanes(mainCamera);
             
             //recover colliders in the frustrum 
@@ -80,8 +77,7 @@ namespace Core.Player
             closestTarget = default;
             foreach (Collider collider in visibleColliders)
             {
-                if (GeometryUtility.TestPlanesAABB(frustumPlanes, collider.bounds) &&
-                    (collider.gameObject.TryGetComponent(out Target target)))
+                if (GeometryUtility.TestPlanesAABB(frustumPlanes, collider.bounds) && (collider.gameObject.TryGetComponent(out Target target)))
                 {
                     confirmedInTheFrustrum.Add(collider);
                     playerPos = playerStateInterpretor.transform.position;
@@ -116,7 +112,7 @@ namespace Core.Player
             }
         }
         
-        private float TurningADirectionInAngle(Vector3 direction)
+        public float TurningADirectionInAngle(Vector3 direction)
         {
             float angle = Vector3.Angle(playerStateInterpretor.transform.forward.normalized, direction);
             return angle;

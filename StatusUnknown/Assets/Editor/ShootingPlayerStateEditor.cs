@@ -1,7 +1,5 @@
 namespace Editor
 {
-    using System.Collections;
-    using System.Collections.Generic;
     using UnityEngine;
     using UnityEditor;
     using Core.Player;
@@ -43,9 +41,34 @@ namespace Editor
                 {
                     Handles.Label(shootingPlayerState.closestTarget.transform.position + Vector3.up * 5, "I am the target", style);
                 }
+                
+                if (shootingPlayerState.confirmedInTheFrustrum != null)
+                {
+                    Handles.color = Color.red;
+            
+                    for (int x = 0; x < shootingPlayerState.confirmedInTheFrustrum.Count; x++)
+                    {
+                        Collider collider = shootingPlayerState.confirmedInTheFrustrum[x];
+                        float angle = shootingPlayerState.confirmedInTheAngle[x];
+                        float angleRequired = shootingPlayerState.angleRequired[x];
+                
+                        if (angle <= angleRequired)
+                        {
+                            Vector3 targetPos = collider.transform.position;
+                            Vector3 playerPos = shootingPlayerState.transform.parent.transform.position;
+                            targetPos.y = 0;
+                            playerPos.y = 0;
+
+                            Handles.color = Color.green;
+                            
+            
+                            Handles.DrawSolidArc(targetPos, Vector3.up, (playerPos- targetPos).normalized, angleRequired, 5f);
+                            Handles.DrawSolidArc(targetPos, Vector3.up, (playerPos- targetPos).normalized, -angleRequired, 5f);
+                        }
+                    }
+                }
             }
         }
     }
-
 }
 
