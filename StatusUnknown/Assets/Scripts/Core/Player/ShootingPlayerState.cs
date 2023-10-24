@@ -28,6 +28,11 @@ namespace Core.Player
         private Collider[] visibleColliders;
         private Plane[] frustumPlanes;
         private List<Collider> confirmedInTheFrustrum;
+        private Collider closestTarget;
+        private float bestAngleToClosestTarget;
+        private float currentPlayerAngle;
+        private float minAngleRequired;
+        private float maxAngleRequired;
         
         private void Awake()
         {
@@ -74,19 +79,25 @@ namespace Core.Player
             
             //recover colliders in the frustrum 
             visibleColliders = Physics.OverlapSphere(mainCamera.transform.position, 50f);
-            DebugDrawFrustrum();
+           
             confirmedInTheFrustrum = new List<Collider>();
             foreach (Collider collider in visibleColliders)
             {
-                if (GeometryUtility.TestPlanesAABB(frustumPlanes, collider.bounds))
-                {
+                if (GeometryUtility.TestPlanesAABB(frustumPlanes, collider.bounds) && (collider.gameObject.TryGetComponent(out Target target)))
                     confirmedInTheFrustrum.Add(collider);
-                }
             }
-        }
-
-        private void DebugDrawFrustrum()
-        {
+            bestAngleToClosestTarget = 1000;
+            foreach (Collider target in confirmedInTheFrustrum)
+            {
+                float angleRequired = TurningADirectionInAngle((target.transform.position - playerStateInterpretor.transform.position).normalized);
+                //angle required min and max must be determined by the distance to the player
+                maxAngleRequired = angleRequired + 10;
+                minAngleRequired = angleRequired - 10;
+                Debug.Log(target.name + "angle required : " + angleRequired);
+                if (angleRequired < bestAngleToClosestTarget)
+                    closestTarget = target;
+                
+            }
         }
         
         
@@ -132,7 +143,13 @@ namespace Core.Player
             playerStateInterpretor.transform.LookAt(snapTo.transform);
 
                     
-        } 
+        }
+
+        private float TurningADirectionInAngle(Vector3 direction)
+        {
+            float angle = Vector3.Angle(playerStateInterpretor.transform.forward.normalized, direction);
+            return angle;
+        }
         
         public override void OnStateExit()
         {
@@ -145,8 +162,6 @@ namespace Core.Player
         {
             if (mainCamera == null)
                 return;
-            Gizmos.color = Color.green;
-            Gizmos.DrawSphere(mainCamera.transform.position, 50f);
             
             if (snapHitsIn == null)
                 return;
