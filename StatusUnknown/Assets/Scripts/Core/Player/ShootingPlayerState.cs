@@ -1,38 +1,28 @@
-using System.Collections.Generic;
-
 namespace Core.Player
 {
     using System.Collections;
+    using System.Collections.Generic;
     using UnityEngine;
 
     public class ShootingPlayerState : PlayerState
     {
         private Coroutine shooting;
         private Transform snapTo;
-        private int closestTargetIndex;
-        private Vector3[] midPointToTarget;
-        private Vector3[] outPointToTarget;
-        private Vector3 playerDirection;
-        private RaycastHit[] snapHitsIn;
-        private Ray inRay;
-        private Ray reverseRay;
-        private RaycastHit reverseHit;
-        private float bestdistanceToClosestTarget;
-        private float distanceToClosestTarget;
         private int weaponNo;
-
-        private Ray playerToMouseRay;
+        
         private bool isShooting;
         private Camera mainCamera;
         
+        //public variable are for editor script
+
         private Collider[] visibleColliders;
         private Plane[] frustumPlanes;
-        private List<Collider> confirmedInTheFrustrum;
-        private Collider closestTarget;
+        [HideInInspector] public List<Collider> confirmedInTheFrustrum;
+        [HideInInspector] public List<float> confirmedInTheAngle;
+        public Collider closestTarget;
         private float bestAngleToClosestTarget;
         private float currentPlayerAngle;
-        private float minAngleRequired;
-        private float maxAngleRequired;
+        private float angleRequired;
         
         private void Awake()
         {
@@ -63,6 +53,7 @@ namespace Core.Player
                 //SnapToTarget();
                 //new method : 
                 FrustrumCulling();
+                DetermineClosestTarget();
                 //need to check if gun is automatic or not
                 //need to check for the gun fire rate 
                 //need to check for the gun ammo
@@ -81,75 +72,46 @@ namespace Core.Player
             visibleColliders = Physics.OverlapSphere(mainCamera.transform.position, 50f);
            
             confirmedInTheFrustrum = new List<Collider>();
+            confirmedInTheAngle = new List<float>();
+            closestTarget = default;
             foreach (Collider collider in visibleColliders)
             {
-                if (GeometryUtility.TestPlanesAABB(frustumPlanes, collider.bounds) && (collider.gameObject.TryGetComponent(out Target target)))
-                    confirmedInTheFrustrum.Add(collider);
-            }
-            bestAngleToClosestTarget = 1000;
-            foreach (Collider target in confirmedInTheFrustrum)
-            {
-                float angleRequired = TurningADirectionInAngle((target.transform.position - playerStateInterpretor.transform.position).normalized);
-                //angle required min and max must be determined by the distance to the player
-                maxAngleRequired = angleRequired + 10;
-                minAngleRequired = angleRequired - 10;
-                Debug.Log(target.name + "angle required : " + angleRequired);
-                if (angleRequired < bestAngleToClosestTarget)
-                    closestTarget = target;
-                
-            }
-        }
-        
-        
-        
-        private void SnapToTarget()
-        {
-            playerDirection = playerStateInterpretor.transform.forward;
-            inRay = new Ray(playerStateInterpretor.transform.position, playerDirection);
-            snapHitsIn = Physics.RaycastAll(inRay, 50);
-            if (snapHitsIn.Length == 0)
-                return;
-                        
-            midPointToTarget = new Vector3[snapHitsIn.Length];
-            outPointToTarget = new Vector3[snapHitsIn.Length];
-            bestdistanceToClosestTarget = 1000;
-            for (int x = 0; x < snapHitsIn.Length; x++)
-            {
-                reverseRay = new Ray(snapHitsIn[x].point+ (playerDirection*30), -playerDirection);
-                Debug.DrawRay(snapHitsIn[x].point+ (playerDirection*30), -playerDirection * 50, Color.yellow);
-
-                if (snapHitsIn[x].collider.Raycast(reverseRay, out reverseHit, 50f))
+                if (GeometryUtility.TestPlanesAABB(frustumPlanes, collider.bounds) &&
+                    (collider.gameObject.TryGetComponent(out Target target)))
                 {
-                    midPointToTarget[x] = (snapHitsIn[x].point + reverseHit.point) / 2;
-                    outPointToTarget[x] = reverseHit.point;
-         
-                    distanceToClosestTarget = Vector3.Distance(midPointToTarget[x], snapHitsIn[x].collider.transform.position);
-                    
-                     if (Vector3.Distance(snapHitsIn[x].point, reverseHit.point) < bestdistanceToClosestTarget)
-                     {
-                        closestTargetIndex = x;
-                        snapTo = snapHitsIn[x].collider.transform;
-                     } 
+                    confirmedInTheFrustrum.Add(collider);
+                    confirmedInTheAngle.Add(TurningADirectionInAngle((collider.transform.position - playerStateInterpretor.transform.position).normalized));
                 }
-                
-
             }
-            
-            Debug.DrawRay(playerStateInterpretor.transform.position, playerDirection * 50, Color.green);
-
-            if (snapTo == null)
-                return;
-        
-            playerStateInterpretor.transform.LookAt(snapTo.transform);
-
-                    
+          
         }
 
+        private void DetermineClosestTarget()
+        {
+            bestAngleToClosestTarget = 1000;
+
+            for (int x = 0; x < confirmedInTheFrustrum.Count; x++)
+            {
+                //angle required min and max must be determined by the distance to the player
+                angleRequired = 10;
+                //need to determine if the player is looking in the min max of the target if not discard this target 
+                if (confirmedInTheAngle[x] < angleRequired)
+                {
+                    if (confirmedInTheAngle[x] < bestAngleToClosestTarget)
+                    {
+                        closestTarget = confirmedInTheFrustrum[x];
+                        bestAngleToClosestTarget = confirmedInTheAngle[x];
+                    }
+                }
+            }
+        }
+        
         private float TurningADirectionInAngle(Vector3 direction)
         {
             float angle = Vector3.Angle(playerStateInterpretor.transform.forward.normalized, direction);
             return angle;
         }
+        
         
         public override void OnStateExit()
         {
@@ -158,28 +120,5 @@ namespace Core.Player
             isShooting = false;
         }
         
-        private void OnDrawGizmos()
-        {
-            if (mainCamera == null)
-                return;
-            
-            if (snapHitsIn == null)
-                return;
-            if (snapHitsIn.Length == 0)
-                return;
-
-            for (int x = 0; x < snapHitsIn.Length; x++)
-            {
-                Gizmos.color = Color.blue;
-                Gizmos.DrawSphere(snapHitsIn[x].point, 0.5f);
-                Gizmos.color = Color.red;
-                Gizmos.DrawSphere(midPointToTarget[x], 0.5f);
-                Gizmos.color = Color.yellow;
-                Gizmos.DrawSphere(outPointToTarget[x], 0.5f);
-            }
-        }
-        
     }
-
-        
 }
