@@ -12,5 +12,8 @@ namespace Core.Player
         public float inertiaDuration;
         public AnimationCurve inertiaCurve;
         [Range(0.01f, 0.1f)] public float turnSpeed;
+        [Header("Aim")]
+        public AnimationCurve angleRequiredMultiplierByDistance;
+
     }
 }

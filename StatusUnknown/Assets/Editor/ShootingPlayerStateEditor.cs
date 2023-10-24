@@ -34,6 +34,8 @@ namespace Editor
                     {
                         Handles.Label(shootingPlayerState.confirmedInTheFrustrum[x].transform.position + Vector3.up * 3,
                             $"Angle : {shootingPlayerState.confirmedInTheAngle[x]}", style);
+                        Handles.Label(shootingPlayerState.confirmedInTheFrustrum[x].transform.position + Vector3.up * 4,
+                            $"Angle Required : {shootingPlayerState.angleRequired[x]}", style);
                     }
                 }
 

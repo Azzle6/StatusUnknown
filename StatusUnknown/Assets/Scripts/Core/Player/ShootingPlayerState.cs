@@ -19,10 +19,13 @@ namespace Core.Player
         private Plane[] frustumPlanes;
         [HideInInspector] public List<Collider> confirmedInTheFrustrum;
         [HideInInspector] public List<float> confirmedInTheAngle;
-        public Collider closestTarget;
+        [HideInInspector] public List<float> angleRequired;
+        [HideInInspector] public Collider closestTarget;
+        [SerializeField] private PlayerStat playerStat;
         private float bestAngleToClosestTarget;
         private float currentPlayerAngle;
-        private float angleRequired;
+        private Vector3 playerPos;
+        private Vector3 targetPos;
         
         private void Awake()
         {
@@ -73,6 +76,7 @@ namespace Core.Player
            
             confirmedInTheFrustrum = new List<Collider>();
             confirmedInTheAngle = new List<float>();
+            angleRequired = new List<float>();
             closestTarget = default;
             foreach (Collider collider in visibleColliders)
             {
@@ -80,7 +84,11 @@ namespace Core.Player
                     (collider.gameObject.TryGetComponent(out Target target)))
                 {
                     confirmedInTheFrustrum.Add(collider);
-                    confirmedInTheAngle.Add(TurningADirectionInAngle((collider.transform.position - playerStateInterpretor.transform.position).normalized));
+                    playerPos = playerStateInterpretor.transform.position;
+                    playerPos.y = 0;
+                    targetPos = collider.transform.position;
+                    targetPos.y = 0;
+                    confirmedInTheAngle.Add(TurningADirectionInAngle((targetPos - playerPos).normalized));
                 }
             }
           
@@ -92,10 +100,12 @@ namespace Core.Player
 
             for (int x = 0; x < confirmedInTheFrustrum.Count; x++)
             {
-                //angle required min and max must be determined by the distance to the player
-                angleRequired = 10;
+                //angle required must be determined by the distance to the player
+                targetPos = confirmedInTheFrustrum[x].transform.position;
+                targetPos.y = 0;
+                angleRequired.Add(1 + playerStat.angleRequiredMultiplierByDistance.Evaluate(Vector3.Distance(playerPos, targetPos)));
                 //need to determine if the player is looking in the min max of the target if not discard this target 
-                if (confirmedInTheAngle[x] < angleRequired)
+                if (confirmedInTheAngle[x] < angleRequired[x])
                 {
                     if (confirmedInTheAngle[x] < bestAngleToClosestTarget)
                     {
