@@ -1,40 +1,44 @@
-﻿using UnityEngine;
-
-public class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T>
+﻿namespace Core
 {
-    private static T instance;
+    using UnityEngine;
 
-    public static T Instance
+    public class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T>
     {
-        get
+        private static T instance;
+
+        public static T Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = FindObjectOfType<T>();
+
+                    if (instance == null)
+                    {
+                        GameObject singletonObject = new GameObject();
+                        instance = singletonObject.AddComponent<T>();
+                        singletonObject.name = typeof(T) + " (MonoSingleton)";
+                        DontDestroyOnLoad(singletonObject);
+                    }
+                }
+
+                return instance;
+            }
+        }
+
+        protected virtual void Awake()
         {
             if (instance == null)
             {
-                instance = FindObjectOfType<T>();
-
-                if (instance == null)
-                {
-                    GameObject singletonObject = new GameObject();
-                    instance = singletonObject.AddComponent<T>();
-                    singletonObject.name = typeof(T) + " (MonoSingleton)";
-                    DontDestroyOnLoad(singletonObject);
-                }
+                instance = this as T;
+                DontDestroyOnLoad(gameObject);
             }
-
-            return instance;
-        }
-    }
-
-    protected virtual void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this as T;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
+

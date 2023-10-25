@@ -1,7 +1,10 @@
+using Core.SingletonsSO;
+
 namespace Core.Pooler
 {
     using System.Collections.Generic;
     using UnityEngine;
+    using Core;
     public class Pooler : MonoSingleton<Pooler>
     {
         private Dictionary<string, Pool> pools = new Dictionary<string, Pool>();
@@ -9,7 +12,10 @@ namespace Core.Pooler
         private GameObject tempPooledObj;
         private string tempString;
 
-
+        private void Start()
+        {
+            InitPools();
+        }
         public void AddPool(PoolKey addedPool)
         {
             poolToInit.Add(addedPool);
@@ -23,17 +29,16 @@ namespace Core.Pooler
         //Add all pools to dictionary
         [ContextMenu("Init Pools")]
         public void InitPools()
-        {
-            foreach (PoolKey poolKey in PoolOfObject.Instance.pool)
-            {
-                poolKey.key = poolKey.pool.objPrefab.name;
-                poolToInit.Add(poolKey);
-            }
+        { 
             if (poolToInit == null) return;
 
-            for (int x = 0; x < poolToInit.Count; x++)
-                pools.Add(poolToInit[x].key, poolToInit[x].pool);
-        
+            foreach (PoolKey key in poolToInit)
+            {
+                key.key = key.pool.objPrefab.name;
+                pools.Add(key.key, key.pool);
+            }
+
+            PopulatePools();
         }
         //Instantiate all objects in pools and spawn stack
         public void PopulatePools()
@@ -47,6 +52,7 @@ namespace Core.Pooler
                 for (int y = 0; y < poolToInit[x].pool.baseCount; y++) 
                     AddInstance(poolToInit[x].pool);
             }
+            
         }
         private void AddInstance(Pool pool)
         {

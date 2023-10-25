@@ -101,6 +101,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  maxDamage: 20
   projectileSize:
     serializedVersion: 2
     m_Curve:
@@ -125,9 +126,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  maxTimeCharge: 0
-  cdTime: 0
-  projectileSpeed: 0
+  maxProjectileSize: 5
+  maxTimeCharge: 2
+  cdTime: 2
+  projectileSpeed: 30
   spawnPoint: {fileID: 727943814089368775}
 --- !u!1 &4908050324150602532
 GameObject:
