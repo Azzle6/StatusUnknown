@@ -19,7 +19,7 @@
                         GameObject singletonObject = new GameObject();
                         instance = singletonObject.AddComponent<T>();
                         singletonObject.name = typeof(T) + " (MonoSingleton)";
-                        DontDestroyOnLoad(singletonObject);
+                        //DontDestroyOnLoad(singletonObject);
                     }
                 }
 
@@ -32,7 +32,7 @@
             if (instance == null)
             {
                 instance = this as T;
-                DontDestroyOnLoad(gameObject);
+                //DontDestroyOnLoad(gameObject);
             }
             else
             {
