@@ -1,6 +1,8 @@
 using UnityEngine;
 using Yarn.Unity;
 
+// Can't call command facial_expression, because LeftMarker doesn't have the correct component
+
 public class CustomCommandsBase : MonoBehaviour
 {
 
@@ -9,8 +11,24 @@ public class CustomCommandsBase : MonoBehaviour
 
     public void Awake()
     {
-        dialogueRunner.AddCommandHandler<GameObject>("camera_moveTo", CameraMoveTo);
+        //dialogueRunner.AddCommandHandler<GameObject>("camera_moveTo", CameraMoveTo);
     }
+
+    [YarnCommand("facial_expression")]
+    public void SetNPCFacialExpression(GameObject target, bool isHappy = false)
+    {
+        if (isHappy)
+        {
+            // set target facial expression to happy
+            Debug.Log("the NPC is happy"); 
+        }
+        else
+        {
+            // set target facial expression to sad
+            Debug.Log("the NPC is sad");
+        }
+    }
+
 
     private void CameraMoveTo(GameObject target)
     {
@@ -21,5 +39,6 @@ public class CustomCommandsBase : MonoBehaviour
 
         Camera.main.transform.SetPositionAndRotation(target.transform.position - new Vector3(0,0,20), Quaternion.identity);
     }
+
 
 }
