@@ -8,7 +8,8 @@ public static class VectorFieldNavigator
     public static float fieldDensity = 1f; // TODO : Add this varaiable to inspector window in some way
     public static Vector3[] linkNodeDirections = new Vector3[] { Vector3.right, Vector3.forward, -Vector3.right, -Vector3.forward };
     public static float linkNodeYDist = 1.2f;
-    static Dictionary<Vector3, Node> nodeField;
+    public static Dictionary<Vector3, Node> NodeField;
+
 
     public static Vector3 PositionToBoundPosition(Vector3 position)
     {
@@ -52,7 +53,6 @@ public static class VectorFieldNavigator
                 return nodeField[boundPosition];
             boundPosition += Vector3.down * fieldDensity;
         }
-
         return null;
     }
     public static void SetTargetDistance(Vector3 targetPosition, Dictionary<Vector3, Node> nodeField)
@@ -94,14 +94,18 @@ public static class VectorFieldNavigator
 
     }
 
-    public static void RegisterVectorFieldVolume(VectorFieldVolume vectorFieldVolume)
+    public static void RegisterVectorFieldVolume(VectorFieldVolumeData data)
     {
+        if (NodeField == null) NodeField = new Dictionary<Vector3, Node>();
+        foreach(var node in data.Nodes)
+            NodeField.Add(PositionToBoundPosition(node.Position), node); 
 
     }
 
-    public static void UnRegisterVectorFieldVolume(VectorFieldVolume vectorFieldVolume)
+    public static void UnRegisterVectorFieldVolume(VectorFieldVolumeData data)
     {
-
+        foreach (var node in data.Nodes)
+            NodeField.Remove(PositionToBoundPosition(node.Position));
     }
 
 }
