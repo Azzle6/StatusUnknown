@@ -10,7 +10,7 @@ namespace Core.Player
         private Transform snapTo;
         private int weaponNo;
         
-        private bool isShooting;
+        [HideInInspector] public bool isShooting;
         private Camera mainCamera;
         
         //public variable are for editor script
@@ -52,9 +52,6 @@ namespace Core.Player
         {
             while (isShooting)
             {
-                //use old method to shoot
-                //SnapToTarget();
-                //new method : 
                 FrustrumCulling();
                 DetermineClosestTarget();
                 //need to check if gun is automatic or not
