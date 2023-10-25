@@ -1,5 +1,3 @@
-using System;
-
 namespace Editor
 {
     using UnityEngine;
@@ -26,28 +24,26 @@ namespace Editor
 
         public virtual void DisplayState()
         {
-            if (EditorApplication.isPlaying)
-            {         
+            if (!EditorApplication.isPlaying)
+                return;
+            
 
-                Handles.Label(psi.transform.position + Vector3.up * 2,
-                    psi.statesSlot[PlayerStateType.MOVEMENT] != default
-                        ? $"Movement : {psi.statesSlot[PlayerStateType.MOVEMENT].GetType().Name}"
-                        : $"Movement : Null",style);
+            Handles.Label(psi.transform.position + Vector3.up * 2,
+                psi.statesSlot[PlayerStateType.MOVEMENT] != default
+                    ? $"Movement : {psi.statesSlot[PlayerStateType.MOVEMENT].GetType().Name}"
+                    : $"Movement : Null",style);
                 
            
-                Handles.Label(psi.transform.position + Vector3.up * 3,
-                    psi.statesSlot[PlayerStateType.AIM] != default
-                        ? $"Aim : {psi.statesSlot[PlayerStateType.AIM].GetType().Name}"
-                        : $"Aim : Null", style);
+            Handles.Label(psi.transform.position + Vector3.up * 3,
+                psi.statesSlot[PlayerStateType.AIM] != default
+                    ? $"Aim : {psi.statesSlot[PlayerStateType.AIM].GetType().Name}"
+                    : $"Aim : Null", style);
                 
              
-                Handles.Label(psi.transform.position + Vector3.up * 4,
-                    psi.statesSlot[PlayerStateType.ACTION] != default
-                        ? $"Action : {psi.statesSlot[PlayerStateType.ACTION].GetType().Name}"
-                        : $"Action : Null", style);
-            }
-
+            Handles.Label(psi.transform.position + Vector3.up * 4,
+                psi.statesSlot[PlayerStateType.ACTION] != default
+                    ? $"Action : {psi.statesSlot[PlayerStateType.ACTION].GetType().Name}"
+                    : $"Action : Null", style);
         }
-
     }
 }

@@ -7,7 +7,6 @@ namespace Core.Player
     public class ShootingPlayerState : PlayerState
     {
         private Coroutine shooting;
-        private Transform snapTo;
         private int weaponNo;
         
         [HideInInspector] public bool isShooting;
@@ -30,6 +29,10 @@ namespace Core.Player
         private void Awake()
         {
             mainCamera = Camera.main;
+            confirmedInTheFrustrum = new List<Collider>();
+            confirmedInTheAngle = new List<float>();
+            angleRequired = new List<float>();
+            closestTarget = default;
         }
 
 
@@ -54,6 +57,7 @@ namespace Core.Player
             {
                 FrustrumCulling();
                 DetermineClosestTarget();
+                Fire();
                 //need to check if gun is automatic or not
                 //need to check for the gun fire rate 
                 //need to check for the gun ammo
@@ -68,9 +72,9 @@ namespace Core.Player
             //recover colliders in the frustrum 
             visibleColliders = Physics.OverlapSphere(mainCamera.transform.position, 50f);
            
-            confirmedInTheFrustrum = new List<Collider>();
-            confirmedInTheAngle = new List<float>();
-            angleRequired = new List<float>();
+            confirmedInTheFrustrum.Clear(); 
+            confirmedInTheAngle.Clear();
+            angleRequired.Clear();
             closestTarget = default;
             foreach (Collider collider in visibleColliders)
             {
@@ -84,7 +88,6 @@ namespace Core.Player
                     confirmedInTheAngle.Add(TurningADirectionInAngle((targetPos - playerPos).normalized));
                 }
             }
-          
         }
 
         private void DetermineClosestTarget()
@@ -97,7 +100,7 @@ namespace Core.Player
                 targetPos = confirmedInTheFrustrum[x].transform.position;
                 targetPos.y = 0;
                 angleRequired.Add(1 + playerStat.angleRequiredMultiplierByDistance.Evaluate(Vector3.Distance(playerPos, targetPos)));
-                //need to determine if the player is looking in the min max of the target if not discard this target 
+  
                 if (confirmedInTheAngle[x] < angleRequired[x])
                 {
                     if (confirmedInTheAngle[x] < bestAngleToClosestTarget)
@@ -108,13 +111,17 @@ namespace Core.Player
                 }
             }
         }
-        
-        public float TurningADirectionInAngle(Vector3 direction)
+
+        private float TurningADirectionInAngle(Vector3 direction)
         {
             float angle = Vector3.Angle(playerStateInterpretor.transform.forward.normalized, direction);
             return angle;
         }
         
+        private void Fire()
+        {
+            Debug.Log($"Shooting with weapon {weaponNo}");
+        }
         
         public override void OnStateExit()
         {
