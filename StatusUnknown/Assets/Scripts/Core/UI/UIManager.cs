@@ -12,7 +12,6 @@ namespace Core.UI
         public UISettingsSO settings;
         [FoldoutGroup("Assets References"), Required]
         public UIInputsHandler inputsHandler;
-        
         [FoldoutGroup("Scene References"), Required] 
         public UIDocument mainUI;
         

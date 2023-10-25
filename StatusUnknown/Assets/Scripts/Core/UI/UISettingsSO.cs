@@ -10,6 +10,7 @@ namespace Core.UI
     public class UISettingsSO : ScriptableObject
     {
         public VisualTreeAsset slotTreeAsset;
+        public VisualTreeAsset itemTemplate;
         public InputActionAsset inputsAction;
     }
 }

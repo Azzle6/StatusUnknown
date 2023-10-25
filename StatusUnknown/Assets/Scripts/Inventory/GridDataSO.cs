@@ -1,8 +1,8 @@
 namespace Inventory
 {
-    using UnityEngine;
-    using Core.Helpers;
+    using AYellowpaper.SerializedCollections;
     using Sirenix.OdinInspector;
+    using UnityEngine;
 
     [CreateAssetMenu(menuName = "CustomAssets/Data/GridData", fileName = "GridData", order = 0)]
     public class GridDataSO : ScriptableObject, IShaped
@@ -10,16 +10,16 @@ namespace Inventory
         [field: SerializeField]
         public Shape Shape { get; set; }
 
-        [SerializeField]
-        public SerializableDictionary<Vector2Int, ItemSO> content = new SerializableDictionary<Vector2Int, ItemSO>();
+        [SerializedDictionary, ReadOnly]
+        public SerializedDictionary<Vector2Int, Item> content = new SerializedDictionary<Vector2Int, Item>();
         
-        public void AddItem(ItemSO item, Vector2Int position)
+        [Button("Test add item")]
+        public void AddItem(Item item)
         {
-            if (content.ContainsKey(position))
-                content[position] = item;
-            else
-                content.Add(position, item);
+            this.content[item.gridPosition] = item;
         }
+        
+        [Button("Test remove item")]
         public void RemoveItem(Vector2Int position)
         {
             content.Remove(position);

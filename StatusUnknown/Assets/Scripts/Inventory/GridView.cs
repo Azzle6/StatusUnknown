@@ -5,10 +5,12 @@ using Core.Helpers;
 
 namespace Inventory
 {
+    using AYellowpaper.SerializedCollections;
     using Core.UI;
     using Sirenix.OdinInspector;
     using UnityEngine;
     using UnityEngine.UIElements;
+    
     public class GridView : MonoBehaviour
     {
         [SerializeField, Required]
@@ -90,13 +92,9 @@ namespace Inventory
         private void LoadContent()
         {
             List<Item> result = new List<Item>();
-            foreach (KeyValuePair<Vector2Int, ItemSO> info in gridDataSo.content)
+            foreach (KeyValuePair<Vector2Int, Item> info in gridDataSo.content)
             {
-                GameObject itemObject = new GameObject($"{info.Value.name} item");
-                Item item = itemObject.AddComponent<Item>();
-                item.gridPosition = info.Key;
-                item.itemDefinition = info.Value;
-                result.Add(item);
+                result.Add(info.Value);
             }
 
             Content = result.ToArray();
@@ -105,9 +103,9 @@ namespace Inventory
         [Button("Save content"), HideInEditorMode, BoxGroup("Actions")]
         private void SaveContent()
         {
-            SerializableDictionary<Vector2Int, ItemSO> newContent = new SerializableDictionary<Vector2Int, ItemSO>();
+            SerializedDictionary<Vector2Int, Item> newContent = new SerializedDictionary<Vector2Int, Item>();
             foreach (Item item in content.Where(i => i != null))
-                newContent.Add(item.gridPosition, item.itemDefinition);
+                newContent.Add(item.gridPosition, item);
             
             gridDataSo.content = newContent;
         }
@@ -140,7 +138,7 @@ namespace Inventory
             }
 
             item.gridPosition = position;
-            gridDataSo.AddItem(item.itemDefinition, position);
+            gridDataSo.AddItem(item);
         }
         private void RemoveItem(Item item)
         {

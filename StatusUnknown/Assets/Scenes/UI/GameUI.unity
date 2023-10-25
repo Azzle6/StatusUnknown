@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 262.38358, g: 325.10843, b: 430.30963, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e46f39742f756a94c817cc087f412b79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridDataSo: {fileID: 11400000, guid: 9d7824d661902054db8419ba1d0d9e51, type: 2}
+  gridDataSo: {fileID: 11400000, guid: 29cbed7ed4cc6714b882087193a15a43, type: 2}
   uiDocument: {fileID: 284051421}
   gridParentName: weaponGrid
   content: []
@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SendPointerHoverToParent: 1
-  m_MoveRepeatDelay: 0.1
+  m_MoveRepeatDelay: 0.4
   m_MoveRepeatRate: 0.1
   m_XRTrackingOrigin: {fileID: 0}
   m_ActionsAsset: {fileID: -944628639613478452, guid: fedd5586976395a49801ffa91e3edf40, type: 3}
@@ -352,7 +352,7 @@ MonoBehaviour:
     m_ActionId: 1c3748a9-7ee4-4b25-b79b-ff256fbfaabf
     m_ActionName: UI/Submit[/XInputControllerWindows/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: Keyboard
+  m_DefaultControlScheme: ControllerScheme
   m_DefaultActionMap: UI
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}

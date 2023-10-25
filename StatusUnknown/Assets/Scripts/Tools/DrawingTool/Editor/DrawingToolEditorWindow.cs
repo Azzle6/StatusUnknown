@@ -817,7 +817,6 @@ namespace Tools.DrawingTool.Editor
                 for (int x = 0; x < newSize.x; x++)
                 {
                     Vector2Int relativePos = new Vector2Int(x, y) + contentBounds.Item1;
-                    Debug.Log($"Register slot {relativePos}.");
                     bool value = this.squaresData[GridPositionToIndex(relativePos)].PointState > 0;
                     exportedShape.Add(value);
                 }

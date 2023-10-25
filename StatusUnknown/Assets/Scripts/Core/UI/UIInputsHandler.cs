@@ -1,12 +1,11 @@
 namespace Core.UI
 {
+    using Inventory;
     using UnityEngine;
     using UnityEngine.UIElements;
 
     public class UIInputsHandler : MonoBehaviour
     {
-        
-        
         public void SetFocus(VisualElement element)
         {
             element.Focus();

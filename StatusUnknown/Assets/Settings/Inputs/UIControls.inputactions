@@ -83,7 +83,7 @@
                     "id": "84895654-09e7-4ed2-87e7-2f55e1ad5912",
                     "path": "<XInputController>/leftStick",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "StickDeadzone(max=1),NormalizeVector2",
                     "groups": "ControllerScheme",
                     "action": "Move",
                     "isComposite": false,
