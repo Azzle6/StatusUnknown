@@ -1,3 +1,5 @@
+using System;
+
 namespace Core.Player
 {
     using System.Collections;
@@ -21,10 +23,14 @@ namespace Core.Player
         [HideInInspector] public List<float> angleRequired;
         [HideInInspector] public Collider closestTarget;
         [SerializeField] private PlayerStat playerStat;
+        [SerializeField] private float distanceVisibleCollider;
+        [SerializeField] private float distanceVisibleRadius;
         private float bestAngleToClosestTarget;
         private float currentPlayerAngle;
         private Vector3 playerPos;
         private Vector3 targetPos;
+        
+        [SerializeField] private WeaponManager weaponManager; 
         
         private void Awake()
         {
@@ -70,7 +76,7 @@ namespace Core.Player
             frustumPlanes = GeometryUtility.CalculateFrustumPlanes(mainCamera);
             
             //recover colliders in the frustrum 
-            visibleColliders = Physics.OverlapSphere(mainCamera.transform.position, 50f);
+            visibleColliders = Physics.OverlapSphere(playerStateInterpretor.transform.position + playerStateInterpretor.transform.forward * distanceVisibleCollider, distanceVisibleRadius);
            
             confirmedInTheFrustrum.Clear(); 
             confirmedInTheAngle.Clear();
@@ -120,15 +126,28 @@ namespace Core.Player
         
         private void Fire()
         {
-            Debug.Log($"Shooting with weapon {weaponNo}");
+            weaponManager.PressTriggerWeapon(weaponNo); 
         }
-        
+
+ 
+
         public override void OnStateExit()
         {
+            weaponManager.ReleaseTriggerWeapon();
             if (shooting != default)
                 StopCoroutine(shooting);
             isShooting = false;
         }
         
+        private void OnDrawGizmos()
+        {
+           //ShowDetectionZone();
+        }
+
+        private void ShowDetectionZone()
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(playerStateInterpretor.transform.position + playerStateInterpretor.transform.forward * distanceVisibleCollider, distanceVisibleRadius);
+        }
     }
 }

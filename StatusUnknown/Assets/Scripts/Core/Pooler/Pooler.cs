@@ -2,7 +2,7 @@ namespace Core.Pooler
 {
     using System.Collections.Generic;
     using UnityEngine;
-    public class Pooler : MonoBehaviour
+    public class Pooler : MonoSingleton<Pooler>
     {
         private Dictionary<string, Pool> pools = new Dictionary<string, Pool>();
         [SerializeField] private List<PoolKey> poolToInit;
