@@ -4,9 +4,42 @@ using UnityEngine;
 
 public static class VectorFieldNavigator 
 {
-    public static float fieldDensity = 1; // TODO : Add this varaiable to inspector window in some way
+    // Const
     public static Vector3[] linkNodeDirections = new Vector3[] { Vector3.right, Vector3.forward, -Vector3.right, -Vector3.forward };
+
+    // Settings
+    public static float fieldDensity = 1; // TODO : Add this varaiable to inspector window in some way (WIP)
     public static float linkNodeYDist = 1.2f;
+
+    //Data
+    static HashSet<VectorFieldVolume> activeVolume; // editor scene usage;
+    static HashSet<VectorFieldVolumeData> activeData; // playmode usage;
+
+    #region Subscribe data
+    public static void RegisterVolume(VectorFieldVolume volume)
+    {
+        Debug.Log("RegisterVolume");
+        if (activeVolume == null) activeVolume = new HashSet<VectorFieldVolume>();
+        activeVolume.Add(volume);
+
+    }
+    public static void UnRegisterVolume(VectorFieldVolume volume)
+    {
+        activeVolume.Remove(volume);
+    }
+
+    public static void Registerdata(VectorFieldVolumeData data)
+    {
+        if(activeData == null) activeData = new HashSet<VectorFieldVolumeData>();
+        activeData.Add(data);
+    }
+    public static void UnRegisterdata(VectorFieldVolumeData data)
+    {
+        activeData.Remove(data);
+    }
+    #endregion
+
+    #region Operations
     public static Vector3 PositionToBoundPosition(Vector3 position)
     {
         int posX = Mathf.RoundToInt(position.x / fieldDensity);
@@ -52,7 +85,6 @@ public static class VectorFieldNavigator
 
         return null;
     }
-
     public static void SetTargetDistance(Vector3 targetPosition, Dictionary<Vector3, Node> nodeField)
     {
         Node targetNode = WorlPositiondToNode(targetPosition, nodeField);
@@ -91,5 +123,16 @@ public static class VectorFieldNavigator
         }
 
     }
+    #endregion
+
+    #region EditorUtils
+    public static void BakeAllActiveVolume()
+    {
+        Debug.Log("Bake All");
+        if (activeVolume == null) return;
+        foreach (var volume in activeVolume)
+            volume.RegisterNodeField();
+    }
+    #endregion
 
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
+[ExecuteAlways]
 public class VectorFieldVolume : MonoBehaviour
 {
     [SerializeField] float fieldDensity => VectorFieldNavigator.fieldDensity;
@@ -21,7 +21,23 @@ public class VectorFieldVolume : MonoBehaviour
     [SerializeField] int maxGradientDistance;
     [SerializeField] bool showLink, showArrow;
 
+    private void OnEnable()
+    {
+        if (Application.isPlaying && data != null)
+            VectorFieldNavigator.Registerdata(data);
 
+        if (Application.isEditor)
+            VectorFieldNavigator.RegisterVolume(this);
+    }
+
+    private void OnDisable()
+    {
+        if (Application.isPlaying && data != null)
+            VectorFieldNavigator.UnRegisterdata(data);
+
+        if (Application.isEditor)
+            VectorFieldNavigator.UnRegisterVolume(this);
+    }
     Vector3[] GetBoundsPoints(Bounds bounds) // Used in method " SetNodeField "
     {
         if (fieldDensity == 0) return new Vector3[0];
@@ -40,8 +56,9 @@ public class VectorFieldVolume : MonoBehaviour
         return points;
     }
     [Button("Bake"),ShowIf("isValidData",true)]
-    void RegisterNodeField()
+    public void RegisterNodeField()
     {
+        if(data == null) return;
         Vector3[] boundsPoints = GetBoundsPoints(fieldCollider.bounds);
         //Debug.Log(boundsPoints.Length);
         int sizeX = Mathf.CeilToInt(fieldCollider.bounds.size.x / fieldDensity);
@@ -63,7 +80,6 @@ public class VectorFieldVolume : MonoBehaviour
         data.SaveAsset();
     }
 
-
     private void OnDrawGizmos()
     {
         if(data == null) return;
@@ -74,7 +90,7 @@ public class VectorFieldVolume : MonoBehaviour
             // draw Node
             
             Gizmos.color = distanceGradient.Evaluate(node.Value.DistanceFromTarget / maxGradientDistance);
-            Gizmos.DrawSphere(node.Value.Position, 0.1f);
+            Gizmos.DrawSphere(node.Value.Position, 0.1f * fieldDensity);
             //Gizmos.DrawCube(node.Value.Position + Vector3.up * node.Value.DistanceFromTarget*0.05f, new Vector3(0.1f,0.4f + node.Value.DistanceFromTarget * 0.1f,0.1f));
 
             // draw link
@@ -90,8 +106,9 @@ public class VectorFieldVolume : MonoBehaviour
             
 
         if (target == null) return;
+        Node worldNode = VectorFieldNavigator.WorlPositiondToNode(target.position, data.NodeField,3);
         VectorFieldNavigator.SetTargetDistance(target.position, data.NodeField);
-        Node worldNode = VectorFieldNavigator.WorlPositiondToNode(target.position, data.NodeField);
+        
         if(worldNode != null)
         {
             Gizmos.color= Color.red;

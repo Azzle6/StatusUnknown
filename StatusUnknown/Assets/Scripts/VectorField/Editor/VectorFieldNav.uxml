@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:VisualElement name="FieldSettings" style="flex-grow: initial; flex-basis: initial;">
+        <ui:Slider picking-mode="Ignore" label="Field density" value="1" high-value="4" low-value="0.5" show-input-field="true" name="FieldDensity" />
+    </ui:VisualElement>
+    <ui:VisualElement name="LinkNodeSettings" style="flex-grow: 0;">
+        <ui:Label tabindex="-1" text="Node Connection Constraints" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-font-style: bold; -unity-text-align: upper-center;" />
+        <ui:FloatField label="MaxStep" value="1" name="MaxStep" />
+        <ui:Slider picking-mode="Ignore" label="Max Angle" value="60" high-value="180" name="MaxAngle" />
+    </ui:VisualElement>
+    <ui:Button text="Bake All Vector Field Volumes In Scene" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Bake" />
+</ui:UXML>
