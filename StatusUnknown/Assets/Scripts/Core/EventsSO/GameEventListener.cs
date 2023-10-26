@@ -1,10 +1,12 @@
 namespace Core.EventsSO
 {
+    using Sirenix.OdinInspector;
     using UnityEngine;
     using UnityEngine.Events;
     
     public class GameEventListener : MonoBehaviour
     {
+        [Required]
         public GameEvent Event;
         public UnityEvent Response;
 
