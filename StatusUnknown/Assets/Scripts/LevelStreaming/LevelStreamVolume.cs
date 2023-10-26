@@ -4,7 +4,7 @@ namespace LevelStreaming
     using UnityEngine.SceneManagement;
     using UnityEngine;
     using Sirenix.OdinInspector;
-    using LevelStreaming.Helper;
+    using Core.Helper;
 
 #if UNITY_EDITOR
     using UnityEditor.SceneManagement;

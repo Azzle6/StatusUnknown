@@ -1,5 +1,6 @@
 namespace VectorField
 {
+    using Core.Helpers;
     using Sirenix.OdinInspector;
     using System.Collections.Generic;
     using UnityEngine;
@@ -103,7 +104,7 @@ namespace VectorField
 
             if (target == null) return;
             VectorFieldNavigator.SetTargetDistance(target.position, data.NodeField);
-            Node worldNode = VectorFieldNavigator.WorlPositiondToNode(target.position, data.NodeField);
+            Node worldNode = VectorFieldNavigator.WorlPositiondToNode(target.position, data.NodeField,2);
             if (worldNode != null)
             {
                 Gizmos.color = Color.red;

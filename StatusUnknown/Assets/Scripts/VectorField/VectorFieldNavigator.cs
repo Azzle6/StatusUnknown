@@ -61,7 +61,7 @@ namespace VectorField
         }
         public static void SetTargetDistance(Vector3 targetPosition, Dictionary<Vector3, Node> nodeField)
         {
-            Node targetNode = WorlPositiondToNode(targetPosition, nodeField);
+            Node targetNode = WorlPositiondToNode(targetPosition, nodeField,2);
             if (targetNode == null) return;
             targetNode.DistanceFromTarget = 0;
 

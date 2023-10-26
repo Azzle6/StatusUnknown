@@ -1,6 +1,6 @@
 namespace LevelStreaming.Editor
 {
-    using LevelStreaming.Helper;
+    using Core.Helper;
     using System.Collections.Generic;
     using UnityEditor;
     using UnityEditor.SceneManagement;
