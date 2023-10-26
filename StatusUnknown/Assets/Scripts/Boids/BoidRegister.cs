@@ -62,6 +62,16 @@ public static class BoidRegister
         Debug.DrawRay(boid.transform.position, result, Color.red);
         return result;
     }
+
+    public static Vector3 PathFindingVector(Boid boid, HashSet<Boid> neighbor,float hoverDistance)
+    {
+        Vector3 result = Vector3.zero;
+        Node node = VectorFieldNavigator.WorlPositiondToNode(boid.transform.position, VectorFieldNavigator.NodeField, 5);
+        if(node == null) return Vector3.zero;
+        Vector3 hovervec = (node.Position + Vector3.up * hoverDistance - boid.transform.position);
+        result += node.targetDirection + hovervec;
+        return result;
+    }
     public static HashSet<Boid> GetNeighbors(Boid boid)
     { 
         if(boids == null) return null;

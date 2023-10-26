@@ -30,6 +30,7 @@ public class Boid : MonoBehaviour
         vectorToProcess.Add((SteerTowards(BoidRegister.CohesionVector(this, neighbors)), settings.cohesionStrength));
         vectorToProcess.Add((SteerTowards(BoidRegister.AlignementVector(this, neighbors)),settings.alignementStrength));
         vectorToProcess.Add((SteerTowards(BoidRegister.AvoidanceVector(this, neighbors, settings.avoidDistance)),settings.avoidStrength));
+        vectorToProcess.Add((SteerTowards(BoidRegister.PathFindingVector(this, neighbors, settings.hoverDistance)), settings.pathFindingStrength));
 
         acceleration = Processvector(ref vectorToProcess);
         velocity += acceleration * Time.deltaTime;
