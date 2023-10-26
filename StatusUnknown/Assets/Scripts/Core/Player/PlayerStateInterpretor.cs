@@ -60,7 +60,17 @@ namespace Core.Player
             statesSlot[playerStateType] = null;
             tempState.OnStateExit();
         }
-        
+        public bool CheckState(PlayerStateType playerStateType, string playerStateName)
+        {
+            if (statesSlot[playerStateType] == null)  
+                return false;
+            if (statesSlot[playerStateType] != null)
+            {
+                if (statesSlot[playerStateType].GetType().Name != playerStateName)
+                    return false;
+            }
+            return true;
+        }
         public void RemoveStateCheck(string state)
         {
             if (statesSlot[playerStates[state].playerStateType] == null)

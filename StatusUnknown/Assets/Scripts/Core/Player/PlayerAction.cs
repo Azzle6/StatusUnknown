@@ -127,17 +127,41 @@ namespace Core.Player
     
         public void OnInventory(InputAction.CallbackContext ctx)
         {
+            if (ctx.started)
+            {
+                if (playerStateInterpretor.CheckState(PlayerStateType.ACTION, "InventoryPlayerState"))
+                {
+                    playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
+                }
+                else
+                {
+                    playerStateInterpretor.AddState("InventoryPlayerState", PlayerStateType.ACTION,true);
+                }
+            }
 
         }
     
         public void OnReload(InputAction.CallbackContext ctx)
         {
+            if (ctx.started)
+            {
+                playerStateInterpretor.AddState("ReloadPlayerState", PlayerStateType.ACTION,false);
+            }
         
         }
     
         public void OnAugment(InputAction.CallbackContext ctx, int augmentNo)
         {
-        
+            if (ctx.started)
+            {
+                playerStateInterpretor.AddState("AugmentPlayerState", PlayerStateType.ACTION,false);
+                playerStateInterpretor.Behave(augmentNo,PlayerStateType.ACTION);
+            }
+
+            if (ctx.canceled)
+            {
+                playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
+            }
         }
     
         public void OnWeapon(InputAction.CallbackContext ctx, int weaponNo)
