@@ -1,16 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Core.Helpers;
-
 namespace Inventory
 {
     using AYellowpaper.SerializedCollections;
+    using Core.Helpers;
     using Core.UI;
     using Sirenix.OdinInspector;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using UnityEngine;
     using UnityEngine.UIElements;
-    
     public class GridView : MonoBehaviour
     {
         [SerializeField, Required]
@@ -37,7 +35,7 @@ namespace Inventory
         }
         private VisualElement gridRoot;
 
-        #region GRID_BUILD
+        #region GRID_DISPLAY
         [Button("Display"), HideInEditorMode, BoxGroup("Actions")]
         public void DisplayGrid()
         {
@@ -51,7 +49,9 @@ namespace Inventory
         {
             this.GridRoot.style.display = DisplayStyle.None;
         }
+        #endregion //GRID_DISPLAY
 
+        #region GRID_BUILD
         private VisualElement BuildGrid()
         {
             VisualElement firstFocusElement = null;
@@ -77,15 +77,23 @@ namespace Inventory
                     if (this.gridDataSo.Shape.GetContentFromPosition(new Vector2Int(x, y)))
                     {
                         gridSlotElement.name = $"{x},{y}";
+                        RegisterSlotEvents(gridSlotElement, new Vector2Int(x,y));
                         firstFocusElement ??= gridSlotElement;
                     }
                     else
+                    {
                         slot.AddToClassList("hiddenSlot");
+                    }
                 }
             }
             return firstFocusElement;
         }
-        #endregion //GRID_BUILD
+
+        private void RegisterSlotEvents(VisualElement slot, Vector2Int pos)
+        {
+            slot.RegisterCallback<FocusEvent>(e => UIManager.Instance.inputsHandler.OnSlotFocus(pos));
+        }
+        #endregion
 
         #region CONTENT_SAVE_LOAD
         [Button("Load content"), HideInEditorMode, BoxGroup("Actions")]
