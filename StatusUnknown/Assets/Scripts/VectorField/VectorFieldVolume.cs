@@ -9,11 +9,15 @@ namespace VectorField
     {
         [SerializeField] float fieldDensity => VectorFieldNavigator.fieldDensity;
         [SerializeField] LayerMask fieldMask;
+        [SerializeField] Transform target;
 
 
         // intern Data
         [SerializeField] BoxCollider fieldCollider;
         [SerializeField] VectorFieldVolumeData data;
+
+        //debug editor
+        Node worldTargetNode = null;
 
         private void OnEnable()
         {
@@ -24,6 +28,10 @@ namespace VectorField
         {
             if (data != null)
                 VectorFieldNavigator.UnRegisterVectorFieldVolume(data);
+        }
+        private void Update()
+        {
+            UpdateFlowField();
         }
         Vector3[] GetBoundsPoints(Bounds bounds) // Used in method " SetNodeField "
         {
@@ -42,13 +50,19 @@ namespace VectorField
             }
             return points;
         }
+
+        void UpdateFlowField()
+        {
+            VectorFieldNavigator.SetTargetDistance(target.position, data.NodeField);
+            worldTargetNode = VectorFieldNavigator.WorlPositiondToNode(target.position, data.NodeField, 2);
+        }
     }
 #if UNITY_EDITOR
     public partial class VectorFieldVolume
     {
+        
         bool isValidData { get { return data != null; } }
         [Header("Debug")]
-        [SerializeField] Transform target;
         [SerializeField] Gradient distanceGradient;
         [SerializeField] int maxGradientDistance;
         [SerializeField] bool showLink, showArrow;
@@ -101,15 +115,16 @@ namespace VectorField
                     DrawArrow.ForGizmo(node.Value.Position + Vector3.up * 0.1f, node.Value.targetDirection, 0.35f, 40);
             }
 
-
             if (target == null) return;
-            VectorFieldNavigator.SetTargetDistance(target.position, data.NodeField);
-            Node worldNode = VectorFieldNavigator.WorlPositiondToNode(target.position, data.NodeField,2);
-            if (worldNode != null)
+            
+            if(Application.isEditor)
+                UpdateFlowField();
+
+            if (worldTargetNode != null)
             {
                 Gizmos.color = Color.red;
-                Gizmos.DrawLine(target.position, worldNode.Position);
-                Gizmos.DrawCube(worldNode.Position, Vector3.one * 0.2f);
+                Gizmos.DrawLine(target.position, worldTargetNode.Position);
+                Gizmos.DrawCube(worldTargetNode.Position, Vector3.one * 0.2f);
             }
 
 
