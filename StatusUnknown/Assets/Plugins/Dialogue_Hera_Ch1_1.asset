@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -488, y: -152}
+  position: {x: -408, y: -88}
   ports:
     keys:
     - input
@@ -64,7 +64,7 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 1
   content: Hi there !
-  title: AAAAA
+  title: Initial Dialogue from Chapter 1
   img: {fileID: 0}
   audio: {fileID: 0}
   answers:
@@ -80,7 +80,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 138a4296ace0db3408dc694e5789a1fc, type: 3}
-  m_Name: DGraph
+  m_Name: Dialogue_Hera_Ch1_1
   m_EditorClassIdentifier: 
   nodes:
   - {fileID: -3812474732246027561}
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -56, y: -168}
+  position: {x: -56, y: -200}
   ports:
     keys:
     - input
@@ -127,7 +127,7 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   content: On my space ship
-  title: BBBB
+  title: 
   img: {fileID: 0}
   audio: {fileID: 0}
   answers: []
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -56, y: 56}
+  position: {x: -56, y: 136}
   ports:
     keys:
     - input
@@ -172,7 +172,7 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
   content: I am just a random guy
-  title: CCCC
+  title: 
   img: {fileID: 0}
   audio: {fileID: 0}
   answers: []
