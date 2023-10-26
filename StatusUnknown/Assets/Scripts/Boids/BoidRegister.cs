@@ -35,7 +35,7 @@ public static class BoidRegister
         if(neighbor.Count <=0) return result;
 
         foreach (var b in neighbor)
-            result += b.desiredDirection;
+            result += b.forward;
         result = Vector3.ClampMagnitude(result/neighbor.Count,1);
         Debug.DrawRay(boid.transform.position, result, Color.green);
 
@@ -69,7 +69,7 @@ public static class BoidRegister
         HashSet<Boid> result = boids;
         foreach(var b in boids)
         {
-            if(b != boid && Vector3.SqrMagnitude(b.transform.position - boid.transform.position) <= boid.viewDistance * boid.viewDistance)
+            if(b != boid && Vector3.SqrMagnitude(b.transform.position - boid.transform.position) <= boid.settings.viewDistance * boid.settings.viewDistance)
             {
                 Debug.DrawLine(b.transform.position, boid.transform.position, Color.blue);
                 result.Add(b);

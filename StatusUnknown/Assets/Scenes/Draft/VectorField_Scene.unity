@@ -143,7 +143,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &39810411
 Transform:
   m_ObjectHideFlags: 0
@@ -539,6 +539,11 @@ PrefabInstance:
       propertyPath: speed
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6197997290865193979, guid: f83eb0013eeaa7341aeefe8b3433fadd,
+        type: 3}
+      propertyPath: angleSpeed
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 7340246903055539138, guid: f83eb0013eeaa7341aeefe8b3433fadd,
         type: 3}
       propertyPath: m_Name
@@ -640,7 +645,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   maxGradientDistance: 40
   showLink: 0
-  showArrow: 0
+  showArrow: 1
 --- !u!65 &101858968
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1528,7 +1533,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &190273681
 Transform:
   m_ObjectHideFlags: 0
@@ -3691,7 +3696,7 @@ Transform:
   m_GameObject: {fileID: 370481822}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.15, y: 3.221, z: -2.356}
+  m_LocalPosition: {x: 16.08, y: 3.221, z: 11.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3882,7 +3887,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &479323580
 Transform:
   m_ObjectHideFlags: 0
@@ -4490,6 +4495,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6197997290865193979, guid: f83eb0013eeaa7341aeefe8b3433fadd,
+        type: 3}
+      propertyPath: angleSpeed
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 7340246903055539138, guid: f83eb0013eeaa7341aeefe8b3433fadd,
         type: 3}
       propertyPath: m_Name
@@ -4520,7 +4530,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &678101459
 Transform:
   m_ObjectHideFlags: 0
@@ -5424,7 +5434,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &792740765
 Transform:
   m_ObjectHideFlags: 0
@@ -6310,6 +6320,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6197997290865193979, guid: f83eb0013eeaa7341aeefe8b3433fadd,
+        type: 3}
+      propertyPath: angleSpeed
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 7340246903055539138, guid: f83eb0013eeaa7341aeefe8b3433fadd,
         type: 3}
       propertyPath: m_Name
@@ -6377,6 +6392,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6197997290865193979, guid: f83eb0013eeaa7341aeefe8b3433fadd,
+        type: 3}
+      propertyPath: angleSpeed
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7340246903055539138, guid: f83eb0013eeaa7341aeefe8b3433fadd,
         type: 3}
@@ -6774,7 +6794,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1571941362
 Transform:
   m_ObjectHideFlags: 0
@@ -7310,7 +7330,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1985909523
 Transform:
   m_ObjectHideFlags: 0
@@ -7885,6 +7905,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6197997290865193979, guid: f83eb0013eeaa7341aeefe8b3433fadd,
+        type: 3}
+      propertyPath: angleSpeed
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7340246903055539138, guid: f83eb0013eeaa7341aeefe8b3433fadd,
         type: 3}
