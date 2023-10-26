@@ -1,5 +1,21 @@
 {
   "dependencies": {
+    "com.aurore.dialogue-system": {
+      "version": "https://github.com/Kabourlix/dialogue-system.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.github.siccity.xnode": ""
+      },
+      "hash": "91ca4364f5ea06f8e4c25af68df6018007aaec9b"
+    },
+    "com.github.siccity.xnode": {
+      "version": "https://github.com/Siccity/xNode.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "82f78879316817dc5c7f8703352f5660a22ec3d4"
+    },
     "com.unity.burst": {
       "version": "1.8.8",
       "depth": 1,
