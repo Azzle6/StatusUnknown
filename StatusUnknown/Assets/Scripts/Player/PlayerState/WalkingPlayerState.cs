@@ -5,6 +5,8 @@ namespace Core.Player
     public class WalkingPlayerState : PlayerState
     {
         private Vector3 tempMovement;
+        private Vector3 tempMovementAnim;
+        private Quaternion tempQuaternionAnim;
         private float inertiaTimer;
         private Vector3 lookDirection;
         [SerializeField] private float groundCheckDistance = 0.5f;
@@ -40,6 +42,8 @@ namespace Core.Player
             if (applyingMovement != default)
                 StopCoroutine(applyingMovement);
             playerStateInterpretor.AddState("IdlePlayerState", PlayerStateType.MOVEMENT,false);
+            playerStateInterpretor.animator.SetFloat("WalkDirX", 0);
+            playerStateInterpretor.animator.SetFloat("WalkDirY", 0);
         }
 
         private void Move(Vector2 movement)
@@ -53,9 +57,17 @@ namespace Core.Player
                 StartCoroutine(ApplyMovement());
             
             tempMovement = new Vector3(movement.x,0,movement.y);
+            tempMovementAnim = tempMovement;
             tempMovement = cam.transform.TransformDirection(tempMovement);
+            tempMovementAnim = tempMovement; 
             tempMovement.y = 0;
-            tempMovement.Normalize();
+            
+            tempQuaternionAnim = Quaternion.FromToRotation(Vector3.forward, playerStateInterpretor.transform.forward);
+            tempQuaternionAnim = Quaternion.Inverse(tempQuaternionAnim);
+            tempMovementAnim = tempQuaternionAnim * tempMovement;
+            
+            playerStateInterpretor.animator.SetFloat("WalkDirX", tempMovementAnim.x);
+            playerStateInterpretor.animator.SetFloat("WalkDirY", tempMovementAnim.z);
         }
 
         private IEnumerator ApplyMovement()
