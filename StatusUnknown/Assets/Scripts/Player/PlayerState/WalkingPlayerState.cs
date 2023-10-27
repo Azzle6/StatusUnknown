@@ -64,7 +64,7 @@ namespace Core.Player
             {
                 playerStateInterpretor.rb.velocity = tempMovement * playerStat.moveSpeed + new Vector3(0,playerStateInterpretor.rb.velocity.y,0);
                 AdjustVelocityToSlope();
-                if (playerStateInterpretor.statesSlot[PlayerStateType.AIM] == null) 
+                if (playerStat.isAiming == default) 
                     playerStateInterpretor.transform.forward = Vector3.Slerp(new Vector3(playerStateInterpretor.transform.forward.x,0,playerStateInterpretor.transform.forward.z), tempMovement, playerStat.turnSpeed); 
                 yield return null;
             }

@@ -2,7 +2,6 @@ namespace Core.Player
 {
     using System.Collections.Generic;
     using UnityEngine;
-    using Sirenix.Serialization;
 
     public class PlayerStateInterpretor : MonoBehaviour
     {
@@ -16,7 +15,7 @@ namespace Core.Player
         [SerializeField] private List<PlayerState> unusedPlayerStates;
         private PlayerState tempState;
         [Header("Player Component")]
-        [OdinSerialize] public Rigidbody rb;
+        public Rigidbody rb;
         public Animator animator;
         private PlayerAction playerInput;
         

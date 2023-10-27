@@ -14,6 +14,7 @@ namespace Core.Player
         [Range(0.01f, 0.1f)] public float turnSpeed;
         [Header("Aim")]
         public AnimationCurve angleRequiredMultiplierByDistance;
+        [HideInInspector] public bool isAiming;
 
     }
 }

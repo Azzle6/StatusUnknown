@@ -22,12 +22,14 @@ namespace Core.Player
 
         private IEnumerator Aim()
         {
+            playerStat.isAiming = true;
             while (aimDirection.magnitude > 0.01f)
             {
                 Debug.DrawRay(playerStateInterpretor.transform.position ,playerStateInterpretor.transform.forward *50, Color.blue);
                 playerStateInterpretor.transform.forward = Vector3.Slerp(new Vector3(playerStateInterpretor.transform.forward.x,0,playerStateInterpretor.transform.forward.z), new Vector3(aimDirection.x,0,aimDirection.y), playerStat.turnSpeed);
                 yield return null;
             }
+            playerStat.isAiming = false;
         }
 
        
@@ -37,6 +39,7 @@ namespace Core.Player
             if (aiming != default)
             {
                 StopCoroutine(aiming);
+                playerStat.isAiming = false;
                 aiming = default;
             } 
         }
