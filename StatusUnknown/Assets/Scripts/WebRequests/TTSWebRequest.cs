@@ -1,11 +1,9 @@
 using CoreGameplayContent.VoiceLines;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Net;
-using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
+using Debug = UnityEngine.Debug;
 
 // api URL https://large-text-to-speech.p.rapidapi.com/tts
 // auth key 1cc4d2218bmshe456bc8d87002fap159ec0jsnd918b3538dc3 (NOT DEPLOYED)
@@ -23,7 +21,7 @@ public class TTSWebRequest : WebRequestBase
     void Start()
     {
         // PostRequest(); 
-        GetRequest();   
+        GetRequest();
     }
 
     private void PostRequest()
@@ -55,10 +53,9 @@ public class TTSWebRequest : WebRequestBase
 
     private void GetRequest()
     {
-        // DEBUG
         data.@params = new()
         {
-            id = "79f47a19-809d-4031-af1c-2750e8c85144" 
+            id = "79f47a19-809d-4031-af1c-2750e8c85144" // DEBUG
         };
         // "x-amzn-requestid":"79f47a19-809d-4031-af1c-2750e8c85144"
 
@@ -72,9 +69,10 @@ public class TTSWebRequest : WebRequestBase
         // string getData = JsonUtility.ToJson(data);
 
         string getData = JsonUtility.ToJson(data);
-        StartCoroutine(WebRequestHandler.HandleRequest_GET(apiURL, headers, getData, OnGetRequestComplete));
-    }
+        Debug.Log(getData);
 
+        // StartCoroutine(WebRequestHandler.HandleRequest_GET(apiURL, headers, getData, OnGetRequestComplete));
+    }
 
     protected override void Populate_OnGetComplete(UnityWebRequest uwb)
     {

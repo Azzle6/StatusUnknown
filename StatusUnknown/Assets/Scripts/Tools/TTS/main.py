@@ -1,9 +1,9 @@
 import requests, json, time
 
 if __name__ == '__main__':
-    text = """Text to speech technology allows you to convert text of unlimited sizes to humanlike voice audio files!"""
+    text = """Hello, I am a non player character from the prototype Status Unknown !"""
     apikey = "1cc4d2218bmshe456bc8d87002fap159ec0jsnd918b3538dc3" # get your free API key from https://rapidapi.com/k_1/api/large-text-to-speech/
-    filename = "test-file.wav"
+    filename = "Files/status_unknown-audiotest-1.wav"
 
     # POST
     headers = {'content-type': "application/json", 'x-rapidapi-host': "large-text-to-speech.p.rapidapi.com", 'x-rapidapi-key': apikey}

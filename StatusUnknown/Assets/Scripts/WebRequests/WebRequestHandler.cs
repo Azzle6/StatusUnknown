@@ -33,7 +33,7 @@ public class WebRequestHandler : MonoBehaviour
 
             if (request.result == UnityWebRequest.Result.Success)
             {
-                string jsonResult = System.Text.Encoding.UTF8.GetString(request.downloadHandler.data);
+                string jsonResult = Encoding.UTF8.GetString(request.downloadHandler.data);
                 Debug.Log($"result : {jsonResult}");
             }
             else
@@ -51,7 +51,7 @@ public class WebRequestHandler : MonoBehaviour
 
             if (request.result == UnityWebRequest.Result.Success)
             {
-                string jsonResult = System.Text.Encoding.UTF8.GetString(request.downloadHandler.data);
+                string jsonResult = Encoding.UTF8.GetString(request.downloadHandler.data);
                 Debug.Log($"result : {jsonResult}");
 
                 callback(request);
