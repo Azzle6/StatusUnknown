@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-using StatusUnknown.CoreGameplayContent; 
+using StatusUnknown.CoreGameplayContent.Character;  
 
 namespace StatusUnknown
 {
@@ -18,16 +18,21 @@ namespace StatusUnknown
             {
                 for (int i = 1; i <= amountOfRequests; i++)
                 {
-                    StartCoroutine(WebRequestHandler.HandleRequest(string.Concat(apiURL, i.ToString()), OnRequestComplete));
+                    StartCoroutine(WebRequestHandler.HandleRequest_GET(string.Concat(apiURL, i.ToString()), OnGetRequestComplete));
                 }
             }
 
-            protected override void Populate(UnityWebRequest uwb)
+            protected override void Populate_OnGetComplete(UnityWebRequest uwb)
             {
                 PopulateAbilities(uwb);
                 PopulateStats(uwb);
 
                 characters.Add(new Character(uwb, allCharacterStatsContainers));
+            }
+
+            protected override void Populate_OnPostComplete(UnityWebRequest uwb)
+            {
+                throw new NotImplementedException();
             }
 
             private void PopulateAbilities(UnityWebRequest uwb)
@@ -53,7 +58,7 @@ namespace StatusUnknown
         }
     }
 
-    namespace CoreGameplayContent
+    namespace CoreGameplayContent.Character
     {
         [Serializable]
         public class Character

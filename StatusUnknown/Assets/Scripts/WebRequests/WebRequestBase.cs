@@ -5,21 +5,24 @@ using UnityEngine.Networking;
 public abstract class WebRequestBase : MonoBehaviour
 {
     [SerializeField] protected string apiURL;
-    [SerializeField, Range(0, 10)] protected int amountOfRequests = 3;
+    [SerializeField] protected string authKey = ""; 
+    [SerializeField, Range(1, 10)] protected int amountOfRequests = 1;
 
-    protected abstract void Populate(UnityWebRequest uwb);
-    protected Action<UnityWebRequest> OnRequestComplete;
+    protected abstract void Populate_OnPostComplete(UnityWebRequest uwb);
+    protected abstract void Populate_OnGetComplete(UnityWebRequest uwb);
+    protected Action<UnityWebRequest> OnGetRequestComplete;
+    protected Action<UnityWebRequest> OnPostRequestComplete; 
 
 
     protected void OnEnable()
     {
-        OnRequestComplete += Populate;
-        Debug.Log("enabling"); 
+        OnPostRequestComplete += Populate_OnPostComplete;
+        OnGetRequestComplete += Populate_OnGetComplete;
     }
 
     protected void OnDisable()
     {
-        OnRequestComplete -= Populate;
-        Debug.Log("disabling"); 
+        OnPostRequestComplete -= Populate_OnPostComplete;
+        OnGetRequestComplete -= Populate_OnGetComplete;
     }
 }

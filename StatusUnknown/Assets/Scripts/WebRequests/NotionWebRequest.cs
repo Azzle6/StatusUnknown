@@ -1,17 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System;
 using UnityEngine.Networking;
 
 public class NotionWebRequest : WebRequestBase
 {
     void Start()
     {
-        StartCoroutine(WebRequestHandler.HandleRequest(apiURL, OnRequestComplete));
+        StartCoroutine(WebRequestHandler.HandleRequest_GET(apiURL, OnGetRequestComplete));
     }
 
-    protected override void Populate(UnityWebRequest uwb)
+    protected override void Populate_OnGetComplete(UnityWebRequest uwb)
     {
-        Debug.Log("REQUEST DONE"); 
+        throw new NotImplementedException();
+    }
+
+    protected override void Populate_OnPostComplete(UnityWebRequest uwb)
+    {
+        throw new NotImplementedException();
     }
 }
