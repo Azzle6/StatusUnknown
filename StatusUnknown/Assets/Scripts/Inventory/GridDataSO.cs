@@ -14,9 +14,9 @@ namespace Inventory
         public SerializedDictionary<Vector2Int, Item> content = new SerializedDictionary<Vector2Int, Item>();
         
         [Button("Test add item")]
-        public void AddItem(Item item)
+        public void AddItem(Item item, Vector2Int gridPosition)
         {
-            this.content[item.gridPosition] = item;
+            this.content[gridPosition] = item;
         }
         
         [Button("Test remove item")]

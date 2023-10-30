@@ -21,7 +21,7 @@ namespace Inventory
         
         [SerializeField]
         private Slot[] slots;
-        private HashSet<Item> items = new HashSet<Item>();
+        private HashSet<ItemView> itemsView = new HashSet<ItemView>();
         
         private VisualElement GridRoot
         {
@@ -102,9 +102,11 @@ namespace Inventory
             ClearContent(false);
             foreach (KeyValuePair<Vector2Int, Item> info in gridDataSo.content)
             {
-                this.slots[GridHelper.GetIndexFromGridPosition(info.Key, gridDataSo.Shape.shapeSize.x)].item = info.Value;
-                
-                AddItem(info.Value, info.Key, false);
+                ItemView itemView = new ItemView(info.Value);
+                itemView.GenerateView();
+                itemView.gridPosition = info.Key;
+                this.slots[GridHelper.GetIndexFromGridPosition(info.Key, gridDataSo.Shape.shapeSize.x)].itemView = itemView;
+                AddItem(itemView, info.Key, false);
             }
         }
         
@@ -112,8 +114,8 @@ namespace Inventory
         private void SaveContent()
         {
             SerializedDictionary<Vector2Int, Item> newContent = new SerializedDictionary<Vector2Int, Item>();
-            foreach (Item item in this.items)
-                newContent.Add(item.gridPosition, item);
+            foreach (ItemView itemView in this.itemsView)
+                newContent.Add(itemView.gridPosition, itemView.item);
             
             gridDataSo.content = newContent;
         }
@@ -121,11 +123,11 @@ namespace Inventory
         [Button("Clear content"), HideInEditorMode, BoxGroup("Actions")]
         private void ClearContent(bool clearData)
         {
-            HashSet<Item> tempItem = new HashSet<Item>(this.items);
-            foreach (Item item in tempItem)
-                RemoveItem(item);
+            HashSet<ItemView> tempItem = new HashSet<ItemView>(this.itemsView);
+            foreach (ItemView itemView in tempItem)
+                RemoveItem(itemView);
             
-            this.items.Clear();
+            this.itemsView.Clear();
 
             if (clearData)
                 gridDataSo.content.Clear();
@@ -133,16 +135,12 @@ namespace Inventory
         #endregion
 
         #region CONTENT_MANAGEMENT
-        private void CreateItemView(Item item)
+        private void AddItem(ItemView itemView, Vector2Int position, bool addData = true)
         {
+            Vector2Int[] itemShapeCoord = itemView.item.itemDefinition.Shape.GetPositionsRelativeToAnchor();
             
-        }
-        private void AddItem(Item item, Vector2Int position, bool addData = true)
-        {
-            Vector2Int[] itemShapeCoord = item.itemDefinition.Shape.GetPositionsRelativeToAnchor();
-            int posIndex = GridHelper.GetIndexFromGridPosition(position, gridDataSo.Shape.shapeSize.x);
-            Debug.Log($"Add item to {posIndex}");
-            //[TODO]Spawn item here
+            int visualPosIndex = GridHelper.GetIndexFromGridPosition(new Vector2Int(position.x, position.y +itemView.item.itemDefinition.Shape.shapeSize.y - 1), gridDataSo.Shape.shapeSize.x);
+            this.slots[visualPosIndex].visualElement.Add(itemView.view);
             
             foreach (var coord in itemShapeCoord)
             {
@@ -151,34 +149,34 @@ namespace Inventory
                 
                 int index = GridHelper.GetIndexFromGridPosition(coord + position, gridDataSo.Shape.shapeSize.x);
                 this.slots[index].visualElement.AddToClassList("usedSlot");
-                this.slots[index].item = item;
+                this.slots[index].itemView = itemView;
             }
             
-            item.gridPosition = position;
-            this.items.Add(item);
+            itemView.gridPosition = position;
+            this.itemsView.Add(itemView);
             
             if(addData)
-                gridDataSo.AddItem(item);
+                gridDataSo.AddItem(itemView.item, position);
         }
-        private void RemoveItem(Item item, bool removeData = true)
+        private void RemoveItem(ItemView itemView, bool removeData = true)
         {
-            if (!this.items.Remove(item))
+            if (!this.itemsView.Remove(itemView))
             {
-                Debug.Log($"Tried to remove {item} but it doesn't exists in grid.");
+                Debug.Log($"Tried to remove {itemView} but it doesn't exists in grid.");
                 return;
             }
             
-            Vector2Int[] itemShapeCoord = item.itemDefinition.Shape.GetPositionsRelativeToAnchor();
+            Vector2Int[] itemShapeCoord = itemView.item.itemDefinition.Shape.GetPositionsRelativeToAnchor();
             foreach (var coord in itemShapeCoord)
             {
-                if (!GridHelper.IsInGrid(coord + item.gridPosition, gridDataSo.Shape.shapeSize))
+                if (!GridHelper.IsInGrid(coord + itemView.gridPosition, gridDataSo.Shape.shapeSize))
                     Debug.LogWarning($"try to add item at {coord}. This position is out of the grid.");
 
-                this.slots[GridHelper.GetIndexFromGridPosition(coord + item.gridPosition, gridDataSo.Shape.shapeSize.x)].visualElement.RemoveFromClassList("usedSlot");
-                this.slots[GridHelper.GetIndexFromGridPosition(coord + item.gridPosition, gridDataSo.Shape.shapeSize.x)].item = null;
+                this.slots[GridHelper.GetIndexFromGridPosition(coord + itemView.gridPosition, gridDataSo.Shape.shapeSize.x)].visualElement.RemoveFromClassList("usedSlot");
+                this.slots[GridHelper.GetIndexFromGridPosition(coord + itemView.gridPosition, gridDataSo.Shape.shapeSize.x)].itemView = null;
             }
             if(removeData)
-                gridDataSo.content.Remove(item.gridPosition);
+                gridDataSo.content.Remove(itemView.gridPosition);
         }
         #endregion
     }
@@ -186,7 +184,7 @@ namespace Inventory
     [Serializable]
     public class Slot
     {
-        public Item item;
+        public ItemView itemView;
         public Vector2Int position;
         public VisualElement visualElement;
 
