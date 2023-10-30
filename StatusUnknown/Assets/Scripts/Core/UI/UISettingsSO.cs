@@ -1,5 +1,3 @@
-
-
 namespace Core.UI
 {
     using UnityEngine;

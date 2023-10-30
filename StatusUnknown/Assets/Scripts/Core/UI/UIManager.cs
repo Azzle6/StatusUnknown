@@ -9,8 +9,6 @@ namespace Core.UI
         public static UIManager Instance;
 
         [FoldoutGroup("Assets References"), Required]
-        public UISettingsSO settings;
-        [FoldoutGroup("Assets References"), Required]
         public UIInputsHandler inputsHandler;
         [FoldoutGroup("Scene References"), Required] 
         public UIDocument mainUI;

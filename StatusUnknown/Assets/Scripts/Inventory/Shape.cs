@@ -27,7 +27,8 @@ namespace Inventory
         #region UTILITIES
         public bool GetContentFromPosition(Vector2Int position)
         {
-            return shapeContent[position.y * this.shapeSize.x + position.x];
+            int index = position.y * this.shapeSize.x + position.x;
+            return index < this.shapeContent.Length && shapeContent[index];
         }
 
         public Vector2Int[] GetPositionsRelativeToAnchor()
