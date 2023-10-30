@@ -17,14 +17,10 @@ namespace Inventory
         private UIDocument uiDocument;
         [SerializeField, Required]
         private string gridParentName;
-
-        public Item[] Content
-        {
-            get => content ??= new Item[gridDataSo.Shape.shapeContent.Length];
-            set => content = value;
-        }
+        
         [SerializeField]
-        private Item[] content;
+        private Slot[] slots;
+        private HashSet<Item> items = new HashSet<Item>();
         
         private VisualElement GridRoot
         {
@@ -55,8 +51,8 @@ namespace Inventory
         private VisualElement BuildGrid()
         {
             VisualElement firstFocusElement = null;
-            
             Shape gridShape = this.gridDataSo.Shape;
+            List<Slot> slotsList = new List<Slot>();
             VisualTreeAsset slotTemplate = UIManager.Instance.settings.slotTreeAsset;
             VisualElement verticalParent = this.GridRoot.Q<VisualElement>("verticalParent");
             verticalParent.Clear();
@@ -73,6 +69,7 @@ namespace Inventory
                     
                     horizontalParent.Insert(x, slot);
                     VisualElement gridSlotElement = slot.Q<VisualElement>("gridSlot");
+                    slotsList.Add(new Slot(new Vector2Int(x,y), gridSlotElement));
 
                     if (this.gridDataSo.Shape.GetContentFromPosition(new Vector2Int(x, y)))
                     {
@@ -86,6 +83,8 @@ namespace Inventory
                     }
                 }
             }
+
+            this.slots = slotsList.ToArray();
             return firstFocusElement;
         }
 
@@ -99,20 +98,19 @@ namespace Inventory
         [Button("Load content"), HideInEditorMode, BoxGroup("Actions")]
         private void LoadContent()
         {
-            List<Item> result = new List<Item>();
+            ClearContent(true);
             foreach (KeyValuePair<Vector2Int, Item> info in gridDataSo.content)
             {
-                result.Add(info.Value);
+                this.slots[GridHelper.GetIndexFromGridPosition(info.Key, gridDataSo.Shape.shapeSize.x)].item = info.Value;
+                AddItem(info.Value, info.Key);
             }
-
-            Content = result.ToArray();
         }
         
         [Button("Save content"), HideInEditorMode, BoxGroup("Actions")]
         private void SaveContent()
         {
             SerializedDictionary<Vector2Int, Item> newContent = new SerializedDictionary<Vector2Int, Item>();
-            foreach (Item item in content.Where(i => i != null))
+            foreach (Item item in this.items)
                 newContent.Add(item.gridPosition, item);
             
             gridDataSo.content = newContent;
@@ -121,15 +119,14 @@ namespace Inventory
         [Button("Clear content"), HideInEditorMode, BoxGroup("Actions")]
         private void ClearContent(bool clearData)
         {
-            for (int i = 0; i < content.Length; i++)
-                Content[i].gridPosition = Vector2Int.zero;
-
-            Content = Array.Empty<Item>();
+            HashSet<Item> tempItem = new HashSet<Item>(this.items);
+            foreach (Item item in tempItem)
+                RemoveItem(item);
             
-            if(!clearData)
-                return;
+            this.items.Clear();
 
-            gridDataSo.content.Clear();
+            if (clearData)
+                gridDataSo.content.Clear();
         }
         #endregion
 
@@ -137,30 +134,55 @@ namespace Inventory
         private void AddItem(Item item, Vector2Int position)
         {
             Vector2Int[] itemShapeCoord = item.itemDefinition.Shape.GetPositionsRelativeToAnchor();
+            int posIndex = GridHelper.GetIndexFromGridPosition(position, gridDataSo.Shape.shapeSize.x);
+            //[TODO]Spawn item here
+            
             foreach (var coord in itemShapeCoord)
             {
-                if (!GridHelper.IsInGrid(coord, gridDataSo.Shape.shapeSize))
+                if (!GridHelper.IsInGrid(coord + position, gridDataSo.Shape.shapeSize))
                     Debug.LogWarning($"try to add item at {coord}. This position is out of the grid.");
-
-                Content[GridHelper.GetIndexFromGridPosition(coord + position, gridDataSo.Shape.shapeSize.x)] = item;
+                int index = GridHelper.GetIndexFromGridPosition(coord + position, gridDataSo.Shape.shapeSize.x);
+                this.slots[index].visualElement.AddToClassList("usedSlot");
+                this.slots[index].item = item;
             }
-
+            
             item.gridPosition = position;
+            this.items.Add(item);
             gridDataSo.AddItem(item);
         }
         private void RemoveItem(Item item)
         {
+            if (!this.items.Remove(item))
+            {
+                Debug.Log($"Tried to remove {item} but it doesn't exists in grid.");
+                return;
+            }
+            
             Vector2Int[] itemShapeCoord = item.itemDefinition.Shape.GetPositionsRelativeToAnchor();
             foreach (var coord in itemShapeCoord)
             {
-                if (!GridHelper.IsInGrid(coord, gridDataSo.Shape.shapeSize))
+                if (!GridHelper.IsInGrid(coord + item.gridPosition, gridDataSo.Shape.shapeSize))
                     Debug.LogWarning($"try to add item at {coord}. This position is out of the grid.");
 
-                Content[GridHelper.GetIndexFromGridPosition(coord + item.gridPosition, gridDataSo.Shape.shapeSize.x)] = null;
+                this.slots[GridHelper.GetIndexFromGridPosition(coord + item.gridPosition, gridDataSo.Shape.shapeSize.x)].visualElement.RemoveFromClassList("usedSlot");
+                this.slots[GridHelper.GetIndexFromGridPosition(coord + item.gridPosition, gridDataSo.Shape.shapeSize.x)].item = null;
             }
-
             gridDataSo.content.Remove(item.gridPosition);
         }
         #endregion
+    }
+
+    [Serializable]
+    public class Slot
+    {
+        public Item item;
+        public Vector2Int position;
+        public VisualElement visualElement;
+
+        public Slot(Vector2Int pos, VisualElement visual)
+        {
+            this.position = pos;
+            this.visualElement = visual;
+        }
     }
 }
