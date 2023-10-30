@@ -94,6 +94,7 @@ namespace Core.Player
             {
                 if (ctx.started)
                 {
+                    Cursor.lockState = CursorLockMode.Confined;
                     playerStateInterpretor.AddState("AimMousePlayerState",PlayerStateType.AIM,false);
                     playerStateInterpretor.Behave(direction,PlayerStateType.AIM);
                 }

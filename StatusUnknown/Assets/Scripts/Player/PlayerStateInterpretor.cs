@@ -17,6 +17,7 @@ namespace Core.Player
         [Header("Player Component")]
         public Rigidbody rb;
         public Animator animator;
+        public WeaponManager weaponManager;
         private PlayerAction playerInput;
         
         

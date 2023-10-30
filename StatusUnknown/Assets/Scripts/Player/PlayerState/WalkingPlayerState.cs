@@ -28,6 +28,8 @@ namespace Core.Player
             if ((inertiaTimer >0.1) && (applyingInertia != default))
                 StopCoroutine(applyingInertia);
             applyingMovement = StartCoroutine(ApplyMovement());
+            playerStateInterpretor.animator.SetBool("Walk", true);
+
         }
 
         public override void Behave<T>(T x)
@@ -44,6 +46,7 @@ namespace Core.Player
             playerStateInterpretor.AddState("IdlePlayerState", PlayerStateType.MOVEMENT,false);
             playerStateInterpretor.animator.SetFloat("WalkDirX", 0);
             playerStateInterpretor.animator.SetFloat("WalkDirY", 0);
+            playerStateInterpretor.animator.SetBool("Walk", false);
         }
 
         private void Move(Vector2 movement)

@@ -8,6 +8,8 @@ namespace Core.Player
     {
         [Header("Movement")]
         public float moveSpeed;
+
+        public float turnAngleLimit = 15f;
         [Header("Inertia")]
         public float inertiaDuration;
         public AnimationCurve inertiaCurve;

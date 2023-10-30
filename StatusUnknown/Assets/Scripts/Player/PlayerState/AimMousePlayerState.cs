@@ -24,6 +24,8 @@ namespace Core.Player
         public override void OnStateEnter()
         {
             aiming = StartCoroutine(Aim());
+            playerStateInterpretor.animator.SetBool("Aim", true);
+            
         }
         
         public override void Behave<T>(T x)
@@ -39,7 +41,6 @@ namespace Core.Player
             while (aimDirection.magnitude > 0.1f)
             {
                 playerStat.isAiming = true;
-                Debug.Log("Trying to aim :" + playerStat.isAiming);
                 camToMouseRay = mainCamera.ScreenPointToRay(aimDirection);
                 Debug.DrawRay(playerStateInterpretor.transform.position ,playerStateInterpretor.transform.forward *50, Color.blue);
                 if (Physics.Raycast(camToMouseRay, out camToMouseHit, 100))
@@ -64,6 +65,8 @@ namespace Core.Player
             if (aiming != default)
                 StopCoroutine(aiming);
             playerStat.isAiming = false;
+            playerStateInterpretor.animator.SetBool("Aim", false);
+
         }
         
     }
