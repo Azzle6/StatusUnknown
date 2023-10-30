@@ -109,7 +109,12 @@ namespace VectorField
                 {
                     foreach (var boundPosition in node.Value.linkedBoundPositions)
                         Gizmos.DrawLine(nodeField[boundPosition].Position, node.Value.Position);
+
+                    
                 }
+
+                //foreach (var position in node.Value.linkPosition)
+                    //Gizmos.DrawLine(node.Value.Position, position);
 
                 if (showArrow && node.Value.targetDirection != Vector3.zero) // Draw arrow
                     DrawArrow.ForGizmo(node.Value.Position + Vector3.up * 0.1f, node.Value.targetDirection, 0.35f, 40);

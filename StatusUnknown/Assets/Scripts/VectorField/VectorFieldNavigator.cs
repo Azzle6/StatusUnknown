@@ -9,9 +9,20 @@ namespace VectorField
 
     public static class VectorFieldNavigator
     {
-        public static float fieldDensity = 1f; // TODO : Add this varaiable to inspector window in some way
-        public static Vector3[] linkNodeDirections = new Vector3[] { Vector3.right, Vector3.forward, -Vector3.right, -Vector3.forward };
-        public static float linkNodeYDist = 1.2f;
+        public const float fieldDensity = 1f; // TODO : Add this varaiable to inspector window in some way
+        public static Vector3[] linkNodeDirections = new Vector3[] 
+        { 
+            Vector3.right,
+            new Vector3(1, 0, 1), 
+            Vector3.forward, 
+            new Vector3(-1, 0, 1),
+            - Vector3.right, 
+            new Vector3(-1, 0, -1), 
+            - Vector3.forward,
+            new Vector3(1, 0, -1) 
+        };
+        const float linkAngle = 70;
+        const float linkHeight = 1f;
         public static Dictionary<Vector3, Node> NodeField;
 
 
@@ -34,13 +45,23 @@ namespace VectorField
         {
             foreach (var dir in linkNodeDirections)
             {
-                int linkIteration = Mathf.FloorToInt(linkNodeYDist / fieldDensity);
-                Vector3 originNodeBoundPos = PositionToBoundPosition(node.Position) + (dir + linkIteration * Vector3.up) * fieldDensity;
+                //int linkIteration = Mathf.FloorToInt(linkNodeYDist / fieldDensity);
+                float heightLink = Mathf.Tan(linkAngle * Mathf.Deg2Rad) * fieldDensity;
+                int linkIteration = Mathf.CeilToInt(heightLink / fieldDensity);
+                Vector3 originNodeBoundPos = PositionToBoundPosition(node.Position) +dir * fieldDensity + Vector3.up * linkIteration * fieldDensity;
+
+                //if (nodeField.ContainsKey(originNodeBoundPos))
+                    //node.linkedBoundPositions.Add(originNodeBoundPos);
 
                 for (int i = 0; i <= linkIteration * 2; i++)
                 {
+                   
                     if (nodeField.ContainsKey(originNodeBoundPos))
-                        node.linkedBoundPositions.Add(originNodeBoundPos);
+                    {
+                        float height = Mathf.Abs(nodeField[originNodeBoundPos].Position.y - node.Position.y);
+                        if (height <= heightLink && height < linkHeight)
+                            node.AddLink(originNodeBoundPos,Vector3.Distance(node.Position, nodeField[originNodeBoundPos].Position));
+                    }
 
                     originNodeBoundPos += Vector3.down * fieldDensity;
                 }
@@ -73,7 +94,31 @@ namespace VectorField
             while (nodeToProcess.Count > 0)
             {
                 Node dequeueNode = nodeToProcess.Dequeue();
-                foreach (var boundPosition in dequeueNode.linkedBoundPositions)
+                for(int i = 0; i < dequeueNode.linkedBoundPositions.Count; i++)
+                {
+                    Node enqueueNode = nodeField[dequeueNode.linkedBoundPositions[i]];
+                    float linkDist = dequeueNode.linkedNodeDistance[i];
+
+                    if (!checkedNode.Contains(enqueueNode))
+                    {
+                        enqueueNode.DistanceFromTarget = dequeueNode.DistanceFromTarget + linkDist;
+                        enqueueNode.targetDirection = (dequeueNode.Position - enqueueNode.Position) /linkDist;
+
+                        nodeToProcess.Enqueue(enqueueNode);
+                        checkedNode.Add(enqueueNode);
+                    }
+                    else
+                    {
+                        if(enqueueNode.DistanceFromTarget > dequeueNode.DistanceFromTarget + linkDist)
+                        {
+                            enqueueNode.DistanceFromTarget = dequeueNode.DistanceFromTarget + linkDist;
+                            enqueueNode.targetDirection = (dequeueNode.Position - enqueueNode.Position) / linkDist;
+                        }
+                            
+                    }
+                }
+
+                /*foreach (var boundPosition in dequeueNode.linkedBoundPositions)
                 {
                     Node enqueueNode = nodeField[boundPosition];
 
@@ -94,7 +139,7 @@ namespace VectorField
                         nodeToProcess.Enqueue(enqueueNode);
                         checkedNode.Add(enqueueNode);
                     }
-                }
+                }*/
 
             }
 
