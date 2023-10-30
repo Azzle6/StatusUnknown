@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 902550757}
   - component: {fileID: 902550759}
   - component: {fileID: 902550760}
+  - component: {fileID: 902550761}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -373,7 +374,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   apiURL: https://pokeapi.co/api/v2/pokemon/
+  authKey: 
   amountOfRequests: 3
+  debugPostMessage: 0
+  debugGetMessage: 0
   characters: []
 --- !u!114 &902550760
 MonoBehaviour:
@@ -382,13 +386,36 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 902550753}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6caae20a3158410479a39b7e75195d92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   apiURL: https://eoqwdwiqsp807df.m.pipedream.net
+  authKey: 
   amountOfRequests: 1
+  debugPostMessage: 0
+  debugGetMessage: 0
+--- !u!114 &902550761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902550753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 659ac030dbdda4b4f8123cf7770e22a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  apiURL: https://large-text-to-speech.p.rapidapi.com/tts
+  authKey: 1cc4d2218bmshe456bc8d87002fap159ec0jsnd918b3538dc3
+  amountOfRequests: 1
+  debugPostMessage: 1
+  debugGetMessage: 1
+  voiceLines:
+    text: Text to speech technology allows you to convert text of unlimited sizes
+      to humanlike voice audio files!
 --- !u!1 &2059700834
 GameObject:
   m_ObjectHideFlags: 0

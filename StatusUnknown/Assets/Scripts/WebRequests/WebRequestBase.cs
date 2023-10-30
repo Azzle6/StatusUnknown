@@ -8,6 +8,10 @@ public abstract class WebRequestBase : MonoBehaviour
     [SerializeField] protected string authKey = ""; 
     [SerializeField, Range(1, 10)] protected int amountOfRequests = 1;
 
+    [Header("-- DEBUG --")]
+    [SerializeField] protected bool debugPostMessage = true;
+    [SerializeField] protected bool debugGetMessage = true; 
+
     protected abstract void Populate_OnPostComplete(UnityWebRequest uwb);
     protected abstract void Populate_OnGetComplete(UnityWebRequest uwb);
     protected Action<UnityWebRequest> OnGetRequestComplete;

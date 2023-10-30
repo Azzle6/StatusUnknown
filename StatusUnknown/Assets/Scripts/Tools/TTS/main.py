@@ -14,12 +14,14 @@ if __name__ == '__main__':
     print(f'Waiting {eta} seconds for the job to finish...')
     time.sleep(eta)
 
-    # GET
+    # GET 1
     response = requests.request("GET", "https://large-text-to-speech.p.rapidapi.com/tts", headers=headers, params={'id': id})
     while "url" not in json.loads(response.text):
         response = requests.request("GET", "https://large-text-to-speech.p.rapidapi.com/tts", headers=headers, params={'id': id})
         print(f'Waiting some more...')
         time.sleep(3)
+
+    # GET 2
     url = json.loads(response.text)['url']
     response = requests.request("GET", url)
     with open(filename, 'wb') as f:
