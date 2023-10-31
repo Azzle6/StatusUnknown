@@ -1,4 +1,5 @@
 using System;
+using UnityEngine.Serialization;
 
 namespace Core.Player
 {
@@ -13,6 +14,8 @@ namespace Core.Player
         private Coroutine aiming;
         private Ray camToMouseRay;
         private RaycastHit camToMouseHit;
+        private Vector3 desiredAimTargetPos;
+        [SerializeField] private Transform aimHeadTarget;
         [SerializeField] private PlayerStat playerStat;
 
         
@@ -24,6 +27,7 @@ namespace Core.Player
         public override void OnStateEnter()
         {
             aiming = StartCoroutine(Aim());
+            playerStateInterpretor.weaponManager.AimWithCurrentWeapon();
             playerStateInterpretor.animator.SetBool("Aim", true);
             
         }
@@ -58,13 +62,20 @@ namespace Core.Player
             }
             playerStat.isAiming = false;
         }
-        
+        private void HeadRotation()
+        {
+            desiredAimTargetPos = new Vector3(aimDirection.x,0,aimDirection.y);
+            desiredAimTargetPos = desiredAimTargetPos.normalized * 3;
+            desiredAimTargetPos.y = playerStat.headHeightOffset;
+            aimHeadTarget.position = playerStateInterpretor.transform.position + desiredAimTargetPos;
+        }
 
         public override void OnStateExit()
         {
             if (aiming != default)
                 StopCoroutine(aiming);
             playerStat.isAiming = false;
+            playerStateInterpretor.weaponManager.RestWeapon();
             playerStateInterpretor.animator.SetBool("Aim", false);
 
         }

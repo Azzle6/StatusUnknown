@@ -58,16 +58,15 @@ namespace Core.Player
             }
             if (applyingMovement == default)
                 StartCoroutine(ApplyMovement());
-            
-            tempMovement = new Vector3(movement.x,0,movement.y);
-            tempMovementAnim = tempMovement;
+
+            tempMovement = new Vector3(movement.x, 0, movement.y*2) * playerStat.moveSpeed;
+            tempMovementAnim = new Vector3(movement.x, 0, movement.y * 2);
             tempMovement = cam.transform.TransformDirection(tempMovement);
-            tempMovementAnim = tempMovement; 
             tempMovement.y = 0;
             
             tempQuaternionAnim = Quaternion.FromToRotation(Vector3.forward, playerStateInterpretor.transform.forward);
             tempQuaternionAnim = Quaternion.Inverse(tempQuaternionAnim);
-            tempMovementAnim = tempQuaternionAnim * tempMovement;
+            tempMovementAnim = tempQuaternionAnim * tempMovementAnim;
             
             playerStateInterpretor.animator.SetFloat("WalkDirX", tempMovementAnim.x);
             playerStateInterpretor.animator.SetFloat("WalkDirY", tempMovementAnim.z);
@@ -77,7 +76,10 @@ namespace Core.Player
         {
             while (tempMovement.magnitude > 0.01f)
             {
-                playerStateInterpretor.rb.velocity = tempMovement * playerStat.moveSpeed + new Vector3(0,playerStateInterpretor.rb.velocity.y,0);
+                if (tempMovement.magnitude > playerStat.moveSpeed)
+                    tempMovement = tempMovement.normalized * playerStat.moveSpeed;
+                
+                playerStateInterpretor.rb.velocity = tempMovement + new Vector3(0,playerStateInterpretor.rb.velocity.y,0);
                 AdjustVelocityToSlope();
                 if (playerStat.isAiming == default) 
                     playerStateInterpretor.transform.forward = Vector3.Slerp(new Vector3(playerStateInterpretor.transform.forward.x,0,playerStateInterpretor.transform.forward.z), tempMovement, playerStat.turnSpeed); 

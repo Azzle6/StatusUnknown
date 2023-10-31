@@ -9,7 +9,10 @@ namespace Core.Player
         [Header("Movement")]
         public float moveSpeed;
 
+        [Header("Aim")]
         public float turnAngleLimit = 15f;
+
+        public float headHeightOffset = 0.25f;
         [Header("Inertia")]
         public float inertiaDuration;
         public AnimationCurve inertiaCurve;

@@ -1,4 +1,4 @@
-using DG.Tweening;
+using UnityEngine.Serialization;
 
 namespace Core.Player
 {
@@ -12,13 +12,14 @@ namespace Core.Player
         private Coroutine aiming;
         [SerializeField] private PlayerStat playerStat;
         [SerializeField] private Rig aimRig;
-        [SerializeField] private Transform aimTarget;
-        [SerializeField] private float heightTargetOffset = 0.25f;
+        [SerializeField] private Transform aimHeadTarget;
+        private Vector3 desiredAimTargetPos;
         public override void OnStateEnter()
         {
             aiming = StartCoroutine(Aim());
             playerStateInterpretor.weaponManager.AimWithCurrentWeapon();
             playerStateInterpretor.animator.SetBool("Aim", true);
+            playerStat.isAiming = true;
             aimRig.weight = 1;
 
         }
@@ -32,7 +33,6 @@ namespace Core.Player
 
         private IEnumerator Aim()
         {
-            playerStat.isAiming = true;
             while (aimDirection.magnitude > 0.01f)
             {
                 Debug.DrawRay(playerStateInterpretor.transform.position ,playerStateInterpretor.transform.forward *50, Color.blue);
@@ -41,15 +41,17 @@ namespace Core.Player
                 {
                     playerStateInterpretor.transform.forward = Vector3.Slerp(new Vector3(playerStateInterpretor.transform.forward.x,0,playerStateInterpretor.transform.forward.z), new Vector3(aimDirection.x,0,aimDirection.y), playerStat.turnSpeed);
                 }
-                Vector3 aimTargetPos = new Vector3(aimDirection.x,0,aimDirection.y);
-                aimTargetPos = aimTargetPos.normalized * 3;
-                aimTargetPos.y = heightTargetOffset;
-                
-                aimTarget.position = playerStateInterpretor.transform.position + aimTargetPos;
-                //playerStateInterpretor.transform.forward = Vector3.Slerp(new Vector3(playerStateInterpretor.transform.forward.x,0,playerStateInterpretor.transform.forward.z), new Vector3(aimDirection.x,0,aimDirection.y), playerStat.turnSpeed);
+                HeadRotation();
                 yield return null;
             }
-            playerStat.isAiming = false;
+        }
+
+        private void HeadRotation()
+        {
+            desiredAimTargetPos = new Vector3(aimDirection.x,0,aimDirection.y);
+            desiredAimTargetPos = desiredAimTargetPos.normalized * 3;
+            desiredAimTargetPos.y = playerStat.headHeightOffset;
+            aimHeadTarget.position = playerStateInterpretor.transform.position + desiredAimTargetPos;
         }
 
        
