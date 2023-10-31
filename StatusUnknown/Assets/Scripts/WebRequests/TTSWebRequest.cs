@@ -6,26 +6,54 @@ using UnityEngine.Networking;
 using Debug = UnityEngine.Debug;
 
 // api URL https://large-text-to-speech.p.rapidapi.com/tts
-// auth key 1cc4d2218bmshe456bc8d87002fap159ec0jsnd918b3538dc3 (NOT DEPLOYED)
+// uri GET ?id=...
+// auth key "..." (NOT DEPLOYED)
+
+public enum AudioFileExtension { wav, mp3, ogg }
 
 public class TTSWebRequest : WebRequestBase
 {
-    [SerializeField] private VoiceLines voiceLines; 
-    private readonly string filename = "unity-test-file.wav";
+    [SerializeField] private VoiceLines voiceLinesToPost;
+    [SerializeField] private string fileName = "my-file-name";
+    [SerializeField] private AudioFileExtension fileExtension = AudioFileExtension.wav;
+
+    private string fileFullName; 
     private Dictionary<string, string> headers = new Dictionary<string, string>(); 
+    private string getURI;
+    private const string PATH_TO_AUDIO_FILES = "/Audio/Files/";
 
-    private string requestID;
-    private string requestURL;
-    private Data data = new Data();  
 
-    void Start()
+    [Space, Header("-- DEBUG --")]  
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private GETResponse responseSO;
+    private POSTResponseObj postResponseObj = new POSTResponseObj();
+    private GETResponseObj getResponseObj  = new GETResponseObj();  
+
+    private void Start()
     {
-        // PostRequest(); 
-        GetRequest();
+        if (useScriptableIfProvided && !string.IsNullOrEmpty(responseSO.ID))
+        {
+            if (!responseSO) return; 
+
+            Debug.Log("skipping POST request"); 
+
+            postResponseObj.id = responseSO.ID;
+            postResponseObj.eta = "15"; // :D
+            postResponseObj.text = responseSO.GetText();  
+
+            GetRequest();
+            return; 
+        }
+
+        PostRequest();
     }
 
+    [ContextMenu("Generate TTS file")]
     private void PostRequest()
     {
+        Debug.Log("doing POST"); 
+        fileFullName = string.Concat(fileName, ".", fileExtension);
+
         headers = new Dictionary<string, string>
         {
             { "Content-Type", "application/json" },
@@ -33,19 +61,22 @@ public class TTSWebRequest : WebRequestBase
             { "x-rapidapi-key", $"{authKey}" }
         };
 
-        string postData = JsonUtility.ToJson(voiceLines);
+        responseSO.SetText(voiceLinesToPost.text); 
+
+        string postData = JsonUtility.ToJson(voiceLinesToPost);
         StartCoroutine(WebRequestHandler.HandleRequest_POST(apiURL, postData, headers, OnPostRequestComplete));
     }
 
     protected override void Populate_OnPostComplete(UnityWebRequest uwb)
     {
-        // use DownloadHandler ?
-        /* _infos.id = JsonHelper.GetJsonObject(uwb.downloadHandler.text, "id");
-        requestID = infos.id; */
+        postResponseObj = JsonUtility.FromJson<POSTResponseObj>(uwb.downloadHandler.text);
+        postResponseObj.id = string.Concat("?id=", postResponseObj.id);
+
+        responseSO.ID = postResponseObj.id;
 
         if (debugPostMessage)
         {
-            Debug.Log("post response id : " + requestID);
+            Debug.Log("post response id : " + postResponseObj.id);
         }
 
         GetRequest(); 
@@ -53,11 +84,7 @@ public class TTSWebRequest : WebRequestBase
 
     private void GetRequest()
     {
-        data.@params = new()
-        {
-            id = "79f47a19-809d-4031-af1c-2750e8c85144" // DEBUG
-        };
-        // "x-amzn-requestid":"79f47a19-809d-4031-af1c-2750e8c85144"
+        Debug.Log("doing GET");
 
         headers = new Dictionary<string, string>
         {           
@@ -65,34 +92,92 @@ public class TTSWebRequest : WebRequestBase
             { "x-rapidapi-key", $"{authKey}" }
         };
 
-        // KeyValuePair<string, string> data = new KeyValuePair<string, string>("id", "79f47a19-809d-4031-af1c-2750e8c85144"); 
-        // string getData = JsonUtility.ToJson(data);
+        getURI = string.Concat(apiURL, postResponseObj.id);
+        responseSO.Uri = getURI; 
 
-        string getData = JsonUtility.ToJson(data);
-        Debug.Log(getData);
-
-        // StartCoroutine(WebRequestHandler.HandleRequest_GET(apiURL, headers, getData, OnGetRequestComplete));
+        StartCoroutine(WebRequestHandler.HandleRequest_GET(getURI, headers, OnGetRequestComplete));
     }
 
     protected override void Populate_OnGetComplete(UnityWebRequest uwb)
     {
-        if (debugGetMessage) 
+        if (string.IsNullOrEmpty(getResponseObj.url))
         {
-            Debug.Log($"Post response : {uwb.downloadHandler.text}");
+            if (debugGetMessage)
+            {
+                Debug.Log($"GET response : {uwb.downloadHandler.text}");
+            }
+
+            if (!useScriptableIfProvided)
+            {
+                getResponseObj = JsonUtility.FromJson<GETResponseObj>(uwb.downloadHandler.text);
+
+                if (responseSO && string.IsNullOrEmpty(responseSO.Url)) { responseSO.Url = getResponseObj.url;  }
+            }
+            else
+            {
+                Debug.Log("getting data from scriptable object"); 
+                getResponseObj.url = responseSO.Url; 
+            }
+
+            StartCoroutine(WebRequestHandler.HandleRequest_GET_MEDIA(getResponseObj.url, OnGetRequestComplete));
         }
-
-        if (requestURL == string.Empty)
-        {
-            requestURL = JsonHelper.GetJsonObject(uwb.downloadHandler.text, "url");
-            Debug.Log("get response url : " + requestURL); // TODO custom path in unity folder Assets/Audio
-
-            StartCoroutine(WebRequestHandler.HandleRequest_GET(requestURL, OnGetRequestComplete));
-        } 
         else
         {
-            string path = "Assets/Audio/Files"; 
-            Debug.Log($"Successfully retrieved data from url : {requestURL}. \n " +
-                      $"Stored at {path}");
+            Debug.Log("playing audio file downloaded from server"); 
+            DownloadHandlerAudioClip dlHandler = uwb.downloadHandler as DownloadHandlerAudioClip;
+
+            AudioClip _clip = dlHandler?.audioClip;
+            _clip.name = fileName; 
+            audioSource.PlayOneShot(_clip);
+
+            // TODO : SAVE AUDIO FILE TO UNTIY
+            // dlHandler.data; 
+            // Debug.Log("saving audio file to Unity");
+
+
+            // string fullPath = string.Concat(Application.dataPath, PATH_TO_AUDIO_FILES, fileFullName);
+            /* string fullPath = string.Concat("C:/Users/f.nossin/Desktop/Audio/", fileFullName);
+            var myFile = File.Create(fullPath, uwb.downloadHandler.data.Length);
+            File.WriteAllBytes(fullPath, uwb.downloadHandler.data);
+            myFile.Close();
+
+            string fullPathOther = string.Concat("C:/Users/f.nossin/Desktop/Audio/", "other.mp3");
+            var myOtherFile = File.Create(fullPathOther, uwb.downloadHandler.data.Length);
+            File.WriteAllBytes(fullPathOther, uwb.downloadHandler.data);
+            myOtherFile.Close();
+
+            string fullPathAgain = string.Concat("C:/Users/f.nossin/Desktop/Audio/", "again.mp3");
+            var myAgainFile = File.Open(fullPathAgain, FileMode.Open, FileAccess.ReadWrite); 
+            File.WriteAllBytes(fullPathAgain, uwb.downloadHandler.data);
+            myAgainFile.Close(); */
+
+            /* using (var Stream = File.Open(fullPath, FileMode.Create))
+            {
+                Debug.Log("stream is set");
+                using (BinaryWriter binWriter = new BinaryWriter(Stream, Encoding.Default, false))
+                {
+                    Debug.Log("Writing the audio data to file.");
+
+                    int arrLength = uwb.downloadHandler.data.Length;
+                    binWriter.Write(uwb.downloadHandler.data, 0, arrLength);
+
+                    byte[] verifier = new byte[arrLength];
+
+                    using (BinaryReader binReader = new BinaryReader(binWriter.BaseStream))
+                    {
+                        binReader.BaseStream.Position = 0;
+
+                        if (binReader.Read(verifier, 0, arrLength) != arrLength)
+                        {
+                            Debug.LogError("Error writing the data.");
+                            return;
+                        }
+                    }
+                }
+            } */
+
+            // Debug.Log($"{fileFullName} stored in {PATH_TO_AUDIO_FILES}. WARNING : server file will only be available for 24 hours !");
+            getResponseObj = null; 
         }
     }
 }
@@ -100,21 +185,26 @@ public class TTSWebRequest : WebRequestBase
 namespace CoreGameplayContent.VoiceLines
 {
     [Serializable]
-    public class VoiceLines
+    internal class VoiceLines
     {
-        [TextArea(10, 20)] public string text = "Text to speech technology allows you to convert text of unlimited sizes to humanlike voice audio files!";
-
+        [TextArea(10, 20)] public string text = "write here the text you want to generate speech for"; 
     }
 
     [Serializable]
-    public class Data
+    internal class POSTResponseObj
     {
-        public Infos @params;
+        public string id;
+        public string status;
+        public string eta;
+        public string text;
     }
 
     [Serializable]
-    public class Infos
+    internal class GETResponseObj
     {
-        public string id; 
+        public string id;
+        public string status;
+        public string url;
+        public string job_time; 
     }
 }

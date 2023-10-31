@@ -61,7 +61,7 @@ namespace StatusUnknown
     namespace CoreGameplayContent.Character
     {
         [Serializable]
-        public class Character
+        internal class Character
         {
             public string name;
             public StatsDataContainer[] Stats;
@@ -77,21 +77,21 @@ namespace StatusUnknown
         }
 
         [Serializable]
-        public class AbilityData
+        internal class AbilityData
         {
             public string name;
             public string url;
         }
 
         [Serializable]
-        public class StatsDataContainer
+        internal class StatsDataContainer
         {
             public string base_stat;
             public StatData stat;
         }
 
         [Serializable]
-        public class StatData
+        internal class StatData
         {
             public string name;
             public string url;

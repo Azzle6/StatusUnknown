@@ -9,6 +9,7 @@ public abstract class WebRequestBase : MonoBehaviour
     [SerializeField, Range(1, 10)] protected int amountOfRequests = 1;
 
     [Header("-- DEBUG --")]
+    [SerializeField] protected bool useScriptableIfProvided = true;
     [SerializeField] protected bool debugPostMessage = true;
     [SerializeField] protected bool debugGetMessage = true; 
 
