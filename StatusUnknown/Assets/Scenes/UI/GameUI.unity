@@ -214,8 +214,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1917496557}
-  - component: {fileID: 1917496556}
-  - component: {fileID: 1917496560}
   - component: {fileID: 1917496559}
   - component: {fileID: 1917496558}
   - component: {fileID: 1917496561}
@@ -226,20 +224,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1917496556
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1917496555}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca3d344d45cbf864a82323a3ee57981e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputsHandler: {fileID: 1917496560}
-  mainUI: {fileID: 284051421}
 --- !u!4 &1917496557
 Transform:
   m_ObjectHideFlags: 0
@@ -301,22 +285,6 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 284051420}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
---- !u!114 &1917496560
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1917496555}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be86ef0f8182e3445aae19df541b5b58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectedPosition: {x: 0, y: 0}
-  selectedItem:
-    itemDefinition: {fileID: 0}
-    gridPosition: {x: 0, y: 0}
 --- !u!114 &1917496561
 MonoBehaviour:
   m_ObjectHideFlags: 0

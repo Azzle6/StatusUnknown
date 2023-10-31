@@ -1,20 +1,21 @@
 namespace Inventory
 {
+    using System;
     using Core.Helpers;
     using Core.SingletonsSO;
     using UnityEngine;
     using UnityEngine.UIElements;
 
-    public class ItemView
+    [Serializable]
+    public class ItemView : GridElement
     {
         public Item item;
-        public VisualElement view;
-        public Vector2Int gridPosition;
 
         public void GenerateView()
         {
             Vector2Int shapeSize = item.itemDefinition.Shape.shapeSize;
-            VisualElement itemView = UISettings.Instance.itemTemplate.Instantiate();
+            VisualElement itemView = UIInputsHandler.Instance.uiSettings.itemTemplate.Instantiate();
+            itemView.style.position = Position.Absolute;
             VisualElement verticalRoot = itemView.Q<VisualElement>("verticalRoot");
             for (int y = 0; y < shapeSize.y; y++)
             {
@@ -37,9 +38,11 @@ namespace Inventory
             this.view = itemView;
         }
 
-        public ItemView(Item item)
+        public ItemView(Item item, Vector2Int gridPosition, GridView gridView)
         {
             this.item = item;
+            this.gridPosition = gridPosition;
+            this.grid = gridView;
         }
     }
 }

@@ -12,13 +12,20 @@
     border-bottom-color: rgb(0, 0, 0);
 }
 
-.baseSlot:hover {
-    border-left-color: rgb(251, 253, 15);
-    border-right-color: rgb(251, 253, 15);
-    border-top-color: rgb(251, 253, 15);
-    border-bottom-color: rgb(251, 253, 15);
-}
-
 .horizontalParent {
     flex-direction: row;
+}
+
+.verticalRoot:focus {
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
+}
+
+.verticalRoot {
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
 }
