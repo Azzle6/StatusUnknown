@@ -13,8 +13,11 @@ namespace Inventory
 
         public void GenerateView()
         {
+            if (this.view != null)
+                this.view.parent.Remove(this.view);
+            
             Vector2Int shapeSize = item.itemDefinition.Shape.shapeSize;
-            VisualElement itemView = UIInputsHandler.Instance.uiSettings.itemTemplate.Instantiate();
+            VisualElement itemView = UIHandler.Instance.uiSettings.itemTemplate.Instantiate();
             itemView.style.position = Position.Absolute;
             VisualElement verticalRoot = itemView.Q<VisualElement>("verticalRoot");
             for (int y = 0; y < shapeSize.y; y++)

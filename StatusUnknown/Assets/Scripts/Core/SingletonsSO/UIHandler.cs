@@ -2,11 +2,12 @@ namespace Core.SingletonsSO
 {
     using Inventory;
     using Sirenix.OdinInspector;
+    using UI;
     using UnityEngine;
     using UnityEngine.UIElements;
 
     [CreateAssetMenu(menuName = "CustomAssets/SingletonSO/UIHandler", fileName = "UIHandler")]
-    public class UIInputsHandler : SingletonSO<UIInputsHandler>
+    public class UIHandler : SingletonSO<UIHandler>
     {
         public UISettings uiSettings;
         
@@ -21,7 +22,7 @@ namespace Core.SingletonsSO
             Debug.Log($"{element.name} get focus.");
         }
 
-        public void OnSlotFocus(GridElement element)
+        public void OnElementFocus(GridElement element)
         {
             this.selectedElement = element;
         }

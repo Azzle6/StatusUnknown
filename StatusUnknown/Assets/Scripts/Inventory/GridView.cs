@@ -6,6 +6,7 @@ namespace Inventory
     using System;
     using System.Collections.Generic;
     using Core.SingletonsSO;
+    using Core.UI;
     using UnityEngine;
     using UnityEngine.UIElements;
     public class GridView : MonoBehaviour
@@ -30,13 +31,24 @@ namespace Inventory
         }
         private VisualElement gridRoot;
 
+        private float SlotWidth
+        {
+            get
+            {
+                if (this.slotWidth == 0)
+                    this.slotWidth = UIHandler.Instance.uiSettings.slotWidth;
+                return this.slotWidth;
+            }
+        }
+        private float slotWidth;
+
         #region GRID_DISPLAY
         [Button("Display"), HideInEditorMode, BoxGroup("Actions")]
         public void DisplayGrid()
         {
             this.GridRoot.style.display = DisplayStyle.Flex;
             VisualElement firstFocus = this.BuildGrid();
-            UIInputsHandler.Instance.SetFocus(firstFocus);
+            UIHandler.Instance.SetFocus(firstFocus);
         }
 
         [Button("Hide"), HideInEditorMode, BoxGroup("Actions")]
@@ -52,7 +64,7 @@ namespace Inventory
             VisualElement firstFocusElement = null;
             Shape gridShape = this.gridDataSo.Shape;
             List<Slot> slotsList = new List<Slot>();
-            VisualTreeAsset slotTemplate = UIInputsHandler.Instance.uiSettings.slotTreeAsset;
+            VisualTreeAsset slotTemplate = UIHandler.Instance.uiSettings.slotTreeAsset;
             VisualElement verticalParent = this.GridRoot.Q<VisualElement>("verticalParent");
             verticalParent.Clear();
 
@@ -74,7 +86,7 @@ namespace Inventory
                     if (this.gridDataSo.Shape.GetContentFromPosition(new Vector2Int(x, y)))
                     {
                         gridSlotElement.name = $"{x},{y}";
-                        RegisterSlotEvents(slot);
+                        this.RegisterElementEvents(slot);
                         firstFocusElement ??= gridSlotElement;
                     }
                     else
@@ -88,9 +100,9 @@ namespace Inventory
             return firstFocusElement;
         }
 
-        private void RegisterSlotEvents(GridElement slotElement)
+        private void RegisterElementEvents(GridElement gridElement)
         {
-            slotElement.view.RegisterCallback<FocusEvent>(e => UIInputsHandler.Instance.OnSlotFocus(slotElement));
+            gridElement.view.RegisterCallback<FocusEvent>(e => UIHandler.Instance.OnElementFocus(gridElement));
         }
         #endregion //GRID_BUILD
 
@@ -103,9 +115,7 @@ namespace Inventory
             {
                 ItemView itemView = new ItemView(info.Value, info.Key, this);
                 itemView.GenerateView();
-                itemView.gridPosition = info.Key;
-                this.slots[GridHelper.GetIndexFromGridPosition(info.Key, gridDataSo.Shape.shapeSize.x)].contentItem = itemView;
-                AddItem(itemView, info.Key, false);
+                this.RefreshItemPosition(itemView, info.Key);
             }
         }
         
@@ -124,7 +134,7 @@ namespace Inventory
         {
             HashSet<ItemView> tempItem = new HashSet<ItemView>(this.itemsView);
             foreach (ItemView itemView in tempItem)
-                RemoveItem(itemView);
+                this.RemoveItem(itemView);
             
             this.itemsView.Clear();
 
@@ -134,68 +144,43 @@ namespace Inventory
         #endregion
 
         #region CONTENT_MANAGEMENT
-        private void AddItem(ItemView itemView, Vector2Int position, bool addData = true)
+        private void RefreshItemPosition(ItemView itemView, Vector2Int position)
         {
-            Vector2Int[] itemShapeCoord = itemView.item.itemDefinition.Shape.GetPositionsRelativeToAnchor();
-            
-            //Set itemView position.
-            int visualPosIndex = GridHelper.GetIndexFromGridPosition(new Vector2Int(position.x, position.y +itemView.item.itemDefinition.Shape.shapeSize.y - 1), gridDataSo.Shape.shapeSize.x);
-            //VisualElement verticalParent = this.GridRoot.Q<VisualElement>("verticalParent"); 
+            //Set item visual position.
             this.GridRoot.Add(itemView.view);
-            Vector3 newPosition = this.slots[visualPosIndex].view.worldTransform.GetPosition();
+            Vector3 newPosition = (Vector2)position * SlotWidth;
             itemView.view.transform.position = newPosition;
-            Debug.Log(newPosition);
-            
-            //For each slots of the shape
-            foreach (var coord in itemShapeCoord)
-            {
-                if (!gridDataSo.Shape.GetContentFromPosition(coord + position))
-                    Debug.LogWarning($"try to add item at {coord + position}. This slot doesn't exists.");
-                
-                int index = GridHelper.GetIndexFromGridPosition(coord + position, gridDataSo.Shape.shapeSize.x);
-                this.slots[index].view.AddToClassList("usedSlot");
-                this.slots[index].contentItem = itemView;
-                this.slots[index].view.focusable = false;
-            }
             
             itemView.gridPosition = position;
             this.itemsView.Add(itemView);
             
-            if(addData)
-                gridDataSo.AddItem(itemView.item, position);
+            SetSlotsOccupied(itemView.item.itemDefinition.Shape, position, true);
+            
+            //Setup item events
+            this.RegisterElementEvents(itemView);
         }
-        private void RemoveItem(ItemView itemView, bool removeData = true)
+
+        private void SetSlotsOccupied(Shape itemShape, Vector2Int pos, bool isOccupied)
+        {
+            Vector2Int[] itemShapeCoord = itemShape.GetPositionsRelativeToAnchor();
+            
+            foreach (var coord in itemShapeCoord)
+            {
+                if (!gridDataSo.Shape.GetContentFromPosition(coord + pos))
+                    Debug.LogWarning($"try to setup slot state at {coord + pos}. but this slot doesn't exists.");
+                
+                int index = GridHelper.GetIndexFromGridPosition(coord + pos, gridDataSo.Shape.shapeSize.x);
+                this.slots[index].SetOccupied(isOccupied);
+            }
+        }
+        
+        private void RemoveItem(ItemView itemView)
         {
             itemView.view.RemoveFromHierarchy();
             this.itemsView.Remove(itemView);
-            
-            Vector2Int[] itemShapeCoord = itemView.item.itemDefinition.Shape.GetPositionsRelativeToAnchor();
-            foreach (var coord in itemShapeCoord)
-            {
-                if (!GridHelper.IsInGrid(coord + itemView.gridPosition, gridDataSo.Shape.shapeSize))
-                    Debug.LogWarning($"try to add item at {coord}. This position is out of the grid.");
 
-                Slot slot = this.slots[GridHelper.GetIndexFromGridPosition(coord + itemView.gridPosition, gridDataSo.Shape.shapeSize.x)];
-                slot.view.RemoveFromClassList("usedSlot");
-                slot.contentItem = null;
-                slot.view.focusable = true;
-            }
-            if(removeData)
-                gridDataSo.content.Remove(itemView.gridPosition);
+            this.SetSlotsOccupied(itemView.item.itemDefinition.Shape, itemView.gridPosition, false);
         }
         #endregion
-    }
-
-    [Serializable]
-    public class Slot : GridElement
-    {
-        public ItemView contentItem;
-
-        public Slot(Vector2Int pos, VisualElement visual, GridView gridView)
-        {
-            this.gridPosition = pos;
-            this.view = visual;
-            this.grid = gridView;
-        }
     }
 }
