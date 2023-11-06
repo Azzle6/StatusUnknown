@@ -1,3 +1,4 @@
+using StatusUnknown.CoreGameplayContent.VoiceLines;
 using System;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -38,6 +39,14 @@ namespace StatusUnknown
                 OnPostRequestComplete -= Populate_OnPostComplete;
                 OnGetRequestComplete -= Populate_OnGetComplete;
             }
+
+            /// <summary>
+            /// Inspired by RestSharp. Automatically handles ? and = for query params
+            /// </summary>
+            /// <param name="key"></param>
+            /// <param name="value"></param>
+            /// <returns></returns>
+            protected string AddQueryParam(string key, string value) => string.Concat("?", key, "=", value); 
         }
     }
 }

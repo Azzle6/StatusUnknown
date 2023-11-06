@@ -76,11 +76,11 @@ namespace StatusUnknown
                 Debug.Log("doing POST");
 
                 headers = new Dictionary<string, string>
-        {
-            { "Content-Type", "application/json" },
-            { "x-rapidapi-host", "large-text-to-speech.p.rapidapi.com" },
-            { "x-rapidapi-key", $"{authKey}" }
-        };
+                {
+                    { "Content-Type", "application/json" },
+                    { "x-rapidapi-host", "large-text-to-speech.p.rapidapi.com" },
+                    { "x-rapidapi-key", $"{authKey}" }
+                };
 
                 getResponseSO.SetText(voiceLinesToPost.text);
 
@@ -91,7 +91,7 @@ namespace StatusUnknown
             protected override void Populate_OnPostComplete(UnityWebRequest uwb)
             {
                 postResponseObj = JsonUtility.FromJson<POSTResponseObj>(uwb.downloadHandler.text);
-                postResponseObj.id = string.Concat("?id=", postResponseObj.id);
+                postResponseObj.id = AddQueryParam("id", postResponseObj.id);
 
                 getResponseSO.ID = postResponseObj.id;
 
@@ -108,10 +108,10 @@ namespace StatusUnknown
                 Debug.Log("doing GET");
 
                 headers = new Dictionary<string, string>
-        {
-            { "x-rapidapi-host", "large-text-to-speech.p.rapidapi.com" },
-            { "x-rapidapi-key", $"{authKey}" }
-        };
+                {
+                    { "x-rapidapi-host", "large-text-to-speech.p.rapidapi.com" },
+                    { "x-rapidapi-key", $"{authKey}" }
+                };
 
                 getURI = string.Concat(apiURL, postResponseObj.id);
                 getResponseSO.Uri = getURI;
