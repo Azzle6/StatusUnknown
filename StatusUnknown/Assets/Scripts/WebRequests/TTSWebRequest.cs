@@ -8,6 +8,7 @@ using Debug = UnityEngine.Debug;
 using StatusUnknown.CoreGameplayContent.VoiceLines;
 
 // api URL https://large-text-to-speech.p.rapidapi.com/tts
+// app URL https://rapidapi.com/developer/analytics/Status-Unknown-TTS 
 // uri GET ?id=...
 // auth key "..." (NOT DEPLOYED)
 
