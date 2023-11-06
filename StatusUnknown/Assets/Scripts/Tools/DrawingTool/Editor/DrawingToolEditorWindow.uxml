@@ -61,7 +61,12 @@
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="bottomElements" style="flex-grow: 0; flex-shrink: 0; transform-origin: bottom; align-self: center; flex-direction: column; justify-content: flex-end; width: 600px; margin-top: 5px;">
-                <ui:Label tabindex="-1" text="EXPORT SETTINGS" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ExportSettingsTitle" style="-unity-font-style: bold;" />
+                <ui:Label tabindex="-1" text="EXPORT TO SELECTED ITEM" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ExportToItemSettingsTitle" style="-unity-font-style: bold;" />
+                <ui:VisualElement name="selectedItemExportButtons" style="flex-grow: 1; flex-direction: row; justify-content: center; align-self: stretch;">
+                    <ui:Button text="Import from selected item" parse-escape-sequences="true" display-tooltip-when-elided="true" name="importFromSelectedButton" style="transform-origin: right;" />
+                    <ui:Button text="Export to selected item" parse-escape-sequences="true" display-tooltip-when-elided="true" name="exportToSelectedButton" style="transform-origin: right;" />
+                </ui:VisualElement>
+                <ui:Label tabindex="-1" text="EXPORT TO TEXT " parse-escape-sequences="true" display-tooltip-when-elided="true" name="ExportSettingsTitle" style="-unity-font-style: bold;" />
                 <ui:VisualElement name="ExportSettings" style="flex-direction: row;">
                     <ui:TextField picking-mode="Ignore" label="File name" value="squareData" name="fileName" class="custom-text-field custom-text-input" style="flex-grow: 1;" />
                     <ui:Button text="Export" parse-escape-sequences="true" display-tooltip-when-elided="true" name="exportButton" style="transform-origin: right;" />
