@@ -8,6 +8,9 @@ namespace StatusUnknown
 {
     namespace WebRequest
     {
+        /// <summary>
+        /// This is a test class to generate a scriptable object from web API data. Will be moved/adapted to NotionWebRequest
+        /// </summary>
         public class PokeWebRequest : WebRequestBase
         {
             [SerializeField] private List<Character> characters = new List<Character>();
@@ -58,6 +61,7 @@ namespace StatusUnknown
         }
     }
 
+    // this maybe be added to it's own separate class
     namespace CoreGameplayContent.Character
     {
         [Serializable]
