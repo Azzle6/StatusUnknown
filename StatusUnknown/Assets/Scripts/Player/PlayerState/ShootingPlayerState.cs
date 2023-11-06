@@ -1,5 +1,3 @@
-using System;
-
 namespace Core.Player
 {
     using System.Collections;
@@ -11,7 +9,6 @@ namespace Core.Player
         private Coroutine shooting;
         private int weaponNo;
         
-        [HideInInspector] public bool isShooting;
         private Camera mainCamera;
         
         //public variable are for editor script
@@ -22,7 +19,7 @@ namespace Core.Player
         [HideInInspector] public List<float> confirmedInTheAngle;
         [HideInInspector] public List<float> angleRequired;
         [HideInInspector] public Collider closestTarget;
-        [SerializeField] private PlayerStat playerStat;
+        public PlayerStat playerStat;
         [SerializeField] private float distanceVisibleCollider;
         [SerializeField] private float distanceVisibleRadius;
         private float bestAngleToClosestTarget;
@@ -39,13 +36,14 @@ namespace Core.Player
             confirmedInTheAngle = new List<float>();
             angleRequired = new List<float>();
             closestTarget = default;
+            playerStat.isShooting = false;
         }
 
 
         public override void OnStateEnter()
         {
             shooting = StartCoroutine(Shoot());
-            isShooting = true;
+            playerStat.isShooting = true;
         }
         
         public override void Behave<T>(T x)
@@ -59,7 +57,7 @@ namespace Core.Player
         
         private IEnumerator Shoot()
         {
-            while (isShooting)
+            while (playerStat.isShooting)
             {
                 FrustrumCulling();
                 DetermineClosestTarget();
@@ -136,7 +134,7 @@ namespace Core.Player
             weaponManager.ReleaseTriggerWeapon();
             if (shooting != default)
                 StopCoroutine(shooting);
-            isShooting = false;
+            playerStat.isShooting = false;
         }
         
         private void OnDrawGizmos()

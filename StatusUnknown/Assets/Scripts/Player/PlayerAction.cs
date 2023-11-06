@@ -8,6 +8,7 @@ namespace Core.Player
        [SerializeField] private PlayerInputController playerInputController;
        [SerializeField] private PlayerStateInterpretor playerStateInterpretor;
        [SerializeField] private DeviceLog deviceLog;
+       private Vector2 mousePos;
 
         private void OnEnable()
         {
@@ -90,26 +91,27 @@ namespace Core.Player
         }
         public void OnAimK(Vector2 direction, InputAction.CallbackContext ctx)
         {
-            if (deviceLog.currentDevice == DeviceType.KEYBOARD)
+            if (deviceLog.currentDevice == DeviceType.GAMEPAD)
+                return;
+
+            if (ctx.started)
             {
-                if (ctx.started)
-                {
-                    Cursor.lockState = CursorLockMode.Confined;
-                    playerStateInterpretor.AddState("AimMousePlayerState",PlayerStateType.AIM,false);
-                    playerStateInterpretor.Behave(direction,PlayerStateType.AIM);
-                }
-            
-                if (ctx.canceled)
-                    playerStateInterpretor.RemoveStateCheck("AimMousePlayerState");
-            
-                if (ctx.performed)
-                {
-                    if (playerStateInterpretor.statesSlot[PlayerStateType.AIM] == null)
-                        playerStateInterpretor.AddState("AimMousePlayerState",PlayerStateType.AIM,false);
-                
-                    playerStateInterpretor.Behave(direction,PlayerStateType.AIM);
-                }
+                playerStateInterpretor.AddState("AimMousePlayerState",PlayerStateType.AIM,false);
             }
+            
+            if (ctx.canceled)
+                playerStateInterpretor.RemoveStateCheck("AimMousePlayerState");
+               
+            playerStateInterpretor.Behave(direction,PlayerStateType.AIM);
+
+            if (ctx.performed)
+            {
+                mousePos = direction;
+                /*if (playerStateInterpretor.statesSlot[PlayerStateType.AIM] == null)
+                    playerStateInterpretor.AddState("AimMousePlayerState",PlayerStateType.AIM,false);*/
+                playerStateInterpretor.Behave(direction,PlayerStateType.AIM);
+            }
+            
         }
     
         public void OnMedkit(InputAction.CallbackContext ctx)
@@ -169,6 +171,12 @@ namespace Core.Player
         {
             if (ctx.started)
             {
+                if (deviceLog.currentDevice == DeviceType.KEYBOARD)
+                {
+                    playerStateInterpretor.AddState("AimMousePlayerState",PlayerStateType.AIM,false);
+                    playerStateInterpretor.Behave(mousePos,PlayerStateType.AIM);
+
+                }
                 playerStateInterpretor.AddState("ShootingPlayerState", PlayerStateType.ACTION,false);
                 playerStateInterpretor.Behave(weaponNo,PlayerStateType.ACTION);
             }
