@@ -14,7 +14,7 @@ public abstract class WebRequestBase : MonoBehaviour
     [SerializeField] protected bool debugGetMessage = true; 
 
     protected abstract void Populate_OnPostComplete(UnityWebRequest uwb);
-    protected abstract void Populate_OnGetComplete(UnityWebRequest uwb);
+    protected abstract void Populate_OnGetComplete(UnityWebRequest uwb); // = null when directly doign GET. But this default can be very dangerous.
     protected Action<UnityWebRequest> OnGetRequestComplete;
     protected Action<UnityWebRequest> OnPostRequestComplete; 
 

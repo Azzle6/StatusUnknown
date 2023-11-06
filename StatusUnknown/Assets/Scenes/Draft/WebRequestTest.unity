@@ -24,7 +24,7 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 4
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
@@ -412,17 +412,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   apiURL: https://large-text-to-speech.p.rapidapi.com/tts
-  authKey: e131f40ea0msh5a3ed5d7f38abd0p1ee3a0jsn656fbf49c9b1
+  authKey: cdb30927f2msh4620b7e6d0ab5a1p151eb9jsn3bb783887eea
   amountOfRequests: 1
-  useScriptableIfProvided: 0
+  useScriptableIfProvided: 1
   debugPostMessage: 1
   debugGetMessage: 1
   voiceLinesToPost:
-    text: Astarion is my daddy
-  fileName: test
+    text: Hello, I am an artificially generated voice from amazon for the project
+      Status Unknown
+  fileName: Work-As-Planned
   fileExtension: 0
+  dialogueType: 0
   audioSource: {fileID: 902550762}
-  responseSO: {fileID: 11400000, guid: 41154ca05c60eae41b82b93d6e7a818c, type: 2}
+  getResponseSO: {fileID: 11400000, guid: 41154ca05c60eae41b82b93d6e7a818c, type: 2}
 --- !u!82 &902550762
 AudioSource:
   m_ObjectHideFlags: 0
