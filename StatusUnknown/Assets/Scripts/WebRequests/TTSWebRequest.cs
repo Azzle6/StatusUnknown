@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 using Debug = UnityEngine.Debug;
 using StatusUnknown.CoreGameplayContent.VoiceLines;
 
-// api URL https://large-text-to-speech.p.rapidapi.com/tts
+// api URL https://rapidapi.com/k_1/api/large-text-to-speech
 // app URL https://rapidapi.com/developer/analytics/Status-Unknown-TTS 
 // uri GET ?id=...
 // auth key "..." (NOT DEPLOYED)
@@ -20,7 +20,7 @@ namespace StatusUnknown
         public enum DialogueType { Test, NPC, Character }
 
         /// <summary>
-        /// Web Request class to generate text from speech. Uses https://large-text-to-speech.p.rapidapi.com/tts as web api. 
+        /// Web Request class to generate text from speech. Uses https://rapidapi.com/k_1/api/large-text-to-speech as web api. 
         /// Files are to be downloaded from an amazon server by providing an url.
         /// </summary>
         public class TTSWebRequest : WebRequestBase
