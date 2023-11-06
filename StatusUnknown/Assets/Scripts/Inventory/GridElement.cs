@@ -9,6 +9,7 @@ namespace Inventory
     {
         public GridView grid;
         public Vector2Int gridPosition;
-        public VisualElement view;
+        public VisualElement viewRoot;
+        public VisualElement focusElement;
     }
 }

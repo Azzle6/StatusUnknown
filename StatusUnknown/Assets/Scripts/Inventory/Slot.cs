@@ -7,27 +7,37 @@ namespace Inventory
     [Serializable]
     public class Slot : GridElement
     {
-        public bool isUsed;
+        public ItemView item;
 
         #region CONSTRUCTOR
         public Slot(Vector2Int pos, VisualElement visual, GridView gridView)
         {
             this.gridPosition = pos;
-            this.view = visual;
+            this.viewRoot = visual;
+            this.focusElement = visual.Q<VisualElement>("gridSlot");
             this.grid = gridView;
         }
         #endregion //CONSTRUCTOR
 
-        public void SetOccupied(bool isOccupied)
+        public void SetOccupied(ItemView itemRef)
         {
+            bool isOccupied = itemRef != null;
+            
             if(isOccupied)
-                this.view.AddToClassList("usedSlot");
+                this.focusElement.AddToClassList("usedSlot");
             else
-                this.view.RemoveFromClassList("usedSlot");
+                this.focusElement.RemoveFromClassList("usedSlot");
 
-            this.isUsed = isOccupied;
-            this.view.focusable = !isOccupied;
+            this.item = itemRef;
+            this.focusElement.focusable = !isOccupied;
         }
-        
+
+        public void TogglePreview(bool preview)
+        {
+            if(preview)
+                this.focusElement.AddToClassList("previewSlot");
+            else
+                this.focusElement.RemoveFromClassList("previewSlot");
+        }
     }
 }

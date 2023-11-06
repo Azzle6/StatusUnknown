@@ -217,6 +217,7 @@ GameObject:
   - component: {fileID: 1917496559}
   - component: {fileID: 1917496558}
   - component: {fileID: 1917496561}
+  - component: {fileID: 1917496562}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -323,10 +324,22 @@ MonoBehaviour:
     m_ActionId: 1c3748a9-7ee4-4b25-b79b-ff256fbfaabf
     m_ActionName: UI/Submit[/XInputControllerWindows/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: UI
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1917496562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917496555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c0fbb8a64f17104ca76d388b1e354a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

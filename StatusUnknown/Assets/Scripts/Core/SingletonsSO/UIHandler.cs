@@ -12,31 +12,32 @@ namespace Core.SingletonsSO
         public UISettings uiSettings;
         
         [FoldoutGroup("Dynamic data")]
-        public GridElement selectedElement;
+        public GridView selectedGrid;
         [FoldoutGroup("Dynamic data")]
-        public E_NavigationState navigationState;
+        public bool isMovingItem;
+        [FoldoutGroup("Dynamic data")]
+        public ItemView movingItem;
         
-        public void SetFocus(VisualElement element)
+        public void ForceFocus(VisualElement element)
         {
             element.Focus();
-            Debug.Log($"{element.name} get focus.");
+            Debug.Log($"{element.name} get forced focus.");
         }
 
-        public void OnElementFocus(GridElement element)
+        public void OnGridFocus(GridView grid)
         {
-            this.selectedElement = element;
+            this.selectedGrid = grid;
         }
 
-        public void ChangeNavigationState(E_NavigationState state)
+        public void OnPickItem(ItemView itemView)
         {
-            this.navigationState = state;
-            Debug.Log($"Change navigation state to : {state}");
+            this.movingItem = itemView;
+            this.isMovingItem = true;
         }
-    }
 
-    public enum E_NavigationState
-    {
-        NAVIGATE,
-        MOVE_ITEM,
+        public void OnDropItem()
+        {
+            this.isMovingItem = false;
+        }
     }
 }

@@ -11,14 +11,16 @@ namespace Inventory
     using UnityEngine.UIElements;
     public class GridView : MonoBehaviour
     {
-        [SerializeField, Required]
+        [SerializeField, Required, FoldoutGroup("References")]
         private GridDataSO gridDataSo;
-        [SerializeField, Required]
+        [SerializeField, Required, FoldoutGroup("References")]
         private UIDocument uiDocument;
-        [SerializeField, Required]
+        [SerializeField, Required, FoldoutGroup("References")]
         private string gridParentName;
+
+        [SerializeField, ReadOnly, BoxGroup("Debug")] 
+        public GridElement selectedElement;
         
-        [SerializeField]
         private Slot[] slots;
         private HashSet<ItemView> itemsView = new HashSet<ItemView>();
         
@@ -42,13 +44,15 @@ namespace Inventory
         }
         private float slotWidth;
 
+        private Slot[] movePreviewSlots;
+
         #region GRID_DISPLAY
         [Button("Display"), HideInEditorMode, BoxGroup("Actions")]
         public void DisplayGrid()
         {
             this.GridRoot.style.display = DisplayStyle.Flex;
             VisualElement firstFocus = this.BuildGrid();
-            UIHandler.Instance.SetFocus(firstFocus);
+            UIHandler.Instance.ForceFocus(firstFocus);
         }
 
         [Button("Hide"), HideInEditorMode, BoxGroup("Actions")]
@@ -80,13 +84,13 @@ namespace Inventory
                     
                     horizontalParent.Insert(x, slotView);
                     VisualElement gridSlotElement = slotView.Q<VisualElement>("gridSlot");
-                    Slot slot = new Slot(new Vector2Int(x, y), gridSlotElement, this);
+                    Slot slot = new Slot(new Vector2Int(x, y), slotView, this);
                     slotsList.Add(slot);
 
                     if (this.gridDataSo.Shape.GetContentFromPosition(new Vector2Int(x, y)))
                     {
                         gridSlotElement.name = $"{x},{y}";
-                        this.RegisterElementEvents(slot);
+                        slot.focusElement.RegisterCallback<FocusEvent>(e => OnGridElementFocus(slot));
                         firstFocusElement ??= gridSlotElement;
                     }
                     else
@@ -99,11 +103,6 @@ namespace Inventory
             this.slots = slotsList.ToArray();
             return firstFocusElement;
         }
-
-        private void RegisterElementEvents(GridElement gridElement)
-        {
-            gridElement.view.RegisterCallback<FocusEvent>(e => UIHandler.Instance.OnElementFocus(gridElement));
-        }
         #endregion //GRID_BUILD
 
         #region CONTENT_SAVE_LOAD
@@ -114,8 +113,10 @@ namespace Inventory
             foreach (KeyValuePair<Vector2Int, Item> info in gridDataSo.content)
             {
                 ItemView itemView = new ItemView(info.Value, info.Key, this);
-                itemView.GenerateView();
-                this.RefreshItemPosition(itemView, info.Key);
+                this.SetItemPosition(itemView, info.Key);
+                this.itemsView.Add(itemView);
+                itemView.focusElement.RegisterCallback<FocusEvent>(e => OnGridElementFocus(itemView));
+                itemView.focusElement.RegisterCallback<NavigationSubmitEvent>(e => PickItem(itemView));
             }
         }
         
@@ -141,46 +142,108 @@ namespace Inventory
             if (clearData)
                 gridDataSo.content.Clear();
         }
-        #endregion
+        #endregion //CONTENT_SAVE_LOAD
 
         #region CONTENT_MANAGEMENT
-        private void RefreshItemPosition(ItemView itemView, Vector2Int position)
+        private void SetSlotsContent(Shape shape, Vector2Int pos, ItemView content)
         {
-            //Set item visual position.
-            this.GridRoot.Add(itemView.view);
+            Slot[] positions = GetSlotsFrom(shape, pos);
+            
+            foreach (var slot in positions)
+                slot.SetOccupied(content);
+        }
+        
+        private void PreviewItemMove(Shape shape, Vector2Int pos)
+        {
+            foreach (Slot slot in this.movePreviewSlots)
+                slot.TogglePreview(false);
+            
+            Slot[] shapeSlots = GetSlotsFrom(shape, pos);
+            
+            foreach (Slot slot in shapeSlots)
+                slot.TogglePreview(true);
+
+            this.movePreviewSlots = shapeSlots;
+        }
+        
+        private void SetItemVisualPosition(ItemView itemView, Vector2Int position)
+        {
+            this.GridRoot.Add(itemView.viewRoot);
             Vector3 newPosition = (Vector2)position * SlotWidth;
-            itemView.view.transform.position = newPosition;
+            itemView.viewRoot.transform.position = newPosition;
+        }
+        #endregion
+        
+        #region CONTENT_ACTIONS
+
+        private void PickItem(ItemView itemView)
+        {
+            itemView.MoveState();
+            SetSlotsContent(itemView.item.itemDefinition.Shape, itemView.gridPosition, null);
+            UIHandler.Instance.OnPickItem(itemView);
+            UIHandler.Instance.ForceFocus(GetSlot(itemView.gridPosition).focusElement);
+        }
+        
+        private void SetItemPosition(ItemView itemView, Vector2Int position)
+        {
+            SetItemVisualPosition(itemView, position);
             
             itemView.gridPosition = position;
-            this.itemsView.Add(itemView);
             
-            SetSlotsOccupied(itemView.item.itemDefinition.Shape, position, true);
-            
-            //Setup item events
-            this.RegisterElementEvents(itemView);
-        }
-
-        private void SetSlotsOccupied(Shape itemShape, Vector2Int pos, bool isOccupied)
-        {
-            Vector2Int[] itemShapeCoord = itemShape.GetPositionsRelativeToAnchor();
-            
-            foreach (var coord in itemShapeCoord)
-            {
-                if (!gridDataSo.Shape.GetContentFromPosition(coord + pos))
-                    Debug.LogWarning($"try to setup slot state at {coord + pos}. but this slot doesn't exists.");
-                
-                int index = GridHelper.GetIndexFromGridPosition(coord + pos, gridDataSo.Shape.shapeSize.x);
-                this.slots[index].SetOccupied(isOccupied);
-            }
+            SetSlotsContent(itemView.item.itemDefinition.Shape, position, itemView);
         }
         
         private void RemoveItem(ItemView itemView)
         {
-            itemView.view.RemoveFromHierarchy();
+            itemView.viewRoot.RemoveFromHierarchy();
             this.itemsView.Remove(itemView);
 
-            this.SetSlotsOccupied(itemView.item.itemDefinition.Shape, itemView.gridPosition, false);
+            this.SetSlotsContent(itemView.item.itemDefinition.Shape, itemView.gridPosition, null);
         }
-        #endregion
+        #endregion //CONTENT_ACTIONS
+        
+        #region EVENTS
+        private void OnGridElementFocus(GridElement element)
+        {
+            this.selectedElement = element;
+            UIHandler.Instance.OnGridFocus(this);
+            
+            if (UIHandler.Instance.isMovingItem)
+            {
+                ItemView movingItem = UIHandler.Instance.movingItem;
+                PreviewItemMove(movingItem.item.itemDefinition.Shape, element.gridPosition);
+                SetItemVisualPosition(movingItem, element.gridPosition);
+            }
+        }
+        #endregion //EVENTS
+
+        private Slot[] GetSlotsFrom(Shape shape, Vector2Int pos)
+        {
+            List<Slot> result = new List<Slot>();
+            
+            Vector2Int[] itemShapeCoord = shape.GetPositionsRelativeToAnchor();
+            
+            foreach (var coord in itemShapeCoord)
+            {
+                if (!gridDataSo.Shape.GetContentFromPosition(coord + pos))
+                {
+                    Debug.LogWarning($"try to setup slot state at {coord + pos}. but this slot doesn't exists.");
+                    return null;
+                }
+                result.Add(this.GetSlot(coord + pos));
+            }
+
+            return result.ToArray();
+        }
+
+        public Slot GetSlot(Vector2Int pos)
+        {
+            if (!gridDataSo.Shape.GetContentFromPosition(pos))
+            {
+                Debug.LogWarning($"try to setup slot state at {pos}. but this slot doesn't exists.");
+                return null;
+            }
+            return this.slots[GridHelper.GetIndexFromGridPosition(pos, gridDataSo.Shape.shapeSize.x)];
+        }
     }
 }

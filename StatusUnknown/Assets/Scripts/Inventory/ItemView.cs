@@ -10,16 +10,27 @@ namespace Inventory
     public class ItemView : GridElement
     {
         public Item item;
+        private VisualElement verticalRoot;
 
+        #region CONSTRUCTOR
+        public ItemView(Item item, Vector2Int gridPosition, GridView gridView)
+        {
+            this.item = item;
+            this.gridPosition = gridPosition;
+            this.grid = gridView;
+            this.GenerateView();
+        }
+        #endregion
+        
         public void GenerateView()
         {
-            if (this.view != null)
-                this.view.parent.Remove(this.view);
+            if (this.viewRoot != null)
+                this.viewRoot.parent.Remove(this.viewRoot);
             
             Vector2Int shapeSize = item.itemDefinition.Shape.shapeSize;
             VisualElement itemView = UIHandler.Instance.uiSettings.itemTemplate.Instantiate();
             itemView.style.position = Position.Absolute;
-            VisualElement verticalRoot = itemView.Q<VisualElement>("verticalRoot");
+            verticalRoot = itemView.Q<VisualElement>("verticalRoot");
             for (int y = 0; y < shapeSize.y; y++)
             {
                 VisualElement horizontalParent = new VisualElement();
@@ -38,14 +49,20 @@ namespace Inventory
                         : "hiddenSlot");
                 }
             }
-            this.view = itemView;
+            this.viewRoot = itemView;
+            this.focusElement = itemView.Q<VisualElement>("focusParent");
         }
 
-        public ItemView(Item item, Vector2Int gridPosition, GridView gridView)
+        public void MoveState()
         {
-            this.item = item;
-            this.gridPosition = gridPosition;
-            this.grid = gridView;
+            this.verticalRoot.AddToClassList("movingElement");
+            this.focusElement.focusable = false;
+        }
+
+        public void PlacedState()
+        {
+            this.verticalRoot.RemoveFromClassList("movingElement");
+            this.focusElement.focusable = true;
         }
     }
 }
