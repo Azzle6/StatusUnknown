@@ -31,13 +31,5 @@ namespace Inventory
             this.item = itemRef;
             this.focusElement.focusable = !isOccupied;
         }
-
-        public void TogglePreview(bool preview)
-        {
-            if(preview)
-                this.focusElement.AddToClassList("previewSlot");
-            else
-                this.focusElement.RemoveFromClassList("previewSlot");
-        }
     }
 }

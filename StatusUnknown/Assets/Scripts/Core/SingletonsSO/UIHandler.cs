@@ -24,9 +24,9 @@ namespace Core.SingletonsSO
             Debug.Log($"{element.name} get forced focus.");
         }
 
-        public void OnGridFocus(GridView grid)
+        public void OnGridElementFocus(GridElement element)
         {
-            this.selectedGrid = grid;
+            this.selectedGrid = element.grid;
         }
 
         public void OnPickItem(ItemView itemView)

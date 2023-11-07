@@ -55,13 +55,19 @@ namespace Inventory
 
         public void MoveState()
         {
-            this.verticalRoot.AddToClassList("movingElement");
+            this.focusElement.AddToClassList("movingElement");
             this.focusElement.focusable = false;
+        }
+
+        public void CanPlaceItemFeedback(bool canPlace)
+        {
+            this.focusElement.AddToClassList(canPlace ? "canPlace" : "cantPlace");
+            this.focusElement.RemoveFromClassList(canPlace ? "cantPlace" : "canPlace");
         }
 
         public void PlacedState()
         {
-            this.verticalRoot.RemoveFromClassList("movingElement");
+            this.focusElement.RemoveFromClassList("movingElement");
             this.focusElement.focusable = true;
         }
     }

@@ -17,9 +17,6 @@ namespace Inventory
         private UIDocument uiDocument;
         [SerializeField, Required, FoldoutGroup("References")]
         private string gridParentName;
-
-        [SerializeField, ReadOnly, BoxGroup("Debug")] 
-        public GridElement selectedElement;
         
         private Slot[] slots;
         private HashSet<ItemView> itemsView = new HashSet<ItemView>();
@@ -44,7 +41,7 @@ namespace Inventory
         }
         private float slotWidth;
 
-        private Slot[] movePreviewSlots;
+        private Action<GridElement> GridElementFocusEvent;
 
         #region GRID_DISPLAY
         [Button("Display"), HideInEditorMode, BoxGroup("Actions")]
@@ -90,7 +87,8 @@ namespace Inventory
                     if (this.gridDataSo.Shape.GetContentFromPosition(new Vector2Int(x, y)))
                     {
                         gridSlotElement.name = $"{x},{y}";
-                        slot.focusElement.RegisterCallback<FocusEvent>(e => OnGridElementFocus(slot));
+                        slot.focusElement.RegisterCallback<FocusEvent>(e => this.GridElementFocusEvent(slot));
+                        slot.focusElement.RegisterCallback<NavigationSubmitEvent>(e => this.OnInteract(slot));
                         firstFocusElement ??= gridSlotElement;
                     }
                     else
@@ -115,8 +113,8 @@ namespace Inventory
                 ItemView itemView = new ItemView(info.Value, info.Key, this);
                 this.SetItemPosition(itemView, info.Key);
                 this.itemsView.Add(itemView);
-                itemView.focusElement.RegisterCallback<FocusEvent>(e => OnGridElementFocus(itemView));
-                itemView.focusElement.RegisterCallback<NavigationSubmitEvent>(e => PickItem(itemView));
+                itemView.focusElement.RegisterCallback<FocusEvent>(e => this.GridElementFocusEvent.Invoke(itemView));
+                itemView.focusElement.RegisterCallback<NavigationSubmitEvent>(e => this.OnInteract(itemView));
             }
         }
         
@@ -147,23 +145,10 @@ namespace Inventory
         #region CONTENT_MANAGEMENT
         private void SetSlotsContent(Shape shape, Vector2Int pos, ItemView content)
         {
-            Slot[] positions = GetSlotsFrom(shape, pos);
+            Slot[] positions = this.GetSlotsFromShape(shape, pos);
             
             foreach (var slot in positions)
                 slot.SetOccupied(content);
-        }
-        
-        private void PreviewItemMove(Shape shape, Vector2Int pos)
-        {
-            foreach (Slot slot in this.movePreviewSlots)
-                slot.TogglePreview(false);
-            
-            Slot[] shapeSlots = GetSlotsFrom(shape, pos);
-            
-            foreach (Slot slot in shapeSlots)
-                slot.TogglePreview(true);
-
-            this.movePreviewSlots = shapeSlots;
         }
         
         private void SetItemVisualPosition(ItemView itemView, Vector2Int position)
@@ -175,22 +160,42 @@ namespace Inventory
         #endregion
         
         #region CONTENT_ACTIONS
-
         private void PickItem(ItemView itemView)
         {
             itemView.MoveState();
             SetSlotsContent(itemView.item.itemDefinition.Shape, itemView.gridPosition, null);
             UIHandler.Instance.OnPickItem(itemView);
             UIHandler.Instance.ForceFocus(GetSlot(itemView.gridPosition).focusElement);
+            this.GridElementFocusEvent += this.OnMoveItem;
+        }
+
+        private void OnMoveItem(GridElement newFocusedElement)
+        {
+            ItemView movingItem = UIHandler.Instance.movingItem;
+            movingItem.CanPlaceItemFeedback(CanPlaceItem(movingItem.item.itemDefinition.Shape, newFocusedElement.gridPosition));
+            SetItemVisualPosition(movingItem, newFocusedElement.gridPosition);
         }
         
-        private void SetItemPosition(ItemView itemView, Vector2Int position)
+        private void DropItem(Vector2Int pos)
         {
-            SetItemVisualPosition(itemView, position);
+            this.GridElementFocusEvent -= this.OnMoveItem;
+            ItemView movingItem = UIHandler.Instance.movingItem;
+            movingItem.PlacedState();
+            SetItemPosition(movingItem, pos);
+            this.SaveContent();
+            UIHandler.Instance.OnDropItem();
+            UIHandler.Instance.ForceFocus(movingItem.focusElement);
+        }
+        
+        private void SetItemPosition(ItemView itemView, Vector2Int pos)
+        {
+            SetItemVisualPosition(itemView, pos);
             
-            itemView.gridPosition = position;
+            itemView.gridPosition = pos;
             
-            SetSlotsContent(itemView.item.itemDefinition.Shape, position, itemView);
+            SetSlotsContent(itemView.item.itemDefinition.Shape, pos, itemView);
+            
+            Debug.Log($"Set item to {pos}");
         }
         
         private void RemoveItem(ItemView itemView)
@@ -203,24 +208,53 @@ namespace Inventory
         #endregion //CONTENT_ACTIONS
         
         #region EVENTS
-        private void OnGridElementFocus(GridElement element)
+        private void OnInteract(GridElement element)
         {
-            this.selectedElement = element;
-            UIHandler.Instance.OnGridFocus(this);
-            
-            if (UIHandler.Instance.isMovingItem)
+            //If we interact with an item, we pick it
+            if (element is ItemView itemView)
             {
-                ItemView movingItem = UIHandler.Instance.movingItem;
-                PreviewItemMove(movingItem.item.itemDefinition.Shape, element.gridPosition);
-                SetItemVisualPosition(movingItem, element.gridPosition);
+                PickItem(itemView);
+            }
+            else if (element is Slot slot) //If we interact with a slot and we're moving an item, we drop it
+            {
+                if (UIHandler.Instance.isMovingItem && CanPlaceItem(UIHandler.Instance.movingItem.item.itemDefinition.Shape, element.gridPosition))
+                {
+                    DropItem(slot.gridPosition);
+                }
             }
         }
-        #endregion //EVENTS
+        #endregion
+        
+        #region UNITY_METHODS
+        private void OnEnable()
+        {
+            this.GridElementFocusEvent += UIHandler.Instance.OnGridElementFocus;
+        }
 
-        private Slot[] GetSlotsFrom(Shape shape, Vector2Int pos)
+        private void OnDisable()
+        {
+            this.GridElementFocusEvent -= UIHandler.Instance.OnGridElementFocus;
+        }
+        #endregion
+
+        private bool CanPlaceItem(Shape shape, Vector2Int pos)
+        {
+            Vector2Int[] itemShapeCoord = shape.GetPositionsRelativeToAnchor();
+            foreach (var coord in itemShapeCoord)
+            {
+                if (!gridDataSo.Shape.GetContentFromPosition(coord + pos))
+                {
+                    Debug.LogWarning($"try to setup slot state at {coord + pos}. but this slot doesn't exists.");
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private Slot[] GetSlotsFromShape(Shape shape, Vector2Int pos)
         {
             List<Slot> result = new List<Slot>();
-            
             Vector2Int[] itemShapeCoord = shape.GetPositionsRelativeToAnchor();
             
             foreach (var coord in itemShapeCoord)
@@ -228,7 +262,7 @@ namespace Inventory
                 if (!gridDataSo.Shape.GetContentFromPosition(coord + pos))
                 {
                     Debug.LogWarning($"try to setup slot state at {coord + pos}. but this slot doesn't exists.");
-                    return null;
+                    continue;
                 }
                 result.Add(this.GetSlot(coord + pos));
             }
@@ -236,7 +270,7 @@ namespace Inventory
             return result.ToArray();
         }
 
-        public Slot GetSlot(Vector2Int pos)
+        private Slot GetSlot(Vector2Int pos)
         {
             if (!gridDataSo.Shape.GetContentFromPosition(pos))
             {
