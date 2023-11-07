@@ -17,6 +17,10 @@ public class MassBody : MonoBehaviour
     {
         Acceleration += (force / Mass);
     }
+    public void SetVelocity(Vector3 velocity)
+    {
+        Velocity = velocity;
+    }
 
     private void FixedUpdate()
     {

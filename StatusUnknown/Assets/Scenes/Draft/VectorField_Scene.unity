@@ -6979,6 +6979,7 @@ GameObject:
   - component: {fileID: 1485877919}
   - component: {fileID: 1485877918}
   - component: {fileID: 1485877917}
+  - component: {fileID: 1485877922}
   - component: {fileID: 1485877921}
   m_Layer: 0
   m_Name: Sphere
@@ -7067,7 +7068,7 @@ Transform:
   m_GameObject: {fileID: 1485877915}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.24, y: 0, z: 0}
+  m_LocalPosition: {x: -0.24, y: 1.54, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7082,50 +7083,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 1485877915}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fddc511c28c8b846b45ed99431ac61c, type: 3}
+  m_Script: {fileID: 11500000, guid: e503a18dd4c1a0e418c7c7ea97ee1300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Mass>k__BackingField: 1
-  <Drag>k__BackingField: 5
   collider: {fileID: 1485877917}
-  repulseDistance: 2
-  repulseStrenght: 7
-  repulseMask:
+  massBody: {fileID: 1485877922}
+  groundMask:
     serializedVersion: 2
     m_Bits: 64
-  maxGroundAngle: 5
-  maxGroundDot: 0
-  debugDot: 0
-  colorGradient:
+  maxSlopeAngle: 20
+  slopeAngle: 0
+  hoverHeight: 1
+  hoverStrength: 1.5
+  avoidMask:
     serializedVersion: 2
-    key0: {r: 0, g: 0.5592303, b: 1, a: 1}
-    key1: {r: 0, g: 1, b: 0.1812067, a: 1}
-    key2: {r: 1, g: 0.6154238, b: 0, a: 0}
-    key3: {r: 1, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 25443
-    ctime2: 45489
-    ctime3: 65535
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 0
-    m_ColorSpace: 0
-    m_NumColorKeys: 4
-    m_NumAlphaKeys: 2
+    m_Bits: 64
+  avoidDistance: 1
+  avoidStrength: 1
+--- !u!114 &1485877922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1485877915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5fc742bb8c347f4088cc3cbb4277160, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Mass>k__BackingField: 0.5
+  <Drag>k__BackingField: 6
 --- !u!43 &1508630079
 Mesh:
   m_ObjectHideFlags: 0
