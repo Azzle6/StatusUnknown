@@ -1,0 +1,15 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:VisualElement name="pane1" style="flex-direction: row;">
+        <ui:VisualElement name="game" class="section" style="width: 50%;">
+            <ui:EnumField type="GameplayManager+GameState, Assembly-CSharp" name="game-state" binding-path="_GameState" />
+            <ui:RadioButtonGroup value="-1" choices="Normal, God Mode" binding-path="_GameMode" />
+        </ui:VisualElement>
+        <ui:VisualElement name="shells" class="section" style="width: 50%;">
+            <PieChart low-value="10" high-value="40" value="20" binding-path="_ShellForce" />
+            <ui:Slider picking-mode="Ignore" value="20" high-value="40" binding-path="_ShellForce" low-value="10" show-input-field="true" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="pane2" class="section">
+        <ui:VisualElement name="message" style="flex-grow: 1;" />
+    </ui:VisualElement>
+</ui:UXML>

@@ -7,7 +7,7 @@ namespace StatusUnknown
         /// <summary>
         /// Scriptable Object to store the last Json response from TTS server, in order to avoid redoing nedless POST requests and directly doing GET
         /// </summary>
-        [CreateAssetMenu(fileName = "GET Json Object", menuName = "StatusUnknown/Web/TTS/Response")]
+        [CreateAssetMenu(fileName = "GET Json Object", menuName = "Status Unknown/Web/TTS/Response")]
         public class GETResponse : ScriptableObject
         {
             public string ID { get; set; }

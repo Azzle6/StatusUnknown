@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:VisualElement class="panel">
+        <ui:Label text="General Properties" display-tooltip-when-elided="true" class="header" />
+        <uie:EnumField binding-path="AbilityType" type="StatusUnknown.CoreGameplayContent.EAbilityType, Assembly-CSharp" label="Ability Type" />
+    </ui:VisualElement>
+    <uie:PropertyField binding-path="AbilityConfig" />
+</ui:UXML>
