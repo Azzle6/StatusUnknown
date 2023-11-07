@@ -210,7 +210,10 @@ namespace StatusUnknown.CoreGameplayContent.Editors
         private void CreateAbilityConfig(string Name, SerializedProperty property)
         {
             AbilityConfigScriptableObject shootConfig = ScriptableObject.CreateInstance<AbilityConfigScriptableObject>();
-            AssetDatabase.CreateAsset(shootConfig, Application.dataPath + "/Data/Gameplay/Combat/Abilities/" + Name + ".asset");
+            AssetDatabase.CreateAsset(shootConfig, "Assets/Data/Gameplay/Combat/Abilities/" + Name + ".asset");
+            AssetDatabase.SaveAssets(); 
+            AssetDatabase.Refresh();    
+
             property.objectReferenceValue = shootConfig;
             property.serializedObject.ApplyModifiedProperties();
             property.serializedObject.Update();

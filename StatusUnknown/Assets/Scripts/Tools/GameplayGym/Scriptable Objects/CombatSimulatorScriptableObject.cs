@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.Pool; 
 
+// later on -> keybindings or any way to automatically create/delete a scriptable object (module, weapon, enemy)
+// prevents having to countlessly navigate throuh sub-menus to create a scriptableObject
+
 namespace StatusUnknown.CoreGameplayContent
 {
     [CreateAssetMenu(fileName = "CombatSimulator_Type_Num", menuName = "Status Unknown/Gameplay/Combat/Simulator", order = 1)]
