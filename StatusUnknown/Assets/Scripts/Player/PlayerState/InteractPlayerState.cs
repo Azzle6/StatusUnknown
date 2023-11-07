@@ -1,7 +1,7 @@
-using System.Collections;
 
-namespace Core.Player
+namespace Player
 {
+    using System.Collections; 
     using UnityEngine;
 
     public class InteractPlayerState : PlayerState

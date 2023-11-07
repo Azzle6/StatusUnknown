@@ -1,4 +1,4 @@
-namespace Core.Player
+namespace Player
 {
     using System.Collections;
     using UnityEngine;

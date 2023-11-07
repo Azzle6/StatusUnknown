@@ -1,9 +1,7 @@
-
-namespace Core.Player
+namespace Player
 {
     using UnityEngine;
     using Sirenix.OdinInspector;
-    using Core.SingletonsSO;
     
     [CreateAssetMenu(fileName = "PlayerStat", menuName = "CustomAssets/PlayerStat", order = 1)]
     public class PlayerStat : ScriptableObject

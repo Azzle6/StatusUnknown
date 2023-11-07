@@ -1,9 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Target : MonoBehaviour
+namespace Player
 {
+    using UnityEngine;
+
+    public class Target : MonoBehaviour
+    {
     
+    }
 }

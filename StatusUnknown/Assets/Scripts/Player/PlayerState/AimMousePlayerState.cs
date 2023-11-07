@@ -1,7 +1,4 @@
-using System;
-using UnityEngine.Serialization;
-
-namespace Core.Player
+namespace Player
 {
     using UnityEngine;
     using System.Collections;

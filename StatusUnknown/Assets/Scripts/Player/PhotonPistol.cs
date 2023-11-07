@@ -1,4 +1,4 @@
-namespace Core.Player
+namespace Player
 {
     using System.Collections;
     using UnityEngine;
@@ -6,14 +6,9 @@ namespace Core.Player
     
     public class PhotonPistol : Weapon
     {
-        [SerializeField] private AnimationCurve damageCurve;
-        [SerializeField] private float maxDamage;
-        [SerializeField] private AnimationCurve projectileSize;
-        [SerializeField] private float maxProjectileSize;
-        [SerializeField] private float maxTimeCharge;
-        [SerializeField] private float cdTime;
-        [SerializeField] private float projectileSpeed;
+        [SerializeField] private PhotonPistolStat stat;
         [SerializeField] private Transform spawnPoint;
+        private float chargeTimer;
         private Coroutine charging;
         private GameObject tempProjectile;
         private bool waitForTriggerRelease;
@@ -23,19 +18,19 @@ namespace Core.Player
         {
             if ((charging != default) || (isInCD))
                 return;
-            tempProjectile = Pooler.Instance.GetPooledObject("PlayerPhotonProjectile");
+            tempProjectile = Pooler.Instance.GetPooledObject(stat.projectilePrefab.name);
             charging = StartCoroutine(Charge());
         }
         
         private IEnumerator Charge()
         {
-            float timer = 0;
+            chargeTimer = 0;
             tempProjectile.transform.parent = spawnPoint;
-            while (timer < maxTimeCharge)
+            while (chargeTimer < stat.maxTimeCharge)
             {
               tempProjectile.transform.localPosition = Vector3.zero;
-              timer += Time.deltaTime;
-              tempProjectile.transform.localScale = Vector3.one * (projectileSize.Evaluate(timer / maxTimeCharge) * maxProjectileSize);
+              chargeTimer += Time.deltaTime;
+              tempProjectile.transform.localScale = Vector3.one * (stat.projectileSize.Evaluate(chargeTimer / stat.maxTimeCharge) * stat.maxProjectileSize);
               yield return null;
             }
 
@@ -55,14 +50,13 @@ namespace Core.Player
         private IEnumerator Cooldown()
         {
             isInCD = true;
-            yield return new WaitForSeconds(cdTime);
+            yield return new WaitForSeconds(stat.cdTime);
             isInCD = false;
             
         }
 
         public override void TriggerReleased()
         {
-            Debug.Log("Release");
             if (charging == default)
                 return;
             waitForTriggerRelease = false;
@@ -70,7 +64,7 @@ namespace Core.Player
             StopCoroutine(charging);
             tempProjectile.transform.parent = null;
             tempProjectile.TryGetComponent(out Rigidbody tempRb);
-            tempRb.velocity = spawnPoint.forward * projectileSpeed;
+            tempRb.velocity = spawnPoint.forward * stat.projectileSpeed;
             tempProjectile = default;
             charging = default;
         }
@@ -78,6 +72,11 @@ namespace Core.Player
         public override void Reload()
         {
           
+        }
+
+        public override void Hit()
+        {
+            
         }
     }
 }

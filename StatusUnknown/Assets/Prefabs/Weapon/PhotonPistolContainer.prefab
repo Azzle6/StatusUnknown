@@ -82,59 +82,7 @@ MonoBehaviour:
   adsRotTr: {fileID: 2055156643633869358}
   adsAngle: 0
   adsRestAngle: 80
-  damageCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  maxDamage: 20
-  projectileSize:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0.1
-      inSlope: 0.9
-      outSlope: 0.9
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0.9
-      outSlope: 0.9
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  maxProjectileSize: 3
-  maxTimeCharge: 2
-  cdTime: 2
-  projectileSpeed: 30
+  stat: {fileID: 11400000, guid: 75cb83bae9127bd4aa4a7d0f57717f6a, type: 2}
   spawnPoint: {fileID: 727943814089368775}
 --- !u!1 &2366914169210452901
 GameObject:
