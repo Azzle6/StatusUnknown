@@ -1,7 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="project://database/Assets/Scripts/Tools/UI/Styles/RootStyle.uss?fileID=7433441132597879392&amp;guid=0ca62b230daf6e74a822c12debfe1d68&amp;type=3#RootStyle" />
+    <Style src="project://database/Assets/Scripts/Tools/UI/Styles/ScriptableObjectStyle.uss?fileID=7433441132597879392&amp;guid=b777fdcb30e280c46a1f22900ae36344&amp;type=3#ScriptableObjectStyle" />
     <ui:VisualElement class="panel">
         <ui:Label text="General Properties" display-tooltip-when-elided="true" class="header" />
-        <uie:EnumField binding-path="AbilityType" type="StatusUnknown.CoreGameplayContent.EAbilityType, Assembly-CSharp" label="Ability Type" />
+        <uie:EnumField binding-path="AbilityType" type="StatusUnknown.CoreGameplayContent.EAbilityType, Assembly-CSharp" label="Ability Type" name="basicEnumField" style="visibility: visible;" />
     </ui:VisualElement>
     <uie:PropertyField binding-path="AbilityConfig" />
 </ui:UXML>

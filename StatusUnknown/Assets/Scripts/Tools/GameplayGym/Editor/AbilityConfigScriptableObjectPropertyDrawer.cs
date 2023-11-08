@@ -1,8 +1,11 @@
+using System;
 using System.Threading.Tasks;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEngine.GraphicsBuffer;
+using Object = UnityEngine.Object;
 
 namespace StatusUnknown.CoreGameplayContent.Editors
 {
@@ -12,6 +15,15 @@ namespace StatusUnknown.CoreGameplayContent.Editors
         private VisualElement ContentPanel;
         private Label CaretLabel;
         private bool isExpanded = true;
+        TextField soNameField;
+        SerializedProperty abilityType;
+
+        readonly string[] hBTextFields = new string[]
+        {
+            "Damage Over Time",
+            "Instant application of damage",
+            "Damage applied after a delay"
+        }; 
 
         public override VisualElement CreatePropertyGUI(SerializedProperty property)
         {
@@ -39,7 +51,7 @@ namespace StatusUnknown.CoreGameplayContent.Editors
 
             if (property.objectReferenceValue == null)
             {
-                ContentPanel = BuildNotShootPanel(RootElement, property);
+                ContentPanel = BuildNoAbilityConfigBox(RootElement, property);
                 RootElement.Add(ContentPanel);
             }
             else
@@ -53,90 +65,10 @@ namespace StatusUnknown.CoreGameplayContent.Editors
             return RootElement;
         }
 
-        private VisualElement BuildAbilityConfigBox(VisualElement rootElement, SerializedProperty property)
+        private VisualElement BuildNoAbilityConfigBox(VisualElement rootElement, SerializedProperty property)
         {
-            VisualElement abilityConfigBox = new VisualElement();
-            abilityConfigBox.name = "ability-config-box";
+            EnumValueTracker.OnValueChanged += SetCreationText;
 
-            abilityConfigBox.Add(BuildObjectField(rootElement, property));
-            Button deleteButton = new Button(() => DeleteSO(property));
-            deleteButton.text = "Delete";
-            deleteButton.AddToClassList("danger");
-            deleteButton.AddToClassList("align-right");
-            deleteButton.AddToClassList("mb-8");
-            abilityConfigBox.Add(deleteButton);
-
-            SerializedObject abilityConfigSO = new SerializedObject(property.objectReferenceValue); // because we are dealing with scriptable objects
-
-            Label damageBehavior = new Label("Damage/Enemy Interaction");
-            damageBehavior.AddToClassList("bold");
-            abilityConfigBox.Add(damageBehavior);
-
-            HelpBox dmgTypeHelpBox_DOT = new HelpBox("Damage Over Time", HelpBoxMessageType.Info);
-            HelpBox dmgTypeHelpBox_Burst = new HelpBox("Instant application of damage", HelpBoxMessageType.Info);
-            HelpBox dmgTypeHelpBox_Delayed = new HelpBox("Damage applied after a delay", HelpBoxMessageType.Info);
-
-            EnumField damageTypeField = new EnumField("Damage Type", EDamageType.Burst);
-            damageTypeField.BindProperty(abilityConfigSO.FindProperty("DamageType"));
-
-            damageTypeField.RegisterValueChangedCallback((changeEvent) =>
-            {
-                EDamageType newValue = (EDamageType)changeEvent.newValue;
-
-                switch (newValue)
-                {
-                    case EDamageType.Burst:
-                        {
-                            dmgTypeHelpBox_Burst.RemoveFromClassList("hidden");
-
-                            dmgTypeHelpBox_DOT.AddToClassList("hidden");
-                            dmgTypeHelpBox_Delayed.AddToClassList("hidden");
-                            break;
-                        }
-                    case EDamageType.DOT:
-                        {
-                            dmgTypeHelpBox_DOT.RemoveFromClassList("hidden");
-
-                            dmgTypeHelpBox_Burst.AddToClassList("hidden");
-                            dmgTypeHelpBox_Delayed.AddToClassList("hidden");
-                            break;
-                        }
-                    case EDamageType.Delayed:
-                        {
-                            dmgTypeHelpBox_Delayed.RemoveFromClassList("hidden");
-
-                            dmgTypeHelpBox_DOT.AddToClassList("hidden");
-                            dmgTypeHelpBox_Burst.AddToClassList("hidden");
-                            break;
-                        }
-                }
-
-            });
-            abilityConfigBox.Add(damageTypeField);
-
-            abilityConfigBox.Add(dmgTypeHelpBox_DOT);
-            abilityConfigBox.Add(dmgTypeHelpBox_Burst);
-            abilityConfigBox.Add(dmgTypeHelpBox_Delayed);
-
-            VisualElement rangeContainer = new VisualElement();
-            rangeContainer.AddToClassList("align-horizontal");
-
-            Slider abilityCooldownSlider = new Slider("Delay Between Abilities", 0.001f, 3f);
-            abilityCooldownSlider.BindProperty(abilityConfigSO.FindProperty("Cooldown"));
-            abilityCooldownSlider.AddToClassList("flex-grow");
-            FloatField abilityCooldownField = new FloatField();
-            abilityCooldownField.style.minWidth = 35;
-            abilityCooldownField.BindProperty(abilityConfigSO.FindProperty("Cooldown"));
-
-            rangeContainer.Add(abilityCooldownSlider);
-            rangeContainer.Add(abilityCooldownField);
-            abilityConfigBox.Add(rangeContainer);
-
-            return abilityConfigBox;
-        }
-
-        private VisualElement BuildNotShootPanel(VisualElement rootElement, SerializedProperty property)
-        {
             VisualElement noShootConfigBox = new VisualElement();
             noShootConfigBox.name = "no-ability-config-box";
 
@@ -148,11 +80,13 @@ namespace StatusUnknown.CoreGameplayContent.Editors
             VisualElement horizontalBox = new VisualElement();
             horizontalBox.AddToClassList("align-horizontal");
 
-            TextField soNameField = new();
+            soNameField = new TextField();
             soNameField.AddToClassList("flex-grow");
-            SerializedProperty abilityType = property.serializedObject.FindProperty("AbilityType"); 
-            string abilityTypeName = abilityType.enumDisplayNames[abilityType.enumValueIndex];
-            soNameField.value = $"{abilityTypeName} Config";
+            abilityType = property.serializedObject.FindProperty("AbilityType");
+
+            string str = abilityType.enumDisplayNames[abilityType.enumValueIndex];
+            Enum.TryParse(str, out EAbilityType newAbilityType); 
+            SetCreationText(newAbilityType);
 
             Button createButton = new Button(() => CreateAbilityConfig(soNameField.text, property));
             createButton.text = "Create";
@@ -173,6 +107,81 @@ namespace StatusUnknown.CoreGameplayContent.Editors
             noShootConfigBox.Add(BuildObjectField(rootElement, property));
 
             return noShootConfigBox;
+        }
+
+        private VisualElement BuildAbilityConfigBox(VisualElement rootElement, SerializedProperty property)
+        {
+            EnumValueTracker.OnValueChanged -= SetCreationText;
+
+            VisualElement abilityConfigBox = new VisualElement();
+            abilityConfigBox.name = "ability-config-box";
+
+            abilityConfigBox.Add(BuildObjectField(rootElement, property));
+            Button deleteButton = new Button(() => DeleteSO(property));
+            deleteButton.text = "Delete";
+            deleteButton.AddToClassList("danger");
+            deleteButton.AddToClassList("align-right");
+            deleteButton.AddToClassList("mb-8");
+            abilityConfigBox.Add(deleteButton);
+
+            SerializedObject abilityConfigSO = new SerializedObject(property.objectReferenceValue); // because we are dealing with scriptable objects
+
+            Label damageBehavior = new Label("Damage/Enemy Interaction");
+            damageBehavior.AddToClassList("bold");
+            abilityConfigBox.Add(damageBehavior);
+
+            HelpBox helpBox = new HelpBox("", HelpBoxMessageType.Info);
+            EnumField damageTypeField = new EnumField("Damage Type", EDamageType.Burst);
+            damageTypeField.BindProperty(abilityConfigSO.FindProperty("DamageType"));
+            helpBox.text = hBTextFields[Convert.ToInt32(damageTypeField.value)];
+
+            damageTypeField.RegisterValueChangedCallback((changeEvent) =>
+            {
+                EDamageType newValue = (EDamageType)changeEvent.newValue;
+                switch (newValue)
+                {
+                    case EDamageType.Burst:
+                        {
+                            helpBox.text = hBTextFields[0];
+                            break;
+                        }
+                    case EDamageType.DOT:
+                        {
+                            helpBox.text = hBTextFields[1];
+                            break;
+                        }
+                    case EDamageType.Delayed:
+                        {
+                            helpBox.text = hBTextFields[2];
+                            break;
+                        }
+                }
+
+            });
+            abilityConfigBox.Add(damageTypeField);
+            abilityConfigBox.Add(helpBox);
+
+            VisualElement rangeContainer = new VisualElement();
+            rangeContainer.AddToClassList("align-horizontal");
+
+            Slider abilityCooldownSlider = new Slider("Delay Between Abilities", 0.001f, 3f);
+            abilityCooldownSlider.BindProperty(abilityConfigSO.FindProperty("Cooldown"));
+            abilityCooldownSlider.AddToClassList("flex-grow");
+            FloatField abilityCooldownField = new FloatField();
+            abilityCooldownField.style.minWidth = 35;
+            abilityCooldownField.BindProperty(abilityConfigSO.FindProperty("Cooldown"));
+
+            rangeContainer.Add(abilityCooldownSlider);
+            rangeContainer.Add(abilityCooldownField);
+            abilityConfigBox.Add(rangeContainer);
+
+            return abilityConfigBox;
+        }
+
+        public void SetCreationText(EAbilityType type)
+        {
+            //abilityTypeName = abilityType.enumDisplayNames[enumValueIndex];
+            soNameField.value = $"{type} Config";
         }
 
         /// <summary>
@@ -206,7 +215,6 @@ namespace StatusUnknown.CoreGameplayContent.Editors
             BuildUI(root, property.serializedObject.FindProperty("AbilityConfig"));
         }
 
-        // NOT WORKING - Because using AssetDataBase ?
         private void CreateAbilityConfig(string Name, SerializedProperty property)
         {
             AbilityConfigScriptableObject shootConfig = ScriptableObject.CreateInstance<AbilityConfigScriptableObject>();

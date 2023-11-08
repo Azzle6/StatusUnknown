@@ -5,7 +5,7 @@ namespace StatusUnknown.CoreGameplayContent
         Offense,
         Defense,
         Support,
-        CrowdControl
+        Control
     }
 
     public enum EDamageType
