@@ -4,7 +4,6 @@ using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
-using static UnityEngine.GraphicsBuffer;
 using Object = UnityEngine.Object;
 
 namespace StatusUnknown.CoreGameplayContent.Editors
@@ -15,15 +14,24 @@ namespace StatusUnknown.CoreGameplayContent.Editors
         private VisualElement ContentPanel;
         private Label CaretLabel;
         private bool isExpanded = true;
-        TextField soNameField;
-        SerializedProperty abilityType;
+        TextField textField_DamageType = new TextField();
+        EnumField enumField_DamageType = new EnumField(); 
+        HelpBox helpBox_DamageType = new HelpBox();
+
+        private EScriptableType newValue_ScriptableType = EScriptableType.NONE;
+        private EScriptableType previousValue_ScriptableType = EScriptableType.NONE;
+
+        private EDamageType newValue_DamageType = EDamageType.Burst;
+        private EDamageType previousValue_DamageType = EDamageType.Burst;
 
         readonly string[] hBTextFields = new string[]
         {
-            "Damage Over Time",
             "Instant application of damage",
+            "Damage Over Time",
             "Damage applied after a delay"
-        }; 
+        };
+
+        Button createButton = new Button();
 
         public override VisualElement CreatePropertyGUI(SerializedProperty property)
         {
@@ -35,6 +43,18 @@ namespace StatusUnknown.CoreGameplayContent.Editors
 
         private VisualElement BuildUI(VisualElement RootElement, SerializedProperty property)
         {
+            EnumValueTracker.OnValueChanged_EScriptableType += SetCreationText;
+
+            SerializedProperty sP = property.serializedObject.FindProperty("scriptableObjectType");
+            Enum.TryParse(sP.enumDisplayNames[sP.enumValueIndex], out newValue_ScriptableType);
+            if (textField_DamageType != null && string.IsNullOrEmpty(textField_DamageType.text))
+            {
+                SetCreationText(newValue_ScriptableType); 
+            }
+
+            // DOES NOT WORK -- can't parse EnumField to EDamageType or vice versa..
+            // RegisterValueChanged_EDamageType(newValue_DamageType, helpBox_DamageType);   
+
             VisualElement titleContainer = new VisualElement();
             titleContainer.AddToClassList("align-horizontal");
             CaretLabel = new Label(">");
@@ -67,8 +87,6 @@ namespace StatusUnknown.CoreGameplayContent.Editors
 
         private VisualElement BuildNoAbilityConfigBox(VisualElement rootElement, SerializedProperty property)
         {
-            EnumValueTracker.OnValueChanged += SetCreationText;
-
             VisualElement noShootConfigBox = new VisualElement();
             noShootConfigBox.name = "no-ability-config-box";
 
@@ -80,19 +98,14 @@ namespace StatusUnknown.CoreGameplayContent.Editors
             VisualElement horizontalBox = new VisualElement();
             horizontalBox.AddToClassList("align-horizontal");
 
-            soNameField = new TextField();
-            soNameField.AddToClassList("flex-grow");
-            abilityType = property.serializedObject.FindProperty("AbilityType");
+            textField_DamageType.AddToClassList("flex-grow");
 
-            string str = abilityType.enumDisplayNames[abilityType.enumValueIndex];
-            Enum.TryParse(str, out EAbilityType newAbilityType); 
-            SetCreationText(newAbilityType);
-
-            Button createButton = new Button(() => CreateAbilityConfig(soNameField.text, property));
+            createButton = new Button(() => CreateAbilityConfig(textField_DamageType.text, property));
             createButton.text = "Create";
-            createButton.SetEnabled(true);
+            createButton.SetEnabled(newValue_ScriptableType != EScriptableType.NONE);
+            textField_DamageType.SetEnabled(newValue_ScriptableType != EScriptableType.NONE);   
 
-            horizontalBox.Add(soNameField);
+            horizontalBox.Add(textField_DamageType);
             horizontalBox.Add(createButton);
 
             noShootConfigBox.Add(horizontalBox);
@@ -111,7 +124,7 @@ namespace StatusUnknown.CoreGameplayContent.Editors
 
         private VisualElement BuildAbilityConfigBox(VisualElement rootElement, SerializedProperty property)
         {
-            EnumValueTracker.OnValueChanged -= SetCreationText;
+            EnumValueTracker.OnValueChanged_EScriptableType -= SetCreationText;
 
             VisualElement abilityConfigBox = new VisualElement();
             abilityConfigBox.name = "ability-config-box";
@@ -130,12 +143,38 @@ namespace StatusUnknown.CoreGameplayContent.Editors
             damageBehavior.AddToClassList("bold");
             abilityConfigBox.Add(damageBehavior);
 
-            HelpBox helpBox = new HelpBox("", HelpBoxMessageType.Info);
-            EnumField damageTypeField = new EnumField("Damage Type", EDamageType.Burst);
-            damageTypeField.BindProperty(abilityConfigSO.FindProperty("DamageType"));
-            helpBox.text = hBTextFields[Convert.ToInt32(damageTypeField.value)];
+            helpBox_DamageType = new HelpBox("", HelpBoxMessageType.Info);
+            enumField_DamageType.BindProperty(abilityConfigSO.FindProperty("DamageType"));
+            helpBox_DamageType.text = hBTextFields[Convert.ToInt32(enumField_DamageType.value)];
 
-            damageTypeField.RegisterValueChangedCallback((changeEvent) =>
+            RegisterValueChanged_EDamageType(enumField_DamageType, helpBox_DamageType); 
+
+            abilityConfigBox.Add(enumField_DamageType);
+            abilityConfigBox.Add(helpBox_DamageType);
+
+            VisualElement rangeContainer = new VisualElement();
+            rangeContainer.AddToClassList("align-horizontal");
+
+            Slider abilityCooldownSlider = new Slider("Delay Between Abilities", 0.001f, 3f);
+            abilityCooldownSlider.BindProperty(abilityConfigSO.FindProperty("Cooldown"));
+            abilityCooldownSlider.AddToClassList("flex-grow");
+            FloatField abilityCooldownField = new FloatField();
+            abilityCooldownField.style.minWidth = 35;
+            abilityCooldownField.BindProperty(abilityConfigSO.FindProperty("Cooldown"));
+
+            rangeContainer.Add(abilityCooldownSlider);
+            rangeContainer.Add(abilityCooldownField);
+            abilityConfigBox.Add(rangeContainer);
+
+            return abilityConfigBox;
+        }
+
+        // BAD
+        private void RegisterValueChanged_EDamageType<T>(T enumField, HelpBox helpBox) where T : EnumField
+        {
+            previousValue_DamageType = newValue_DamageType;
+
+            enumField.RegisterValueChangedCallback((changeEvent) =>
             {
                 EDamageType newValue = (EDamageType)changeEvent.newValue;
                 switch (newValue)
@@ -157,31 +196,26 @@ namespace StatusUnknown.CoreGameplayContent.Editors
                         }
                 }
 
+                newValue_DamageType = newValue;
             });
-            abilityConfigBox.Add(damageTypeField);
-            abilityConfigBox.Add(helpBox);
-
-            VisualElement rangeContainer = new VisualElement();
-            rangeContainer.AddToClassList("align-horizontal");
-
-            Slider abilityCooldownSlider = new Slider("Delay Between Abilities", 0.001f, 3f);
-            abilityCooldownSlider.BindProperty(abilityConfigSO.FindProperty("Cooldown"));
-            abilityCooldownSlider.AddToClassList("flex-grow");
-            FloatField abilityCooldownField = new FloatField();
-            abilityCooldownField.style.minWidth = 35;
-            abilityCooldownField.BindProperty(abilityConfigSO.FindProperty("Cooldown"));
-
-            rangeContainer.Add(abilityCooldownSlider);
-            rangeContainer.Add(abilityCooldownField);
-            abilityConfigBox.Add(rangeContainer);
-
-            return abilityConfigBox;
         }
 
-        public void SetCreationText(EAbilityType type)
+        public void SetCreationText(EScriptableType newValue)
         {
-            //abilityTypeName = abilityType.enumDisplayNames[enumValueIndex];
-            soNameField.value = $"{type} Config";
+            previousValue_ScriptableType = newValue; 
+
+            if (newValue == EScriptableType.NONE)
+            {
+                createButton.SetEnabled(false);
+                textField_DamageType.SetEnabled(false);
+                textField_DamageType.value = string.Empty;
+            }
+            else
+            {
+                createButton.SetEnabled(true);
+                textField_DamageType.SetEnabled(true); 
+                textField_DamageType.value = $"{newValue} Config"; 
+            }
         }
 
         /// <summary>

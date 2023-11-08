@@ -9,7 +9,7 @@ namespace StatusUnknown.CoreGameplayContent
     [CreateAssetMenu(fileName = "CombatSimulator_Type_Num", menuName = "Status Unknown/Gameplay/Combat/Simulator", order = 1)]
     public class CombatSimulatorScriptableObject : ScriptableObject
     {
-        public EAbilityType AbilityType;
+        public EScriptableType scriptableObjectType;
         // public GameObject Model;
 
         public AbilityConfigScriptableObject AbilityConfig;

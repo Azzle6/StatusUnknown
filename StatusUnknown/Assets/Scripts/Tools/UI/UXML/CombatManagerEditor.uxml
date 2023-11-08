@@ -3,7 +3,7 @@
     <Style src="project://database/Assets/Scripts/Tools/UI/Styles/ScriptableObjectStyle.uss?fileID=7433441132597879392&amp;guid=b777fdcb30e280c46a1f22900ae36344&amp;type=3#ScriptableObjectStyle" />
     <ui:VisualElement class="panel">
         <ui:Label text="General Properties" display-tooltip-when-elided="true" class="header" />
-        <uie:EnumField binding-path="AbilityType" type="StatusUnknown.CoreGameplayContent.EAbilityType, Assembly-CSharp" label="Ability Type" name="basicEnumField" style="visibility: visible;" />
+        <uie:EnumField binding-path="scriptableObjectType" type="StatusUnknown.CoreGameplayContent.EScriptableType, Assembly-CSharp" label="Scriptable Type" name="basicEnumField" style="visibility: visible;" />
     </ui:VisualElement>
     <uie:PropertyField binding-path="AbilityConfig" />
 </ui:UXML>

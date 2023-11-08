@@ -10,7 +10,7 @@ namespace StatusUnknown.CoreGameplayContent.Editors
     {
         [SerializeField] private VisualTreeAsset VisualTree;
         [SerializeField] AbilityConfigScriptableObjectPropertyDrawer drawer;
-        private EnumValueTracker tracker = new EnumValueTracker();
+        private readonly EnumValueTracker tracker = new EnumValueTracker();
 
         public override VisualElement CreateInspectorGUI()
         {
@@ -21,22 +21,24 @@ namespace StatusUnknown.CoreGameplayContent.Editors
             var field =  root.Q<EnumField>("basicEnumField");
             field.RegisterValueChangedCallback((e) =>
             {
-                tracker.value = (EAbilityType)e.newValue;  
+                tracker.value = (EScriptableType)e.newValue;  
             });
 
             return inspector;
         }
     }
 
-    public class EnumValueTracker : INotifyValueChanged<EAbilityType>
+    public class EnumValueTracker : INotifyValueChanged<EScriptableType>
     {
-        public EAbilityType value { get => default; set => SetValueWithoutNotify(value); }
+        public EScriptableType value { get => default; set => SetValueWithoutNotify(value); }
 
-        public static Action<EAbilityType> OnValueChanged;
+        public static Action<EScriptableType> OnValueChanged_EScriptableType;
 
-        public void SetValueWithoutNotify(EAbilityType newValue)
+        public void SetValueWithoutNotify(EScriptableType newValue)
         {
-            OnValueChanged(newValue);
+            if (OnValueChanged_EScriptableType == null) { return; }
+
+            OnValueChanged_EScriptableType(newValue);
         }
     }
 }
