@@ -111,6 +111,7 @@ namespace Player
                     {
                         closestTarget = confirmedInTheFrustrum[x];
                         bestAngleToClosestTarget = confirmedInTheAngle[x];
+                        playerStateInterpretor.transform.forward = Vector3.Slerp(new Vector3(playerStateInterpretor.transform.forward.x,0,playerStateInterpretor.transform.forward.z), closestTarget.transform.position - playerStateInterpretor.transform.position, playerStat.turnSpeed);
                     }
                 }
             }
@@ -126,9 +127,7 @@ namespace Player
         {
             weaponManager.PressTriggerWeapon(weaponNo); 
         }
-
- 
-
+        
         public override void OnStateExit()
         {
             weaponManager.ReleaseTriggerWeapon();
@@ -137,11 +136,6 @@ namespace Player
             playerStat.isShooting = false;
         }
         
-        private void OnDrawGizmos()
-        {
-           //ShowDetectionZone();
-        }
-
         private void ShowDetectionZone()
         {
             Gizmos.color = Color.yellow;

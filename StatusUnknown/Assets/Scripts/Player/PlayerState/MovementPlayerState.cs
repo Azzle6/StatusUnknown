@@ -2,11 +2,17 @@ namespace Player
 {
     using System.Collections;
     using UnityEngine;
-    public class WalkingPlayerState : PlayerState
+    public class MovementPlayerState : PlayerState
     {
+        private Vector3 inputDirection;
         private Vector3 tempMovement;
         private Vector3 tempMovementAnim;
+        private Vector3 initialVelocity;
         private Quaternion tempQuaternionAnim;
+        private Vector3 camForward;
+        private Vector3 camRight;
+        private Vector3 forwardMovement;
+        private Vector3 rightMovement;
         private float inertiaTimer;
         private Vector3 lookDirection;
         [SerializeField] private float groundCheckDistance = 0.5f;
@@ -16,6 +22,7 @@ namespace Player
         private RaycastHit slopeHit;
         private bool slopeDetected;
         [SerializeField] private PlayerStat playerStat;
+        [SerializeField] private DeviceLog deviceLog;
         private Camera cam;
         
         private void Awake()
@@ -46,6 +53,7 @@ namespace Player
             playerStateInterpretor.AddState("IdlePlayerState", PlayerStateType.MOVEMENT,false);
             playerStateInterpretor.animator.SetFloat("WalkDirX", 0);
             playerStateInterpretor.animator.SetFloat("WalkDirY", 0);
+            playerStateInterpretor.animator.SetFloat("WalkMagnitude", 0);
             playerStateInterpretor.animator.SetBool("Walk", false);
         }
 
@@ -58,31 +66,40 @@ namespace Player
             }
             if (applyingMovement == default)
                 StartCoroutine(ApplyMovement());
-
-            tempMovement = new Vector3(movement.x, 0, movement.y*2) * playerStat.moveSpeed;
-            tempMovementAnim = new Vector3(movement.x, 0, movement.y * 2);
-            tempMovement = cam.transform.TransformDirection(tempMovement);
-            tempMovement.y = 0;
             
-            tempQuaternionAnim = Quaternion.FromToRotation(Vector3.forward, playerStateInterpretor.transform.forward);
-            tempQuaternionAnim = Quaternion.Inverse(tempQuaternionAnim);
-            tempMovementAnim = tempQuaternionAnim * tempMovementAnim;
+            inputDirection = new Vector3(movement.x, 0, movement.y);
+            tempMovementAnim = inputDirection;
             
-            playerStateInterpretor.animator.SetFloat("WalkDirX", tempMovementAnim.x);
-            playerStateInterpretor.animator.SetFloat("WalkDirY", tempMovementAnim.z);
+            AdjustAnimAcordingToAim();
         }
 
         private IEnumerator ApplyMovement()
         {
-            while (tempMovement.magnitude > 0.01f)
+            while (inputDirection.magnitude > 0.01f)
             {
+                //si la camera ne se déplace pas frequement déplacer cela dans l'init ? 
+                camForward = cam.transform.forward; 
+                camRight = cam.transform.right;
+                camForward.y = 0;
+                camRight.y = 0;
+                camForward.Normalize();
+                camRight.Normalize();
+                
+                forwardMovement = camForward * inputDirection.z;
+                rightMovement = camRight * inputDirection.x;
+                
+                tempMovement = (forwardMovement + rightMovement) * playerStat.moveSpeed;
+
+                if (playerStat.isAiming == default)
+                    playerStateInterpretor.transform.forward = Vector3.Slerp(new Vector3(playerStateInterpretor.transform.forward.x,0,playerStateInterpretor.transform.forward.z), tempMovement.normalized, playerStat.turnSpeed);
+
+                //diagonal danger
                 if (tempMovement.magnitude > playerStat.moveSpeed)
                     tempMovement = tempMovement.normalized * playerStat.moveSpeed;
                 
-                playerStateInterpretor.rb.velocity = tempMovement + new Vector3(0,playerStateInterpretor.rb.velocity.y,0);
+                tempMovement.y = playerStateInterpretor.rb.velocity.y;
+                playerStateInterpretor.rb.velocity = tempMovement;
                 AdjustVelocityToSlope();
-                if (playerStat.isAiming == default) 
-                    playerStateInterpretor.transform.forward = Vector3.Slerp(new Vector3(playerStateInterpretor.transform.forward.x,0,playerStateInterpretor.transform.forward.z), tempMovement, playerStat.turnSpeed); 
                 yield return null;
             }
         }
@@ -90,8 +107,9 @@ namespace Player
 
         IEnumerator ApplyInertia()
         {
-            Vector3 initialVelocity = playerStateInterpretor.rb.velocity;
+            initialVelocity = playerStateInterpretor.rb.velocity;
             tempMovement = Vector3.zero;
+            inputDirection = Vector3.zero;
             inertiaTimer = 0;
 
             while (inertiaTimer < playerStat.inertiaDuration)
@@ -106,30 +124,36 @@ namespace Player
             }
         }
 
+        private void AdjustAnimAcordingToAim()
+        {
+            tempMovementAnim = playerStateInterpretor.transform.InverseTransformDirection(tempMovementAnim);
+            playerStateInterpretor.animator.SetFloat("WalkMagnitude", inputDirection.magnitude);
+            playerStateInterpretor.animator.SetFloat("WalkDirX", tempMovementAnim.x);
+            playerStateInterpretor.animator.SetFloat("WalkDirY", tempMovementAnim.z);
+        }
+
         private void AdjustVelocityToSlope()
         {
             if (Physics.Raycast(playerStateInterpretor.transform.position, Vector3.down, out slopeHit, groundCheckDistance))
             {
-                if (slopeHit.collider != default)
+                if (slopeHit.collider == default)
+                    return;
+                
+                if (slopeHit.normal != Vector3.up)
                 {
-                    if (slopeHit.normal != Vector3.up)
-                    {
-                        playerStateInterpretor.rb.velocity = Vector3.ProjectOnPlane(playerStateInterpretor.rb.velocity, slopeHit.normal);
-                        slopeDetected = true;
-                    }
-
-                    if ((slopeHit.normal == Vector3.up) && (slopeDetected))
-                    {
-                        playerStateInterpretor.rb.velocity = Vector3.zero;
-                        slopeDetected = false;
-                    }
+                    playerStateInterpretor.rb.velocity = Vector3.ProjectOnPlane(playerStateInterpretor.rb.velocity, slopeHit.normal);
+                    slopeDetected = true;
                 }
+
+                if ((slopeHit.normal == Vector3.up) && (slopeDetected))
+                {
+                    playerStateInterpretor.rb.velocity = Vector3.zero;
+                    slopeDetected = false;
+                }
+                
             }
         }
         
-        
-        
-
         private bool CheckForGround()
         {
             if (Physics.Raycast(playerStateInterpretor.transform.position, Vector3.down, out groundHit, groundCheckDistance))

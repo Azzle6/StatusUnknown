@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   turnAngleLimit: 15
-  turnSpeed: 0.0461
+  turnSpeed: 0.0577
   angleRequiredMultiplierByDistance:
     serializedVersion: 2
     m_Curve:
@@ -40,6 +40,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   headHeightOffset: 0.25
+  timeBeforeStopAimingWithMouse: 2
   inertiaDuration: 0.5
   inertiaCurve:
     serializedVersion: 2

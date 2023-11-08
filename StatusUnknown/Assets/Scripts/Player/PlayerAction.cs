@@ -49,19 +49,22 @@ namespace Player
         
         public void OnMove(Vector2 direction, InputAction.CallbackContext ctx)
         {
-            if (ctx.started && direction.magnitude > 0.1f)
-                playerStateInterpretor.AddState("WalkingPlayerState",PlayerStateType.MOVEMENT,false);
+            if (ctx.started)
+            {
+                playerStateInterpretor.AddState("MovementPlayerState",PlayerStateType.MOVEMENT,false);
+                playerStateInterpretor.Behave(direction,PlayerStateType.MOVEMENT);
+            }
                 
 
             if ((direction == Vector2.zero) && (ctx.canceled))
             {
-                playerStateInterpretor.RemoveStateCheck("WalkingPlayerState");
+                playerStateInterpretor.RemoveStateCheck("MovementPlayerState");
             }
             
-            if (direction != Vector2.zero || ctx.performed) 
+            if (direction != Vector2.zero || ctx.performed)
             {
-                if (playerStateInterpretor.statesSlot[PlayerStateType.MOVEMENT].name != "WalkingPlayerState")
-                    playerStateInterpretor.AddState("WalkingPlayerState",PlayerStateType.MOVEMENT,false);
+                if (playerStateInterpretor.statesSlot[PlayerStateType.MOVEMENT].name != "MovementPlayerState")
+                    playerStateInterpretor.AddState("MovementPlayerState",PlayerStateType.MOVEMENT,false);
                 playerStateInterpretor.Behave(direction,PlayerStateType.MOVEMENT);
             }
         }
