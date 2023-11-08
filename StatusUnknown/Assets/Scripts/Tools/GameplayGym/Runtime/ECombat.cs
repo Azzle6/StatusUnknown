@@ -1,5 +1,3 @@
-using Sirenix.OdinInspector;
-
 namespace StatusUnknown.CoreGameplayContent
 {
     public enum EScriptableType

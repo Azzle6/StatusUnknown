@@ -5,8 +5,8 @@ using UnityEngine.UIElements;
 
 namespace StatusUnknown.CoreGameplayContent.Editors
 {
-    [CustomEditor(typeof(CombatSimulatorScriptableObject), true)]
-    public class CombatSimulatorScriptableObjectEditor : Editor
+    [CustomEditor(typeof(ScriptableObjectManager), true)]
+    public class ScriptableObjectManagerEditor : Editor
     {
         [SerializeField] private VisualTreeAsset VisualTree;
         [SerializeField] AbilityConfigScriptableObjectPropertyDrawer drawer;

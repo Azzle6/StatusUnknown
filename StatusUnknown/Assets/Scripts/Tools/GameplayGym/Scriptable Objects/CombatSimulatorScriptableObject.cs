@@ -1,27 +1,24 @@
+using System;
 using UnityEngine;
-using UnityEngine.Pool; 
-
-// later on -> keybindings or any way to automatically create/delete a scriptable object (module, weapon, enemy)
-// prevents having to countlessly navigate throuh sub-menus to create a scriptableObject
 
 namespace StatusUnknown.CoreGameplayContent
 {
-    [CreateAssetMenu(fileName = "CombatSimulator_Type_Num", menuName = "Status Unknown/Gameplay/Combat/Simulator", order = 1)]
+    [CreateAssetMenu(fileName = "CombatSimualator_Type_Num", menuName = "Status Unknown/Gameplay/Combat/Simulator", order = 50)]
     public class CombatSimulatorScriptableObject : ScriptableObject
     {
-        public EScriptableType scriptableObjectType;
-        // public GameObject Model;
+        public AbilityConfigScriptableObject[] abilities;
+        private Action<Payload> OnExecuteFinish;
+        private int index; 
 
-        public AbilityConfigScriptableObject AbilityConfig;
-        // public AudioConfigScriptableObject AudioConfig;
-        // public VisualConfigScriptableObject VisualConfig;
+        internal EDamageType GetRootValue()
+        {
+            index++; 
+            return abilities[0].GetDamageType(); 
+        }
 
-        private MonoBehaviour ActiveMonoBehaviour;
-        private AudioSource CombatAudioSource;
-        private GameObject Model;
-        private Camera ActiveCamera;
-
-        private ParticleSystem DefaultParticleSystem;
-        private ObjectPool<TrailRenderer> TrailPool;
+        internal EDamageType GetNextValue()
+        {
+            return abilities[index++].GetDamageType();
+        }
     }
 }

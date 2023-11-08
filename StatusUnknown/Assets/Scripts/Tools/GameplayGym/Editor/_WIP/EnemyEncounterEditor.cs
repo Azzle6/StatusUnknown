@@ -2,7 +2,7 @@ using UnityEditor.UIElements;
 using UnityEditor;
 using UnityEngine.UIElements;
 
-[CustomEditor(typeof(EnemyEncounterSO))]
+//[CustomEditor(typeof(EnemyEncounterConfigScriptableObject))]
 public class EnemyEncounterEditor : Editor
 {
     public VisualTreeAsset _UXML; // goes through all the tags and instantiate them
