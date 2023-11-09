@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class CollisionBody : MonoBehaviour
 {
+    [SerializeField] float gravity = 9;
     [SerializeField] SphereCollider collider;
     [SerializeField] MassBody massBody;
     float size => collider.radius;
@@ -26,7 +27,7 @@ public class CollisionBody : MonoBehaviour
     private void FixedUpdate()
     {
         // Gravity
-        massBody.AddForce(Vector3.down * 9);
+        
 
         // Ground
         RaycastHit hitGround;
@@ -37,6 +38,10 @@ public class CollisionBody : MonoBehaviour
             Debug.DrawLine(transform.position, hitGround.point);
             Debug.DrawRay(hitGround.point, hitGround.normal, (hitAngle <= maxSlopeAngle) ? Color.green : Color.red);
             if(hitAngle <= maxSlopeAngle) { massBody.AddForce(Vector3.up * hoverStrength / hitGround.distance); }
+        }
+        else
+        {
+            massBody.AddForce(Vector3.down * gravity * massBody.Mass);
         }
 
         // Avoidance

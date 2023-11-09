@@ -67,8 +67,7 @@ namespace VectorField
                 }
             }
         }
-
-        public static Node WorlPositiondToNode(Vector3 position, Dictionary<Vector3, Node> nodeField, float depthLinkDistance = 1)
+        public static Node WorlPositiondToNode(Vector3 position, Dictionary<Vector3, Node> nodeField, float depthLinkDistance = 2)
         {
             Vector3 boundPosition = PositionToBoundPosition(position);
             int depthIteration = Mathf.FloorToInt(depthLinkDistance / fieldDensity);
@@ -80,6 +79,19 @@ namespace VectorField
             }
             return null;
         }
+        public static Node WorlPositiondToNode(Vector3 position, float depthLinkDistance = 2)
+        {
+            Vector3 boundPosition = PositionToBoundPosition(position);
+            int depthIteration = Mathf.FloorToInt(depthLinkDistance / fieldDensity);
+            for (int i = 0; i < depthIteration; i++)
+            {
+                if (NodeField.ContainsKey(boundPosition))
+                    return NodeField[boundPosition];
+                boundPosition += Vector3.down * fieldDensity;
+            }
+            return null;
+        }
+
         public static void SetTargetDistance(Vector3 targetPosition, Dictionary<Vector3, Node> nodeField)
         {
             Node targetNode = WorlPositiondToNode(targetPosition, nodeField,2);
