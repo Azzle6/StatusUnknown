@@ -1,9 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="InventoryInterface" src="project://database/Assets/UI/Grid/InventoryInterface.uxml?fileID=9197481963319205126&amp;guid=ef01e496115e8864d886f7a64f379fe2&amp;type=3#InventoryInterface" />
+    <ui:Template name="ProtoInventoryInterface" src="project://database/Assets/UI/Inventory/ProtoInventoryInterface.uxml?fileID=9197481963319205126&amp;guid=66627ee1737b3a54cabab26d7847fc53&amp;type=3#ProtoInventoryInterface" />
     <Style src="project://database/Assets/UI/Root/MainGameUI.uss?fileID=7433441132597879392&amp;guid=019b92c3d6581974989b3593bcfaf4d7&amp;type=3#MainGameUI" />
     <ui:VisualElement name="mainRoot" style="flex-grow: 1;">
         <ui:VisualElement name="centerParent" style="align-items: center; flex-direction: row; flex-grow: 1; justify-content: center; margin-right: 20%; margin-left: 20%; margin-bottom: 10%; margin-top: 10%;">
-            <ui:Instance template="InventoryInterface" name="InventoryInterface" style="flex-grow: 1;" />
+            <ui:Instance template="ProtoInventoryInterface" name="ProtoInventoryInterface" style="flex-grow: 1;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

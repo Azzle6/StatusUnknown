@@ -9,25 +9,13 @@ namespace Inventory
     using Core.UI;
     using UnityEngine;
     using UnityEngine.UIElements;
-    public class GridView : MonoBehaviour
+    public class GridView
     {
-        [SerializeField, Required, FoldoutGroup("References")]
         private GridDataSO gridDataSo;
-        [SerializeField, Required, FoldoutGroup("References")]
-        private UIDocument uiDocument;
-        [SerializeField, Required, FoldoutGroup("References")]
-        private string gridParentName;
         
         private Slot[] slots;
         private HashSet<ItemView> itemsView = new HashSet<ItemView>();
         
-        private VisualElement GridRoot
-        {
-            get
-            {
-                return gridRoot ??= uiDocument.rootVisualElement.Q<VisualElement>(this.gridParentName);
-            }
-        }
         private VisualElement gridRoot;
 
         private float SlotWidth
@@ -42,12 +30,21 @@ namespace Inventory
         private float slotWidth;
 
         private Action<GridElement> GridElementFocusEvent;
+        
+        #region CONSTRUCTOR
+        public GridView(VisualElement root, GridDataSO data)
+        {
+            this.gridRoot = root;
+            this.DisplayGrid(data);
+        }
+        #endregion //CONSTRUCTOR
 
         #region GRID_DISPLAY
         [Button("Display"), HideInEditorMode, BoxGroup("Actions")]
-        public void DisplayGrid()
+        public void DisplayGrid(GridDataSO data)
         {
-            this.GridRoot.style.display = DisplayStyle.Flex;
+            this.gridDataSo = data;
+            this.gridRoot.style.display = DisplayStyle.Flex;
             VisualElement firstFocus = this.BuildGrid();
             UIHandler.Instance.ForceFocus(firstFocus);
         }
@@ -55,7 +52,7 @@ namespace Inventory
         [Button("Hide"), HideInEditorMode, BoxGroup("Actions")]
         public void HideGrid()
         {
-            this.GridRoot.style.display = DisplayStyle.None;
+            this.gridRoot.style.display = DisplayStyle.None;
         }
         #endregion //GRID_DISPLAY
 
@@ -66,7 +63,7 @@ namespace Inventory
             Shape gridShape = this.gridDataSo.Shape;
             List<Slot> slotsList = new List<Slot>();
             VisualTreeAsset slotTemplate = UIHandler.Instance.uiSettings.slotTreeAsset;
-            VisualElement verticalParent = this.GridRoot.Q<VisualElement>("verticalParent");
+            VisualElement verticalParent = this.gridRoot.Q<VisualElement>("verticalParent");
             verticalParent.Clear();
 
             for (int y = 0; y < gridShape.shapeSize.y; y++)
@@ -153,7 +150,7 @@ namespace Inventory
         
         public void SetItemVisualPosition(ItemView itemView, Vector2Int position)
         {
-            this.GridRoot.Add(itemView.viewRoot);
+            this.gridRoot.Add(itemView.viewRoot);
             Vector3 newPosition = (Vector2)position * SlotWidth;
             itemView.viewRoot.transform.position = newPosition;
         }
