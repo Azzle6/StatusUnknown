@@ -9,6 +9,8 @@ namespace VectorField
     {
         [SerializeField] float fieldDensity => VectorFieldNavigator.fieldDensity;
         [SerializeField] LayerMask fieldMask;
+        [SerializeField] LayerMask obstacleMask;
+        [SerializeField] float agentRadius = 1;
         [SerializeField] Transform target;
 
 
@@ -84,7 +86,11 @@ namespace VectorField
                 RaycastHit hit;
                 // Collider MUST BE CONVEX !!!
                 if (Physics.Raycast(ray, out hit, fieldDensity, fieldMask) && !Physics.CheckSphere(boundsPoints[i], 0.001f, fieldMask))
-                    nodes.Add(new Node(hit.point));
+                {
+                    if(!Physics.CheckSphere(hit.point,agentRadius,obstacleMask))
+                        nodes.Add(new Node(hit.point));
+                }
+                    
             }
             data.SetNodes(nodes);
             data.SaveAsset();
@@ -109,7 +115,12 @@ namespace VectorField
                 {
                     foreach (var boundPosition in node.Value.linkedBoundPositions)
                         Gizmos.DrawLine(nodeField[boundPosition].Position, node.Value.Position);
+
+                    
                 }
+
+                //foreach (var position in node.Value.linkPosition)
+                    //Gizmos.DrawLine(node.Value.Position, position);
 
                 if (showArrow && node.Value.targetDirection != Vector3.zero) // Draw arrow
                     DrawArrow.ForGizmo(node.Value.Position + Vector3.up * 0.1f, node.Value.targetDirection, 0.35f, 40);

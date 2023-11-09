@@ -9,16 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99091917bab4cb5439fe61060b31c6ce, type: 3}
-  m_Name: BoidSettings
+  m_Script: {fileID: 11500000, guid: 83672121cbb58cf4bb51ed5715775190, type: 3}
+  m_Name: EnemyStats
   m_EditorClassIdentifier: 
-  viewDistance: 4
-  avoidDistance: 2
-  minSpeed: 3
-  maxSpeed: 5
-  hoverDistance: 0.5
-  maxForce: 8
-  avoidStrength: 2.5
-  cohesionStrength: 0
-  alignementStrength: 2
-  pathFindingStrength: 4
+  health: 100
+  AggroRange: 30
+  chaseStrength: 6.05
+  AttackRange: 2
+  AttackDuration: 1
