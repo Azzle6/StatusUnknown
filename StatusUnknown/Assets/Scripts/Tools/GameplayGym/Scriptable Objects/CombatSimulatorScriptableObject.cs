@@ -7,18 +7,19 @@ namespace StatusUnknown.CoreGameplayContent
     public class CombatSimulatorScriptableObject : ScriptableObject
     {
         public AbilityConfigScriptableObject[] abilities;
-        private Action<Payload> OnExecuteFinish;
-        private int index; 
+
+        internal int GetAbilitiesArrayLength() { return abilities.Length; } 
 
         internal EDamageType GetRootValue()
         {
-            index++; 
+            if (abilities == null) return default;
+
             return abilities[0].GetDamageType(); 
         }
 
-        internal EDamageType GetNextValue()
+        internal EDamageType GetValueAtIndex(int i)
         {
-            return abilities[index++].GetDamageType();
+            return abilities[i].GetDamageType();
         }
     }
 }

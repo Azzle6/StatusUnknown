@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Pool; 
 
 // later on -> keybindings or any way to automatically create/delete a scriptable object (module, weapon, enemy)
 // prevents having to countlessly navigate through sub-menus to create a scriptableObject
@@ -24,8 +23,5 @@ namespace StatusUnknown.CoreGameplayContent
         private AudioSource CombatAudioSource;
         private GameObject Model;
         private Camera ActiveCamera;
-
-        private ParticleSystem DefaultParticleSystem;
-        private ObjectPool<TrailRenderer> TrailPool;
     }
 }

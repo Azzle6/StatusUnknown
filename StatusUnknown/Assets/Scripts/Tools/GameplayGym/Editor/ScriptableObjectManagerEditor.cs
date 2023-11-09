@@ -9,7 +9,6 @@ namespace StatusUnknown.CoreGameplayContent.Editors
     public class ScriptableObjectManagerEditor : Editor
     {
         [SerializeField] private VisualTreeAsset VisualTree;
-        [SerializeField] AbilityConfigScriptableObjectPropertyDrawer drawer;
         private readonly EnumValueTracker tracker = new EnumValueTracker();
 
         public override VisualElement CreateInspectorGUI()

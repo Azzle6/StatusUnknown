@@ -8,7 +8,7 @@ using Object = UnityEngine.Object;
 
 namespace StatusUnknown.CoreGameplayContent.Editors
 {
-    [CustomPropertyDrawer(typeof(AbilityConfigScriptableObject), true)]
+    // [CustomPropertyDrawer(typeof(AbilityConfigScriptableObject), true)]
     public class AbilityConfigScriptableObjectPropertyDrawer : PropertyDrawer
     {
         private VisualElement ContentPanel;
