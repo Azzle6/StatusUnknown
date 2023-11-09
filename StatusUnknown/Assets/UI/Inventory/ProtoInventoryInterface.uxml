@@ -1,0 +1,29 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:Template name="InventoryGrid" src="project://database/Assets/UI/Grid/Grid.uxml?fileID=9197481963319205126&amp;guid=d76399139e4e88d4c91451f86a882183&amp;type=3#Grid" />
+    <ui:VisualElement name="InventoryInterface" style="flex-grow: 1; flex-direction: row; background-color: rgb(128, 128, 128);">
+        <ui:VisualElement name="Stats" style="flex-basis: 20%; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%;">
+            <ui:VisualElement name="StatsInfosZone" style="margin-top: 5%; margin-right: 5%; margin-bottom: 5%; margin-left: 5%; background-color: rgb(147, 147, 147); flex-grow: 1;">
+                <ui:Label tabindex="-1" text="Stats :" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="WeaponsGrids" style="flex-basis: 40%; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%;">
+            <ui:VisualElement name="WeponsSelection" style="flex-basis: 20%; margin-top: 5%; margin-right: 5%; margin-bottom: 5%; margin-left: 5%; background-color: rgb(147, 147, 147);" />
+            <ui:VisualElement name="WeaponGrid" style="flex-grow: 1; flex-direction: row; background-color: rgb(90, 90, 90); margin-top: 5%; margin-right: 5%; margin-bottom: 5%; margin-left: 5%;">
+                <ui:VisualElement name="WeaponsInventory" style="margin-right: 1%; flex-grow: 1;">
+                    <ui:VisualElement name="weaponDisplay" style="align-self: center;">
+                        <ui:Instance template="InventoryGrid" name="weaponGrid" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Inventory" style="flex-basis: 40%; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%;">
+            <ui:VisualElement name="InventoryGrids" style="flex-grow: 1; flex-direction: row; background-color: rgb(90, 90, 90); margin-top: 5%; margin-right: 5%; margin-bottom: 5%; margin-left: 5%;">
+                <ui:VisualElement name="ModulesInventory" style="flex-basis: 50%; margin-left: 1%;">
+                    <ui:VisualElement name="inventoryDisplay" style="align-self: center;">
+                        <ui:Instance template="InventoryGrid" name="inventoryGrid" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

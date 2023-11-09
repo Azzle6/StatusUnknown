@@ -1,0 +1,45 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:Template name="InventoryGrid" src="project://database/Assets/UI/Grid/Grid.uxml?fileID=9197481963319205126&amp;guid=d76399139e4e88d4c91451f86a882183&amp;type=3#Grid" />
+    <Style src="project://database/Assets/UI/GlobalUSS.uss?fileID=7433441132597879392&amp;guid=b957b32707326d646b329444c53afc3b&amp;type=3#GlobalUSS" />
+    <ui:VisualElement name="InventoryInterface" style="flex-grow: 1; flex-direction: row; background-color: rgb(128, 128, 128);">
+        <ui:VisualElement name="CharacterInfos" style="flex-basis: 50%; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%;">
+            <ui:VisualElement name="Resources" style="flex-basis: 70px;">
+                <ui:VisualElement name="Money" style="flex-grow: 1; flex-direction: row; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px;">
+                    <ui:VisualElement style="height: 25px; width: 25px; background-color: rgb(236, 191, 59);" />
+                    <ui:Label tabindex="-1" text="Money" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-text-align: middle-left;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Scrap" style="flex-grow: 1; flex-direction: row; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px;">
+                    <ui:VisualElement style="width: 25px; height: 25px; background-color: rgb(82, 79, 79);" />
+                    <ui:Label tabindex="-1" text="Scrap" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-text-align: middle-left;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="Character" style="flex-grow: 1; background-color: rgb(90, 90, 90);">
+                <ui:VisualElement name="ArmorIcon" focusable="true" class="focusableElement" style="position: absolute; width: 30%; height: 20%; align-self: center; background-color: rgba(84, 200, 245, 0.65);" />
+                <ui:VisualElement name="WeaponFirstIcon" focusable="true" class="focusableElement" style="position: absolute; width: 30%; height: 15%; align-self: flex-start; background-color: rgba(84, 200, 245, 0.65); bottom: 50%;" />
+                <ui:VisualElement name="WeaponSecondIcon" focusable="true" class="focusableElement" style="position: absolute; width: 30%; height: 15%; align-self: flex-end; background-color: rgba(84, 200, 245, 0.65); bottom: 50%;" />
+                <ui:VisualElement name="AbilitiesIcons" style="position: absolute; align-self: center; bottom: 10%; align-items: center; justify-content: space-between; width: 50%; height: 10%; flex-direction: row;">
+                    <ui:VisualElement name="AbilityFirstIcon" focusable="true" class="focusableElement" style="position: relative; height: 100%; align-self: center; background-color: rgba(84, 200, 245, 0.65); width: 30%; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%; border-bottom-left-radius: 50%;" />
+                    <ui:VisualElement name="AbilitySecondIcon" focusable="true" class="focusableElement" style="position: relative; height: 100%; align-self: center; background-color: rgba(84, 200, 245, 0.65); width: 30%; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%; border-bottom-left-radius: 50%;" />
+                    <ui:VisualElement name="AbilityThirdIcon" focusable="true" class="focusableElement" style="position: relative; height: 100%; align-self: center; background-color: rgba(84, 200, 245, 0.65); width: 30%; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%; border-bottom-left-radius: 50%;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Inventory" style="flex-basis: 50%; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%;">
+            <ui:VisualElement name="StatsInfosZone" style="flex-basis: 20%; margin-top: 5%; margin-right: 5%; margin-bottom: 5%; margin-left: 5%; background-color: rgb(147, 147, 147);">
+                <ui:Label tabindex="-1" text="Stats :" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+            </ui:VisualElement>
+            <ui:VisualElement name="InventoryGrids" style="flex-grow: 1; flex-direction: row; background-color: rgb(90, 90, 90); margin-top: 5%; margin-right: 5%; margin-bottom: 5%; margin-left: 5%;">
+                <ui:VisualElement name="WeaponsInventory" style="flex-basis: 50%; margin-right: 1%;">
+                    <ui:VisualElement name="weaponDisplay" style="align-self: center;">
+                        <ui:Instance template="InventoryGrid" name="weaponGrid" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement name="ModulesInventory" style="flex-basis: 50%; margin-left: 1%;">
+                    <ui:VisualElement name="inventoryDisplay" style="align-self: center;">
+                        <ui:Instance template="InventoryGrid" name="inventoryGrid" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,5 +1,6 @@
 namespace Core.SingletonsSO
 {
+    using System;
     using Inventory;
     using Sirenix.OdinInspector;
     using UI;
@@ -17,6 +18,8 @@ namespace Core.SingletonsSO
         public bool isMovingItem;
         [FoldoutGroup("Dynamic data")]
         public ItemView movingItem;
+
+        public Action<GridElement> OnGridElementFocusEvent;
         
         public void ForceFocus(VisualElement element)
         {
@@ -24,20 +27,47 @@ namespace Core.SingletonsSO
             Debug.Log($"{element.name} get forced focus.");
         }
 
+        #region GRID_MANAGEMENT
         public void OnGridElementFocus(GridElement element)
         {
             this.selectedGrid = element.grid;
+            this.OnGridElementFocusEvent?.Invoke(element);
         }
 
-        public void OnPickItem(ItemView itemView)
+        public void PickItem(ItemView itemView)
         {
             this.movingItem = itemView;
             this.isMovingItem = true;
+            
+            itemView.MoveState();
+            
+            itemView.grid.OnPickItem(itemView);
+            this.OnGridElementFocusEvent += this.MoveItem;
         }
 
-        public void OnDropItem()
+        private void MoveItem(GridElement focusedElement)
         {
+            this.movingItem.CanPlaceItemFeedback(this.selectedGrid.CanPlaceItem(this.movingItem.item.itemDefinition.Shape, focusedElement.gridPosition));
+            this.selectedGrid.SetItemVisualPosition(this.movingItem, focusedElement.gridPosition);
+            Debug.Log($"Move item to {focusedElement.gridPosition} in grid parent {this.selectedGrid}.");
+        }
+
+        public void TryDropItem(Vector2Int pos)
+        {
+            if (this.selectedGrid.CanPlaceItem(this.movingItem.item.itemDefinition.Shape, pos))
+                this.DropItem(pos);
+        }
+
+        private void DropItem(Vector2Int pos)
+        {
+            this.OnGridElementFocusEvent -= this.MoveItem;
+            this.movingItem.PlacedState();
+            this.selectedGrid.DropItem(this.movingItem, pos);
+            this.ForceFocus(this.movingItem.focusElement);
+            
+            this.movingItem = null;
             this.isMovingItem = false;
         }
+        #endregion //GRID_MANAGEMENT
     }
 }

@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="tabs" style="flex-grow: 1;">
+        <ui:Label tabindex="-1" text="firstTab" parse-escape-sequences="true" display-tooltip-when-elided="true" name="firstTab" />
+        <ui:Label tabindex="-1" text="secondTab" parse-escape-sequences="true" display-tooltip-when-elided="true" name="secondTab" />
+        <ui:Label tabindex="-1" text="thirdTab" parse-escape-sequences="true" display-tooltip-when-elided="true" name="thirdTab" />
+    </ui:VisualElement>
+    <ui:VisualElement name="tabContent" style="flex-grow: 1;">
+        <ui:Label tabindex="-1" text="firstContent" parse-escape-sequences="true" display-tooltip-when-elided="true" name="firstContent" />
+        <ui:Label tabindex="-1" text="secondContent" parse-escape-sequences="true" display-tooltip-when-elided="true" name="secondContent" />
+        <ui:Label tabindex="-1" text="thirdContent" parse-escape-sequences="true" display-tooltip-when-elided="true" name="thirdContent" />
+    </ui:VisualElement>
+</ui:UXML>

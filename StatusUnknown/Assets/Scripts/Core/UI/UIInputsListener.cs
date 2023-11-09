@@ -8,5 +8,11 @@ namespace Core.UI
         {
             Debug.Log($"Submit performed.");
         }
+
+        private void OnStart()
+        {
+            Debug.Log($"Start performed.");
+            
+        }
     }
 }
