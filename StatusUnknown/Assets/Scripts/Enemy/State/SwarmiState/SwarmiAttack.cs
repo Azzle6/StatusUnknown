@@ -5,10 +5,12 @@ using UnityEngine;
 public class SwarmiAttack : EnemyState
 {
     Color colorState = Color.red;
+    float attackDuration;
     float attackRange => context.stats.AttackRange;
     public override void Update()
     {
-        if (!CombatManager.PlayerInRange(transform.position, attackRange))
+        attackDuration -= Time.deltaTime;
+        if (!CombatManager.PlayerInRange(transform.position, attackRange) && attackDuration < 0)
         {
             context.SwitchState(new SwarmiChase());
         }
@@ -16,6 +18,7 @@ public class SwarmiAttack : EnemyState
 
     protected override void Initialize()
     {
+        attackDuration = context.stats.AttackDuration;
         context.changeColor(colorState);
     }
 }

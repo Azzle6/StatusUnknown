@@ -9,6 +9,8 @@ namespace VectorField
     {
         [SerializeField] float fieldDensity => VectorFieldNavigator.fieldDensity;
         [SerializeField] LayerMask fieldMask;
+        [SerializeField] LayerMask obstacleMask;
+        [SerializeField] float agentRadius = 1;
         [SerializeField] Transform target;
 
 
@@ -84,7 +86,11 @@ namespace VectorField
                 RaycastHit hit;
                 // Collider MUST BE CONVEX !!!
                 if (Physics.Raycast(ray, out hit, fieldDensity, fieldMask) && !Physics.CheckSphere(boundsPoints[i], 0.001f, fieldMask))
-                    nodes.Add(new Node(hit.point));
+                {
+                    if(!Physics.CheckSphere(hit.point,agentRadius,obstacleMask))
+                        nodes.Add(new Node(hit.point));
+                }
+                    
             }
             data.SetNodes(nodes);
             data.SaveAsset();

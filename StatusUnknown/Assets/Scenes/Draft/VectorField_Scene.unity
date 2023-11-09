@@ -532,6 +532,10 @@ MonoBehaviour:
   fieldMask:
     serializedVersion: 2
     m_Bits: 64
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 0
+  agentRadius: 1
   target: {fileID: 1789481950}
   fieldCollider: {fileID: 101858968}
   data: {fileID: 11400000, guid: d7c9eb72df8c1f344b0260e15a753733, type: 2}
@@ -3356,6 +3360,7 @@ GameObject:
   - component: {fileID: 242546099}
   - component: {fileID: 242546098}
   - component: {fileID: 242546097}
+  - component: {fileID: 242546103}
   m_Layer: 7
   m_Name: Enemy (1)
   m_TagString: Untagged
@@ -3396,7 +3401,7 @@ MonoBehaviour:
   isTrigger: 0
   collisionMask:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 64
 --- !u!135 &242546099
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3412,7 +3417,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -3483,6 +3488,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &242546103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242546096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e60321e91b1e7784692fb022b2495d6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  massBody: {fileID: 242546098}
+  avoidMask:
+    serializedVersion: 2
+    m_Bits: 128
+  avoidDistance: 1
+  avoidStrength: 1
 --- !u!1 &269561750
 GameObject:
   m_ObjectHideFlags: 0
@@ -6350,6 +6373,7 @@ GameObject:
   - component: {fileID: 728900376}
   - component: {fileID: 728900375}
   - component: {fileID: 728900374}
+  - component: {fileID: 728900380}
   m_Layer: 7
   m_Name: Enemy (5)
   m_TagString: Untagged
@@ -6390,7 +6414,7 @@ MonoBehaviour:
   isTrigger: 0
   collisionMask:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 64
 --- !u!135 &728900376
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6406,7 +6430,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -6477,6 +6501,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &728900380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728900373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e60321e91b1e7784692fb022b2495d6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  massBody: {fileID: 728900375}
+  avoidMask:
+    serializedVersion: 2
+    m_Bits: 128
+  avoidDistance: 1
+  avoidStrength: 1
 --- !u!1 &792740764
 GameObject:
   m_ObjectHideFlags: 0
@@ -7114,6 +7156,7 @@ GameObject:
   - component: {fileID: 883167933}
   - component: {fileID: 883167932}
   - component: {fileID: 883167931}
+  - component: {fileID: 883167937}
   m_Layer: 7
   m_Name: Enemy (2)
   m_TagString: Untagged
@@ -7154,7 +7197,7 @@ MonoBehaviour:
   isTrigger: 0
   collisionMask:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 64
 --- !u!135 &883167933
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -7170,7 +7213,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -7241,6 +7284,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &883167937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 883167930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e60321e91b1e7784692fb022b2495d6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  massBody: {fileID: 883167932}
+  avoidMask:
+    serializedVersion: 2
+    m_Bits: 128
+  avoidDistance: 1
+  avoidStrength: 1
 --- !u!1 &933814794
 GameObject:
   m_ObjectHideFlags: 0
@@ -7255,6 +7316,7 @@ GameObject:
   - component: {fileID: 933814797}
   - component: {fileID: 933814796}
   - component: {fileID: 933814795}
+  - component: {fileID: 933814801}
   m_Layer: 7
   m_Name: Enemy (3)
   m_TagString: Untagged
@@ -7295,7 +7357,7 @@ MonoBehaviour:
   isTrigger: 0
   collisionMask:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 64
 --- !u!135 &933814797
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -7311,7 +7373,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -7382,6 +7444,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &933814801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 933814794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e60321e91b1e7784692fb022b2495d6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  massBody: {fileID: 933814796}
+  avoidMask:
+    serializedVersion: 2
+    m_Bits: 128
+  avoidDistance: 1
+  avoidStrength: 1
 --- !u!43 &950118523
 Mesh:
   m_ObjectHideFlags: 0
@@ -8355,8 +8435,8 @@ GameObject:
   - component: {fileID: 1279901819}
   - component: {fileID: 1279901818}
   - component: {fileID: 1279901817}
-  m_Layer: 6
-  m_Name: Cube (4)
+  m_Layer: 8
+  m_Name: Ostacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8462,6 +8542,7 @@ GameObject:
   - component: {fileID: 1302116781}
   - component: {fileID: 1302116780}
   - component: {fileID: 1302116779}
+  - component: {fileID: 1302116785}
   m_Layer: 7
   m_Name: Enemy (4)
   m_TagString: Untagged
@@ -8502,7 +8583,7 @@ MonoBehaviour:
   isTrigger: 0
   collisionMask:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 64
 --- !u!135 &1302116781
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -8518,7 +8599,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -8589,6 +8670,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1302116785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1302116778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e60321e91b1e7784692fb022b2495d6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  massBody: {fileID: 1302116780}
+  avoidMask:
+    serializedVersion: 2
+    m_Bits: 128
+  avoidDistance: 1
+  avoidStrength: 1
 --- !u!43 &1447921690
 Mesh:
   m_ObjectHideFlags: 0
@@ -8768,6 +8867,7 @@ GameObject:
   - component: {fileID: 1485877917}
   - component: {fileID: 1485877922}
   - component: {fileID: 1485877923}
+  - component: {fileID: 1485877924}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -8790,7 +8890,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -8879,7 +8979,7 @@ MonoBehaviour:
   isTrigger: 0
   collisionMask:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 64
 --- !u!114 &1485877923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8895,6 +8995,24 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: fd4cf9cc59e2d784585831141016319f, type: 2}
   massBody: {fileID: 1485877922}
   meshRenderer: {fileID: 1485877918}
+--- !u!114 &1485877924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1485877915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e60321e91b1e7784692fb022b2495d6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  massBody: {fileID: 1485877922}
+  avoidMask:
+    serializedVersion: 2
+    m_Bits: 128
+  avoidDistance: 1
+  avoidStrength: 1
 --- !u!1 &1507474061
 GameObject:
   m_ObjectHideFlags: 0
@@ -9293,6 +9411,10 @@ MonoBehaviour:
   fieldMask:
     serializedVersion: 2
     m_Bits: 64
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 256
+  agentRadius: 1
   target: {fileID: 491272587}
   fieldCollider: {fileID: 1562646369}
   data: {fileID: 11400000, guid: 48859196b936727418390b80336875ed, type: 2}

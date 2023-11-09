@@ -23,6 +23,7 @@ public class MassBody : MonoBehaviour
     public void AddForce(Vector3 force)
     {
         Acceleration += (force / Mass);
+        //body.AddForce(force);
     }
     public void SetVelocity(Vector3 velocity)
     {
@@ -31,7 +32,8 @@ public class MassBody : MonoBehaviour
 
     private void FixedUpdate()
     {
-        var nextPosition = transform.position + Velocity * Time.fixedDeltaTime;
+        ProcessAcceleration();
+        var nextPosition = transform.position;
         var solidCollider = Physics.OverlapSphere(nextPosition, sphereCollider.radius * 2, collisionMask);
         foreach (var collider in solidCollider)
         {
@@ -42,11 +44,10 @@ public class MassBody : MonoBehaviour
             if (repulseMagnitude == 0) repulseMagnitude = sphereCollider.radius;
             if (repulseMagnitude < sphereCollider.radius) {
                 transform.position = repulsePoint + (repulseVector / repulseMagnitude) * sphereCollider.radius;
-                AddForce(-Acceleration);
+                AddForce(repulseVector);
             }
         }
 
-        ProcessAcceleration();
         transform.position += Velocity * Time.fixedDeltaTime;
     }
 

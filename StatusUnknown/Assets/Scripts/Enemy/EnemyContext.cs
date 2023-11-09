@@ -13,7 +13,7 @@ public class EnemyContext : MonoBehaviour, IDamageable
     private void Start()
     {
         currentHealth = stats.health;
-        SwitchState(new SwarmiChase());
+        SwitchState(new SwarmiIdle());
     }
     private void Update()
     {
