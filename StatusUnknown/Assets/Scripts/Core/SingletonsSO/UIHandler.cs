@@ -13,13 +13,13 @@ namespace Core.SingletonsSO
         public UISettings uiSettings;
         
         [FoldoutGroup("Dynamic data")]
-        public GridView selectedGrid;
-        [FoldoutGroup("Dynamic data")]
         public bool isMovingItem;
         [FoldoutGroup("Dynamic data")]
         public ItemView movingItem;
 
         public Action<GridElement> OnGridElementFocusEvent;
+        
+        private GridView selectedGrid;
         
         public void ForceFocus(VisualElement element)
         {
@@ -40,8 +40,8 @@ namespace Core.SingletonsSO
             this.isMovingItem = true;
             
             itemView.MoveState();
-            
             itemView.grid.OnPickItem(itemView);
+            
             this.OnGridElementFocusEvent += this.MoveItem;
         }
 
@@ -49,7 +49,7 @@ namespace Core.SingletonsSO
         {
             this.movingItem.CanPlaceItemFeedback(this.selectedGrid.CanPlaceItem(this.movingItem.item.itemDefinition.Shape, focusedElement.gridPosition));
             this.selectedGrid.SetItemVisualPosition(this.movingItem, focusedElement.gridPosition);
-            Debug.Log($"Move item to {focusedElement.gridPosition} in grid parent {this.selectedGrid}.");
+            //Debug.Log($"Move item to {focusedElement.gridPosition} in grid parent {this.selectedGrid}.");
         }
 
         public void TryDropItem(Vector2Int pos)

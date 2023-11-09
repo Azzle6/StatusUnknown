@@ -2,11 +2,9 @@ namespace Inventory
 {
     using AYellowpaper.SerializedCollections;
     using Core.Helpers;
-    using Sirenix.OdinInspector;
     using System;
     using System.Collections.Generic;
     using Core.SingletonsSO;
-    using Core.UI;
     using UnityEngine;
     using UnityEngine.UIElements;
     public class GridView
@@ -30,26 +28,24 @@ namespace Inventory
         private float slotWidth;
 
         private Action<GridElement> GridElementFocusEvent;
+
+        private VisualElement firstFocus;
         
         #region CONSTRUCTOR
         public GridView(VisualElement root, GridDataSO data)
         {
             this.gridRoot = root;
-            this.DisplayGrid(data);
+            this.gridDataSo = data;
+            this.BuildGrid();
         }
         #endregion //CONSTRUCTOR
 
         #region GRID_DISPLAY
-        [Button("Display"), HideInEditorMode, BoxGroup("Actions")]
-        public void DisplayGrid(GridDataSO data)
+        public void FocusOnGrid()
         {
-            this.gridDataSo = data;
-            this.gridRoot.style.display = DisplayStyle.Flex;
-            VisualElement firstFocus = this.BuildGrid();
             UIHandler.Instance.ForceFocus(firstFocus);
         }
 
-        [Button("Hide"), HideInEditorMode, BoxGroup("Actions")]
         public void HideGrid()
         {
             this.gridRoot.style.display = DisplayStyle.None;
@@ -57,9 +53,9 @@ namespace Inventory
         #endregion //GRID_DISPLAY
 
         #region GRID_BUILD
-        private VisualElement BuildGrid()
+        private void BuildGrid()
         {
-            VisualElement firstFocusElement = null;
+            this.firstFocus = null;
             Shape gridShape = this.gridDataSo.Shape;
             List<Slot> slotsList = new List<Slot>();
             VisualTreeAsset slotTemplate = UIHandler.Instance.uiSettings.slotTreeAsset;
@@ -84,9 +80,9 @@ namespace Inventory
                     if (this.gridDataSo.Shape.GetContentFromPosition(new Vector2Int(x, y)))
                     {
                         gridSlotElement.name = $"{x},{y}";
-                        slot.focusElement.RegisterCallback<FocusEvent>(e => this.GridElementFocusEvent(slot));
+                        slot.focusElement.RegisterCallback<FocusEvent>(e => this.GridElementFocusEvent?.Invoke(slot));
                         slot.focusElement.RegisterCallback<NavigationSubmitEvent>(e => this.OnInteract(slot));
-                        firstFocusElement ??= gridSlotElement;
+                        this.firstFocus ??= gridSlotElement;
                     }
                     else
                     {
@@ -94,15 +90,24 @@ namespace Inventory
                     }
                 }
             }
+            
+            this.GridElementFocusEvent += UIHandler.Instance.OnGridElementFocus;
 
             this.slots = slotsList.ToArray();
-            return firstFocusElement;
         }
         #endregion //GRID_BUILD
 
         #region CONTENT_SAVE_LOAD
-        [Button("Load content"), HideInEditorMode, BoxGroup("Actions")]
-        private void LoadContent()
+        public void LoadNewContent(GridDataSO data)
+        {
+            ClearContent(false);
+            
+            this.gridDataSo = data;
+            this.BuildGrid();
+            this.LoadContent();
+        }
+        
+        public void LoadContent()
         {
             ClearContent(false);
             foreach (KeyValuePair<Vector2Int, Item> info in gridDataSo.content)
@@ -110,12 +115,11 @@ namespace Inventory
                 ItemView itemView = new ItemView(info.Value, info.Key, this);
                 this.SetItemPosition(itemView, info.Key);
                 this.itemsView.Add(itemView);
-                itemView.focusElement.RegisterCallback<FocusEvent>(e => this.GridElementFocusEvent.Invoke(itemView));
+                itemView.focusElement.RegisterCallback<FocusEvent>(e => this.GridElementFocusEvent?.Invoke(itemView));
                 itemView.focusElement.RegisterCallback<NavigationSubmitEvent>(e => this.OnInteract(itemView));
             }
         }
         
-        [Button("Save content"), HideInEditorMode, BoxGroup("Actions")]
         private void SaveContent()
         {
             SerializedDictionary<Vector2Int, Item> newContent = new SerializedDictionary<Vector2Int, Item>();
@@ -125,7 +129,6 @@ namespace Inventory
             gridDataSo.content = newContent;
         }
         
-        [Button("Clear content"), HideInEditorMode, BoxGroup("Actions")]
         private void ClearContent(bool clearData)
         {
             HashSet<ItemView> tempItem = new HashSet<ItemView>(this.itemsView);
@@ -159,10 +162,9 @@ namespace Inventory
         #region CONTENT_ACTIONS
         public void OnPickItem(ItemView itemView)
         {
-            itemView.MoveState();
             SetSlotsContent(itemView.item.itemDefinition.Shape, itemView.gridPosition, null);
-            UIHandler.Instance.ForceFocus(GetSlot(itemView.gridPosition).focusElement);
             this.itemsView.Remove(itemView);
+            UIHandler.Instance.ForceFocus(GetSlot(itemView.gridPosition).focusElement);
             this.SaveContent();
         }
         
@@ -185,8 +187,6 @@ namespace Inventory
             
             //Register item in grid
             this.itemsView.Add(itemView);
-            
-            Debug.Log($"Set item to {pos}");
         }
         
         private void RemoveItem(ItemView itemView)
@@ -211,18 +211,6 @@ namespace Inventory
                 if (UIHandler.Instance.isMovingItem)
                     UIHandler.Instance.TryDropItem(slot.gridPosition);
             }
-        }
-        #endregion
-        
-        #region UNITY_METHODS
-        private void OnEnable()
-        {
-            this.GridElementFocusEvent += UIHandler.Instance.OnGridElementFocus;
-        }
-
-        private void OnDisable()
-        {
-            this.GridElementFocusEvent -= UIHandler.Instance.OnGridElementFocus;
         }
         #endregion
 

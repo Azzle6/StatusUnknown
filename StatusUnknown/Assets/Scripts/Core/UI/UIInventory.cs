@@ -1,7 +1,5 @@
 namespace Core.UI
 {
-    using System;
-    using global::UI.Global.TabbedMenu;
     using Inventory;
     using Sirenix.OdinInspector;
     using UnityEngine;
@@ -10,7 +8,7 @@ namespace Core.UI
     public class UIInventory : MonoBehaviour
     {
         private const string INVENTORY_GRID_NAME = "inventoryGrid";
-        private const string WEAPON_GRID_NAME = "weaponGrid";
+        private const string FIRST_WEAPON_GRID_NAME = "weaponGrid";
         
         [SerializeField]
         private UIDocument uiDocument;
@@ -22,11 +20,10 @@ namespace Core.UI
         [SerializeField, BoxGroup("Debug")] 
         private GridDataSO inventoryData;
         [SerializeField, BoxGroup("Debug")] 
-        private GridDataSO weaponData;
+        private GridDataSO[] weaponsData;
 
         private VisualElement inventoryRoot;
         private VisualElement weaponTabRoot;
-        private TabbedMenuController weaponTabbedController;
 
         private GridView inventoryGridView;
         private GridView weaponGridView;
@@ -36,23 +33,55 @@ namespace Core.UI
         private void OnEnable()
         {
             this.weaponTabRoot = this.uiDocument.rootVisualElement.Q<VisualElement>(this.weaponsTabElementName);
-            this.weaponTabbedController = new(this.weaponTabRoot);
-            this.weaponTabbedController.RegisterTabCallbacks();
-
             this.inventoryRoot = this.uiDocument.rootVisualElement.Q<VisualElement>(inventoryInterfaceName);
-
-            this.inventoryGridView = new GridView(this.uiDocument.rootVisualElement.Q<VisualElement>(INVENTORY_GRID_NAME),
-                    this.inventoryData);
             
-            this.weaponGridView = new GridView(this.uiDocument.rootVisualElement.Q<VisualElement>(WEAPON_GRID_NAME),
-                this.weaponData);
+            this.RefreshWeaponsTriggerTabs();
+
+            this.InitGridViews();
+
+            this.inventoryRoot.style.display = DisplayStyle.None;
         }
 
-        [Button]
+        private void InitGridViews()
+        {
+            this.inventoryGridView = new GridView(this.uiDocument.rootVisualElement.Q<VisualElement>(INVENTORY_GRID_NAME),
+                this.inventoryData);
+            this.weaponGridView = new GridView(this.uiDocument.rootVisualElement.Q<VisualElement>(FIRST_WEAPON_GRID_NAME),
+                this.weaponsData[0]);
+        }
+
+        private void RefreshWeaponsTriggerTabs()
+        {
+            this.weaponTabRoot.Clear();
+            foreach (GridDataSO weapon in this.weaponsData)
+            {
+                Button tabButton = new Button(() => SwitchWeaponGrid(weapon))
+                {
+                    text = weapon.name
+                };
+                this.weaponTabRoot.Add(tabButton);
+            }
+        }
+
+        private void SwitchWeaponGrid(GridDataSO newGrid)
+        {
+            this.weaponGridView.LoadNewContent(newGrid);
+        }
+
+        [Button, HideInEditorMode]
         public void Display()
         {
             this.isDisplayed = !this.isDisplayed;
-            this.inventoryRoot.style.display = this.isDisplayed ? DisplayStyle.None : DisplayStyle.Flex;
+            
+            Debug.Log($"{(this.isDisplayed ? "Display" : "Hide")} inventory.");
+            
+            this.inventoryRoot.style.display = this.isDisplayed ? DisplayStyle.Flex : DisplayStyle.None;
+            if (this.isDisplayed)
+            {
+                this.inventoryGridView.FocusOnGrid();
+                this.inventoryGridView.LoadContent();
+                this.weaponGridView.LoadContent();
+            }
         }
     }
 }

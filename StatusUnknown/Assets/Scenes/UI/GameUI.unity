@@ -185,10 +185,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiDocument: {fileID: 284051421}
-  weaponsTabElementName: WeaponsTabbedMenu
+  weaponsTabElementName: weaponSelectionButtons
   inventoryInterfaceName: InventoryInterface
   inventoryData: {fileID: 11400000, guid: 9d7824d661902054db8419ba1d0d9e51, type: 2}
-  weaponData: {fileID: 11400000, guid: 29cbed7ed4cc6714b882087193a15a43, type: 2}
+  weaponsData:
+  - {fileID: 11400000, guid: 29cbed7ed4cc6714b882087193a15a43, type: 2}
+  - {fileID: 11400000, guid: 9c5315e5c4e974f439b6262ead98a7d1, type: 2}
 --- !u!1 &1917496555
 GameObject:
   m_ObjectHideFlags: 0
