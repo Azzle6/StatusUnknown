@@ -9,12 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 043d092d02ee10849b501f6c4efbef7e, type: 3}
-  m_Name: Inventory2
+  m_Script: {fileID: 11500000, guid: be86ef0f8182e3445aae19df541b5b58, type: 3}
+  m_Name: UIHandler
   m_EditorClassIdentifier: 
-  <Shape>k__BackingField:
-    shapeSize: {x: 4, y: 5}
-    anchor: {x: 2, y: 2}
-    shapeContent: 0001010101010100010101010101010100010001
-  content:
-    _serializedList: []
+  uiSettings: {fileID: 11400000, guid: 61ebac6ac6bb3d446b01bab7113090ea, type: 2}
+  selectedPosition: {x: 0, y: 0}
+  selectedItem:
+    itemDefinition: {fileID: 0}
