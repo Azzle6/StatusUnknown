@@ -40,7 +40,10 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   headHeightOffset: 0.25
-  timeBeforeStopAimingWithMouse: 2
+  timeBeforeStopAiming: 2
+  aimLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
   inertiaDuration: 0.5
   inertiaCurve:
     serializedVersion: 2

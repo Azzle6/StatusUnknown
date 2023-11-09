@@ -17,6 +17,7 @@ namespace Player
         public AnimationCurve angleRequiredMultiplierByDistance;
         public float headHeightOffset = 0.25f;
         public float timeBeforeStopAiming = 2f;
+        public LayerMask aimLayerMask;
         [Header("Inertia")]
         public float inertiaDuration;
         public AnimationCurve inertiaCurve;

@@ -74,7 +74,7 @@ namespace Player
             frustumPlanes = GeometryUtility.CalculateFrustumPlanes(mainCamera);
             
             //recover colliders in the frustrum 
-            visibleColliders = Physics.OverlapSphere(playerStateInterpretor.transform.position + playerStateInterpretor.transform.forward * distanceVisibleCollider, distanceVisibleRadius);
+            visibleColliders = Physics.OverlapSphere(playerStateInterpretor.transform.position + playerStateInterpretor.transform.forward * distanceVisibleCollider, distanceVisibleRadius, playerStat.aimLayerMask);
            
             confirmedInTheFrustrum.Clear(); 
             confirmedInTheAngle.Clear();
@@ -82,7 +82,7 @@ namespace Player
             closestTarget = default;
             foreach (Collider collider in visibleColliders)
             {
-                if (GeometryUtility.TestPlanesAABB(frustumPlanes, collider.bounds) && (collider.gameObject.TryGetComponent(out Target target)))
+                if (GeometryUtility.TestPlanesAABB(frustumPlanes, collider.bounds))
                 {
                     confirmedInTheFrustrum.Add(collider);
                     playerPos = playerStateInterpretor.transform.position;

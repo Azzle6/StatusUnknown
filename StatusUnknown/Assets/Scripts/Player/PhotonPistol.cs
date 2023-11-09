@@ -11,6 +11,7 @@ namespace Player
         private float chargeTimer;
         private Coroutine charging;
         private GameObject tempProjectile;
+        private float currentDamage;
         private bool waitForTriggerRelease;
         private bool isInCD;
         
@@ -31,6 +32,7 @@ namespace Player
               tempProjectile.transform.localPosition = Vector3.zero;
               chargeTimer += Time.deltaTime;
               tempProjectile.transform.localScale = Vector3.one * (stat.projectileSize.Evaluate(chargeTimer / stat.maxTimeCharge) * stat.maxProjectileSize);
+              currentDamage = stat.damageCurve.Evaluate(chargeTimer / stat.maxTimeCharge) * stat.maxDamage;
               yield return null;
             }
 
@@ -65,6 +67,8 @@ namespace Player
             tempProjectile.transform.parent = null;
             tempProjectile.TryGetComponent(out Rigidbody tempRb);
             tempRb.velocity = spawnPoint.forward * stat.projectileSpeed;
+            tempProjectile.TryGetComponent(out PhotonPistolBullet tempPPbullet);
+            tempPPbullet.damage = currentDamage;
             tempProjectile = default;
             charging = default;
         }
