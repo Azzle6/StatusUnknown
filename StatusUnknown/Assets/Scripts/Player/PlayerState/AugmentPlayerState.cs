@@ -1,8 +1,6 @@
-using UnityEngine;
-
-namespace Core.Player
+namespace Player
 {
-
+    using UnityEngine;
 
     public class AugmentPlayerState : PlayerState
     {

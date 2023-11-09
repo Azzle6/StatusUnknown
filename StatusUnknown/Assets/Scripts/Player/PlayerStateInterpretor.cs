@@ -1,4 +1,4 @@
-namespace Core.Player
+namespace Player
 {
     using System.Collections.Generic;
     using UnityEngine;
@@ -17,6 +17,7 @@ namespace Core.Player
         [Header("Player Component")]
         public Rigidbody rb;
         public Animator animator;
+        public WeaponManager weaponManager;
         private PlayerAction playerInput;
         
         
@@ -55,9 +56,9 @@ namespace Core.Player
             if (statesSlot[playerStateType] == null)
                 return;
             tempState = statesSlot[playerStateType];
+            tempState.OnStateExit();
             statesSlot[playerStateType].lockState = false;
             statesSlot[playerStateType] = null;
-            tempState.OnStateExit();
         }
         public bool CheckState(PlayerStateType playerStateType, string playerStateName)
         {

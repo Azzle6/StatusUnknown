@@ -38,5 +38,6 @@ public class EnemyContext : MonoBehaviour, IDamageable
     {
         currentHealth -= damage;
         AddForce(force);
+        Debug.Log("Enemy took damage");
     }
 }

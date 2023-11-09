@@ -2,7 +2,7 @@ namespace Editor
 {
     using UnityEngine;
     using UnityEditor;
-    using Core.Player;
+    using Player;
     
     [CustomEditor (typeof (PlayerStateInterpretor),true)]
     public class PlayerStateInterpretorEditor : Editor
