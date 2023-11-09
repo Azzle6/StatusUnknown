@@ -1,12 +1,22 @@
+using Sirenix.OdinInspector;
 using StatusUnknown.CoreGameplayContent;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
+    [Header("General")]
     [Space, SerializeField] private EnemyConfigScriptableObject enemySO;
+
+    [Header("UI")]
+    [SerializeField] private Slider enemyHP_UI;
+    [SerializeField] private TMP_Text enemyHPText_UI;
+
+    [Header("-- DEBUG --")]
     [Space, SerializeField] private bool overrideMaxHP = false;
-    [SerializeField, Range(10, 500)] private int maxHP_Override = 50; 
-    private int maxHP; 
+    [SerializeField, Range(10, 500)] private int maxHP_Override = 50;
+    private int maxHP;
     private int currentHP;
 
     private void OnEnable()
@@ -19,12 +29,18 @@ public class Enemy : MonoBehaviour, IDamageable
     private void Init()
     {
         maxHP = overrideMaxHP ? maxHP_Override : enemySO.MaxHP;
-        currentHP = maxHP; 
+        currentHP = maxHP;
+        enemyHP_UI.maxValue = maxHP; 
+        enemyHP_UI.value = maxHP;
+        enemyHPText_UI.text = maxHP.ToString(); ; 
     }
 
     public void TakeDamage(int damage)
     {
-        currentHP -= damage; 
+        currentHP -= damage;
+        enemyHP_UI.value = currentHP;
+        enemyHPText_UI.text = currentHP.ToString(); ;
+
         if (currentHP <= 0 && gameObject)
         {
             Destroy(gameObject); 
