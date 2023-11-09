@@ -8,11 +8,13 @@ namespace Player
        [SerializeField] private PlayerInputController playerInputController;
        [SerializeField] private PlayerStateInterpretor playerStateInterpretor;
        [SerializeField] private DeviceLog deviceLog;
+       [SerializeField] private PlayerStat playerStat;
        private Vector2 mousePos;
 
         private void OnEnable()
         {
             EnableEvent();
+            playerStat.isAiming = false;
         }
 
         private void OnDisable()
@@ -77,10 +79,14 @@ namespace Player
                 {
                     playerStateInterpretor.AddState("AimGamepadPlayerState",PlayerStateType.AIM,false);
                     playerStateInterpretor.Behave(direction,PlayerStateType.AIM);
+                    playerStat.isAiming = true;
                 }
 
-                if (ctx.canceled)
+                if ((ctx.canceled) && (playerStat.isShooting == false))
+                {
                     playerStateInterpretor.RemoveStateCheck("AimGamepadPlayerState");
+                    playerStat.isAiming = false;
+                }
 
                 if ((ctx.performed) || (direction != Vector2.zero))
                 {
@@ -101,9 +107,11 @@ namespace Player
             {
                 playerStateInterpretor.AddState("AimMousePlayerState",PlayerStateType.AIM,false);
             }
-            
+
             if (ctx.canceled)
+            {
                 playerStateInterpretor.RemoveStateCheck("AimMousePlayerState");
+            }
                
             playerStateInterpretor.Behave(direction,PlayerStateType.AIM);
 
@@ -174,12 +182,22 @@ namespace Player
         {
             if (ctx.started)
             {
-                if (deviceLog.currentDevice == DeviceType.KEYBOARD)
+                if (playerStateInterpretor.statesSlot[PlayerStateType.AIM] == null)
                 {
-                    playerStateInterpretor.AddState("AimMousePlayerState",PlayerStateType.AIM,false);
-                    playerStateInterpretor.Behave(mousePos,PlayerStateType.AIM);
+                    if ((deviceLog.currentDevice == DeviceType.GAMEPAD) && (playerStat.isAiming == false))
+                    {
+                        playerStateInterpretor.AddState("AimGamepadPlayerState",PlayerStateType.AIM,false);
+                        playerStateInterpretor.Behave(playerStateInterpretor.transform.forward,PlayerStateType.AIM);
+                    }
 
+                    if (deviceLog.currentDevice == DeviceType.KEYBOARD)
+                    {
+                        playerStateInterpretor.AddState("AimMousePlayerState",PlayerStateType.AIM,false);
+                        playerStateInterpretor.Behave(mousePos,PlayerStateType.AIM);
+                    }
+            
                 }
+                    
                 playerStateInterpretor.AddState("ShootingPlayerState", PlayerStateType.ACTION,false);
                 playerStateInterpretor.Behave(weaponNo,PlayerStateType.ACTION);
             }

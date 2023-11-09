@@ -1,3 +1,5 @@
+using UnityEngine.Serialization;
+
 namespace Player
 {
     using UnityEngine;
@@ -14,7 +16,7 @@ namespace Player
         [Range(0.01f, 0.1f)] public float turnSpeed;
         public AnimationCurve angleRequiredMultiplierByDistance;
         public float headHeightOffset = 0.25f;
-        public float timeBeforeStopAimingWithMouse = 2f;
+        public float timeBeforeStopAiming = 2f;
         [Header("Inertia")]
         public float inertiaDuration;
         public AnimationCurve inertiaCurve;

@@ -41,10 +41,13 @@ namespace Player
                 aimDirection = aim;
             if (aiming == default)
                 aiming = StartCoroutine(Aim());
+            
+            
+
         }
         private IEnumerator CheckIfStopAiming()
         {
-            yield return new WaitForSeconds(playerStat.timeBeforeStopAimingWithMouse);
+            yield return new WaitForSeconds(playerStat.timeBeforeStopAiming);
             if (!playerStat.isShooting)
             {
                 playerStateInterpretor.RemoveState(PlayerStateType.AIM);
@@ -88,6 +91,7 @@ namespace Player
                 StopCoroutine(aiming);
             if (stopAiming != null)
                 StopCoroutine(stopAiming);
+            StopAllCoroutines();
             playerStat.isAiming = false;
             playerStateInterpretor.weaponManager.RestWeapon();
             playerStateInterpretor.animator.SetBool("Aim", false);
