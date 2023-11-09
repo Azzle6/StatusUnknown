@@ -56,9 +56,9 @@ namespace Player
             if (statesSlot[playerStateType] == null)
                 return;
             tempState = statesSlot[playerStateType];
+            tempState.OnStateExit();
             statesSlot[playerStateType].lockState = false;
             statesSlot[playerStateType] = null;
-            tempState.OnStateExit();
         }
         public bool CheckState(PlayerStateType playerStateType, string playerStateName)
         {

@@ -16,8 +16,8 @@ namespace Player
         
         public override void OnStateEnter()
         {
-            /*if (aiming == default)
-                aiming = StartCoroutine(Aim());*/
+            if (aiming == default)
+                aiming = StartCoroutine(Aim());
             Debug.Log("Entered aim state");
             playerStateInterpretor.weaponManager.AimWithCurrentWeapon();
             playerStateInterpretor.animator.SetBool("Aim", true);
@@ -43,15 +43,18 @@ namespace Player
             {
                 playerStateInterpretor.RemoveState(PlayerStateType.AIM);
             }
+            else
+            {
+                stopAiming = StartCoroutine(CheckIfStopAiming());
+            }
             Debug.Log("Relaunching coroutine");
-            stopAiming = StartCoroutine(CheckIfStopAiming());
         }
 
 
        private IEnumerator Aim()
         {
             //match stick dead zone
-            while (aimDirection.magnitude > 0.15f)
+            while (playerStat.isAiming)
             {
                 Debug.DrawRay(playerStateInterpretor.transform.position ,playerStateInterpretor.transform.forward *50, Color.blue);
                 //Check angle of aim direction and change forward when angle is higher than limit 
@@ -76,14 +79,16 @@ namespace Player
 
         public override void OnStateExit()
         {
-            if (aiming != default)
-            {
                 aimRig.weight = 0;
-                StopCoroutine(aiming);
+                if (aiming != default)
+                    StopCoroutine(aiming);
+                if (stopAiming != default)
+                    StopCoroutine(stopAiming);
+                stopAiming = default;
                 aiming = default;
+                playerStat.isAiming = false;
                 playerStateInterpretor.weaponManager.RestWeapon();
                 playerStateInterpretor.animator.SetBool("Aim", false);
-            } 
         }
     }
 }

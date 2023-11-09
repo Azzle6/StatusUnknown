@@ -448,7 +448,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""id"": ""88854856-41dd-41d4-b9b8-3a29def97da7"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
-                    ""processors"": ""StickDeadzone"",
+                    ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""AimG"",
                     ""isComposite"": false,

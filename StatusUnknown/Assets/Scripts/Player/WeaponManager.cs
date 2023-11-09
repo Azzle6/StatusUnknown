@@ -11,7 +11,7 @@ namespace Player
         private void Awake()
         {
             currentWeaponIndex = 0;
-        
+            RestWeapon();
         }
     
         public void PressTriggerWeapon(int weaponNo)
