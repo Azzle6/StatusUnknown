@@ -218,14 +218,15 @@ namespace StatusUnknown.CoreGameplayContent
     // TODO FEATURE: show dps and total damage (over how much sec) for better readability
     // TODO FEATURE : set data based on curve (locally, from spreadsheet) 
     [Serializable]
-    public class AbilityConfigTemplate
+    public abstract class AbilityConfigTemplate
     {
-        [SerializeField] private EAbilityType abilityType = EAbilityType.Offense;
-        [SerializeField, Range(1, 100)] protected int damage = 1;
-        [SerializeField] protected GameObject damageArea;
+        [SerializeField] protected EAbilityType abilityType = EAbilityType.Offense;
 
-        public int Damage => damage; 
-        public GameObject DamageArea => damageArea;
+        [SerializeField] protected string abilitySaveName = "Ability_Type_Name";
+        [SerializeField] protected GameObject damageArea;
+        [SerializeField] protected EPayloadType PayloadType; 
+
+        [SerializeField, Range(1, 100)] protected int payloadValue = 1;
 
         //[Space, SerializeField] protected AudioClip damageSFX;
         //[SerializeField] protected ParticleSystem damageVFX;
@@ -235,17 +236,28 @@ namespace StatusUnknown.CoreGameplayContent
 
         } */
 
-        [Button(size:ButtonSizes.Small)]
-        protected void SaveTemplateAsNewAbility()
+        [Button]
+        public abstract void SaveAbility(); 
+        
+        protected void Save(UnityEngine.Object assetToSave)
         {
-
+            AssetDatabase.CreateAsset(assetToSave, $"Assets/Data/Gameplay/Combat/Abilities/{abilitySaveName}.asset");
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
         }
     }
 
     [Serializable]
-    public class DamageType_Burst : AbilityConfigTemplate
+    public class DamageType_Burst : AbilityConfigTemplate 
     {
-        [SerializeField] private string abilitySaveName = "Ability_Type_Name";
+        public override void SaveAbility()
+        {
+            AbilityConfigSO_Burst AbilityConfigSO = ScriptableObject.CreateInstance<AbilityConfigSO_Burst>();
+            AbilityConfigSO.name = abilitySaveName;
+            AbilityConfigSO.SetAbilityInfos(abilitySaveName, PayloadType, damageArea, payloadValue);
+
+            Save(AbilityConfigSO); 
+        }
     }
 
     [Serializable]
@@ -255,13 +267,31 @@ namespace StatusUnknown.CoreGameplayContent
         [SerializeField, Range(0.1f, 2f)] private float tickDelay = 0.5f;
         public int TickAmount => tickAmount;
         public float TickDelay => tickDelay;
+
+        public override void SaveAbility()
+        {
+            AbilityConfigSO_Burst AbilityConfigSO = ScriptableObject.CreateInstance<AbilityConfigSO_Burst>();
+            AbilityConfigSO.name = abilitySaveName;
+            AbilityConfigSO.SetAbilityInfos(abilitySaveName, PayloadType, damageArea, payloadValue);
+
+            Save(AbilityConfigSO);
+        }
     }
 
     [Serializable]
     public class DamageType_Delayed : AbilityConfigTemplate
     {
         [SerializeField, Range(0.5f, 5f)] private float damageDelay = 1f;
-        public float DamageDelay => damageDelay;    
+        public float DamageDelay => damageDelay;
+
+        public override void SaveAbility()
+        {
+            AbilityConfigSO_Burst AbilityConfigSO = ScriptableObject.CreateInstance<AbilityConfigSO_Burst>();
+            AbilityConfigSO.name = abilitySaveName;
+            AbilityConfigSO.SetAbilityInfos(abilitySaveName, PayloadType, damageArea, payloadValue);
+
+            Save(AbilityConfigSO);
+        }
     }
     #endregion 
 }

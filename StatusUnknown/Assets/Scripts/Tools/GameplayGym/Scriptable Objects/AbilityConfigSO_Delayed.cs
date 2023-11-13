@@ -9,6 +9,6 @@ public class AbilityConfigSO_Delayed : AbilityConfigSO_Base
 
     void OnEnable()
     {
-        payloadType = EPayloadType.Delayed;
+        PayloadType = EPayloadType.Delayed;
     }
 }

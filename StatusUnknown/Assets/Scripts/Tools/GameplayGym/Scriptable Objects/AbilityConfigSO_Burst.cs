@@ -6,6 +6,6 @@ public class AbilityConfigSO_Burst : AbilityConfigSO_Base
 {
     void OnEnable()
     {
-        payloadType = EPayloadType.Burst;
+        PayloadType = EPayloadType.Burst;
     }
 }

@@ -11,6 +11,6 @@ public class AbilityConfigSO_OverTime : AbilityConfigSO_Base
 
     void OnEnable()
     {
-        payloadType = EPayloadType.OverTime;
+        PayloadType = EPayloadType.OverTime;
     }
 }

@@ -24,7 +24,7 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 4
+  m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
@@ -816,23 +816,32 @@ MonoBehaviour:
   CombatSimulatorSO: {fileID: 11400000, guid: 9c032e16910c0be4abe163cff9008d2e, type: 2}
   useEncounterSO: 0
   EnemyEncounterSO: {fileID: 11400000, guid: a2b3e0b888fc45841a7089a384be39fe, type: 2}
-  encounterName: Encounter_Medium_1
+  encounterSaveName: Encounter_Medium_2
   showTemplate: 0
   template_burst:
     abilityType: 0
-    damage: 20
-    damageArea: {fileID: 0}
+    abilitySaveName: Ability_Burst_Explosion_2
+    damageArea: {fileID: 5559624768829508104, guid: fbbd219427d956c4d9d13fb53715c4de,
+      type: 3}
+    PayloadType: 0
+    payloadValue: 100
   template_overTime:
     abilityType: 0
-    damage: 1
-    damageArea: {fileID: 0}
+    abilitySaveName: Ability_Type_Name
+    damageArea: {fileID: 3664247709590085082, guid: 0bcee2bc91c138f43bc237363ccf1a72,
+      type: 3}
+    PayloadType: 1
+    payloadValue: 1
     tickAmount: 3
     tickDelay: 0.5
   template_delayed:
     abilityType: 0
-    damage: 50
-    damageArea: {fileID: 0}
-    damageDelay: 2
+    abilitySaveName: Ability_Type_Name
+    damageArea: {fileID: 2154308962095434749, guid: ed333a33e0e82d44a8c52f3402ba951c,
+      type: 3}
+    PayloadType: 2
+    payloadValue: 65
+    damageDelay: 1.5
 --- !u!82 &1342278252
 AudioSource:
   m_ObjectHideFlags: 0
