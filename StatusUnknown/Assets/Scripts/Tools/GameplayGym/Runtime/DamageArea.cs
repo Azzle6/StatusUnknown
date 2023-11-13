@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DamageArea : MonoBehaviour
 {
-    private List<Enemy> enemiesInArea = new List<Enemy>(); 
+    private readonly List<Enemy> enemiesInArea = new List<Enemy>(); 
 
     private void OnTriggerEnter(Collider other)
     {

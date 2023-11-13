@@ -6,20 +6,22 @@ namespace StatusUnknown.CoreGameplayContent
     [CreateAssetMenu(fileName = "CombatSimualator_Type_Num", menuName = "Status Unknown/Gameplay/Combat/Simulator", order = 50)]
     public class CombatSimulatorScriptableObject : ScriptableObject
     {
-        public AbilityConfigScriptableObject[] abilities;
+        public AbilityConfigSO_Base[] abilitiesConfig;
 
-        internal int GetAbilitiesArrayLength() { return abilities.Length; } 
+        internal int GetAbilitiesArrayLength() { return abilitiesConfig.Length; } 
 
-        internal EDamageType GetRootValue()
+        internal (AbilityInfos infos, AbilityConfigSO_Base so) GetRootAbilityData()
         {
-            if (abilities == null) return default;
+            if (abilitiesConfig == null) return default;
 
-            return abilities[0].GetDamageType(); 
+            return abilitiesConfig[0].GetAbilityData(); 
         }
 
-        internal EDamageType GetValueAtIndex(int i)
+        internal (AbilityInfos infos, AbilityConfigSO_Base so) GetAbilityDataAtIndex(int i)
         {
-            return abilities[i].GetDamageType();
+            return abilitiesConfig[i].GetAbilityData();
         }
+
+
     }
 }

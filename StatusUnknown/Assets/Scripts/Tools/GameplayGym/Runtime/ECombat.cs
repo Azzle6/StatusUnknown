@@ -16,10 +16,10 @@ namespace StatusUnknown.CoreGameplayContent
         Control
     }
 
-    public enum EDamageType
+    public enum EPayloadType
     {
         Burst, 
-        DOT,
+        OverTime,
         Delayed
     }
 }

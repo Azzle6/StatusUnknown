@@ -21,8 +21,8 @@ namespace StatusUnknown.CoreGameplayContent.Editors
         private EScriptableType newValue_ScriptableType = EScriptableType.NONE;
         private EScriptableType previousValue_ScriptableType = EScriptableType.NONE;
 
-        private EDamageType newValue_DamageType = EDamageType.Burst;
-        private EDamageType previousValue_DamageType = EDamageType.Burst;
+        private EPayloadType newValue_DamageType = EPayloadType.Burst;
+        private EPayloadType previousValue_DamageType = EPayloadType.Burst;
 
         readonly string[] hBTextFields = new string[]
         {
@@ -176,20 +176,20 @@ namespace StatusUnknown.CoreGameplayContent.Editors
 
             enumField.RegisterValueChangedCallback((changeEvent) =>
             {
-                EDamageType newValue = (EDamageType)changeEvent.newValue;
+                EPayloadType newValue = (EPayloadType)changeEvent.newValue;
                 switch (newValue)
                 {
-                    case EDamageType.Burst:
+                    case EPayloadType.Burst:
                         {
                             helpBox.text = hBTextFields[0];
                             break;
                         }
-                    case EDamageType.DOT:
+                    case EPayloadType.OverTime:
                         {
                             helpBox.text = hBTextFields[1];
                             break;
                         }
-                    case EDamageType.Delayed:
+                    case EPayloadType.Delayed:
                         {
                             helpBox.text = hBTextFields[2];
                             break;
@@ -227,10 +227,10 @@ namespace StatusUnknown.CoreGameplayContent.Editors
         private ObjectField BuildObjectField(VisualElement rootElement, SerializedProperty property)
         {
             ObjectField shootConfigObjectField = new ObjectField("Ability Config");
-            shootConfigObjectField.objectType = typeof(AbilityConfigScriptableObject);
+            shootConfigObjectField.objectType = typeof(AbilityConfigSO_Base);
             shootConfigObjectField.BindProperty(property.serializedObject.FindProperty("AbilityConfig"));
 
-            AbilityConfigScriptableObject currentValue = property.objectReferenceValue as AbilityConfigScriptableObject;
+            AbilityConfigSO_Base currentValue = property.objectReferenceValue as AbilityConfigSO_Base;
             shootConfigObjectField.RegisterValueChangedCallback((changeEvent) =>
             {
                 // if to avoid infinite looping by not checking against previous but current value
@@ -251,7 +251,7 @@ namespace StatusUnknown.CoreGameplayContent.Editors
 
         private void CreateAbilityConfig(string Name, SerializedProperty property)
         {
-            AbilityConfigScriptableObject shootConfig = ScriptableObject.CreateInstance<AbilityConfigScriptableObject>();
+            AbilityConfigSO_Base shootConfig = ScriptableObject.CreateInstance<AbilityConfigSO_Base>();
             AssetDatabase.CreateAsset(shootConfig, "Assets/Data/Gameplay/Combat/Abilities/" + Name + ".asset");
             AssetDatabase.SaveAssets(); 
             AssetDatabase.Refresh();    

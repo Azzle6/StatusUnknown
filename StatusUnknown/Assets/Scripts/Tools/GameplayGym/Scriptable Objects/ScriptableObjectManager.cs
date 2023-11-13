@@ -15,7 +15,7 @@ namespace StatusUnknown.CoreGameplayContent
         public EScriptableType scriptableObjectType;
         // public GameObject Model;
 
-        public AbilityConfigScriptableObject AbilityConfig;
+        public AbilityConfigSO_Base AbilityConfig;
         // public AudioConfigScriptableObject AudioConfig;
         // public VisualConfigScriptableObject VisualConfig;
 

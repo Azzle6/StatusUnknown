@@ -4,18 +4,20 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+[ExecuteAlways]
 public class Enemy : MonoBehaviour, IDamageable
 {
     [Header("General")]
     [Space, SerializeField] private EnemyConfigScriptableObject enemySO;
 
     [Header("UI")]
+    [SerializeField] private Image panelImage; 
     [SerializeField] private Slider enemyHP_UI;
     [SerializeField] private TMP_Text enemyHPText_UI;
 
     [Header("-- DEBUG --")]
     [Space, SerializeField] private bool overrideMaxHP = false;
-    [SerializeField, Range(10, 500)] private int maxHP_Override = 50;
+    [SerializeField, Range(10, 1000)] private int maxHP_Override = 250;
     private int maxHP;
     private int currentHP;
 
@@ -32,7 +34,8 @@ public class Enemy : MonoBehaviour, IDamageable
         currentHP = maxHP;
         enemyHP_UI.maxValue = maxHP; 
         enemyHP_UI.value = maxHP;
-        enemyHPText_UI.text = maxHP.ToString(); ; 
+        enemyHPText_UI.text = maxHP.ToString();
+        panelImage.color = enemySO.EnemyColor; 
     }
 
     public void TakeDamage(int damage)

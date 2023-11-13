@@ -1,6 +1,7 @@
 using Sirenix.OdinInspector;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -8,7 +9,6 @@ using UnityEngine.UIElements;
 // Editor, Window, PropertyDrawer
 namespace StatusUnknown.CoreGameplayContent
 {
-    public enum DamageZoneType { SingleTarget, Area, All } 
     // TODO : have to make it work in editor (problems -> callbacks, coroutines)
     // [RequireComponent(typeof(UIDocument))]
     [RequireComponent(typeof(AudioSource))] 
@@ -19,33 +19,40 @@ namespace StatusUnknown.CoreGameplayContent
         [SerializeField] private CombatSimulatorScriptableObject CombatSimulator;
         private const int DELAY = 1;
 
-        [Header("Damage Types Template")] // TODO : by default, read values from scriptables in the simulator and not from the template
+        // TODO - FEATURE : add option to overwrite values of a specific SO with template OR generate new so from template
+        [Header("Ability Types Template")]
+        [SerializeField] private bool showTemplate = false; 
         [Space, SerializeField] private DamageType_Burst template_burst;
-        [SerializeField] private DamageType_DOT template_dot;
+        [SerializeField] private DamageType_OverTime template_overTime;
         [SerializeField] private DamageType_Delayed template_delayed;
-        private DamageType[] damageTypeArray = new DamageType[3];
-        private EDamageType currentDamageType;
+        private AbilityConfigTemplate[] abilityConfigTemplates = new AbilityConfigTemplate[3];
+        private (AbilityInfos infos, AbilityConfigSO_Base so) currentAbilityData = new();
+
+        private AbilityConfigSO_Burst currentAbilityConfigSO_Burst = null;
+        private AbilityConfigSO_OverTime currentAbilityConfigSO_OverTime = null;
+        private AbilityConfigSO_Delayed currentAbilityConfigSO_Delayed = null; 
+
 
         private int currentIndex; 
-        private int lastIndex; 
+        private int lastIndex;
 
-        // -- LATER --
+        // -- TODO FEATURE --
         // save and load combat config locally + remote
-        // save and load encounter config + remote
+        // save and load encounter config locally + remote
         // save and load damage types (for ex DOT -> poison or fire, BURST -> stun or explosion, etc..) locally + remote 
 
         private void OnEnable()
         {
-            damageTypeArray = new DamageType[]
+            abilityConfigTemplates = new AbilityConfigTemplate[]
             {
                 template_burst, 
-                template_dot,
+                template_overTime,
                 template_delayed,
             };
 
             if (CombatSimulator == null) return; 
 
-            currentDamageType = CombatSimulator.GetRootValue();
+            currentAbilityData = CombatSimulator.GetRootAbilityData();
         }
 
         #region CORE LOGIC
@@ -55,51 +62,61 @@ namespace StatusUnknown.CoreGameplayContent
             currentIndex = 0;
             lastIndex = CombatSimulator.GetAbilitiesArrayLength() - 1;
 
-            SetDamagePayload(currentDamageType); 
+            StartCoroutine(nameof(SetDamagePayload)); 
         }
 
         // REFACTOR : strategy pattern for different types of damage application
         // REFACTOR : as callback when damage payload is done
         // for now, just a plain ugly switch case
-        DamageType damageType; 
-        int damageValue; 
-        private void SetDamagePayload(EDamageType eDmgType)
+        // AbilityConfigTemplate damageType; 
+        //int damageValue; 
+        GameObject currentAreaObj;
+        private List<Enemy> currentEnemiesInArea; 
+        private IEnumerator SetDamagePayload()
         {
-            Debug.Log("setting damage type to : " + currentDamageType);
+            Debug.Log("setting payload type to : " + currentAbilityData.infos.PayloadType);
 
-            damageType = damageTypeArray[(int)eDmgType];
-            damageValue = damageType.Damage; 
+            //damageType = abilityConfigTemplates[(int)abilityInfos.PayloadType];
+            //damageValue = damageType.Damage;
 
-            switch(eDmgType)
+            if (currentAbilityData.infos.Area != null)
             {
-                case EDamageType.Burst :
-                    DoDamage_Burst(damageValue); 
+                currentAreaObj = Instantiate(currentAbilityData.infos.Area); 
+            }
+
+            yield return new WaitForFixedUpdate(); 
+            // TODO : see if I can have only one type of SO and cast correctly (factory pattern ?)
+            switch (currentAbilityData.infos.PayloadType)
+            {
+                case EPayloadType.Burst :
+                    currentAbilityConfigSO_Burst = (AbilityConfigSO_Burst)currentAbilityData.so;  
+                    DoDamage_Burst(); 
                     break;
-                case EDamageType.DOT:
-                    maxTick = template_dot.TickAmount;
+                case EPayloadType.OverTime:
+                    currentAbilityConfigSO_OverTime =  (AbilityConfigSO_OverTime)currentAbilityData.so;
                     StartCoroutine(nameof(DoDamage_DOT)); // TODO : change with custom struct for cooldown/tick delay
                     break; 
-                case EDamageType.Delayed:
-                    DoDamage_Delayed(damageValue);
+                case EPayloadType.Delayed:
+                    currentAbilityConfigSO_Delayed = (AbilityConfigSO_Delayed)currentAbilityData.so;
+                    Invoke(nameof(DoDamage_Delayed), currentAbilityConfigSO_Delayed.DamageDelay);
                 break; 
             } 
         }
 
-        private void DoDamage_Burst(int damageValue)
+        private void DoDamage_Burst()
         {
             Debug.Log("applying burst damage"); 
-            ApplyDamage(damageValue);
+            ApplyDamage(currentAbilityData.infos.PayloadValue);
             OnDamageDone(); 
         }
 
-        private int maxTick;
         private IEnumerator DoDamage_DOT()
         {
-            for (int i = 0; i < maxTick; i++)
+            for (int i = 0; i < currentAbilityConfigSO_OverTime.TickAmount; i++)
             {
                 Debug.Log("applying DOT damage");
-                ApplyDamage(damageValue);
-                yield return new WaitForSeconds(template_dot.TickDelay);
+                ApplyDamage(currentAbilityData.infos.PayloadValue);
+                yield return new WaitForSeconds(currentAbilityConfigSO_OverTime.TickDelay);
             }
 
             StopCoroutine(nameof(DoDamage_DOT));
@@ -107,22 +124,23 @@ namespace StatusUnknown.CoreGameplayContent
         }
 
         // ERROR : "Trying to Invoke method: GameplayManager.ApplyDamage couldn't be called."
-        private void DoDamage_Delayed(int damageValue)
+        private void DoDamage_Delayed()
         {
-            Debug.Log($"applying damage with delay of {template_delayed.DamageDelay} seconds");
-            Invoke(nameof(ApplyDamage), template_delayed.DamageDelay);
-            Invoke(nameof(OnDamageDone), template_delayed.DamageDelay * 1.5f); // :D
+            Debug.Log($"applying damage with delay of {currentAbilityConfigSO_Delayed.DamageDelay} seconds");
+            ApplyDamage(currentAbilityData.infos.PayloadValue);
+            OnDamageDone(); 
         }
 
         private void ApplyDamage(int damageValue)
         {
-            foreach (var enemy in damageType.DamageArea.GetEnemiesInArea())
+            currentEnemiesInArea = currentAreaObj.GetComponent<DamageArea>().GetEnemiesInArea();
+            foreach (var enemy in currentEnemiesInArea) 
             {
-                if (enemy.TryGetComponent(out IDamageable damageable))
+                if (enemy != null && enemy.TryGetComponent(out IDamageable damageable))
                 {
                     damageable.TakeDamage(damageValue);
                 }
-            }
+            } 
         }
 
         private void OnDamageDone()
@@ -135,13 +153,13 @@ namespace StatusUnknown.CoreGameplayContent
                 return; 
             }
 
-            currentDamageType = CombatSimulator.GetValueAtIndex(currentIndex);
+            currentAbilityData = CombatSimulator.GetAbilityDataAtIndex(currentIndex);
             Invoke(nameof(Callback), DELAY); 
         }
 
         private void Callback()
         {
-            SetDamagePayload(currentDamageType);
+            StartCoroutine(nameof(SetDamagePayload));
         }
         #endregion
 
@@ -154,14 +172,17 @@ namespace StatusUnknown.CoreGameplayContent
         #endregion
     }
 
-    // TODO : show dps and total damage (over how much sec) for better readability
+    // TODO FEATURE: show dps and total damage (over how much sec) for better readability
+    // TODO FEATURE : set data based on curve (locally, from spreadsheet) 
     [Serializable]
-    public class DamageType
+    public class AbilityConfigTemplate
     {
+        [SerializeField] private EAbilityType abilityType = EAbilityType.Offense;
         [SerializeField, Range(1, 100)] protected int damage = 1;
-        [SerializeField] protected DamageArea damageArea; 
+        [SerializeField] protected GameObject damageArea;
+
         public int Damage => damage; 
-        public DamageArea DamageArea => damageArea;
+        public GameObject DamageArea => damageArea;
 
         //[Space, SerializeField] protected AudioClip damageSFX;
         //[SerializeField] protected ParticleSystem damageVFX;
@@ -179,14 +200,14 @@ namespace StatusUnknown.CoreGameplayContent
     }
 
     [Serializable]
-    public class DamageType_Burst : DamageType
+    public class DamageType_Burst : AbilityConfigTemplate
     {
 
 
     }
 
     [Serializable]
-    public class DamageType_DOT : DamageType
+    public class DamageType_OverTime : AbilityConfigTemplate
     {
         [SerializeField, Range(2, 20)] private int tickAmount = 3;
         [SerializeField, Range(0.1f, 2f)] private float tickDelay = 0.5f;
@@ -195,7 +216,7 @@ namespace StatusUnknown.CoreGameplayContent
     }
 
     [Serializable]
-    public class DamageType_Delayed : DamageType
+    public class DamageType_Delayed : AbilityConfigTemplate
     {
         [SerializeField, Range(0.5f, 5f)] private float damageDelay = 1f;
         public float DamageDelay => damageDelay;    

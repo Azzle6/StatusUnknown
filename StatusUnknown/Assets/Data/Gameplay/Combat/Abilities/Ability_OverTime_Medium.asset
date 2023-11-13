@@ -9,8 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c170df5c394759c48a876e27e269bfd6, type: 3}
-  m_Name: EnemyConfig_Easy_1
+  m_Script: {fileID: 11500000, guid: 473c196e14b5a63419c77be0dcca354c, type: 3}
+  m_Name: Ability_OverTime_Medium
   m_EditorClassIdentifier: 
-  enemyColor: {r: 0.50980395, g: 0.039215688, b: 0.39215687, a: 1}
-  maxHP: 120
+  abilityType: 0
+  payload: 5
+  effectArea: {fileID: 6981658959558872868, guid: 59ec3b79c7b8c664092b6ab07426fe6b,
+    type: 3}
+  tickAmount: 10
+  tickDelay: 0.5
