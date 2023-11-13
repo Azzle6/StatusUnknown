@@ -61,6 +61,8 @@ namespace StatusUnknown.CoreGameplayContent
         {
             currentIndex = 0;
             lastIndex = CombatSimulator.GetAbilitiesArrayLength() - 1;
+            StopAllCoroutines(); 
+            CancelInvoke(); 
 
             StartCoroutine(nameof(SetDamagePayload)); 
         }

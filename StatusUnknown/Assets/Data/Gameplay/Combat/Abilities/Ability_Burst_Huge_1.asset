@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c170df5c394759c48a876e27e269bfd6, type: 3}
-  m_Name: EnemyConfig_Elite
+  m_Script: {fileID: 11500000, guid: a023da5e226826d478a5e6cdb765879b, type: 3}
+  m_Name: Ability_Burst_Huge_1
   m_EditorClassIdentifier: 
-  enemyColor: {r: 0.7924528, g: 0.6989797, b: 0.063545756, a: 1}
-  maxHP: 500
+  abilityType: 0
+  payload: 100
+  effectArea: {fileID: 2154308962095434749, guid: ed333a33e0e82d44a8c52f3402ba951c,
+    type: 3}
