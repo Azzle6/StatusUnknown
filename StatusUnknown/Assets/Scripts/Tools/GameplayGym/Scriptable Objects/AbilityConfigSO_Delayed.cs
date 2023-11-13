@@ -5,7 +5,7 @@ using UnityEngine;
 public class AbilityConfigSO_Delayed : AbilityConfigSO_Base
 {
     [SerializeField, Range(0.5f, 5f)] private float damageDelay = 1f;
-    public float DamageDelay => damageDelay;
+    public float DamageDelay { get => damageDelay; set => damageDelay = value; }    
 
     void OnEnable()
     {

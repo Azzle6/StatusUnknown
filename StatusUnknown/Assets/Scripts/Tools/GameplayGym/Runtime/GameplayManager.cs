@@ -60,21 +60,25 @@ namespace StatusUnknown.CoreGameplayContent
             currentAbilityData = CombatSimulatorSO.GetRootAbilityData();
         }
 
-        private void Start()
+        // TODO : enemy must be set by matching instance with the prefab in folder !
+        [Button(ButtonHeight = 40), PropertySpace, GUIColor("green")]
+        public void GenerateEncounter()
         {
             if (useEncounterSO && EnemyEncounterSO != null)
             {
-                GenerateEncounter();
+                for (int i = 0; i < EnemyEncounterSO.EnemyDatas.Length; i++)
+                {
+                    Instantiate(EnemyEncounterSO.EnemyDatas[i].EnemyPrefab, EnemyEncounterSO.EnemyDatas[i].Positions, Quaternion.identity);
+                }
+            }
+            else
+            {
+                Debug.LogError("Encounter could not be generated. Are you missing the scriptable object or have useEncounterSO = false ?"); 
             }
         }
 
-        private void GenerateEncounter()
-        {
-
-        }
-
         #region CORE LOGIC
-        [Button(ButtonHeight = 100), PropertySpace]
+        [Button(ButtonHeight = 100), PropertySpace, GUIColor("green")]
         public void StartSimulation() // Entry Point (done once)
         {
             currentIndex = 0;
@@ -187,7 +191,7 @@ namespace StatusUnknown.CoreGameplayContent
         #endregion
 
         #region SAVE
-        [Button(ButtonHeight = 40), PropertySpace]
+        [Button(ButtonHeight = 40), PropertySpace, GUIColor("yellow")]
         private void SaveEncounter() 
         {
             GameObject[] enemyArray = GameObject.FindGameObjectsWithTag("Enemy");
@@ -236,7 +240,7 @@ namespace StatusUnknown.CoreGameplayContent
 
         } */
 
-        [Button]
+        [Button, PropertySpace, GUIColor("yellow")]
         public abstract void SaveAbility(); 
         
         protected void Save(UnityEngine.Object assetToSave)
@@ -265,14 +269,14 @@ namespace StatusUnknown.CoreGameplayContent
     {
         [SerializeField, Range(2, 20)] private int tickAmount = 3;
         [SerializeField, Range(0.1f, 2f)] private float tickDelay = 0.5f;
-        public int TickAmount => tickAmount;
-        public float TickDelay => tickDelay;
 
         public override void SaveAbility()
         {
-            AbilityConfigSO_Burst AbilityConfigSO = ScriptableObject.CreateInstance<AbilityConfigSO_Burst>();
+            AbilityConfigSO_OverTime AbilityConfigSO = ScriptableObject.CreateInstance<AbilityConfigSO_OverTime>();
             AbilityConfigSO.name = abilitySaveName;
             AbilityConfigSO.SetAbilityInfos(abilitySaveName, PayloadType, damageArea, payloadValue);
+            AbilityConfigSO.TickAmount = tickAmount;
+            AbilityConfigSO.TickDelay = tickDelay;
 
             Save(AbilityConfigSO);
         }
@@ -282,13 +286,13 @@ namespace StatusUnknown.CoreGameplayContent
     public class DamageType_Delayed : AbilityConfigTemplate
     {
         [SerializeField, Range(0.5f, 5f)] private float damageDelay = 1f;
-        public float DamageDelay => damageDelay;
 
         public override void SaveAbility()
         {
-            AbilityConfigSO_Burst AbilityConfigSO = ScriptableObject.CreateInstance<AbilityConfigSO_Burst>();
+            AbilityConfigSO_Delayed AbilityConfigSO = ScriptableObject.CreateInstance<AbilityConfigSO_Delayed>();
             AbilityConfigSO.name = abilitySaveName;
             AbilityConfigSO.SetAbilityInfos(abilitySaveName, PayloadType, damageArea, payloadValue);
+            AbilityConfigSO.DamageDelay = damageDelay;
 
             Save(AbilityConfigSO);
         }

@@ -136,6 +136,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_Elite
       objectReference: {fileID: 0}
+    - target: {fileID: 1399060325925678155, guid: 9fd15f3963ce45442895ded766029055,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2128954905795456080, guid: 9fd15f3963ce45442895ded766029055,
         type: 3}
       propertyPath: m_Value
@@ -309,6 +314,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_Common (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6135666941009965577, guid: 1b59cc3dd78591d41a04987297df8b10,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6613430852601164306, guid: 1b59cc3dd78591d41a04987297df8b10,
         type: 3}
       propertyPath: m_Value
@@ -361,6 +371,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy_Uncommon
+      objectReference: {fileID: 0}
+    - target: {fileID: 885871943118081216, guid: 181605b38e2c8d54eb8f973ff00bb39d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3442876753062501457, guid: 181605b38e2c8d54eb8f973ff00bb39d,
         type: 3}
@@ -529,6 +544,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy_Common (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6135666941009965577, guid: 1b59cc3dd78591d41a04987297df8b10,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6613430852601164306, guid: 1b59cc3dd78591d41a04987297df8b10,
         type: 3}
@@ -814,20 +834,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CombatSimulatorSO: {fileID: 11400000, guid: 9c032e16910c0be4abe163cff9008d2e, type: 2}
-  useEncounterSO: 0
+  useEncounterSO: 1
   EnemyEncounterSO: {fileID: 11400000, guid: a2b3e0b888fc45841a7089a384be39fe, type: 2}
   encounterSaveName: Encounter_Medium_2
   showTemplate: 0
   template_burst:
     abilityType: 0
-    abilitySaveName: Ability_Burst_Explosion_2
+    abilitySaveName: Ability_Burst_Explosion_1
     damageArea: {fileID: 5559624768829508104, guid: fbbd219427d956c4d9d13fb53715c4de,
       type: 3}
     PayloadType: 0
     payloadValue: 100
   template_overTime:
     abilityType: 0
-    abilitySaveName: Ability_Type_Name
+    abilitySaveName: Ability_OverTime_Poison_1
     damageArea: {fileID: 3664247709590085082, guid: 0bcee2bc91c138f43bc237363ccf1a72,
       type: 3}
     PayloadType: 1
@@ -836,7 +856,7 @@ MonoBehaviour:
     tickDelay: 0.5
   template_delayed:
     abilityType: 0
-    abilitySaveName: Ability_Type_Name
+    abilitySaveName: Ability_Delay_Stun_1
     damageArea: {fileID: 2154308962095434749, guid: ed333a33e0e82d44a8c52f3402ba951c,
       type: 3}
     PayloadType: 2
@@ -1015,6 +1035,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy_Common (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6135666941009965577, guid: 1b59cc3dd78591d41a04987297df8b10,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6613430852601164306, guid: 1b59cc3dd78591d41a04987297df8b10,
         type: 3}
@@ -1445,6 +1470,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy_Common
+      objectReference: {fileID: 0}
+    - target: {fileID: 6135666941009965577, guid: 1b59cc3dd78591d41a04987297df8b10,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6613430852601164306, guid: 1b59cc3dd78591d41a04987297df8b10,
         type: 3}
