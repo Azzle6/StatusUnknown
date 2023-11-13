@@ -2,8 +2,8 @@ using UnityEngine;
 
 namespace StatusUnknown.CoreGameplayContent
 {
-    [CreateAssetMenu(fileName = "EnemyConfig_Type_Num", menuName = "Status Unknown/Gameplay/Combat/Enemy")]
-    public class EnemyConfigScriptableObject : ScriptableObject
+    [CreateAssetMenu(fileName = "EnemyConfig_Type_Num", menuName = "Status Unknown/Gameplay/Combat/Enemy", order = 4)]
+    public class EnemyConfigSO : ScriptableObject
     {
         [SerializeField] private Color enemyColor = new Color32(130, 10, 100, 255); 
         [SerializeField, Range(10, 1000)] private int maxHP = 100; 

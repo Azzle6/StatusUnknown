@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class Enemy : MonoBehaviour, IDamageable
 {
     [Header("General")]
-    [Space, SerializeField] private EnemyConfigScriptableObject enemySO;
+    [Space, SerializeField] private EnemyConfigSO enemySO;
 
     [Header("UI")]
     [SerializeField] private Image panelImage; 

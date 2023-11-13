@@ -136,6 +136,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_Elite
       objectReference: {fileID: 0}
+    - target: {fileID: 2128954905795456080, guid: 9fd15f3963ce45442895ded766029055,
+        type: 3}
+      propertyPath: m_Value
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2128954905795456080, guid: 9fd15f3963ce45442895ded766029055,
+        type: 3}
+      propertyPath: m_MaxValue
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 3523719301054872794, guid: 9fd15f3963ce45442895ded766029055,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.063545756
+      objectReference: {fileID: 0}
+    - target: {fileID: 3523719301054872794, guid: 9fd15f3963ce45442895ded766029055,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.6989797
+      objectReference: {fileID: 0}
+    - target: {fileID: 3523719301054872794, guid: 9fd15f3963ce45442895ded766029055,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.7924528
+      objectReference: {fileID: 0}
     - target: {fileID: 4714777355976915160, guid: 9fd15f3963ce45442895ded766029055,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -195,6 +220,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6458268267680047899, guid: 9fd15f3963ce45442895ded766029055,
+        type: 3}
+      propertyPath: m_text
+      value: 500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -317,15 +347,45 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 192206828144086235, guid: 181605b38e2c8d54eb8f973ff00bb39d,
+        type: 3}
+      propertyPath: m_Value
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 192206828144086235, guid: 181605b38e2c8d54eb8f973ff00bb39d,
+        type: 3}
+      propertyPath: m_MaxValue
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 885871943118081216, guid: 181605b38e2c8d54eb8f973ff00bb39d,
         type: 3}
       propertyPath: m_Name
       value: Enemy_Uncommon
       objectReference: {fileID: 0}
+    - target: {fileID: 3442876753062501457, guid: 181605b38e2c8d54eb8f973ff00bb39d,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.1064436
+      objectReference: {fileID: 0}
+    - target: {fileID: 3442876753062501457, guid: 181605b38e2c8d54eb8f973ff00bb39d,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.9811321
+      objectReference: {fileID: 0}
+    - target: {fileID: 3442876753062501457, guid: 181605b38e2c8d54eb8f973ff00bb39d,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.2684634
+      objectReference: {fileID: 0}
     - target: {fileID: 4907387193102481425, guid: 181605b38e2c8d54eb8f973ff00bb39d,
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5080389026864858000, guid: 181605b38e2c8d54eb8f973ff00bb39d,
+        type: 3}
+      propertyPath: m_text
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 5941717974934093841, guid: 181605b38e2c8d54eb8f973ff00bb39d,
         type: 3}
@@ -753,7 +813,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20411141dd146a14e8955b519ae53d33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CombatSimulator: {fileID: 11400000, guid: 9c032e16910c0be4abe163cff9008d2e, type: 2}
+  CombatSimulatorSO: {fileID: 11400000, guid: 9c032e16910c0be4abe163cff9008d2e, type: 2}
+  useEncounterSO: 0
+  EnemyEncounterSO: {fileID: 11400000, guid: a2b3e0b888fc45841a7089a384be39fe, type: 2}
+  encounterName: Encounter_Medium_1
   showTemplate: 0
   template_burst:
     abilityType: 0
@@ -1364,10 +1427,40 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2300303268223057241, guid: 1b59cc3dd78591d41a04987297df8b10,
+        type: 3}
+      propertyPath: m_text
+      value: 120
+      objectReference: {fileID: 0}
     - target: {fileID: 6135666941009965577, guid: 1b59cc3dd78591d41a04987297df8b10,
         type: 3}
       propertyPath: m_Name
       value: Enemy_Common
+      objectReference: {fileID: 0}
+    - target: {fileID: 6613430852601164306, guid: 1b59cc3dd78591d41a04987297df8b10,
+        type: 3}
+      propertyPath: m_Value
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 6613430852601164306, guid: 1b59cc3dd78591d41a04987297df8b10,
+        type: 3}
+      propertyPath: m_MaxValue
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 8550916702940291736, guid: 1b59cc3dd78591d41a04987297df8b10,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.8486864
+      objectReference: {fileID: 0}
+    - target: {fileID: 8550916702940291736, guid: 1b59cc3dd78591d41a04987297df8b10,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.9150943
+      objectReference: {fileID: 0}
+    - target: {fileID: 8550916702940291736, guid: 1b59cc3dd78591d41a04987297df8b10,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.38416696
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -2,6 +2,7 @@ using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -16,7 +17,11 @@ namespace StatusUnknown.CoreGameplayContent
     {
         [Header("General")]
         //[SerializeField] AudioSource source; 
-        [SerializeField] private CombatSimulatorScriptableObject CombatSimulator;
+        [SerializeField] private CombatSimulatorSO CombatSimulatorSO;
+        [SerializeField] private bool useEncounterSO = false;
+        [SerializeField] private EnemyEncounterConfigSO EnemyEncounterSO;
+        [SerializeField] private string encounterSaveName = "Encounter_Medium_1"; 
+
         private const int DELAY = 1;
 
         // TODO - FEATURE : add option to overwrite values of a specific SO with template OR generate new so from template
@@ -50,9 +55,22 @@ namespace StatusUnknown.CoreGameplayContent
                 template_delayed,
             };
 
-            if (CombatSimulator == null) return; 
+            if (CombatSimulatorSO == null) return; 
 
-            currentAbilityData = CombatSimulator.GetRootAbilityData();
+            currentAbilityData = CombatSimulatorSO.GetRootAbilityData();
+        }
+
+        private void Start()
+        {
+            if (useEncounterSO && EnemyEncounterSO != null)
+            {
+                GenerateEncounter();
+            }
+        }
+
+        private void GenerateEncounter()
+        {
+
         }
 
         #region CORE LOGIC
@@ -60,7 +78,7 @@ namespace StatusUnknown.CoreGameplayContent
         public void StartSimulation() // Entry Point (done once)
         {
             currentIndex = 0;
-            lastIndex = CombatSimulator.GetAbilitiesArrayLength() - 1;
+            lastIndex = CombatSimulatorSO.GetAbilitiesArrayLength() - 1;
             StopAllCoroutines(); 
             CancelInvoke(); 
 
@@ -155,7 +173,7 @@ namespace StatusUnknown.CoreGameplayContent
                 return; 
             }
 
-            currentAbilityData = CombatSimulator.GetAbilityDataAtIndex(currentIndex);
+            currentAbilityData = CombatSimulatorSO.GetAbilityDataAtIndex(currentIndex);
             Invoke(nameof(Callback), DELAY); 
         }
 
@@ -169,11 +187,34 @@ namespace StatusUnknown.CoreGameplayContent
         #endregion
 
         #region SAVE
+        [Button(ButtonHeight = 40), PropertySpace]
+        private void SaveEncounter() 
+        {
+            GameObject[] enemyArray = GameObject.FindGameObjectsWithTag("Enemy");
+            EnemyEncounterConfigSO enemyEncounterConfigSO = ScriptableObject.CreateInstance<EnemyEncounterConfigSO>();
+            enemyEncounterConfigSO.name = encounterSaveName; 
+            enemyEncounterConfigSO.EnemyDatas = new EnemyData[enemyArray.Length];
+
+            for (int i = 0; i < enemyArray.Length; i++)
+            {
+                enemyEncounterConfigSO.EnemyDatas[i] = new EnemyData
+                {
+                    EnemyPrefab = enemyArray[i],
+                    Positions = enemyArray[i].transform.position
+                };
+            }
+
+            AssetDatabase.CreateAsset(enemyEncounterConfigSO, $"Assets/Data/Gameplay/Combat/Encounters/{encounterSaveName}.asset");
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+        }
+
         // [Button(ButtonHeight = 40), PropertySpace]
         private void SaveFullSimulationPayload() { }
         #endregion
     }
 
+    #region Templates
     // TODO FEATURE: show dps and total damage (over how much sec) for better readability
     // TODO FEATURE : set data based on curve (locally, from spreadsheet) 
     [Serializable]
@@ -194,8 +235,8 @@ namespace StatusUnknown.CoreGameplayContent
 
         } */
 
-        // [Button(size:ButtonSizes.Small)]
-        protected void SaveTemplateToScriptableObject()
+        [Button(size:ButtonSizes.Small)]
+        protected void SaveTemplateAsNewAbility()
         {
 
         }
@@ -204,8 +245,7 @@ namespace StatusUnknown.CoreGameplayContent
     [Serializable]
     public class DamageType_Burst : AbilityConfigTemplate
     {
-
-
+        [SerializeField] private string abilitySaveName = "Ability_Type_Name";
     }
 
     [Serializable]
@@ -223,4 +263,5 @@ namespace StatusUnknown.CoreGameplayContent
         [SerializeField, Range(0.5f, 5f)] private float damageDelay = 1f;
         public float DamageDelay => damageDelay;    
     }
+    #endregion 
 }

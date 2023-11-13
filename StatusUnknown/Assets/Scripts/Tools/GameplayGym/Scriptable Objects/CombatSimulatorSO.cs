@@ -4,7 +4,7 @@ using UnityEngine;
 namespace StatusUnknown.CoreGameplayContent
 {
     [CreateAssetMenu(fileName = "CombatSimualator_Type_Num", menuName = "Status Unknown/Gameplay/Combat/Simulator", order = 50)]
-    public class CombatSimulatorScriptableObject : ScriptableObject
+    public class CombatSimulatorSO : ScriptableObject
     {
         public AbilityConfigSO_Base[] abilitiesConfig;
 
