@@ -839,7 +839,7 @@ namespace Tools.DrawingTool.Editor
             {
                 for (int x = 0; x < loadedShape.shapeSize.x; x++)
                 {
-                    this.ChangeSquareState(this.squaresData[this.GridPositionToIndex(new Vector2Int(x, loadedShape.shapeSize.y - 1 - y))], loadedShape.shapeContent[this.GridPositionToIndex(new Vector2Int(x, y))] == false ? E_PointState.EMPTY : E_PointState.FILL);
+                    this.ChangeSquareState(this.squaresData[this.GridPositionToIndex(new Vector2Int(x, loadedShape.shapeSize.y - 1 - y))], loadedShape.content[this.GridPositionToIndex(new Vector2Int(x, y))] == false ? E_PointState.EMPTY : E_PointState.FILL);
                 }
             }
         }

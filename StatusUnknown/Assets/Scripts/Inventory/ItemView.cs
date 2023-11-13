@@ -43,7 +43,7 @@ namespace Inventory
                     
                     horizontalParent.Insert(x, slot);
 
-                    slot.AddToClassList(this.item.itemDefinition.Shape.shapeContent[
+                    slot.AddToClassList(this.item.itemDefinition.Shape.content[
                         GridHelper.GetIndexFromGridPosition(new Vector2Int(x, y), shapeSize.x)]
                         ? "baseSlot"
                         : "hiddenSlot");

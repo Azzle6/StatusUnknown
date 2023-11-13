@@ -12,15 +12,5 @@ namespace Inventory
 
         [SerializedDictionary]
         public SerializedDictionary<Vector2Int, Item> content = new SerializedDictionary<Vector2Int, Item>();
-        
-        public void AddItem(Item item, Vector2Int gridPosition)
-        {
-            this.content[gridPosition] = item;
-        }
-        
-        public void RemoveItem(Vector2Int position)
-        {
-            content.Remove(position);
-        }
     }
 }
