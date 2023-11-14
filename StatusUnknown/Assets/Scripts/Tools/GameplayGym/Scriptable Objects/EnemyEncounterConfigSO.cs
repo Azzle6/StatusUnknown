@@ -13,7 +13,7 @@ namespace StatusUnknown.CoreGameplayContent
     [Serializable]
     public class EnemyData
     {
-        public GameObject EnemyPrefab;
-        public Vector3 Positions; 
+        public EnemyConfigSO enemyConfig;
+        public Vector3 position; 
     }
 }

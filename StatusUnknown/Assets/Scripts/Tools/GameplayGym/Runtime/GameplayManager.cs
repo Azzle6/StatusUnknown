@@ -2,10 +2,10 @@ using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using StatusUnknown.Utils.AssetManagement;  
 
 // Editor, Window, PropertyDrawer
 namespace StatusUnknown.CoreGameplayContent
@@ -37,9 +37,11 @@ namespace StatusUnknown.CoreGameplayContent
         private AbilityConfigSO_OverTime currentAbilityConfigSO_OverTime = null;
         private AbilityConfigSO_Delayed currentAbilityConfigSO_Delayed = null; 
 
-
         private int currentIndex; 
         private int lastIndex;
+
+        [Header("-- DEBUG --")]
+        [SerializeField] private GameObject[] prefab_enemy = new GameObject[3];
 
         // -- TODO FEATURE --
         // save and load combat config locally + remote
@@ -64,16 +66,18 @@ namespace StatusUnknown.CoreGameplayContent
         [Button(ButtonHeight = 40), PropertySpace, GUIColor("green")]
         public void GenerateEncounter()
         {
-            if (useEncounterSO && EnemyEncounterSO != null)
+            try
             {
                 for (int i = 0; i < EnemyEncounterSO.EnemyDatas.Length; i++)
                 {
-                    Instantiate(EnemyEncounterSO.EnemyDatas[i].EnemyPrefab, EnemyEncounterSO.EnemyDatas[i].Positions, Quaternion.identity);
+                    EnemyData currentEnemyData = EnemyEncounterSO.EnemyDatas[i];
+                    StatusUnknown_AssetManager.InstantiatePrefabAtPosition(prefab_enemy[currentEnemyData.enemyConfig.Type_ID], currentEnemyData.position); 
                 }
             }
-            else
+            catch (Exception e) 
             {
-                Debug.LogError("Encounter could not be generated. Are you missing the scriptable object or have useEncounterSO = false ?"); 
+                string msg = useEncounterSO == false ? "useEncouter is set to false. " : "your EnemyEncouterSO field is null. "; 
+                Debug.LogError($"Could not generate encounter because {msg} \n full error message infos {e.Message}");
             }
         }
 
@@ -201,16 +205,14 @@ namespace StatusUnknown.CoreGameplayContent
 
             for (int i = 0; i < enemyArray.Length; i++)
             {
-                enemyEncounterConfigSO.EnemyDatas[i] = new EnemyData
+                enemyEncounterConfigSO.EnemyDatas[i] = new EnemyData()
                 {
-                    EnemyPrefab = enemyArray[i],
-                    Positions = enemyArray[i].transform.position
+                    enemyConfig = enemyArray[i].GetComponent<Enemy>().EnemyConfigSO,
+                    position = enemyArray[i].transform.position
                 };
             }
 
-            AssetDatabase.CreateAsset(enemyEncounterConfigSO, $"Assets/Data/Gameplay/Combat/Encounters/{encounterSaveName}.asset");
-            AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
+            StatusUnknown_AssetManager.SaveSO(enemyEncounterConfigSO, StatusUnknown_AssetManager.SAVE_PATH_ENCOUNTER, encounterSaveName, ".asset"); 
         }
 
         // [Button(ButtonHeight = 40), PropertySpace]
@@ -241,26 +243,19 @@ namespace StatusUnknown.CoreGameplayContent
         } */
 
         [Button, PropertySpace, GUIColor("yellow")]
-        public abstract void SaveAbility(); 
-        
-        protected void Save(UnityEngine.Object assetToSave)
-        {
-            AssetDatabase.CreateAsset(assetToSave, $"Assets/Data/Gameplay/Combat/Abilities/{abilitySaveName}.asset");
-            AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
-        }
+        protected abstract void SaveAbility(); 
     }
 
     [Serializable]
     public class DamageType_Burst : AbilityConfigTemplate 
     {
-        public override void SaveAbility()
+        protected override void SaveAbility()
         {
             AbilityConfigSO_Burst AbilityConfigSO = ScriptableObject.CreateInstance<AbilityConfigSO_Burst>();
             AbilityConfigSO.name = abilitySaveName;
             AbilityConfigSO.SetAbilityInfos(abilitySaveName, PayloadType, damageArea, payloadValue);
 
-            Save(AbilityConfigSO); 
+            StatusUnknown_AssetManager.SaveSO(AbilityConfigSO, StatusUnknown_AssetManager.SAVE_PATH_ABILITY, abilitySaveName, ".asset");
         }
     }
 
@@ -270,7 +265,7 @@ namespace StatusUnknown.CoreGameplayContent
         [SerializeField, Range(2, 20)] private int tickAmount = 3;
         [SerializeField, Range(0.1f, 2f)] private float tickDelay = 0.5f;
 
-        public override void SaveAbility()
+        protected override void SaveAbility()
         {
             AbilityConfigSO_OverTime AbilityConfigSO = ScriptableObject.CreateInstance<AbilityConfigSO_OverTime>();
             AbilityConfigSO.name = abilitySaveName;
@@ -278,7 +273,7 @@ namespace StatusUnknown.CoreGameplayContent
             AbilityConfigSO.TickAmount = tickAmount;
             AbilityConfigSO.TickDelay = tickDelay;
 
-            Save(AbilityConfigSO);
+            StatusUnknown_AssetManager.SaveSO(AbilityConfigSO, StatusUnknown_AssetManager.SAVE_PATH_ABILITY, abilitySaveName, ".asset");
         }
     }
 
@@ -287,14 +282,14 @@ namespace StatusUnknown.CoreGameplayContent
     {
         [SerializeField, Range(0.5f, 5f)] private float damageDelay = 1f;
 
-        public override void SaveAbility()
+        protected override void SaveAbility()
         {
             AbilityConfigSO_Delayed AbilityConfigSO = ScriptableObject.CreateInstance<AbilityConfigSO_Delayed>();
             AbilityConfigSO.name = abilitySaveName;
             AbilityConfigSO.SetAbilityInfos(abilitySaveName, PayloadType, damageArea, payloadValue);
             AbilityConfigSO.DamageDelay = damageDelay;
 
-            Save(AbilityConfigSO);
+            StatusUnknown_AssetManager.SaveSO(AbilityConfigSO, StatusUnknown_AssetManager.SAVE_PATH_ABILITY, abilitySaveName, ".asset");
         }
     }
     #endregion 

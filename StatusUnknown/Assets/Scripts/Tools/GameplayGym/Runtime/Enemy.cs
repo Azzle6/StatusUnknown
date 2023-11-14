@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour, IDamageable
 {
     [Header("General")]
     [Space, SerializeField] private EnemyConfigSO enemySO;
+    public EnemyConfigSO EnemyConfigSO { get => enemySO; set => enemySO = value; }
 
     [Header("UI")]
     [SerializeField] private Image panelImage; 
