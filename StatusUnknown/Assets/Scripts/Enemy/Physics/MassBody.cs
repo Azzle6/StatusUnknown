@@ -25,6 +25,7 @@ public class MassBody : MonoBehaviour
         Acceleration += (force / Mass);
         //body.AddForce(force);
     }
+
     public void SetVelocity(Vector3 velocity)
     {
         Velocity = velocity;

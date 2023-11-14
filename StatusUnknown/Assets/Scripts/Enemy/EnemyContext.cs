@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class EnemyContext : MonoBehaviour, IDamageable
 {
+    [SerializeField] protected Animator animator;
     EnemyState currentState;
     public EnemyStats stats;
-    [SerializeField] MassBody massBody;
+    [SerializeField] protected MassBody massBody;
     [Header("Debug")]
     [SerializeField] MeshRenderer meshRenderer;
     float currentHealth;
     private void Start()
     {
         currentHealth = stats.health;
-        SwitchState(new SwarmiIdle());
     }
     private void Update()
     {

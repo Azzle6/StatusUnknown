@@ -70,6 +70,9 @@ public class HitZone : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = temp_colliders.Count > 0?Color.red : Color.green;
+        if (!isActiveAndEnabled)
+            Gizmos.color = new Color(0.5f,0.5f,0.5f,0.5f);
+
         if(zoneType == ZoneType.SPHERE)
             Gizmos.DrawWireSphere(transform.position, radius);
 
