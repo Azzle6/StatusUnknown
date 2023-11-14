@@ -5,26 +5,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
-using StatusUnknown.Utils.AssetManagement;  
+using StatusUnknown.Utils.AssetManagement;
 
-// Editor, Window, PropertyDrawer
 namespace StatusUnknown.CoreGameplayContent
 {
-    // TODO : have to make it work in editor (problems -> callbacks, coroutines)
-    // [RequireComponent(typeof(UIDocument))]
     [RequireComponent(typeof(AudioSource))] 
     public class GameplayManager : MonoBehaviour
     {
         [Header("General")]
         //[SerializeField] AudioSource source; 
         [SerializeField] private CombatSimulatorSO CombatSimulatorSO;
-        [SerializeField] private bool useEncounterSO = false;
         [SerializeField] private EnemyEncounterConfigSO EnemyEncounterSO;
-        [SerializeField] private string encounterSaveName = "Encounter_Medium_1"; 
+        [SerializeField] private string encounterSaveName = "Encounter_Difficulty_Num"; 
 
         private const int DELAY = 1;
 
-        // TODO - FEATURE : add option to overwrite values of a specific SO with template OR generate new so from template
         [Header("Ability Types Template")]
         [SerializeField] private bool showTemplate = false; 
         [Space, SerializeField] private DamageType_Burst template_burst;
@@ -40,13 +35,13 @@ namespace StatusUnknown.CoreGameplayContent
         private int currentIndex; 
         private int lastIndex;
 
-        [Header("-- DEBUG --")]
+        [Header("Save & Load")]
         [SerializeField] private GameObject[] prefab_enemy = new GameObject[3];
+        private const string LOG_ERROR_OVERWRITE_ENCOUNTER =
+            "Encounter could not be saved. Please provide a valid name (different from \"Encounter_Difficulty_Num\"). \n" +
+            "If you want to overwrite an existing encounter, use the same name in the \"Encounter Save Name\" field.";
 
-        // -- TODO FEATURE --
-        // save and load combat config locally + remote
-        // save and load encounter config locally + remote
-        // save and load damage types (for ex DOT -> poison or fire, BURST -> stun or explosion, etc..) locally + remote 
+        private const string LOG_ERROR_ENCOUNTER_NULL = "Could not generate encounter. Make sure the \"Enemy Encounter SO\" field is not empty.";
 
         private void OnEnable()
         {
@@ -62,22 +57,26 @@ namespace StatusUnknown.CoreGameplayContent
             currentAbilityData = CombatSimulatorSO.GetRootAbilityData();
         }
 
-        // TODO : enemy must be set by matching instance with the prefab in folder !
         [Button(ButtonHeight = 40), PropertySpace, GUIColor("green")]
         public void GenerateEncounter()
         {
+            GameObject[] curentlySpawnedEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+            for (int i = 0; i < curentlySpawnedEnemies.Length; i++)
+            {
+                DestroyImmediate(curentlySpawnedEnemies[i]);
+            }
+
             try
             {
                 for (int i = 0; i < EnemyEncounterSO.EnemyDatas.Length; i++)
                 {
                     EnemyData currentEnemyData = EnemyEncounterSO.EnemyDatas[i];
-                    StatusUnknown_AssetManager.InstantiatePrefabAtPosition(prefab_enemy[currentEnemyData.enemyConfig.Type_ID], currentEnemyData.position); 
+                    GameObject instance = StatusUnknown_AssetManager.InstantiatePrefabAtPosition(prefab_enemy[currentEnemyData.enemyConfig.Type_ID], currentEnemyData.position);
                 }
             }
             catch (Exception e) 
             {
-                string msg = useEncounterSO == false ? "useEncouter is set to false. " : "your EnemyEncouterSO field is null. "; 
-                Debug.LogError($"Could not generate encounter because {msg} \n full error message infos {e.Message}");
+                Debug.LogError(string.Concat(LOG_ERROR_ENCOUNTER_NULL, $"\n Full error message infos {e.Message}"));
             }
         }
 
@@ -198,21 +197,28 @@ namespace StatusUnknown.CoreGameplayContent
         [Button(ButtonHeight = 40), PropertySpace, GUIColor("yellow")]
         private void SaveEncounter() 
         {
-            GameObject[] enemyArray = GameObject.FindGameObjectsWithTag("Enemy");
+            if (string.Equals(encounterSaveName, "Encounter_Difficulty_Num"))
+            {
+                Debug.LogError(LOG_ERROR_OVERWRITE_ENCOUNTER);
+                return; 
+            }
+
+            GameObject[] currentlySpawnedEnemies = GameObject.FindGameObjectsWithTag("Enemy");
             EnemyEncounterConfigSO enemyEncounterConfigSO = ScriptableObject.CreateInstance<EnemyEncounterConfigSO>();
             enemyEncounterConfigSO.name = encounterSaveName; 
-            enemyEncounterConfigSO.EnemyDatas = new EnemyData[enemyArray.Length];
+            enemyEncounterConfigSO.EnemyDatas = new EnemyData[currentlySpawnedEnemies.Length];
 
-            for (int i = 0; i < enemyArray.Length; i++)
+            for (int i = 0; i < currentlySpawnedEnemies.Length; i++)
             {
                 enemyEncounterConfigSO.EnemyDatas[i] = new EnemyData()
                 {
-                    enemyConfig = enemyArray[i].GetComponent<Enemy>().EnemyConfigSO,
-                    position = enemyArray[i].transform.position
+                    enemyConfig = currentlySpawnedEnemies[i].GetComponent<Enemy>().EnemyConfigSO,
+                    position = currentlySpawnedEnemies[i].transform.position
                 };
             }
 
-            StatusUnknown_AssetManager.SaveSO(enemyEncounterConfigSO, StatusUnknown_AssetManager.SAVE_PATH_ENCOUNTER, encounterSaveName, ".asset"); 
+            StatusUnknown_AssetManager.SaveSO(enemyEncounterConfigSO, StatusUnknown_AssetManager.SAVE_PATH_ENCOUNTER, encounterSaveName, ".asset");
+            encounterSaveName = "Encounter_Difficulty_Num"; // cheap solution to avoid overwriting existing asset by accident
         }
 
         // [Button(ButtonHeight = 40), PropertySpace]
@@ -233,6 +239,9 @@ namespace StatusUnknown.CoreGameplayContent
         [SerializeField] protected EPayloadType PayloadType; 
 
         [SerializeField, Range(1, 100)] protected int payloadValue = 1;
+        protected const string LOG_ERROR_OVERWRITE_ABILITY =
+            "Ability could not be saved. Please provide a valid name (different from \"Ability_Type_Name\"). \n" +
+             "If you want to overwrite an existing ability, use the same name in the \"Ability Save Name\" field."; 
 
         //[Space, SerializeField] protected AudioClip damageSFX;
         //[SerializeField] protected ParticleSystem damageVFX;
@@ -251,11 +260,18 @@ namespace StatusUnknown.CoreGameplayContent
     {
         protected override void SaveAbility()
         {
+            if (string.Equals(abilitySaveName, "Ability_Type_Name"))
+            {
+                Debug.LogError(LOG_ERROR_OVERWRITE_ABILITY);
+                return;
+            }
+
             AbilityConfigSO_Burst AbilityConfigSO = ScriptableObject.CreateInstance<AbilityConfigSO_Burst>();
             AbilityConfigSO.name = abilitySaveName;
             AbilityConfigSO.SetAbilityInfos(abilitySaveName, PayloadType, damageArea, payloadValue);
 
             StatusUnknown_AssetManager.SaveSO(AbilityConfigSO, StatusUnknown_AssetManager.SAVE_PATH_ABILITY, abilitySaveName, ".asset");
+            abilitySaveName = "Ability_Type_Name"; 
         }
     }
 
@@ -267,6 +283,12 @@ namespace StatusUnknown.CoreGameplayContent
 
         protected override void SaveAbility()
         {
+            if (string.Equals(abilitySaveName, "Ability_Type_Name"))
+            {
+                Debug.LogError(LOG_ERROR_OVERWRITE_ABILITY);
+                return;
+            }
+
             AbilityConfigSO_OverTime AbilityConfigSO = ScriptableObject.CreateInstance<AbilityConfigSO_OverTime>();
             AbilityConfigSO.name = abilitySaveName;
             AbilityConfigSO.SetAbilityInfos(abilitySaveName, PayloadType, damageArea, payloadValue);
@@ -274,6 +296,7 @@ namespace StatusUnknown.CoreGameplayContent
             AbilityConfigSO.TickDelay = tickDelay;
 
             StatusUnknown_AssetManager.SaveSO(AbilityConfigSO, StatusUnknown_AssetManager.SAVE_PATH_ABILITY, abilitySaveName, ".asset");
+            abilitySaveName = "Ability_Type_Name";
         }
     }
 
@@ -284,12 +307,19 @@ namespace StatusUnknown.CoreGameplayContent
 
         protected override void SaveAbility()
         {
+            if (string.Equals(abilitySaveName, "Ability_Type_Name"))
+            {
+                Debug.LogError(LOG_ERROR_OVERWRITE_ABILITY);
+                return;
+            }
+
             AbilityConfigSO_Delayed AbilityConfigSO = ScriptableObject.CreateInstance<AbilityConfigSO_Delayed>();
             AbilityConfigSO.name = abilitySaveName;
             AbilityConfigSO.SetAbilityInfos(abilitySaveName, PayloadType, damageArea, payloadValue);
             AbilityConfigSO.DamageDelay = damageDelay;
 
             StatusUnknown_AssetManager.SaveSO(AbilityConfigSO, StatusUnknown_AssetManager.SAVE_PATH_ABILITY, abilitySaveName, ".asset");
+            abilitySaveName = "Ability_Type_Name";
         }
     }
     #endregion 

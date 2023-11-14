@@ -1,11 +1,14 @@
-using StatusUnknown.CoreGameplayContent;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Ability_Burst_Name", menuName = "Status Unknown/Gameplay/Combat/Ability Burst")]
-public class AbilityConfigSO_Burst : AbilityConfigSO_Base
+namespace StatusUnknown.CoreGameplayContent
 {
-    void OnEnable()
+    [CreateAssetMenu(fileName = "Ability_Burst_Name", menuName = "Status Unknown/Gameplay/Combat/Ability Burst")]
+    public class AbilityConfigSO_Burst : AbilityConfigSO_Base
     {
-        PayloadType = EPayloadType.Burst;
+        void OnEnable()
+        {
+            PayloadType = EPayloadType.Burst;
+        }
     }
 }
+

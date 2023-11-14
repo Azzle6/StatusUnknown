@@ -1,14 +1,17 @@
-using StatusUnknown.CoreGameplayContent;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Ability_Delayed_Name", menuName = "Status Unknown/Gameplay/Combat/Ability Delayed")]
-public class AbilityConfigSO_Delayed : AbilityConfigSO_Base
+namespace StatusUnknown.CoreGameplayContent
 {
-    [SerializeField, Range(0.5f, 5f)] private float damageDelay = 1f;
-    public float DamageDelay { get => damageDelay; set => damageDelay = value; }    
-
-    void OnEnable()
+    [CreateAssetMenu(fileName = "Ability_Delayed_Name", menuName = "Status Unknown/Gameplay/Combat/Ability Delayed")]
+    public class AbilityConfigSO_Delayed : AbilityConfigSO_Base
     {
-        PayloadType = EPayloadType.Delayed;
+        [SerializeField, Range(0.5f, 5f)] private float damageDelay = 1f;
+        public float DamageDelay { get => damageDelay; set => damageDelay = value; }
+
+        void OnEnable()
+        {
+            PayloadType = EPayloadType.Delayed;
+        }
     }
 }
+

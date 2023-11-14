@@ -24,10 +24,11 @@ namespace StatusUnknown.Utils
                 AssetDatabase.Refresh();
             }
 
-            public static void InstantiatePrefabAtPosition(Object obj, Vector3 pos)
+            public static GameObject InstantiatePrefabAtPosition(Object obj, Vector3 pos)
             {
                 GameObject instance = PrefabUtility.InstantiatePrefab(obj) as GameObject;
                 instance.transform.position = pos;
+                return instance;
             }
         }
     }
