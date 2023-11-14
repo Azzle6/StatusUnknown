@@ -10,7 +10,6 @@ namespace Core.UI
 
         private void OnStart()
         {
-            Debug.Log($"Start performed.");
             this.inventory.Display();
         }
     }

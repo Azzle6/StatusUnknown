@@ -1,71 +1,110 @@
 namespace Core.UI
 {
+    using System.Collections.Generic;
     using Inventory;
     using Sirenix.OdinInspector;
     using UnityEngine;
     using UnityEngine.UIElements;
+    using Weapons;
 
     public class UIInventory : MonoBehaviour
     {
+        private const string INVENTORY_NAME = "InventoryInterface";
         private const string INVENTORY_GRID_NAME = "inventoryGrid";
-        private const string FIRST_WEAPON_GRID_NAME = "weaponGrid";
+        private const string WEAPON_GRID_NAME = "weaponGrid";
+        private const string WEAPON_TRIGGERS_BUTTONS_NAME = "weaponTriggerSelectionButtons";
+        private const string WEAPON_SELECTION_BUTTONS_NAME = "weaponSelectionButtons";
         
         [SerializeField]
         private UIDocument uiDocument;
-        [SerializeField]
-        private string weaponsTabElementName;
-        [SerializeField]
-        private string inventoryInterfaceName;
 
         [SerializeField, BoxGroup("Debug")] 
-        private GridDataSO inventoryData;
-        [SerializeField, BoxGroup("Debug")] 
-        private GridDataSO[] weaponsData;
+        private PlayerInventorySO playerInventory;
 
+        //Data
         private VisualElement inventoryRoot;
-        private VisualElement weaponTabRoot;
+        private VisualElement weaponSelectionRoot;
+        private VisualElement weaponTriggersRoot;
 
         private GridView inventoryGridView;
         private GridView weaponGridView;
 
         private bool isDisplayed;
 
+        private Weapon selectedWeapon;
+
         private void OnEnable()
         {
-            this.weaponTabRoot = this.uiDocument.rootVisualElement.Q<VisualElement>(this.weaponsTabElementName);
-            this.inventoryRoot = this.uiDocument.rootVisualElement.Q<VisualElement>(inventoryInterfaceName);
+            this.weaponSelectionRoot = this.uiDocument.rootVisualElement.Q<VisualElement>(WEAPON_SELECTION_BUTTONS_NAME);
+            this.weaponTriggersRoot = this.uiDocument.rootVisualElement.Q<VisualElement>(WEAPON_TRIGGERS_BUTTONS_NAME);
+            this.inventoryRoot = this.uiDocument.rootVisualElement.Q<VisualElement>(INVENTORY_NAME);
             
-            this.RefreshWeaponsTriggerTabs();
-
-            this.InitGridViews();
+            this.weaponSelectionRoot.Clear();
+            
+            this.RefreshWeapons();
+            this.InitInventoryView();
+            this.InitWeaponGridView();
 
             this.inventoryRoot.style.display = DisplayStyle.None;
         }
 
-        private void InitGridViews()
+        private void RefreshWeapons()
         {
-            this.inventoryGridView = new GridView(this.uiDocument.rootVisualElement.Q<VisualElement>(INVENTORY_GRID_NAME),
-                this.inventoryData);
-            this.weaponGridView = new GridView(this.uiDocument.rootVisualElement.Q<VisualElement>(FIRST_WEAPON_GRID_NAME),
-                this.weaponsData[0]);
-        }
-
-        private void RefreshWeaponsTriggerTabs()
-        {
-            this.weaponTabRoot.Clear();
-            foreach (GridDataSO weapon in this.weaponsData)
+            this.weaponSelectionRoot.Clear();
+            foreach (Weapon weapon in this.playerInventory.equippedWeaponsData)
             {
-                Button tabButton = new Button(() => SwitchWeaponGrid(weapon))
+                Button tabButton = new Button(() => this.SelectWeapon(weapon))
                 {
-                    text = weapon.name
+                    text = weapon.definition.weaponName
                 };
-                this.weaponTabRoot.Add(tabButton);
+                this.weaponSelectionRoot.Add(tabButton);
             }
         }
 
-        private void SwitchWeaponGrid(GridDataSO newGrid)
+        private void InitInventoryView()
         {
-            this.weaponGridView.LoadNewContent(newGrid);
+            this.inventoryGridView = new GridView(this.uiDocument.rootVisualElement.Q<VisualElement>(INVENTORY_GRID_NAME),
+                this.playerInventory.inventory.Shape, this.playerInventory.inventory.content);
+        }
+
+        private void InitWeaponGridView()
+        {
+            this.weaponGridView = new GridView(this.uiDocument.rootVisualElement.Q<VisualElement>(WEAPON_GRID_NAME),
+                this.playerInventory.equippedWeaponsData[0].definition.triggers[0].shape, this.playerInventory.equippedWeaponsData[0].triggerInfoData[0].content);
+            
+            this.SelectWeapon(this.playerInventory.equippedWeaponsData[0]);
+        }
+
+        private void SelectWeapon(Weapon weapon)
+        {
+            this.selectedWeapon = weapon;
+            this.RefreshWeaponTriggers();
+            this.SelectTriggerIndex(0);
+        }
+
+        private void RefreshWeaponTriggers()
+        {
+            this.weaponTriggersRoot.Clear();
+            for (var i = 0; i < this.selectedWeapon.triggerInfoData.Length; i++)
+            {
+                int index = i;
+                Button triggerButton = new Button(() => this.SelectTriggerIndex(index))
+                {
+                    text = this.selectedWeapon.triggerInfoData[i].triggerType.ToString()
+                };
+                this.weaponTriggersRoot.Add(triggerButton);
+            }
+        }
+
+        private void SelectTriggerIndex(int index)
+        {
+            if (this.selectedWeapon.triggerInfoData.Length == 0 || this.selectedWeapon.triggerInfoData.Length - 1 < index)
+            {
+                Debug.Log($"Cannot select trigger index {index}, out of range.");
+                return;
+            }
+            
+            this.weaponGridView.LoadNewData(this.selectedWeapon.definition.triggers[index].shape, this.selectedWeapon.triggerInfoData[index].content);
         }
 
         [Button, HideInEditorMode]

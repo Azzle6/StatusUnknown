@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc991c3a9dc0ad04eb9df11c000a8bcb, type: 3}
+  m_Name: PlayerInventory
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 11400000, guid: 9d7824d661902054db8419ba1d0d9e51, type: 2}
+  equippedWeaponsData:
+  - definition: {fileID: 11400000, guid: 122a42ee52fa1d44ea3b18b00cc00351, type: 2}
+    triggerInfoData:
+    - triggerType: 0
+      content:
+        _serializedList:
+        - Key: {x: 1, y: 1}
+          Value:
+            itemDefinition: {fileID: 11400000, guid: 236eca757d6647944965a52c08b4af1f, type: 2}
+    - triggerType: 1
+      content:
+        _serializedList: []
+  - definition: {fileID: 11400000, guid: ddfda7b31cc8afb49abd392993bea013, type: 2}
+    triggerInfoData:
+    - triggerType: 0
+      content:
+        _serializedList: []

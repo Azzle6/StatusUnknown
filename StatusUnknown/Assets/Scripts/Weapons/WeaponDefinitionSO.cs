@@ -7,11 +7,12 @@ namespace Weapons
     [CreateAssetMenu(menuName = "CustomAssets/Definitions/WeaponDefinitionSO", fileName = "WeaponDefinition", order = 0)]
     public class WeaponDefinitionSO : ScriptableObject
     {
-        public WeaponTriggerData[] triggers;
+        public string weaponName;
+        public WeaponTriggerDefinition[] triggers;
     }
 
     [Serializable]
-    public struct WeaponTriggerData
+    public struct WeaponTriggerDefinition
     {
         public E_TriggerType trigger;
         public Shape shape;

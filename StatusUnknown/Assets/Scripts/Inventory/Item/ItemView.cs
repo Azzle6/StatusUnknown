@@ -1,4 +1,4 @@
-namespace Inventory
+namespace Inventory.Item
 {
     using System;
     using Core.Helpers;
@@ -27,15 +27,15 @@ namespace Inventory
             if (this.viewRoot != null)
                 this.viewRoot.parent.Remove(this.viewRoot);
             
-            Vector2Int shapeSize = item.itemDefinition.Shape.shapeSize;
+            Vector2Int shapeSize = this.item.itemDefinition.Shape.shapeSize;
             VisualElement itemView = UIHandler.Instance.uiSettings.itemTemplate.Instantiate();
             itemView.style.position = Position.Absolute;
-            verticalRoot = itemView.Q<VisualElement>("verticalRoot");
+            this.verticalRoot = itemView.Q<VisualElement>("verticalRoot");
             for (int y = 0; y < shapeSize.y; y++)
             {
                 VisualElement horizontalParent = new VisualElement();
                 horizontalParent.AddToClassList("horizontalParent");
-                verticalRoot.Insert(y, horizontalParent);
+                this.verticalRoot.Insert(y, horizontalParent);
                 
                 for (int x = 0; x < shapeSize.x; x++)
                 {

@@ -11,12 +11,10 @@ namespace Inventory.Editor
     [CustomPropertyDrawer(typeof(Shape))]
     public class ShapePropertyDrawer : PropertyDrawer
     {
-        private SerializedProperty content;
-        private SerializedProperty size;
-        private VisualElement[] squares;
-        
         public override VisualElement CreatePropertyGUI(SerializedProperty property)
         {
+            VisualElement[] squares = new VisualElement[]{};
+            
             VisualElement container = new VisualElement();
             VisualElement gridContainer = new VisualElement();
 
@@ -26,23 +24,23 @@ namespace Inventory.Editor
             gridContainer.style.marginBottom = 10;
             gridContainer.style.marginTop = 10;
             
-            content = property.FindPropertyRelative("content");
-            size = property.FindPropertyRelative("shapeSize");
+            var content = property.FindPropertyRelative("content");
+            var size = property.FindPropertyRelative("shapeSize");
 
             var anchorField = new PropertyField(property.FindPropertyRelative("anchor"));
             
             var sizeField = new PropertyField(property.FindPropertyRelative("shapeSize"));
             sizeField.RegisterValueChangeCallback(e =>
             {
-                this.DrawGridContent(gridContainer, property);
+                this.DrawGridContent(gridContainer, property, content, size, ref squares);
                 property.serializedObject.ApplyModifiedProperties();
             });
             
-            this.DrawGridContent(gridContainer, property);
+            this.DrawGridContent(gridContainer, property, content, size, ref squares);
 
             Button fillGrid = new Button(() =>
             {
-                this.FillAll();
+                this.FillAll(content, size, ref squares);
                 property.serializedObject.ApplyModifiedProperties();
             });
             fillGrid.text = "Fill grid";
@@ -55,14 +53,15 @@ namespace Inventory.Editor
             return container;
         }
 
-        private void DrawGridContent(VisualElement gridContainer, SerializedProperty property)
+        private void DrawGridContent(VisualElement gridContainer, SerializedProperty property, SerializedProperty content, SerializedProperty size, ref VisualElement[] squares)
         {
             List<VisualElement> newSquares = new List<VisualElement>();
-            content.arraySize = size.vector2IntValue.x * size.vector2IntValue.y;
+            Vector2Int curSize = size.vector2IntValue;
+            content.arraySize = curSize.x * curSize.y;
             gridContainer.Clear();
             if (content.arraySize > 0)
             {
-                for (int x = 0; x < size.vector2IntValue.x; x++)
+                for (int x = 0; x < curSize.x; x++)
                 {
                     VisualElement newColumn = new VisualElement
                     {
@@ -72,11 +71,11 @@ namespace Inventory.Editor
                         }
                     };
                     gridContainer.Add(newColumn);
-                    for (int y = 0; y < size.vector2IntValue.y; y++)
+                    for (int y = 0; y < curSize.y; y++)
                     {
                         SerializedProperty valueProperty =
                             content.GetArrayElementAtIndex(
-                                GridHelper.GetIndexFromGridPosition(new Vector2Int(x, y), size.vector2IntValue.x));
+                                GridHelper.GetIndexFromGridPosition(new Vector2Int(x, y), curSize.x));
                         
                         VisualElement button = this.InstantiateSquare();
                         ChangeSquareVisual(button, valueProperty.boolValue);
@@ -116,30 +115,29 @@ namespace Inventory.Editor
                     }
                 }
             }
-            this.squares = newSquares.ToArray();
+            squares = newSquares.ToArray();
         }
 
-        private void FillAll()
+        private void FillAll(SerializedProperty content, SerializedProperty size, ref VisualElement[] squares)
         {
-            content.arraySize = size.vector2IntValue.x * size.vector2IntValue.y;
+            Vector2Int newSize = size.vector2IntValue;
+            content.arraySize = newSize.x * newSize.y;
             if (content.arraySize > 0)
             {
-                for (int x = 0; x < size.vector2IntValue.x; x++)
+                for (int x = 0; x < newSize.x; x++)
                 {
-                    for (int y = 0; y < size.vector2IntValue.y; y++)
+                    for (int y = 0; y < newSize.y; y++)
                     {
                         SerializedProperty valueProperty =
                             content.GetArrayElementAtIndex(
-                                GridHelper.GetIndexFromGridPosition(new Vector2Int(x, y), size.vector2IntValue.x));
+                                GridHelper.GetIndexFromGridPosition(new Vector2Int(x, y), newSize.x));
                         valueProperty.boolValue = true;
                     }
                 }
             }
 
-            foreach (VisualElement square in this.squares)
+            foreach (VisualElement square in squares)
                 ChangeSquareVisual(square, true);
-            
-            
         }
 
         private VisualElement InstantiateSquare()

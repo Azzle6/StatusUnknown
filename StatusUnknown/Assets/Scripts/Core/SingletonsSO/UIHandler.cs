@@ -2,6 +2,7 @@ namespace Core.SingletonsSO
 {
     using System;
     using Inventory;
+    using Inventory.Item;
     using Sirenix.OdinInspector;
     using UI;
     using UnityEngine;
@@ -24,7 +25,6 @@ namespace Core.SingletonsSO
         public void ForceFocus(VisualElement element)
         {
             element.Focus();
-            Debug.Log($"{element.name} get forced focus.");
         }
 
         #region GRID_MANAGEMENT
