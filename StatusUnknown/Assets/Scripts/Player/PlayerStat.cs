@@ -26,7 +26,7 @@ namespace Player
         [Header("Player State ")]
         [ReadOnly] public bool isAiming;
         [ReadOnly] public bool isShooting;
-        
+        [ReadOnly] public bool[] weaponMelee = new bool[2];
 
     }
 }

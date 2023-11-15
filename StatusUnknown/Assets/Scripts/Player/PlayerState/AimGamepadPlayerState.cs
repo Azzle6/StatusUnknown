@@ -18,7 +18,6 @@ namespace Player
         {
             if (aiming == default)
                 aiming = StartCoroutine(Aim());
-            Debug.Log("Entered aim state");
             playerStateInterpretor.weaponManager.AimWithCurrentWeapon();
             playerStateInterpretor.animator.SetBool("Aim", true);
             aimRig.weight = 1;

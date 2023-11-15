@@ -522,6 +522,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2117993331799178013}
+  - {fileID: 5276006444595230948}
   m_Father: {fileID: 5174330278457101129}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4974381338073703539
@@ -536,9 +537,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 865d6fc0bd6493f4cb759652662a5a2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStateInterpretor: {fileID: 3331217997880427551}
+  playerAnimator: {fileID: 5119865257426492695}
   weapons:
   - {fileID: 734256521544380742}
-  - {fileID: 734256521544380742}
+  - {fileID: 2875921016714515856}
+  currentWeaponIndex: 0
+  playerStat: {fileID: 11400000, guid: 96563a0c89298fe42a7e0015e37b4023, type: 2}
 --- !u!1 &5087490274234103893
 GameObject:
   m_ObjectHideFlags: 0
@@ -885,6 +890,7 @@ MonoBehaviour:
   movementState: {fileID: 0}
   aimState: {fileID: 0}
   actionState: {fileID: 0}
+  inputBufferState: {fileID: 0}
   unusedPlayerStates:
   - {fileID: 3101095867169504121}
   - {fileID: 6615505804494617116}
@@ -895,6 +901,10 @@ MonoBehaviour:
   - {fileID: 4269637640754272242}
   - {fileID: 7751168312715653307}
   - {fileID: 6071315733489356351}
+  - {fileID: 4764279643686001967}
+  - {fileID: 4130879028828508758}
+  - {fileID: 1241682378252029606}
+  - {fileID: 6965172701220603686}
   rb: {fileID: 5190767570319545551}
   animator: {fileID: 5119865257426492695}
   weaponManager: {fileID: 4974381338073703539}
@@ -1106,6 +1116,10 @@ GameObject:
   - component: {fileID: 4269637640754272242}
   - component: {fileID: 7751168312715653307}
   - component: {fileID: 6071315733489356351}
+  - component: {fileID: 4764279643686001967}
+  - component: {fileID: 4130879028828508758}
+  - component: {fileID: 1241682378252029606}
+  - component: {fileID: 6965172701220603686}
   m_Layer: 0
   m_Name: States
   m_TagString: Untagged
@@ -1143,6 +1157,7 @@ MonoBehaviour:
   playerStateInterpretor: {fileID: 3331217997880427551}
   playerStateType: 0
   lockState: 0
+  inputBufferActive: 0
   groundCheckDistance: 2.2
   playerStat: {fileID: 11400000, guid: 96563a0c89298fe42a7e0015e37b4023, type: 2}
   deviceLog: {fileID: 11400000, guid: 03f0add060b72a64482755963028eead, type: 2}
@@ -1161,6 +1176,7 @@ MonoBehaviour:
   playerStateInterpretor: {fileID: 3331217997880427551}
   playerStateType: 0
   lockState: 0
+  inputBufferActive: 0
 --- !u!114 &8031482524456282729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1176,6 +1192,7 @@ MonoBehaviour:
   playerStateInterpretor: {fileID: 3331217997880427551}
   playerStateType: 2
   lockState: 0
+  inputBufferActive: 0
 --- !u!114 &387420635643281641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1191,6 +1208,7 @@ MonoBehaviour:
   playerStateInterpretor: {fileID: 3331217997880427551}
   playerStateType: 1
   lockState: 0
+  inputBufferActive: 0
   aimHeadTarget: {fileID: 3343987510111299657}
   playerStat: {fileID: 11400000, guid: 96563a0c89298fe42a7e0015e37b4023, type: 2}
 --- !u!114 &3849587055107827169
@@ -1208,6 +1226,7 @@ MonoBehaviour:
   playerStateInterpretor: {fileID: 3331217997880427551}
   playerStateType: 1
   lockState: 0
+  inputBufferActive: 0
   playerStat: {fileID: 11400000, guid: 96563a0c89298fe42a7e0015e37b4023, type: 2}
   aimRig: {fileID: 5874052690486424388}
   aimHeadTarget: {fileID: 3343987510111299657}
@@ -1220,19 +1239,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 7264950043347175952}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2730bfec0298a942bef56e646c5a43b, type: 3}
+  m_Script: {fileID: 11500000, guid: b3c2032c9e692374497ba778bed8262d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerStateInterpretor: {fileID: 3331217997880427551}
-  playerStateType: 2
+  playerStateType: 0
   lockState: 0
+  inputBufferActive: 0
   confirmedInTheFrustrum: []
   confirmedInTheAngle: []
   angleRequired: []
   closestTarget: {fileID: 0}
   playerStat: {fileID: 11400000, guid: 96563a0c89298fe42a7e0015e37b4023, type: 2}
-  distanceVisibleCollider: 10
-  distanceVisibleRadius: 10
+  distanceVisibleCollider: 30
+  distanceVisibleRadius: 30
   weaponManager: {fileID: 4974381338073703539}
 --- !u!114 &4269637640754272242
 MonoBehaviour:
@@ -1249,6 +1269,7 @@ MonoBehaviour:
   playerStateInterpretor: {fileID: 3331217997880427551}
   playerStateType: 2
   lockState: 0
+  inputBufferActive: 0
 --- !u!114 &7751168312715653307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1264,6 +1285,8 @@ MonoBehaviour:
   playerStateInterpretor: {fileID: 3331217997880427551}
   playerStateType: 2
   lockState: 0
+  inputBufferActive: 0
+  weaponManager: {fileID: 4974381338073703539}
 --- !u!114 &6071315733489356351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1279,6 +1302,107 @@ MonoBehaviour:
   playerStateInterpretor: {fileID: 3331217997880427551}
   playerStateType: 2
   lockState: 0
+  inputBufferActive: 0
+--- !u!114 &4764279643686001967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7264950043347175952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a586f3b60fe65fd4590a004e2960a091, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStateInterpretor: {fileID: 3331217997880427551}
+  playerStateType: 2
+  lockState: 0
+  inputBufferActive: 0
+  currentAttack:
+    attackDamage: 0
+    castTime: 0
+    buildUpTime: 0
+    superArmor: 0
+    activeTime: 0
+    recoveryTime: 0
+    hitBoxSize: {x: 0, y: 0, z: 0}
+  weaponManager: {fileID: 4974381338073703539}
+--- !u!114 &4130879028828508758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7264950043347175952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 416f0e66025a0014b8287c27f35f62ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStateInterpretor: {fileID: 3331217997880427551}
+  playerStateType: 2
+  lockState: 0
+  inputBufferActive: 0
+  currentAttack:
+    attackDamage: 0
+    castTime: 0
+    buildUpTime: 0
+    superArmor: 0
+    activeTime: 0
+    recoveryTime: 0
+    hitBoxSize: {x: 0, y: 0, z: 0}
+  weaponManager: {fileID: 4974381338073703539}
+--- !u!114 &1241682378252029606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7264950043347175952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e23a22047a1a2634fba1c4f4dd416c84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStateInterpretor: {fileID: 3331217997880427551}
+  playerStateType: 2
+  lockState: 0
+  inputBufferActive: 0
+  currentAttack:
+    attackDamage: 0
+    castTime: 0
+    buildUpTime: 0
+    superArmor: 0
+    activeTime: 0
+    recoveryTime: 0
+    hitBoxSize: {x: 0, y: 0, z: 0}
+  weaponManager: {fileID: 4974381338073703539}
+--- !u!114 &6965172701220603686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7264950043347175952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b2c268bdfe9ddb45ab302d48e270bc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStateInterpretor: {fileID: 3331217997880427551}
+  playerStateType: 2
+  lockState: 0
+  inputBufferActive: 0
+  currentAttack:
+    attackDamage: 0
+    castTime: 0
+    buildUpTime: 0
+    superArmor: 0
+    activeTime: 0
+    recoveryTime: 0
+    hitBoxSize: {x: 0, y: 0, z: 0}
+  weaponManager: {fileID: 4974381338073703539}
 --- !u!1001 &1614540443679563910
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1764,6 +1888,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PhotonPistolContainer
       objectReference: {fileID: 0}
+    - target: {fileID: 7693410530315367249, guid: 1708dfd4bc512924385dc9630c687f1f, type: 3}
+      propertyPath: weaponManager
+      value: 
+      objectReference: {fileID: 4974381338073703539}
     - target: {fileID: 9047865523849787658, guid: 1708dfd4bc512924385dc9630c687f1f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1834,4 +1962,81 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1558700194440174458, guid: 1708dfd4bc512924385dc9630c687f1f, type: 3}
   m_PrefabInstance: {fileID: 6986462321507353111}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7684860085291537572
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8545159125544498194}
+    m_Modifications:
+    - target: {fileID: 2003955313394750300, guid: 7ed0d303a9085144893bce6f552c4fa9, type: 3}
+      propertyPath: m_Name
+      value: TwinSwordContainer
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566550824337828928, guid: 7ed0d303a9085144893bce6f552c4fa9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566550824337828928, guid: 7ed0d303a9085144893bce6f552c4fa9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566550824337828928, guid: 7ed0d303a9085144893bce6f552c4fa9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566550824337828928, guid: 7ed0d303a9085144893bce6f552c4fa9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566550824337828928, guid: 7ed0d303a9085144893bce6f552c4fa9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566550824337828928, guid: 7ed0d303a9085144893bce6f552c4fa9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566550824337828928, guid: 7ed0d303a9085144893bce6f552c4fa9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566550824337828928, guid: 7ed0d303a9085144893bce6f552c4fa9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566550824337828928, guid: 7ed0d303a9085144893bce6f552c4fa9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566550824337828928, guid: 7ed0d303a9085144893bce6f552c4fa9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570751963952841012, guid: 7ed0d303a9085144893bce6f552c4fa9, type: 3}
+      propertyPath: weaponManager
+      value: 
+      objectReference: {fileID: 4974381338073703539}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7ed0d303a9085144893bce6f552c4fa9, type: 3}
+--- !u!114 &2875921016714515856 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5570751963952841012, guid: 7ed0d303a9085144893bce6f552c4fa9, type: 3}
+  m_PrefabInstance: {fileID: 7684860085291537572}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e05f0417baac1c04a95ca08d4c8b82c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &5276006444595230948 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2566550824337828928, guid: 7ed0d303a9085144893bce6f552c4fa9, type: 3}
+  m_PrefabInstance: {fileID: 7684860085291537572}
   m_PrefabAsset: {fileID: 0}

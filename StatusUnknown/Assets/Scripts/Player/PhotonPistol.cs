@@ -14,10 +14,17 @@ namespace Player
         private float currentDamage;
         private bool waitForTriggerRelease;
         private bool isInCD;
+        private bool isReloading;
+        private float currentAmmo;
         
-        public override void TriggerPressed()
+        private void Awake()
         {
-            if ((charging != default) || (isInCD))
+            currentAmmo = stat.magazineSize;
+        }
+        
+        public override void ActionPressed()
+        {
+            if ((charging != default) || (isInCD) || (isReloading) || (currentAmmo <= 0))
                 return;
             tempProjectile = Pooler.Instance.GetPooledObject(stat.projectilePrefab.name);
             charging = StartCoroutine(Charge());
@@ -57,7 +64,7 @@ namespace Player
             
         }
 
-        public override void TriggerReleased()
+        public override void ActionReleased()
         {
             if (charging == default)
                 return;
@@ -71,13 +78,25 @@ namespace Player
             tempPPbullet.damage = currentDamage;
             tempProjectile = default;
             charging = default;
+            currentAmmo--;
         }
 
-        public override void Reload()
+        public override void Reload(Animator playerAnimator)
         {
-          
+            if (isReloading)
+                return;
+            StartCoroutine(ReloadingTimer());
+            playerAnimator.SetTrigger("Reload");
         }
 
+        private IEnumerator ReloadingTimer()
+        {
+            isReloading = true;
+            yield return new WaitForSeconds(stat.reloadTime);
+            currentAmmo = stat.magazineSize;
+            isReloading = false;
+        }
+        
         public override void Hit()
         {
             

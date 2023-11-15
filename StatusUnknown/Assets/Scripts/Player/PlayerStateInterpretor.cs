@@ -12,6 +12,7 @@ namespace Player
         [HideInInspector] public PlayerState movementState;
         [HideInInspector] public PlayerState aimState;
         [HideInInspector] public PlayerState actionState;
+        [HideInInspector] public PlayerState inputBufferState;
         [SerializeField] private List<PlayerState> unusedPlayerStates;
         private PlayerState tempState;
         [Header("Player Component")]
@@ -38,21 +39,29 @@ namespace Player
             statesSlot.Add(PlayerStateType.MOVEMENT, movementState);
         }
     
+        //before adding a state need to remove previous state
         public void AddState(string state, PlayerStateType playerStateType, bool lockState)
         {
+            Debug.Log("adding state " + state);
             if (statesSlot[playerStateType] != null)
             {
+                if (statesSlot[playerStateType].inputBufferActive)
+                    inputBufferState = playerStates[state];
+                
                 if (statesSlot[playerStateType].lockState)
                     return;
             }
+            
             tempState = playerStates[state];
             statesSlot[playerStateType] = tempState;
-            statesSlot[playerStateType].lockState = lockState;
             tempState.OnStateEnter();
+            statesSlot[playerStateType].lockState = lockState;
+
         }
     
         public void RemoveState(PlayerStateType playerStateType)
         {
+            Debug.Log("removing state " + playerStateType);
             if (statesSlot[playerStateType] == null)
                 return;
             tempState = statesSlot[playerStateType];
@@ -81,6 +90,15 @@ namespace Player
             statesSlot[playerStates[state].playerStateType].lockState = false;
             statesSlot[playerStates[state].playerStateType] = null;
             tempState.OnStateExit();
+        }
+
+        public void ExecuteBufferInput()
+        {
+            if(inputBufferState == default)
+                return;
+            
+            AddState(inputBufferState.name, inputBufferState.playerStateType, false);
+            inputBufferState = null;
         }
 
         public void LockPlayerInput()

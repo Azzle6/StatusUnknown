@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baf01f5e3a509ae4bb51fff4375f005c, type: 3}
   m_Name: PhotonPistol
   m_EditorClassIdentifier: 
+  isAGun: 0
   maxDamage: 25
   damageCurve:
     serializedVersion: 2
@@ -66,5 +67,5 @@ MonoBehaviour:
   projectilePrefab: {fileID: 2084647982804730131, guid: b51a3fc02e55aad4c931a631e96295dd, type: 3}
   maxTimeCharge: 2
   cdTime: 1
-  magazineSize: 0
-  reloadTime: 0
+  magazineSize: 10
+  reloadTime: 5

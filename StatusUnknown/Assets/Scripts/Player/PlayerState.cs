@@ -7,6 +7,7 @@ namespace Player
         [SerializeField] protected PlayerStateInterpretor playerStateInterpretor;
         public PlayerStateType playerStateType;
         [HideInInspector] public bool lockState;
+        [HideInInspector] public bool inputBufferActive;
 
         public abstract void OnStateEnter();
     
