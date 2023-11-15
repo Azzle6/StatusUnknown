@@ -11,5 +11,6 @@ public class MeleeAttack
     public float superArmor;
     public float activeTime;
     public float recoveryTime;
+    public float cooldownTime;
     public Vector3 hitBoxSize;
 }

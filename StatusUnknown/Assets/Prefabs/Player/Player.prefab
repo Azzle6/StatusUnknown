@@ -1337,6 +1337,7 @@ MonoBehaviour:
     superArmor: 0
     activeTime: 0
     recoveryTime: 0
+    cooldownTime: 0
     hitBoxSize: {x: 0, y: 0, z: 0}
   weaponManager: {fileID: 4974381338073703539}
 --- !u!114 &4130879028828508758
@@ -1362,6 +1363,7 @@ MonoBehaviour:
     superArmor: 0
     activeTime: 0
     recoveryTime: 0
+    cooldownTime: 0
     hitBoxSize: {x: 0, y: 0, z: 0}
   weaponManager: {fileID: 4974381338073703539}
 --- !u!114 &1241682378252029606
@@ -1387,6 +1389,7 @@ MonoBehaviour:
     superArmor: 0
     activeTime: 0
     recoveryTime: 0
+    cooldownTime: 0
     hitBoxSize: {x: 0, y: 0, z: 0}
   weaponManager: {fileID: 4974381338073703539}
 --- !u!114 &6965172701220603686
@@ -1412,6 +1415,7 @@ MonoBehaviour:
     superArmor: 0
     activeTime: 0
     recoveryTime: 0
+    cooldownTime: 0
     hitBoxSize: {x: 0, y: 0, z: 0}
   weaponManager: {fileID: 4974381338073703539}
 --- !u!1 &8463495544153464495
@@ -2011,6 +2015,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PhotonPistolContainer
       objectReference: {fileID: 0}
+    - target: {fileID: 2675037210809185590, guid: 1708dfd4bc512924385dc9630c687f1f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7693410530315367249, guid: 1708dfd4bc512924385dc9630c687f1f, type: 3}
       propertyPath: weaponManager
       value: 
@@ -2097,6 +2105,18 @@ PrefabInstance:
     - target: {fileID: 2003955313394750300, guid: 7ed0d303a9085144893bce6f552c4fa9, type: 3}
       propertyPath: m_Name
       value: TwinSwordContainer
+      objectReference: {fileID: 0}
+    - target: {fileID: 2003955313394750300, guid: 7ed0d303a9085144893bce6f552c4fa9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2387115202336153330, guid: 7ed0d303a9085144893bce6f552c4fa9, type: 3}
+      propertyPath: m_VersionIndex
+      value: 2680
+      objectReference: {fileID: 0}
+    - target: {fileID: 2432388006558039305, guid: 7ed0d303a9085144893bce6f552c4fa9, type: 3}
+      propertyPath: m_VersionIndex
+      value: 2680
       objectReference: {fileID: 0}
     - target: {fileID: 2566550824337828928, guid: 7ed0d303a9085144893bce6f552c4fa9, type: 3}
       propertyPath: m_LocalPosition.x

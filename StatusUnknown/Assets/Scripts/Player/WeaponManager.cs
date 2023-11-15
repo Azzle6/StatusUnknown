@@ -22,9 +22,8 @@ namespace Player
             playerStat.weaponMelee[0] = weapons[0].meleeWeapon;
             playerStat.weaponMelee[1] = weapons[1].meleeWeapon;
 
-            currentWeaponIndex = 0;
+            currentWeaponIndex = 1;
             SwitchWeapon(0);
-            weapons[1].gameObject.SetActive(false);
             RestWeapon();
         }
 

@@ -13,6 +13,7 @@ namespace Player
         public override void OnStateEnter()
         {
             inputBufferActive = true;
+            recoveryCoroutine = StartCoroutine(Recovery());
         }
         
         public override void Behave<T>(T x) 
@@ -20,15 +21,19 @@ namespace Player
             if (x is MeleeAttack attack)
             {
                 currentAttack = attack;
-                recoveryCoroutine = StartCoroutine(Recovery());
             }
         }
         
         private IEnumerator Recovery()
         {
+            while (currentAttack == null)
+                yield return null;
+            
             playerStateInterpretor.weaponManager.GetCurrentMeleeWeapon().Recovery();
+            Debug.Log("Recovery");
             yield return new WaitForSeconds(currentAttack.recoveryTime);
             playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
+            recoveryCoroutine = null;
         }
 
         public override void OnStateExit()

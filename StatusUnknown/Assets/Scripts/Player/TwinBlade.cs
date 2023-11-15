@@ -1,5 +1,6 @@
 
 using System;
+using System.Collections;
 
 namespace Player
 {
@@ -41,6 +42,7 @@ namespace Player
             }
             else
             {
+                playerAnimator.SetInteger("WeaponID", twinBladeStat.weaponID);
                 bladeLeft.gameObject.SetActive(true);
                 bladeRight.gameObject.SetActive(true);
                 bladeLeft.parent = weaponManager.lHandTr;
@@ -56,15 +58,28 @@ namespace Player
 
         public override void Hit()
         {
-            throw new System.NotImplementedException();
+
         }
 
         public override void Cast()
         {
             if (weaponManager.playerStateInterpretor.CheckState(PlayerStateType.ACTION, "MeleeCastPlayerState") || weaponManager.playerStateInterpretor.CheckState(PlayerStateType.ACTION, "MeleeBuildUpPlayerState"))
                 return;
+            
+            if (cooldownCoroutine != default)
+            {
+                StopCoroutine(cooldownCoroutine);
+                cooldownCoroutine = default;
+            }
+            
             weaponManager.playerStateInterpretor.AddState("MeleeCastPlayerState",PlayerStateType.ACTION, false);
             weaponManager.playerStateInterpretor.Behave(twinBladeStat.attacks[comboIndex],PlayerStateType.ACTION);
+
+            weaponManager.playerAnimator.SetTrigger("MeleeHit");   
+            weaponManager.playerAnimator.SetInteger("MeleeCombo", comboIndex);
+         
+                
+
         }
 
         public override void BuildUp()
@@ -86,12 +101,26 @@ namespace Player
 
         public override void Recovery()
         {
-            if (weaponManager.playerStateInterpretor.CheckState(PlayerStateType.ACTION, "MeleeRecoveryPlayerState"))
-                return;
+            /*if (weaponManager.playerStateInterpretor.CheckState(PlayerStateType.ACTION, "MeleeRecoveryPlayerState"))
+                return;*/
             weaponManager.playerStateInterpretor.Behave(twinBladeStat.attacks[comboIndex],PlayerStateType.ACTION);
 
             comboIndex++;
+            Debug.Log(comboIndex + " combo index" + twinBladeStat.attacks.Length + " length");
+            if (comboIndex > twinBladeStat.attacks.Length)
+            {
+                Debug.Log("Combo index reset");
+                comboIndex = 0;
+            }
+
+            cooldownCoroutine = StartCoroutine(Cooldown());
         }
-        
+
+        public override IEnumerator Cooldown()
+        {
+            yield return new WaitForSeconds(twinBladeStat.attacks[comboIndex].cooldownTime + twinBladeStat.attacks[comboIndex].cooldownTime);
+            comboIndex = 0;
+            Debug.Log("Combo index reset in coroutine");
+        }
     }
 }

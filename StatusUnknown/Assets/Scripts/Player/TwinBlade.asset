@@ -15,18 +15,20 @@ MonoBehaviour:
   weaponID: 0
   attacks:
   - attackDamage: 10
-    castTime: 2
-    buildUpTime: 2
+    castTime: 0.2
+    buildUpTime: 0.2
     superArmor: 50
-    activeTime: 2
-    recoveryTime: 2
+    activeTime: 0.2
+    recoveryTime: 0.2
+    cooldownTime: 0.5
     hitBoxSize: {x: 0, y: 0, z: 0}
   - attackDamage: 10
-    castTime: 0.5
-    buildUpTime: 0.5
+    castTime: 0.3
+    buildUpTime: 0.3
     superArmor: 50
-    activeTime: 0.5
-    recoveryTime: 0.5
+    activeTime: 0.3
+    recoveryTime: 0.3
+    cooldownTime: 0.5
     hitBoxSize: {x: 0, y: 0, z: 0}
   - attackDamage: 30
     castTime: 0.5
@@ -34,6 +36,7 @@ MonoBehaviour:
     superArmor: 50
     activeTime: 0.5
     recoveryTime: 0.5
+    cooldownTime: 0.5
     hitBoxSize: {x: 0, y: 0, z: 0}
   attack3DamageDot: 0
   dotDuration: 0
