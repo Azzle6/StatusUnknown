@@ -1,5 +1,3 @@
-
-
 namespace Core.Helpers
 {
     using UnityEngine;
@@ -19,5 +17,13 @@ namespace Core.Helpers
         {
             return (position.x < size.x && position.y < size.y && position.x >= 0 && position.y >= 0);
         }
+    }
+
+    public enum E_Direction
+    {
+        UP,
+        DOWN,
+        LEFT,
+        RIGHT
     }
 }

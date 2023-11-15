@@ -12,14 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3af01be4bdbf26c4c8c7ee491673112f, type: 3}
   m_Name: WeaponDefinition
   m_EditorClassIdentifier: 
-  weaponName: Big useless weapon
+  itemName: AAAAAARME SUPER
+  shape:
+    shapeSize: {x: 3, y: 2}
+    anchor: {x: 0, y: 0}
+    content: 010101010101
+  view: {fileID: 0}
   triggers:
-  - trigger: 0
+  - trigger: {fileID: 11400000, guid: a81d8b4ef5aff55479fdbd5a3dac5f66, type: 2}
+    triggerRowPosition: 0
     shape:
       shapeSize: {x: 4, y: 7}
       anchor: {x: 0, y: 0}
       content: 01010101010101010101010101010101010101010101010101010101
-  - trigger: 1
+  - trigger: {fileID: 11400000, guid: a6198027f09bfa64e9a8ae60cdb7acc1, type: 2}
+    triggerRowPosition: 0
     shape:
       shapeSize: {x: 7, y: 4}
       anchor: {x: 0, y: 0}

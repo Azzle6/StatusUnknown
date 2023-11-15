@@ -2,25 +2,22 @@ namespace Weapons
 {
     using System;
     using Inventory;
+    using Inventory.Item;
+    using Module;
     using UnityEngine;
     
-    [CreateAssetMenu(menuName = "CustomAssets/Definitions/WeaponDefinitionSO", fileName = "WeaponDefinition", order = 0)]
-    public class WeaponDefinitionSO : ScriptableObject
+    [CreateAssetMenu(menuName = "CustomAssets/Definitions/WeaponDefinition", fileName = "WeaponDefinition")]
+    public class WeaponDefinitionSO : GridItemSO
     {
-        public string weaponName;
+        public override E_ItemType ItemType => E_ItemType.WEAPON;
         public WeaponTriggerDefinition[] triggers;
     }
 
     [Serializable]
     public struct WeaponTriggerDefinition
     {
-        public E_TriggerType trigger;
+        public TriggerSO trigger;
+        public int triggerRowPosition;
         public Shape shape;
-    }
-
-    public enum E_TriggerType
-    {
-        ON_FIRE,
-        ON_RELOAD
     }
 }

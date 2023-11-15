@@ -29,7 +29,7 @@ namespace Inventory
         }
         private float slotWidth;
 
-        private Action<GridElement> gridElementFocusEvent;
+        private Action<IGridElement> gridElementFocusEvent;
 
         private VisualElement firstFocus;
         
@@ -83,8 +83,8 @@ namespace Inventory
                     if (this.shape.GetContentFromPosition(new Vector2Int(x, y)))
                     {
                         gridSlotElement.name = $"{x},{y}";
-                        slot.focusElement.RegisterCallback<FocusEvent>(e => this.gridElementFocusEvent?.Invoke(slot));
-                        slot.focusElement.RegisterCallback<NavigationSubmitEvent>(e => this.OnInteract(slot));
+                        slot.FocusElement.RegisterCallback<FocusEvent>(e => this.gridElementFocusEvent?.Invoke(slot));
+                        slot.FocusElement.RegisterCallback<NavigationSubmitEvent>(e => this.OnInteract(slot));
                         this.firstFocus ??= gridSlotElement;
                     }
                     else
@@ -116,11 +116,17 @@ namespace Inventory
             ClearContent(false);
             foreach (KeyValuePair<Vector2Int, Item.Item> info in this.content)
             {
-                ItemView itemView = new ItemView(info.Value, info.Key, this);
+                if (info.Value == null)
+                {
+                    Debug.LogWarning($"Try to spawn null item at {info.Key}. Item skipped.");
+                    continue;
+                }
+                
+                ItemView itemView = ItemView.InstantiateItemView(info.Value.gridItemDefinition.ItemType ,info.Value, info.Key, this);
                 this.SetItemPosition(itemView, info.Key);
                 this.itemsView.Add(itemView);
-                itemView.focusElement.RegisterCallback<FocusEvent>(e => this.gridElementFocusEvent?.Invoke(itemView));
-                itemView.focusElement.RegisterCallback<NavigationSubmitEvent>(e => this.OnInteract(itemView));
+                itemView.FocusElement.RegisterCallback<FocusEvent>(e => this.gridElementFocusEvent?.Invoke(itemView));
+                itemView.FocusElement.RegisterCallback<NavigationSubmitEvent>(e => this.OnInteract(itemView));
             }
         }
         
@@ -128,7 +134,7 @@ namespace Inventory
         {
             this.content.Clear();
             foreach (ItemView itemView in this.itemsView)
-                this.content.Add(itemView.gridPosition, itemView.item);
+                this.content.Add(itemView.GridPosition, itemView.item);
         }
         
         private void ClearContent(bool clearData)
@@ -155,18 +161,18 @@ namespace Inventory
         
         public void SetItemVisualPosition(ItemView itemView, Vector2Int position)
         {
-            this.gridRoot.Add(itemView.viewRoot);
+            this.gridRoot.Add(itemView.ViewRoot);
             Vector3 newPosition = (Vector2)position * SlotWidth;
-            itemView.viewRoot.transform.position = newPosition;
+            itemView.ViewRoot.transform.position = newPosition;
         }
         #endregion
         
         #region CONTENT_ACTIONS
         public void OnPickItem(ItemView itemView)
         {
-            SetSlotsContent(itemView.item.itemDefinition.Shape, itemView.gridPosition, null);
+            SetSlotsContent(itemView.item.gridItemDefinition.shape, itemView.GridPosition, null);
             this.itemsView.Remove(itemView);
-            UIHandler.Instance.ForceFocus(GetSlot(itemView.gridPosition).focusElement);
+            UIHandler.Instance.ForceFocus(GetSlot(itemView.GridPosition).FocusElement);
             this.SaveContent();
         }
         
@@ -181,11 +187,11 @@ namespace Inventory
             //Set visual
             SetItemVisualPosition(itemView, pos);
 
-            itemView.grid = this;
-            itemView.gridPosition = pos;
+            itemView.Grid = this;
+            itemView.GridPosition = pos;
             
             //Setup slots infos under the item
-            SetSlotsContent(itemView.item.itemDefinition.Shape, pos, itemView);
+            SetSlotsContent(itemView.item.gridItemDefinition.shape, pos, itemView);
             
             //Register item in grid
             this.itemsView.Add(itemView);
@@ -193,25 +199,25 @@ namespace Inventory
         
         private void RemoveItem(ItemView itemView)
         {
-            itemView.viewRoot.RemoveFromHierarchy();
+            itemView.ViewRoot.RemoveFromHierarchy();
             this.itemsView.Remove(itemView);
 
-            this.SetSlotsContent(itemView.item.itemDefinition.Shape, itemView.gridPosition, null);
+            this.SetSlotsContent(itemView.item.gridItemDefinition.shape, itemView.GridPosition, null);
         }
         #endregion //CONTENT_ACTIONS
         
         #region EVENTS
-        private void OnInteract(GridElement element)
+        private void OnInteract(IGridElement element)
         {
             //If we interact with an item, we pick it
             if (element is ItemView itemView)
             {
-                UIHandler.Instance.PickItem(itemView);
+                UIHandler.Instance.TryPickItem(itemView);
             }
             else if (element is Slot slot) //If we interact with a slot and we're moving an item, we try to drop it
             {
                 if (UIHandler.Instance.isMovingItem)
-                    UIHandler.Instance.TryDropItem(slot.gridPosition);
+                    UIHandler.Instance.TryDropItem(slot.GridPosition);
             }
         }
         #endregion
@@ -223,13 +229,12 @@ namespace Inventory
             foreach (var coord in itemShapeCoord)
             {
                 Vector2Int currentPosition = coord + pos;
-                if (!this.shape.GetContentFromPosition(currentPosition) || !GridHelper.IsInGrid(currentPosition, this.shape.shapeSize))
+                if (!this.shape.GetContentFromPosition(currentPosition) || !GridHelper.IsInGrid(currentPosition, this.shape.shapeSize) || GetSlot(currentPosition).item != null)
                 {
-                    Debug.LogWarning($"try to setup slot state at {coord + pos} but the position is invalid.");
+                    //Debug.LogWarning($"try to setup slot state at {coord + pos} but the position is invalid.");
                     return false;
                 }
             }
-
             return true;
         }
 

@@ -5,11 +5,10 @@ namespace Inventory.Item
     [Serializable]
     public class Item
     {
-        public ItemSO itemDefinition;
-
-        public Item(ItemSO itemDefinition)
+        public GridItemSO gridItemDefinition;
+        public Item(GridItemSO gridItemDefinition)
         {
-            this.itemDefinition = itemDefinition;
+            this.gridItemDefinition = gridItemDefinition;
         }
     }
 }

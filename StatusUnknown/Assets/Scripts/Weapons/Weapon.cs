@@ -4,6 +4,7 @@ namespace Weapons
     using System.Collections.Generic;
     using AYellowpaper.SerializedCollections;
     using Inventory.Item;
+    using Module;
     using Sirenix.OdinInspector;
     using UnityEngine;
 
@@ -11,16 +12,16 @@ namespace Weapons
     public class Weapon
     {
         public WeaponDefinitionSO definition;
-        public WeaponTriggerInfoData[] triggerInfoData;
+        public WeaponTriggerGridData[] triggerInfoData;
         
         #region CONSTRUCTOR
         public Weapon(WeaponDefinitionSO def)
         {
             this.definition = def;
-            List<WeaponTriggerInfoData> triggerInfosResult = new List<WeaponTriggerInfoData>();
+            List<WeaponTriggerGridData> triggerInfosResult = new List<WeaponTriggerGridData>();
             
             foreach (WeaponTriggerDefinition trigger in def.triggers)
-                triggerInfosResult.Add(new WeaponTriggerInfoData(trigger));
+                triggerInfosResult.Add(new WeaponTriggerGridData(trigger));
 
             this.triggerInfoData = triggerInfosResult.ToArray();
         }
@@ -32,10 +33,10 @@ namespace Weapons
             if(this.definition == null)
                 return;
 
-            List<WeaponTriggerInfoData> result = new List<WeaponTriggerInfoData>();
+            List<WeaponTriggerGridData> result = new List<WeaponTriggerGridData>();
             foreach (WeaponTriggerDefinition trigger in this.definition.triggers)
             {
-                result.Add(new WeaponTriggerInfoData(trigger));
+                result.Add(new WeaponTriggerGridData(trigger));
             }
 
             this.triggerInfoData = result.ToArray();
@@ -43,16 +44,18 @@ namespace Weapons
     }
 
     [Serializable]
-    public class WeaponTriggerInfoData
+    public struct WeaponTriggerGridData
     {
-        public E_TriggerType triggerType;
+        public TriggerSO triggerType;
+        public int triggerRowPosition;
         [SerializedDictionary] 
         public SerializedDictionary<Vector2Int, Item> content;
 
-        public WeaponTriggerInfoData(WeaponTriggerDefinition triggerDefinitionData)
+        public WeaponTriggerGridData(WeaponTriggerDefinition triggerDefinitionData)
         {
             this.triggerType = triggerDefinitionData.trigger;
             this.content = new SerializedDictionary<Vector2Int, Item>();
+            this.triggerRowPosition = triggerDefinitionData.triggerRowPosition;
         }
     }
 }

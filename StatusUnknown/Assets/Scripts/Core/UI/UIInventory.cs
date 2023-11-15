@@ -1,6 +1,5 @@
 namespace Core.UI
 {
-    using System.Collections.Generic;
     using Inventory;
     using Sirenix.OdinInspector;
     using UnityEngine;
@@ -55,7 +54,7 @@ namespace Core.UI
             {
                 Button tabButton = new Button(() => this.SelectWeapon(weapon))
                 {
-                    text = weapon.definition.weaponName
+                    text = weapon.definition.itemName
                 };
                 this.weaponSelectionRoot.Add(tabButton);
             }
@@ -90,7 +89,7 @@ namespace Core.UI
                 int index = i;
                 Button triggerButton = new Button(() => this.SelectTriggerIndex(index))
                 {
-                    text = this.selectedWeapon.triggerInfoData[i].triggerType.ToString()
+                    text = this.selectedWeapon.triggerInfoData[i].triggerType.name
                 };
                 this.weaponTriggersRoot.Add(triggerButton);
             }

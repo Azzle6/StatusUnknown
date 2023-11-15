@@ -12,9 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3af01be4bdbf26c4c8c7ee491673112f, type: 3}
   m_Name: WeaponDefinition2
   m_EditorClassIdentifier: 
-  weaponName: Bigger useless weapon
+  itemName: AAAARME GIGA BIEN
+  shape:
+    shapeSize: {x: 1, y: 2}
+    anchor: {x: 0, y: 0}
+    content: 0101
+  view: {fileID: 0}
   triggers:
-  - trigger: 0
+  - trigger: {fileID: 11400000, guid: a81d8b4ef5aff55479fdbd5a3dac5f66, type: 2}
+    triggerRowPosition: 0
     shape:
       shapeSize: {x: 6, y: 5}
       anchor: {x: 0, y: 0}

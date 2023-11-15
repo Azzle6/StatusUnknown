@@ -3,31 +3,39 @@ namespace Inventory.Item
     using System;
     using Core.Helpers;
     using Core.SingletonsSO;
+    using Module;
     using UnityEngine;
     using UnityEngine.UIElements;
+    using Weapons;
 
     [Serializable]
-    public class ItemView : GridElement
+    public abstract class ItemView : IGridElement
     {
+        public GridView Grid { get; set; }
+        public Vector2Int GridPosition { get; set; }
+        public VisualElement ViewRoot { get; set; }
+        public VisualElement FocusElement { get; set; }
+        
         public Item item;
         private VisualElement verticalRoot;
 
         #region CONSTRUCTOR
-        public ItemView(Item item, Vector2Int gridPosition, GridView gridView)
+        protected ItemView(Item item, Vector2Int gridPosition, GridView gridView)
         {
             this.item = item;
-            this.gridPosition = gridPosition;
-            this.grid = gridView;
-            this.GenerateView();
+            this.GridPosition = gridPosition;
+            this.Grid = gridView;
+            this.GenerateBaseView();
+            this.GenerateCustomView();
         }
         #endregion
         
-        public void GenerateView()
+        public void GenerateBaseView()
         {
-            if (this.viewRoot != null)
-                this.viewRoot.parent.Remove(this.viewRoot);
+            if (this.ViewRoot != null)
+                this.ViewRoot.parent.Remove(this.ViewRoot);
             
-            Vector2Int shapeSize = this.item.itemDefinition.Shape.shapeSize;
+            Vector2Int shapeSize = this.item.gridItemDefinition.shape.shapeSize;
             VisualElement itemView = UIHandler.Instance.uiSettings.itemTemplate.Instantiate();
             itemView.style.position = Position.Absolute;
             this.verticalRoot = itemView.Q<VisualElement>("verticalRoot");
@@ -43,32 +51,49 @@ namespace Inventory.Item
                     
                     horizontalParent.Insert(x, slot);
 
-                    slot.AddToClassList(this.item.itemDefinition.Shape.content[
+                    slot.AddToClassList(this.item.gridItemDefinition.shape.content[
                         GridHelper.GetIndexFromGridPosition(new Vector2Int(x, y), shapeSize.x)]
                         ? "baseSlot"
                         : "hiddenSlot");
                 }
             }
-            this.viewRoot = itemView;
-            this.focusElement = itemView.Q<VisualElement>("focusParent");
+            this.ViewRoot = itemView;
+            this.FocusElement = itemView.Q<VisualElement>("focusParent");
         }
+
+        protected abstract void GenerateCustomView();
 
         public void MoveState()
         {
-            this.focusElement.AddToClassList("movingElement");
-            this.focusElement.focusable = false;
+            this.FocusElement.AddToClassList("movingElement");
+            this.FocusElement.focusable = false;
         }
 
         public void CanPlaceItemFeedback(bool canPlace)
         {
-            this.focusElement.AddToClassList(canPlace ? "canPlace" : "cantPlace");
-            this.focusElement.RemoveFromClassList(canPlace ? "cantPlace" : "canPlace");
+            this.FocusElement.AddToClassList(canPlace ? "canPlace" : "cantPlace");
+            this.FocusElement.RemoveFromClassList(canPlace ? "cantPlace" : "canPlace");
         }
 
         public void PlacedState()
         {
-            this.focusElement.RemoveFromClassList("movingElement");
-            this.focusElement.focusable = true;
+            this.FocusElement.RemoveFromClassList("movingElement");
+            this.FocusElement.RemoveFromClassList("canPlace");
+            this.FocusElement.RemoveFromClassList("cantPlace");
+            this.FocusElement.focusable = true;
+        }
+
+        public static ItemView InstantiateItemView(E_ItemType type, Item item, Vector2Int gridPosition, GridView gridView)
+        {
+            switch (type)
+            {
+                case E_ItemType.MODULE:
+                    return new ModuleItemView(item, gridPosition, gridView);
+                case E_ItemType.WEAPON:
+                    return new WeaponItemView(item, gridPosition, gridView);
+            }
+
+            return null;
         }
     }
 }
