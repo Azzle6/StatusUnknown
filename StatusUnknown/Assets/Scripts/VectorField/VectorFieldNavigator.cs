@@ -67,7 +67,7 @@ namespace VectorField
                 }
             }
         }
-        public static Node WorlPositiondToNode(Vector3 position, Dictionary<Vector3, Node> nodeField, float depthLinkDistance = 2)
+        public static Node WorldPositiondToNode(Vector3 position, Dictionary<Vector3, Node> nodeField, float depthLinkDistance = 2)
         {
             Vector3 boundPosition = PositionToBoundPosition(position);
             int depthIteration = Mathf.FloorToInt(depthLinkDistance / fieldDensity);
@@ -79,7 +79,7 @@ namespace VectorField
             }
             return null;
         }
-        public static Node WorlPositiondToNode(Vector3 position, float depthLinkDistance = 2)
+        public static Node WorldPositiondToNode(Vector3 position, float depthLinkDistance = 2)
         {
             Vector3 boundPosition = PositionToBoundPosition(position);
             int depthIteration = Mathf.FloorToInt(depthLinkDistance / fieldDensity);
@@ -94,7 +94,7 @@ namespace VectorField
 
         public static void SetTargetDistance(Vector3 targetPosition, Dictionary<Vector3, Node> nodeField)
         {
-            Node targetNode = WorlPositiondToNode(targetPosition, nodeField,2);
+            Node targetNode = WorldPositiondToNode(targetPosition, nodeField,2);
             if (targetNode == null) return;
             targetNode.DistanceFromTarget = 0;
 
@@ -129,29 +129,6 @@ namespace VectorField
                             
                     }
                 }
-
-                /*foreach (var boundPosition in dequeueNode.linkedBoundPositions)
-                {
-                    Node enqueueNode = nodeField[boundPosition];
-
-                    if (enqueueNode.DistanceFromTarget >= dequeueNode.DistanceFromTarget + 1)
-                    {
-                        enqueueNode.DistanceFromTarget = dequeueNode.DistanceFromTarget + 1;
-                        enqueueNode.targetDirection = (dequeueNode.Position - enqueueNode.Position) / fieldDensity;
-                    }
-
-
-                    if (!checkedNode.Contains(enqueueNode))
-                    {
-
-                        if (enqueueNode.DistanceFromTarget >= dequeueNode.DistanceFromTarget + 1)
-                            enqueueNode.targetDirection = (dequeueNode.Position - enqueueNode.Position) / fieldDensity;
-
-                        enqueueNode.DistanceFromTarget = dequeueNode.DistanceFromTarget + 1;
-                        nodeToProcess.Enqueue(enqueueNode);
-                        checkedNode.Add(enqueueNode);
-                    }
-                }*/
 
             }
 

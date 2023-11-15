@@ -7,7 +7,6 @@ public class EnemySwarmi : EnemyContext
     
     private void Start()
     {
-        Start();
         SwitchState(new SwarmiIdle());
     }
 }

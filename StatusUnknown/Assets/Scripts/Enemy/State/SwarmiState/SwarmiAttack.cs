@@ -10,7 +10,11 @@ public class SwarmiAttack : EnemyState
     public override void Update()
     {
         attackDuration -= Time.deltaTime;
-        if (!CombatManager.PlayerInRange(transform.position, attackRange) && attackDuration < 0)
+        if(CombatManager.playerTransform != null )
+        {
+            context.RotateTowards(CombatManager.playerTransform.position - transform.position, 180);
+        }
+        if (!CombatManager.PlayerInRange(transform.position, attackRange) || attackDuration < 0)
         {
             context.SwitchState(new SwarmiChase());
         }
@@ -19,6 +23,6 @@ public class SwarmiAttack : EnemyState
     protected override void Initialize()
     {
         attackDuration = context.stats.AttackDuration;
-        context.changeColor(colorState);
+        context.PlayAnimation("SwarmiAttack");
     }
 }

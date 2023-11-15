@@ -13,6 +13,6 @@ public class SwarmiIdle : EnemyState
 
     protected override void Initialize()
     {
-        context.changeColor(stateColor);
+        
     }
 }
