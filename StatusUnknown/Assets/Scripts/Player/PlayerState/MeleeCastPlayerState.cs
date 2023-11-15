@@ -20,7 +20,6 @@ namespace Player
             {
                 if (castCoroutine == null)
                 {
-                    Debug.Log("cast behave received attack");
                     currentAttack = attack;
                     castCoroutine = StartCoroutine(Cast());
                 }
@@ -35,9 +34,7 @@ namespace Player
             //need to match animation length
             playerStateInterpretor.weaponManager.GetCurrentMeleeWeapon().Cast();
             yield return new WaitForSeconds(currentAttack.castTime);
-            Debug.Log("cast finished");
             playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
-            Debug.Log("exiting cast");
             playerStateInterpretor.AddState("MeleeBuildUpPlayerState", PlayerStateType.ACTION, false);
             playerStateInterpretor.Behave(currentAttack,PlayerStateType.ACTION);
             castCoroutine = null;

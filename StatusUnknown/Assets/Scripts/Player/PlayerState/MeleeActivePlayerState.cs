@@ -13,20 +13,15 @@ namespace Player
 
         public override void OnStateEnter()
         {
-
-            Debug.Log("Active melee weapon");
             inputBufferActive = true;
         }
         
         public override void Behave<T>(T x) 
         {
-            Debug.Log("active behave");
             if (x is MeleeAttack attack)
             {
-                Debug.Log("active behave received attack");
                 if (activeCoroutine == null)
                 {
-                    Debug.Log("active behave received attack and active coroutine was not null");
                     currentAttack = attack;
                     activeCoroutine = StartCoroutine(Active());
                 }
@@ -37,11 +32,9 @@ namespace Player
         private IEnumerator Active()
         {
             weaponManager.GetCurrentMeleeWeapon().Active();
-            Debug.Log("starting active coroutine");
             yield return new WaitForSeconds(currentAttack.activeTime);
             playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
             activeCoroutine = null;
-            Debug.Log("exiting Active");
             playerStateInterpretor.AddState("MeleeRecoveryPlayerState", PlayerStateType.ACTION, false);
             playerStateInterpretor.Behave(currentAttack,PlayerStateType.ACTION);
             currentAttack = null;

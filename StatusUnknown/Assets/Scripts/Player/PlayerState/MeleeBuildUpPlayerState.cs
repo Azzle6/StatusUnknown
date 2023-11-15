@@ -16,7 +16,6 @@ namespace Player
     
         public override void OnStateEnter()
         {
-            Debug.Log("Build up ");
             //weaponManager.GetCurrentMeleeWeapon().BuildUp();
         }
         
@@ -24,7 +23,6 @@ namespace Player
         {
             if (x is MeleeAttack attack)
             {
-                Debug.Log("build behave received attack");
                 currentAttack = attack;
                 if (buildUpCoroutine == null)
                     buildUpCoroutine = StartCoroutine(BuildUp());
@@ -35,7 +33,6 @@ namespace Player
         private IEnumerator BuildUp()
         {
             playerStateInterpretor.weaponManager.GetCurrentMeleeWeapon().BuildUp();
-            Debug.Log("current attack test " + currentAttack.buildUpTime);
             while (buildUpTimer <= currentAttack.buildUpTime)
             {
                 if (superArmorDamageTaken > currentAttack.superArmor)
@@ -46,10 +43,8 @@ namespace Player
                 buildUpTimer += Time.deltaTime;
                 yield return null;
             }
-            Debug.Log("Build up finished");
             if (playerStateInterpretor.CheckState(PlayerStateType.ACTION,"MeleeBuildUpPlayerState"))
             {
-                Debug.Log("buildup sate was still there");
                 playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
                 superArmorDamageTaken = 0;
                 playerStateInterpretor.AddState("MeleeActivePlayerState", PlayerStateType.ACTION, true);

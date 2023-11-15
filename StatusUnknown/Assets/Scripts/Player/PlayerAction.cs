@@ -222,11 +222,7 @@ namespace Player
             if (ctx.canceled)
             {
                 if (!playerStat.weaponMelee[weaponNo])
-                {
-                    Debug.Log("remove state bcs weapon is not melee");
                     playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
-
-                }
                 
                 if (deviceLog.currentDevice == DeviceType.GAMEPAD)
                 {

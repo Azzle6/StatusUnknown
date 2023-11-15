@@ -17,7 +17,6 @@ namespace Player
 
         public override void ActionPressed()
         {
-            Debug.Log("twinblade action pressed");
             Cast();
         }
 

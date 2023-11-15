@@ -42,7 +42,6 @@ namespace Player
 
         public override void OnStateEnter()
         {
-            Debug.Log("ShootingPlayerState");
             if (playerStat.weaponMelee[weaponNo])
             {
                 Fire();
@@ -61,12 +60,10 @@ namespace Player
 
             if (playerStat.weaponMelee[weaponNo])
             {
-                Debug.Log("fire melee weapon");
                 Fire();
             }
             else
             {
-                Debug.Log("fire range weapon");
                 playerStat.isShooting = true;
                 if (shooting == default)
                     shooting = StartCoroutine(Shoot());

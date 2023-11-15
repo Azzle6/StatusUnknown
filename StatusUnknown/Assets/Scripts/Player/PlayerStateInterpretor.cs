@@ -42,7 +42,6 @@ namespace Player
         //before adding a state need to remove previous state
         public void AddState(string state, PlayerStateType playerStateType, bool lockState)
         {
-            Debug.Log("adding state " + state);
             if (statesSlot[playerStateType] != null)
             {
                 if (statesSlot[playerStateType].inputBufferActive)
@@ -61,7 +60,6 @@ namespace Player
     
         public void RemoveState(PlayerStateType playerStateType)
         {
-            Debug.Log("removing state " + playerStateType);
             if (statesSlot[playerStateType] == null)
                 return;
             tempState = statesSlot[playerStateType];
