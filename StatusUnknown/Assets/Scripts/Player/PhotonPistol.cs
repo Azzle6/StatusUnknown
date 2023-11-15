@@ -14,6 +14,7 @@ namespace Player
         private float currentDamage;
         private bool waitForTriggerRelease;
         private bool isInCD;
+        private float cdTimer;
         private bool isReloading;
         private float currentAmmo;
         
@@ -24,7 +25,20 @@ namespace Player
         
         public override void ActionPressed()
         {
-            if ((charging != default) || (isInCD) || (isReloading) || (currentAmmo <= 0))
+            //disabling an object stop its coroutine so we need to check if it is already in cooldown and relaunch it
+            if (isInCD)
+            {
+                StartCoroutine(Cooldown());
+                return;
+            }
+
+            if (isReloading)
+            {
+                Reload(weaponManager.playerAnimator);
+                return;
+            }
+            
+            if ((charging != default) || (isReloading) || (currentAmmo <= 0))
                 return;
             tempProjectile = Pooler.Instance.GetPooledObject(stat.projectilePrefab.name);
             charging = StartCoroutine(Charge());
@@ -66,11 +80,11 @@ namespace Player
 
         public override void ActionReleased()
         {
-            if (charging == default)
-                return;
             waitForTriggerRelease = false;
             StartCoroutine(Cooldown());
-            StopCoroutine(charging);
+            if (charging != default)
+                StopCoroutine(charging);
+            
             tempProjectile.transform.parent = null;
             tempProjectile.TryGetComponent(out Rigidbody tempRb);
             tempRb.velocity = spawnPoint.forward * stat.projectileSpeed;
@@ -87,6 +101,17 @@ namespace Player
                 return;
             StartCoroutine(ReloadingTimer());
             playerAnimator.SetTrigger("Reload");
+        }
+
+        public override void Switched(Animator playerAnimator, bool OnOff)
+        {
+            if (OnOff)
+            {
+                playerAnimator.SetLayerWeight(2,0);
+                playerAnimator.SetLayerWeight(1,1);
+                weaponManager.rigLHand.weight = 1;
+                weaponManager.rigRHand.weight = 1;
+            }
         }
 
         private IEnumerator ReloadingTimer()

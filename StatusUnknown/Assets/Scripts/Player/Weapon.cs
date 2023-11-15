@@ -16,6 +16,8 @@ namespace Player
     
         public abstract void Reload(Animator playerAnimator);
 
+        public abstract void Switched(Animator playerAnimator, bool OnOff);
+
         public abstract void Hit();
 
         

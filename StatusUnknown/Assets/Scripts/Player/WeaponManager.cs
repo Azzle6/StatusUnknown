@@ -1,3 +1,5 @@
+using UnityEngine.Animations.Rigging;
+
 namespace Player
 {
     using DG.Tweening;
@@ -6,10 +8,14 @@ namespace Player
     public class WeaponManager : MonoBehaviour
     {
         public PlayerStateInterpretor playerStateInterpretor;
-        [SerializeField] private Animator playerAnimator;
+        public Animator playerAnimator;
         public Weapon[] weapons;
         public int currentWeaponIndex;
         [SerializeField] private PlayerStat playerStat;
+        public Transform lHandTr;
+        public Transform rHandTr;
+        public Rig rigLHand;
+        public Rig rigRHand;
     
         private void Awake()
         {
@@ -17,6 +23,7 @@ namespace Player
             playerStat.weaponMelee[1] = weapons[1].meleeWeapon;
 
             currentWeaponIndex = 0;
+            SwitchWeapon(0);
             weapons[1].gameObject.SetActive(false);
             RestWeapon();
         }
@@ -37,17 +44,32 @@ namespace Player
         public void PressTriggerWeapon(int weaponNo)
         {
             if (currentWeaponIndex != weaponNo)
-            {
-                if (weapons[weaponNo].meleeWeapon)
-                    weapons[currentWeaponIndex].adsRotTr.localRotation = Quaternion.Euler(weapons[weaponNo].adsRestAngle,0,0);
-                
-                weapons[currentWeaponIndex].gameObject.SetActive(false);
-                weapons[weaponNo].gameObject.SetActive(true);
-                currentWeaponIndex = weaponNo;
-
-            }
+                SwitchWeapon(weaponNo);
             
             weapons[currentWeaponIndex].ActionPressed();
+        }
+
+        private void SwitchWeapon(int weaponNo)
+        {
+            if (weapons[weaponNo].meleeWeapon)
+            {
+                //weapons[currentWeaponIndex].adsRotTr.localRotation = Quaternion.Euler(weapons[weaponNo].adsRestAngle,0,0); why ?
+                //changing arm layer
+                playerStateInterpretor.animator.SetLayerWeight(2,1);
+                playerStateInterpretor.animator.SetLayerWeight(1,0);
+
+            }
+            else
+            {
+                playerStateInterpretor.animator.SetLayerWeight(2,0);
+                playerStateInterpretor.animator.SetLayerWeight(1,1);
+            }
+                
+            weapons[currentWeaponIndex].Switched(playerAnimator, false);
+            weapons[weaponNo].gameObject.SetActive(true);
+            weapons[weaponNo].Switched(playerAnimator, true);
+            weapons[currentWeaponIndex].gameObject.SetActive(false);
+            currentWeaponIndex = weaponNo;
         }
     
     

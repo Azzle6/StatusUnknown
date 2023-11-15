@@ -162,9 +162,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7d75b433304910479abac5c0eea2c29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponManager: {fileID: 0}
+  meleeWeapon: 0
   adsRotTr: {fileID: 2055156643633869358}
   adsAimAngle: 0
   adsRestAngle: 80
+  meshes:
+  - {fileID: 2201431471329000006}
   stat: {fileID: 11400000, guid: 75cb83bae9127bd4aa4a7d0f57717f6a, type: 2}
   spawnPoint: {fileID: 727943814089368775}
 --- !u!1 &2366914169210452901

@@ -1,3 +1,5 @@
+using System.Reflection;
+
 namespace Player
 {
     using UnityEngine;
@@ -193,6 +195,7 @@ namespace Player
     
         public void OnWeapon(InputAction.CallbackContext ctx, int weaponNo)
         {
+            
             if (ctx.started)
             {
                 if (playerStateInterpretor.statesSlot[PlayerStateType.AIM] == null)

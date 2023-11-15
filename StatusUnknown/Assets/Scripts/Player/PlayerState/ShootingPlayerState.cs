@@ -53,7 +53,6 @@ namespace Player
             if (playerStat.weaponMelee[weaponNo])
             {
                 shooting = null;
-                Debug.Log("Melee");
                 Fire();
             }
             else
@@ -62,7 +61,6 @@ namespace Player
                 playerStat.isShooting = true;
                 if (shooting == default)
                 {
-                    Debug.Log("Starting Shooting");
                     shooting = StartCoroutine(Shoot());
                 }
             }
@@ -142,7 +140,10 @@ namespace Player
         {
             weaponManager.ReleaseTriggerWeapon();
             if (shooting != default)
+            {
                 StopCoroutine(shooting);
+                shooting = default;
+            }
             playerStat.isShooting = false;
         }
         
