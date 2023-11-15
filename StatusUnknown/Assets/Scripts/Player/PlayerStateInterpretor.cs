@@ -1,3 +1,5 @@
+using UnityEngine.Serialization;
+
 namespace Player
 {
     using System.Collections.Generic;
@@ -13,6 +15,7 @@ namespace Player
         [HideInInspector] public PlayerState aimState;
         [HideInInspector] public PlayerState actionState;
         [HideInInspector] public PlayerState inputBufferState;
+        //[HideInInspector] public string inputBufferStateName;
         [SerializeField] private List<PlayerState> unusedPlayerStates;
         private PlayerState tempState;
         [Header("Player Component")]
@@ -45,10 +48,16 @@ namespace Player
             if (statesSlot[playerStateType] != null)
             {
                 if (statesSlot[playerStateType].inputBufferActive)
+                {
                     inputBufferState = playerStates[state];
+                    //inputBufferStateType = playerStates[state].playerStateType;
+                    //inputBufferStateName = state;
+                }
                 
                 if (statesSlot[playerStateType].lockState)
                     return;
+                
+            
             }
             
             tempState = playerStates[state];
@@ -94,9 +103,9 @@ namespace Player
         {
             if(inputBufferState == default)
                 return;
-            
-            AddState(inputBufferState.name, inputBufferState.playerStateType, false);
-            inputBufferState = null;
+            AddState(inputBufferState.GetType().Name, inputBufferState.playerStateType, false);
+            //inputBufferStateType = default;
+            //inputBufferStateName = null;
         }
 
         public void LockPlayerInput()

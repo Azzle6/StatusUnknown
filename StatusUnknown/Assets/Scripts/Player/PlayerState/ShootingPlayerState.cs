@@ -42,15 +42,7 @@ namespace Player
 
         public override void OnStateEnter()
         {
-            if (playerStat.weaponMelee[weaponNo])
-            {
-                Fire();
-            }
-            else
-            {
-                playerStat.isShooting = true;
-                shooting = StartCoroutine(Shoot());
-            }
+            
         }
         
         public override void Behave<T>(T x)
@@ -60,19 +52,25 @@ namespace Player
 
             if (playerStat.weaponMelee[weaponNo])
             {
+                shooting = null;
+                Debug.Log("Melee");
                 Fire();
             }
             else
             {
+                Debug.Log("Shooting");
                 playerStat.isShooting = true;
                 if (shooting == default)
+                {
+                    Debug.Log("Starting Shooting");
                     shooting = StartCoroutine(Shoot());
+                }
             }
         }
         
         private IEnumerator Shoot()
         {
-            while (playerStat.isShooting && playerStat.weaponMelee[weaponNo] == false)
+            while (playerStat.isShooting)// && playerStat.weaponMelee[weaponNo] == false)
             {
                 FrustrumCulling();
                 DetermineClosestTarget();

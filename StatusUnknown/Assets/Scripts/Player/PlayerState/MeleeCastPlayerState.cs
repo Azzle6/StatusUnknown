@@ -34,9 +34,13 @@ namespace Player
             //need to match animation length
             playerStateInterpretor.weaponManager.GetCurrentMeleeWeapon().Cast();
             yield return new WaitForSeconds(currentAttack.castTime);
-            playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
-            playerStateInterpretor.AddState("MeleeBuildUpPlayerState", PlayerStateType.ACTION, false);
-            playerStateInterpretor.Behave(currentAttack,PlayerStateType.ACTION);
+            if (playerStateInterpretor.CheckState(PlayerStateType.ACTION,"MeleeCastPlayerState"))
+            {
+                playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
+                playerStateInterpretor.AddState("MeleeBuildUpPlayerState", PlayerStateType.ACTION, true);
+                playerStateInterpretor.Behave(currentAttack,PlayerStateType.ACTION);
+            }
+          
             castCoroutine = null;
             currentAttack = null;
         }
