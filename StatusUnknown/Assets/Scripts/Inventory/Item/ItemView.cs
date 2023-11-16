@@ -35,11 +35,14 @@ namespace Inventory.Item
             if (this.ViewRoot != null)
                 this.ViewRoot.parent.Remove(this.ViewRoot);
             
-            Vector2Int shapeSize = this.item.gridItemDefinition.shape.shapeSize;
+            Shape shape = this.item.GridItemDefinition.shape;
             VisualElement itemView = UIHandler.Instance.uiSettings.itemTemplate.Instantiate();
             itemView.style.position = Position.Absolute;
+            
             this.verticalRoot = itemView.Q<VisualElement>("verticalRoot");
-            for (int y = 0; y < shapeSize.y; y++)
+            VisualElement[] slots = GridBuilder.BuildGrid(shape, this.verticalRoot, UIHandler.Instance.uiSettings.itemSquareTemplate);
+            
+            /*for (int y = 0; y < shapeSize.y; y++)
             {
                 VisualElement horizontalParent = new VisualElement();
                 horizontalParent.AddToClassList("horizontalParent");
@@ -56,7 +59,7 @@ namespace Inventory.Item
                         ? "baseSlot"
                         : "hiddenSlot");
                 }
-            }
+            }*/
             this.ViewRoot = itemView;
             this.FocusElement = itemView.Q<VisualElement>("focusParent");
         }
@@ -83,14 +86,14 @@ namespace Inventory.Item
             this.FocusElement.focusable = true;
         }
 
-        public static ItemView InstantiateItemView(E_ItemType type, Item item, Vector2Int gridPosition, GridView gridView)
+        public static ItemView InstantiateItemView(Item item, Vector2Int gridPosition, GridView gridView)
         {
-            switch (type)
+            switch (item.GridItemDefinition.ItemType)
             {
                 case E_ItemType.MODULE:
-                    return new ModuleItemView(item, gridPosition, gridView);
+                    return new ModuleItemView((Module)item, gridPosition, gridView);
                 case E_ItemType.WEAPON:
-                    return new WeaponItemView(item, gridPosition, gridView);
+                    return new WeaponItemView((Weapon)item, gridPosition, gridView);
             }
 
             return null;

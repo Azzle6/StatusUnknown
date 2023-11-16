@@ -6,8 +6,13 @@ namespace Weapons
     
     public class WeaponItemView : ItemView
     {
-        public WeaponItemView(Item item, Vector2Int gridPosition, GridView gridView) : base(item, gridPosition, gridView)
-        { }
+        public WeaponItemView(Weapon item, Vector2Int gridPosition, GridView gridView) : base(item, gridPosition,
+            gridView)
+        {
+            this.WeaponItem = item;
+        }
+
+        public Weapon WeaponItem;
 
         protected override void GenerateCustomView()
         {

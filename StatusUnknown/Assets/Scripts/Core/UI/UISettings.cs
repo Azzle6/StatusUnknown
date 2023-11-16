@@ -10,6 +10,8 @@ namespace Core.UI
     {
         [FoldoutGroup("Assets references")]
         public VisualTreeAsset slotTreeAsset;
+        [FoldoutGroup("Assets references")] 
+        public VisualTreeAsset itemSquareTemplate;
         [FoldoutGroup("Assets references")]
         public VisualTreeAsset itemTemplate;
         [FoldoutGroup("Assets references")]
@@ -17,5 +19,8 @@ namespace Core.UI
 
         [FoldoutGroup("Parameters")]
         public float slotWidth;
+
+        [FoldoutGroup("Styles naming")]
+        public string hiddenStyle;
     }
 }

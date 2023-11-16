@@ -51,14 +51,14 @@ namespace Core.SingletonsSO
 
         private void MoveItem(IGridElement focusedElement)
         {
-            this.movingItem.CanPlaceItemFeedback(this.selectedGrid.CanPlaceItem(this.movingItem.item.gridItemDefinition.shape, focusedElement.GridPosition));
+            this.movingItem.CanPlaceItemFeedback(this.selectedGrid.CanPlaceItem(this.movingItem.item.GridItemDefinition.shape, focusedElement.GridPosition));
             this.selectedGrid.SetItemVisualPosition(this.movingItem, focusedElement.GridPosition);
             //Debug.Log($"Move item to {focusedElement.gridPosition} in grid parent {this.selectedGrid}.");
         }
 
         public void TryDropItem(Vector2Int pos)
         {
-            if (this.selectedGrid.CanPlaceItem(this.movingItem.item.gridItemDefinition.shape, pos))
+            if (this.selectedGrid.CanPlaceItem(this.movingItem.item.GridItemDefinition.shape, pos))
                 this.DropItem(pos);
         }
 

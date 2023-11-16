@@ -2,28 +2,29 @@ namespace Weapons
 {
     using System;
     using System.Collections.Generic;
-    using AYellowpaper.SerializedCollections;
+    using Core.Helpers;
     using Inventory.Item;
     using Module;
     using Sirenix.OdinInspector;
-    using UnityEngine;
 
     [Serializable]
-    public class Weapon
+    public class Weapon : Item
     {
+        public override GridItemSO GridItemDefinition => this.definition;
         public WeaponDefinitionSO definition;
+        
         public WeaponTriggerGridData[] triggerInfoData;
         
         #region CONSTRUCTOR
         public Weapon(WeaponDefinitionSO def)
         {
-            this.definition = def;
             List<WeaponTriggerGridData> triggerInfosResult = new List<WeaponTriggerGridData>();
             
             foreach (WeaponTriggerDefinition trigger in def.triggers)
                 triggerInfosResult.Add(new WeaponTriggerGridData(trigger));
 
             this.triggerInfoData = triggerInfosResult.ToArray();
+            this.definition = def;
         }
         #endregion
 
@@ -48,13 +49,12 @@ namespace Weapons
     {
         public TriggerSO triggerType;
         public int triggerRowPosition;
-        [SerializedDictionary] 
-        public SerializedDictionary<Vector2Int, Item> content;
+        public VectorIntItemDictionary content;
 
         public WeaponTriggerGridData(WeaponTriggerDefinition triggerDefinitionData)
         {
             this.triggerType = triggerDefinitionData.trigger;
-            this.content = new SerializedDictionary<Vector2Int, Item>();
+            this.content = new VectorIntItemDictionary();
             this.triggerRowPosition = triggerDefinitionData.triggerRowPosition;
         }
     }

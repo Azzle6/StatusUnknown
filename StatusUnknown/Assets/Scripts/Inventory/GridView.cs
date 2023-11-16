@@ -1,6 +1,5 @@
 namespace Inventory
 {
-    using AYellowpaper.SerializedCollections;
     using Core.Helpers;
     using System;
     using System.Collections.Generic;
@@ -10,7 +9,7 @@ namespace Inventory
     using UnityEngine.UIElements;
     public class GridView
     {
-        private SerializedDictionary<Vector2Int, Item.Item> content;
+        private VectorIntItemDictionary content;
         private Shape shape;
         
         private Slot[] slots;
@@ -34,11 +33,12 @@ namespace Inventory
         private VisualElement firstFocus;
         
         #region CONSTRUCTOR
-        public GridView(VisualElement root, Shape shape, SerializedDictionary<Vector2Int, Item.Item> content)
+        public GridView(VisualElement root, Shape shape, VectorIntItemDictionary content)
         {
             this.gridRoot = root;
             this.shape = shape;
             this.content = content;
+            this.gridElementFocusEvent += UIHandler.Instance.OnGridElementFocus;
             this.BuildGrid();
         }
         #endregion //CONSTRUCTOR
@@ -59,49 +59,32 @@ namespace Inventory
         private void BuildGrid()
         {
             this.firstFocus = null;
-            Shape gridShape = this.shape;
-            List<Slot> slotsList = new List<Slot>();
-            VisualTreeAsset slotTemplate = UIHandler.Instance.uiSettings.slotTreeAsset;
             VisualElement verticalParent = this.gridRoot.Q<VisualElement>("verticalParent");
-            verticalParent.Clear();
+            
+            //Faire des trucs ici là 
+            VisualElement[] gridSlots = GridBuilder.BuildGrid(this.shape, verticalParent, UIHandler.Instance.uiSettings.slotTreeAsset);
 
-            for (int y = 0; y < gridShape.shapeSize.y; y++)
+            List<Slot> slotsList = new List<Slot>();
+            for (int y = 0; y < this.shape.shapeSize.y; y++)
             {
-                VisualElement horizontalParent = new VisualElement();
-                horizontalParent.AddToClassList("horizontalParent");
-                verticalParent.Insert(y, horizontalParent);
-                
-                for (int x = 0; x < gridShape.shapeSize.x; x++)
+                for (int x = 0; x < this.shape.shapeSize.x; x++)
                 {
-                    VisualElement slotView = slotTemplate.Instantiate();
-                    
-                    horizontalParent.Insert(x, slotView);
-                    VisualElement gridSlotElement = slotView.Q<VisualElement>("gridSlot");
-                    Slot slot = new Slot(new Vector2Int(x, y), slotView, this);
+                    Vector2Int pos = new Vector2Int(x, y);
+                    VisualElement slotView = gridSlots[GridHelper.GetIndexFromGridPosition(pos, this.shape.shapeSize.x)];
+                    Slot slot = new Slot(pos, slotView, this);
+                    slot.FocusElement.RegisterCallback<FocusEvent>(e => this.gridElementFocusEvent?.Invoke(slot));
+                    slot.FocusElement.RegisterCallback<NavigationSubmitEvent>(e => this.OnInteract(slot));
                     slotsList.Add(slot);
-
-                    if (this.shape.GetContentFromPosition(new Vector2Int(x, y)))
-                    {
-                        gridSlotElement.name = $"{x},{y}";
-                        slot.FocusElement.RegisterCallback<FocusEvent>(e => this.gridElementFocusEvent?.Invoke(slot));
-                        slot.FocusElement.RegisterCallback<NavigationSubmitEvent>(e => this.OnInteract(slot));
-                        this.firstFocus ??= gridSlotElement;
-                    }
-                    else
-                    {
-                        slotView.AddToClassList("hiddenSlot");
-                    }
+                    if (!slotView.ClassListContains("hiddenSlot"))
+                        this.firstFocus ??= slot.FocusElement;
                 }
             }
-            
-            this.gridElementFocusEvent += UIHandler.Instance.OnGridElementFocus;
-
             this.slots = slotsList.ToArray();
         }
         #endregion //GRID_BUILD
         
         #region CONTENT_SAVE_LOAD
-        public void LoadNewData(Shape shape, SerializedDictionary<Vector2Int, Item.Item> content)
+        public void LoadNewData(Shape shape, VectorIntItemDictionary content)
         {
             ClearContent(false);
             
@@ -114,7 +97,7 @@ namespace Inventory
         public void LoadContent()
         {
             ClearContent(false);
-            foreach (KeyValuePair<Vector2Int, Item.Item> info in this.content)
+            foreach (var info in this.content)
             {
                 if (info.Value == null)
                 {
@@ -122,7 +105,7 @@ namespace Inventory
                     continue;
                 }
                 
-                ItemView itemView = ItemView.InstantiateItemView(info.Value.gridItemDefinition.ItemType ,info.Value, info.Key, this);
+                ItemView itemView = ItemView.InstantiateItemView(info.Value, info.Key, this);
                 this.SetItemPosition(itemView, info.Key);
                 this.itemsView.Add(itemView);
                 itemView.FocusElement.RegisterCallback<FocusEvent>(e => this.gridElementFocusEvent?.Invoke(itemView));
@@ -170,7 +153,7 @@ namespace Inventory
         #region CONTENT_ACTIONS
         public void OnPickItem(ItemView itemView)
         {
-            SetSlotsContent(itemView.item.gridItemDefinition.shape, itemView.GridPosition, null);
+            SetSlotsContent(itemView.item.GridItemDefinition.shape, itemView.GridPosition, null);
             this.itemsView.Remove(itemView);
             UIHandler.Instance.ForceFocus(GetSlot(itemView.GridPosition).FocusElement);
             this.SaveContent();
@@ -191,7 +174,7 @@ namespace Inventory
             itemView.GridPosition = pos;
             
             //Setup slots infos under the item
-            SetSlotsContent(itemView.item.gridItemDefinition.shape, pos, itemView);
+            SetSlotsContent(itemView.item.GridItemDefinition.shape, pos, itemView);
             
             //Register item in grid
             this.itemsView.Add(itemView);
@@ -202,7 +185,7 @@ namespace Inventory
             itemView.ViewRoot.RemoveFromHierarchy();
             this.itemsView.Remove(itemView);
 
-            this.SetSlotsContent(itemView.item.gridItemDefinition.shape, itemView.GridPosition, null);
+            this.SetSlotsContent(itemView.item.GridItemDefinition.shape, itemView.GridPosition, null);
         }
         #endregion //CONTENT_ACTIONS
         

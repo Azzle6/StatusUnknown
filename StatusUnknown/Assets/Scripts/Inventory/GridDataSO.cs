@@ -1,6 +1,6 @@
 namespace Inventory
 {
-    using AYellowpaper.SerializedCollections;
+    using Core.Helpers;
     using UnityEngine;
 
     [CreateAssetMenu(menuName = "CustomAssets/Data/GridData", fileName = "GridData", order = 0)]
@@ -9,7 +9,6 @@ namespace Inventory
         [field: SerializeField]
         public Shape Shape { get; set; }
 
-        [SerializedDictionary]
-        public SerializedDictionary<Vector2Int, Item.Item> content;
+        public VectorIntItemDictionary content;
     }
 }
