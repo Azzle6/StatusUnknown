@@ -13,6 +13,7 @@ namespace StatusUnknown.CoreGameplayContent
         [SerializeField] private GameplayDataSO gameplayDataSO; 
         [SerializeField] private GameObject enemyObj;
         [SerializeField] private GameObject damagePrinterObj;
+        private MeshRenderer objMeshRenderer; 
 
         public EnemyConfigSO EnemyConfigSO { get => enemySO; set => enemySO = value; }
 
@@ -53,6 +54,8 @@ namespace StatusUnknown.CoreGameplayContent
             panelImage.color = enemySO.EnemyColor;
 
             damagePrinterObj.SetActive(false);
+            objMeshRenderer = GetComponentInChildren<MeshRenderer>();
+            objMeshRenderer.enabled = true; 
         }
 
         public void TakeDamage(int damage)
@@ -66,8 +69,8 @@ namespace StatusUnknown.CoreGameplayContent
 
             if (currentHP <= 0 && gameObject)
             {
-                currentHP = 0; 
-                Destroy(enemyObj);
+                currentHP = 0;
+                objMeshRenderer.enabled = false; 
                 isDead = true; 
             }
         }

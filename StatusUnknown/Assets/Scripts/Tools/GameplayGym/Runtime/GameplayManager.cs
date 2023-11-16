@@ -14,6 +14,7 @@ namespace StatusUnknown.CoreGameplayContent
     [RequireComponent(typeof(AudioSource))]
     public class GameplayManager : MonoBehaviour, INotifyValueChanged<bool>
     {
+        #region Data
         [Header("General")]
         //[SerializeField] AudioSource source; 
         [SerializeField] private AbilityConfigSO_Base[] buildToSimulate;
@@ -72,13 +73,17 @@ namespace StatusUnknown.CoreGameplayContent
 
         private const string LOG_ERROR_ENCOUNTER_NULL = "Could not generate encounter. Make sure the \"Enemy Encounter SO\" field is not empty.";
         private const string LOG_ERROR_BUILD_NULL = "No abilities were found on your \"buildToSimulate\" array.";
+        #endregion
 
+        #region Unity Callbacks
         private void OnValidate()
         {
             value = useCustomBuildSO; 
         }
+        #endregion
 
-        private void OnEnable()
+        #region CORE LOGIC
+        private void Init()
         {
             totalDamage_UI.SetText(string.Empty);
 
@@ -108,67 +113,11 @@ namespace StatusUnknown.CoreGameplayContent
             gameplayDataSO.Init();
         }
 
-        [Button(ButtonHeight = 40), PropertySpace, GUIColor("yellow")]
-        public void SaveBuild()
-        {
-            if (string.Equals(buildSaveName, "Build_Playstyle_Num"))
-            {
-                Debug.LogError(LOG_ERROR_OVERWRITE_BUILD);
-                return;
-            }
-
-            CreateNewBuildInstance(); 
-
-            simulatorInstance.name = buildSaveName; 
-            StatusUnknown_AssetManager.SaveSO(simulatorInstance, StatusUnknown_AssetManager.SAVE_PATH_BUILD, buildSaveName, ".asset");
-            buildSaveName = "Build_Playstyle_Num"; // cheap solution to avoid overwriting existing asset by accident
-        }
-
-        private void CreateNewBuildInstance()
-        {
-            simulatorInstance = ScriptableObject.CreateInstance<CombatSimulatorSO>();
-            simulatorInstance.abilitiesConfig = new AbilityConfigSO_Base[buildToSimulate.Length];
-            Array.Copy(buildToSimulate, simulatorInstance.abilitiesConfig, buildToSimulate.Length);
-        }
-
-        private void RepopulateBuildArray()
-        {
-            buildToSimulate = new AbilityConfigSO_Base[customBuildSO.abilitiesConfig.Length];
-            for (int i = 0; i < buildToSimulate.Length; i++)
-            {
-                buildToSimulate[i] = customBuildSO.abilitiesConfig[i];  
-            }
-
-            Debug.Log("repopulated array with new build from scriptable object"); 
-        }
-
-        [Button(ButtonHeight = 40), PropertySpace, GUIColor("green")]
-        public void GenerateEncounter()
-        {
-            GameObject[] curentlySpawnedEnemies = GameObject.FindGameObjectsWithTag("Enemy");
-            for (int i = 0; i < curentlySpawnedEnemies.Length; i++)
-            {
-                DestroyImmediate(curentlySpawnedEnemies[i]);
-            }
-
-            try
-            {
-                for (int i = 0; i < EnemyEncounterSO.EnemyDatas.Length; i++)
-                {
-                    EnemyData currentEnemyData = EnemyEncounterSO.EnemyDatas[i];
-                    GameObject instance = StatusUnknown_AssetManager.InstantiatePrefabAtPosition(prefab_enemy[currentEnemyData.enemyConfig.Type_ID], currentEnemyData.position);
-                }
-            }
-            catch (Exception e) 
-            {
-                Debug.LogError(string.Concat(LOG_ERROR_ENCOUNTER_NULL, $"\n Full error message infos {e.Message}"));
-            }
-        }
-
-        #region CORE LOGIC
         [Button(ButtonHeight = 100), PropertySpace, GUIColor("green")]
         public void StartSimulation() // Entry Point (done once)
         {
+            Init();
+
             currentIndex = 0;
             lastIndex = simulatorInstance.GetAbilitiesArrayLength() - 1;
             StopAllCoroutines(); 
@@ -286,9 +235,63 @@ namespace StatusUnknown.CoreGameplayContent
         #endregion
 
         #region LOAD
+        [Button(ButtonHeight = 40), PropertySpace, GUIColor("green")]
+        public void GenerateEncounter()
+        {
+            GameObject[] curentlySpawnedEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+            for (int i = 0; i < curentlySpawnedEnemies.Length; i++)
+            {
+                DestroyImmediate(curentlySpawnedEnemies[i]);
+            }
+
+            try
+            {
+                for (int i = 0; i < EnemyEncounterSO.EnemyDatas.Length; i++)
+                {
+                    EnemyData currentEnemyData = EnemyEncounterSO.EnemyDatas[i];
+                    GameObject instance = StatusUnknown_AssetManager.InstantiatePrefabAtPosition(prefab_enemy[currentEnemyData.enemyConfig.Type_ID], currentEnemyData.position);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(string.Concat(LOG_ERROR_ENCOUNTER_NULL, $"\n Full error message infos {e.Message}"));
+            }
+        }
+
+        private void RepopulateBuildArray()
+        {
+            buildToSimulate = new AbilityConfigSO_Base[customBuildSO.abilitiesConfig.Length];
+            for (int i = 0; i < buildToSimulate.Length; i++)
+            {
+                buildToSimulate[i] = customBuildSO.abilitiesConfig[i];
+            }
+        }
         #endregion
 
         #region SAVE
+        private void CreateNewBuildInstance()
+        {
+            simulatorInstance = ScriptableObject.CreateInstance<CombatSimulatorSO>();
+            simulatorInstance.abilitiesConfig = new AbilityConfigSO_Base[buildToSimulate.Length];
+            Array.Copy(buildToSimulate, simulatorInstance.abilitiesConfig, buildToSimulate.Length);
+        }
+
+        [Button(ButtonHeight = 40), PropertySpace, GUIColor("yellow")]
+        public void SaveBuild()
+        {
+            if (string.Equals(buildSaveName, "Build_Playstyle_Num"))
+            {
+                Debug.LogError(LOG_ERROR_OVERWRITE_BUILD);
+                return;
+            }
+
+            CreateNewBuildInstance();
+
+            simulatorInstance.name = buildSaveName;
+            StatusUnknown_AssetManager.SaveSO(simulatorInstance, StatusUnknown_AssetManager.SAVE_PATH_BUILD, buildSaveName, ".asset");
+            buildSaveName = "Build_Playstyle_Num"; // cheap solution to avoid overwriting existing asset by accident
+        }
+
         [Button(ButtonHeight = 40), PropertySpace, GUIColor("yellow")]
         private void SaveEncounter() 
         {
@@ -320,11 +323,14 @@ namespace StatusUnknown.CoreGameplayContent
         private void SaveFullSimulationPayload() { }
         #endregion
 
+        #region Interfaces
+
         public void SetValueWithoutNotify(bool v)
         {
             useCustomBuildSO = v;
             Debug.Log("SetValueWithoutNotify: " + v);
         }
+        #endregion
     }
 
     #region Templates
