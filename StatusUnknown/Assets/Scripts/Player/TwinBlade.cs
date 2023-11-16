@@ -8,7 +8,6 @@ namespace Player
 
     public class TwinBlade : MeleeWeapon
     {
-        public int comboIndex;
         [SerializeField] private TwinBladeStat twinBladeStat;
         [SerializeField] private Transform bladeLeft;
         [SerializeField] private Transform bladeRight;
@@ -39,9 +38,13 @@ namespace Player
             {
                 bladeLeft.gameObject.SetActive(false);
                 bladeRight.gameObject.SetActive(false);
+                foreach (HitContext hitContext in hitContexts)
+                    hitContext.HitTriggerEvent -= Hit;
             }
             else
             {
+                foreach (HitContext hitContext in hitContexts)
+                    hitContext.HitTriggerEvent += Hit;
                 playerAnimator.SetInteger("WeaponID", twinBladeStat.weaponID);
                 bladeLeft.gameObject.SetActive(true);
                 bladeRight.gameObject.SetActive(true);
@@ -58,54 +61,40 @@ namespace Player
 
         public override void Hit()
         {
+            
+        }
 
+        public void Hit(IDamageable target)
+        {
+            target.TakeDamage(twinBladeStat.attacks[comboIndex].attackDamage, Vector3.zero);
         }
 
         public override void Cast()
         {
-            if (weaponManager.playerStateInterpretor.CheckState(PlayerStateType.ACTION, "MeleeCastPlayerState") || weaponManager.playerStateInterpretor.CheckState(PlayerStateType.ACTION, "MeleeBuildUpPlayerState"))
-                return;
-            
-            if (cooldownCoroutine != default)
-            {
-                StopCoroutine(cooldownCoroutine);
-                cooldownCoroutine = default;
-            }
-            
-            weaponManager.playerStateInterpretor.AddState("MeleeCastPlayerState",PlayerStateType.ACTION, false);
+            base.Cast();
             weaponManager.playerStateInterpretor.Behave(twinBladeStat.attacks[comboIndex],PlayerStateType.ACTION);
-
-            weaponManager.playerAnimator.SetTrigger("MeleeHit");   
-            weaponManager.playerAnimator.SetInteger("MeleeCombo", comboIndex);
-         
-                
-
         }
 
         public override void BuildUp()
         {
-            if (weaponManager.playerStateInterpretor.CheckState(PlayerStateType.ACTION, "MeleeBuildUpPlayerState"))
-                return;
+            base.BuildUp();
             weaponManager.playerStateInterpretor.Behave(twinBladeStat.attacks[comboIndex],PlayerStateType.ACTION);
-
         }
 
         public override void Active()
         {
-            if (weaponManager.playerStateInterpretor.CheckState(PlayerStateType.ACTION, "MeleeActivePlayerState"))
-                return;
-            
+            base.Active();
             weaponManager.playerStateInterpretor.Behave(twinBladeStat.attacks[comboIndex],PlayerStateType.ACTION);
 
         }
 
         public override void Recovery()
         {
+            base.Recovery();
             /*if (weaponManager.playerStateInterpretor.CheckState(PlayerStateType.ACTION, "MeleeRecoveryPlayerState"))
                 return;*/
             weaponManager.playerStateInterpretor.Behave(twinBladeStat.attacks[comboIndex],PlayerStateType.ACTION);
 
-            comboIndex++;
             Debug.Log(comboIndex + " combo index" + twinBladeStat.attacks.Length + " length");
             if (comboIndex > twinBladeStat.attacks.Length -1)
             {
@@ -113,7 +102,7 @@ namespace Player
                 comboIndex = 0;
             }
 
-            cooldownCoroutine = StartCoroutine(Cooldown());
+
         }
 
         public override IEnumerator Cooldown()
@@ -122,5 +111,6 @@ namespace Player
             comboIndex = 0;
             Debug.Log("Combo index reset in coroutine");
         }
+        
     }
 }

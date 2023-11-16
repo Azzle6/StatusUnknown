@@ -18,7 +18,7 @@ namespace Player
             
             if (x is MeleeAttack attack)
             {
-                if (castCoroutine == null)
+                if (castCoroutine == null && currentAttack == null)
                 {
                     currentAttack = attack;
                     castCoroutine = StartCoroutine(Cast());
@@ -38,11 +38,12 @@ namespace Player
             {
                 playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
                 playerStateInterpretor.AddState("MeleeBuildUpPlayerState", PlayerStateType.ACTION, true);
-                playerStateInterpretor.Behave(currentAttack,PlayerStateType.ACTION);
+                MeleeAttack attackToBehave = currentAttack;
+                currentAttack = null;
+                playerStateInterpretor.Behave(attackToBehave,PlayerStateType.ACTION);
             }
-          
+
             castCoroutine = null;
-            currentAttack = null;
         }
         
         public override void OnStateExit()

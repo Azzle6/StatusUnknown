@@ -99,6 +99,11 @@ namespace Player
             tempRb.velocity = spawnPoint.forward * stat.projectileSpeed;
             tempProjectile.TryGetComponent(out PhotonPistolBullet tempPPbullet);
             tempPPbullet.damage = currentDamage;
+            tempProjectile.TryGetComponent(out HitContext tempHitContext);
+            HitSphere tempHitSphere = tempHitContext.hitShape as HitSphere;
+            tempHitSphere.radius = tempProjectile.transform.localScale.y / 2;
+            tempHitContext.HitTriggerEvent += tempPPbullet.Hit;
+            
             tempProjectile = default;
             charging = default;
             currentAmmo--;
@@ -147,5 +152,7 @@ namespace Player
         {
             
         }
+        
+        
     }
 }

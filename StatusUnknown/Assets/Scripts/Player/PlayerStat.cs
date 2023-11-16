@@ -8,6 +8,10 @@ namespace Player
     [CreateAssetMenu(fileName = "PlayerStat", menuName = "CustomAssets/PlayerStat", order = 1)]
     public class PlayerStat : ScriptableObject
     {
+        
+        [Header("Health")]
+        public float maxHealth;
+        public float medKitHealAmount;
         [Header("Movement")]
         public float moveSpeed;
 

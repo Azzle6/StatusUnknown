@@ -8,13 +8,10 @@ public class PhotonPistolBullet : MonoBehaviour
 {
     [HideInInspector] public float damage;
     public float knockbackStrength = 10f;
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.TryGetComponent(out IDamageable damageable))
-        {
-            damageable.TakeDamage(damage,  (other.transform.position - transform.position) * knockbackStrength);
-            Debug.Log(other.name);
-        }
-      
-    }
+    
+     public void Hit(IDamageable target)
+     {
+         target.TakeDamage(damage, transform.forward * knockbackStrength);
+     }
+     
 }
