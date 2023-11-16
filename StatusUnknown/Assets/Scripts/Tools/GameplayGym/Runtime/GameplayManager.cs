@@ -15,19 +15,26 @@ namespace StatusUnknown.CoreGameplayContent
     {
         [Header("General")]
         //[SerializeField] AudioSource source; 
-        [SerializeField] private CombatSimulatorSO CombatSimulatorSO;
-        [SerializeField] private EnemyEncounterConfigSO EnemyEncounterSO;
+        [SerializeField] private AbilityConfigSO_Base[] buildToSimulate;
+        private const int DELAY_BETWEEN_ABILITIES = 1;
+
+        [Header("Encounter")]
+        [Space, SerializeField] private EnemyEncounterConfigSO EnemyEncounterSO;
         [SerializeField] private string encounterSaveName = "Encounter_Difficulty_Num";
 
-        private const int DELAY = 1;
+        [Header("Build")]
+        [Space, SerializeField] private CombatSimulatorSO customBuildSO;
+        [SerializeField] private bool useCustomBuildSO;
+        private CombatSimulatorSO simulatorInstance;  
 
         [Header("Ability Types Template")]
-        [SerializeField] private bool showTemplate = false; 
         [Space, SerializeField] private DamageType_Burst template_burst;
         [SerializeField] private DamageType_OverTime template_overTime;
         [SerializeField] private DamageType_Delayed template_delayed;
         private AbilityConfigTemplate[] abilityConfigTemplates = new AbilityConfigTemplate[3];
         private (AbilityInfos infos, AbilityConfigSO_Base so) currentAbilityData = new();
+        //[SerializeField] private bool showTemplate = false; 
+
 
         private AbilityConfigSO_Burst currentAbilityConfigSO_Burst = null;
         private AbilityConfigSO_OverTime currentAbilityConfigSO_OverTime = null;
@@ -49,6 +56,7 @@ namespace StatusUnknown.CoreGameplayContent
             "If you want to overwrite an existing encounter, use the same name in the \"Encounter Save Name\" field.";
 
         private const string LOG_ERROR_ENCOUNTER_NULL = "Could not generate encounter. Make sure the \"Enemy Encounter SO\" field is not empty.";
+        private const string LOG_ERROR_BUILD_NULL = "No abilities were found on your \"buildToSimulate\" array.";
 
         private void OnEnable()
         {
@@ -56,15 +64,36 @@ namespace StatusUnknown.CoreGameplayContent
 
             abilityConfigTemplates = new AbilityConfigTemplate[]
             {
-                template_burst, 
+                template_burst,
                 template_overTime,
                 template_delayed,
             };
 
-            if (CombatSimulatorSO == null) return;
+            if (useCustomBuildSO && customBuildSO != null)
+            {
+                simulatorInstance = customBuildSO;
+            }
+            else 
+            {
+                if (buildToSimulate.Length == 0)
+                {
+                    Debug.LogError(LOG_ERROR_BUILD_NULL);
+                    return;
+                }
 
+                simulatorInstance = ScriptableObject.CreateInstance<CombatSimulatorSO>();
+                simulatorInstance.abilitiesConfig = new AbilityConfigSO_Base[buildToSimulate.Length]; 
+                Array.Copy(buildToSimulate, simulatorInstance.abilitiesConfig, buildToSimulate.Length);
+            }       
+
+            currentAbilityData = simulatorInstance.GetRootAbilityData();
             gameplayDataSO.Init();
-            currentAbilityData = CombatSimulatorSO.GetRootAbilityData();
+        }
+
+        [Button(ButtonHeight = 40), PropertySpace, GUIColor("yellow")]
+        public void SaveBuild()
+        {
+
         }
 
         [Button(ButtonHeight = 40), PropertySpace, GUIColor("green")]
@@ -95,7 +124,7 @@ namespace StatusUnknown.CoreGameplayContent
         public void StartSimulation() // Entry Point (done once)
         {
             currentIndex = 0;
-            lastIndex = CombatSimulatorSO.GetAbilitiesArrayLength() - 1;
+            lastIndex = simulatorInstance.GetAbilitiesArrayLength() - 1;
             StopAllCoroutines(); 
             CancelInvoke(); 
 
@@ -195,8 +224,8 @@ namespace StatusUnknown.CoreGameplayContent
                 return; 
             }
 
-            currentAbilityData = CombatSimulatorSO.GetAbilityDataAtIndex(currentIndex);
-            Invoke(nameof(Callback), DELAY); 
+            currentAbilityData = simulatorInstance.GetAbilityDataAtIndex(currentIndex);
+            Invoke(nameof(Callback), DELAY_BETWEEN_ABILITIES); 
         }
 
         private void PrintTotalDamageDone()

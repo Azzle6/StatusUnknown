@@ -66,6 +66,7 @@ namespace StatusUnknown.CoreGameplayContent
 
             if (currentHP <= 0 && gameObject)
             {
+                currentHP = 0; 
                 Destroy(enemyObj);
                 isDead = true; 
             }
