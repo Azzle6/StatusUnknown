@@ -107,7 +107,7 @@ namespace Player
 
             comboIndex++;
             Debug.Log(comboIndex + " combo index" + twinBladeStat.attacks.Length + " length");
-            if (comboIndex > twinBladeStat.attacks.Length)
+            if (comboIndex > twinBladeStat.attacks.Length -1)
             {
                 Debug.Log("Combo index reset");
                 comboIndex = 0;

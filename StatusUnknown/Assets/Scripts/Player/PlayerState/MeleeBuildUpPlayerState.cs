@@ -16,6 +16,8 @@ namespace Player
     
         public override void OnStateEnter()
         {
+            buildUpTimer = 0;
+            superArmorDamageTaken = 0;
             //weaponManager.GetCurrentMeleeWeapon().BuildUp();
         }
         
@@ -49,10 +51,11 @@ namespace Player
                 superArmorDamageTaken = 0;
                 playerStateInterpretor.AddState("MeleeActivePlayerState", PlayerStateType.ACTION, true);
                 playerStateInterpretor.Behave(currentAttack,PlayerStateType.ACTION);
-                currentAttack = null;
-                buildUpCoroutine = null;
-                buildUpTimer = 0;
+               
             }
+            currentAttack = null;
+            buildUpCoroutine = null;
+            buildUpTimer = 0;
         }
         
         public void SuperArmorTakeDamage(float damage)

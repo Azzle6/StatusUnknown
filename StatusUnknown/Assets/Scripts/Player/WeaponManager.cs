@@ -19,6 +19,11 @@ namespace Player
     
         private void Awake()
         {
+            InitWeaponManager();
+        }
+
+        private void InitWeaponManager()
+        {
             playerStat.weaponMelee[0] = weapons[0].meleeWeapon;
             playerStat.weaponMelee[1] = weapons[1].meleeWeapon;
 
@@ -32,11 +37,7 @@ namespace Player
             weapons[weaponNo] = weapon;
             weapons[weaponNo].weaponManager = this;
             
-            if (weapon.meleeWeapon)
-                playerStat.weaponMelee[weaponNo] = true;
-            else
-                playerStat.weaponMelee[weaponNo] = false;
-            
+            playerStat.weaponMelee[weaponNo] = weapon.meleeWeapon;
         }
 
     
@@ -52,7 +53,6 @@ namespace Player
         {
             if (weapons[weaponNo].meleeWeapon)
             {
-                //weapons[currentWeaponIndex].adsRotTr.localRotation = Quaternion.Euler(weapons[weaponNo].adsRestAngle,0,0); why ?
                 //changing arm layer
                 playerStateInterpretor.animator.SetLayerWeight(2,1);
                 playerStateInterpretor.animator.SetLayerWeight(1,0);
@@ -105,6 +105,9 @@ namespace Player
         
         public MeleeWeapon GetCurrentMeleeWeapon()
         {
+            if (weapons[currentWeaponIndex].meleeWeapon == false)
+                return null;
+            
             return (MeleeWeapon) weapons[currentWeaponIndex];
         }
     }

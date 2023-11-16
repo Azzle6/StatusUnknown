@@ -30,7 +30,6 @@ namespace Player
                 yield return null;
             
             playerStateInterpretor.weaponManager.GetCurrentMeleeWeapon().Recovery();
-            Debug.Log("Recovery");
             yield return new WaitForSeconds(currentAttack.recoveryTime);
             playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
             recoveryCoroutine = null;

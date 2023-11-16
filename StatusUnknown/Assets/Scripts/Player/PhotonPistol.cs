@@ -1,3 +1,5 @@
+using Unity.Mathematics;
+
 namespace Player
 {
     using System.Collections;
@@ -8,6 +10,9 @@ namespace Player
     {
         [SerializeField] private PhotonPistolStat stat;
         [SerializeField] private Transform spawnPoint;
+        [SerializeField] private Transform mesh;
+        [SerializeField] private Transform meshPos;
+        private Vector3 initMeshPos;
         private float chargeTimer;
         private Coroutine charging;
         private GameObject tempProjectile;
@@ -21,6 +26,7 @@ namespace Player
         private void Awake()
         {
             currentAmmo = stat.magazineSize;
+            initMeshPos = mesh.localPosition;
         }
         
         public override void ActionPressed()
@@ -80,6 +86,9 @@ namespace Player
 
         public override void ActionReleased()
         {
+            if (tempProjectile == default)
+                return;
+            
             waitForTriggerRelease = false;
             StartCoroutine(Cooldown());
             if (charging != default)
@@ -99,6 +108,9 @@ namespace Player
         {
             if (isReloading)
                 return;
+            weaponManager.rigLHand.weight = 0;
+            weaponManager.rigRHand.weight = 0;
+            mesh.transform.parent = weaponManager.rHandTr;
             StartCoroutine(ReloadingTimer());
             playerAnimator.SetTrigger("Reload");
         }
@@ -112,6 +124,10 @@ namespace Player
                 weaponManager.rigLHand.weight = 1;
                 weaponManager.rigRHand.weight = 1;
             }
+            else
+            {
+                ActionReleased();
+            }
         }
 
         private IEnumerator ReloadingTimer()
@@ -120,6 +136,11 @@ namespace Player
             yield return new WaitForSeconds(stat.reloadTime);
             currentAmmo = stat.magazineSize;
             isReloading = false;
+            weaponManager.rigLHand.weight = 1;
+            weaponManager.rigRHand.weight = 1;
+            mesh.transform.parent = meshPos;
+            mesh.transform.localRotation = quaternion.identity;
+            mesh.transform.localPosition = initMeshPos; 
         }
         
         public override void Hit()
