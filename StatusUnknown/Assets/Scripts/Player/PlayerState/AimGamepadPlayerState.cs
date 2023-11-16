@@ -18,7 +18,6 @@ namespace Player
         {
             if (aiming == default)
                 aiming = StartCoroutine(Aim());
-            Debug.Log("Entered aim state");
             playerStateInterpretor.weaponManager.AimWithCurrentWeapon();
             playerStateInterpretor.animator.SetBool("Aim", true);
             aimRig.weight = 1;
@@ -38,16 +37,15 @@ namespace Player
         
         private IEnumerator CheckIfStopAiming()
         {
-            yield return new WaitForSeconds(playerStat.timeBeforeStopAiming);
-            if (!playerStat.isShooting && !playerStat.isAiming)
+            while (true)
             {
-                playerStateInterpretor.RemoveState(PlayerStateType.AIM);
+                yield return new WaitForSeconds(playerStat.timeBeforeStopAiming);
+                if (!playerStat.isShooting && !playerStat.isAiming)
+                {
+                    playerStateInterpretor.RemoveState(PlayerStateType.AIM);
+                    yield break;
+                }
             }
-            else
-            {
-                stopAiming = StartCoroutine(CheckIfStopAiming());
-            }
-            Debug.Log("Relaunching coroutine");
         }
 
 

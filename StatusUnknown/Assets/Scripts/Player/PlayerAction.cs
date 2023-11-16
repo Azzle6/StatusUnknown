@@ -1,3 +1,5 @@
+using System.Reflection;
+
 namespace Player
 {
     using UnityEngine;
@@ -193,6 +195,7 @@ namespace Player
     
         public void OnWeapon(InputAction.CallbackContext ctx, int weaponNo)
         {
+            
             if (ctx.started)
             {
                 if (playerStateInterpretor.statesSlot[PlayerStateType.AIM] == null)
@@ -221,7 +224,9 @@ namespace Player
 
             if (ctx.canceled)
             {
-                playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
+                if (!playerStat.weaponMelee[weaponNo])
+                    playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
+                
                 if (deviceLog.currentDevice == DeviceType.GAMEPAD)
                 {
                     if (aimDirection != Vector2.zero)

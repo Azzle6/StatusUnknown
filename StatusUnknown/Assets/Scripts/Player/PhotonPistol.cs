@@ -1,3 +1,5 @@
+using Unity.Mathematics;
+
 namespace Player
 {
     using System.Collections;
@@ -8,16 +10,41 @@ namespace Player
     {
         [SerializeField] private PhotonPistolStat stat;
         [SerializeField] private Transform spawnPoint;
+        [SerializeField] private Transform mesh;
+        [SerializeField] private Transform meshPos;
+        private Vector3 initMeshPos;
         private float chargeTimer;
         private Coroutine charging;
         private GameObject tempProjectile;
         private float currentDamage;
         private bool waitForTriggerRelease;
         private bool isInCD;
+        private float cdTimer;
+        private bool isReloading;
+        private float currentAmmo;
         
-        public override void TriggerPressed()
+        private void Awake()
         {
-            if ((charging != default) || (isInCD))
+            currentAmmo = stat.magazineSize;
+            initMeshPos = mesh.localPosition;
+        }
+        
+        public override void ActionPressed()
+        {
+            //disabling an object stop its coroutine so we need to check if it is already in cooldown and relaunch it
+            if (isInCD)
+            {
+                StartCoroutine(Cooldown());
+                return;
+            }
+
+            if (isReloading)
+            {
+                Reload(weaponManager.playerAnimator);
+                return;
+            }
+            
+            if ((charging != default) || (isReloading) || (currentAmmo <= 0))
                 return;
             tempProjectile = Pooler.Instance.GetPooledObject(stat.projectilePrefab.name);
             charging = StartCoroutine(Charge());
@@ -57,30 +84,75 @@ namespace Player
             
         }
 
-        public override void TriggerReleased()
+        public override void ActionReleased()
         {
-            if (charging == default)
+            if (tempProjectile == default)
                 return;
+            
             waitForTriggerRelease = false;
             StartCoroutine(Cooldown());
-            StopCoroutine(charging);
+            if (charging != default)
+                StopCoroutine(charging);
+            
             tempProjectile.transform.parent = null;
             tempProjectile.TryGetComponent(out Rigidbody tempRb);
             tempRb.velocity = spawnPoint.forward * stat.projectileSpeed;
             tempProjectile.TryGetComponent(out PhotonPistolBullet tempPPbullet);
             tempPPbullet.damage = currentDamage;
+            tempProjectile.TryGetComponent(out HitContext tempHitContext);
+            HitSphere tempHitSphere = tempHitContext.hitShape as HitSphere;
+            tempHitSphere.radius = tempProjectile.transform.localScale.y / 2;
+            tempHitContext.HitTriggerEvent += tempPPbullet.Hit;
+            
             tempProjectile = default;
             charging = default;
+            currentAmmo--;
         }
 
-        public override void Reload()
+        public override void Reload(Animator playerAnimator)
         {
-          
+            if (isReloading)
+                return;
+            weaponManager.rigLHand.weight = 0;
+            weaponManager.rigRHand.weight = 0;
+            mesh.transform.parent = weaponManager.rHandTr;
+            StartCoroutine(ReloadingTimer());
+            playerAnimator.SetTrigger("Reload");
         }
 
+        public override void Switched(Animator playerAnimator, bool OnOff)
+        {
+            if (OnOff)
+            {
+                playerAnimator.SetLayerWeight(2,0);
+                playerAnimator.SetLayerWeight(1,1);
+                weaponManager.rigLHand.weight = 1;
+                weaponManager.rigRHand.weight = 1;
+            }
+            else
+            {
+                ActionReleased();
+            }
+        }
+
+        private IEnumerator ReloadingTimer()
+        {
+            isReloading = true;
+            yield return new WaitForSeconds(stat.reloadTime);
+            currentAmmo = stat.magazineSize;
+            isReloading = false;
+            weaponManager.rigLHand.weight = 1;
+            weaponManager.rigRHand.weight = 1;
+            mesh.transform.parent = meshPos;
+            mesh.transform.localRotation = quaternion.identity;
+            mesh.transform.localPosition = initMeshPos; 
+        }
+        
         public override void Hit()
         {
             
         }
+        
+        
     }
 }

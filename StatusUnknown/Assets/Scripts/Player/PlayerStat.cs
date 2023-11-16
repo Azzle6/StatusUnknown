@@ -8,6 +8,10 @@ namespace Player
     [CreateAssetMenu(fileName = "PlayerStat", menuName = "CustomAssets/PlayerStat", order = 1)]
     public class PlayerStat : ScriptableObject
     {
+        
+        [Header("Health")]
+        public float maxHealth;
+        public float medKitHealAmount;
         [Header("Movement")]
         public float moveSpeed;
 
@@ -26,7 +30,7 @@ namespace Player
         [Header("Player State ")]
         [ReadOnly] public bool isAiming;
         [ReadOnly] public bool isShooting;
-        
+        [ReadOnly] public bool[] weaponMelee = new bool[2];
 
     }
 }

@@ -5,6 +5,8 @@ namespace Player
     [CreateAssetMenu(fileName = "PhotonPistol", menuName = "CustomAssets/WeaponStat/PhotonPistol", order = 1)]
     public class PhotonPistolStat : WeaponStat
     {
+        [Header("Damage")]
+        public float maxDamage;
         public AnimationCurve damageCurve;
         [Header("Projectile")]
         public AnimationCurve projectileSize;
