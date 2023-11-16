@@ -5,7 +5,15 @@ namespace StatusUnknown.CoreGameplayContent
 {
     public class DamageArea : MonoBehaviour
     {
+        [SerializeField] private Color areaShowColor = Color.white;
+        [SerializeField] private BoxCollider collider;
         private readonly List<Enemy> enemiesInArea = new List<Enemy>();
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = areaShowColor;
+            Gizmos.DrawWireCube(transform.position, collider.size);
+        }
 
         private void OnTriggerEnter(Collider other)
         {

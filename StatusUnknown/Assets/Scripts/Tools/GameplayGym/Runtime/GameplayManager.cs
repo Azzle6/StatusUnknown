@@ -6,17 +6,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 using StatusUnknown.Utils.AssetManagement;
+using TMPro;
 
 namespace StatusUnknown.CoreGameplayContent
 {
-    [RequireComponent(typeof(AudioSource))] 
+    [RequireComponent(typeof(AudioSource))]
     public class GameplayManager : MonoBehaviour
     {
         [Header("General")]
         //[SerializeField] AudioSource source; 
         [SerializeField] private CombatSimulatorSO CombatSimulatorSO;
         [SerializeField] private EnemyEncounterConfigSO EnemyEncounterSO;
-        [SerializeField] private string encounterSaveName = "Encounter_Difficulty_Num"; 
+        [SerializeField] private string encounterSaveName = "Encounter_Difficulty_Num";
 
         private const int DELAY = 1;
 
@@ -34,6 +35,12 @@ namespace StatusUnknown.CoreGameplayContent
 
         private int currentIndex; 
         private int lastIndex;
+        private int damageCounter;
+        public static Action OnSimulationDone; 
+
+        [Header("UI")]
+        [SerializeField] private TMP_Text totalDamage_UI;
+        [SerializeField] private GameplayDataSO gameplayDataSO; 
 
         [Header("Save & Load")]
         [SerializeField] private GameObject[] prefab_enemy = new GameObject[3];
@@ -45,6 +52,8 @@ namespace StatusUnknown.CoreGameplayContent
 
         private void OnEnable()
         {
+            totalDamage_UI.SetText(string.Empty);
+
             abilityConfigTemplates = new AbilityConfigTemplate[]
             {
                 template_burst, 
@@ -52,8 +61,9 @@ namespace StatusUnknown.CoreGameplayContent
                 template_delayed,
             };
 
-            if (CombatSimulatorSO == null) return; 
+            if (CombatSimulatorSO == null) return;
 
+            gameplayDataSO.Init();
             currentAbilityData = CombatSimulatorSO.GetRootAbilityData();
         }
 
@@ -160,6 +170,8 @@ namespace StatusUnknown.CoreGameplayContent
 
         private void ApplyDamage(int damageValue)
         {
+            damageCounter += damageValue;
+
             currentEnemiesInArea = currentAreaObj.GetComponent<DamageArea>().GetEnemiesInArea();
             foreach (var enemy in currentEnemiesInArea) 
             {
@@ -176,12 +188,20 @@ namespace StatusUnknown.CoreGameplayContent
             if (currentIndex > lastIndex)
             {
                 currentIndex = 0;
-                Debug.Log("SIMULATION DONE"); 
+                Debug.Log("SIMULATION DONE");
+
+                OnSimulationDone();
+                Invoke(nameof(PrintTotalDamageDone), 0.5f); 
                 return; 
             }
 
             currentAbilityData = CombatSimulatorSO.GetAbilityDataAtIndex(currentIndex);
             Invoke(nameof(Callback), DELAY); 
+        }
+
+        private void PrintTotalDamageDone()
+        {
+            totalDamage_UI.SetText(string.Concat("Total Damage : ", gameplayDataSO.TotalDamageDone.ToString()));
         }
 
         private void Callback()
