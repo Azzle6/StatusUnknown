@@ -7,25 +7,39 @@ using UnityEngine.UI;
 using UnityEngine.UIElements;
 using StatusUnknown.Utils.AssetManagement;
 using TMPro;
+using static UnityEngine.Rendering.DebugUI;
 
 namespace StatusUnknown.CoreGameplayContent
 {
     [RequireComponent(typeof(AudioSource))]
-    public class GameplayManager : MonoBehaviour
+    public class GameplayManager : MonoBehaviour, INotifyValueChanged<bool>
     {
         [Header("General")]
         //[SerializeField] AudioSource source; 
         [SerializeField] private AbilityConfigSO_Base[] buildToSimulate;
+        [SerializeField] private string buildSaveName = "Build_Playstyle_Num"; 
         private const int DELAY_BETWEEN_ABILITIES = 1;
-
-        [Header("Encounter")]
-        [Space, SerializeField] private EnemyEncounterConfigSO EnemyEncounterSO;
-        [SerializeField] private string encounterSaveName = "Encounter_Difficulty_Num";
+        private int currentIndex;
+        private int lastIndex;
+        private int damageCounter;
+        public static Action OnSimulationDone;
 
         [Header("Build")]
         [Space, SerializeField] private CombatSimulatorSO customBuildSO;
         [SerializeField] private bool useCustomBuildSO;
-        private CombatSimulatorSO simulatorInstance;  
+        public bool value
+        {
+            get { return useCustomBuildSO; }
+            set
+            {
+                using (ChangeEvent<bool> evt = ChangeEvent<bool>.GetPooled(useCustomBuildSO, value))
+                {
+                    if (evt.newValue == true && customBuildSO != null)
+                        RepopulateBuildArray();
+                }
+            }
+        }
+        private CombatSimulatorSO simulatorInstance;
 
         [Header("Ability Types Template")]
         [Space, SerializeField] private DamageType_Burst template_burst;
@@ -33,17 +47,14 @@ namespace StatusUnknown.CoreGameplayContent
         [SerializeField] private DamageType_Delayed template_delayed;
         private AbilityConfigTemplate[] abilityConfigTemplates = new AbilityConfigTemplate[3];
         private (AbilityInfos infos, AbilityConfigSO_Base so) currentAbilityData = new();
-        //[SerializeField] private bool showTemplate = false; 
-
-
         private AbilityConfigSO_Burst currentAbilityConfigSO_Burst = null;
         private AbilityConfigSO_OverTime currentAbilityConfigSO_OverTime = null;
-        private AbilityConfigSO_Delayed currentAbilityConfigSO_Delayed = null; 
+        private AbilityConfigSO_Delayed currentAbilityConfigSO_Delayed = null;
+        //[SerializeField] private bool showTemplate = false; 
 
-        private int currentIndex; 
-        private int lastIndex;
-        private int damageCounter;
-        public static Action OnSimulationDone; 
+        [Header("Encounter")]
+        [Space, SerializeField] private EnemyEncounterConfigSO EnemyEncounterSO;
+        [SerializeField] private string encounterSaveName = "Encounter_Difficulty_Num";
 
         [Header("UI")]
         [SerializeField] private TMP_Text totalDamage_UI;
@@ -55,8 +66,17 @@ namespace StatusUnknown.CoreGameplayContent
             "Encounter could not be saved. Please provide a valid name (different from \"Encounter_Difficulty_Num\"). \n" +
             "If you want to overwrite an existing encounter, use the same name in the \"Encounter Save Name\" field.";
 
+        private const string LOG_ERROR_OVERWRITE_BUILD =
+            "Build could not be saved. Please provide a valid name (different from \"Build_Playstyle_Num\"). \n" +
+            "If you want to overwrite an existing build, use the same name in the \"Build Save Name\" field.";
+
         private const string LOG_ERROR_ENCOUNTER_NULL = "Could not generate encounter. Make sure the \"Enemy Encounter SO\" field is not empty.";
         private const string LOG_ERROR_BUILD_NULL = "No abilities were found on your \"buildToSimulate\" array.";
+
+        private void OnValidate()
+        {
+            value = useCustomBuildSO; 
+        }
 
         private void OnEnable()
         {
@@ -73,7 +93,7 @@ namespace StatusUnknown.CoreGameplayContent
             {
                 simulatorInstance = customBuildSO;
             }
-            else 
+            else
             {
                 if (buildToSimulate.Length == 0)
                 {
@@ -81,10 +101,8 @@ namespace StatusUnknown.CoreGameplayContent
                     return;
                 }
 
-                simulatorInstance = ScriptableObject.CreateInstance<CombatSimulatorSO>();
-                simulatorInstance.abilitiesConfig = new AbilityConfigSO_Base[buildToSimulate.Length]; 
-                Array.Copy(buildToSimulate, simulatorInstance.abilitiesConfig, buildToSimulate.Length);
-            }       
+                CreateNewBuildInstance();
+            }
 
             currentAbilityData = simulatorInstance.GetRootAbilityData();
             gameplayDataSO.Init();
@@ -93,7 +111,35 @@ namespace StatusUnknown.CoreGameplayContent
         [Button(ButtonHeight = 40), PropertySpace, GUIColor("yellow")]
         public void SaveBuild()
         {
+            if (string.Equals(buildSaveName, "Build_Playstyle_Num"))
+            {
+                Debug.LogError(LOG_ERROR_OVERWRITE_BUILD);
+                return;
+            }
 
+            CreateNewBuildInstance(); 
+
+            simulatorInstance.name = buildSaveName; 
+            StatusUnknown_AssetManager.SaveSO(simulatorInstance, StatusUnknown_AssetManager.SAVE_PATH_BUILD, buildSaveName, ".asset");
+            buildSaveName = "Build_Playstyle_Num"; // cheap solution to avoid overwriting existing asset by accident
+        }
+
+        private void CreateNewBuildInstance()
+        {
+            simulatorInstance = ScriptableObject.CreateInstance<CombatSimulatorSO>();
+            simulatorInstance.abilitiesConfig = new AbilityConfigSO_Base[buildToSimulate.Length];
+            Array.Copy(buildToSimulate, simulatorInstance.abilitiesConfig, buildToSimulate.Length);
+        }
+
+        private void RepopulateBuildArray()
+        {
+            buildToSimulate = new AbilityConfigSO_Base[customBuildSO.abilitiesConfig.Length];
+            for (int i = 0; i < buildToSimulate.Length; i++)
+            {
+                buildToSimulate[i] = customBuildSO.abilitiesConfig[i];  
+            }
+
+            Debug.Log("repopulated array with new build from scriptable object"); 
         }
 
         [Button(ButtonHeight = 40), PropertySpace, GUIColor("green")]
@@ -225,7 +271,7 @@ namespace StatusUnknown.CoreGameplayContent
             }
 
             currentAbilityData = simulatorInstance.GetAbilityDataAtIndex(currentIndex);
-            Invoke(nameof(Callback), DELAY_BETWEEN_ABILITIES); 
+            Invoke(nameof(Callback_DamageApplied), DELAY_BETWEEN_ABILITIES); 
         }
 
         private void PrintTotalDamageDone()
@@ -233,7 +279,7 @@ namespace StatusUnknown.CoreGameplayContent
             totalDamage_UI.SetText(string.Concat("Total Damage : ", gameplayDataSO.TotalDamageDone.ToString()));
         }
 
-        private void Callback()
+        private void Callback_DamageApplied()
         {
             StartCoroutine(nameof(SetDamagePayload));
         }
@@ -273,6 +319,12 @@ namespace StatusUnknown.CoreGameplayContent
         // [Button(ButtonHeight = 40), PropertySpace]
         private void SaveFullSimulationPayload() { }
         #endregion
+
+        public void SetValueWithoutNotify(bool v)
+        {
+            useCustomBuildSO = v;
+            Debug.Log("SetValueWithoutNotify: " + v);
+        }
     }
 
     #region Templates

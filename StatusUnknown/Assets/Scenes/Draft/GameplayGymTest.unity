@@ -967,9 +967,61 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 411539302595325670, guid: 53b15abc96c17da408ab733de7d404b0,
         type: 3}
-      propertyPath: showTemplate
-      value: 0
+      propertyPath: buildSaveName
+      value: Build_Playstyle_Num
       objectReference: {fileID: 0}
+    - target: {fileID: 411539302595325670, guid: 53b15abc96c17da408ab733de7d404b0,
+        type: 3}
+      propertyPath: customBuildSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 9c032e16910c0be4abe163cff9008d2e,
+        type: 2}
+    - target: {fileID: 411539302595325670, guid: 53b15abc96c17da408ab733de7d404b0,
+        type: 3}
+      propertyPath: useCustomBuildSO
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 411539302595325670, guid: 53b15abc96c17da408ab733de7d404b0,
+        type: 3}
+      propertyPath: buildToSimulate.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 411539302595325670, guid: 53b15abc96c17da408ab733de7d404b0,
+        type: 3}
+      propertyPath: buildToSimulate.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: a86bc66d79d213141b6bda464b6ad35f,
+        type: 2}
+    - target: {fileID: 411539302595325670, guid: 53b15abc96c17da408ab733de7d404b0,
+        type: 3}
+      propertyPath: buildToSimulate.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 612e2ba1faa1e7f40be87faab964c77d,
+        type: 2}
+    - target: {fileID: 411539302595325670, guid: 53b15abc96c17da408ab733de7d404b0,
+        type: 3}
+      propertyPath: buildToSimulate.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0e38c1fae631c50499b6ec387c5a4818,
+        type: 2}
+    - target: {fileID: 411539302595325670, guid: 53b15abc96c17da408ab733de7d404b0,
+        type: 3}
+      propertyPath: buildToSimulate.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 53b12120e903c164ebc68ca6473c4ed0,
+        type: 2}
+    - target: {fileID: 411539302595325670, guid: 53b15abc96c17da408ab733de7d404b0,
+        type: 3}
+      propertyPath: buildToSimulate.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: a46106ddacde66e44a876a2ffee50add,
+        type: 2}
+    - target: {fileID: 411539302595325670, guid: 53b15abc96c17da408ab733de7d404b0,
+        type: 3}
+      propertyPath: buildToSimulate.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: a46106ddacde66e44a876a2ffee50add,
+        type: 2}
     - target: {fileID: 5164766419157690584, guid: 53b15abc96c17da408ab733de7d404b0,
         type: 3}
       propertyPath: m_Name
