@@ -9,8 +9,8 @@ using UnityEngine;
 public class HitContext : MonoBehaviour
 {
     public LayerMask hitMask;
-    [SerializeField,SerializeReference] HitShape hitShape = new HitBox();
-    [SerializeField] float updateFrequence = 1f;
+    [SerializeField,SerializeReference] protected HitShape hitShape = new HitBox();
+    [SerializeField] protected float updateFrequence = 0.2f;
     Coroutine processDetection;
     HashSet<Collider> temp_colliders = new HashSet<Collider>();
     public event Action<IDamageable> HitTriggerEvent,HitStayEvent; // HitStayEvent call is udpateFrequence based

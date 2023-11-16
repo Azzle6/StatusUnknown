@@ -1,4 +1,5 @@
 
+using Sirenix.Utilities.Editor.Expressions;
 using UnityEngine;
 [System.Serializable]
 public class HitBox : HitShape
@@ -8,6 +9,11 @@ public class HitBox : HitShape
     public override Collider[] DetectColliders(HitContext hitContext)
     {
         return Physics.OverlapBox(hitContext.transform.position, size * 0.5f, hitContext.transform.rotation, hitContext.hitMask);
+    }
+
+    public override Collider[] DetectColliders(Vector3 position, Quaternion rotation, LayerMask hitMask)
+    {
+        return Physics.OverlapBox(position, size * 0.5f, rotation,hitMask);
     }
 
     public override void DrawGizmos(HitContext hitContext)
