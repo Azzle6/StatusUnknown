@@ -12,7 +12,7 @@ namespace StatusUnknown.CoreGameplayContent.Editors
     public class AbilityConfigScriptableObjectPropertyDrawer : PropertyDrawer
     {
         private VisualElement ContentPanel;
-        private Label CaretLabel;
+        private UnityEngine.UIElements.Label CaretLabel;
         private bool isExpanded = true;
         TextField textField_DamageType = new TextField();
         EnumField enumField_DamageType = new EnumField(); 
@@ -57,11 +57,11 @@ namespace StatusUnknown.CoreGameplayContent.Editors
 
             VisualElement titleContainer = new VisualElement();
             titleContainer.AddToClassList("align-horizontal");
-            CaretLabel = new Label(">");
+            CaretLabel = new UnityEngine.UIElements.Label(">");
             CaretLabel.style.fontSize = 18;
             CaretLabel.AddToClassList(isExpanded ? "rotate-90" : "rotate-0");
             titleContainer.Add(CaretLabel);
-            Label title = new Label("Ability Configuration");
+            UnityEngine.UIElements.Label title = new UnityEngine.UIElements.Label("Ability Configuration");
             titleContainer.AddToClassList("header");
 
             titleContainer.Add(title);
@@ -90,11 +90,11 @@ namespace StatusUnknown.CoreGameplayContent.Editors
             VisualElement noShootConfigBox = new VisualElement();
             noShootConfigBox.name = "no-ability-config-box";
 
-            Label noShootConfigLabel = new Label("No Ability Config Exists !");
+            UnityEngine.UIElements.Label noShootConfigLabel = new UnityEngine.UIElements.Label("No Ability Config Exists !");
             noShootConfigLabel.AddToClassList("mb-8");
             noShootConfigBox.Add(noShootConfigLabel);
 
-            noShootConfigBox.Add(new Label("Create a new one with name"));
+            noShootConfigBox.Add(new UnityEngine.UIElements.Label("Create a new one with name"));
             VisualElement horizontalBox = new VisualElement();
             horizontalBox.AddToClassList("align-horizontal");
 
@@ -110,7 +110,7 @@ namespace StatusUnknown.CoreGameplayContent.Editors
 
             noShootConfigBox.Add(horizontalBox);
 
-            Label selectExistingLabel = new Label("Select Existing");
+            UnityEngine.UIElements.Label selectExistingLabel = new UnityEngine.UIElements.Label("Select Existing");
             selectExistingLabel.AddToClassList("bold");
             selectExistingLabel.AddToClassList("pt-4");
             selectExistingLabel.AddToClassList("mt-4");
@@ -139,7 +139,7 @@ namespace StatusUnknown.CoreGameplayContent.Editors
 
             SerializedObject abilityConfigSO = new SerializedObject(property.objectReferenceValue); // because we are dealing with scriptable objects
 
-            Label damageBehavior = new Label("Damage/Enemy Interaction");
+            UnityEngine.UIElements.Label damageBehavior = new UnityEngine.UIElements.Label("Damage/Enemy Interaction");
             damageBehavior.AddToClassList("bold");
             abilityConfigBox.Add(damageBehavior);
 

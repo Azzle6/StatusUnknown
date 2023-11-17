@@ -167,8 +167,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2387b56c6d6bd5468f08ceb75bc3eb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1882896896}
-  MustHaveMeshRenderer: 0
+  prefabType: 04000000
+  playstyleType: 
+  moduleTypes: 01000000
+  loadedPrefabs:
+  - {fileID: 5559624768829508104, guid: fbbd219427d956c4d9d13fb53715c4de, type: 3}
+  - {fileID: 2154308962095434749, guid: ed333a33e0e82d44a8c52f3402ba951c, type: 3}
+  - {fileID: 6981658959558872868, guid: 59ec3b79c7b8c664092b6ab07426fe6b, type: 3}
+  - {fileID: 3664247709590085082, guid: 0bcee2bc91c138f43bc237363ccf1a72, type: 3}
+  loadedAbilities:
+  - {fileID: 11400000, guid: 0e38c1fae631c50499b6ec387c5a4818, type: 2}
+  - {fileID: 11400000, guid: ad49657c20fd0ce4ea8e12c880dc2bcf, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
