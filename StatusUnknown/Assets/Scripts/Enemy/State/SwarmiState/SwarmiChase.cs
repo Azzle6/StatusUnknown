@@ -24,7 +24,7 @@ public class SwarmiChase : EnemyState
             Vector3 targetVector = node.targetDirection;
 
             context.AddForce(targetVector * chaseSpeed);
-            Vector3 force = Vector3.down *2* chaseSpeed;
+            Vector3 force = Vector3.down * chaseSpeed;
             context.AddForce(force * Mathf.Max(Vector3.Distance(transform.position, node.Position) - hoverOffset,0));
             Debug.DrawLine(transform.position, node.Position);
         }
@@ -35,12 +35,20 @@ public class SwarmiChase : EnemyState
             context.SwitchState(new SwarmiAttack());
 
         if (!CombatManager.PlayerInRange(transform.position, context.stats.AggroRange))
-            context.SwitchState(new SwarmiChase());
+            context.SwitchState(new SwarmiIdle());
 
     }
 
     protected override void Initialize()
     {
         
+    }
+
+    public override void DebugGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(context.transform.position, attackRange);
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(context.transform.position, context.stats.AggroRange);
     }
 }

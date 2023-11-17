@@ -19,6 +19,7 @@ public class HitContext : MonoBehaviour
     private void OnDisable()
     {
         StopCoroutine(processDetection);
+        temp_colliders.Clear();
     }
     private void OnEnable()
     {

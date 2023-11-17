@@ -108,7 +108,7 @@ Transform:
   m_GameObject: {fileID: 2798947521669332963}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.70710677, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.07529006, y: 0, z: 0.02}
+  m_LocalPosition: {x: 0.02, y: 0, z: 0.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -748,13 +748,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bb4780582780be4b87c3ee1754f5fcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoneType: 0
-  size: {x: 0.5, y: 1, z: 0.5}
-  radius: 1
   hitMask:
     serializedVersion: 2
-    m_Bits: 0
-  updateFrequence: 1
+    m_Bits: 512
+  hitShape:
+    rid: 5225647092011368449
+  updateFrequence: 0.1
+  references:
+    version: 2
+    RefIds:
+    - rid: 5225647092011368449
+      type: {class: HitBox, ns: , asm: Assembly-CSharp}
+      data:
+        size: {x: 0.5, y: 1.7, z: 0.5}
 --- !u!1 &7778957924732031919
 GameObject:
   m_ObjectHideFlags: 0
@@ -959,6 +965,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc1d55c7a0e86714ba4c35467a4e5a18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitContexts:
+  - {fileID: 4586539127504081084}
   animator: {fileID: 3392131639749682905}
   stats: {fileID: 11400000, guid: fd4cf9cc59e2d784585831141016319f, type: 2}
   body: {fileID: 5553896409487144114}
@@ -988,10 +996,10 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!95 &3392131639749682905
 Animator:
@@ -1003,7 +1011,7 @@ Animator:
   m_GameObject: {fileID: 8449849220990944551}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8e1d631697fc0c846a73d5464835283f, type: 2}
+  m_Controller: {fileID: 9100000, guid: c4b092cb5bf83504f8ce119970c1ec2c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class EnemyContext : MonoBehaviour, IDamageable
 {
+    [SerializeField] HitContext[] hitContexts;
     [SerializeField] protected Animator animator;
     EnemyState currentState;
+    public string stateName => currentState.ToString();
     public EnemyStats stats;
     public Vector3 Velocity { get { return body.velocity; } }
     Quaternion rotation;
@@ -16,6 +18,16 @@ public class EnemyContext : MonoBehaviour, IDamageable
     [Header("Debug")]
     [SerializeField] MeshRenderer meshRenderer;
     float currentHealth;
+    void OnEnable()
+    {
+        foreach (var context in hitContexts)
+            context.HitTriggerEvent += PerformHitEffect;
+    }
+    void OnDisable() 
+    { 
+        foreach (var context in hitContexts)
+            context.HitTriggerEvent -= PerformHitEffect;
+    }
     private void Start()
     {
         currentHealth = stats.health;
@@ -30,7 +42,10 @@ public class EnemyContext : MonoBehaviour, IDamageable
         currentState = state;
         currentState.SetContext(this);
     }
-
+    void PerformHitEffect(IDamageable target)
+    {
+        target.TakeDamage(stats.AttackDamage, transform.forward * 3);
+    }
     public void AddForce(Vector3 force)
     {
         body.AddForce(force);
@@ -80,5 +95,12 @@ public class EnemyContext : MonoBehaviour, IDamageable
         currentHealth -= damage;
         AddForce(force);
         Debug.Log("Enemy took damage");
+        if(currentHealth < 0)
+            Destroy(gameObject);
+    }
+    void OnDrawGizmos()
+    {
+        if(Application.isPlaying)
+            currentState.DebugGizmos();
     }
 }

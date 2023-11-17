@@ -7,6 +7,12 @@ public class SwarmiAttack : EnemyState
     Color colorState = Color.red;
     float attackDuration;
     float attackRange => context.stats.AttackRange;
+
+    public override void DebugGizmos()
+    {
+
+    }
+
     public override void Update()
     {
         attackDuration -= Time.deltaTime;
