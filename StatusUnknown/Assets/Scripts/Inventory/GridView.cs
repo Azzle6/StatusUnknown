@@ -3,13 +3,14 @@ namespace Inventory
     using Core.Helpers;
     using System;
     using System.Collections.Generic;
+    using Containers;
     using Core.SingletonsSO;
     using Item;
     using UnityEngine;
     using UnityEngine.UIElements;
     public class GridView
     {
-        private VectorIntItemDictionary content;
+        private IItemsDataContainer container;
         private Shape shape;
         
         private Slot[] slots;
@@ -33,11 +34,11 @@ namespace Inventory
         private VisualElement firstFocus;
         
         #region CONSTRUCTOR
-        public GridView(VisualElement root, Shape shape, VectorIntItemDictionary content)
+        public GridView(VisualElement root, Shape shape, IItemsDataContainer container)
         {
             this.gridRoot = root;
             this.shape = shape;
-            this.content = content;
+            this.container = container;
             this.gridElementFocusEvent += UIHandler.Instance.OnGridElementFocus;
             this.BuildGrid();
         }
@@ -48,11 +49,6 @@ namespace Inventory
         {
             UIHandler.Instance.ForceFocus(firstFocus);
         }
-
-        public void HideGrid()
-        {
-            this.gridRoot.style.display = DisplayStyle.None;
-        }
         #endregion //GRID_DISPLAY
 
         #region GRID_BUILD
@@ -61,7 +57,6 @@ namespace Inventory
             this.firstFocus = null;
             VisualElement verticalParent = this.gridRoot.Q<VisualElement>("verticalParent");
             
-            //Faire des trucs ici là 
             VisualElement[] gridSlots = GridBuilder.BuildGrid(this.shape, verticalParent, UIHandler.Instance.uiSettings.slotTreeAsset);
 
             List<Slot> slotsList = new List<Slot>();
@@ -84,12 +79,12 @@ namespace Inventory
         #endregion //GRID_BUILD
         
         #region CONTENT_SAVE_LOAD
-        public void LoadNewData(Shape shape, VectorIntItemDictionary content)
+        public void LoadNewData(Shape shape, IItemsDataContainer newContainer)
         {
             ClearContent(false);
             
             this.shape = shape;
-            this.content = content;
+            this.container = newContainer;
             this.BuildGrid();
             this.LoadContent();
         }
@@ -97,7 +92,7 @@ namespace Inventory
         public void LoadContent()
         {
             ClearContent(false);
-            foreach (var info in this.content)
+            foreach (var info in this.container.GetAllItems())
             {
                 if (info.Value == null)
                 {
@@ -115,9 +110,11 @@ namespace Inventory
         
         private void SaveContent()
         {
-            this.content.Clear();
+            VectorIntItemDictionary dictionary = new VectorIntItemDictionary();
             foreach (ItemView itemView in this.itemsView)
-                this.content.Add(itemView.GridPosition, itemView.item);
+                dictionary.Add(itemView.GridPosition, itemView.item);
+            
+            this.container.SaveAllItems(dictionary);
         }
         
         private void ClearContent(bool clearData)
@@ -129,7 +126,7 @@ namespace Inventory
             this.itemsView.Clear();
 
             if (clearData)
-                this.content.Clear();
+                this.container.ClearData();
         }
         #endregion //CONTENT_SAVE_LOAD
 

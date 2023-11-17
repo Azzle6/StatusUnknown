@@ -5,7 +5,8 @@ namespace Core.Helpers
     using Inventory.Item;
     using Module;
     using UnityEngine;
-    
+    using Weapons;
+
     public abstract class CustomSerializedDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver
     {
         [SerializeField, HideInInspector]
@@ -35,12 +36,44 @@ namespace Core.Helpers
             }
         }
     }
-    
+
     [Serializable]
     public class VectorIntItemDictionary : CustomSerializedDictionary<Vector2Int, Item>
-    { }
-    
+    {
+        public void MergeMultipleDictionary(VectorIntItemDictionary[] dictionaries)
+        {
+            this.Clear();
+            foreach (var dictionary in dictionaries)
+            {
+                foreach (var info in dictionary)
+                {
+                    this.Add(info.Key, info.Value);
+                }
+            }
+        }
+    }
+
     [Serializable]
     public class VectorIntModuleDictionary : CustomSerializedDictionary<Vector2Int, Module>
-    { }
+    {
+        public VectorIntItemDictionary ToItemDictionary()
+        {
+            VectorIntItemDictionary result = new VectorIntItemDictionary();
+            foreach (var content in this)
+                result.Add(content.Key, content.Value);
+            return result;
+        }
+    }
+
+    [Serializable]
+    public class VectorIntWeaponDictionary : CustomSerializedDictionary<Vector2Int, Weapon>
+    {
+        public VectorIntItemDictionary ToItemDictionary()
+        {
+            VectorIntItemDictionary result = new VectorIntItemDictionary();
+            foreach (var content in this)
+                result.Add(content.Key, content.Value);
+            return result;
+        }
+    }
 }

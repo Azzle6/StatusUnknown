@@ -8,9 +8,11 @@ namespace Module
     {
         public override GridItemSO GridItemDefinition => this.definition;
         public ModuleDefinitionSO definition;
-        
+
         public Module(ModuleDefinitionSO definition)
-        { }
+        {
+            this.definition = definition;
+        }
     }
 }
 

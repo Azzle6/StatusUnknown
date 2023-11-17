@@ -42,24 +42,6 @@ namespace Inventory.Item
             this.verticalRoot = itemView.Q<VisualElement>("verticalRoot");
             VisualElement[] slots = GridBuilder.BuildGrid(shape, this.verticalRoot, UIHandler.Instance.uiSettings.itemSquareTemplate);
             
-            /*for (int y = 0; y < shapeSize.y; y++)
-            {
-                VisualElement horizontalParent = new VisualElement();
-                horizontalParent.AddToClassList("horizontalParent");
-                this.verticalRoot.Insert(y, horizontalParent);
-                
-                for (int x = 0; x < shapeSize.x; x++)
-                {
-                    VisualElement slot = new VisualElement();
-                    
-                    horizontalParent.Insert(x, slot);
-
-                    slot.AddToClassList(this.item.gridItemDefinition.shape.content[
-                        GridHelper.GetIndexFromGridPosition(new Vector2Int(x, y), shapeSize.x)]
-                        ? "baseSlot"
-                        : "hiddenSlot");
-                }
-            }*/
             this.ViewRoot = itemView;
             this.FocusElement = itemView.Q<VisualElement>("focusParent");
         }

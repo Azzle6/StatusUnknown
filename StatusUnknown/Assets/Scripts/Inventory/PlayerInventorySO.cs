@@ -6,7 +6,7 @@ namespace Inventory
     [CreateAssetMenu(menuName = "CustomAssets/Data/PlayerInventory")]
     public class PlayerInventorySO : ScriptableObject
     {
-        public GridDataSO inventory;
+        public InventoryDataSO inventory;
         public Weapon[] equippedWeaponsData;
     }
 }

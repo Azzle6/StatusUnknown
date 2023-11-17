@@ -3,6 +3,7 @@ namespace Weapons
     using System;
     using System.Collections.Generic;
     using Core.Helpers;
+    using Inventory.Containers;
     using Inventory.Item;
     using Module;
     using Sirenix.OdinInspector;
@@ -45,16 +46,35 @@ namespace Weapons
     }
 
     [Serializable]
-    public struct WeaponTriggerGridData
+    public struct WeaponTriggerGridData : IItemsDataContainer
     {
         public TriggerSO triggerType;
         public int triggerRowPosition;
-        public VectorIntItemDictionary content;
+        public VectorIntModuleDictionary Modules;
+        
+        public VectorIntItemDictionary GetAllItems()
+        {
+            return Modules.ToItemDictionary();
+        }
+
+        public void SaveAllItems(VectorIntItemDictionary content)
+        {
+            this.Modules.Clear();
+            foreach (var info in content)
+            {
+                this.Modules.Add(info.Key, (Module)info.Value);
+            }
+        }
+
+        public void ClearData()
+        {
+            this.Modules.Clear();
+        }
 
         public WeaponTriggerGridData(WeaponTriggerDefinition triggerDefinitionData)
         {
             this.triggerType = triggerDefinitionData.trigger;
-            this.content = new VectorIntItemDictionary();
+            this.Modules = new VectorIntModuleDictionary();
             this.triggerRowPosition = triggerDefinitionData.triggerRowPosition;
         }
     }

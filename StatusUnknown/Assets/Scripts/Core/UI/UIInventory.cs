@@ -63,13 +63,13 @@ namespace Core.UI
         private void InitInventoryView()
         {
             this.inventoryGridView = new GridView(this.uiDocument.rootVisualElement.Q<VisualElement>(INVENTORY_GRID_NAME),
-                this.playerInventory.inventory.Shape, this.playerInventory.inventory.content);
+                this.playerInventory.inventory.Shape, this.playerInventory.inventory);
         }
 
         private void InitWeaponGridView()
         {
             this.weaponGridView = new GridView(this.uiDocument.rootVisualElement.Q<VisualElement>(WEAPON_GRID_NAME),
-                this.playerInventory.equippedWeaponsData[0].definition.triggers[0].shape, this.playerInventory.equippedWeaponsData[0].triggerInfoData[0].content);
+                this.playerInventory.equippedWeaponsData[0].definition.triggers[0].shape, this.playerInventory.equippedWeaponsData[0].triggerInfoData[0]);
             
             this.SelectWeapon(this.playerInventory.equippedWeaponsData[0]);
         }
@@ -103,7 +103,7 @@ namespace Core.UI
                 return;
             }
             
-            this.weaponGridView.LoadNewData(this.selectedWeapon.definition.triggers[index].shape, this.selectedWeapon.triggerInfoData[index].content);
+            this.weaponGridView.LoadNewData(this.selectedWeapon.definition.triggers[index].shape, this.selectedWeapon.triggerInfoData[index]);
         }
 
         [Button, HideInEditorMode]
