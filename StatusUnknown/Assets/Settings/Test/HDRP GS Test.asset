@@ -141,7 +141,7 @@ MonoBehaviour:
         m_Version: 1
         dilationSettings:
           enableDilation: 1
-          dilationDistance: 5
+          dilationDistance: 20
           dilationValidityThreshold: 0.25
           dilationIterations: 1
           squaredDistWeighting: 1
@@ -176,6 +176,7 @@ MonoBehaviour:
     - name: Baking Set Test
       sceneGUIDs:
       - ce31f14eba0f1044386249b739363569
+      - 233e2eb1c2721e64488853d1494cc767
       settings:
         m_Version: 1
         dilationSettings:
