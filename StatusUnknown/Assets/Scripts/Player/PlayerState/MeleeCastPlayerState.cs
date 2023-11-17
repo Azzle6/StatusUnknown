@@ -5,6 +5,7 @@ namespace Player
     public class MeleeCastPlayerState : PlayerState
     {
         [HideInInspector] public MeleeAttack currentAttack;
+        private MeleeWeapon currentMeleeWeapon;
         [SerializeField] private WeaponManager weaponManager;
         private Coroutine castCoroutine;
         public override void OnStateEnter()
@@ -13,14 +14,13 @@ namespace Player
         }
 
        
-        public override void Behave<T>(T x) 
+        public override void Behave<T>(T x)
         {
-            
             if (x is MeleeAttack attack)
             {
-                if (castCoroutine == null && currentAttack == null)
+                currentAttack = attack;
+                if ((castCoroutine == null))
                 {
-                    currentAttack = attack;
                     castCoroutine = StartCoroutine(Cast());
                 }
             }
@@ -32,19 +32,23 @@ namespace Player
         {
             //launch the cast animation
             //need to match animation length
-            playerStateInterpretor.weaponManager.GetCurrentMeleeWeapon().Cast();
+            currentMeleeWeapon = playerStateInterpretor.weaponManager.GetCurrentMeleeWeapon();
+                if(currentMeleeWeapon == default)
+                    yield break;
+                    
+            currentMeleeWeapon.Cast();
             yield return new WaitForSeconds(currentAttack.castTime);
-            if (playerStateInterpretor.CheckState(PlayerStateType.ACTION,"MeleeCastPlayerState"))
-            {
-                playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
-                playerStateInterpretor.AddState("MeleeBuildUpPlayerState", PlayerStateType.ACTION, true);
-                MeleeAttack attackToBehave = currentAttack;
-                currentAttack = null;
-                playerStateInterpretor.Behave(attackToBehave,PlayerStateType.ACTION);
-            }
-
+          
+            playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
+            playerStateInterpretor.AddState("MeleeBuildUpPlayerState", PlayerStateType.ACTION, true);
+            MeleeAttack attackToBehave = currentAttack;
+            currentAttack = null;
+            playerStateInterpretor.Behave(attackToBehave,PlayerStateType.ACTION);
             castCoroutine = null;
+            currentMeleeWeapon = null;
         }
+
+            
         
         public override void OnStateExit()
         {

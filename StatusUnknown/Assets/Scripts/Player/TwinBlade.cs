@@ -1,6 +1,8 @@
 
 using System;
 using System.Collections;
+using DG.Tweening;
+using Unity.Mathematics;
 
 namespace Player
 {
@@ -14,6 +16,7 @@ namespace Player
 
         private void OnEnable()
         {
+            attacks = twinBladeStat.attacks;
             comboIndex = 0;
         }
 
@@ -72,45 +75,25 @@ namespace Player
         public override void Cast()
         {
             base.Cast();
-            weaponManager.playerStateInterpretor.Behave(twinBladeStat.attacks[comboIndex],PlayerStateType.ACTION);
         }
 
         public override void BuildUp()
         {
             base.BuildUp();
-            weaponManager.playerStateInterpretor.Behave(twinBladeStat.attacks[comboIndex],PlayerStateType.ACTION);
         }
 
         public override void Active()
         {
             base.Active();
-            weaponManager.playerStateInterpretor.Behave(twinBladeStat.attacks[comboIndex],PlayerStateType.ACTION);
-
         }
 
         public override void Recovery()
         {
             base.Recovery();
-            /*if (weaponManager.playerStateInterpretor.CheckState(PlayerStateType.ACTION, "MeleeRecoveryPlayerState"))
-                return;*/
-            weaponManager.playerStateInterpretor.Behave(twinBladeStat.attacks[comboIndex],PlayerStateType.ACTION);
-
-            Debug.Log(comboIndex + " combo index" + twinBladeStat.attacks.Length + " length");
-            if (comboIndex > twinBladeStat.attacks.Length -1)
-            {
-                Debug.Log("Combo index reset");
-                comboIndex = 0;
-            }
-
-
+            
         }
 
-        public override IEnumerator Cooldown()
-        {
-            yield return new WaitForSeconds(twinBladeStat.attacks[comboIndex].cooldownTime + twinBladeStat.attacks[comboIndex].cooldownTime);
-            comboIndex = 0;
-            Debug.Log("Combo index reset in coroutine");
-        }
+    
         
     }
 }

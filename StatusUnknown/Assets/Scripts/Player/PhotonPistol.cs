@@ -1,3 +1,4 @@
+using System;
 using Unity.Mathematics;
 
 namespace Player
@@ -15,6 +16,7 @@ namespace Player
         private Vector3 initMeshPos;
         private float chargeTimer;
         private Coroutine charging;
+        private Coroutine reloading;
         private GameObject tempProjectile;
         private float currentDamage;
         private bool waitForTriggerRelease;
@@ -28,7 +30,13 @@ namespace Player
             currentAmmo = stat.magazineSize;
             initMeshPos = mesh.localPosition;
         }
-        
+
+        private void OnDisable()
+        {
+            reloading = default;
+            charging = default;
+        }
+
         public override void ActionPressed()
         {
             //disabling an object stop its coroutine so we need to check if it is already in cooldown and relaunch it
@@ -38,8 +46,9 @@ namespace Player
                 return;
             }
 
-            if (isReloading)
+            if ((isReloading) && (reloading == default))
             {
+                Debug.Log("need to resume reload animation");
                 Reload(weaponManager.playerAnimator);
                 return;
             }
@@ -111,8 +120,9 @@ namespace Player
 
         public override void Reload(Animator playerAnimator)
         {
-            if (isReloading)
+            if (reloading != default)
                 return;
+            
             weaponManager.rigLHand.weight = 0;
             weaponManager.rigRHand.weight = 0;
             mesh.transform.parent = weaponManager.rHandTr;
