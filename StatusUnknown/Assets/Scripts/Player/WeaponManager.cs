@@ -12,6 +12,7 @@ namespace Player
         public Weapon[] weapons;
         public int currentWeaponIndex;
         [SerializeField] private PlayerStat playerStat;
+        public EnemyStatusHandler enemyStatusHandler;
         public Transform lHandTr;
         public Transform rHandTr;
         public Rig rigLHand;

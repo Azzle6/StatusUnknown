@@ -67,11 +67,8 @@ namespace Player
             weaponManager.playerStateInterpretor.Behave(attacks[comboIndex],PlayerStateType.ACTION);
             comboIndex++;
 
-
-            Debug.Log(comboIndex + " combo index" + attacks.Length + " length");
             if (comboIndex > attacks.Length -1)
             {
-                Debug.Log("Combo index reset");
                 comboIndex = 0;
             }
         }
@@ -81,7 +78,6 @@ namespace Player
             comboIndexWhenCDStarted = comboIndex;
             yield return new WaitForSeconds(attacks[comboIndexWhenCDStarted].cooldownTime + attacks[comboIndexWhenCDStarted].cooldownTime);
             comboIndex = 0;
-            Debug.Log("Combo index reset in coroutine");
         }
 
     }

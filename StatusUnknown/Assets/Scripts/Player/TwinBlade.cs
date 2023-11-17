@@ -70,7 +70,15 @@ namespace Player
         public void Hit(IDamageable target)
         {
             target.TakeDamage(twinBladeStat.attacks[comboIndex].attackDamage, Vector3.zero);
+            if (comboIndex == 2)
+            {
+                weaponManager.enemyStatusHandler.ApplyDotStart(target, twinBladeStat.dotDuration,
+                    twinBladeStat.dotTickRate, twinBladeStat.dotDamage, Vector3.zero);
+            }
+            
         }
+        
+        
 
         public override void Cast()
         {
