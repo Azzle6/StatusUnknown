@@ -4,6 +4,7 @@ using UnityEngine.UIElements;
 
 namespace Inventory
 {
+    using Grid;
     using Item;
 
     [Serializable]

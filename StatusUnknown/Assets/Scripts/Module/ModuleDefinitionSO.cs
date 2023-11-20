@@ -1,6 +1,5 @@
 namespace Module
 {
-    using Inventory;
     using Inventory.Item;
     using UnityEngine;
 
@@ -8,6 +7,6 @@ namespace Module
     public class ModuleDefinitionSO : GridItemSO
     {
         public override E_ItemType ItemType => E_ItemType.MODULE;
-        public Output[] Outputs;
+        public Output[] outputs;
     }
 }

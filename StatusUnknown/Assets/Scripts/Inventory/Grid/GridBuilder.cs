@@ -1,4 +1,4 @@
-namespace Inventory
+namespace Inventory.Grid
 {
     using System.Collections.Generic;
     using Core.SingletonsSO;

@@ -1,6 +1,7 @@
 namespace Inventory.Containers
 {
     using Core.Helpers;
+    using Item;
 
     public interface IItemsDataContainer
     {

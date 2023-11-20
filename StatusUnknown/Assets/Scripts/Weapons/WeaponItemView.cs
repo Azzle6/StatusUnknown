@@ -1,18 +1,18 @@
 namespace Weapons
 {
-    using Inventory;
+    using Inventory.Grid;
     using Inventory.Item;
     using UnityEngine;
     
     public class WeaponItemView : ItemView
     {
-        public WeaponItemView(WeaponData dataItem, Vector2Int gridPosition, GridView gridView) : base(dataItem, gridPosition,
+        public WeaponItemView(WeaponData itemData, Vector2Int gridPosition, GridView gridView) : base(itemData, gridPosition,
             gridView)
         {
-            this.WeaponDataItem = dataItem;
+            this.WeaponItemData = itemData;
         }
 
-        public WeaponData WeaponDataItem;
+        public WeaponData WeaponItemData;
 
         protected override void GenerateCustomView()
         {

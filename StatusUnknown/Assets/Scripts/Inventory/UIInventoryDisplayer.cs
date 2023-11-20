@@ -1,12 +1,13 @@
-namespace Core.UI
+namespace Inventory
 {
-    using Inventory;
+    using Grid;
+    using Item;
     using Sirenix.OdinInspector;
     using UnityEngine;
     using UnityEngine.UIElements;
     using Weapons;
 
-    public class UIInventory : MonoBehaviour
+    public class UIInventoryDisplayer : MonoBehaviour
     {
         private const string INVENTORY_NAME = "InventoryInterface";
         private const string INVENTORY_GRID_NAME = "inventoryGrid";
@@ -63,13 +64,13 @@ namespace Core.UI
         private void InitInventoryView()
         {
             this.inventoryGridView = new GridView(this.uiDocument.rootVisualElement.Q<VisualElement>(INVENTORY_GRID_NAME),
-                this.playerInventory.inventory.Shape, this.playerInventory.inventory);
+                this.playerInventory.inventory.Shape, this.playerInventory.inventory, new E_ItemType[] { E_ItemType.MODULE, E_ItemType.WEAPON});
         }
 
         private void InitWeaponGridView()
         {
             this.weaponGridView = new GridView(this.uiDocument.rootVisualElement.Q<VisualElement>(WEAPON_GRID_NAME),
-                this.playerInventory.equippedWeaponsData[0].definition.triggers[0].shape, this.playerInventory.equippedWeaponsData[0].triggerInfoData[0]);
+                this.playerInventory.equippedWeaponsData[0].definition.triggers[0].shape, this.playerInventory.equippedWeaponsData[0].triggerInfoData[0], new E_ItemType[] { E_ItemType.MODULE});
             
             this.SelectWeapon(this.playerInventory.equippedWeaponsData[0]);
         }

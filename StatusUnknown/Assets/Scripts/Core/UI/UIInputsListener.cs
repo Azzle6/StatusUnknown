@@ -1,16 +1,18 @@
 namespace Core.UI
 {
+    using Inventory;
     using Sirenix.OdinInspector;
     using UnityEngine;
+    using UnityEngine.Serialization;
 
     public class UIInputsListener : MonoBehaviour
     {
-        [SerializeField, Required]
-        private UIInventory inventory;
+        [FormerlySerializedAs("inventory")] [SerializeField, Required]
+        private UIInventoryDisplayer inventoryDisplayer;
 
         private void OnStart()
         {
-            this.inventory.Display();
+            this.inventoryDisplayer.Display();
         }
     }
 }

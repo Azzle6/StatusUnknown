@@ -3,6 +3,7 @@ namespace Inventory.Item
     using System;
     using Core.Helpers;
     using Core.SingletonsSO;
+    using Grid;
     using Module;
     using UnityEngine;
     using UnityEngine.UIElements;
@@ -16,13 +17,13 @@ namespace Inventory.Item
         public VisualElement ViewRoot { get; set; }
         public VisualElement FocusElement { get; set; }
         
-        public ItemData DataDataItemData;
+        public ItemData ItemData;
         private VisualElement verticalRoot;
 
         #region CONSTRUCTOR
-        protected ItemView(ItemData dataDataItemData, Vector2Int gridPosition, GridView gridView)
+        protected ItemView(ItemData itemData, Vector2Int gridPosition, GridView gridView)
         {
-            this.DataDataItemData = dataDataItemData;
+            this.ItemData = itemData;
             this.GridPosition = gridPosition;
             this.Grid = gridView;
             this.GenerateBaseView();
@@ -35,12 +36,12 @@ namespace Inventory.Item
             if (this.ViewRoot != null)
                 this.ViewRoot.parent.Remove(this.ViewRoot);
             
-            Shape shape = this.DataDataItemData.GridItemDefinition.shape;
+            Shape shape = this.ItemData.GridItemDefinition.shape;
             VisualElement itemView = UIHandler.Instance.uiSettings.itemTemplate.Instantiate();
             itemView.style.position = Position.Absolute;
             
             this.verticalRoot = itemView.Q<VisualElement>("verticalRoot");
-            VisualElement[] slots = GridBuilder.BuildGrid(shape, this.verticalRoot, UIHandler.Instance.uiSettings.itemSquareTemplate);
+            GridBuilder.BuildGrid(shape, this.verticalRoot, UIHandler.Instance.uiSettings.itemSquareTemplate);
             
             this.ViewRoot = itemView;
             this.FocusElement = itemView.Q<VisualElement>("focusParent");

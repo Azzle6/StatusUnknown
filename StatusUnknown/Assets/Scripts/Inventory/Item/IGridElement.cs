@@ -1,5 +1,6 @@
-namespace Inventory
+namespace Inventory.Item
 {
+    using Grid;
     using UnityEngine;
     using UnityEngine.UIElements;
 

@@ -14,12 +14,12 @@ namespace Inventory
         [field: SerializeField]
         public Shape Shape { get; set; }
 
-        public VectorIntModuleDictionary Modules;
-        public VectorIntWeaponDictionary Weapons;
+        public VectorIntModuleDictionary modules;
+        public VectorIntWeaponDictionary weapons;
         public VectorIntItemDictionary GetAllItems()
         {
             List<VectorIntItemDictionary> dictionariesToMerge = new List<VectorIntItemDictionary>()
-                { this.Modules.ToItemDictionary(), this.Weapons.ToItemDictionary() };
+                { this.modules.ToItemDictionary(), this.weapons.ToItemDictionary() };
             
             VectorIntItemDictionary result = new VectorIntItemDictionary();
             
@@ -30,18 +30,18 @@ namespace Inventory
 
         public void SaveAllItems(VectorIntItemDictionary content)
         {
-            this.Modules.Clear();
-            this.Weapons.Clear();
+            this.modules.Clear();
+            this.weapons.Clear();
             
             foreach (var info in content)
             {
                 switch (info.Value.GridItemDefinition.ItemType)
                 {
                     case E_ItemType.MODULE:
-                        this.Modules.Add(info.Key, (ModuleData)info.Value);
+                        this.modules.Add(info.Key, (ModuleData)info.Value);
                         break;
                     case E_ItemType.WEAPON:
-                        this.Weapons.Add(info.Key, (WeaponData)info.Value);
+                        this.weapons.Add(info.Key, (WeaponData)info.Value);
                         break;
                 }
             }
@@ -49,8 +49,8 @@ namespace Inventory
 
         public void ClearData()
         {
-            this.Modules.Clear();
-            this.Weapons.Clear();
+            this.modules.Clear();
+            this.weapons.Clear();
         }
     }
 }
