@@ -1,8 +1,8 @@
 namespace Core.SingletonsSO
 {
-    using System;
     using UnityEngine;
-    
+    using UnityEngine.AddressableAssets;
+
     public class SingletonSO<T> : ScriptableObject where T : SingletonSO<T>
     {
         private static T instance = null;
@@ -12,14 +12,14 @@ namespace Core.SingletonsSO
             {
                 if (instance == null)
                 {
-                    T[] results = Resources.FindObjectsOfTypeAll<T>();
-                    if (results.Length == 0)
-                        throw new Exception($"Cannot find instance of {typeof(T)}.");
-                    if (results.Length > 1)
-                        throw new Exception($"Multiple instances of {typeof(T)} exists. Only one will be used, delete others.");
+                    var op = Addressables.LoadAssetAsync<T>("SingletonSO");
 
-                    instance = results[0];
-                    instance.hideFlags = HideFlags.DontUnloadUnusedAsset;
+                    T result = op.WaitForCompletion();
+
+                    if (result == null)
+                        Debug.LogWarning($"Cannot find instance of {typeof(T)}.");
+                    
+                    instance = result;
                 }
                 return instance;
             }

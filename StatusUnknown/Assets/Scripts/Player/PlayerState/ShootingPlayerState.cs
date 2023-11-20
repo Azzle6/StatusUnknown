@@ -1,6 +1,4 @@
-using System;
-
-namespace Core.Player
+namespace Player
 {
     using System.Collections;
     using System.Collections.Generic;
@@ -11,7 +9,6 @@ namespace Core.Player
         private Coroutine shooting;
         private int weaponNo;
         
-        [HideInInspector] public bool isShooting;
         private Camera mainCamera;
         
         //public variable are for editor script
@@ -22,7 +19,7 @@ namespace Core.Player
         [HideInInspector] public List<float> confirmedInTheAngle;
         [HideInInspector] public List<float> angleRequired;
         [HideInInspector] public Collider closestTarget;
-        [SerializeField] private PlayerStat playerStat;
+        public PlayerStat playerStat;
         [SerializeField] private float distanceVisibleCollider;
         [SerializeField] private float distanceVisibleRadius;
         private float bestAngleToClosestTarget;
@@ -39,13 +36,13 @@ namespace Core.Player
             confirmedInTheAngle = new List<float>();
             angleRequired = new List<float>();
             closestTarget = default;
+            playerStat.isShooting = false;
         }
 
 
         public override void OnStateEnter()
         {
-            shooting = StartCoroutine(Shoot());
-            isShooting = true;
+            
         }
         
         public override void Behave<T>(T x)
@@ -53,20 +50,29 @@ namespace Core.Player
             if (x is int weapon)
                 weaponNo = weapon;
 
-            if (shooting == default)
-                shooting = StartCoroutine(Shoot());
+            if (playerStat.weaponMelee[weaponNo])
+            {
+                shooting = null;
+                Fire();
+            }
+            else
+            {
+                Debug.Log("Shooting");
+                playerStat.isShooting = true;
+                if (shooting == default)
+                {
+                    shooting = StartCoroutine(Shoot());
+                }
+            }
         }
         
         private IEnumerator Shoot()
         {
-            while (isShooting)
+            while (playerStat.isShooting)// && playerStat.weaponMelee[weaponNo] == false)
             {
                 FrustrumCulling();
                 DetermineClosestTarget();
                 Fire();
-                //need to check if gun is automatic or not
-                //need to check for the gun fire rate 
-                //need to check for the gun ammo
                 yield return null;
             }
         }
@@ -76,7 +82,7 @@ namespace Core.Player
             frustumPlanes = GeometryUtility.CalculateFrustumPlanes(mainCamera);
             
             //recover colliders in the frustrum 
-            visibleColliders = Physics.OverlapSphere(playerStateInterpretor.transform.position + playerStateInterpretor.transform.forward * distanceVisibleCollider, distanceVisibleRadius);
+            visibleColliders = Physics.OverlapSphere(playerStateInterpretor.transform.position + playerStateInterpretor.transform.forward * distanceVisibleCollider, distanceVisibleRadius, playerStat.aimLayerMask);
            
             confirmedInTheFrustrum.Clear(); 
             confirmedInTheAngle.Clear();
@@ -84,7 +90,7 @@ namespace Core.Player
             closestTarget = default;
             foreach (Collider collider in visibleColliders)
             {
-                if (GeometryUtility.TestPlanesAABB(frustumPlanes, collider.bounds) && (collider.gameObject.TryGetComponent(out Target target)))
+                if (GeometryUtility.TestPlanesAABB(frustumPlanes, collider.bounds))
                 {
                     confirmedInTheFrustrum.Add(collider);
                     playerPos = playerStateInterpretor.transform.position;
@@ -113,6 +119,7 @@ namespace Core.Player
                     {
                         closestTarget = confirmedInTheFrustrum[x];
                         bestAngleToClosestTarget = confirmedInTheAngle[x];
+                        playerStateInterpretor.transform.forward = Vector3.Slerp(new Vector3(playerStateInterpretor.transform.forward.x,0,playerStateInterpretor.transform.forward.z), closestTarget.transform.position - playerStateInterpretor.transform.position, playerStat.turnSpeed);
                     }
                 }
             }
@@ -128,22 +135,18 @@ namespace Core.Player
         {
             weaponManager.PressTriggerWeapon(weaponNo); 
         }
-
- 
-
+        
         public override void OnStateExit()
         {
             weaponManager.ReleaseTriggerWeapon();
             if (shooting != default)
+            {
                 StopCoroutine(shooting);
-            isShooting = false;
+                shooting = default;
+            }
+            playerStat.isShooting = false;
         }
         
-        private void OnDrawGizmos()
-        {
-           //ShowDetectionZone();
-        }
-
         private void ShowDetectionZone()
         {
             Gizmos.color = Color.yellow;

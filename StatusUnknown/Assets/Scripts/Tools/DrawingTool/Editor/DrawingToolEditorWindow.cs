@@ -812,7 +812,7 @@ namespace Tools.DrawingTool.Editor
             
             List<bool> exportedShape = new List<bool>();
 
-            for (int y = 0; y < newSize.y; y++) //Inverted because the grid is visually inverted so we need to save data in good order
+            for (int y = newSize.y - 1; y >= 0; y--) //Inverted because the grid is visually inverted so we need to save data in good order
             {
                 for (int x = 0; x < newSize.x; x++)
                 {
@@ -835,8 +835,13 @@ namespace Tools.DrawingTool.Editor
             this.ForceNewGrid(loadedShape.shapeSize);
             this.SetNewAnchor(loadedShape.anchor);
 
-            for (int i = 0; i < loadedShape.shapeContent.Length; i++)
-                this.ChangeSquareState(this.squaresData[i], loadedShape.shapeContent[i] == false ? E_PointState.EMPTY : E_PointState.FILL);
+            for (int y = 0; y < loadedShape.shapeSize.y; y++) //Inverted because the grid is visually inverted so we need to load data in good order
+            {
+                for (int x = 0; x < loadedShape.shapeSize.x; x++)
+                {
+                    this.ChangeSquareState(this.squaresData[this.GridPositionToIndex(new Vector2Int(x, loadedShape.shapeSize.y - 1 - y))], loadedShape.shapeContent[this.GridPositionToIndex(new Vector2Int(x, y))] == false ? E_PointState.EMPTY : E_PointState.FILL);
+                }
+            }
         }
 
         private void OnLoadButtonClicked()

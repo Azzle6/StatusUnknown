@@ -5,6 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Draft/PlayerDraft.unity
+    guid: f9fe0f117ac28844984c8ba453d41e20
   - enabled: 0
     path: Assets/Scenes/Draft/LevelStreamTest.unity
     guid: bb3d239e57463d64ba657af7c3aa78fb
@@ -26,7 +29,5 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Levels/LevelStreamTest_StreamScenes/Room (6)_StreamScene.unity
     guid: 9e78a78bcae73a34793f4fa5399b3743
-  - enabled: 1
-    path: Assets/Scenes/Draft/VectorField_Scene.unity
-    guid: 0191b610c8dbf71498bbb7e93803bdcc
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 4c2762a248adc0d40bf460d2ee0ba781, type: 2}

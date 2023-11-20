@@ -1,8 +1,6 @@
-using UnityEngine;
-
-namespace Core.Player
+namespace Player
 {
-
+    using UnityEngine;
 
     public class AugmentPlayerState : PlayerState
     {
@@ -13,7 +11,7 @@ namespace Core.Player
             Debug.Log("Augment");
         }
 
-        public void Behave<T>(T x)
+        public override void Behave<T>(T x)
         {
             if (x is int index)
             {

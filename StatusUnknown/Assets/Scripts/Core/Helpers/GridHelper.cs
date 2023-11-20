@@ -17,7 +17,7 @@ namespace Core.Helpers
 
         public static bool IsInGrid(Vector2Int position, Vector2Int size)
         {
-            return position.x >= size.x || position.y >= size.y || position.x < 0 || position.y < 0;
+            return (position.x < size.x && position.y < size.y && position.x >= 0 && position.y >= 0);
         }
     }
 }
