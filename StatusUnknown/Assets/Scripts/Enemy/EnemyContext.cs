@@ -16,7 +16,7 @@ public class EnemyContext : MonoBehaviour, IDamageable
     [SerializeField] protected LayerMask avoidanceMask;
 
     [Header("Debug")]
-    [SerializeField] MeshRenderer meshRenderer;
+    [SerializeField] protected MeshRenderer meshRenderer;
     float currentHealth;
     void OnEnable()
     {
@@ -30,8 +30,7 @@ public class EnemyContext : MonoBehaviour, IDamageable
     }
     private void Start()
     {
-        currentHealth = stats.health;
-        rotation = transform.rotation;
+        InitializeEnemy();
     }
     private void Update()
     {
@@ -92,11 +91,22 @@ public class EnemyContext : MonoBehaviour, IDamageable
     }
     public void TakeDamage(float damage, Vector3 force)
     {
+        EnemyTakeDamage(damage, force);
+    }
+
+    protected virtual void EnemyTakeDamage(float damage, Vector3 force)
+    {
         currentHealth -= damage;
         AddForce(force);
-        Debug.Log("Enemy took damage");
-        if(currentHealth < 0)
+        //Debug.Log($"{gameObject.name} took {damage} damage {currentHealth}/{stats.health}");
+        if (currentHealth < 0)
             Destroy(gameObject);
+    }
+    protected virtual void InitializeEnemy()
+    {
+        currentHealth = stats.health;
+        Debug.Log($" current health {currentHealth}");
+        rotation = transform.rotation;
     }
     void OnDrawGizmos()
     {

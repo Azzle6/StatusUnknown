@@ -754,6 +754,7 @@ MonoBehaviour:
   hitShape:
     rid: 5225647092011368449
   updateFrequence: 0.1
+  triggerHit: 0
   references:
     version: 2
     RefIds:
@@ -974,6 +975,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   meshRenderer: {fileID: 3413500973956032109}
+  hit: 0
+  hitFreq: 0.1
 --- !u!54 &5553896409487144114
 Rigidbody:
   m_ObjectHideFlags: 0
