@@ -13,25 +13,25 @@ MonoBehaviour:
   m_Name: PhotonPistol
   m_EditorClassIdentifier: 
   weaponID: 0
-  maxDamage: 25
+  maxDamage: 100
   damageCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
@@ -43,29 +43,29 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      value: 0.09906006
+      inSlope: 0.90093994
+      outSlope: 0.90093994
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      inSlope: 0.90093994
+      outSlope: 0.90093994
+      tangentMode: 34
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  maxProjectileSize: 3
+  maxProjectileSize: 0.75
   projectileSpeed: 30
   projectilePrefab: {fileID: 2084647982804730131, guid: b51a3fc02e55aad4c931a631e96295dd, type: 3}
-  maxTimeCharge: 2
-  cdTime: 1
-  magazineSize: 10
-  reloadTime: 3.2
+  maxTimeCharge: 1.5
+  cdTime: 0.5
+  magazineSize: 14
+  reloadTime: 2

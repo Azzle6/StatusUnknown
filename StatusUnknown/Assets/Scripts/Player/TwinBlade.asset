@@ -20,23 +20,21 @@ MonoBehaviour:
     superArmor: 50
     activeTime: 0.2
     recoveryTime: 0.2
-    cooldownTime: 0.5
-    hitBoxSize: {x: 0, y: 0, z: 0}
+    cooldownTime: 1
   - attackDamage: 10
     castTime: 0.3
     buildUpTime: 0.3
     superArmor: 50
     activeTime: 0.3
     recoveryTime: 0.3
-    cooldownTime: 0.5
-    hitBoxSize: {x: 0, y: 0, z: 0}
+    cooldownTime: 1
   - attackDamage: 30
     castTime: 0.5
     buildUpTime: 0.5
     superArmor: 50
     activeTime: 0.5
     recoveryTime: 0.5
-    cooldownTime: 0.5
-    hitBoxSize: {x: 0, y: 0, z: 0}
-  attack3DamageDot: 0
-  dotDuration: 0
+    cooldownTime: 1
+  dotDamage: 3
+  dotDuration: 5
+  dotTickRate: 1

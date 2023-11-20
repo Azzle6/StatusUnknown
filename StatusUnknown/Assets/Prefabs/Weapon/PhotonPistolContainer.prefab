@@ -139,7 +139,7 @@ Transform:
   m_GameObject: {fileID: 2366914169210452901}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0175, y: 0.7025, z: 4.6975017}
+  m_LocalPosition: {x: 0, y: 0.7025, z: 1.3}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -191,7 +191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponManager: {fileID: 0}
-  meleeWeapon: 0
+  playerStat: {fileID: 11400000, guid: 96563a0c89298fe42a7e0015e37b4023, type: 2}
   adsRotTr: {fileID: 2055156643633869358}
   adsAimAngle: 0
   adsRestAngle: 80

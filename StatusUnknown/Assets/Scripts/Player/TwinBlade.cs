@@ -1,7 +1,3 @@
-
-using System;
-using System.Collections;
-
 namespace Player
 {
     using UnityEngine;
@@ -14,24 +10,20 @@ namespace Player
 
         private void OnEnable()
         {
+            attacks = twinBladeStat.attacks;
             comboIndex = 0;
         }
+        
 
         public override void ActionPressed()
-        {
-            Cast();
-        }
-
-        public override void ActionReleased()
         {
             
         }
 
-        public override void Reload(Animator playerAnimator)
+        public override void ActionReleased()
         {
-            return;
         }
-
+        
         public override void Switched(Animator playerAnimator, bool OnOff)
         {
             if (!OnOff)
@@ -67,50 +59,38 @@ namespace Player
         public void Hit(IDamageable target)
         {
             target.TakeDamage(twinBladeStat.attacks[comboIndex].attackDamage, Vector3.zero);
+            if (comboIndex == 2)
+            {
+                weaponManager.enemyStatusHandler.ApplyDotStart(target, twinBladeStat.dotDuration,
+                    twinBladeStat.dotTickRate, twinBladeStat.dotDamage, Vector3.zero);
+            }
+            
         }
+        
+        
 
         public override void Cast()
         {
             base.Cast();
-            weaponManager.playerStateInterpretor.Behave(twinBladeStat.attacks[comboIndex],PlayerStateType.ACTION);
         }
 
         public override void BuildUp()
         {
             base.BuildUp();
-            weaponManager.playerStateInterpretor.Behave(twinBladeStat.attacks[comboIndex],PlayerStateType.ACTION);
         }
 
         public override void Active()
         {
             base.Active();
-            weaponManager.playerStateInterpretor.Behave(twinBladeStat.attacks[comboIndex],PlayerStateType.ACTION);
-
         }
 
         public override void Recovery()
         {
             base.Recovery();
-            /*if (weaponManager.playerStateInterpretor.CheckState(PlayerStateType.ACTION, "MeleeRecoveryPlayerState"))
-                return;*/
-            weaponManager.playerStateInterpretor.Behave(twinBladeStat.attacks[comboIndex],PlayerStateType.ACTION);
-
-            Debug.Log(comboIndex + " combo index" + twinBladeStat.attacks.Length + " length");
-            if (comboIndex > twinBladeStat.attacks.Length -1)
-            {
-                Debug.Log("Combo index reset");
-                comboIndex = 0;
-            }
-
-
+            
         }
 
-        public override IEnumerator Cooldown()
-        {
-            yield return new WaitForSeconds(twinBladeStat.attacks[comboIndex].cooldownTime + twinBladeStat.attacks[comboIndex].cooldownTime);
-            comboIndex = 0;
-            Debug.Log("Combo index reset in coroutine");
-        }
+    
         
     }
 }

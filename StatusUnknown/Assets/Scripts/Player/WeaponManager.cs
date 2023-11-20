@@ -12,6 +12,7 @@ namespace Player
         public Weapon[] weapons;
         public int currentWeaponIndex;
         [SerializeField] private PlayerStat playerStat;
+        public EnemyStatusHandler enemyStatusHandler;
         public Transform lHandTr;
         public Transform rHandTr;
         public Rig rigLHand;
@@ -24,44 +25,44 @@ namespace Player
 
         private void InitWeaponManager()
         {
-            playerStat.weaponMelee[0] = weapons[0].meleeWeapon;
-            playerStat.weaponMelee[1] = weapons[1].meleeWeapon;
 
             currentWeaponIndex = 1;
+            playerStat.currentWeaponIsMelee = CheckIfMeleeWeapon(0);
             SwitchWeapon(0);
-            RestWeapon();
+
+            if (weapons[0].TryGetComponent(out RangedWeapon rangedWeapon))
+                rangedWeapon.RestWeapon();
+     
         }
 
         public void EquipWeapon(int weaponNo, Weapon weapon)
         {
             weapons[weaponNo] = weapon;
             weapons[weaponNo].weaponManager = this;
-            
-            playerStat.weaponMelee[weaponNo] = weapon.meleeWeapon;
         }
-
-    
+        
         public void PressTriggerWeapon(int weaponNo)
         {
-            if (currentWeaponIndex != weaponNo)
-                SwitchWeapon(weaponNo);
-            
             weapons[currentWeaponIndex].ActionPressed();
         }
 
-        private void SwitchWeapon(int weaponNo)
+        public void SwitchWeapon(int weaponNo)
         {
-            if (weapons[weaponNo].meleeWeapon)
+            if (weaponNo == currentWeaponIndex)
+                return;
+            
+            if (CheckIfMeleeWeapon(weaponNo))
             {
                 //changing arm layer
                 playerStateInterpretor.animator.SetLayerWeight(2,1);
                 playerStateInterpretor.animator.SetLayerWeight(1,0);
-
+                playerStat.currentWeaponIsMelee = true;
             }
             else
             {
                 playerStateInterpretor.animator.SetLayerWeight(2,0);
                 playerStateInterpretor.animator.SetLayerWeight(1,1);
+                playerStat.currentWeaponIsMelee = false;
             }
                 
             weapons[currentWeaponIndex].Switched(playerAnimator, false);
@@ -76,26 +77,23 @@ namespace Player
         {
             weapons[currentWeaponIndex].ActionReleased();
         }
-
-        public void AimWithCurrentWeapon()
+        
+        public void ReloadWeapon()
         {
-            if (weapons[currentWeaponIndex].meleeWeapon)
-                return;
-            
-            weapons[currentWeaponIndex].adsRotTr.DOLocalRotate(new Vector3(weapons[currentWeaponIndex].adsAimAngle,0,0), 0.1f);
+            if (weapons[currentWeaponIndex].TryGetComponent(out RangedWeapon rangedWeapon))
+                rangedWeapon.Reload(playerAnimator);
         }
-    
+
         public void RestWeapon()
         {
-            if (weapons[currentWeaponIndex].meleeWeapon)
-                return;
-            
-            weapons[currentWeaponIndex].adsRotTr.DOLocalRotate(new Vector3(weapons[currentWeaponIndex].adsRestAngle,0,0), 0.1f);
+            if (weapons[currentWeaponIndex].TryGetComponent(out RangedWeapon rangedWeapon))
+                rangedWeapon.RestWeapon();
         }
-
-        public void ReloadLastEquipedWeapon()
+        
+        public void AimWithCurrentWeapon()
         {
-            weapons[currentWeaponIndex].Reload(playerAnimator);
+            if (weapons[currentWeaponIndex].TryGetComponent(out RangedWeapon rangedWeapon))
+                rangedWeapon.AimWithCurrentWeapon();
         }
         
         public Weapon GetCurrentWeapon()
@@ -103,13 +101,39 @@ namespace Player
             return weapons[currentWeaponIndex];
         }
         
-        public MeleeWeapon GetCurrentMeleeWeapon()
+        public MeleeWeapon ReturnIfMeleeWeapon(int weaponNo)
         {
-            if (weapons[currentWeaponIndex].meleeWeapon == false)
+            if (weapons[weaponNo].TryGetComponent(out MeleeWeapon meleeWeapon))
+                return meleeWeapon;
+            else
                 return null;
-            
-            return (MeleeWeapon) weapons[currentWeaponIndex];
         }
+        
+        public RangedWeapon ReturnIfRangedWeapon(int weaponNo)
+        {
+            if (weapons[weaponNo].TryGetComponent(out RangedWeapon rangedWeapon))
+                return rangedWeapon;
+            else
+                return null;
+        }
+        
+        public bool CheckIfMeleeWeapon(int weaponNo)
+        {
+            if (weapons[weaponNo].TryGetComponent(out MeleeWeapon meleeWeapon))
+                return true;
+            else
+                return false;
+        }
+        
+        public bool CheckIfRangedWeapon(int weaponNo)
+        {
+            if (weapons[weaponNo].TryGetComponent(out RangedWeapon rangedWeapon))
+                return true;
+            else
+                return false;
+        }
+        
+        
     }
 }
 

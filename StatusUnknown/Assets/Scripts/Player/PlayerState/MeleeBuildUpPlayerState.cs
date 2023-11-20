@@ -9,6 +9,7 @@ namespace Player
     {
         [HideInInspector] public MeleeAttack currentAttack;
         [SerializeField] private WeaponManager weaponManager;
+        private MeleeWeapon currentMeleeWeapon;
         private float superArmorDamageTaken;
         private Coroutine buildUpCoroutine;
         private float buildUpTimer;
@@ -23,18 +24,21 @@ namespace Player
         
         public override void Behave<T>(T x) 
         {
-            if (x is MeleeAttack attack)
+            if (x is MeleeWeapon meleeWeapon)
             {
-                currentAttack = attack;
+                currentMeleeWeapon = meleeWeapon;
                 if (buildUpCoroutine == null)
+                {
                     buildUpCoroutine = StartCoroutine(BuildUp());
+                }
             }
         }
 
 
         private IEnumerator BuildUp()
         {
-            playerStateInterpretor.weaponManager.GetCurrentMeleeWeapon().BuildUp();
+            currentMeleeWeapon.BuildUp();
+            currentAttack = currentMeleeWeapon.GetAttack();
             while (buildUpTimer <= currentAttack.buildUpTime)
             {
                 if (superArmorDamageTaken > currentAttack.superArmor)
@@ -50,12 +54,13 @@ namespace Player
                 playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
                 superArmorDamageTaken = 0;
                 playerStateInterpretor.AddState("MeleeActivePlayerState", PlayerStateType.ACTION, true);
-                playerStateInterpretor.Behave(currentAttack,PlayerStateType.ACTION);
+                playerStateInterpretor.Behave(currentMeleeWeapon,PlayerStateType.ACTION);
                
             }
-            currentAttack = null;
-            buildUpCoroutine = null;
+            currentAttack = default;
+            buildUpCoroutine = default;
             buildUpTimer = 0;
+            currentMeleeWeapon = default;
         }
         
         public void SuperArmorTakeDamage(float damage)

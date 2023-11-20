@@ -8,7 +8,7 @@ using UnityEngine;
         
         public override void OnStateEnter()
         {
-            weaponManager.ReloadLastEquipedWeapon();
+            weaponManager.ReloadWeapon();
         }
 
         public override void OnStateExit()

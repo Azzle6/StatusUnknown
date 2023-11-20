@@ -7,6 +7,7 @@ namespace Player
     public class MeleeRecoveryPlayerState : PlayerState
     {
         [HideInInspector] public MeleeAttack currentAttack;
+        [HideInInspector] public MeleeWeapon currentMeleeWeapon;
         [SerializeField] private WeaponManager weaponManager;
         private Coroutine recoveryCoroutine;
 
@@ -18,26 +19,29 @@ namespace Player
         
         public override void Behave<T>(T x) 
         {
-            if (x is MeleeAttack attack)
+            if (x is MeleeWeapon meleeWeapon)
             {
-                currentAttack = attack;
+                currentMeleeWeapon = meleeWeapon;
             }
         }
         
         private IEnumerator Recovery()
         {
-            while (currentAttack == null)
+            while (currentMeleeWeapon == null)
                 yield return null;
             
-            playerStateInterpretor.weaponManager.GetCurrentMeleeWeapon().Recovery();
+            currentMeleeWeapon.Recovery();
+            currentAttack = currentMeleeWeapon.GetAttack();
             yield return new WaitForSeconds(currentAttack.recoveryTime);
+            playerStateInterpretor.ExecuteBufferInput();
             playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
+            currentAttack = null;
+            currentMeleeWeapon = null;
             recoveryCoroutine = null;
         }
 
         public override void OnStateExit()
         {
-            playerStateInterpretor.ExecuteBufferInput();
         }
     }
 }

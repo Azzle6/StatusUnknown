@@ -224,7 +224,7 @@ namespace Player
 
             if (ctx.canceled)
             {
-                if (!playerStat.weaponMelee[weaponNo])
+                if (!playerStat.currentWeaponIsMelee)
                     playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
                 
                 if (deviceLog.currentDevice == DeviceType.GAMEPAD)

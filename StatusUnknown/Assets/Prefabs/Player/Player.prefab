@@ -563,6 +563,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8545159125544498194}
   - component: {fileID: 4974381338073703539}
+  - component: {fileID: 4741601364681424715}
   m_Layer: 0
   m_Name: WeaponManager
   m_TagString: Untagged
@@ -606,10 +607,23 @@ MonoBehaviour:
   - {fileID: 3048650242929717248}
   currentWeaponIndex: 0
   playerStat: {fileID: 11400000, guid: 96563a0c89298fe42a7e0015e37b4023, type: 2}
+  enemyStatusHandler: {fileID: 4741601364681424715}
   lHandTr: {fileID: 5390231149389324123}
   rHandTr: {fileID: 5509668536567005265}
   rigLHand: {fileID: 702666387601256530}
   rigRHand: {fileID: 2675868506475354865}
+--- !u!114 &4741601364681424715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4784582543325438014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8f7038d90f59cc45a986f7f2cd09438, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5087490274234103893
 GameObject:
   m_ObjectHideFlags: 0
@@ -1352,7 +1366,7 @@ MonoBehaviour:
     activeTime: 0
     recoveryTime: 0
     cooldownTime: 0
-    hitBoxSize: {x: 0, y: 0, z: 0}
+  currentMeleeWeapon: {fileID: 0}
   weaponManager: {fileID: 4974381338073703539}
 --- !u!114 &4130879028828508758
 MonoBehaviour:
@@ -1378,7 +1392,6 @@ MonoBehaviour:
     activeTime: 0
     recoveryTime: 0
     cooldownTime: 0
-    hitBoxSize: {x: 0, y: 0, z: 0}
   weaponManager: {fileID: 4974381338073703539}
 --- !u!114 &1241682378252029606
 MonoBehaviour:
@@ -1404,7 +1417,6 @@ MonoBehaviour:
     activeTime: 0
     recoveryTime: 0
     cooldownTime: 0
-    hitBoxSize: {x: 0, y: 0, z: 0}
   weaponManager: {fileID: 4974381338073703539}
 --- !u!114 &6965172701220603686
 MonoBehaviour:
@@ -1430,7 +1442,7 @@ MonoBehaviour:
     activeTime: 0
     recoveryTime: 0
     cooldownTime: 0
-    hitBoxSize: {x: 0, y: 0, z: 0}
+  currentMeleeWeapon: {fileID: 0}
   weaponManager: {fileID: 4974381338073703539}
 --- !u!1 &8463495544153464495
 GameObject:
@@ -2130,11 +2142,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2387115202336153330, guid: 7ed0d303a9085144893bce6f552c4fa9, type: 3}
       propertyPath: m_VersionIndex
-      value: 2680
+      value: 2683
       objectReference: {fileID: 0}
     - target: {fileID: 2432388006558039305, guid: 7ed0d303a9085144893bce6f552c4fa9, type: 3}
       propertyPath: m_VersionIndex
-      value: 2680
+      value: 2683
       objectReference: {fileID: 0}
     - target: {fileID: 2566550824337828928, guid: 7ed0d303a9085144893bce6f552c4fa9, type: 3}
       propertyPath: m_LocalPosition.x
