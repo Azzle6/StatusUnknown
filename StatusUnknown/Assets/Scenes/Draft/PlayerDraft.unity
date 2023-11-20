@@ -1428,6 +1428,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 539881633}
   m_LocalEulerAnglesHint: {x: -54.458, y: 90, z: 0}
+--- !u!114 &1035012726 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3048650242929717248, guid: e49cc5f766cb4354ead5819d0ebe3d0e, type: 3}
+  m_PrefabInstance: {fileID: 780712302934379812}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d75b433304910479abac5c0eea2c29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1196480677
 GameObject:
   m_ObjectHideFlags: 0
@@ -1534,6 +1545,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 539881633}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1248266313 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2875921016714515856, guid: e49cc5f766cb4354ead5819d0ebe3d0e, type: 3}
+  m_PrefabInstance: {fileID: 780712302934379812}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e05f0417baac1c04a95ca08d4c8b82c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1287144885
 GameObject:
   m_ObjectHideFlags: 0
@@ -4359,6 +4381,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: swordMesh
       objectReference: {fileID: 0}
+    - target: {fileID: 4974381338073703539, guid: e49cc5f766cb4354ead5819d0ebe3d0e, type: 3}
+      propertyPath: weapons.Array.data[0]
+      value: 
+      objectReference: {fileID: 1035012726}
+    - target: {fileID: 4974381338073703539, guid: e49cc5f766cb4354ead5819d0ebe3d0e, type: 3}
+      propertyPath: weapons.Array.data[1]
+      value: 
+      objectReference: {fileID: 1248266313}
     - target: {fileID: 5174330278457101129, guid: e49cc5f766cb4354ead5819d0ebe3d0e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

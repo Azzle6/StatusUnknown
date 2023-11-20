@@ -8,6 +8,7 @@ namespace Player
     public class MeleeActivePlayerState : PlayerState
     {
         [HideInInspector] public MeleeAttack currentAttack;
+        [HideInInspector] public MeleeWeapon currentMeleeWeapon;
         [SerializeField] private WeaponManager weaponManager;
         private Coroutine activeCoroutine;
 
@@ -18,11 +19,11 @@ namespace Player
         
         public override void Behave<T>(T x) 
         {
-            if (x is MeleeAttack attack)
+            if (x is MeleeWeapon meleeWeapon)
             {
                 if (activeCoroutine == null)
                 {
-                    currentAttack = attack;
+                    currentMeleeWeapon = meleeWeapon;
                     activeCoroutine = StartCoroutine(Active());
                 }
        
@@ -31,13 +32,15 @@ namespace Player
         
         private IEnumerator Active()
         {
-            weaponManager.GetCurrentMeleeWeapon().Active();
+            currentMeleeWeapon.Active();
+            currentAttack = currentMeleeWeapon.GetAttack();
             yield return new WaitForSeconds(currentAttack.activeTime);
             playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
             activeCoroutine = null;
             playerStateInterpretor.AddState("MeleeRecoveryPlayerState", PlayerStateType.ACTION, false);
-            playerStateInterpretor.Behave(currentAttack,PlayerStateType.ACTION);
+            playerStateInterpretor.Behave(currentMeleeWeapon,PlayerStateType.ACTION);
             currentAttack = null;
+            currentMeleeWeapon = null;
         }
 
         public override void OnStateExit()

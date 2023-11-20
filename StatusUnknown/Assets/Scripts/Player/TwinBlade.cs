@@ -1,9 +1,3 @@
-
-using System;
-using System.Collections;
-using DG.Tweening;
-using Unity.Mathematics;
-
 namespace Player
 {
     using UnityEngine;
@@ -19,22 +13,17 @@ namespace Player
             attacks = twinBladeStat.attacks;
             comboIndex = 0;
         }
+        
 
         public override void ActionPressed()
-        {
-            Cast();
-        }
-
-        public override void ActionReleased()
         {
             
         }
 
-        public override void Reload(Animator playerAnimator)
+        public override void ActionReleased()
         {
-            return;
         }
-
+        
         public override void Switched(Animator playerAnimator, bool OnOff)
         {
             if (!OnOff)

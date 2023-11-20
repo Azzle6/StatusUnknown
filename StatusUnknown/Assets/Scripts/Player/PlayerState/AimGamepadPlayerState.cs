@@ -18,9 +18,14 @@ namespace Player
         {
             if (aiming == default)
                 aiming = StartCoroutine(Aim());
-            playerStateInterpretor.weaponManager.AimWithCurrentWeapon();
-            playerStateInterpretor.animator.SetBool("Aim", true);
-            aimRig.weight = 1;
+            if (!playerStat.currentWeaponIsMelee)
+            {
+                playerStateInterpretor.weaponManager.AimWithCurrentWeapon();
+                aimRig.weight = 1;
+                playerStateInterpretor.animator.SetBool("Aim", true);
+            }
+            
+            
             if (stopAiming == default)
                 stopAiming = StartCoroutine(CheckIfStopAiming());
 

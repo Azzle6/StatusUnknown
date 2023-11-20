@@ -49,11 +49,13 @@ namespace Player
         {
             if (x is int weapon)
                 weaponNo = weapon;
+            
+            weaponManager.SwitchWeapon(weaponNo);
 
-            if (playerStat.weaponMelee[weaponNo])
+            if (playerStat.currentWeaponIsMelee)
             {
                 shooting = null;
-                Fire();
+                playerStateInterpretor.AddState("MeleeCastPlayerState", PlayerStateType.ACTION, true);
             }
             else
             {

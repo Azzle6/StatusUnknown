@@ -7,7 +7,7 @@ namespace Player
     using UnityEngine;
     using Core.Pooler;
     
-    public class PhotonPistol : Weapon
+    public class PhotonPistol : RangedWeapon
     {
         [SerializeField] private PhotonPistolStat stat;
         [SerializeField] private Transform spawnPoint;

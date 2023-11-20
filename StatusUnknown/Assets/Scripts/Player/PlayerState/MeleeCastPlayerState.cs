@@ -10,16 +10,17 @@ namespace Player
         private Coroutine castCoroutine;
         public override void OnStateEnter()
         {
-          
+            currentMeleeWeapon = (MeleeWeapon) weaponManager.GetCurrentWeapon();
+            currentMeleeWeapon.Cast();
         }
 
        
         public override void Behave<T>(T x)
         {
-            if (x is MeleeAttack attack)
+            if (x is MeleeWeapon weapon)
             {
-                currentAttack = attack;
-                if ((castCoroutine == null))
+                currentMeleeWeapon = weapon;
+                if ((castCoroutine == null) && (!playerStateInterpretor.CheckState(PlayerStateType.ACTION,"MeleeBuildUpPlayerState")))
                 {
                     castCoroutine = StartCoroutine(Cast());
                 }
@@ -32,18 +33,16 @@ namespace Player
         {
             //launch the cast animation
             //need to match animation length
-            currentMeleeWeapon = playerStateInterpretor.weaponManager.GetCurrentMeleeWeapon();
                 if(currentMeleeWeapon == default)
                     yield break;
-                    
-            currentMeleeWeapon.Cast();
+                
+            currentAttack = currentMeleeWeapon.GetAttack();
             yield return new WaitForSeconds(currentAttack.castTime);
           
             playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
             playerStateInterpretor.AddState("MeleeBuildUpPlayerState", PlayerStateType.ACTION, true);
-            MeleeAttack attackToBehave = currentAttack;
             currentAttack = null;
-            playerStateInterpretor.Behave(attackToBehave,PlayerStateType.ACTION);
+            playerStateInterpretor.Behave(currentMeleeWeapon,PlayerStateType.ACTION);
             castCoroutine = null;
             currentMeleeWeapon = null;
         }
