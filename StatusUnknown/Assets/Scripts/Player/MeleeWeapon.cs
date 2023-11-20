@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Player
 {
+    using System.Collections;
+    using UnityEngine;
+    
     public abstract class MeleeWeapon : Weapon
     {
         public Coroutine cooldownCoroutine;
@@ -15,9 +14,6 @@ namespace Player
 
         public virtual void Cast()
         {
-            if (weaponManager.playerStateInterpretor.CheckState(PlayerStateType.ACTION, "MeleeCastPlayerState") || weaponManager.playerStateInterpretor.CheckState(PlayerStateType.ACTION, "MeleeBuildUpPlayerState"))
-                return;
-
             if (comboIndex > attacks.Length -1)
                 comboIndex = 0;
             
@@ -34,18 +30,11 @@ namespace Player
             weaponManager.playerAnimator.SetTrigger("MeleeHit");   
             weaponManager.playerAnimator.SetInteger("MeleeCombo", comboIndex);
             
-            weaponManager.playerStateInterpretor.AddState("MeleeCastPlayerState",PlayerStateType.ACTION, false);
-            weaponManager.playerStateInterpretor.Behave(attacks[comboIndex],PlayerStateType.ACTION);
-
-
+            weaponManager.playerStateInterpretor.Behave(this,PlayerStateType.ACTION);
         }
 
         public virtual void BuildUp()
         {
-            if (weaponManager.playerStateInterpretor.CheckState(PlayerStateType.ACTION, "MeleeBuildUpPlayerState"))
-                return;   
-            
-            weaponManager.playerStateInterpretor.Behave(attacks[comboIndex],PlayerStateType.ACTION);
 
         }
 
@@ -54,17 +43,17 @@ namespace Player
             if (weaponManager.playerStateInterpretor.CheckState(PlayerStateType.ACTION, "MeleeActivePlayerState"))
                 return;
             
-            weaponManager.playerStateInterpretor.Behave(attacks[comboIndex],PlayerStateType.ACTION);
-
         }
 
         public virtual void Recovery()
         {
             foreach (HitContext hitContext in hitContexts)
                 hitContext.enabled = false;
-            cooldownCoroutine = StartCoroutine(Cooldown());
             
-            weaponManager.playerStateInterpretor.Behave(attacks[comboIndex],PlayerStateType.ACTION);
+            if ((gameObject.activeSelf) && (cooldownCoroutine == default))
+                cooldownCoroutine = StartCoroutine(Cooldown());
+            
+            Debug.Log("Combo index up");
             comboIndex++;
 
             if (comboIndex > attacks.Length -1)
@@ -78,6 +67,11 @@ namespace Player
             comboIndexWhenCDStarted = comboIndex;
             yield return new WaitForSeconds(attacks[comboIndexWhenCDStarted].cooldownTime + attacks[comboIndexWhenCDStarted].cooldownTime);
             comboIndex = 0;
+        }
+        
+        public MeleeAttack GetAttack()
+        {
+            return attacks[comboIndex];
         }
 
     }

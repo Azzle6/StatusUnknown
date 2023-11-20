@@ -24,22 +24,21 @@ namespace Player
         
         public override void Behave<T>(T x) 
         {
-            if (x is MeleeAttack attack)
+            if (x is MeleeWeapon meleeWeapon)
             {
-                currentAttack = attack;
+                currentMeleeWeapon = meleeWeapon;
                 if (buildUpCoroutine == null)
+                {
                     buildUpCoroutine = StartCoroutine(BuildUp());
+                }
             }
         }
 
 
         private IEnumerator BuildUp()
         {
-            currentMeleeWeapon = playerStateInterpretor.weaponManager.GetCurrentMeleeWeapon();
-            if (currentMeleeWeapon == default)
-                yield break;
-            
             currentMeleeWeapon.BuildUp();
+            currentAttack = currentMeleeWeapon.GetAttack();
             while (buildUpTimer <= currentAttack.buildUpTime)
             {
                 if (superArmorDamageTaken > currentAttack.superArmor)
@@ -55,7 +54,7 @@ namespace Player
                 playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
                 superArmorDamageTaken = 0;
                 playerStateInterpretor.AddState("MeleeActivePlayerState", PlayerStateType.ACTION, true);
-                playerStateInterpretor.Behave(currentAttack,PlayerStateType.ACTION);
+                playerStateInterpretor.Behave(currentMeleeWeapon,PlayerStateType.ACTION);
                
             }
             currentAttack = default;

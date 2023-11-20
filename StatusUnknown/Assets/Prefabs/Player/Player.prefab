@@ -1366,6 +1366,7 @@ MonoBehaviour:
     activeTime: 0
     recoveryTime: 0
     cooldownTime: 0
+  currentMeleeWeapon: {fileID: 0}
   weaponManager: {fileID: 4974381338073703539}
 --- !u!114 &4130879028828508758
 MonoBehaviour:
@@ -1441,6 +1442,7 @@ MonoBehaviour:
     activeTime: 0
     recoveryTime: 0
     cooldownTime: 0
+  currentMeleeWeapon: {fileID: 0}
   weaponManager: {fileID: 4974381338073703539}
 --- !u!1 &8463495544153464495
 GameObject:
@@ -2140,11 +2142,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2387115202336153330, guid: 7ed0d303a9085144893bce6f552c4fa9, type: 3}
       propertyPath: m_VersionIndex
-      value: 2680
+      value: 2683
       objectReference: {fileID: 0}
     - target: {fileID: 2432388006558039305, guid: 7ed0d303a9085144893bce6f552c4fa9, type: 3}
       propertyPath: m_VersionIndex
-      value: 2680
+      value: 2683
       objectReference: {fileID: 0}
     - target: {fileID: 2566550824337828928, guid: 7ed0d303a9085144893bce6f552c4fa9, type: 3}
       propertyPath: m_LocalPosition.x

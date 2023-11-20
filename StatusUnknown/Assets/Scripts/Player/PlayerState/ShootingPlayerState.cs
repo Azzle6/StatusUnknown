@@ -50,10 +50,10 @@ namespace Player
             if (x is int weapon)
                 weaponNo = weapon;
 
-            if (playerStat.weaponMelee[weaponNo])
+            if (playerStat.currentWeaponIsMelee)
             {
                 shooting = null;
-                Fire();
+                playerStateInterpretor.AddState("MeleeCastPlayerState", PlayerStateType.ACTION, true);
             }
             else
             {
