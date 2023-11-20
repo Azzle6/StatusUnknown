@@ -1,9 +1,3 @@
-
-using System;
-using System.Collections;
-using DG.Tweening;
-using Unity.Mathematics;
-
 namespace Player
 {
     using UnityEngine;

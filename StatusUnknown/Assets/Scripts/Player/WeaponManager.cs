@@ -43,14 +43,14 @@ namespace Player
         
         public void PressTriggerWeapon(int weaponNo)
         {
-            if (currentWeaponIndex != weaponNo)
-                SwitchWeapon(weaponNo);
-            
             weapons[currentWeaponIndex].ActionPressed();
         }
 
-        private void SwitchWeapon(int weaponNo)
+        public void SwitchWeapon(int weaponNo)
         {
+            if (weaponNo == currentWeaponIndex)
+                return;
+            
             if (CheckIfMeleeWeapon(weaponNo))
             {
                 //changing arm layer

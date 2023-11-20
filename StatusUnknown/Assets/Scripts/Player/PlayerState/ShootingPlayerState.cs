@@ -49,6 +49,8 @@ namespace Player
         {
             if (x is int weapon)
                 weaponNo = weapon;
+            
+            weaponManager.SwitchWeapon(weaponNo);
 
             if (playerStat.currentWeaponIsMelee)
             {

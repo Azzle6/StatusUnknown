@@ -19,11 +19,9 @@ namespace Player
         {
             if (x is MeleeWeapon weapon)
             {
-                Debug.Log("Cast received");
                 currentMeleeWeapon = weapon;
                 if ((castCoroutine == null) && (!playerStateInterpretor.CheckState(PlayerStateType.ACTION,"MeleeBuildUpPlayerState")))
                 {
-                    Debug.Log("Cast coroutine started");
                     castCoroutine = StartCoroutine(Cast());
                 }
             }
