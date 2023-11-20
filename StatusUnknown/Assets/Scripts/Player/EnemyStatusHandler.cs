@@ -13,9 +13,14 @@ public class EnemyStatusHandler : MonoBehaviour
     public IEnumerator ApplyDot(IDamageable target, float duration, float tickRate, float damage, Vector3 force)
     {
         float timer = 0;
-        while (timer <= duration)
+        while (timer <= duration && target != null)
         {
-            target.TakeDamage(damage, force);
+            if(target.ToString() != "null")
+            {
+                //Debug.Log($"Target {target.ToString()} {target.ToString() == "null"}");
+                target?.TakeDamage(damage, force);
+            }
+                
             timer += tickRate;
             yield return new WaitForSeconds(tickRate);
         }

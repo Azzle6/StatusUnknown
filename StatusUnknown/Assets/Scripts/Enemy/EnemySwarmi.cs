@@ -25,7 +25,7 @@ public class EnemySwarmi : EnemyContext
         {
             //Debug.Log($"blink {startTime}, {Time.time}, {startTime - Time.time}, {speed}");
             hit = Mathf.PingPong(Time.time / hitFreq, 1);
-            meshRenderer.material.SetFloat("_Hit", 1);// debug hit
+            meshRenderer?.material?.SetFloat("_Hit", 1);// debug hit
             yield return null;
         }
         hit = 0;

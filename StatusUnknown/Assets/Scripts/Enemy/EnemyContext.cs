@@ -43,11 +43,12 @@ public class EnemyContext : MonoBehaviour, IDamageable
     }
     void PerformHitEffect(IDamageable target)
     {
+        if(target.ToString() == "null") return;
         target.TakeDamage(stats.AttackDamage, transform.forward * 3);
     }
     public void AddForce(Vector3 force)
     {
-        body.AddForce(force);
+        body?.AddForce(force);
     }
     public Vector3 GetAvoidance()
     {
@@ -98,7 +99,7 @@ public class EnemyContext : MonoBehaviour, IDamageable
     {
         currentHealth -= damage;
         AddForce(force);
-        //Debug.Log($"{gameObject.name} took {damage} damage {currentHealth}/{stats.health}");
+        Debug.Log($"{gameObject.name} took {damage} damage {currentHealth}/{stats.health}");
         if (currentHealth < 0)
             Destroy(gameObject);
     }
