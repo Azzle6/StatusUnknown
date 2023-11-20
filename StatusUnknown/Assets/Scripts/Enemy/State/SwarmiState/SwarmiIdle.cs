@@ -5,6 +5,12 @@ using UnityEngine;
 public class SwarmiIdle : EnemyState
 {
     Color stateColor = Color.green;
+
+    public override void DebugGizmos()
+    {
+        Gizmos.DrawWireSphere(context.transform.position, context.stats.AggroRange);
+    }
+
     public override void Update()
     {
         if (CombatManager.PlayerInRange(transform.position, context.stats.AggroRange))
@@ -13,6 +19,6 @@ public class SwarmiIdle : EnemyState
 
     protected override void Initialize()
     {
-        context.changeColor(stateColor);
+        
     }
 }

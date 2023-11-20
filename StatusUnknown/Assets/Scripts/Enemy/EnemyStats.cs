@@ -5,6 +5,11 @@ using UnityEngine;
 public class EnemyStats : ScriptableObject
 {
     public float health = 100;
+
+    [Header("Avoidance")]
+    public float avoidDistance = 1;
+    public float avoidStrength = 1;
+
     [Header("Aggro")]
     public float AggroRange = 10;
 
@@ -14,4 +19,5 @@ public class EnemyStats : ScriptableObject
     [Header("Attack")]
     public float AttackRange = 0.5f;
     public float AttackDuration = 1f;
+    public float AttackDamage = 5;
 }

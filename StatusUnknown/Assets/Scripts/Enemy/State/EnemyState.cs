@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class EnemyState 
 {
     protected EnemyContext context;
+    protected string name = "test";
     protected Transform transform => context.transform;
     public void SetContext(EnemyContext context)
     {
@@ -13,5 +14,7 @@ public abstract class EnemyState
     }
     protected abstract void Initialize();
     public abstract void Update();
+
+    public abstract void DebugGizmos();
 
 }
