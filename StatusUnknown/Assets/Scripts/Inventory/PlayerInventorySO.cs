@@ -7,6 +7,6 @@ namespace Inventory
     public class PlayerInventorySO : ScriptableObject
     {
         public InventoryDataSO inventory;
-        public Weapon[] equippedWeaponsData;
+        public WeaponData[] equippedWeaponsData;
     }
 }

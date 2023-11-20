@@ -38,10 +38,10 @@ namespace Inventory
                 switch (info.Value.GridItemDefinition.ItemType)
                 {
                     case E_ItemType.MODULE:
-                        this.Modules.Add(info.Key, (Module)info.Value);
+                        this.Modules.Add(info.Key, (ModuleData)info.Value);
                         break;
                     case E_ItemType.WEAPON:
-                        this.Weapons.Add(info.Key, (Weapon)info.Value);
+                        this.Weapons.Add(info.Key, (WeaponData)info.Value);
                         break;
                 }
             }

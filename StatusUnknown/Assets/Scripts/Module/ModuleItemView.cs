@@ -6,13 +6,13 @@ namespace Module
 
     public class ModuleItemView : ItemView
     {
-        public ModuleItemView(Module item, Vector2Int gridPosition, GridView gridView) : base(item, gridPosition,
+        public ModuleItemView(ModuleData dataItem, Vector2Int gridPosition, GridView gridView) : base(dataItem, gridPosition,
             gridView)
         {
-            this.ModuleItem = item;
+            this.ModuleDataItem = dataItem;
         }
 
-        public Module ModuleItem;
+        public ModuleData ModuleDataItem;
 
         protected override void GenerateCustomView()
         {

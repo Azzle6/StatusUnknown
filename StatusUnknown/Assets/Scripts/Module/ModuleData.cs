@@ -4,12 +4,12 @@ namespace Module
     using Inventory.Item;
 
     [Serializable]
-    public class Module : Item
+    public class ModuleData : ItemData
     {
         public override GridItemSO GridItemDefinition => this.definition;
         public ModuleDefinitionSO definition;
 
-        public Module(ModuleDefinitionSO definition)
+        public ModuleData(ModuleDefinitionSO definition)
         {
             this.definition = definition;
         }

@@ -112,7 +112,7 @@ namespace Inventory
         {
             VectorIntItemDictionary dictionary = new VectorIntItemDictionary();
             foreach (ItemView itemView in this.itemsView)
-                dictionary.Add(itemView.GridPosition, itemView.item);
+                dictionary.Add(itemView.GridPosition, itemView.DataDataItemData);
             
             this.container.SaveAllItems(dictionary);
         }
@@ -150,7 +150,7 @@ namespace Inventory
         #region CONTENT_ACTIONS
         public void OnPickItem(ItemView itemView)
         {
-            SetSlotsContent(itemView.item.GridItemDefinition.shape, itemView.GridPosition, null);
+            SetSlotsContent(itemView.DataDataItemData.GridItemDefinition.shape, itemView.GridPosition, null);
             this.itemsView.Remove(itemView);
             UIHandler.Instance.ForceFocus(GetSlot(itemView.GridPosition).FocusElement);
             this.SaveContent();
@@ -171,7 +171,7 @@ namespace Inventory
             itemView.GridPosition = pos;
             
             //Setup slots infos under the item
-            SetSlotsContent(itemView.item.GridItemDefinition.shape, pos, itemView);
+            SetSlotsContent(itemView.DataDataItemData.GridItemDefinition.shape, pos, itemView);
             
             //Register item in grid
             this.itemsView.Add(itemView);
@@ -182,7 +182,7 @@ namespace Inventory
             itemView.ViewRoot.RemoveFromHierarchy();
             this.itemsView.Remove(itemView);
 
-            this.SetSlotsContent(itemView.item.GridItemDefinition.shape, itemView.GridPosition, null);
+            this.SetSlotsContent(itemView.DataDataItemData.GridItemDefinition.shape, itemView.GridPosition, null);
         }
         #endregion //CONTENT_ACTIONS
         

@@ -38,7 +38,7 @@ namespace Core.Helpers
     }
 
     [Serializable]
-    public class VectorIntItemDictionary : CustomSerializedDictionary<Vector2Int, Item>
+    public class VectorIntItemDictionary : CustomSerializedDictionary<Vector2Int, ItemData>
     {
         public void MergeMultipleDictionary(VectorIntItemDictionary[] dictionaries)
         {
@@ -54,7 +54,7 @@ namespace Core.Helpers
     }
 
     [Serializable]
-    public class VectorIntModuleDictionary : CustomSerializedDictionary<Vector2Int, Module>
+    public class VectorIntModuleDictionary : CustomSerializedDictionary<Vector2Int, ModuleData>
     {
         public VectorIntItemDictionary ToItemDictionary()
         {
@@ -66,7 +66,7 @@ namespace Core.Helpers
     }
 
     [Serializable]
-    public class VectorIntWeaponDictionary : CustomSerializedDictionary<Vector2Int, Weapon>
+    public class VectorIntWeaponDictionary : CustomSerializedDictionary<Vector2Int, WeaponData>
     {
         public VectorIntItemDictionary ToItemDictionary()
         {

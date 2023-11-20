@@ -30,7 +30,7 @@ namespace Core.UI
 
         private bool isDisplayed;
 
-        private Weapon selectedWeapon;
+        private WeaponData selectedWeaponData;
 
         private void OnEnable()
         {
@@ -50,7 +50,7 @@ namespace Core.UI
         private void RefreshWeapons()
         {
             this.weaponSelectionRoot.Clear();
-            foreach (Weapon weapon in this.playerInventory.equippedWeaponsData)
+            foreach (WeaponData weapon in this.playerInventory.equippedWeaponsData)
             {
                 Button tabButton = new Button(() => this.SelectWeapon(weapon))
                 {
@@ -74,9 +74,9 @@ namespace Core.UI
             this.SelectWeapon(this.playerInventory.equippedWeaponsData[0]);
         }
 
-        private void SelectWeapon(Weapon weapon)
+        private void SelectWeapon(WeaponData weaponData)
         {
-            this.selectedWeapon = weapon;
+            this.selectedWeaponData = weaponData;
             this.RefreshWeaponTriggers();
             this.SelectTriggerIndex(0);
         }
@@ -84,12 +84,12 @@ namespace Core.UI
         private void RefreshWeaponTriggers()
         {
             this.weaponTriggersRoot.Clear();
-            for (var i = 0; i < this.selectedWeapon.triggerInfoData.Length; i++)
+            for (var i = 0; i < this.selectedWeaponData.triggerInfoData.Length; i++)
             {
                 int index = i;
                 Button triggerButton = new Button(() => this.SelectTriggerIndex(index))
                 {
-                    text = this.selectedWeapon.triggerInfoData[i].triggerType.name
+                    text = this.selectedWeaponData.triggerInfoData[i].triggerType.name
                 };
                 this.weaponTriggersRoot.Add(triggerButton);
             }
@@ -97,13 +97,13 @@ namespace Core.UI
 
         private void SelectTriggerIndex(int index)
         {
-            if (this.selectedWeapon.triggerInfoData.Length == 0 || this.selectedWeapon.triggerInfoData.Length - 1 < index)
+            if (this.selectedWeaponData.triggerInfoData.Length == 0 || this.selectedWeaponData.triggerInfoData.Length - 1 < index)
             {
                 Debug.Log($"Cannot select trigger index {index}, out of range.");
                 return;
             }
             
-            this.weaponGridView.LoadNewData(this.selectedWeapon.definition.triggers[index].shape, this.selectedWeapon.triggerInfoData[index]);
+            this.weaponGridView.LoadNewData(this.selectedWeaponData.definition.triggers[index].shape, this.selectedWeaponData.triggerInfoData[index]);
         }
 
         [Button, HideInEditorMode]

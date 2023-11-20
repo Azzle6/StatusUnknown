@@ -7,9 +7,10 @@ namespace Weapons
     using Inventory.Item;
     using Module;
     using Sirenix.OdinInspector;
+    using UnityEngine.Serialization;
 
     [Serializable]
-    public class Weapon : Item
+    public class WeaponData : ItemData
     {
         public override GridItemSO GridItemDefinition => this.definition;
         public WeaponDefinitionSO definition;
@@ -17,7 +18,7 @@ namespace Weapons
         public WeaponTriggerGridData[] triggerInfoData;
         
         #region CONSTRUCTOR
-        public Weapon(WeaponDefinitionSO def)
+        public WeaponData(WeaponDefinitionSO def)
         {
             List<WeaponTriggerGridData> triggerInfosResult = new List<WeaponTriggerGridData>();
             
@@ -50,31 +51,31 @@ namespace Weapons
     {
         public TriggerSO triggerType;
         public int triggerRowPosition;
-        public VectorIntModuleDictionary Modules;
+        public VectorIntModuleDictionary modules;
         
         public VectorIntItemDictionary GetAllItems()
         {
-            return Modules.ToItemDictionary();
+            return this.modules.ToItemDictionary();
         }
 
         public void SaveAllItems(VectorIntItemDictionary content)
         {
-            this.Modules.Clear();
+            this.modules.Clear();
             foreach (var info in content)
             {
-                this.Modules.Add(info.Key, (Module)info.Value);
+                this.modules.Add(info.Key, (ModuleData)info.Value);
             }
         }
 
         public void ClearData()
         {
-            this.Modules.Clear();
+            this.modules.Clear();
         }
 
         public WeaponTriggerGridData(WeaponTriggerDefinition triggerDefinitionData)
         {
             this.triggerType = triggerDefinitionData.trigger;
-            this.Modules = new VectorIntModuleDictionary();
+            this.modules = new VectorIntModuleDictionary();
             this.triggerRowPosition = triggerDefinitionData.triggerRowPosition;
         }
     }

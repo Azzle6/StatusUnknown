@@ -16,13 +16,13 @@ namespace Inventory.Item
         public VisualElement ViewRoot { get; set; }
         public VisualElement FocusElement { get; set; }
         
-        public Item item;
+        public ItemData DataDataItemData;
         private VisualElement verticalRoot;
 
         #region CONSTRUCTOR
-        protected ItemView(Item item, Vector2Int gridPosition, GridView gridView)
+        protected ItemView(ItemData dataDataItemData, Vector2Int gridPosition, GridView gridView)
         {
-            this.item = item;
+            this.DataDataItemData = dataDataItemData;
             this.GridPosition = gridPosition;
             this.Grid = gridView;
             this.GenerateBaseView();
@@ -35,7 +35,7 @@ namespace Inventory.Item
             if (this.ViewRoot != null)
                 this.ViewRoot.parent.Remove(this.ViewRoot);
             
-            Shape shape = this.item.GridItemDefinition.shape;
+            Shape shape = this.DataDataItemData.GridItemDefinition.shape;
             VisualElement itemView = UIHandler.Instance.uiSettings.itemTemplate.Instantiate();
             itemView.style.position = Position.Absolute;
             
@@ -68,14 +68,14 @@ namespace Inventory.Item
             this.FocusElement.focusable = true;
         }
 
-        public static ItemView InstantiateItemView(Item item, Vector2Int gridPosition, GridView gridView)
+        public static ItemView InstantiateItemView(ItemData itemData, Vector2Int gridPosition, GridView gridView)
         {
-            switch (item.GridItemDefinition.ItemType)
+            switch (itemData.GridItemDefinition.ItemType)
             {
                 case E_ItemType.MODULE:
-                    return new ModuleItemView((Module)item, gridPosition, gridView);
+                    return new ModuleItemView((ModuleData)itemData, gridPosition, gridView);
                 case E_ItemType.WEAPON:
-                    return new WeaponItemView((Weapon)item, gridPosition, gridView);
+                    return new WeaponItemView((WeaponData)itemData, gridPosition, gridView);
             }
 
             return null;
