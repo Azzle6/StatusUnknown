@@ -12,6 +12,12 @@ namespace Player
         [Header("Health")]
         public float maxHealth;
         public float medKitHealAmount;
+        
+        [Header("Medikit")]
+        public float medikitHealAmount;
+        public int maxMedikitAmount;
+        public float medikitCooldown;
+        
         [Header("Movement")]
         public float moveSpeed;
 

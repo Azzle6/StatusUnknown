@@ -59,7 +59,6 @@ namespace Player
             }
             else
             {
-                Debug.Log("Shooting");
                 playerStat.isShooting = true;
                 if (shooting == default)
                 {

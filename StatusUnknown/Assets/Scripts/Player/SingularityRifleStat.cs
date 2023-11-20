@@ -2,7 +2,7 @@ namespace Player
 {
     using UnityEngine;
 
-    [CreateAssetMenu(fileName = "SingularityRifleStat", menuName = "CustomAssets/WeaponStat/SingularityRifleSta", order = 1)]
+    [CreateAssetMenu(fileName = "SingularityRifleStat", menuName = "CustomAssets/WeaponStat/SingularityRifleStat", order = 1)]
     public class SingularityRifleStat : WeaponStat
     {
         

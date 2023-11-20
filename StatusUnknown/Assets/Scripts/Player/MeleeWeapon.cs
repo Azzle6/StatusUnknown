@@ -53,7 +53,6 @@ namespace Player
             if ((gameObject.activeSelf) && (cooldownCoroutine == default))
                 cooldownCoroutine = StartCoroutine(Cooldown());
             
-            Debug.Log("Combo index up");
             comboIndex++;
 
             if (comboIndex > attacks.Length -1)

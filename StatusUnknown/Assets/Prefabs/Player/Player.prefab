@@ -933,6 +933,7 @@ MonoBehaviour:
   - {fileID: 4130879028828508758}
   - {fileID: 1241682378252029606}
   - {fileID: 6965172701220603686}
+  - {fileID: 9187700631984985908}
   rb: {fileID: 5190767570319545551}
   animator: {fileID: 5119865257426492695}
   weaponManager: {fileID: 4974381338073703539}
@@ -1159,6 +1160,7 @@ GameObject:
   - component: {fileID: 4130879028828508758}
   - component: {fileID: 1241682378252029606}
   - component: {fileID: 6965172701220603686}
+  - component: {fileID: 9187700631984985908}
   m_Layer: 0
   m_Name: States
   m_TagString: Untagged
@@ -1444,6 +1446,25 @@ MonoBehaviour:
     cooldownTime: 0
   currentMeleeWeapon: {fileID: 0}
   weaponManager: {fileID: 4974381338073703539}
+--- !u!114 &9187700631984985908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7264950043347175952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79098d2e9c35f254c8dace288f51f666, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStateInterpretor: {fileID: 3331217997880427551}
+  playerStateType: 2
+  lockState: 0
+  inputBufferActive: 0
+  playerHealth: {fileID: 6516842071234829007}
+  medikitAmount: {fileID: 11400000, guid: 1d6c496d123a9234c95687101de1be90, type: 2}
+  stat: {fileID: 11400000, guid: 96563a0c89298fe42a7e0015e37b4023, type: 2}
 --- !u!1 &8463495544153464495
 GameObject:
   m_ObjectHideFlags: 0
