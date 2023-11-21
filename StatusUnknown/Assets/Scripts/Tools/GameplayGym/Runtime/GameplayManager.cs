@@ -7,6 +7,8 @@ using UnityEngine.UI;
 using UnityEngine.UIElements;
 using StatusUnknown.Utils.AssetManagement;
 using TMPro;
+using UnityEditor;
+using System.Linq;
 
 namespace StatusUnknown.CoreGameplayContent
 {
@@ -45,7 +47,9 @@ namespace StatusUnknown.CoreGameplayContent
         } // Editor
 
         private CombatSimulatorSO simulatorInstance;
-        private Stack<GameObject> spawnedAreas = new Stack<GameObject>(); // Editor
+        private Stack<GameObject> spawnedAreasObj = new Stack<GameObject>(); // Editor
+
+        private GameObject[] spawnedAreasObj_Runtime; // Runtime
 
         GameObject currentActiveAreaObj; // Runtime
         private List<Enemy> currentEnemiesInArea; // Runtime
@@ -89,6 +93,8 @@ namespace StatusUnknown.CoreGameplayContent
         #region Unity Callbacks
         private void OnValidate()
         {
+            if (EditorApplication.isCompiling || EditorApplication.isUpdating || EditorApplication.isPlaying) return;
+
             value = useCustomBuildSO; // WARNING : this prevents from further editing the simulateBuildArray
                                       // avoid raw OnValidate calls like this one
 
@@ -99,7 +105,9 @@ namespace StatusUnknown.CoreGameplayContent
             }
             else if (builToSimulatePreviousLength != buildToSimulate.Length && buildToSimulate.Length > 0)
             {
-                try
+                RefreshDamageAreaStack();
+
+                /* try
                 {
                     Debug.Log("spawning");
 
@@ -123,14 +131,38 @@ namespace StatusUnknown.CoreGameplayContent
                 catch (NullReferenceException e)
                 {
                     RefreshDamageAreaStack(e);
-                }
+                } */
 
                 builToSimulatePreviousLength = buildToSimulate.Length;
             } 
         }
+
+        private void OnEnable()
+        {
+            spawnedAreasObj_Runtime = GameObject.FindGameObjectsWithTag("Area");
+            foreach (var item in spawnedAreasObj_Runtime)
+            {
+                item.SetActive(false);
+            }
+
+            spawnedAreasObj_Runtime = spawnedAreasObj_Runtime.Reverse().ToArray();
+        }
         #endregion
 
         #region RUNTIME
+        [Button(ButtonHeight = 100), PropertySpace, GUIColor("green")]
+        public void StartSimulation() // Entry Point (done once)
+        {
+            Init();
+
+            currentIndex = 0;
+            lastIndex = simulatorInstance.GetAbilitiesArrayLength() - 1;
+            StopAllCoroutines(); 
+            CancelInvoke(); 
+
+            StartCoroutine(nameof(SetDamagePayload)); 
+        }
+
         private void Init()
         {
             totalDamage_UI.SetText(string.Empty);
@@ -161,19 +193,6 @@ namespace StatusUnknown.CoreGameplayContent
             gameplayDataSO.Init();
         }
 
-        [Button(ButtonHeight = 100), PropertySpace, GUIColor("green")]
-        public void StartSimulation() // Entry Point (done once)
-        {
-            Init();
-
-            currentIndex = 0;
-            lastIndex = simulatorInstance.GetAbilitiesArrayLength() - 1;
-            StopAllCoroutines(); 
-            CancelInvoke(); 
-
-            StartCoroutine(nameof(SetDamagePayload)); 
-        }
-
         // REFACTOR : strategy pattern for different types of damage application
         // REFACTOR : as callback when damage payload is done
         // for now, just a plain ugly switch case
@@ -188,7 +207,7 @@ namespace StatusUnknown.CoreGameplayContent
 
             if (currentAbilityData.infos.Area != null)
             {
-                currentActiveAreaObj = currentAbilityData.infos.Area; 
+                currentActiveAreaObj = spawnedAreasObj_Runtime[currentIndex]; 
                 currentActiveAreaObj.SetActive(true);
             }
 
@@ -378,20 +397,22 @@ namespace StatusUnknown.CoreGameplayContent
                 Debug.LogError("Error : " + nre.Message);
             }
             Debug.Log("refreshing damage area stack");
-            for (int i = 0; i < spawnedAreas.Count; i++)
+            int initialCount = spawnedAreasObj.Count; 
+            for (int i = 0; i < initialCount; i++)
             {
-                if (spawnedAreas.TryPop(out var area))
+                if (spawnedAreasObj.TryPop(out var area))
                 {
+                    Debug.Log("destroying"); 
                     DestroyImmediate(area);
                 }
             }
-            spawnedAreas.Clear();   
+            spawnedAreasObj.Clear();   
 
             for (int i = 0; i < buildToSimulate.Length; i++)
             {
                 GameObject instance = buildToSimulate[i].GetArea();
-                instance.name = $"[{buildToSimulate[i].name}]"; 
-                spawnedAreas.Push(Instantiate(instance));
+                instance.name = $"[{buildToSimulate[i].name}]";
+                spawnedAreasObj.Push(Instantiate(instance));
             }
 
             builToSimulatePreviousLength = buildToSimulate.Length;
