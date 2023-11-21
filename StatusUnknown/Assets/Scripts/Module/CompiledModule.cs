@@ -1,6 +1,6 @@
 namespace Module
 {
-    public struct CompiledModule
+    public class CompiledModule
     {
         public ModuleData module;
         public CompiledTriggerInfo[] triggersNextModule;

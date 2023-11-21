@@ -19,9 +19,13 @@ namespace Core.UI
         public VisualTreeAsset triggerTemplate;
         [FoldoutGroup("Assets references")]
         public InputActionAsset inputsAction;
+        [FoldoutGroup("Assets references")] 
+        public Texture basicTriggerIcon;
 
         [FoldoutGroup("Parameters")]
         public float slotWidth;
+        [FoldoutGroup("Parameters")]
+        public float triggerWidth;
 
         [FoldoutGroup("Styles naming")]
         public string hiddenStyle;

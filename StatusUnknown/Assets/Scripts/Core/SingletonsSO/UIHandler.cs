@@ -44,7 +44,7 @@ namespace Core.SingletonsSO
             this.movingItem = itemView;
             this.isMovingItem = true;
             
-            itemView.MoveState();
+            itemView.SetMoveState();
             itemView.Grid.OnPickItem(itemView);
         }
 
@@ -53,7 +53,7 @@ namespace Core.SingletonsSO
             bool canPlace =
                 this.selectedGrid.CanPlaceItem(this.movingItem, focusedElement.GridPosition);
             
-            this.movingItem.CanPlaceItemFeedback(canPlace);
+            this.movingItem.SetPlaceItemFeedback(canPlace);
             this.selectedGrid.SetItemVisualPosition(this.movingItem, focusedElement.GridPosition);
             //Debug.Log($"Move item to {focusedElement.gridPosition} in grid parent {this.selectedGrid}.");
         }

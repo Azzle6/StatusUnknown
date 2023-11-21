@@ -102,7 +102,6 @@ namespace Inventory.Grid
                     Debug.LogWarning($"Try to spawn null item at {info.Key}. Item skipped.");
                     continue;
                 }
-                
                 ItemView itemView = ItemView.InstantiateItemView(info.Value, info.Key, this);
                 this.SetItemPosition(itemView, info.Key);
                 this.itemsView.Add(itemView);

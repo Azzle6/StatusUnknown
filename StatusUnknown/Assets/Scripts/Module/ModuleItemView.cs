@@ -14,6 +14,7 @@ namespace Module
             gridView)
         {
             this.ModuleItemData = itemData;
+            this.GenerateCustomView();
         }
 
         public ModuleData ModuleItemData;
@@ -26,25 +27,31 @@ namespace Module
                 this.ViewRoot.Add(triggerElement);
                 float slotWidth = UIHandler.Instance.uiSettings.slotWidth;
                 Vector2 directionDisplacement;
+                float iconRotation = 0;
                 switch (outputInfo.direction)
                 {
                     case E_Direction.UP:
-                        directionDisplacement = new Vector2(slotWidth / 2, 0);
+                        directionDisplacement = new Vector2(slotWidth/2f, 0);
+                        iconRotation = 270;
                         break;
                     case E_Direction.DOWN:
-                        directionDisplacement = new Vector2(slotWidth / 2, 1);
+                        directionDisplacement = new Vector2(slotWidth/2f, slotWidth);
+                        iconRotation = 90;
                         break;
                     case E_Direction.LEFT:
-                        directionDisplacement = new Vector2(0, slotWidth / 2);
+                        directionDisplacement = new Vector2(0, slotWidth/2f);
+                        iconRotation = 180;
                         break;
                     case E_Direction.RIGHT:
-                        directionDisplacement = new Vector2(0, slotWidth / 2);
+                        directionDisplacement = new Vector2(slotWidth, slotWidth/2f);
+                        iconRotation = 0;
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
 
-                triggerElement.transform.position = (Vector2)outputInfo.localPosition * slotWidth + directionDisplacement;
+                triggerElement.transform.position = ((Vector2)outputInfo.localPosition * slotWidth + directionDisplacement) - (Vector2.one * UIHandler.Instance.uiSettings.triggerWidth/2);
+                triggerElement.style.rotate = new StyleRotate(new Rotate(iconRotation));
             }
         }
     }

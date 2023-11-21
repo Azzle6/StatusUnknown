@@ -32,14 +32,14 @@ namespace Core.Helpers
             return result.ToArray();
         }
 
-        public static Vector2Int DirectionToVectorInt(E_Direction direction)
+        public static Vector2Int DirectionToVectorInt(E_Direction direction, bool invertY = false)
         {
             switch (direction)
             {
                 case E_Direction.UP:
-                    return Vector2Int.up;
+                    return invertY ? Vector2Int.down : Vector2Int.up;
                 case E_Direction.DOWN:
-                    return Vector2Int.down;
+                    return invertY ? Vector2Int.up : Vector2Int.down;
                 case E_Direction.LEFT:
                     return Vector2Int.left;
                 case E_Direction.RIGHT:

@@ -1,5 +1,7 @@
 namespace Module
 {
+    using System;
+    using Core.Helpers;
     using Inventory.Item;
     using UnityEngine;
 
@@ -8,5 +10,13 @@ namespace Module
     {
         public override E_ItemType ItemType => E_ItemType.MODULE;
         public Output[] outputs;
+    }
+    
+    [Serializable]
+    public struct Output
+    {
+        public TriggerSO triggerType;
+        public Vector2Int localPosition;
+        public E_Direction direction;
     }
 }

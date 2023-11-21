@@ -71,8 +71,6 @@ namespace Inventory
         {
             this.weaponGridView = new GridView(this.uiDocument.rootVisualElement.Q<VisualElement>(WEAPON_GRID_NAME),
                 this.playerInventory.equippedWeaponsData[0].definition.triggers[0].shape, this.playerInventory.equippedWeaponsData[0].triggerInfoData[0], new E_ItemType[] { E_ItemType.MODULE});
-            
-            this.SelectWeapon(this.playerInventory.equippedWeaponsData[0]);
         }
 
         private void SelectWeapon(WeaponData weaponData)
@@ -119,7 +117,7 @@ namespace Inventory
             {
                 this.inventoryGridView.FocusOnGrid();
                 this.inventoryGridView.LoadContent();
-                this.weaponGridView.LoadContent();
+                this.SelectWeapon(this.playerInventory.equippedWeaponsData[0]);
             }
         }
     }

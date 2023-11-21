@@ -10,6 +10,7 @@ namespace Weapons
             gridView)
         {
             this.WeaponItemData = itemData;
+            this.GenerateCustomView();
         }
 
         public WeaponData WeaponItemData;

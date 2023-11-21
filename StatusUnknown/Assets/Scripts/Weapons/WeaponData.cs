@@ -7,7 +7,6 @@ namespace Weapons
     using Inventory.Item;
     using Module;
     using Sirenix.OdinInspector;
-    using UnityEngine.Serialization;
 
     [Serializable]
     public class WeaponData : ItemData

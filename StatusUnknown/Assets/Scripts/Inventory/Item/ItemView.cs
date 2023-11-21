@@ -27,7 +27,6 @@ namespace Inventory.Item
             this.GridPosition = gridPosition;
             this.Grid = gridView;
             this.GenerateBaseView();
-            this.GenerateCustomView();
         }
         #endregion
         
@@ -49,13 +48,13 @@ namespace Inventory.Item
 
         protected abstract void GenerateCustomView();
 
-        public void MoveState()
+        public void SetMoveState()
         {
             this.FocusElement.AddToClassList("movingElement");
             this.FocusElement.focusable = false;
         }
 
-        public void CanPlaceItemFeedback(bool canPlace)
+        public void SetPlaceItemFeedback(bool canPlace)
         {
             this.FocusElement.AddToClassList(canPlace ? "canPlace" : "cantPlace");
             this.FocusElement.RemoveFromClassList(canPlace ? "cantPlace" : "canPlace");
