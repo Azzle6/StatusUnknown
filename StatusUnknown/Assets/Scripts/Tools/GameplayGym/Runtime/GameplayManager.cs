@@ -7,17 +7,20 @@ using UnityEngine.UI;
 using UnityEngine.UIElements;
 using StatusUnknown.Utils.AssetManagement;
 using TMPro;
-using static UnityEngine.Rendering.DebugUI;
 
 namespace StatusUnknown.CoreGameplayContent
 {
+    // TODO : split this class to separate Runtime from Editor..
+
     [RequireComponent(typeof(AudioSource))]
     public class GameplayManager : MonoBehaviour, INotifyValueChanged<bool>
     {
         #region Data
         [Header("General")]
         //[SerializeField] AudioSource source; 
-        [SerializeField] private AbilityConfigSO_Base[] buildToSimulate;
+        [SerializeField] private AbilityConfigSO_Base[] buildToSimulate; 
+        private int builToSimulatePreviousLength; 
+
         [SerializeField] private string buildSaveName = "Build_Playstyle_Num"; 
         private const int DELAY_BETWEEN_ABILITIES = 1;
         private int currentIndex;
@@ -39,15 +42,20 @@ namespace StatusUnknown.CoreGameplayContent
                         RepopulateBuildArray();
                 }
             }
-        }
+        } // Editor
+
         private CombatSimulatorSO simulatorInstance;
+        private Stack<GameObject> spawnedAreas = new Stack<GameObject>(); // Editor
+
+        GameObject currentActiveAreaObj; // Runtime
+        private List<Enemy> currentEnemiesInArea; // Runtime
 
         [Header("Ability Types Template")]
         [Space, SerializeField] private DamageType_Burst template_burst;
         [SerializeField] private DamageType_OverTime template_overTime;
         [SerializeField] private DamageType_Delayed template_delayed;
         private AbilityConfigTemplate[] abilityConfigTemplates = new AbilityConfigTemplate[3];
-        private (AbilityInfos infos, AbilityConfigSO_Base so) currentAbilityData = new();
+        private (AbilityInfos infos, AbilityConfigSO_Base so) currentAbilityData = new(); // Runtime
         private AbilityConfigSO_Burst currentAbilityConfigSO_Burst = null;
         private AbilityConfigSO_OverTime currentAbilityConfigSO_OverTime = null;
         private AbilityConfigSO_Delayed currentAbilityConfigSO_Delayed = null;
@@ -73,16 +81,56 @@ namespace StatusUnknown.CoreGameplayContent
 
         private const string LOG_ERROR_ENCOUNTER_NULL = "Could not generate encounter. Make sure the \"Enemy Encounter SO\" field is not empty.";
         private const string LOG_ERROR_BUILD_NULL = "No abilities were found on your \"buildToSimulate\" array.";
+
+        [Header("Debug")]
+        [SerializeField] private bool retrieveLostAreas;
         #endregion
 
         #region Unity Callbacks
         private void OnValidate()
         {
-            value = useCustomBuildSO; 
+            value = useCustomBuildSO; // WARNING : this prevents from further editing the simulateBuildArray
+                                      // avoid raw OnValidate calls like this one
+
+            if (retrieveLostAreas)
+            {
+                retrieveLostAreas = false;
+                RefreshDamageAreaStack();
+            }
+            else if (builToSimulatePreviousLength != buildToSimulate.Length && buildToSimulate.Length > 0)
+            {
+                try
+                {
+                    Debug.Log("spawning");
+
+                    if (buildToSimulate.Length - builToSimulatePreviousLength > 0)
+                    {
+                        for (int i = builToSimulatePreviousLength; i < buildToSimulate.Length; i++)
+                        {
+                            GameObject instance = buildToSimulate[i].GetArea();
+                            instance.name = $"[{buildToSimulate[i].name}]";
+                            spawnedAreas.Push(Instantiate(instance));
+                        }
+                    }
+                    else if (buildToSimulate.Length - builToSimulatePreviousLength < 0)
+                    {
+                        for (int i = builToSimulatePreviousLength; i > buildToSimulate.Length; i--)
+                        {
+                            DestroyImmediate(spawnedAreas.Pop());
+                        }
+                    }
+                }
+                catch (NullReferenceException e)
+                {
+                    RefreshDamageAreaStack(e);
+                }
+
+                builToSimulatePreviousLength = buildToSimulate.Length;
+            } 
         }
         #endregion
 
-        #region CORE LOGIC
+        #region RUNTIME
         private void Init()
         {
             totalDamage_UI.SetText(string.Empty);
@@ -131,8 +179,6 @@ namespace StatusUnknown.CoreGameplayContent
         // for now, just a plain ugly switch case
         // AbilityConfigTemplate damageType; 
         //int damageValue; 
-        GameObject currentAreaObj;
-        private List<Enemy> currentEnemiesInArea; 
         private IEnumerator SetDamagePayload()
         {
             Debug.Log("setting payload type to : " + currentAbilityData.infos.PayloadType);
@@ -142,7 +188,8 @@ namespace StatusUnknown.CoreGameplayContent
 
             if (currentAbilityData.infos.Area != null)
             {
-                currentAreaObj = Instantiate(currentAbilityData.infos.Area); 
+                currentActiveAreaObj = currentAbilityData.infos.Area; 
+                currentActiveAreaObj.SetActive(true);
             }
 
             yield return new WaitForFixedUpdate(); 
@@ -196,7 +243,7 @@ namespace StatusUnknown.CoreGameplayContent
         {
             damageCounter += damageValue;
 
-            currentEnemiesInArea = currentAreaObj.GetComponent<DamageArea>().GetEnemiesInArea();
+            currentEnemiesInArea = currentActiveAreaObj.GetComponent<DamageArea>().GetEnemiesInArea();
             foreach (var enemy in currentEnemiesInArea) 
             {
                 if (enemy != null && enemy.TryGetComponent(out IDamageable damageable))
@@ -323,12 +370,45 @@ namespace StatusUnknown.CoreGameplayContent
         private void SaveFullSimulationPayload() { }
         #endregion
 
-        #region Interfaces
+        #region Error Handling
+        private void RefreshDamageAreaStack(NullReferenceException nre = null)
+        {
+            if (nre != null)
+            {
+                Debug.LogError("Error : " + nre.Message);
+            }
+            Debug.Log("refreshing damage area stack");
+            for (int i = 0; i < spawnedAreas.Count; i++)
+            {
+                if (spawnedAreas.TryPop(out var area))
+                {
+                    DestroyImmediate(area);
+                }
+            }
+            spawnedAreas.Clear();   
+
+            for (int i = 0; i < buildToSimulate.Length; i++)
+            {
+                GameObject instance = buildToSimulate[i].GetArea();
+                instance.name = $"[{buildToSimulate[i].name}]"; 
+                spawnedAreas.Push(Instantiate(instance));
+            }
+
+            builToSimulatePreviousLength = buildToSimulate.Length;
+        }
+        #endregion
+
+        #region Implementations
 
         public void SetValueWithoutNotify(bool v)
         {
             useCustomBuildSO = v;
             Debug.Log("SetValueWithoutNotify: " + v);
+        }
+
+        public void SetValueWithoutNotify(int newValue)
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }

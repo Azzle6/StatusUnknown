@@ -24,7 +24,7 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 4
+  m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
@@ -751,6 +751,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 411539302595325670, guid: 53b15abc96c17da408ab733de7d404b0,
         type: 3}
+      propertyPath: refresh
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 411539302595325670, guid: 53b15abc96c17da408ab733de7d404b0,
+        type: 3}
       propertyPath: buildSaveName
       value: Build_OneMod
       objectReference: {fileID: 0}
@@ -780,7 +785,7 @@ PrefabInstance:
     - target: {fileID: 411539302595325670, guid: 53b15abc96c17da408ab733de7d404b0,
         type: 3}
       propertyPath: buildToSimulate.Array.size
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 411539302595325670, guid: 53b15abc96c17da408ab733de7d404b0,
         type: 3}
@@ -808,7 +813,7 @@ PrefabInstance:
         type: 3}
       propertyPath: buildToSimulate.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: c8371bd13d3ecc542b300ffc275dfb88,
+      objectReference: {fileID: 11400000, guid: a46106ddacde66e44a876a2ffee50add,
         type: 2}
     - target: {fileID: 411539302595325670, guid: 53b15abc96c17da408ab733de7d404b0,
         type: 3}
@@ -820,13 +825,13 @@ PrefabInstance:
         type: 3}
       propertyPath: buildToSimulate.Array.data[4]
       value: 
-      objectReference: {fileID: 11400000, guid: a46106ddacde66e44a876a2ffee50add,
+      objectReference: {fileID: 11400000, guid: ad49657c20fd0ce4ea8e12c880dc2bcf,
         type: 2}
     - target: {fileID: 411539302595325670, guid: 53b15abc96c17da408ab733de7d404b0,
         type: 3}
       propertyPath: buildToSimulate.Array.data[5]
       value: 
-      objectReference: {fileID: 11400000, guid: a46106ddacde66e44a876a2ffee50add,
+      objectReference: {fileID: 11400000, guid: c8371bd13d3ecc542b300ffc275dfb88,
         type: 2}
     - target: {fileID: 411539302595325670, guid: 53b15abc96c17da408ab733de7d404b0,
         type: 3}

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace StatusUnknown.CoreGameplayContent
@@ -21,7 +20,5 @@ namespace StatusUnknown.CoreGameplayContent
         {
             return abilitiesConfig[i].GetAbilityData();
         }
-
-
     }
 }

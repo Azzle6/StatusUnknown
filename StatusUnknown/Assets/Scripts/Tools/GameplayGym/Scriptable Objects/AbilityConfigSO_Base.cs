@@ -47,5 +47,6 @@ namespace StatusUnknown.CoreGameplayContent
         }
 
         public virtual AbilityInfos GetAbilityInfos() => AbilityInfos;
+        public virtual GameObject GetArea() => effectArea; 
     }
 }

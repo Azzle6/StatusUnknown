@@ -31,6 +31,11 @@ namespace StatusUnknown.CoreGameplayContent
             }
         }
 
+        private void OnEnable()
+        {
+            areaCollider.enabled = false; 
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             enemiesInArea.Add(other.GetComponent<Enemy>());
