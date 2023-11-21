@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyContext : MonoBehaviour, IDamageable
+public abstract class EnemyContext : MonoBehaviour, IDamageable
 {
     [SerializeField] HitContext[] hitContexts;
     [SerializeField] protected Animator animator;
     EnemyState currentState;
     public string stateName => currentState.ToString();
-    public EnemyStats stats;
+    public abstract EnemyStats stats { get; }
     public Vector3 Velocity { get { return body.velocity; } }
     Quaternion rotation;
 

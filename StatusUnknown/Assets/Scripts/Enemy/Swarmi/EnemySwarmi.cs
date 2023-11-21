@@ -9,6 +9,8 @@ public class EnemySwarmi : EnemyContext
     [Range(0f, 1f)]
     public float hit = 0;
     public float hitFreq = 1;
+    public EnemyStats swarmiStats;
+    public override EnemyStats stats => swarmiStats;
 
     protected override void EnemyTakeDamage(float damage, Vector3 force)
     {

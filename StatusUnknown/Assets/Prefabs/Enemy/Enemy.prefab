@@ -969,7 +969,6 @@ MonoBehaviour:
   hitContexts:
   - {fileID: 4586539127504081084}
   animator: {fileID: 3392131639749682905}
-  stats: {fileID: 11400000, guid: fd4cf9cc59e2d784585831141016319f, type: 2}
   body: {fileID: 5553896409487144114}
   avoidanceMask:
     serializedVersion: 2
@@ -977,6 +976,7 @@ MonoBehaviour:
   meshRenderer: {fileID: 3413500973956032109}
   hit: 0
   hitFreq: 0.1
+  swarmiStats: {fileID: 11400000, guid: fd4cf9cc59e2d784585831141016319f, type: 2}
 --- !u!54 &5553896409487144114
 Rigidbody:
   m_ObjectHideFlags: 0
