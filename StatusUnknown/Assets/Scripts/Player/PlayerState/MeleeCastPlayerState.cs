@@ -2,6 +2,7 @@ namespace Player
 {
     using System.Collections;
     using UnityEngine;
+    using Weapon;
     public class MeleeCastPlayerState : PlayerState
     {
         [HideInInspector] public MeleeAttack currentAttack;

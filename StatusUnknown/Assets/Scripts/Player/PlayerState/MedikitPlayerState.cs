@@ -14,14 +14,17 @@ namespace Player
         [SerializeField] private PlayerStat stat;
         public override void OnStateEnter()
         {
-            if (medikitAmount.Value > 0)
-            {
-                playerHealth.Heal(stat.medikitHealAmount);
-                medikitAmount.Value--;
-            }
+            if (medikitAmount.Value <= 0)
+                return;
             
-            playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
+            playerHealth.Heal(stat.medikitHealAmount);
+            medikitAmount.Value--;
+            
+            
+            playerStateInterpretor.RemoveStateCheck("MedikitPlayerState");
         }
+        
+        
 
         public override void OnStateExit()
         {

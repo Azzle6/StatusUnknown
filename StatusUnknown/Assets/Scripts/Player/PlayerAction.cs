@@ -144,7 +144,7 @@ namespace Player
         {            
             if (ctx.started)
             {
-                playerStateInterpretor.AddState("MedkitPlayerState", PlayerStateType.ACTION,false);
+                playerStateInterpretor.AddState("MedikitPlayerState", PlayerStateType.ACTION,false);
             }
         }
     

@@ -1,11 +1,12 @@
-using System;
-using Unity.Mathematics;
 
-namespace Player
+
+namespace Weapon
 {
     using System.Collections;
     using UnityEngine;
     using Core.Pooler;
+    using System;
+    using Unity.Mathematics;
     
     public class PhotonPistol : RangedWeapon
     {

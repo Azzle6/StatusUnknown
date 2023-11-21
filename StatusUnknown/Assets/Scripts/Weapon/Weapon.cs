@@ -1,10 +1,12 @@
-namespace Player
+namespace Weapon
 {
+    using Player;
     using UnityEngine;
     public abstract class Weapon : MonoBehaviour
     {
         public WeaponManager weaponManager;
         public PlayerStat playerStat;
+        public Sprite weaponSprite;
         
         
         public abstract void ActionPressed();

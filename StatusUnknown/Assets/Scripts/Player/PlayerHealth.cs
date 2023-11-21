@@ -1,3 +1,4 @@
+using System.Collections;
 using Core.VariablesSO.VariableTypes;
 
 namespace Player
@@ -7,8 +8,9 @@ namespace Player
     public class PlayerHealth : MonoBehaviour, IDamageable
     {
         [SerializeField] private PlayerStat stat;
-        private FloatVariableSO playerHealth;
-        private FloatVariableSO playerArmor;
+        [SerializeField] private FloatVariableSO playerHealth;
+        [SerializeField] private FloatVariableSO playerArmor;
+        private Coroutine medikitCD;
 
 
         private void Awake()
@@ -21,10 +23,19 @@ namespace Player
             playerHealth.Value -= damage;
             Debug.Log("Player took " + damage + " damage");
         }
+
+        private IEnumerator MedikitCD()
+        {
+            yield return new WaitForSeconds(stat.medikitCooldown);
+            medikitCD = null;
+        }
     
         public void Heal(float amount)
         {
-            if (playerHealth.Value >= stat.maxHealth)
+            if (medikitCD != null)
+                return;
+            
+            if (playerHealth.Value + amount >= stat.maxHealth)
             {
                 playerHealth.Value = stat.maxHealth;
             }
@@ -32,6 +43,8 @@ namespace Player
             {
                 playerHealth.Value += amount;
             }
+            
+            medikitCD = StartCoroutine(MedikitCD());
         }
     }
 

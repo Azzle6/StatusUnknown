@@ -1,15 +1,18 @@
-using UnityEngine.Animations.Rigging;
+using Core.VariablesSO.VariableTypes;
 
-namespace Player
+namespace Weapon
 {
-    using DG.Tweening;
+    using Player;
     using UnityEngine;
+    using UnityEngine.Animations.Rigging;
+
 
     public class WeaponManager : MonoBehaviour
     {
         public PlayerStateInterpretor playerStateInterpretor;
         public Animator playerAnimator;
         public Weapon[] weapons;
+        public WeaponVariableSO[] weaponsSO;
         public int currentWeaponIndex;
         [SerializeField] private PlayerStat playerStat;
         public EnemyStatusHandler enemyStatusHandler;
@@ -32,13 +35,17 @@ namespace Player
 
             if (weapons[0].TryGetComponent(out RangedWeapon rangedWeapon))
                 rangedWeapon.RestWeapon();
-     
+
+            for (int x = 0; x < weapons.Length; x++)
+                weaponsSO[x].Value = weapons[x];
+
         }
 
         public void EquipWeapon(int weaponNo, Weapon weapon)
         {
             weapons[weaponNo] = weapon;
             weapons[weaponNo].weaponManager = this;
+            weaponsSO[weaponNo].Value = weapon;
         }
         
         public void PressTriggerWeapon(int weaponNo)

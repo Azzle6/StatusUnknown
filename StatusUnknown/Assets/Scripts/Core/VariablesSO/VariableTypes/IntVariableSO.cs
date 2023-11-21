@@ -1,4 +1,3 @@
-
 namespace Core.VariablesSO.VariableTypes
 {
     using UnityEngine;

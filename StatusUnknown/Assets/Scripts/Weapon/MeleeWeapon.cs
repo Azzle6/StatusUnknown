@@ -1,7 +1,8 @@
-namespace Player
+namespace Weapon
 {
     using System.Collections;
     using UnityEngine;
+    using Player;
     
     public abstract class MeleeWeapon : Weapon
     {

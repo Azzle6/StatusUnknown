@@ -1,4 +1,4 @@
-namespace Player
+namespace Weapon
 {
     using System.Collections;
     using System.Collections.Generic;

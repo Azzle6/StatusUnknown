@@ -4,6 +4,7 @@ using System.Collections;
 namespace Player
 {
     using UnityEngine;
+    using Weapon;
 
     public class MeleeBuildUpPlayerState : PlayerState
     {

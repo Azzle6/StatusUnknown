@@ -10,7 +10,11 @@ namespace Core.VariablesSO
         public T Value
         {
             get => this.value;
-            set => this.onValueChanged?.Invoke(value);
+            set
+            {
+                this.value = value;
+                this.onValueChanged?.Invoke(value);
+            }
         }
 
         private Action<T> onValueChanged;

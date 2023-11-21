@@ -1,4 +1,4 @@
-namespace Player
+namespace Weapon
 {
     using UnityEngine;
     public class WeaponStat : ScriptableObject
