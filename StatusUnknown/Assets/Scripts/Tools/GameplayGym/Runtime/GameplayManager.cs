@@ -21,7 +21,7 @@ namespace StatusUnknown.CoreGameplayContent
         [Header("General")]
         //[SerializeField] AudioSource source; 
         [SerializeField] private AbilityConfigSO_Base[] buildToSimulate; 
-        private int builToSimulatePreviousLength; 
+        private int buildToSimulatePreviousLength; 
 
         [SerializeField] private string buildSaveName = "Build_Playstyle_Num"; 
         private const int DELAY_BETWEEN_ABILITIES = 1;
@@ -47,7 +47,7 @@ namespace StatusUnknown.CoreGameplayContent
         } // Editor
 
         private CombatSimulatorSO simulatorInstance;
-        private Stack<GameObject> spawnedAreasObj = new Stack<GameObject>(); // Editor
+        private readonly Stack<GameObject> spawnedAreasObj = new Stack<GameObject>(); // Editor
 
         private GameObject[] spawnedAreasObj_Runtime; // Runtime
 
@@ -93,7 +93,11 @@ namespace StatusUnknown.CoreGameplayContent
         #region Unity Callbacks
         private void OnValidate()
         {
-            if (EditorApplication.isCompiling || EditorApplication.isUpdating || EditorApplication.isPlaying) return;
+            if (EditorApplication.isCompiling ||
+                EditorApplication.isUpdating ||
+                EditorApplication.isPlaying ||
+                GameObject.FindGameObjectsWithTag("Area").Length == buildToSimulate.Length) // when going from play to edit, only way to avoid refreshing.. ?
+            return;
 
             value = useCustomBuildSO; // WARNING : this prevents from further editing the simulateBuildArray
                                       // avoid raw OnValidate calls like this one
@@ -103,37 +107,33 @@ namespace StatusUnknown.CoreGameplayContent
                 retrieveLostAreas = false;
                 RefreshDamageAreaStack();
             }
-            else if (builToSimulatePreviousLength != buildToSimulate.Length && buildToSimulate.Length > 0)
+            else if (buildToSimulatePreviousLength != buildToSimulate.Length && buildToSimulate.Length > 0)
             {
-                RefreshDamageAreaStack();
-
-                /* try
+                try
                 {
-                    Debug.Log("spawning");
-
-                    if (buildToSimulate.Length - builToSimulatePreviousLength > 0)
+                    if (buildToSimulate.Length - buildToSimulatePreviousLength > 0)
                     {
-                        for (int i = builToSimulatePreviousLength; i < buildToSimulate.Length; i++)
+                        for (int i = buildToSimulatePreviousLength; i < buildToSimulate.Length; i++)
                         {
                             GameObject instance = buildToSimulate[i].GetArea();
                             instance.name = $"[{buildToSimulate[i].name}]";
-                            spawnedAreas.Push(Instantiate(instance));
+                            spawnedAreasObj.Push(Instantiate(instance));
                         }
                     }
-                    else if (buildToSimulate.Length - builToSimulatePreviousLength < 0)
+                    else if (buildToSimulate.Length - buildToSimulatePreviousLength < 0)
                     {
-                        for (int i = builToSimulatePreviousLength; i > buildToSimulate.Length; i--)
+                        for (int i = buildToSimulatePreviousLength; i > buildToSimulate.Length; i--)
                         {
-                            DestroyImmediate(spawnedAreas.Pop());
+                            DestroyImmediate(spawnedAreasObj.Pop());
                         }
                     }
                 }
                 catch (NullReferenceException e)
                 {
                     RefreshDamageAreaStack(e);
-                } */
+                }
 
-                builToSimulatePreviousLength = buildToSimulate.Length;
+                buildToSimulatePreviousLength = buildToSimulate.Length;
             } 
         }
 
@@ -200,7 +200,7 @@ namespace StatusUnknown.CoreGameplayContent
         //int damageValue; 
         private IEnumerator SetDamagePayload()
         {
-            Debug.Log("setting payload type to : " + currentAbilityData.infos.PayloadType);
+            //Debug.Log("setting payload type to : " + currentAbilityData.infos.PayloadType);
 
             //damageType = abilityConfigTemplates[(int)abilityInfos.PayloadType];
             //damageValue = damageType.Damage;
@@ -232,7 +232,7 @@ namespace StatusUnknown.CoreGameplayContent
 
         private void DoDamage_Burst()
         {
-            Debug.Log("applying burst damage"); 
+            //Debug.Log("applying burst damage"); 
             ApplyDamage(currentAbilityData.infos.PayloadValue);
             OnDamageDone(); 
         }
@@ -241,7 +241,7 @@ namespace StatusUnknown.CoreGameplayContent
         {
             for (int i = 0; i < currentAbilityConfigSO_OverTime.TickAmount; i++)
             {
-                Debug.Log("applying DOT damage");
+                //Debug.Log("applying DOT damage");
                 ApplyDamage(currentAbilityData.infos.PayloadValue);
                 yield return new WaitForSeconds(currentAbilityConfigSO_OverTime.TickDelay);
             }
@@ -253,7 +253,7 @@ namespace StatusUnknown.CoreGameplayContent
         // ERROR : "Trying to Invoke method: GameplayManager.ApplyDamage couldn't be called."
         private void DoDamage_Delayed()
         {
-            Debug.Log($"applying damage with delay of {currentAbilityConfigSO_Delayed.DamageDelay} seconds");
+            //Debug.Log($"applying damage with delay of {currentAbilityConfigSO_Delayed.DamageDelay} seconds");
             ApplyDamage(currentAbilityData.infos.PayloadValue);
             OnDamageDone(); 
         }
@@ -396,7 +396,9 @@ namespace StatusUnknown.CoreGameplayContent
             {
                 Debug.LogError("Error : " + nre.Message);
             }
+
             Debug.Log("refreshing damage area stack");
+
             int initialCount = spawnedAreasObj.Count; 
             for (int i = 0; i < initialCount; i++)
             {
@@ -415,7 +417,7 @@ namespace StatusUnknown.CoreGameplayContent
                 spawnedAreasObj.Push(Instantiate(instance));
             }
 
-            builToSimulatePreviousLength = buildToSimulate.Length;
+            buildToSimulatePreviousLength = buildToSimulate.Length;
         }
         #endregion
 

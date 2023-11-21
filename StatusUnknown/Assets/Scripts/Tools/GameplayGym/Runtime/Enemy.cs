@@ -84,7 +84,7 @@ namespace StatusUnknown.CoreGameplayContent
         private void GetFinalPayload()
         {
             damagePrinterObj.SetActive(true);
-            enemyTotalDamage_UI.SetText($"{damageCounter} ({(float)(damageCounter / maxHP) * 100}% of max HP)");
+            enemyTotalDamage_UI.SetText($"{damageCounter} ({((float)damageCounter / maxHP) * 100}% of max HP)");
 
             gameplayDataSO.TotalDamageDone += damageCounter; 
         }
