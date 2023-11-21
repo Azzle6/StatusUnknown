@@ -4,6 +4,8 @@ using UnityEngine;
 public class GameplayDataSO : ScriptableObject
 {
     public int TotalDamageDone { get; set; }
+    [field:SerializeField] public bool MustRefreshAreasObj { get; set; }
+    [field: SerializeField] public bool ExitedPlayMode { get; set; }
 
     public void Init()
     {

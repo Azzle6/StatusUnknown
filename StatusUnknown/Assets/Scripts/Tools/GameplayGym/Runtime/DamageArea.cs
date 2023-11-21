@@ -10,6 +10,14 @@ namespace StatusUnknown.CoreGameplayContent
         private readonly List<Enemy> enemiesInArea = new List<Enemy>();
         private BoxCollider boxCollider;
         private SphereCollider sphereCollider;
+        public int EnemiesInArea { get; set; }
+
+        private void OnEnable()
+        {
+            EnemiesInArea = enemiesInArea.Count; 
+
+
+        }
 
         private void OnDrawGizmos()
         {
@@ -33,11 +41,13 @@ namespace StatusUnknown.CoreGameplayContent
 
         private void OnTriggerEnter(Collider other)
         {
+            Debug.Log("trigger enter"); 
             enemiesInArea.Add(other.GetComponent<Enemy>());
         }
 
         private void OnTriggerExit(Collider other)
         {
+            Debug.Log("trigger exit");
             enemiesInArea.Remove(other.GetComponent<Enemy>());
         }
 

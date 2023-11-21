@@ -35,21 +35,22 @@ namespace StatusUnknown.CoreGameplayContent
         [SerializeField] private bool useCustomBuildSO;
         public bool value
         {
-            get { return useCustomBuildSO; }
+            get { return customBuildSO; }
             set
             {
                 using (ChangeEvent<bool> evt = ChangeEvent<bool>.GetPooled(useCustomBuildSO, value))
                 {
                     if (evt.newValue == true && customBuildSO != null)
+                    {
                         RepopulateBuildArray();
+                        RefreshDamageAreaStack();
+                    }
                 }
             }
         } // Editor
 
         private CombatSimulatorSO simulatorInstance;
-        private readonly Stack<GameObject> spawnedAreasObj = new Stack<GameObject>(); // Editor
-
-        private GameObject[] spawnedAreasObj_Runtime; // Runtime
+        [SerializeField] private List<GameObject> spawnedAreasObj = new List<GameObject>();  
 
         GameObject currentActiveAreaObj; // Runtime
         private List<Enemy> currentEnemiesInArea; // Runtime
@@ -86,45 +87,60 @@ namespace StatusUnknown.CoreGameplayContent
         private const string LOG_ERROR_ENCOUNTER_NULL = "Could not generate encounter. Make sure the \"Enemy Encounter SO\" field is not empty.";
         private const string LOG_ERROR_BUILD_NULL = "No abilities were found on your \"buildToSimulate\" array.";
 
-        [Header("Debug")]
-        [SerializeField] private bool retrieveLostAreas;
+        [Header("-- DEBUG --")]
+        [SerializeField, Tooltip("If you deleted some areas by mistake")] private bool refreshAllAreas; 
         #endregion
 
         #region Unity Callbacks
         private void OnValidate()
         {
+            if (EditorApplication.isPlayingOrWillChangePlaymode) return;
+            
+            value = useCustomBuildSO; // avoid raw OnValidate calls like this on
+
+            // From Play to Editor
+            if (gameplayDataSO.MustRefreshAreasObj || refreshAllAreas)
+            {
+                gameplayDataSO.MustRefreshAreasObj = false;
+                Debug.Log(EditorApplication.isPlaying); 
+                if (gameplayDataSO.ExitedPlayMode)
+                {
+                    //spawnedAreasObj = GameObject.FindGameObjectsWithTag("Area").ToList(); // going to need a better solution
+                }
+
+                RefreshDamageAreaStack();
+                return;
+            }
+
+            // when going from play to edit, only way to avoid refreshing.. ?
             if (EditorApplication.isCompiling ||
                 EditorApplication.isUpdating ||
-                EditorApplication.isPlaying ||
-                GameObject.FindGameObjectsWithTag("Area").Length == buildToSimulate.Length) // when going from play to edit, only way to avoid refreshing.. ?
-            return;
+                GameObject.FindGameObjectsWithTag("Area").Length == buildToSimulate.Length) 
+                return;
 
-            value = useCustomBuildSO; // WARNING : this prevents from further editing the simulateBuildArray
-                                      // avoid raw OnValidate calls like this one
-
-            if (retrieveLostAreas)
-            {
-                retrieveLostAreas = false;
-                RefreshDamageAreaStack();
-            }
-            else if (buildToSimulatePreviousLength != buildToSimulate.Length && buildToSimulate.Length > 0)
+            // In Editor
+            if (buildToSimulatePreviousLength != buildToSimulate.Length && buildToSimulate.Length >= 0)
             {
                 try
                 {
+                    spawnedAreasObj.Clear();
+                    spawnedAreasObj = GameObject.FindGameObjectsWithTag("Area").ToList(); // going to need a better solution
+
                     if (buildToSimulate.Length - buildToSimulatePreviousLength > 0)
                     {
                         for (int i = buildToSimulatePreviousLength; i < buildToSimulate.Length; i++)
                         {
-                            GameObject instance = buildToSimulate[i].GetArea();
-                            instance.name = $"[{buildToSimulate[i].name}]";
-                            spawnedAreasObj.Push(Instantiate(instance));
+                            GameObject prefabInstance = buildToSimulate[i].GetArea();
+                            //prefabInstance.name = string.Empty;
+                            //prefabInstance.name = string.Concat(prefabInstance.name, " ", buildToSimulate[i].name); 
+                            spawnedAreasObj.Add(Instantiate(prefabInstance));
                         }
                     }
                     else if (buildToSimulate.Length - buildToSimulatePreviousLength < 0)
                     {
-                        for (int i = buildToSimulatePreviousLength; i > buildToSimulate.Length; i--)
+                        for (int i = buildToSimulatePreviousLength - 1; i >= buildToSimulate.Length; i--)
                         {
-                            DestroyImmediate(spawnedAreasObj.Pop());
+                            DestroyImmediate(spawnedAreasObj[i]);
                         }
                     }
                 }
@@ -134,29 +150,43 @@ namespace StatusUnknown.CoreGameplayContent
                 }
 
                 buildToSimulatePreviousLength = buildToSimulate.Length;
-            } 
+            }
         }
 
         private void OnEnable()
         {
-            spawnedAreasObj_Runtime = GameObject.FindGameObjectsWithTag("Area");
-            foreach (var item in spawnedAreasObj_Runtime)
-            {
-                item.SetActive(false);
-            }
+            // From Editor to Play
+            BindAreaSceneObjectsToList();
+            EditorApplication.playModeStateChanged += OnEditorApplicationStateChanged;
+        }
 
-            spawnedAreasObj_Runtime = spawnedAreasObj_Runtime.Reverse().ToArray();
+        private void OnDisable()
+        {
+            EditorApplication.playModeStateChanged -= OnEditorApplicationStateChanged;
         }
         #endregion
 
+        // In Play
         #region RUNTIME
+        private void OnEditorApplicationStateChanged(PlayModeStateChange currentPlayMode)
+        {
+            if (currentPlayMode == PlayModeStateChange.EnteredPlayMode)
+            {
+                gameplayDataSO.MustRefreshAreasObj = false;
+                gameplayDataSO.ExitedPlayMode = false;
+            }
+            else if (currentPlayMode == PlayModeStateChange.ExitingPlayMode)
+            {
+                gameplayDataSO.MustRefreshAreasObj = true;
+                gameplayDataSO.ExitedPlayMode = true; 
+            }
+        }
+
         [Button(ButtonHeight = 100), PropertySpace, GUIColor("green")]
         public void StartSimulation() // Entry Point (done once)
         {
             Init();
 
-            currentIndex = 0;
-            lastIndex = simulatorInstance.GetAbilitiesArrayLength() - 1;
             StopAllCoroutines(); 
             CancelInvoke(); 
 
@@ -189,8 +219,26 @@ namespace StatusUnknown.CoreGameplayContent
                 CreateNewBuildInstance();
             }
 
+            currentIndex = 0;
+            lastIndex = simulatorInstance.GetAbilitiesArrayLength() - 1;
             currentAbilityData = simulatorInstance.GetRootAbilityData();
+
             gameplayDataSO.Init();
+        }
+
+        private void BindAreaSceneObjectsToList()
+        {
+            Debug.Log("binding area scene objects to list");
+            //spawnedAreasObj.Clear();
+            //spawnedAreasObj = GameObject.FindGameObjectsWithTag("Area").ToList();
+            foreach (var item in spawnedAreasObj)
+            {
+                item.SetActive(false);
+            }
+
+            //spawnedAreasObj.Reverse();
+
+            buildToSimulatePreviousLength = buildToSimulate.Length;
         }
 
         // REFACTOR : strategy pattern for different types of damage application
@@ -207,7 +255,7 @@ namespace StatusUnknown.CoreGameplayContent
 
             if (currentAbilityData.infos.Area != null)
             {
-                currentActiveAreaObj = spawnedAreasObj_Runtime[currentIndex]; 
+                currentActiveAreaObj = spawnedAreasObj[currentIndex]; 
                 currentActiveAreaObj.SetActive(true);
             }
 
@@ -269,7 +317,9 @@ namespace StatusUnknown.CoreGameplayContent
                 {
                     damageable.TakeDamage(damageValue);
                 }
-            } 
+            }
+
+            Debug.Log("damage"); 
         }
 
         private void OnDamageDone()
@@ -300,6 +350,7 @@ namespace StatusUnknown.CoreGameplayContent
         }
         #endregion
 
+        // In Editor
         #region LOAD
         [Button(ButtonHeight = 40), PropertySpace, GUIColor("green")]
         public void GenerateEncounter()
@@ -394,28 +445,28 @@ namespace StatusUnknown.CoreGameplayContent
         {
             if (nre != null)
             {
-                Debug.LogError("Error : " + nre.Message);
+                Debug.LogError("Error : " + nre?.Message);
             }
 
             Debug.Log("refreshing damage area stack");
+            gameplayDataSO.ExitedPlayMode = false;
+            refreshAllAreas = false;
 
-            int initialCount = spawnedAreasObj.Count; 
+            int initialCount = spawnedAreasObj.Count;
             for (int i = 0; i < initialCount; i++)
             {
-                if (spawnedAreasObj.TryPop(out var area))
-                {
-                    Debug.Log("destroying"); 
-                    DestroyImmediate(area);
-                }
-            }
+                Destroy(spawnedAreasObj[i]);
+            } 
+
             spawnedAreasObj.Clear();   
 
             for (int i = 0; i < buildToSimulate.Length; i++)
             {
-                GameObject instance = buildToSimulate[i].GetArea();
-                instance.name = $"[{buildToSimulate[i].name}]";
-                spawnedAreasObj.Push(Instantiate(instance));
-            }
+                GameObject prefabInstance = buildToSimulate[i].GetArea();
+                //prefabInstance.name = string.Empty; 
+                //prefabInstance.name = string.Concat(prefabInstance.name, " ", buildToSimulate[i].name);
+                spawnedAreasObj.Add(Instantiate(prefabInstance));
+            } 
 
             buildToSimulatePreviousLength = buildToSimulate.Length;
         }
@@ -427,11 +478,6 @@ namespace StatusUnknown.CoreGameplayContent
         {
             useCustomBuildSO = v;
             Debug.Log("SetValueWithoutNotify: " + v);
-        }
-
-        public void SetValueWithoutNotify(int newValue)
-        {
-            throw new NotImplementedException();
         }
         #endregion
     }
