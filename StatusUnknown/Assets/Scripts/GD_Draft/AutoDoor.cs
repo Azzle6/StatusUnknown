@@ -20,6 +20,6 @@ public class AutoDoor : MonoBehaviour
 
     void ChangeDoorState(bool open = true)
     {
-        animator.SetTrigger();
+        animator.SetTrigger("trigger");
     }
 }
