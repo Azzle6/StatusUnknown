@@ -1,5 +1,6 @@
 
 using System.Collections;
+using Core.VariablesSO.VariableTypes;
 
 namespace Player
 {
@@ -14,7 +15,12 @@ namespace Player
         private float superArmorDamageTaken;
         private Coroutine buildUpCoroutine;
         private float buildUpTimer;
+        [SerializeField] private FloatVariableSO playerHealth;
 
+        private void Awake()
+        {
+            playerHealth.RegisterOnValueChanged(SuperArmorTakeDamage);
+        }
     
         public override void OnStateEnter()
         {
@@ -34,8 +40,7 @@ namespace Player
                 }
             }
         }
-
-
+        
         private IEnumerator BuildUp()
         {
             currentMeleeWeapon.BuildUp();

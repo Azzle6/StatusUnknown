@@ -101,7 +101,6 @@ namespace Player
         private void UpdateMedikitCount(int newMedikitCount)
         {
             medikitCount.text = newMedikitCount.ToString();
-            Debug.Log("Medikit amount: " + medikitAmount.Value + " + tempMedikitAmount: " + tempMedikitAmount);
             if (medikitAmount.Value < tempMedikitAmount)
             {
                 medikitIcon.transform.scale = Vector3.zero;
