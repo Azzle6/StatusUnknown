@@ -46,12 +46,13 @@ namespace Weapons
     }
 
     [Serializable]
-    public struct WeaponTriggerData : IItemsDataContainer
+    public class WeaponTriggerData : IItemsDataContainer
     {
         public TriggerSO triggerType;
         public int triggerRowPosition;
         public VectorIntModuleDictionary modules;
         public ModuleCompilation compiledModules;
+        
         
         #region CONSTRUCTOR
         public WeaponTriggerData(WeaponTriggerDefinition triggerDefinitionData)
@@ -63,18 +64,21 @@ namespace Weapons
         }
         #endregion
        
-        public VectorIntItemDictionary GetAllItems()
+        public ContainedItemInfo[] GetAllItems()
         {
-            return this.modules.ToItemDictionary();
+            List<ContainedItemInfo> result = new List<ContainedItemInfo>();
+            foreach (var module in this.modules)
+                result.Add(new ContainedItemInfo(module.Key, module.Value));
+            
+            return result.ToArray();
         }
 
-        public void SaveAllItems(VectorIntItemDictionary content)
+        public void SaveAllItems(ContainedItemInfo[] content)
         {
             this.modules.Clear();
             foreach (var info in content)
-            {
-                this.modules.Add(info.Key, (ModuleData)info.Value);
-            }
+                this.modules.Add(info.Coordinates, (ModuleData)info.ItemData);
+            
             this.compiledModules.CompileWeaponModules(this.triggerRowPosition, this.modules);
         }
 

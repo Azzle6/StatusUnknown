@@ -16,32 +16,33 @@ namespace Inventory
 
         public VectorIntModuleDictionary modules;
         public VectorIntWeaponDictionary weapons;
-        public VectorIntItemDictionary GetAllItems()
+        public ContainedItemInfo[] GetAllItems()
         {
-            List<VectorIntItemDictionary> dictionariesToMerge = new List<VectorIntItemDictionary>()
-                { this.modules.ToItemDictionary(), this.weapons.ToItemDictionary() };
+            List<ContainedItemInfo> result = new List<ContainedItemInfo>();
+
+            foreach (var module in this.modules)
+                result.Add(new ContainedItemInfo(module.Key, module.Value));
             
-            VectorIntItemDictionary result = new VectorIntItemDictionary();
+            foreach (var weapon in this.weapons)
+                result.Add(new ContainedItemInfo(weapon.Key, weapon.Value));
             
-            result.MergeMultipleDictionary(dictionariesToMerge.ToArray());
-            
-            return result;
+            return result.ToArray();
         }
 
-        public void SaveAllItems(VectorIntItemDictionary content)
+        public void SaveAllItems(ContainedItemInfo[] content)
         {
             this.modules.Clear();
             this.weapons.Clear();
             
             foreach (var info in content)
             {
-                switch (info.Value.GridItemDefinition.ItemType)
+                switch (info.ItemData.GridItemDefinition.ItemType)
                 {
                     case E_ItemType.MODULE:
-                        this.modules.Add(info.Key, (ModuleData)info.Value);
+                        this.modules.Add(info.Coordinates, (ModuleData)info.ItemData);
                         break;
                     case E_ItemType.WEAPON:
-                        this.weapons.Add(info.Key, (WeaponData)info.Value);
+                        this.weapons.Add(info.Coordinates, (WeaponData)info.ItemData);
                         break;
                 }
             }

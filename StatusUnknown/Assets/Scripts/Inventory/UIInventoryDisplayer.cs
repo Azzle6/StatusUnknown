@@ -27,7 +27,7 @@ namespace Inventory
         private VisualElement weaponTriggersRoot;
 
         private GridView inventoryGridView;
-        private GridView weaponGridView;
+        private WeaponGridView weaponGridView;
 
         private bool isDisplayed;
 
@@ -63,13 +63,13 @@ namespace Inventory
 
         private void InitInventoryView()
         {
-            this.inventoryGridView = new GridView(this.uiDocument.rootVisualElement.Q<VisualElement>(INVENTORY_GRID_NAME),
+            this.inventoryGridView = new BasicGridView(this.uiDocument.rootVisualElement.Q<VisualElement>(INVENTORY_GRID_NAME),
                 this.playerInventory.inventory.Shape, this.playerInventory.inventory, new E_ItemType[] { E_ItemType.MODULE, E_ItemType.WEAPON});
         }
 
         private void InitWeaponGridView()
         {
-            this.weaponGridView = new GridView(this.uiDocument.rootVisualElement.Q<VisualElement>(WEAPON_GRID_NAME),
+            this.weaponGridView = new WeaponGridView(this.uiDocument.rootVisualElement.Q<VisualElement>(WEAPON_GRID_NAME),
                 this.playerInventory.equippedWeaponsData[0].definition.triggers[0].shape, this.playerInventory.equippedWeaponsData[0].triggerInfoData[0], new E_ItemType[] { E_ItemType.MODULE});
         }
 

@@ -8,13 +8,15 @@ namespace Module
     [Serializable]
     public class ModuleCompilation
     {
+        public Action<ModuleCompilation> onNewCompilation;
+        public CompiledModule FirstModule;
+        public List<CompiledModule> AllCompiledModules = new List<CompiledModule>();
+        
         private VectorIntModuleDictionary modulesPosition;
-        public CompiledModule firstModule;
-        public int debugLinkedModulesCount;
 
         public void CompileWeaponModules(int startingRow, VectorIntModuleDictionary modPositions)
         {
-            this.debugLinkedModulesCount = 0;
+            this.AllCompiledModules.Clear();
             this.modulesPosition = modPositions;
 
             Vector2Int startingPosition = new Vector2Int(0, startingRow);
@@ -22,10 +24,11 @@ namespace Module
 
             if (firstModuleInfo.Item1 != null)
             {
-                this.debugLinkedModulesCount = 1;
-                this.firstModule = new CompiledModule(firstModuleInfo.Item1);
-                this.CalculateLinkedModules(firstModuleInfo.Item2, this.firstModule);
+                this.FirstModule = new CompiledModule(firstModuleInfo.Item1);
+                this.AllCompiledModules.Add(this.FirstModule);
+                this.CalculateLinkedModules(firstModuleInfo.Item2, this.FirstModule);
             }
+            this.onNewCompilation?.Invoke(this);
         }
 
         private void CalculateLinkedModules(Vector2Int currentModulePosition, CompiledModule compiledModule)
@@ -45,8 +48,8 @@ namespace Module
 
                 if (nextModuleResult.Item1 != null)
                 {
-                    this.debugLinkedModulesCount++;
-                    if (this.debugLinkedModulesCount >= 30)
+                    this.AllCompiledModules.Add(newCompiledModule);
+                    if (this.AllCompiledModules.Count >= 30)
                     {
                         Debug.LogWarning("Too many iterations in the compilation, stopped.");
                         return;

@@ -1,6 +1,7 @@
 namespace Module
 {
     using System;
+    using System.Collections.Generic;
     using Core.Helpers;
     using Core.SingletonsSO;
     using Inventory.Grid;
@@ -18,9 +19,11 @@ namespace Module
         }
 
         public ModuleData ModuleItemData;
+        private Dictionary<TriggerSO, VisualElement> outputsVisual;
 
         protected override void GenerateCustomView()
         {
+            this.outputsVisual = new Dictionary<TriggerSO, VisualElement>();
             foreach (var outputInfo in this.ModuleItemData.definition.outputs)
             {
                 VisualElement triggerElement = UIHandler.Instance.uiSettings.triggerTemplate.Instantiate();
@@ -52,7 +55,14 @@ namespace Module
 
                 triggerElement.transform.position = ((Vector2)outputInfo.localPosition * slotWidth + directionDisplacement) - (Vector2.one * UIHandler.Instance.uiSettings.triggerWidth/2);
                 triggerElement.style.rotate = new StyleRotate(new Rotate(iconRotation));
+                
+                this.outputsVisual.Add(outputInfo.triggerType, triggerElement);
             }
+        }
+
+        public void SetLinkView(TriggerSO linkedOutput, bool isLinked)
+        {
+            this.outputsVisual[linkedOutput].style.backgroundColor = isLinked ? new StyleColor(Color.green) : new StyleColor(Color.red);
         }
     }
 }

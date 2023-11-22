@@ -21,19 +21,19 @@ MonoBehaviour:
       modules:
         keyData:
         - {x: 0, y: 1}
+        - {x: 2, y: 3}
         - {x: 2, y: 1}
+        - {x: 1, y: 5}
         valueData:
         - definition: {fileID: 11400000, guid: 0eb7e3422f6fd2444a9ae05458adaa92, type: 2}
         - definition: {fileID: 11400000, guid: 0eb7e3422f6fd2444a9ae05458adaa92, type: 2}
-      compiledModules:
-        debugLinkedModulesCount: 2
+        - definition: {fileID: 11400000, guid: 54dac6aab9360ab42b25fc605e85fa05, type: 2}
+        - definition: {fileID: 11400000, guid: 54dac6aab9360ab42b25fc605e85fa05, type: 2}
     - triggerType: {fileID: 11400000, guid: a6198027f09bfa64e9a8ae60cdb7acc1, type: 2}
       triggerRowPosition: 0
       modules:
         keyData: []
         valueData: []
-      compiledModules:
-        debugLinkedModulesCount: 0
   - definition: {fileID: 11400000, guid: ddfda7b31cc8afb49abd392993bea013, type: 2}
     triggerInfoData:
     - triggerType: {fileID: 11400000, guid: a81d8b4ef5aff55479fdbd5a3dac5f66, type: 2}
@@ -41,5 +41,3 @@ MonoBehaviour:
       modules:
         keyData: []
         valueData: []
-      compiledModules:
-        debugLinkedModulesCount: 0

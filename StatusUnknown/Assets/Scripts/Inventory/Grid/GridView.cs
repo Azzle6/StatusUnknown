@@ -9,14 +9,14 @@ namespace Inventory.Grid
     using UnityEngine;
     using UnityEngine.UIElements;
 
-    public class GridView
+    public abstract class GridView
     {
         private IItemsDataContainer container;
         private Shape shape;
-        private E_ItemType[] canContainsTypes;
+        private readonly E_ItemType[] canContainsTypes;
         
         private Slot[] slots;
-        private readonly HashSet<ItemView> itemsView = new HashSet<ItemView>();
+        protected readonly HashSet<ItemView> ItemsView = new HashSet<ItemView>();
         
         private readonly VisualElement gridRoot;
 
@@ -31,7 +31,7 @@ namespace Inventory.Grid
         }
         private float slotWidth;
 
-        private Action<IGridElement> gridElementFocusEvent;
+        private readonly Action<IGridElement> gridElementFocusEvent;
 
         private VisualElement firstFocus;
         
@@ -90,21 +90,24 @@ namespace Inventory.Grid
             this.container = newContainer;
             this.BuildGrid();
             this.LoadContent();
+            this.OnNewContainerLoad(newContainer);
         }
+
+        protected abstract void OnNewContainerLoad(IItemsDataContainer newContainer);
         
         public void LoadContent()
         {
             this.ClearContent(false);
             foreach (var info in this.container.GetAllItems())
             {
-                if (info.Value == null)
+                if (info.ItemData == null)
                 {
-                    Debug.LogWarning($"Try to spawn null item at {info.Key}. Item skipped.");
+                    Debug.LogWarning($"Try to spawn null item at {info.Coordinates}. Item skipped.");
                     continue;
                 }
-                ItemView itemView = ItemView.InstantiateItemView(info.Value, info.Key, this);
-                this.SetItemPosition(itemView, info.Key);
-                this.itemsView.Add(itemView);
+                ItemView itemView = ItemView.InstantiateItemView(info.ItemData, info.Coordinates, this);
+                this.SetItemPosition(itemView, info.Coordinates);
+                this.ItemsView.Add(itemView);
                 itemView.FocusElement.RegisterCallback<FocusEvent>(e => this.gridElementFocusEvent?.Invoke(itemView));
                 itemView.FocusElement.RegisterCallback<NavigationSubmitEvent>(e => this.OnInteract(itemView));
             }
@@ -112,20 +115,20 @@ namespace Inventory.Grid
         
         private void SaveContent()
         {
-            VectorIntItemDictionary dictionary = new VectorIntItemDictionary();
-            foreach (ItemView itemView in this.itemsView)
-                dictionary.Add(itemView.GridPosition, itemView.ItemData);
+            List<ContainedItemInfo> result = new List<ContainedItemInfo>();
+            foreach (ItemView itemView in this.ItemsView)
+                result.Add( new ContainedItemInfo(itemView.GridPosition, itemView.ItemData));
             
-            this.container.SaveAllItems(dictionary);
+            this.container.SaveAllItems(result.ToArray());
         }
         
         private void ClearContent(bool clearData)
         {
-            HashSet<ItemView> tempItem = new HashSet<ItemView>(this.itemsView);
+            HashSet<ItemView> tempItem = new HashSet<ItemView>(this.ItemsView);
             foreach (ItemView itemView in tempItem)
                 this.RemoveItem(itemView);
             
-            this.itemsView.Clear();
+            this.ItemsView.Clear();
 
             if (clearData)
                 this.container.ClearData();
@@ -153,7 +156,7 @@ namespace Inventory.Grid
         public void OnPickItem(ItemView itemView)
         {
             this.SetSlotsContent(itemView.ItemData.GridItemDefinition.shape, itemView.GridPosition, null);
-            this.itemsView.Remove(itemView);
+            this.ItemsView.Remove(itemView);
             UIHandler.Instance.ForceFocus(this.GetSlot(itemView.GridPosition).FocusElement);
             this.SaveContent();
         }
@@ -176,13 +179,13 @@ namespace Inventory.Grid
             this.SetSlotsContent(itemView.ItemData.GridItemDefinition.shape, pos, itemView);
             
             //Register item in grid
-            this.itemsView.Add(itemView);
+            this.ItemsView.Add(itemView);
         }
         
         private void RemoveItem(ItemView itemView)
         {
             itemView.ViewRoot.RemoveFromHierarchy();
-            this.itemsView.Remove(itemView);
+            this.ItemsView.Remove(itemView);
 
             this.SetSlotsContent(itemView.ItemData.GridItemDefinition.shape, itemView.GridPosition, null);
         }
@@ -221,7 +224,7 @@ namespace Inventory.Grid
             return true;
         }
 
-        public bool CanContainsItem(ItemView itemView)
+        private bool CanContainsItem(ItemView itemView)
         {
             foreach (var itemType in this.canContainsTypes)
             {

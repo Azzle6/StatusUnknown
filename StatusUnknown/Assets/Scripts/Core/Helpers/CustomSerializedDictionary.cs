@@ -2,7 +2,6 @@ namespace Core.Helpers
 {
     using System;
     using System.Collections.Generic;
-    using Inventory.Item;
     using Module;
     using UnityEngine;
     using Weapons;
@@ -38,42 +37,10 @@ namespace Core.Helpers
     }
 
     [Serializable]
-    public class VectorIntItemDictionary : CustomSerializedDictionary<Vector2Int, ItemData>
-    {
-        public void MergeMultipleDictionary(VectorIntItemDictionary[] dictionaries)
-        {
-            this.Clear();
-            foreach (var dictionary in dictionaries)
-            {
-                foreach (var info in dictionary)
-                {
-                    this.Add(info.Key, info.Value);
-                }
-            }
-        }
-    }
-
-    [Serializable]
     public class VectorIntModuleDictionary : CustomSerializedDictionary<Vector2Int, ModuleData>
-    {
-        public VectorIntItemDictionary ToItemDictionary()
-        {
-            VectorIntItemDictionary result = new VectorIntItemDictionary();
-            foreach (var content in this)
-                result.Add(content.Key, content.Value);
-            return result;
-        }
-    }
+    { }
 
     [Serializable]
     public class VectorIntWeaponDictionary : CustomSerializedDictionary<Vector2Int, WeaponData>
-    {
-        public VectorIntItemDictionary ToItemDictionary()
-        {
-            VectorIntItemDictionary result = new VectorIntItemDictionary();
-            foreach (var content in this)
-                result.Add(content.Key, content.Value);
-            return result;
-        }
-    }
+    { }
 }
