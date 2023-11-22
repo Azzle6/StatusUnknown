@@ -8,4 +8,6 @@ public class SniperStats : EnemyStats
     public float minTpRange = 4f;
     public float maxTpRange = 10f;
     public float tpCooldown = 2f;
+    [Header("Shoot")]
+    public float shootDelay = 0.5f;
 }

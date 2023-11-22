@@ -19,5 +19,6 @@ public class EnemyStats : ScriptableObject
     [Header("Attack")]
     public float AttackRange = 0.5f;
     public float AttackDuration = 1f;
+    public float AttackCooldown = 0;
     public float AttackDamage = 5;
 }

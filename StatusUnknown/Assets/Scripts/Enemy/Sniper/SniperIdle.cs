@@ -10,32 +10,36 @@ public class SniperIdle : EnemyState
     EnemySniper currentContext => context as EnemySniper;
     SniperStats sniperStats => currentContext.sniperStats;
     float tpCooldown;
+    float attackCooldown;
     public override void DebugGizmos()
     {
         Gizmos.color = (CombatManager.PlayerInView(transform.position, transform.forward, sniperStats.AttackRange, 180, currentContext.obstacleMask)) ? Color.green : Color.red; ;
         Gizmos.DrawWireSphere(transform.position, sniperStats.AttackRange);
-        List<Vector3> Positions = TpPositions();
+        /*List<Vector3> Positions = TpPositions();
         foreach (Vector3 position in Positions)
         {
             Gizmos.color = Color.green;
             Gizmos.DrawSphere(position, 0.2f);
-        }
+        }*/
     }
 
     public override void Update()
     {
-        
-        if(CombatManager.PlayerInView(transform.position,transform.forward, sniperStats.AttackRange,180,currentContext.obstacleMask))
-        {
-            Debug.Log("Sniper attack");
+        attackCooldown -=Time.deltaTime;
+        tpCooldown -= Time.deltaTime;
+        bool playerInView = CombatManager.PlayerInView(transform.position, transform.forward, sniperStats.AttackRange, 180, currentContext.obstacleMask);
 
-        }else if(tpCooldown < 0)
+        if (playerInView && attackCooldown < 0)
+            currentContext.SwitchState(new SniperAttack());
+
+        if(!playerInView && tpCooldown < 0)
         {
             transform.position = TpPosition();
             tpCooldown = sniperStats.tpCooldown;
           
         }
-        tpCooldown -= Time.deltaTime;
+        if(CombatManager.playerTransform != null && playerInView) 
+            transform.forward = CombatManager.playerTransform.position - transform.position;
     }
     Vector3 TpPosition()
     {
@@ -90,6 +94,7 @@ public class SniperIdle : EnemyState
 
     protected override void Initialize()
     {
-        
+        tpCooldown = sniperStats.tpCooldown;
+        attackCooldown = sniperStats.AttackCooldown;
     }
 }
