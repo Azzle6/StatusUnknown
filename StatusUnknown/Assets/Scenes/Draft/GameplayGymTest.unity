@@ -201,7 +201,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b59cc3dd78591d41a04987297df8b10, type: 3}
---- !u!1 &210189765
+--- !u!1 &203773736
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -209,23 +209,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 210189768}
-  - component: {fileID: 210189767}
-  - component: {fileID: 210189766}
+  - component: {fileID: 203773739}
+  - component: {fileID: 203773738}
+  - component: {fileID: 203773737}
   m_Layer: 0
-  m_Name: damage_area_medium(Clone)
+  m_Name: damage_area_small(Clone)
   m_TagString: Area
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &210189766
+--- !u!114 &203773737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203773736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f0c23c69c7a71b4c9457746257ce8c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaShowColor: {r: 0.21226418, g: 1, b: 0.2321186, a: 1}
+  areaCollider: {fileID: 203773738}
+--- !u!65 &203773738
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 210189765}
+  m_GameObject: {fileID: 203773736}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -234,42 +248,28 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 6.45, y: 1, z: 2.47}
+  m_Size: {x: 2.5, y: 1, z: 1.95}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &210189767
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 210189765}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f0c23c69c7a71b4c9457746257ce8c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  areaShowColor: {r: 0.033018887, g: 1, b: 0.9804577, a: 1}
-  areaCollider: {fileID: 210189766}
---- !u!4 &210189768
+--- !u!4 &203773739
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 210189765}
+  m_GameObject: {fileID: 203773736}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 6.66, y: -0.58, z: -8.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &261387883
+--- !u!1 &206078144
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -277,9 +277,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 261387886}
-  - component: {fileID: 261387885}
-  - component: {fileID: 261387884}
+  - component: {fileID: 206078147}
+  - component: {fileID: 206078146}
+  - component: {fileID: 206078145}
   m_Layer: 0
   m_Name: damage_area_huge(Clone)
   m_TagString: Area
@@ -287,27 +287,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &261387884
+--- !u!114 &206078145
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 261387883}
+  m_GameObject: {fileID: 206078144}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7f0c23c69c7a71b4c9457746257ce8c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   areaShowColor: {r: 0.990566, g: 0.16353682, b: 0.16353682, a: 1}
-  areaCollider: {fileID: 261387885}
---- !u!65 &261387885
+  areaCollider: {fileID: 206078146}
+--- !u!65 &206078146
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 261387883}
+  m_GameObject: {fileID: 206078144}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -322,13 +322,13 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: -18.04522, y: 1, z: 11}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!4 &261387886
+--- !u!4 &206078147
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 261387883}
+  m_GameObject: {fileID: 206078144}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.15, y: -0.89, z: 0.55}
@@ -415,7 +415,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b59cc3dd78591d41a04987297df8b10, type: 3}
---- !u!1 &468104017
+--- !u!1 &588561969
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -423,349 +423,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 468104020}
-  - component: {fileID: 468104019}
-  - component: {fileID: 468104018}
-  m_Layer: 0
-  m_Name: damage_area_huge(Clone)
-  m_TagString: Area
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &468104018
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 468104017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f0c23c69c7a71b4c9457746257ce8c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  areaShowColor: {r: 0.990566, g: 0.16353682, b: 0.16353682, a: 1}
-  areaCollider: {fileID: 468104019}
---- !u!65 &468104019
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 468104017}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: -18.04522, y: 1, z: 11}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!4 &468104020
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 468104017}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.15, y: -0.89, z: 0.55}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &546058385
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 546058388}
-  - component: {fileID: 546058387}
-  - component: {fileID: 546058386}
-  m_Layer: 0
-  m_Name: damage_area_small(Clone)
-  m_TagString: Area
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &546058386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 546058385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f0c23c69c7a71b4c9457746257ce8c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  areaShowColor: {r: 0.21226418, g: 1, b: 0.2321186, a: 1}
-  areaCollider: {fileID: 546058387}
---- !u!65 &546058387
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 546058385}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.5, y: 1, z: 1.95}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!4 &546058388
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 546058385}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.79, y: -0.58, z: -3.15}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &576027455
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 576027458}
-  - component: {fileID: 576027457}
-  - component: {fileID: 576027456}
-  m_Layer: 0
-  m_Name: damage_area_bullet(Clone)
-  m_TagString: Area
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!135 &576027456
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 576027455}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.25
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &576027457
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 576027455}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f0c23c69c7a71b4c9457746257ce8c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  areaShowColor: {r: 0.9990006, g: 0.2117647, b: 1, a: 1}
-  areaCollider: {fileID: 576027456}
---- !u!4 &576027458
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 576027455}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &622411541
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 622411544}
-  - component: {fileID: 622411543}
-  - component: {fileID: 622411542}
-  m_Layer: 0
-  m_Name: damage_area_small(Clone)
-  m_TagString: Area
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &622411542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 622411541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f0c23c69c7a71b4c9457746257ce8c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  areaShowColor: {r: 0.21226418, g: 1, b: 0.2321186, a: 1}
-  areaCollider: {fileID: 622411543}
---- !u!65 &622411543
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 622411541}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.5, y: 1, z: 1.95}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!4 &622411544
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 622411541}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.79, y: -0.58, z: -3.15}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &634668027
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 634668030}
-  - component: {fileID: 634668029}
-  - component: {fileID: 634668028}
-  m_Layer: 0
-  m_Name: damage_area_big(Clone)
-  m_TagString: Area
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &634668028
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 634668027}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f0c23c69c7a71b4c9457746257ce8c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  areaShowColor: {r: 0.8773585, g: 0.82624495, b: 0.028969401, a: 1}
-  areaCollider: {fileID: 634668029}
---- !u!65 &634668029
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 634668027}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 18, y: 1, z: 3}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!4 &634668030
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 634668027}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.15, y: -0.89, z: -2.29}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &867280825
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 867280828}
-  - component: {fileID: 867280827}
-  - component: {fileID: 867280826}
+  - component: {fileID: 588561972}
+  - component: {fileID: 588561971}
+  - component: {fileID: 588561970}
   m_Layer: 0
   m_Name: damage_area_medium(Clone)
   m_TagString: Area
@@ -773,13 +433,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &867280826
+--- !u!65 &588561970
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 867280825}
+  m_GameObject: {fileID: 588561969}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -794,27 +454,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6.45, y: 1, z: 2.47}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &867280827
+--- !u!114 &588561971
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 867280825}
+  m_GameObject: {fileID: 588561969}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7f0c23c69c7a71b4c9457746257ce8c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   areaShowColor: {r: 0.033018887, g: 1, b: 0.9804577, a: 1}
-  areaCollider: {fileID: 867280826}
---- !u!4 &867280828
+  areaCollider: {fileID: 588561970}
+--- !u!4 &588561972
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 867280825}
+  m_GameObject: {fileID: 588561969}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -823,7 +483,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1384839930
+--- !u!1 &805571797
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -831,9 +491,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1384839933}
-  - component: {fileID: 1384839932}
-  - component: {fileID: 1384839931}
+  - component: {fileID: 805571800}
+  - component: {fileID: 805571799}
+  - component: {fileID: 805571798}
   m_Layer: 0
   m_Name: damage_area_huge(Clone)
   m_TagString: Area
@@ -841,27 +501,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1384839931
+--- !u!114 &805571798
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1384839930}
+  m_GameObject: {fileID: 805571797}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7f0c23c69c7a71b4c9457746257ce8c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   areaShowColor: {r: 0.990566, g: 0.16353682, b: 0.16353682, a: 1}
-  areaCollider: {fileID: 1384839932}
---- !u!65 &1384839932
+  areaCollider: {fileID: 805571799}
+--- !u!65 &805571799
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1384839930}
+  m_GameObject: {fileID: 805571797}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -876,16 +536,84 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: -18.04522, y: 1, z: 11}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!4 &1384839933
+--- !u!4 &805571800
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1384839930}
+  m_GameObject: {fileID: 805571797}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.15, y: -0.89, z: 0.55}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1568114657
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1568114660}
+  - component: {fileID: 1568114659}
+  - component: {fileID: 1568114658}
+  m_Layer: 0
+  m_Name: damage_area_medium(Clone)
+  m_TagString: Area
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1568114658
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568114657}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6.45, y: 1, z: 2.47}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1568114659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568114657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f0c23c69c7a71b4c9457746257ce8c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaShowColor: {r: 0.033018887, g: 1, b: 0.9804577, a: 1}
+  areaCollider: {fileID: 1568114658}
+--- !u!4 &1568114660
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568114657}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1197,6 +925,74 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1796367379
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1796367382}
+  - component: {fileID: 1796367381}
+  - component: {fileID: 1796367380}
+  m_Layer: 0
+  m_Name: damage_area_bullet(Clone)
+  m_TagString: Area
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!135 &1796367380
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796367379}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.25
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1796367381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796367379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f0c23c69c7a71b4c9457746257ce8c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaShowColor: {r: 0.9990006, g: 0.2117647, b: 1, a: 1}
+  areaCollider: {fileID: 1796367380}
+--- !u!4 &1796367382
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796367379}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1818173256
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1275,6 +1071,142 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b59cc3dd78591d41a04987297df8b10, type: 3}
+--- !u!1 &1835091495
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1835091498}
+  - component: {fileID: 1835091497}
+  - component: {fileID: 1835091496}
+  m_Layer: 0
+  m_Name: damage_area_big(Clone)
+  m_TagString: Area
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1835091496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1835091495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f0c23c69c7a71b4c9457746257ce8c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaShowColor: {r: 0.8773585, g: 0.82624495, b: 0.028969401, a: 1}
+  areaCollider: {fileID: 1835091497}
+--- !u!65 &1835091497
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1835091495}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 18, y: 1, z: 3}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1835091498
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1835091495}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.1, y: -0.89, z: -7.79}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1928693132
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1928693135}
+  - component: {fileID: 1928693134}
+  - component: {fileID: 1928693133}
+  m_Layer: 0
+  m_Name: damage_area_huge(Clone)
+  m_TagString: Area
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1928693133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1928693132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f0c23c69c7a71b4c9457746257ce8c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaShowColor: {r: 0.990566, g: 0.16353682, b: 0.16353682, a: 1}
+  areaCollider: {fileID: 1928693134}
+--- !u!65 &1928693134
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1928693132}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: -18.04522, y: 1, z: 11}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1928693135
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1928693132}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.15, y: -0.89, z: 0.55}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2081332941
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1353,6 +1285,74 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b59cc3dd78591d41a04987297df8b10, type: 3}
+--- !u!1 &2098433530
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2098433533}
+  - component: {fileID: 2098433532}
+  - component: {fileID: 2098433531}
+  m_Layer: 0
+  m_Name: damage_area_small(Clone)
+  m_TagString: Area
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2098433531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098433530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f0c23c69c7a71b4c9457746257ce8c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaShowColor: {r: 0.21226418, g: 1, b: 0.2321186, a: 1}
+  areaCollider: {fileID: 2098433532}
+--- !u!65 &2098433532
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098433530}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.5, y: 1, z: 1.95}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &2098433533
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098433530}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.38, y: -0.58, z: -7.93}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5728603060227987967
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1482,47 +1482,47 @@ PrefabInstance:
         type: 3}
       propertyPath: spawnedAreasObj.Array.data[0]
       value: 
-      objectReference: {fileID: 622411541}
+      objectReference: {fileID: 203773736}
     - target: {fileID: 411539302595325670, guid: 53b15abc96c17da408ab733de7d404b0,
         type: 3}
       propertyPath: spawnedAreasObj.Array.data[1]
       value: 
-      objectReference: {fileID: 576027455}
+      objectReference: {fileID: 1796367379}
     - target: {fileID: 411539302595325670, guid: 53b15abc96c17da408ab733de7d404b0,
         type: 3}
       propertyPath: spawnedAreasObj.Array.data[2]
       value: 
-      objectReference: {fileID: 210189765}
+      objectReference: {fileID: 588561969}
     - target: {fileID: 411539302595325670, guid: 53b15abc96c17da408ab733de7d404b0,
         type: 3}
       propertyPath: spawnedAreasObj.Array.data[3]
       value: 
-      objectReference: {fileID: 546058385}
+      objectReference: {fileID: 2098433530}
     - target: {fileID: 411539302595325670, guid: 53b15abc96c17da408ab733de7d404b0,
         type: 3}
       propertyPath: spawnedAreasObj.Array.data[4]
       value: 
-      objectReference: {fileID: 634668027}
+      objectReference: {fileID: 1835091495}
     - target: {fileID: 411539302595325670, guid: 53b15abc96c17da408ab733de7d404b0,
         type: 3}
       propertyPath: spawnedAreasObj.Array.data[5]
       value: 
-      objectReference: {fileID: 468104017}
+      objectReference: {fileID: 206078144}
     - target: {fileID: 411539302595325670, guid: 53b15abc96c17da408ab733de7d404b0,
         type: 3}
       propertyPath: spawnedAreasObj.Array.data[6]
       value: 
-      objectReference: {fileID: 261387883}
+      objectReference: {fileID: 1928693132}
     - target: {fileID: 411539302595325670, guid: 53b15abc96c17da408ab733de7d404b0,
         type: 3}
       propertyPath: spawnedAreasObj.Array.data[7]
       value: 
-      objectReference: {fileID: 1384839930}
+      objectReference: {fileID: 805571797}
     - target: {fileID: 411539302595325670, guid: 53b15abc96c17da408ab733de7d404b0,
         type: 3}
       propertyPath: spawnedAreasObj.Array.data[8]
       value: 
-      objectReference: {fileID: 867280825}
+      objectReference: {fileID: 1568114657}
     - target: {fileID: 411539302595325670, guid: 53b15abc96c17da408ab733de7d404b0,
         type: 3}
       propertyPath: template_delayed.payloadValue
@@ -1604,12 +1604,12 @@ SceneRoots:
   - {fileID: 1818173256}
   - {fileID: 35095821}
   - {fileID: 2081332941}
-  - {fileID: 622411544}
-  - {fileID: 576027458}
-  - {fileID: 210189768}
-  - {fileID: 546058388}
-  - {fileID: 634668030}
-  - {fileID: 468104020}
-  - {fileID: 261387886}
-  - {fileID: 1384839933}
-  - {fileID: 867280828}
+  - {fileID: 203773739}
+  - {fileID: 1796367382}
+  - {fileID: 588561972}
+  - {fileID: 2098433533}
+  - {fileID: 1835091498}
+  - {fileID: 206078147}
+  - {fileID: 1928693135}
+  - {fileID: 805571800}
+  - {fileID: 1568114660}

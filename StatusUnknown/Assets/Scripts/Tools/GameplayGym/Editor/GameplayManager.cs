@@ -18,10 +18,10 @@ namespace StatusUnknown.CoreGameplayContent
     public class GameplayManager : MonoBehaviour, INotifyValueChanged<bool>
     {
         #region Data
-        [Header("General")]
+        [Header("Build")]
         //[SerializeField] AudioSource source; 
-        [SerializeField] private AbilityConfigSO_Base[] buildToSimulate; 
-        private int buildToSimulatePreviousLength; 
+        [SerializeField] private AbilityConfigSO_Base[] buildToSimulate; // Hybrid
+        private int buildToSimulatePreviousLength; // Hybrid
 
         [SerializeField] private string buildSaveName = "Build_Playstyle_Num"; 
         private const int DELAY_BETWEEN_ABILITIES = 1;
@@ -30,7 +30,6 @@ namespace StatusUnknown.CoreGameplayContent
         private int damageCounter;
         public static Action OnSimulationDone;
 
-        [Header("Build")]
         [Space, SerializeField] private CombatSimulatorSO customBuildSO;
         [SerializeField] private bool useCustomBuildSO;
         public bool value
@@ -50,7 +49,7 @@ namespace StatusUnknown.CoreGameplayContent
         } // Editor
 
         private CombatSimulatorSO simulatorInstance;
-        [SerializeField] private List<GameObject> spawnedAreasObj = new List<GameObject>();  
+        [HideInInspector, SerializeField] private List<GameObject> spawnedAreasObj = new List<GameObject>(); // Hybrid
 
         GameObject currentActiveAreaObj; // Runtime
         private List<Enemy> currentEnemiesInArea; // Runtime
@@ -69,13 +68,14 @@ namespace StatusUnknown.CoreGameplayContent
         [Header("Encounter")]
         [Space, SerializeField] private EnemyEncounterConfigSO EnemyEncounterSO;
         [SerializeField] private string encounterSaveName = "Encounter_Difficulty_Num";
+        [HideInInspector, SerializeField] private GameObject[] prefab_enemy = new GameObject[3];
 
         [Header("UI")]
-        [SerializeField] private TMP_Text totalDamage_UI;
-        [SerializeField] private GameplayDataSO gameplayDataSO; 
+        [HideInInspector, SerializeField] private TMP_Text totalDamage_UI;
+        [HideInInspector, SerializeField] private GameplayDataSO gameplayDataSO; 
 
-        [Header("Save & Load")]
-        [SerializeField] private GameObject[] prefab_enemy = new GameObject[3];
+        [Header("-- DEBUG --")]
+        [SerializeField, Tooltip("If you deleted some areas by mistake")] private bool refreshAllAreas;
         private const string LOG_ERROR_OVERWRITE_ENCOUNTER =
             "Encounter could not be saved. Please provide a valid name (different from \"Encounter_Difficulty_Num\"). \n" +
             "If you want to overwrite an existing encounter, use the same name in the \"Encounter Save Name\" field.";
@@ -86,9 +86,6 @@ namespace StatusUnknown.CoreGameplayContent
 
         private const string LOG_ERROR_ENCOUNTER_NULL = "Could not generate encounter. Make sure the \"Enemy Encounter SO\" field is not empty.";
         private const string LOG_ERROR_BUILD_NULL = "No abilities were found on your \"buildToSimulate\" array.";
-
-        [Header("-- DEBUG --")]
-        [SerializeField, Tooltip("If you deleted some areas by mistake")] private bool refreshAllAreas; 
         #endregion
 
         #region Unity Callbacks
@@ -96,26 +93,26 @@ namespace StatusUnknown.CoreGameplayContent
         {
             if (EditorApplication.isPlayingOrWillChangePlaymode) return;
             
-            value = useCustomBuildSO; // avoid raw OnValidate calls like this on
-
-            // From Play to Editor
-            if (gameplayDataSO.MustRefreshAreasObj || refreshAllAreas)
+            if (refreshAllAreas)
             {
-                gameplayDataSO.MustRefreshAreasObj = false;
-                Debug.Log(EditorApplication.isPlaying); 
-                if (gameplayDataSO.ExitedPlayMode)
-                {
-                    //spawnedAreasObj = GameObject.FindGameObjectsWithTag("Area").ToList(); // going to need a better solution
-                }
+                value = useCustomBuildSO; 
 
+                refreshAllAreas = false;
+                gameplayDataSO.MustRefreshAreasObj = false; 
                 RefreshDamageAreaStack();
                 return;
+            }
+
+            if (gameplayDataSO.ExitedPlayMode)
+            {
+                gameplayDataSO.ExitedPlayMode = false;
+                buildToSimulatePreviousLength = buildToSimulate.Length; 
             }
 
             // when going from play to edit, only way to avoid refreshing.. ?
             if (EditorApplication.isCompiling ||
                 EditorApplication.isUpdating ||
-                GameObject.FindGameObjectsWithTag("Area").Length == buildToSimulate.Length) 
+                buildToSimulatePreviousLength == buildToSimulate.Length) 
                 return;
 
             // In Editor
@@ -319,7 +316,7 @@ namespace StatusUnknown.CoreGameplayContent
                 }
             }
 
-            Debug.Log("damage"); 
+            //Debug.Log("damage"); 
         }
 
         private void OnDamageDone()
@@ -449,13 +446,13 @@ namespace StatusUnknown.CoreGameplayContent
             }
 
             Debug.Log("refreshing damage area stack");
+            gameplayDataSO.MustRefreshAreasObj = false; 
             gameplayDataSO.ExitedPlayMode = false;
-            refreshAllAreas = false;
 
             int initialCount = spawnedAreasObj.Count;
             for (int i = 0; i < initialCount; i++)
             {
-                Destroy(spawnedAreasObj[i]);
+                DestroyImmediate(spawnedAreasObj[i]);
             } 
 
             spawnedAreasObj.Clear();   
