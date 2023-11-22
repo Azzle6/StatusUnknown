@@ -92,6 +92,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5155307180763057133}
+  - component: {fileID: 4705705109251720256}
+  - component: {fileID: 886411188715322890}
   m_Layer: 0
   m_Name: TPEnd
   m_TagString: Untagged
@@ -108,13 +110,73 @@ Transform:
   m_GameObject: {fileID: 396947091491914596}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.54, y: 0, z: 0}
+  m_LocalPosition: {x: 9.17, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4266790733731977731}
   m_Father: {fileID: 4929626677914393936}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &4705705109251720256
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396947091491914596}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &886411188715322890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396947091491914596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec2aa31c14f070b4c8ea0a172786889a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goal: {fileID: 2573885755701024484}
+  onCD: 0
+  interactInput:
+    m_Name: Interact Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: c4d7032d-c9ba-4fef-82ba-39d8b2c2c240
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: a61f89aa-568f-4f40-9859-8e598339aebe
+      m_Path: <Keyboard>/e
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Interact Input
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 65c7c604-9ae4-487e-b39a-d00ae668c242
+      m_Path: <Gamepad>/buttonSouth
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Interact Input
+      m_Flags: 0
+    m_Flags: 0
 --- !u!1 &2573885755701024484
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,7 +231,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.1, y: 2, z: 2}
+  m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8406777398918165394
 MonoBehaviour:
@@ -183,7 +245,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec2aa31c14f070b4c8ea0a172786889a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goal: {fileID: 5155307180763057133}
+  goal: {fileID: 396947091491914596}
+  onCD: 0
+  interactInput:
+    m_Name: Interact Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: c4d7032d-c9ba-4fef-82ba-39d8b2c2c240
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: a61f89aa-568f-4f40-9859-8e598339aebe
+      m_Path: <Keyboard>/e
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Interact Input
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 65c7c604-9ae4-487e-b39a-d00ae668c242
+      m_Path: <Gamepad>/buttonSouth
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Interact Input
+      m_Flags: 0
+    m_Flags: 0
 --- !u!1 &4625937260974807821
 GameObject:
   m_ObjectHideFlags: 0

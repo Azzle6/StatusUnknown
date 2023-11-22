@@ -1,25 +1,52 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Player;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Teleporter : MonoBehaviour
 {
-    public Transform goal;
-    // Start is called before the first frame update
-    void Start()
+    public GameObject goal;
+    public bool onCD = false;
+    public InputAction interactInput;
+    private GameObject player;
+
+    private void Start()
     {
-        
+        interactInput.Disable();
     }
 
-    // Update is called once per frame
+    private void Update()
+    {
+        if (interactInput.IsPressed() && onCD == false)
+        {
+            onCD = true;
+            goal.GetComponent<Teleporter>().onCD = true;
+            player.GetComponent<Transform>().position = goal.transform.position;
+            StartCoroutine("Cooldown");
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name == "Player" )
+        interactInput.Enable();
+        if (other.name == "Player" && onCD==false)
         {
-            Transform player = other.GetComponent<Transform>();
-            player.position = goal.position;
+            player = other.GameObject();
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        interactInput.Disable();
+    }
+
+    IEnumerator Cooldown()
+    {
+        yield return new WaitForSeconds(3);
+        onCD = false;
+        goal.GetComponent<Teleporter>().onCD = false;
     }
 }
