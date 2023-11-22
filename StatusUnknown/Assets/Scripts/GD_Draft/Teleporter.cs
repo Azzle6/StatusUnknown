@@ -12,6 +12,7 @@ public class Teleporter : MonoBehaviour
     public bool onCD = false;
     public InputAction interactInput;
     private GameObject player;
+    public GameObject canvas;
 
     private void Start()
     {
@@ -32,7 +33,8 @@ public class Teleporter : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         interactInput.Enable();
-        if (other.name == "Player" && onCD==false)
+        canvas.SetActive(true);
+        if (other.name == "Player")
         {
             player = other.GameObject();
         }
@@ -41,6 +43,7 @@ public class Teleporter : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         interactInput.Disable();
+        canvas.SetActive(false);
     }
 
     IEnumerator Cooldown()
