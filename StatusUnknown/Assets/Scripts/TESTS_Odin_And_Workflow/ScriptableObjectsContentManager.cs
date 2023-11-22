@@ -5,6 +5,17 @@ using System.Linq;
 using Object = UnityEngine.Object;
 using StatusUnknown.CoreGameplayContent;
 
+// -- PROTOTYPING GOALS --
+// A set of centralised Editor Windows to quickly manipulate : gameplay data, audio, visuals, animations, etc..
+    // And navigate through complex design content like :
+        // Weapons & Modules
+        // Enemies
+        // NPCs
+        // The Player Character (3Cs)
+
+// A (set of) centralised window(s) to quickly create/edit/import/export gameplay data from or to spreadsheet
+// A (set of) centralised window(s) to quickly edit/import data from design documents (notion)
+
 namespace StatusUnknown.Utils.AssetManagement
 {
     public enum PatternMatchingRule { [HideInInspector] NONE = -1, ShortName, LongName }
