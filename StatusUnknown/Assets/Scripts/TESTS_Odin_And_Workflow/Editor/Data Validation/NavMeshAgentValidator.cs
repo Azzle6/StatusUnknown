@@ -3,7 +3,7 @@ using Sirenix.OdinInspector.Editor.Validation;
 using UnityEngine; 
 using UnityEngine.AI;
 
-[assembly: RegisterValidator(typeof(NavMeshAgentValidator))]
+//[assembly: RegisterValidator(typeof(NavMeshAgentValidator))]
 
 public class NavMeshAgentValidator : RootObjectValidator<NavMeshAgent>
 {

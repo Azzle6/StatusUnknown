@@ -5,7 +5,7 @@ using UnityEngine;
 
 // https://odininspector.com/documentation/sirenix.odininspector.editor.validation.validationresult
 // https://odininspector.com/documentation/sirenix.odininspector.editor.validation.resultitem
-[assembly: RegisterValidationRule(typeof(GameobjectNeedsCollider))]
+//[assembly: RegisterValidationRule(typeof(GameobjectNeedsCollider))]
 public class GameobjectNeedsCollider : RootObjectValidator<GameObject>
 {
     public Vector3 center;

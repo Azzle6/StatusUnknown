@@ -20,13 +20,21 @@ namespace StatusUnknown.CoreGameplayContent
 
     public class AbilityConfigSO_Base : ScriptableObject
     {
-        [SerializeField] protected EAbilityType abilityType = EAbilityType.Offense; 
-        [SerializeField, Range(1, 100)] protected int payloadValue;
+        [SerializeField] protected EAbilityType abilityType = EAbilityType.Offense; // editor only
+        [SerializeField, Range(0, 100)] protected int payloadValue; 
 
         [Space, SerializeField] protected GameObject effectArea;
+        public EAbilityType AbilityType { get; set; }
         public EPayloadType PayloadType { get; protected set; }
 
         protected AbilityInfos AbilityInfos { get; set; }
+
+        public AbilityConfigSO_Base() { }
+
+        public AbilityConfigSO_Base(AbilityInfos ObjectInitializer)
+        {
+            AbilityInfos = ObjectInitializer;
+        }
 
         public virtual (AbilityInfos infos, AbilityConfigSO_Base so) GetAbilityData()
         {
@@ -47,6 +55,7 @@ namespace StatusUnknown.CoreGameplayContent
         }
 
         public virtual AbilityInfos GetAbilityInfos() => AbilityInfos;
-        public virtual GameObject GetArea() => effectArea; 
+        public virtual GameObject GetArea() => effectArea;
+        public virtual void SetArea(GameObject area) {effectArea = area; } 
     }
 }

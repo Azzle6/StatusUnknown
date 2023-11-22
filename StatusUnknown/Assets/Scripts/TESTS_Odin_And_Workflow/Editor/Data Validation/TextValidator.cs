@@ -1,6 +1,6 @@
 using Sirenix.OdinInspector.Editor.Validation;
 
-[assembly: RegisterValidator(typeof(TextValidator))]
+//[assembly: RegisterValidator(typeof(TextValidator))]
 public class TextValidator : RootObjectValidator<UnityEngine.UI.Text>
 {
     protected override void Validate(ValidationResult result)
