@@ -12,6 +12,7 @@ namespace StatusUnknown.Utils
     {
         public static class StatusUnknown_AssetManager
         {
+            public static string SAVE_PATH_BUILD = "Assets/Data/Gameplay/Combat/Simulators/";
             public static string SAVE_PATH_ABILITY = "Assets/Data/Gameplay/Combat/Abilities/";
             public static string SAVE_PATH_ENCOUNTER = "Assets/Data/Gameplay/Combat/Encounters/";
             public static string SAVE_PATH_PREFABS = "Assets/Prefabs/"; 
