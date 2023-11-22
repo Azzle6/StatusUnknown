@@ -24,7 +24,7 @@ namespace VectorField
         const float linkAngle = 70;
         const float linkHeight = 1f;
         public static Dictionary<Vector3, Node> NodeField;
-
+        public static bool isActive {  get { return NodeField != null && NodeField.Count > 0; } }
 
         public static Vector3 PositionToBoundPosition(Vector3 position)
         {

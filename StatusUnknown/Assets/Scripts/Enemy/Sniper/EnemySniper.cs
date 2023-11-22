@@ -1,14 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
-public class EnemySwarmi : EnemyContext
+public class EnemySniper : EnemyContext
 {
-
+    public SniperStats sniperStats;
+    public LayerMask obstacleMask;
     [Range(0f, 1f)]
     public float hit = 0;
     public float hitFreq = 1;
+
+    [Header("Shoot")]
+    public GameObject bulletPrefab;
+
+    
+    [field: SerializeField] public Transform shootingPoint {  get; private set; }
+    
+    public override EnemyStats stats => sniperStats;
+    private void Start()
+    {
+        InitializeEnemy();
+        SwitchState(new SniperIdle());
+    }
 
     protected override void EnemyTakeDamage(float damage, Vector3 force)
     {
@@ -25,7 +38,7 @@ public class EnemySwarmi : EnemyContext
         {
             //Debug.Log($"blink {startTime}, {Time.time}, {startTime - Time.time}, {speed}");
             hit = Mathf.PingPong(Time.time / hitFreq, 1);
-            meshRenderer.material.SetFloat("_Hit", 1);// debug hit
+            meshRenderer?.material?.SetFloat("_Hit", 1);// debug hit
             yield return null;
         }
         hit = 0;
@@ -33,12 +46,4 @@ public class EnemySwarmi : EnemyContext
         yield return null;
 
     }
-
-    protected override void InitializeEnemy()
-    {
-        base.InitializeEnemy();
-        SwitchState(new SwarmiIdle());
-    }
-
-
 }
