@@ -13,6 +13,7 @@ namespace Weapon
         public Animator playerAnimator;
         public Weapon[] weapons;
         public WeaponVariableSO[] weaponsSO;
+        public FloatVariableSO[] weaponsAmmoSO;
         public int currentWeaponIndex;
         [SerializeField] private PlayerStat playerStat;
         public EnemyStatusHandler enemyStatusHandler;
@@ -20,6 +21,7 @@ namespace Weapon
         public Transform rHandTr;
         public Rig rigLHand;
         public Rig rigRHand;
+        public FloatVariableSO[] currentAmmoWeapon;
     
         private void Awake()
         {
@@ -28,7 +30,9 @@ namespace Weapon
 
         private void InitWeaponManager()
         {
-
+            for (int x = 0; x < weapons.Length; x++)
+                EquipWeapon(x, weapons[x]);
+            
             currentWeaponIndex = 1;
             playerStat.currentWeaponIsMelee = CheckIfMeleeWeapon(0);
             SwitchWeapon(0);
@@ -36,7 +40,7 @@ namespace Weapon
             if (weapons[0].TryGetComponent(out RangedWeapon rangedWeapon))
                 rangedWeapon.RestWeapon();
 
-            for (int x = 0; x < weapons.Length; x++)
+            for (int x = 0; x < weapons.Length - 1; x++)
                 weaponsSO[x].Value = weapons[x];
 
         }
@@ -46,6 +50,11 @@ namespace Weapon
             weapons[weaponNo] = weapon;
             weapons[weaponNo].weaponManager = this;
             weaponsSO[weaponNo].Value = weapon;
+            if (weapon.TryGetComponent(out RangedWeapon rangedWeapon))
+            {
+                rangedWeapon.currentAmmo = currentAmmoWeapon[weaponNo];
+                currentAmmoWeapon[weaponNo].Value = ((RangedWeapon) weapon).GetMagazineSize();
+            }
         }
         
         public void PressTriggerWeapon(int weaponNo)
@@ -70,6 +79,7 @@ namespace Weapon
                 playerStateInterpretor.animator.SetLayerWeight(2,0);
                 playerStateInterpretor.animator.SetLayerWeight(1,1);
                 playerStat.currentWeaponIsMelee = false;
+                ReturnIfRangedWeapon(weaponNo).currentAmmo = currentAmmoWeapon[weaponNo];
             }
                 
             weapons[currentWeaponIndex].Switched(playerAnimator, false);

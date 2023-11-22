@@ -1,9 +1,7 @@
 namespace Weapon
 {
-    using System.Collections;
-    using System.Collections.Generic;
+    using Core.VariablesSO.VariableTypes;
     using DG.Tweening;
-    using Player;
     using UnityEngine;
     
     public abstract class RangedWeapon : Weapon
@@ -12,6 +10,8 @@ namespace Weapon
         public Transform adsRotTr;
         public float adsAimAngle;
         public float adsRestAngle;
+        public FloatVariableSO currentAmmo;
+
     
         public virtual void AimWithCurrentWeapon()
         {
@@ -23,6 +23,7 @@ namespace Weapon
             adsRotTr.DOLocalRotate(new Vector3(adsRestAngle,0,0), 0.1f);
         }
         
+        public abstract float GetMagazineSize();
         public abstract void Reload(Animator playerAnimator);
 
     }

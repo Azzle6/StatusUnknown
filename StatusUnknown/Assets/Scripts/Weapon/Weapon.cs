@@ -7,6 +7,7 @@ namespace Weapon
         public WeaponManager weaponManager;
         public PlayerStat playerStat;
         public Sprite weaponSprite;
+        public WeaponType weaponType;
         
         
         public abstract void ActionPressed();
@@ -23,3 +24,8 @@ namespace Weapon
 
 }
 
+public enum WeaponType
+{
+    MELEE,
+    RANGED
+}

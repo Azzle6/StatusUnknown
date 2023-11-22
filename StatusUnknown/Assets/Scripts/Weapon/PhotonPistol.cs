@@ -1,5 +1,7 @@
 
 
+using Core.VariablesSO.VariableTypes;
+
 namespace Weapon
 {
     using System.Collections;
@@ -24,11 +26,10 @@ namespace Weapon
         private bool isInCD;
         private float cdTimer;
         private bool isReloading;
-        private float currentAmmo;
         
         private void Awake()
         {
-            currentAmmo = stat.magazineSize;
+            currentAmmo.Value = stat.magazineSize;
             initMeshPos = mesh.localPosition;
         }
 
@@ -54,7 +55,7 @@ namespace Weapon
                 return;
             }
             
-            if ((charging != default) || (isReloading) || (currentAmmo <= 0))
+            if ((charging != default) || (isReloading) || (currentAmmo.Value <= 0))
                 return;
             tempProjectile = Pooler.Instance.GetPooledObject(stat.projectilePrefab.name);
             charging = StartCoroutine(Charge());
@@ -116,7 +117,12 @@ namespace Weapon
             
             tempProjectile = default;
             charging = default;
-            currentAmmo--;
+            currentAmmo.Value--;
+        }
+
+        public override float GetMagazineSize()
+        {
+            return stat.magazineSize;
         }
 
         public override void Reload(Animator playerAnimator)
@@ -150,7 +156,7 @@ namespace Weapon
         {
             isReloading = true;
             yield return new WaitForSeconds(stat.reloadTime);
-            currentAmmo = stat.magazineSize;
+            currentAmmo.Value = stat.magazineSize;
             isReloading = false;
             weaponManager.rigLHand.weight = 1;
             weaponManager.rigRHand.weight = 1;
