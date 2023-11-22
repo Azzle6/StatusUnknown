@@ -92,28 +92,27 @@ namespace StatusUnknown.CoreGameplayContent
         private void OnValidate()
         {
             if (EditorApplication.isPlayingOrWillChangePlaymode) return;
-            
+
             if (refreshAllAreas)
             {
-                value = useCustomBuildSO; 
-
                 refreshAllAreas = false;
                 gameplayDataSO.MustRefreshAreasObj = false; 
                 RefreshDamageAreaStack();
                 return;
             }
 
-            if (gameplayDataSO.ExitedPlayMode)
+            if (!gameplayDataSO.ExitedPlayMode && !EditorApplication.isUpdating)
+            {
+                value = useCustomBuildSO;
+            }
+            else 
             {
                 gameplayDataSO.ExitedPlayMode = false;
-                buildToSimulatePreviousLength = buildToSimulate.Length; 
+                buildToSimulatePreviousLength = buildToSimulate.Length;
             }
 
             // when going from play to edit, only way to avoid refreshing.. ?
-            if (EditorApplication.isCompiling ||
-                EditorApplication.isUpdating ||
-                buildToSimulatePreviousLength == buildToSimulate.Length) 
-                return;
+            if (EditorApplication.isCompiling || buildToSimulatePreviousLength == buildToSimulate.Length)  return;
 
             // In Editor
             if (buildToSimulatePreviousLength != buildToSimulate.Length && buildToSimulate.Length >= 0)
