@@ -2,7 +2,6 @@ using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using System;
 using Object = UnityEngine.Object;
 using StatusUnknown.CoreGameplayContent;
 
