@@ -309,7 +309,6 @@ GameObject:
   - component: {fileID: 2500451279866134106}
   - component: {fileID: 6335809419093036229}
   - component: {fileID: 2634050141920352704}
-  - component: {fileID: 5215797253703118170}
   m_Layer: 0
   m_Name: LeftSlide
   m_TagString: Untagged
@@ -382,27 +381,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5215797253703118170
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6911993418110885276}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7027066290519957958
 GameObject:
   m_ObjectHideFlags: 0
@@ -414,7 +392,6 @@ GameObject:
   - component: {fileID: 260958700636508526}
   - component: {fileID: 8362463439330451751}
   - component: {fileID: 7492781735564066618}
-  - component: {fileID: 2362080870240891823}
   m_Layer: 0
   m_Name: RightSlide
   m_TagString: Untagged
@@ -487,27 +464,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2362080870240891823
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7027066290519957958}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8747904695700131881
 GameObject:
   m_ObjectHideFlags: 0
@@ -521,7 +477,7 @@ GameObject:
   - component: {fileID: 6942011116405257443}
   - component: {fileID: 6916193076439497931}
   m_Layer: 0
-  m_Name: DoorProto
+  m_Name: AutoDoorProto
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
