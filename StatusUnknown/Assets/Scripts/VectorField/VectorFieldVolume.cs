@@ -56,7 +56,7 @@ namespace VectorField
         void UpdateFlowField()
         {
             VectorFieldNavigator.SetTargetDistance(target.position, data.NodeField);
-            worldTargetNode = VectorFieldNavigator.WorlPositiondToNode(target.position, data.NodeField, 2);
+            worldTargetNode = VectorFieldNavigator.WorldPositiondToNode(target.position, data.NodeField, 2);
         }
     }
 #if UNITY_EDITOR
