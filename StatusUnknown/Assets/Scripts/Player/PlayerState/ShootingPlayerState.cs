@@ -3,7 +3,7 @@ namespace Player
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
-
+    using Weapon;
     public class ShootingPlayerState : PlayerState
     {
         private Coroutine shooting;
@@ -42,29 +42,38 @@ namespace Player
 
         public override void OnStateEnter()
         {
-            shooting = StartCoroutine(Shoot());
-            playerStat.isShooting = true;
+            
         }
         
         public override void Behave<T>(T x)
         {
             if (x is int weapon)
                 weaponNo = weapon;
+            
+            weaponManager.SwitchWeapon(weaponNo);
 
-            if (shooting == default)
-                shooting = StartCoroutine(Shoot());
+            if (playerStat.currentWeaponIsMelee)
+            {
+                shooting = null;
+                playerStateInterpretor.AddState("MeleeCastPlayerState", PlayerStateType.ACTION, true);
+            }
+            else
+            {
+                playerStat.isShooting = true;
+                if (shooting == default)
+                {
+                    shooting = StartCoroutine(Shoot());
+                }
+            }
         }
         
         private IEnumerator Shoot()
         {
-            while (playerStat.isShooting)
+            while (playerStat.isShooting)// && playerStat.weaponMelee[weaponNo] == false)
             {
                 FrustrumCulling();
                 DetermineClosestTarget();
                 Fire();
-                //need to check if gun is automatic or not
-                //need to check for the gun fire rate 
-                //need to check for the gun ammo
                 yield return null;
             }
         }
@@ -132,7 +141,10 @@ namespace Player
         {
             weaponManager.ReleaseTriggerWeapon();
             if (shooting != default)
+            {
                 StopCoroutine(shooting);
+                shooting = default;
+            }
             playerStat.isShooting = false;
         }
         

@@ -32,19 +32,15 @@ namespace Player
             
             RaycastMouseToGround();
         }
-
         
-         
         public override void Behave<T>(T x)
         {
             if (x is Vector2 aim)
                 aimDirection = aim;
             if (aiming == default)
                 aiming = StartCoroutine(Aim());
-            
-            
-
         }
+        
         private IEnumerator CheckIfStopAiming()
         {
             yield return new WaitForSeconds(playerStat.timeBeforeStopAiming);

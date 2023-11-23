@@ -11,7 +11,7 @@ namespace Player
             Debug.Log("Augment");
         }
 
-        public void Behave<T>(T x)
+        public override void Behave<T>(T x)
         {
             if (x is int index)
             {

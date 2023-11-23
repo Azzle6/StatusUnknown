@@ -1,3 +1,5 @@
+using System.Reflection;
+
 namespace Player
 {
     using UnityEngine;
@@ -140,6 +142,10 @@ namespace Player
     
         public void OnMedkit(InputAction.CallbackContext ctx)
         {            
+            if (ctx.started)
+            {
+                playerStateInterpretor.AddState("MedikitPlayerState", PlayerStateType.ACTION,false);
+            }
         }
     
         public void OnInteract(InputAction.CallbackContext ctx)
@@ -193,6 +199,7 @@ namespace Player
     
         public void OnWeapon(InputAction.CallbackContext ctx, int weaponNo)
         {
+            
             if (ctx.started)
             {
                 if (playerStateInterpretor.statesSlot[PlayerStateType.AIM] == null)
@@ -221,7 +228,9 @@ namespace Player
 
             if (ctx.canceled)
             {
-                playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
+                if (!playerStat.currentWeaponIsMelee)
+                    playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
+                
                 if (deviceLog.currentDevice == DeviceType.GAMEPAD)
                 {
                     if (aimDirection != Vector2.zero)
