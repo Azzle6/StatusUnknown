@@ -79,6 +79,7 @@ GameObject:
   - component: {fileID: 1123838191667012415}
   - component: {fileID: 2214394824114764607}
   - component: {fileID: 8748143321681919880}
+  - component: {fileID: 5944730163289528001}
   m_Layer: 7
   m_Name: EnemySniper
   m_TagString: Untagged
@@ -249,6 +250,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5944730163289528001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3926380311748740003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b60d0250c286e7847a621af8d3e966f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  morphEggPrefab: {fileID: 8233590218045599866, guid: 7c6ed457da3fe6240876f1a3b266a884, type: 3}
+  startMorphEvent: {fileID: 11400000, guid: 93391f52dc2a3bb4ca7cb9f104e46d9a, type: 2}
+  morphTimer: 20
+  timerRandomness: 0.5
+  morphing: 0
 --- !u!1 &4681897508976779984
 GameObject:
   m_ObjectHideFlags: 0

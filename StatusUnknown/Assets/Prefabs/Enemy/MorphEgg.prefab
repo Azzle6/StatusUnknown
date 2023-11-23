@@ -8697,7 +8697,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4482178666351451586}
   - component: {fileID: 3868124773786947283}
-  m_Layer: 0
+  - component: {fileID: 4688777333352920596}
+  m_Layer: 7
   m_Name: MorphEgg
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -8732,5 +8733,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e0bb55bbb68fd4db3a517a1b6eeff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  succesEnemyToSpawn: {fileID: 0}
-  failedEnemiesToSpawn: []
+  succesEnemyToSpawn: {fileID: 3926380311748740003, guid: 4b3a5123b10bb6f48bf185606d5795dd, type: 3}
+  failedEnemiesToSpawn:
+  - {fileID: 8449849220990944551, guid: 42638689991654143b0718c2081e3597, type: 3}
+  - {fileID: 8449849220990944551, guid: 42638689991654143b0718c2081e3597, type: 3}
+  meshRenderer: {fileID: 8513228645527226087}
+  endMorphEvent: {fileID: 11400000, guid: 28a33d2d66974e742ab1fdaf3b571d44, type: 2}
+  morphDuration: 10
+  durationRandomness: 1
+  lifePoints: 100
+--- !u!136 &4688777333352920596
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8233590218045599866}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Height: 4
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
