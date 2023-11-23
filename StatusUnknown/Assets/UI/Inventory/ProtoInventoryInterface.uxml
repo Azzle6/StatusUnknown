@@ -1,32 +1,28 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <ui:Template name="InventoryGrid" src="project://database/Assets/UI/Grid/Grid.uxml?fileID=9197481963319205126&amp;guid=d76399139e4e88d4c91451f86a882183&amp;type=3#Grid" />
-    <ui:VisualElement name="InventoryInterface" style="flex-grow: 1; flex-direction: row; background-color: rgb(128, 128, 128);">
-        <ui:VisualElement name="Stats" style="flex-basis: 20%; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%;">
-            <ui:VisualElement name="StatsInfosZone" style="margin-top: 5%; margin-right: 5%; margin-bottom: 5%; margin-left: 5%; background-color: rgb(147, 147, 147); flex-grow: 1;">
+    <Style src="project://database/Assets/UI/Global/GlobalUSS.uss?fileID=7433441132597879392&amp;guid=b957b32707326d646b329444c53afc3b&amp;type=3#GlobalUSS" />
+    <ui:VisualElement name="InventoryInterface" style="flex-direction: row; background-color: rgb(128, 128, 128); height: 100%; flex-grow: 1;">
+        <ui:VisualElement name="Stats" style="padding-top: 1%; padding-right: 1%; padding-bottom: 1%; padding-left: 1%; width: 20%;">
+            <ui:VisualElement name="StatsInfosZone" style="margin-top: 5%; margin-right: 5%; margin-bottom: 5%; margin-left: 5%; background-color: rgb(147, 147, 147);">
                 <ui:Label tabindex="-1" text="Stats :" parse-escape-sequences="true" display-tooltip-when-elided="true" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="WeaponsGrids" style="flex-basis: 40%; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%;">
-            <ui:VisualElement name="WeaponsTabbedMenu" style="flex-grow: 1;">
-                <Style src="project://database/Assets/UI/Global/TabbedMenu/TabbedMenu.uss?fileID=7433441132597879392&amp;guid=3b96a7988fdb52046b3d1e24f9255b3c&amp;type=3#TabbedMenu" />
-                <ui:VisualElement name="tabs">
-                    <ui:Label tabindex="0" text="firstTab" parse-escape-sequences="true" display-tooltip-when-elided="true" name="firstTab" focusable="true" class="tab currentlySelectedTab" />
-                    <ui:Label tabindex="0" text="secondTab" parse-escape-sequences="true" display-tooltip-when-elided="true" name="secondTab" focusable="true" class="tab" />
-                    <ui:Label tabindex="0" text="thirdTab" parse-escape-sequences="true" display-tooltip-when-elided="true" name="thirdTab" focusable="true" class="tab" />
+        <ui:VisualElement name="WeaponsGrids" style="padding-top: 1%; padding-right: 1%; padding-bottom: 1%; padding-left: 1%; width: 40%;">
+            <ui:VisualElement name="weaponSelectionButtons" style="flex-direction: row; background-color: rgb(147, 147, 147); height: 10%;" />
+            <ui:VisualElement name="weaponMenu" style="flex-direction: row; background-color: rgb(147, 147, 147); margin-top: 3%; margin-right: 3%; margin-bottom: 3%; margin-left: 3%; height: 90%;">
+                <ui:VisualElement name="leftSide" style="background-color: rgb(118, 118, 118); align-items: center; justify-content: center; width: 30%;">
+                    <ui:Label tabindex="-1" text="Trigger name" parse-escape-sequences="true" display-tooltip-when-elided="true" name="weaponTriggerName" style="white-space: normal; -unity-text-align: middle-center; -unity-font-style: bold;" />
                 </ui:VisualElement>
-                <ui:VisualElement name="tabContent">
-                    <ui:Label tabindex="-1" text="firstContent" parse-escape-sequences="true" display-tooltip-when-elided="true" name="firstContent">
-                        <ui:VisualElement name="weaponDisplay" style="align-self: center;">
-                            <ui:Instance template="InventoryGrid" name="weaponGrid" />
-                        </ui:VisualElement>
-                    </ui:Label>
-                    <ui:Label tabindex="-1" text="secondContent" parse-escape-sequences="true" display-tooltip-when-elided="true" name="secondContent" class="unselectedContent" />
-                    <ui:Label tabindex="-1" text="thirdContent" parse-escape-sequences="true" display-tooltip-when-elided="true" name="thirdContent" class="unselectedContent" />
+                <ui:VisualElement name="rightSide" style="background-color: rgb(149, 127, 127); width: 70%;">
+                    <ui:VisualElement name="weaponTriggerSelectionButtons" style="flex-direction: row; height: 10%;" />
+                    <ui:VisualElement name="weaponGridDisplayZone" style="height: 90%;">
+                        <ui:Instance template="InventoryGrid" name="weaponGrid" style="align-self: center;" />
+                    </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="Inventory" style="flex-basis: 40%; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%;">
-            <ui:VisualElement name="ModulesInventory" style="flex-grow: 1;">
+        <ui:VisualElement name="Inventory" style="padding-top: 1%; padding-right: 1%; padding-bottom: 1%; padding-left: 1%; height: 100%; width: 40%;">
+            <ui:VisualElement name="ModulesInventory" style="flex-grow: 1; background-color: rgb(147, 147, 147); margin-top: 3%; margin-right: 3%; margin-bottom: 3%; margin-left: 3%;">
                 <ui:VisualElement name="inventoryDisplay" style="align-self: center;">
                     <ui:Instance template="InventoryGrid" name="inventoryGrid" />
                 </ui:VisualElement>
