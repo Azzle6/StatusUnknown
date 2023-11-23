@@ -14,7 +14,7 @@ public class DollEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        player = GameObject.FindWithTag("PLayer");
+        player = GameObject.FindWithTag("Player");
         transform.LookAt(player.transform);
     }
 }
