@@ -5,13 +5,16 @@ using UnityEngine;
 
 public class SpawnerTrigger : MonoBehaviour
 {
-    public ProtoSpawner spawner;
+    public List<ProtoSpawner> spawnerList;
     
     private void OnTriggerEnter(Collider other)
     {
         if (other.name == "Player")
         {
-            spawner.isSpawning = true;
+            for (int i = 0; i < spawnerList.Count; i++)
+            {
+                spawnerList[i].isSpawning = true;
+            }
         }
     }
 }

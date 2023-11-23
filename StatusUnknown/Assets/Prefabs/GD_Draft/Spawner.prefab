@@ -139,7 +139,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4740599350732158441}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bae328f5423bea54c84fae5bb8ad245e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trigger: {fileID: 3345876677484931956}
+  feedback: {fileID: 0}
   spawnPoints:
   - {fileID: 8348903573841781639}
   - {fileID: 8129434906043236479}
@@ -197,7 +197,7 @@ MonoBehaviour:
   - {fileID: 8449849220990944551, guid: 42638689991654143b0718c2081e3597, type: 3}
   - {fileID: 8449849220990944551, guid: 42638689991654143b0718c2081e3597, type: 3}
   - {fileID: 8449849220990944551, guid: 42638689991654143b0718c2081e3597, type: 3}
-  Timer: 10
+  timer: 10
   onCD: 0
   isSpawning: 0
 --- !u!1 &5278667073919503084
