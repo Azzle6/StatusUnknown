@@ -1,4 +1,4 @@
-using StatusUnknown.CoreGameplayContent.VoiceLines;
+using StatusUnknown.Content.VoiceLines;
 using System;
 using UnityEngine;
 using UnityEngine.Networking;

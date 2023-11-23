@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace StatusUnknown.CoreGameplayContent
+namespace StatusUnknown.Content
 {
     public struct AbilityInfos
     {

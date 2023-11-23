@@ -1,4 +1,4 @@
-namespace StatusUnknown.CoreGameplayContent
+namespace StatusUnknown.Content
 {
     public enum EScriptableType
     {

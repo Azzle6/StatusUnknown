@@ -3,7 +3,7 @@ using UnityEngine;
 // later on -> keybindings or any way to automatically create/delete a scriptable object (module, weapon, enemy)
 // prevents having to countlessly navigate through sub-menus to create a scriptableObject
 
-namespace StatusUnknown.CoreGameplayContent
+namespace StatusUnknown.Content
 {
     /// <summary>
     /// Base class for better content creation, management, and browsing. 

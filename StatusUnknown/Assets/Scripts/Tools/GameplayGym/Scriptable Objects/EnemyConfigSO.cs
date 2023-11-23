@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace StatusUnknown.CoreGameplayContent
+namespace StatusUnknown.Content
 {
     [CreateAssetMenu(fileName = "EnemyConfig_Type_Num", menuName = "Status Unknown/Gameplay/Combat/Enemy", order = 4)]
     public class EnemyConfigSO : ScriptableObject

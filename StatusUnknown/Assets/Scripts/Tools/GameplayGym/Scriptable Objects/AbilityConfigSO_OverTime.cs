@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace StatusUnknown.CoreGameplayContent
+namespace StatusUnknown.Content
 {
     [CreateAssetMenu(fileName = "Ability_OverTime_Name", menuName = "Status Unknown/Gameplay/Combat/Ability Over Time")]
     public class AbilityConfigSO_OverTime : AbilityConfigSO_Base

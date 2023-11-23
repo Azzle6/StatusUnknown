@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace StatusUnknown.CoreGameplayContent
+namespace StatusUnknown.Content
 {
     [CreateAssetMenu(fileName = "Ability_Delayed_Name", menuName = "Status Unknown/Gameplay/Combat/Ability Delayed")]
     public class AbilityConfigSO_Delayed : AbilityConfigSO_Base

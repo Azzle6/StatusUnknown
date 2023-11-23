@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace StatusUnknown.CoreGameplayContent
+namespace StatusUnknown.Content
 {
     [CreateAssetMenu(fileName = "EncounterConfig_Difficulty_Num", menuName = "Status Unknown/Gameplay/Combat/Encounter", order = 20)]
     public class EnemyEncounterConfigSO : ScriptableObject

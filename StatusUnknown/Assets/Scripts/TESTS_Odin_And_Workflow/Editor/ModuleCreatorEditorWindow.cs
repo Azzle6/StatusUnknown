@@ -1,6 +1,6 @@
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
-using StatusUnknown.CoreGameplayContent;
+using StatusUnknown.Content;
 using StatusUnknown.Utils.AssetManagement;
 using System;
 using System.Collections.Generic;

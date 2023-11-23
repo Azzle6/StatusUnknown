@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using StatusUnknown.Tools;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
@@ -14,10 +15,10 @@ public class ProjectGeneralInfosSO : SerializedScriptableObject
     [Title("Add New Notes")]
     [SerializeField, OnValueChanged("LoadInfos")] private InfoType infoType;
 
-    [GUIColor("green")]
+    [GUIColor(SU_Tools.COLOR_QOL)]
     [ButtonGroup("Buttons")] private void AddInfos() { }
 
-    [GUIColor("red")]
+    [GUIColor(SU_Tools.COLOR_DANGER)]
     [ButtonGroup("Buttons")] private void RemoveInfos() { } 
 
     private void LoadInfos() { }    

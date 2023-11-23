@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 
-namespace StatusUnknown.CoreGameplayContent.Editors
+namespace StatusUnknown.Content.Editors
 {
     // [CustomEditor(typeof(CombatSimulatorScriptableObject), true)]
     public class CombatSimulatorScriptableObjectEditor : Editor

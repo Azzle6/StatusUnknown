@@ -5,7 +5,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 using Debug = UnityEngine.Debug;
-using StatusUnknown.CoreGameplayContent.VoiceLines;
+using StatusUnknown.Content.VoiceLines;
 
 // api URL https://rapidapi.com/k_1/api/large-text-to-speech
 // app URL https://rapidapi.com/developer/analytics/Status-Unknown-TTS 
@@ -186,7 +186,7 @@ namespace StatusUnknown
     }
 
     // this maybe be added to it's own separate class
-    namespace CoreGameplayContent.VoiceLines
+    namespace Content.VoiceLines
     {
         [Serializable]
         internal class VoiceLines

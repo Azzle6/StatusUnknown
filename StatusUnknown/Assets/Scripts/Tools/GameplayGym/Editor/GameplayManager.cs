@@ -10,7 +10,7 @@ using TMPro;
 using UnityEditor;
 using System.Linq;
 
-namespace StatusUnknown.CoreGameplayContent
+namespace StatusUnknown.Content
 {
     // TODO : split this class to separate Runtime from Editor..
 

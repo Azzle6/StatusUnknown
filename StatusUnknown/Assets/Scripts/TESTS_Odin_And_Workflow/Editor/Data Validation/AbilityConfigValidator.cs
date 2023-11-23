@@ -1,5 +1,5 @@
 using Sirenix.OdinInspector.Editor.Validation;
-using StatusUnknown.CoreGameplayContent;
+using StatusUnknown.Content;
 using UnityEditor;
 using UnityEngine;
 

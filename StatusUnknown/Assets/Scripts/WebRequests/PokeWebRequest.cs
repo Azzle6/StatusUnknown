@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-using StatusUnknown.CoreGameplayContent.Character;  
+using StatusUnknown.Content.Character;  
 
 namespace StatusUnknown
 {
@@ -62,7 +62,7 @@ namespace StatusUnknown
     }
 
     // this maybe be added to it's own separate class
-    namespace CoreGameplayContent.Character
+    namespace Content.Character
     {
         [Serializable]
         internal class Character
