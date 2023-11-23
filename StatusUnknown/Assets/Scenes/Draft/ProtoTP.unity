@@ -5147,21 +5147,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2200101453050758135, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
-      propertyPath: enemy
-      value: 
-      objectReference: {fileID: 8449849220990944551, guid: 42638689991654143b0718c2081e3597, type: 3}
-    - target: {fileID: 2200101453050758135, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
-      propertyPath: listEnnemies.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2200101453050758135, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
-      propertyPath: listEnnemies.Array.data[0]
-      value: 
-      objectReference: {fileID: 8449849220990944551, guid: 42638689991654143b0718c2081e3597, type: 3}
     - target: {fileID: 4452851188889509337, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 10.35
       objectReference: {fileID: 0}
     - target: {fileID: 4452851188889509337, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5169,7 +5157,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4452851188889509337, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 8.49
       objectReference: {fileID: 0}
     - target: {fileID: 4452851188889509337, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5199,6 +5187,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4740599350732158441, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 4740599350732158441, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
       propertyPath: m_Name
       value: Spawner

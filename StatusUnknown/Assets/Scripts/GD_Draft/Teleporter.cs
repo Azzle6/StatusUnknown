@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Player;
+using Sirenix.OdinInspector;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -23,8 +24,6 @@ public class Teleporter : MonoBehaviour
     {
         if (interactInput.IsPressed() && onCD == false)
         {
-            onCD = true;
-            goal.GetComponent<Teleporter>().onCD = true;
             player.GetComponent<Transform>().position = goal.transform.position;
             StartCoroutine("Cooldown");
         }
@@ -48,6 +47,8 @@ public class Teleporter : MonoBehaviour
 
     IEnumerator Cooldown()
     {
+        onCD = true;
+        goal.GetComponent<Teleporter>().onCD = true;
         yield return new WaitForSeconds(3);
         onCD = false;
         goal.GetComponent<Teleporter>().onCD = false;
