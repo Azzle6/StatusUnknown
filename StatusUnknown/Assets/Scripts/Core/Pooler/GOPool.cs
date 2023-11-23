@@ -4,7 +4,7 @@ namespace Core.Pooler
     using UnityEngine;
 
     [System.Serializable]
-    public class Pool
+    public class GOPool
     {
         public GameObject objPrefab;
         public uint baseCount;
@@ -12,9 +12,9 @@ namespace Core.Pooler
     }
 
     [System.Serializable]
-    public class PoolKey
+    public class GOPoolKey
     {
         [HideInInspector] public string key;
-        public Pool pool;
+        public GOPool pool;
     }
 }

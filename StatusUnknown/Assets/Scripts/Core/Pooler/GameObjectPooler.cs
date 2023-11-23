@@ -3,10 +3,10 @@ namespace Core.Pooler
     using System.Collections.Generic;
     using UnityEngine;
     using Core;
-    public class Pooler : MonoSingleton<Pooler>
+    public class GameObjectPooler : MonoSingleton<GameObjectPooler>
     {
-        private Dictionary<string, Pool> pools = new Dictionary<string, Pool>();
-        [SerializeField] private List<PoolKey> poolToInit;
+        private Dictionary<string, GOPool> pools = new Dictionary<string, GOPool>();
+        [SerializeField] private List<GOPoolKey> poolToInit;
         private GameObject tempPooledObj;
         private string tempString;
 
@@ -14,7 +14,7 @@ namespace Core.Pooler
         {
             InitPools();
         }
-        public void AddPool(PoolKey addedPool)
+        public void AddPool(GOPoolKey addedPool)
         {
             poolToInit.Add(addedPool);
         }
@@ -30,7 +30,7 @@ namespace Core.Pooler
         { 
             if (poolToInit == null) return;
 
-            foreach (PoolKey key in poolToInit)
+            foreach (GOPoolKey key in poolToInit)
             {
                 key.key = key.pool.objPrefab.name;
                 pools.Add(key.key, key.pool);
@@ -52,29 +52,28 @@ namespace Core.Pooler
             }
             
         }
-        private void AddInstance(Pool pool)
+        private void AddInstance(GOPool pool)
         {
             tempPooledObj = Instantiate(pool.objPrefab, transform);
             tempPooledObj.gameObject.SetActive(false);
             pool.poolStack.Push(tempPooledObj);
         }
         //Use this to get an object from the pool
-        public GameObject GetPooledObject(string key)
+        public T GetPooledObject<T>(string key)
         {
-            if (pools.ContainsKey(key))
+            if (!pools.ContainsKey(key))
             {
-                if (pools[key].poolStack.Count == 0)
-                    AddInstance(pools[key]);
-                tempPooledObj = pools[key].poolStack.Pop();
-                tempPooledObj.gameObject.SetActive(true);
-                tempPooledObj.transform.parent = null;
-                return tempPooledObj;
+                Debug.LogError("Pooler: " + key + " doesn't exist");
+                return default;
             }
-            else
+            if (pools[key].poolStack.Count == 0)
             {
-                Debug.LogError("Pooler does not contain key: " + key);
-                return null;
+                AddInstance(pools[key]);
             }
+            tempPooledObj = pools[key].poolStack.Pop();
+            tempPooledObj.gameObject.SetActive(true);
+            tempPooledObj.transform.parent = null;
+            return tempPooledObj.GetComponent<T>();
         }
         //Use this to return an object to the pool
         public void ReturnObjectToPool(GameObject returnedObj)
