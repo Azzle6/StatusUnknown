@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Weapons.WeaponData">
+    <Position X="24.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAABAAAAAAAIAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Assets\Scripts\Weapons\WeaponData.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="definition" />
+      <Field Name="triggerInfoData" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Weapons.WeaponTriggerData" BaseTypeListCollapsed="true">
+    <Position X="27.25" Y="8.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAQAABAAAAAAAEAAAACAAIAAAIAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Weapons\WeaponData.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="compiledModules" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Weapons.WeaponDefinitionSO">
+    <Position X="24.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Assets\Scripts\Weapons\WeaponDefinitionSO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Weapons.WeaponItemView">
+    <Position X="24.25" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAABA=</HashCode>
+      <FileName>Assets\Scripts\Weapons\WeaponItemView.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="WeaponItemData" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Module.CompiledModule">
+    <Position X="16" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Assets\Scripts\Module\CompiledModule.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="module" />
+      <Field Name="triggersNextModule" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Module.ModuleCompilation">
+    <Position X="15.5" Y="10.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAgAAAAAAIEACAAAAAAAAAAAAAAEAAEAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Module\ModuleCompilation.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="FirstModule" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Module.ModuleData">
+    <Position X="20.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Module\ModuleData.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="definition" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Module.ModuleDefinitionSO">
+    <Position X="20.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAgA=</HashCode>
+      <FileName>Assets\Scripts\Module\ModuleDefinitionSO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Module.ModuleItemView">
+    <Position X="20.5" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAABAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAABA=</HashCode>
+      <FileName>Assets\Scripts\Module\ModuleItemView.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="ModuleItemData" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Inventory.Item.ItemView" Collapsed="true">
+    <Position X="22.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABggAAEAAAAAAAgAAAgAAAAEAAAAAAAAAAIgAAABg=</HashCode>
+      <FileName>Assets\Scripts\Inventory\Item\ItemView.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Inventory.Item.ItemData" Collapsed="true">
+    <Position X="22.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Inventory\Item\ItemData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Inventory.Item.GridItemSO" Collapsed="true">
+    <Position X="22.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAABgA=</HashCode>
+      <FileName>Assets\Scripts\Inventory\Item\GridItemSO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Weapons.WeaponTriggerDefinition">
+    <Position X="23.75" Y="14.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Assets\Scripts\Weapons\WeaponDefinitionSO.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Module.CompiledTriggerInfo">
+    <Position X="12.25" Y="8.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Module\CompiledModule.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="compiledModule" />
+    </ShowAsAssociation>
+  </Struct>
+  <Struct Name="Module.Output">
+    <Position X="20.5" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Module\ModuleDefinitionSO.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
