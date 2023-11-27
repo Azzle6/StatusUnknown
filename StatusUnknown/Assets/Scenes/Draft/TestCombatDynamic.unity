@@ -300,6 +300,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySniper (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3926380311748740003, guid: 4b3a5123b10bb6f48bf185606d5795dd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5381711920966376349, guid: 4b3a5123b10bb6f48bf185606d5795dd, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -5117,11 +5121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 004f87ff9f0935947bdc660a770a7c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolToInit:
-  - key: 
-    pool:
-      objPrefab: {fileID: 2084647982804730131, guid: b51a3fc02e55aad4c931a631e96295dd, type: 3}
-      baseCount: 10
 --- !u!4 &1528489141
 Transform:
   m_ObjectHideFlags: 0
@@ -5196,6 +5195,10 @@ PrefabInstance:
     - target: {fileID: 3926380311748740003, guid: 4b3a5123b10bb6f48bf185606d5795dd, type: 3}
       propertyPath: m_Name
       value: EnemySniper (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3926380311748740003, guid: 4b3a5123b10bb6f48bf185606d5795dd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5381711920966376349, guid: 4b3a5123b10bb6f48bf185606d5795dd, type: 3}
       propertyPath: m_Mesh
@@ -5338,6 +5341,10 @@ PrefabInstance:
     - target: {fileID: 3926380311748740003, guid: 4b3a5123b10bb6f48bf185606d5795dd, type: 3}
       propertyPath: m_Name
       value: EnemySniper
+      objectReference: {fileID: 0}
+    - target: {fileID: 3926380311748740003, guid: 4b3a5123b10bb6f48bf185606d5795dd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5381711920966376349, guid: 4b3a5123b10bb6f48bf185606d5795dd, type: 3}
       propertyPath: m_Mesh
