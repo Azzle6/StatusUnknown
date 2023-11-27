@@ -1,14 +1,8 @@
-
-
-using Core.VariablesSO.VariableTypes;
-using Unity.VisualScripting;
-
 namespace Weapon
 {
     using System.Collections;
     using UnityEngine;
     using Core.Pooler;
-    using System;
     using Unity.Mathematics;
     
     public class PhotonPistol : RangedWeapon
@@ -17,11 +11,12 @@ namespace Weapon
         [SerializeField] private Transform spawnPoint;
         [SerializeField] private Transform mesh;
         [SerializeField] private Transform meshPos;
+        [SerializeField] private CoPoolProjectile projectilePool;
         private Vector3 initMeshPos;
         private float chargeTimer;
         private Coroutine charging;
         private Coroutine reloading;
-        private PhotonPistolBullet tempPhotonPistolBullet;
+        private Projectile tempPhotonPistolBullet;
         private Transform tempPhotonPistolBulletTr;
         private float currentDamage;
         private bool waitForTriggerRelease;
@@ -29,11 +24,13 @@ namespace Weapon
         private float cdTimer;
         private bool isReloading;
         
-        private void Awake()
+        private void Start()
         {
             currentAmmo.Value = stat.magazineSize;
             initMeshPos = mesh.localPosition;
-            //Pooler.Instance.CreatePool(stat.projectilePrefab.GetComponent<PhotonPistolBullet>(),20);
+            
+            Debug.Log(stat);
+            ComponentPooler.Instance.CreatePool(stat.projectilePool.prefab.GetComponent<Projectile>(),stat.projectilePool.baseCount);
         }
 
         private void OnDisable()
@@ -61,7 +58,8 @@ namespace Weapon
             if ((charging != default) || (isReloading) || (currentAmmo.Value <= 0))
                 return;
 
-            //tempPhotonPistolBullet = Pooler.Instance.GetPooledObject<PhotonPistolBullet>(stat.projectilePrefab.gameObject.name);
+
+            tempPhotonPistolBullet = ComponentPooler.Instance.GetPooledObject<Projectile>(stat.projectilePool.prefab.name);
             tempPhotonPistolBulletTr = tempPhotonPistolBullet.transform;
             
             charging = StartCoroutine(Charge());

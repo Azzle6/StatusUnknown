@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 262.38358, g: 325.10843, b: 430.30963, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -377,8 +377,9 @@ GameObject:
   m_Component:
   - component: {fileID: 63540956}
   - component: {fileID: 63540958}
+  - component: {fileID: 63540959}
   m_Layer: 0
-  m_Name: ComponentPooler
+  m_Name: Pooler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -411,6 +412,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 004f87ff9f0935947bdc660a770a7c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &63540959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63540954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0de01777ee9af24ca1254a64a456d1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolToInit: []
 --- !u!43 &104974444
 Mesh:
   m_ObjectHideFlags: 0
@@ -6135,8 +6149,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61c80e71c656a934bb77e010147b31b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vfxToPool:
+    prefab: {fileID: 0}
+    baseCount: 10
   vfxPrefab: {fileID: 4039014032688278735, guid: 6bebdf68f5e12bd4a8a27642fe9a475e, type: 3}
   vfx: {fileID: 0}
+  projectileToPool:
+    prefab: {fileID: 8586028294311903091, guid: b51a3fc02e55aad4c931a631e96295dd, type: 3}
+    baseCount: 10
+  projectilePrefab: {fileID: 8586028294311903091, guid: b51a3fc02e55aad4c931a631e96295dd, type: 3}
+  projectile: {fileID: 0}
 --- !u!4 &1571956197
 Transform:
   m_ObjectHideFlags: 0

@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 6625378342913300468}
   - component: {fileID: 7144375184864917321}
   - component: {fileID: 1794472797588995133}
-  - component: {fileID: 3898426771653547266}
   - component: {fileID: 8611682885871718163}
+  - component: {fileID: 8586028294311903091}
   m_Layer: 0
   m_Name: PlayerPhotonProjectile
   m_TagString: Untagged
@@ -113,21 +113,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!114 &3898426771653547266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2084647982804730131}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 939152046d8b26a49a64e3a190e919b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 0
-  rb: {fileID: 1794472797588995133}
-  knockbackStrength: 30
 --- !u!114 &8611682885871718163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,3 +138,18 @@ MonoBehaviour:
       type: {class: HitSphere, ns: , asm: Assembly-CSharp}
       data:
         radius: 0.001
+--- !u!114 &8586028294311903091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2084647982804730131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0278ec5b28e1a84f9fb7949ecb58a5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  rb: {fileID: 1794472797588995133}
+  knockbackStrength: 10

@@ -1,24 +1,19 @@
-using System;
-using Sirenix.Serialization;
-using UnityEngine.VFX;
-
 namespace Core.Pooler
 {
     
-    using System.Collections.Generic;
     using UnityEngine;
-    using UnityEngine.Pool;
-
+    using UnityEngine.VFX;
     
     [System.Serializable]
     public class COPool <T> where T : Component
     {
-        public T Component;
+        public T prefab;
         public int baseCount;
     }
     
-    public class CoPoolProjectile : COPool<Projectile> {}
-    
+    [System.Serializable]
+    public class CoPoolProjectile : COPool<Weapon.Projectile> {}
+    [System.Serializable]
     public class CoPoolVFX : COPool<VisualEffect> {}
     
     public enum PoolType

@@ -10,26 +10,28 @@ namespace Core.Pooler
     {
         private Dictionary<string, IObjectPool<Component>> pools = new Dictionary<string, IObjectPool<Component>>();
         private Dictionary<GameObject, Component> objectToComponent = new Dictionary<GameObject, Component>();
-
+        
+        
         public void CreatePool<T>(T prefab, int baseCount) where T : Component
         {
             string key = prefab.gameObject.name;
             Debug.Log("Creating pool for " + key + " with base count " + baseCount);
             if (pools.ContainsKey(key))
             {
-                Debug.LogError("Pooler: Pool with key " + key + " already exists");
+                Debug.Log("Pooler: Pool with key " + key + " already exists");
                 return;
             }
 
             IObjectPool<Component> newPool = new ObjectPool<Component>(() => (Object.Instantiate(prefab)), ActionOnGet, ActionOnRelease,null, false,baseCount);
             AddPool<Component>(prefab.gameObject.name, newPool);
+            
         }
 
         public void AddPool<T>(string key, IObjectPool<Component> pool) where T : Object
         {
             if (pools.ContainsKey(key))
             {
-                Debug.LogError("Pooler: " + key + " already exists");
+                Debug.Log("Pooler: " + key + " already exists");
                 return;
             }
             pools.Add(key, pool);

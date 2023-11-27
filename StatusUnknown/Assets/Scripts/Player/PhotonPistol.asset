@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: PhotonPistol
   m_EditorClassIdentifier: 
   weaponID: 0
-  weaponSprite: {fileID: 21300000, guid: 11987f8bf22920748ae7b0a4ea49cd11, type: 3}
   maxDamage: 100
   damageCurve:
     serializedVersion: 2
@@ -65,7 +64,9 @@ MonoBehaviour:
     m_RotationOrder: 4
   maxProjectileSize: 0.75
   projectileSpeed: 30
-  projectilePrefab: {fileID: 2084647982804730131, guid: b51a3fc02e55aad4c931a631e96295dd, type: 3}
+  projectilePool:
+    prefab: {fileID: 8586028294311903091, guid: b51a3fc02e55aad4c931a631e96295dd, type: 3}
+    baseCount: 10
   maxTimeCharge: 1.5
   cdTime: 0.5
   magazineSize: 14

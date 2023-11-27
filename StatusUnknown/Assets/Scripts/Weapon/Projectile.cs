@@ -1,9 +1,8 @@
-
-
 namespace Weapon
 {
     using UnityEngine;
-    public class PhotonPistolBullet : MonoBehaviour
+
+    public class Projectile : MonoBehaviour
     {
         [HideInInspector] public float damage;
         [SerializeField] private Rigidbody rb;
@@ -18,8 +17,8 @@ namespace Weapon
         public void Hit(IDamageable target)
         {
             target.TakeDamage(damage, transform.forward * knockbackStrength);
-        }
-     
+        } 
     }
 }
+
 
