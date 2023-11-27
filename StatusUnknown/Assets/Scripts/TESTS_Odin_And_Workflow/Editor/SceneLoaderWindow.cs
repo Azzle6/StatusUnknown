@@ -6,7 +6,7 @@ using StatusUnknown.Tools;
 
 public class SceneLoaderWindow : OdinEditorWindow
 {
-    [MenuItem(SU_Tools.ROOT_MENU_PATH + "Scene Loader")]
+    [MenuItem(CoreToolsStrings.ROOT_MENU_PATH + "Scene Loader")]
     // Start is called before the first frame update
     void OpenSceneLoader()
     {

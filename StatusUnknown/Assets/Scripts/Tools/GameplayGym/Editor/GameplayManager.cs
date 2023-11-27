@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using StatusUnknown.Utils; 
 using StatusUnknown.Utils.AssetManagement;
 using TMPro;
 using UnityEditor;
@@ -401,7 +402,7 @@ namespace StatusUnknown.Content
             CreateNewBuildInstance();
 
             simulatorInstance.name = buildSaveName;
-            StatusUnknown_AssetManager.SaveSO(simulatorInstance, StatusUnknown_AssetManager.SAVE_PATH_BUILD, buildSaveName, ".asset");
+            StatusUnknown_AssetManager.SaveSO(simulatorInstance, CoreAssetManagementStrings.SAVE_PATH_BUILD, buildSaveName, ".asset");
             buildSaveName = "Build_Playstyle_Num"; // cheap solution to avoid overwriting existing asset by accident
         }
 
@@ -428,7 +429,7 @@ namespace StatusUnknown.Content
                 };
             }
 
-            StatusUnknown_AssetManager.SaveSO(enemyEncounterConfigSO, StatusUnknown_AssetManager.SAVE_PATH_ENCOUNTER, encounterSaveName, ".asset");
+            StatusUnknown_AssetManager.SaveSO(enemyEncounterConfigSO, CoreAssetManagementStrings.SAVE_PATH_ENCOUNTER, encounterSaveName, ".asset");
             encounterSaveName = "Encounter_Difficulty_Num"; // cheap solution to avoid overwriting existing asset by accident
         }
 
@@ -522,7 +523,7 @@ namespace StatusUnknown.Content
             AbilityConfigSO.name = abilitySaveName;
             AbilityConfigSO.SetAbilityInfos(abilitySaveName, PayloadType, damageArea, payloadValue);
 
-            StatusUnknown_AssetManager.SaveSO(AbilityConfigSO, StatusUnknown_AssetManager.SAVE_PATH_ABILITY, abilitySaveName, ".asset");
+            StatusUnknown_AssetManager.SaveSO(AbilityConfigSO, CoreAssetManagementStrings.SAVE_PATH_ABILITY, abilitySaveName, ".asset");
             abilitySaveName = "Ability_Type_Name"; 
         }
     }
@@ -547,7 +548,7 @@ namespace StatusUnknown.Content
             AbilityConfigSO.TickAmount = tickAmount;
             AbilityConfigSO.TickDelay = tickDelay;
 
-            StatusUnknown_AssetManager.SaveSO(AbilityConfigSO, StatusUnknown_AssetManager.SAVE_PATH_ABILITY, abilitySaveName, ".asset");
+            StatusUnknown_AssetManager.SaveSO(AbilityConfigSO, CoreAssetManagementStrings.SAVE_PATH_ABILITY, abilitySaveName, ".asset");
             abilitySaveName = "Ability_Type_Name";
         }
     }
@@ -570,7 +571,7 @@ namespace StatusUnknown.Content
             AbilityConfigSO.SetAbilityInfos(abilitySaveName, PayloadType, damageArea, payloadValue);
             AbilityConfigSO.DamageDelay = damageDelay;
 
-            StatusUnknown_AssetManager.SaveSO(AbilityConfigSO, StatusUnknown_AssetManager.SAVE_PATH_ABILITY, abilitySaveName, ".asset");
+            StatusUnknown_AssetManager.SaveSO(AbilityConfigSO, CoreAssetManagementStrings.SAVE_PATH_ABILITY, abilitySaveName, ".asset");
             abilitySaveName = "Ability_Type_Name";
         }
     }

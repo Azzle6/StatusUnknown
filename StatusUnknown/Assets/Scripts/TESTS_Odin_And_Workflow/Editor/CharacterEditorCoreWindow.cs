@@ -1,7 +1,6 @@
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using StatusUnknown.Content.Narrative;
-using StatusUnknown.Content.Serializables;
 using StatusUnknown.Tools;
 using System;
 using System.Collections.Generic;
@@ -15,34 +14,23 @@ using UnityEngine.UIElements;
 
 namespace StatusUnknown.Content
 {
-    struct SU_Content
+    public struct CoreContentStrings
     {
-        internal const string PATH_CONTENT_ROOT = "Status Unknown/"; 
-        internal const string PATH_CONTENT_GAMEPLAY = PATH_CONTENT_ROOT + "Gameplay/";
-        internal const string PATH_CONTENT_NARRATIVE = PATH_CONTENT_ROOT + "Narrative/";
+        public const string PATH_CONTENT_ROOT = "Status Unknown/";
+        public const string PATH_CONTENT_GAMEPLAY = PATH_CONTENT_ROOT + "Gameplay/";
+        public const string PATH_CONTENT_NARRATIVE = PATH_CONTENT_ROOT + "Narrative/";
     }
 
     namespace Narrative
     {
-        [CreateAssetMenu(fileName = "Dialogue", menuName = SU_Content.PATH_CONTENT_NARRATIVE + "Dialogue")]
-        public class DialogueSO : SerializedScriptableObject
-        {
-            [SerializeField]
-            private Dictionary<Faction, string> dialogueLine = new Dictionary<Faction, string>()
-            {
-                { Faction.Hera, "We are Hera, and we will rule." },
-                { Faction.SAA, "Yeah... You mad bro ?" },
-                { Faction.Pulse, "LET'S DESTROY EVERYTHING !!!" },
-            };
-        }
-    }
-
-    namespace Serializables
-    {
         [Serializable]
-        public class Weapon // load or create new weapon
+        internal class Weapon // load or create new weapon
         {
+            #region Odin Property Processor
             [HideInInspector] public const bool SHOW_METADATA = false;
+            #endregion
+
+            CoreContentStrings s = new CoreContentStrings();  
 
             [SerializeField, PreviewField] protected Sprite imageUI;
             [SerializeField, PreviewField] protected GameObject weaponPrefab; // previz
@@ -58,21 +46,21 @@ namespace StatusUnknown.Content
             public float AttackSpeed { get => attackSpeed; set => attackSpeed = value; }
         }
 
-        public class Bow : Weapon
+        internal class Bow : Weapon
         {
             [SerializeField, PropertyRange(1f, 10f)] private float fireRange = 1.5f;
         }
 
-        public class Sword : Weapon
+        internal class Sword : Weapon
         {
             [SerializeField, PropertyRange(0f, 1f)] private float stunChancePercent;
         }
 
         [Serializable]
-        public class ModuleInfos // load or create new module
+        internal class ModuleInfos // load or create new module
         {
-            [SerializeField][GUIColor(SU_Tools.COLOR_ENUMS)] protected EAbilityType abilityType = EAbilityType.Offense;
-            [SerializeField][GUIColor(SU_Tools.COLOR_ENUMS)] protected EPayloadType PayloadType;
+            [SerializeField][GUIColor(CoreToolsStrings.COLOR_ENUMS)] protected EAbilityType abilityType = EAbilityType.Offense;
+            [SerializeField][GUIColor(CoreToolsStrings.COLOR_ENUMS)] protected EPayloadType PayloadType;
             [SerializeField, Range(0, 100)] protected int payloadValue;
             [SerializeField] protected GameObject effectArea;
         }
@@ -80,7 +68,7 @@ namespace StatusUnknown.Content
         [Serializable]
         public class StatsInfos // load or create new stat
         {
-            [GUIColor(SU_Tools.COLOR_ENUMS)] public enum Stat { [HideInInspector] NONE = -1, ModuleSlots, Cost, Damage, AttackSpeed }
+            [GUIColor(CoreToolsStrings.COLOR_ENUMS)] public enum Stat { [HideInInspector] NONE = -1, ModuleSlots, Cost, Damage, AttackSpeed }
 
             [SerializeField] private Stat stat;
 
@@ -109,7 +97,7 @@ namespace StatusUnknown.Content
 namespace StatusUnknown.Tools
 {
     public enum Faction { Player, SAA, Hera, Excelsior, Pulse }
-    struct SU_Tools
+    public struct CoreToolsStrings
     {
         internal const string ROOT_MENU_PATH = "Status Unknown/Tools/";
 
@@ -127,7 +115,7 @@ namespace StatusUnknown.Tools
         public class CharacterEditorCoreWindow : OdinEditorWindow
         {
 
-            [MenuItem(SU_Tools.ROOT_MENU_PATH + "Character Editor")]
+            [MenuItem(CoreToolsStrings.ROOT_MENU_PATH + "Character Editor")]
             private static void OpenWindow()
             {
                 CharacterEditorCoreWindow window = GetWindow<CharacterEditorCoreWindow>("Character Editor");
@@ -136,7 +124,7 @@ namespace StatusUnknown.Tools
                 window.Show();
             }
 
-            [EnumToggleButtons, PropertyOrder(-1)][GUIColor(SU_Tools.COLOR_ENUMS)] public Faction Faction;
+            [EnumToggleButtons, PropertyOrder(-1)][GUIColor(CoreToolsStrings.COLOR_ENUMS)] public Faction Faction;
 
             [PropertySpace(SpaceAfter = 25), HorizontalGroup("Base", LabelWidth = 100, Title = "BASE")]
 
@@ -146,10 +134,10 @@ namespace StatusUnknown.Tools
             [VerticalGroup("Base/left", GroupName = "CHARACTER")][HideIf("Faction", Faction.Player)] public DialogueSO[] unlockedDialogues = new DialogueSO[2];
 
             [VerticalGroup("Base/right", GroupName = "WEAPON")]
-            [VerticalGroup("Base/right/weapon", GroupName = "WEAPON"), LabelWidth(SU_Tools.LABEL_SIZE_SMALL)] public Weapon Weapon = new Weapon();
+            [SerializeField, VerticalGroup("Base/right/weapon", GroupName = "WEAPON"), LabelWidth(CoreToolsStrings.LABEL_SIZE_SMALL)] private Weapon Weapon = new Weapon();
             [VerticalGroup("Base/right/details", GroupName = "DETAILS")]
-            [TabGroup("Base/right/details/infos", "Stats"), LabelWidth(SU_Tools.LABEL_SIZE_MEDIUM)] public StatsInfos[] StartingStats = new StatsInfos[1];
-            [TabGroup("Base/right/details/infos", "Modules"), LabelWidth(SU_Tools.LABEL_SIZE_MEDIUM)] public ModuleInfos[] StartingModules = new ModuleInfos[3];
+            [TabGroup("Base/right/details/infos", "Stats"), LabelWidth(CoreToolsStrings.LABEL_SIZE_MEDIUM)] public StatsInfos[] StartingStats = new StatsInfos[1];
+            [SerializeField, TabGroup("Base/right/details/infos", "Modules"), LabelWidth(CoreToolsStrings.LABEL_SIZE_MEDIUM)] private ModuleInfos[] StartingModules = new ModuleInfos[3];
 
             [PropertySpace][ShowIf("Faction", Faction.Player)] public bool showCameraAndControls = false;
 
@@ -161,26 +149,26 @@ namespace StatusUnknown.Tools
             [ShowIf("showSaveFields", true)][BoxGroup("Save"), Required("Do not forget to fill in the \"Save Name\" field", InfoMessageType.Warning)] public string saveName;
 
             [ShowIf("showSaveFields", true)]
-            [HorizontalGroup("Save/ModulesSet", SU_Tools.BUTTON_LAYOUT_SMALL)]
-            [GUIColor(SU_Tools.COLOR_QOL)]
+            [HorizontalGroup("Save/ModulesSet", CoreToolsStrings.BUTTON_LAYOUT_SMALL)]
+            [GUIColor(CoreToolsStrings.COLOR_QOL)]
             [Button("Weapon Set - Default Name")]
             public void Faction_Default_ModulesSet() { saveName = $"{Faction}_DialogueSet_ID"; }
 
             [ShowIf("showSaveFields", true)]
-            [HorizontalGroup("Save/WeaponSet", SU_Tools.BUTTON_LAYOUT_SMALL)]
-            [GUIColor(SU_Tools.COLOR_QOL)]
+            [HorizontalGroup("Save/WeaponSet", CoreToolsStrings.BUTTON_LAYOUT_SMALL)]
+            [GUIColor(CoreToolsStrings.COLOR_QOL)]
             [Button("Module Set - Default Name")]
             public void Faction_Default_WeaponSet() { saveName = $"{Faction}_WeaponSet_ID"; }
 
             [ShowIf("showSaveFields", true)]
-            [HorizontalGroup("Save/DialogueSet", SU_Tools.BUTTON_LAYOUT_SMALL)]
-            [GUIColor(SU_Tools.COLOR_QOL)]
+            [HorizontalGroup("Save/DialogueSet", CoreToolsStrings.BUTTON_LAYOUT_SMALL)]
+            [GUIColor(CoreToolsStrings.COLOR_QOL)]
             [Button("NPC Set - Default Name")]
             public void Faction_Default_DialogueSet() { saveName = $"{Faction}_DialogueSet_ID"; }
 
             [ShowIf("saveName", null)]
-            [HorizontalGroup("Save/Save", SU_Tools.BUTTON_LAYOUT_SMALL)]
-            [PropertySpace(25), GUIColor(SU_Tools.COLOR_SAVE)]
+            [HorizontalGroup("Save/Save", CoreToolsStrings.BUTTON_LAYOUT_SMALL)]
+            [PropertySpace(25), GUIColor(CoreToolsStrings.COLOR_SAVE)]
             [Button("Save")]
             public void SaveAsset() { }
 
@@ -189,7 +177,7 @@ namespace StatusUnknown.Tools
             private string rootGameplayDataPath = "Assets/Data/Gameplay";
 
 
-            public class WeaponPropertyProcessor<T> : OdinPropertyProcessor<T> where T : Weapon
+            internal class WeaponPropertyProcessor<T> : OdinPropertyProcessor<T> where T : Weapon
             {
                 public override void ProcessMemberProperties(List<InspectorPropertyInfo> propertyInfos)
                 {
@@ -206,7 +194,7 @@ namespace StatusUnknown.Tools
                 }
             }
 
-            public class ModuleInfosPropertyProcessor : OdinPropertyProcessor<ModuleInfos>
+            internal class ModuleInfosPropertyProcessor : OdinPropertyProcessor<ModuleInfos>
             {
                 public override void ProcessMemberProperties(List<InspectorPropertyInfo> propertyInfos)
                 {
@@ -214,7 +202,7 @@ namespace StatusUnknown.Tools
                 }
             }
 
-            public class StatsInfosPropertyProcessor : OdinPropertyProcessor<StatsInfos>
+            internal class StatsInfosPropertyProcessor : OdinPropertyProcessor<StatsInfos>
             {
                 public override void ProcessMemberProperties(List<InspectorPropertyInfo> propertyInfos)
                 {
@@ -222,7 +210,7 @@ namespace StatusUnknown.Tools
                 }
             }
 
-            public class DialogueSOPropertyProcessor : OdinPropertyProcessor<DialogueSO>
+            internal class DialogueSOPropertyProcessor : OdinPropertyProcessor<DialogueSO>
             {
                 public override void ProcessMemberProperties(List<InspectorPropertyInfo> propertyInfos)
                 {

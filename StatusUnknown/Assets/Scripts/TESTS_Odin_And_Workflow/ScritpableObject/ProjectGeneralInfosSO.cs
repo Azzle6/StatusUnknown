@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "General Infos", menuName = SU_Content.PATH_CONTENT_ROOT + "General Infos", order = -20)]
+[CreateAssetMenu(fileName = "General Infos", menuName = CoreContentStrings.PATH_CONTENT_ROOT + "General Infos", order = -20)]
 public class ProjectGeneralInfosSO : SerializedScriptableObject
 {
     public enum InfoType { Gameplay, Systems, Combat, Narrative }
@@ -16,10 +16,10 @@ public class ProjectGeneralInfosSO : SerializedScriptableObject
     [Title("Add New Notes")]
     [SerializeField, OnValueChanged("LoadInfos")] private InfoType infoType;
 
-    [GUIColor(SU_Tools.COLOR_QOL)]
+    [GUIColor(CoreToolsStrings.COLOR_QOL)]
     [ButtonGroup("Buttons")] private void AddInfos() { }
 
-    [GUIColor(SU_Tools.COLOR_DANGER)]
+    [GUIColor(CoreToolsStrings.COLOR_DANGER)]
     [ButtonGroup("Buttons")] private void RemoveInfos() { } 
 
     private void LoadInfos() { }    

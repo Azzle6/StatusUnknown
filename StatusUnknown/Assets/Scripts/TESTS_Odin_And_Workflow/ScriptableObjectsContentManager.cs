@@ -52,7 +52,7 @@ namespace StatusUnknown.Utils.AssetManagement
 
         //public bool MustHaveMeshRenderer;
 
-        [PropertySpace, Button, GUIColor(SU_Tools.COLOR_QOL)]
+        [PropertySpace, Button, GUIColor(CoreToolsStrings.COLOR_QOL)]
         public void LoadModulesWithLabels()
         {
             (List<ModulePlaystyle> playstyle, List<ModuleType> type) filters = new(playstyleType, moduleTypes); 
@@ -79,7 +79,7 @@ namespace StatusUnknown.Utils.AssetManagement
                 labelsToFetch += string.Concat("l:", queryFilters[i], separator); 
             }
 
-            StatusUnknown_AssetManager.LoadAssetsWithMatchingLabels(labelsToFetch, out List<Object> list, StatusUnknown_AssetManager.SAVE_PATH_ABILITY);
+            StatusUnknown_AssetManager.LoadAssetsWithMatchingLabels(labelsToFetch, out List<Object> list, CoreAssetManagementStrings.SAVE_PATH_ABILITY);
 
             loadedAbilities.Clear(); 
             foreach (var item in list)
@@ -89,7 +89,7 @@ namespace StatusUnknown.Utils.AssetManagement
             } 
         }
 
-        [PropertySpace, Button, GUIColor(SU_Tools.COLOR_QOL)]
+        [PropertySpace, Button, GUIColor(CoreToolsStrings.COLOR_QOL)]
         public void LoadPrefabsWithLabels()
         {
             string labelsToFetch = string.Empty;
@@ -106,7 +106,7 @@ namespace StatusUnknown.Utils.AssetManagement
                 labelsToFetch += string.Concat("l:", queryFilters[i], separator);
             }
 
-            StatusUnknown_AssetManager.LoadAssetsWithMatchingLabels(labelsToFetch, out List<Object> list, StatusUnknown_AssetManager.SAVE_PATH_PREFABS, true);
+            StatusUnknown_AssetManager.LoadAssetsWithMatchingLabels(labelsToFetch, out List<Object> list, CoreAssetManagementStrings.SAVE_PATH_PREFABS, true);
 
             loadedPrefabs.Clear();
             foreach (var item in list)
