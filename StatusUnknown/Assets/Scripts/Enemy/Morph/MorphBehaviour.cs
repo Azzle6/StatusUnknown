@@ -35,10 +35,10 @@ public class MorphBehaviour : MonoBehaviour
         currentMorphTimer = Random.Range((1-timerRandomness) * morphTimer, morphTimer);
         StartMorphProcess();
     }
-    [Button("StartMorph")]
+
     void StartMorph()
     {
-        startMorphEvent.RaiseEvent(this);
+        startMorphEvent?.RaiseEvent(this);
         MorphEvents.StartMorphEvent(this);
         Debug.Log("StartMorph");
         morphing = true;
@@ -71,6 +71,7 @@ public class MorphBehaviour : MonoBehaviour
         currentMorphTimer -= Time.time - morphTimeCounter;
         CancelInvoke("StartMorph");
     }
+    [Button("StartMorphProcess")]
     public void StartMorphProcess()
     {
         Invoke("StartMorph", currentMorphTimer);
