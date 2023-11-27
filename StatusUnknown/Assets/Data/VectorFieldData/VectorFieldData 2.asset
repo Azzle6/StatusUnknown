@@ -13,28 +13,13 @@ MonoBehaviour:
   m_Name: VectorFieldData 2
   m_EditorClassIdentifier: 
   Nodes:
-  - <Position>k__BackingField: {x: -12, y: 2.5062103, z: -14}
-    DistanceFromTarget: -1
-    linkedBoundPositions:
-    - {x: -11, y: 3, z: -14}
-    - {x: -11, y: 3, z: -13}
-    - {x: -12, y: 3, z: -13}
-    linkedNodeDistance:
-    - 1
-    - 1.4142135
-    - 1
-    targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: -11, y: 2.5062103, z: -14}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: -10, y: 3, z: -14}
     - {x: -10, y: 3, z: -13}
     - {x: -11, y: 3, z: -13}
-    - {x: -12, y: 3, z: -13}
-    - {x: -12, y: 3, z: -14}
     linkedNodeDistance:
-    - 1
-    - 1.4142135
     - 1
     - 1.4142135
     - 1
@@ -198,13 +183,13 @@ MonoBehaviour:
     - {x: -1, y: 3, z: -13}
     - {x: -1, y: 3, z: -14}
     linkedNodeDistance:
-    - 1.0000001
-    - 1.4142137
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     - 1
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 1.0000001, y: 2.5062103, z: -14}
+  - <Position>k__BackingField: {x: 1, y: 2.5062103, z: -14}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 2, y: 3, z: -14}
@@ -213,11 +198,11 @@ MonoBehaviour:
     - {x: 0, y: 3, z: -13}
     - {x: 0, y: 3, z: -14}
     linkedNodeDistance:
-    - 0.9999999
-    - 1.4142134
     - 1
-    - 1.4142137
-    - 1.0000001
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 2, y: 2.5062103, z: -14}
     DistanceFromTarget: -1
@@ -231,8 +216,8 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142134
-    - 0.9999999
+    - 1.4142135
+    - 1
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 3, y: 2.5062103, z: -14}
     DistanceFromTarget: -1
@@ -288,13 +273,13 @@ MonoBehaviour:
     - {x: 5, y: 3, z: -13}
     - {x: 5, y: 3, z: -14}
     linkedNodeDistance:
-    - 0.9999995
-    - 1.4142132
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     - 1
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 6.9999995, y: 2.5062103, z: -14}
+  - <Position>k__BackingField: {x: 7, y: 2.5062103, z: -14}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 8, y: 3, z: -14}
@@ -306,10 +291,10 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
-    - 0.9999995
+    - 1.4142135
+    - 1
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 7.9999995, y: 2.5062103, z: -14}
+  - <Position>k__BackingField: {x: 8, y: 2.5062103, z: -14}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 9, y: 3, z: -14}
@@ -318,8 +303,8 @@ MonoBehaviour:
     - {x: 7, y: 3, z: -13}
     - {x: 7, y: 3, z: -14}
     linkedNodeDistance:
-    - 1.0000005
-    - 1.4142139
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     - 1
@@ -336,8 +321,8 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
-    - 1.0000005
+    - 1.4142135
+    - 1
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 10, y: 2.5062103, z: -14}
     DistanceFromTarget: -1
@@ -402,6 +387,8 @@ MonoBehaviour:
   - <Position>k__BackingField: {x: 14, y: 2.5062103, z: -14}
     DistanceFromTarget: -1
     linkedBoundPositions:
+    - {x: 15, y: 3, z: -14}
+    - {x: 15, y: 3, z: -13}
     - {x: 14, y: 3, z: -13}
     - {x: 13, y: 3, z: -13}
     - {x: 13, y: 3, z: -14}
@@ -409,21 +396,34 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
+    - 1
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: -12, y: 2.5062103, z: -13}
+  - <Position>k__BackingField: {x: 15, y: 2.5062103, z: -14}
     DistanceFromTarget: -1
     linkedBoundPositions:
-    - {x: -11, y: 3, z: -13}
-    - {x: -11, y: 3, z: -12}
-    - {x: -12, y: 3, z: -12}
-    - {x: -12, y: 3, z: -14}
-    - {x: -11, y: 3, z: -14}
+    - {x: 16, y: 3, z: -14}
+    - {x: 16, y: 3, z: -13}
+    - {x: 15, y: 3, z: -13}
+    - {x: 14, y: 3, z: -13}
+    - {x: 14, y: 3, z: -14}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
+    - 1
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: 16, y: 2.5062103, z: -14}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: 16, y: 3, z: -13}
+    - {x: 15, y: 3, z: -13}
+    - {x: 15, y: 3, z: -14}
+    linkedNodeDistance:
     - 1
     - 1.4142135
+    - 1
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: -11, y: 2.5062103, z: -13}
     DistanceFromTarget: -1
@@ -431,18 +431,12 @@ MonoBehaviour:
     - {x: -10, y: 3, z: -13}
     - {x: -10, y: 3, z: -12}
     - {x: -11, y: 3, z: -12}
-    - {x: -12, y: 3, z: -12}
-    - {x: -12, y: 3, z: -13}
-    - {x: -12, y: 3, z: -14}
     - {x: -11, y: 3, z: -14}
     - {x: -10, y: 3, z: -14}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
-    - 1.4142135
-    - 1
-    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -668,16 +662,16 @@ MonoBehaviour:
     - {x: 0, y: 3, z: -14}
     - {x: 1, y: 3, z: -14}
     linkedNodeDistance:
-    - 1.0000001
-    - 1.4142137
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142137
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 1.0000001, y: 2.5062103, z: -13}
+  - <Position>k__BackingField: {x: 1, y: 2.5062103, z: -13}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 2, y: 3, z: -13}
@@ -689,14 +683,14 @@ MonoBehaviour:
     - {x: 1, y: 3, z: -14}
     - {x: 2, y: 3, z: -14}
     linkedNodeDistance:
-    - 0.9999999
-    - 1.4142134
     - 1
-    - 1.4142137
-    - 1.0000001
-    - 1.4142137
+    - 1.4142135
     - 1
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 2, y: 2.5062103, z: -13}
     DistanceFromTarget: -1
@@ -713,9 +707,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142134
-    - 0.9999999
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -794,16 +788,16 @@ MonoBehaviour:
     - {x: 6, y: 3, z: -14}
     - {x: 7, y: 3, z: -14}
     linkedNodeDistance:
-    - 0.9999995
-    - 1.4142132
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 6.9999995, y: 2.5062103, z: -13}
+  - <Position>k__BackingField: {x: 7, y: 2.5062103, z: -13}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 8, y: 3, z: -13}
@@ -818,13 +812,13 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
-    - 0.9999995
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 7.9999995, y: 2.5062103, z: -13}
+  - <Position>k__BackingField: {x: 8, y: 2.5062103, z: -13}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 9, y: 3, z: -13}
@@ -836,14 +830,14 @@ MonoBehaviour:
     - {x: 8, y: 3, z: -14}
     - {x: 9, y: 3, z: -14}
     linkedNodeDistance:
-    - 1.0000005
-    - 1.4142139
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 9, y: 2.5062103, z: -13}
     DistanceFromTarget: -1
@@ -860,9 +854,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
-    - 1.0000005
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -953,32 +947,59 @@ MonoBehaviour:
   - <Position>k__BackingField: {x: 14, y: 2.5062103, z: -13}
     DistanceFromTarget: -1
     linkedBoundPositions:
+    - {x: 15, y: 3, z: -13}
+    - {x: 15, y: 3, z: -12}
     - {x: 14, y: 3, z: -12}
     - {x: 13, y: 3, z: -12}
     - {x: 13, y: 3, z: -13}
     - {x: 13, y: 3, z: -14}
     - {x: 14, y: 3, z: -14}
+    - {x: 15, y: 3, z: -14}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: -12, y: 2.5062103, z: -12}
+  - <Position>k__BackingField: {x: 15, y: 2.5062103, z: -13}
     DistanceFromTarget: -1
     linkedBoundPositions:
-    - {x: -11, y: 3, z: -12}
-    - {x: -11, y: 3, z: -11}
-    - {x: -12, y: 3, z: -11}
-    - {x: -12, y: 3, z: -13}
-    - {x: -11, y: 3, z: -13}
+    - {x: 16, y: 3, z: -13}
+    - {x: 16, y: 3, z: -12}
+    - {x: 15, y: 3, z: -12}
+    - {x: 14, y: 3, z: -12}
+    - {x: 14, y: 3, z: -13}
+    - {x: 14, y: 3, z: -14}
+    - {x: 15, y: 3, z: -14}
+    - {x: 16, y: 3, z: -14}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
     - 1
     - 1.4142135
+    - 1
+    - 1.4142135
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: 16, y: 2.5062103, z: -13}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: 16, y: 3, z: -12}
+    - {x: 15, y: 3, z: -12}
+    - {x: 15, y: 3, z: -13}
+    - {x: 15, y: 3, z: -14}
+    - {x: 16, y: 3, z: -14}
+    linkedNodeDistance:
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: -11, y: 2.5062103, z: -12}
     DistanceFromTarget: -1
@@ -986,18 +1007,12 @@ MonoBehaviour:
     - {x: -10, y: 3, z: -12}
     - {x: -10, y: 3, z: -11}
     - {x: -11, y: 3, z: -11}
-    - {x: -12, y: 3, z: -11}
-    - {x: -12, y: 3, z: -12}
-    - {x: -12, y: 3, z: -13}
     - {x: -11, y: 3, z: -13}
     - {x: -10, y: 3, z: -13}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
-    - 1.4142135
-    - 1
-    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -1223,16 +1238,16 @@ MonoBehaviour:
     - {x: 0, y: 3, z: -13}
     - {x: 1, y: 3, z: -13}
     linkedNodeDistance:
-    - 1.0000001
-    - 1.4142137
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142137
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 1.0000001, y: 2.5062103, z: -12}
+  - <Position>k__BackingField: {x: 1, y: 2.5062103, z: -12}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 2, y: 3, z: -12}
@@ -1244,14 +1259,14 @@ MonoBehaviour:
     - {x: 1, y: 3, z: -13}
     - {x: 2, y: 3, z: -13}
     linkedNodeDistance:
-    - 0.9999999
-    - 1.4142134
     - 1
-    - 1.4142137
-    - 1.0000001
-    - 1.4142137
+    - 1.4142135
     - 1
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 2, y: 2.5062103, z: -12}
     DistanceFromTarget: -1
@@ -1268,9 +1283,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142134
-    - 0.9999999
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -1349,16 +1364,16 @@ MonoBehaviour:
     - {x: 6, y: 3, z: -13}
     - {x: 7, y: 3, z: -13}
     linkedNodeDistance:
-    - 0.9999995
-    - 1.4142132
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 6.9999995, y: 2.5062103, z: -12}
+  - <Position>k__BackingField: {x: 7, y: 2.5062103, z: -12}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 8, y: 3, z: -12}
@@ -1373,13 +1388,13 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
-    - 0.9999995
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 7.9999995, y: 2.5062103, z: -12}
+  - <Position>k__BackingField: {x: 8, y: 2.5062103, z: -12}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 9, y: 3, z: -12}
@@ -1391,14 +1406,14 @@ MonoBehaviour:
     - {x: 8, y: 3, z: -13}
     - {x: 9, y: 3, z: -13}
     linkedNodeDistance:
-    - 1.0000005
-    - 1.4142139
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 9, y: 2.5062103, z: -12}
     DistanceFromTarget: -1
@@ -1415,9 +1430,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
-    - 1.0000005
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -1508,32 +1523,59 @@ MonoBehaviour:
   - <Position>k__BackingField: {x: 14, y: 2.5062103, z: -12}
     DistanceFromTarget: -1
     linkedBoundPositions:
+    - {x: 15, y: 3, z: -12}
+    - {x: 15, y: 3, z: -11}
     - {x: 14, y: 3, z: -11}
     - {x: 13, y: 3, z: -11}
     - {x: 13, y: 3, z: -12}
     - {x: 13, y: 3, z: -13}
     - {x: 14, y: 3, z: -13}
+    - {x: 15, y: 3, z: -13}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: -12, y: 2.5062103, z: -11}
+  - <Position>k__BackingField: {x: 15, y: 2.5062103, z: -12}
     DistanceFromTarget: -1
     linkedBoundPositions:
-    - {x: -11, y: 3, z: -11}
-    - {x: -11, y: 3, z: -10}
-    - {x: -12, y: 3, z: -10}
-    - {x: -12, y: 3, z: -12}
-    - {x: -11, y: 3, z: -12}
+    - {x: 16, y: 3, z: -12}
+    - {x: 16, y: 3, z: -11}
+    - {x: 15, y: 3, z: -11}
+    - {x: 14, y: 3, z: -11}
+    - {x: 14, y: 3, z: -12}
+    - {x: 14, y: 3, z: -13}
+    - {x: 15, y: 3, z: -13}
+    - {x: 16, y: 3, z: -13}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
     - 1
     - 1.4142135
+    - 1
+    - 1.4142135
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: 16, y: 2.5062103, z: -12}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: 16, y: 3, z: -11}
+    - {x: 15, y: 3, z: -11}
+    - {x: 15, y: 3, z: -12}
+    - {x: 15, y: 3, z: -13}
+    - {x: 16, y: 3, z: -13}
+    linkedNodeDistance:
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: -11, y: 2.5062103, z: -11}
     DistanceFromTarget: -1
@@ -1541,18 +1583,12 @@ MonoBehaviour:
     - {x: -10, y: 3, z: -11}
     - {x: -10, y: 3, z: -10}
     - {x: -11, y: 3, z: -10}
-    - {x: -12, y: 3, z: -10}
-    - {x: -12, y: 3, z: -11}
-    - {x: -12, y: 3, z: -12}
     - {x: -11, y: 3, z: -12}
     - {x: -10, y: 3, z: -12}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
-    - 1.4142135
-    - 1
-    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -1778,16 +1814,16 @@ MonoBehaviour:
     - {x: 0, y: 3, z: -12}
     - {x: 1, y: 3, z: -12}
     linkedNodeDistance:
-    - 1.0000001
-    - 1.4142137
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142137
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 1.0000001, y: 2.5062103, z: -11}
+  - <Position>k__BackingField: {x: 1, y: 2.5062103, z: -11}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 2, y: 3, z: -11}
@@ -1799,14 +1835,14 @@ MonoBehaviour:
     - {x: 1, y: 3, z: -12}
     - {x: 2, y: 3, z: -12}
     linkedNodeDistance:
-    - 0.9999999
-    - 1.4142134
     - 1
-    - 1.4142137
-    - 1.0000001
-    - 1.4142137
+    - 1.4142135
     - 1
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 2, y: 2.5062103, z: -11}
     DistanceFromTarget: -1
@@ -1823,9 +1859,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142134
-    - 0.9999999
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -1904,16 +1940,16 @@ MonoBehaviour:
     - {x: 6, y: 3, z: -12}
     - {x: 7, y: 3, z: -12}
     linkedNodeDistance:
-    - 0.9999995
-    - 1.4142132
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 6.9999995, y: 2.5062103, z: -11}
+  - <Position>k__BackingField: {x: 7, y: 2.5062103, z: -11}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 8, y: 3, z: -11}
@@ -1928,13 +1964,13 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
-    - 0.9999995
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 7.9999995, y: 2.5062103, z: -11}
+  - <Position>k__BackingField: {x: 8, y: 2.5062103, z: -11}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 9, y: 3, z: -11}
@@ -1946,14 +1982,14 @@ MonoBehaviour:
     - {x: 8, y: 3, z: -12}
     - {x: 9, y: 3, z: -12}
     linkedNodeDistance:
-    - 1.0000005
-    - 1.4142139
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 9, y: 2.5062103, z: -11}
     DistanceFromTarget: -1
@@ -1970,9 +2006,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
-    - 1.0000005
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -2063,32 +2099,59 @@ MonoBehaviour:
   - <Position>k__BackingField: {x: 14, y: 2.5062103, z: -11}
     DistanceFromTarget: -1
     linkedBoundPositions:
+    - {x: 15, y: 3, z: -11}
+    - {x: 15, y: 3, z: -10}
     - {x: 14, y: 3, z: -10}
     - {x: 13, y: 3, z: -10}
     - {x: 13, y: 3, z: -11}
     - {x: 13, y: 3, z: -12}
     - {x: 14, y: 3, z: -12}
+    - {x: 15, y: 3, z: -12}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: -12, y: 2.5062103, z: -10}
+  - <Position>k__BackingField: {x: 15, y: 2.5062103, z: -11}
     DistanceFromTarget: -1
     linkedBoundPositions:
-    - {x: -11, y: 3, z: -10}
-    - {x: -11, y: 3, z: -9}
-    - {x: -12, y: 3, z: -9}
-    - {x: -12, y: 3, z: -11}
-    - {x: -11, y: 3, z: -11}
+    - {x: 16, y: 3, z: -11}
+    - {x: 16, y: 3, z: -10}
+    - {x: 15, y: 3, z: -10}
+    - {x: 14, y: 3, z: -10}
+    - {x: 14, y: 3, z: -11}
+    - {x: 14, y: 3, z: -12}
+    - {x: 15, y: 3, z: -12}
+    - {x: 16, y: 3, z: -12}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
     - 1
     - 1.4142135
+    - 1
+    - 1.4142135
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: 16, y: 2.5062103, z: -11}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: 16, y: 3, z: -10}
+    - {x: 15, y: 3, z: -10}
+    - {x: 15, y: 3, z: -11}
+    - {x: 15, y: 3, z: -12}
+    - {x: 16, y: 3, z: -12}
+    linkedNodeDistance:
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: -11, y: 2.5062103, z: -10}
     DistanceFromTarget: -1
@@ -2096,18 +2159,12 @@ MonoBehaviour:
     - {x: -10, y: 3, z: -10}
     - {x: -10, y: 3, z: -9}
     - {x: -11, y: 3, z: -9}
-    - {x: -12, y: 3, z: -9}
-    - {x: -12, y: 3, z: -10}
-    - {x: -12, y: 3, z: -11}
     - {x: -11, y: 3, z: -11}
     - {x: -10, y: 3, z: -11}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
-    - 1.4142135
-    - 1
-    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -2333,16 +2390,16 @@ MonoBehaviour:
     - {x: 0, y: 3, z: -11}
     - {x: 1, y: 3, z: -11}
     linkedNodeDistance:
-    - 1.0000001
-    - 1.4142137
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142137
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 1.0000001, y: 2.5062103, z: -10}
+  - <Position>k__BackingField: {x: 1, y: 2.5062103, z: -10}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 2, y: 3, z: -10}
@@ -2354,14 +2411,14 @@ MonoBehaviour:
     - {x: 1, y: 3, z: -11}
     - {x: 2, y: 3, z: -11}
     linkedNodeDistance:
-    - 0.9999999
-    - 1.4142134
     - 1
-    - 1.4142137
-    - 1.0000001
-    - 1.4142137
+    - 1.4142135
     - 1
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 2, y: 2.5062103, z: -10}
     DistanceFromTarget: -1
@@ -2378,9 +2435,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142134
-    - 0.9999999
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -2459,16 +2516,16 @@ MonoBehaviour:
     - {x: 6, y: 3, z: -11}
     - {x: 7, y: 3, z: -11}
     linkedNodeDistance:
-    - 0.9999995
-    - 1.4142132
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 6.9999995, y: 2.5062103, z: -10}
+  - <Position>k__BackingField: {x: 7, y: 2.5062103, z: -10}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 8, y: 3, z: -10}
@@ -2483,13 +2540,13 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
-    - 0.9999995
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 7.9999995, y: 2.5062103, z: -10}
+  - <Position>k__BackingField: {x: 8, y: 2.5062103, z: -10}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 9, y: 3, z: -10}
@@ -2501,14 +2558,14 @@ MonoBehaviour:
     - {x: 8, y: 3, z: -11}
     - {x: 9, y: 3, z: -11}
     linkedNodeDistance:
-    - 1.0000005
-    - 1.4142139
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 9, y: 2.5062103, z: -10}
     DistanceFromTarget: -1
@@ -2525,9 +2582,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
-    - 1.0000005
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -2618,32 +2675,59 @@ MonoBehaviour:
   - <Position>k__BackingField: {x: 14, y: 2.5062103, z: -10}
     DistanceFromTarget: -1
     linkedBoundPositions:
+    - {x: 15, y: 3, z: -10}
+    - {x: 15, y: 3, z: -9}
     - {x: 14, y: 3, z: -9}
     - {x: 13, y: 3, z: -9}
     - {x: 13, y: 3, z: -10}
     - {x: 13, y: 3, z: -11}
     - {x: 14, y: 3, z: -11}
+    - {x: 15, y: 3, z: -11}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: -12, y: 2.5062103, z: -9}
+  - <Position>k__BackingField: {x: 15, y: 2.5062103, z: -10}
     DistanceFromTarget: -1
     linkedBoundPositions:
-    - {x: -11, y: 3, z: -9}
-    - {x: -11, y: 3, z: -8}
-    - {x: -12, y: 3, z: -8}
-    - {x: -12, y: 3, z: -10}
-    - {x: -11, y: 3, z: -10}
+    - {x: 16, y: 3, z: -10}
+    - {x: 16, y: 3, z: -9}
+    - {x: 15, y: 3, z: -9}
+    - {x: 14, y: 3, z: -9}
+    - {x: 14, y: 3, z: -10}
+    - {x: 14, y: 3, z: -11}
+    - {x: 15, y: 3, z: -11}
+    - {x: 16, y: 3, z: -11}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
     - 1
     - 1.4142135
+    - 1
+    - 1.4142135
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: 16, y: 2.5062103, z: -10}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: 16, y: 3, z: -9}
+    - {x: 15, y: 3, z: -9}
+    - {x: 15, y: 3, z: -10}
+    - {x: 15, y: 3, z: -11}
+    - {x: 16, y: 3, z: -11}
+    linkedNodeDistance:
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: -11, y: 2.5062103, z: -9}
     DistanceFromTarget: -1
@@ -2651,18 +2735,12 @@ MonoBehaviour:
     - {x: -10, y: 3, z: -9}
     - {x: -10, y: 3, z: -8}
     - {x: -11, y: 3, z: -8}
-    - {x: -12, y: 3, z: -8}
-    - {x: -12, y: 3, z: -9}
-    - {x: -12, y: 3, z: -10}
     - {x: -11, y: 3, z: -10}
     - {x: -10, y: 3, z: -10}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
-    - 1.4142135
-    - 1
-    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -2888,16 +2966,16 @@ MonoBehaviour:
     - {x: 0, y: 3, z: -10}
     - {x: 1, y: 3, z: -10}
     linkedNodeDistance:
-    - 1.0000001
-    - 1.4142137
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142137
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 1.0000001, y: 2.5062103, z: -9}
+  - <Position>k__BackingField: {x: 1, y: 2.5062103, z: -9}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 2, y: 3, z: -9}
@@ -2909,14 +2987,14 @@ MonoBehaviour:
     - {x: 1, y: 3, z: -10}
     - {x: 2, y: 3, z: -10}
     linkedNodeDistance:
-    - 0.9999999
-    - 1.4142134
     - 1
-    - 1.4142137
-    - 1.0000001
-    - 1.4142137
+    - 1.4142135
     - 1
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 2, y: 2.5062103, z: -9}
     DistanceFromTarget: -1
@@ -2933,9 +3011,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142134
-    - 0.9999999
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -3014,16 +3092,16 @@ MonoBehaviour:
     - {x: 6, y: 3, z: -10}
     - {x: 7, y: 3, z: -10}
     linkedNodeDistance:
-    - 0.9999995
-    - 1.4142132
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 6.9999995, y: 2.5062103, z: -9}
+  - <Position>k__BackingField: {x: 7, y: 2.5062103, z: -9}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 8, y: 3, z: -9}
@@ -3038,13 +3116,13 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
-    - 0.9999995
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 7.9999995, y: 2.5062103, z: -9}
+  - <Position>k__BackingField: {x: 8, y: 2.5062103, z: -9}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 9, y: 3, z: -9}
@@ -3056,14 +3134,14 @@ MonoBehaviour:
     - {x: 8, y: 3, z: -10}
     - {x: 9, y: 3, z: -10}
     linkedNodeDistance:
-    - 1.0000005
-    - 1.4142139
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 9, y: 2.5062103, z: -9}
     DistanceFromTarget: -1
@@ -3080,9 +3158,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
-    - 1.0000005
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -3173,32 +3251,59 @@ MonoBehaviour:
   - <Position>k__BackingField: {x: 14, y: 2.5062103, z: -9}
     DistanceFromTarget: -1
     linkedBoundPositions:
+    - {x: 15, y: 3, z: -9}
+    - {x: 15, y: 3, z: -8}
     - {x: 14, y: 3, z: -8}
     - {x: 13, y: 3, z: -8}
     - {x: 13, y: 3, z: -9}
     - {x: 13, y: 3, z: -10}
     - {x: 14, y: 3, z: -10}
+    - {x: 15, y: 3, z: -10}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: -12, y: 2.5062103, z: -8}
+  - <Position>k__BackingField: {x: 15, y: 2.5062103, z: -9}
     DistanceFromTarget: -1
     linkedBoundPositions:
-    - {x: -11, y: 3, z: -8}
-    - {x: -11, y: 3, z: -7}
-    - {x: -12, y: 3, z: -7}
-    - {x: -12, y: 3, z: -9}
-    - {x: -11, y: 3, z: -9}
+    - {x: 16, y: 3, z: -9}
+    - {x: 16, y: 3, z: -8}
+    - {x: 15, y: 3, z: -8}
+    - {x: 14, y: 3, z: -8}
+    - {x: 14, y: 3, z: -9}
+    - {x: 14, y: 3, z: -10}
+    - {x: 15, y: 3, z: -10}
+    - {x: 16, y: 3, z: -10}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
     - 1
     - 1.4142135
+    - 1
+    - 1.4142135
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: 16, y: 2.5062103, z: -9}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: 16, y: 3, z: -8}
+    - {x: 15, y: 3, z: -8}
+    - {x: 15, y: 3, z: -9}
+    - {x: 15, y: 3, z: -10}
+    - {x: 16, y: 3, z: -10}
+    linkedNodeDistance:
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: -11, y: 2.5062103, z: -8}
     DistanceFromTarget: -1
@@ -3206,18 +3311,12 @@ MonoBehaviour:
     - {x: -10, y: 3, z: -8}
     - {x: -10, y: 3, z: -7}
     - {x: -11, y: 3, z: -7}
-    - {x: -12, y: 3, z: -7}
-    - {x: -12, y: 3, z: -8}
-    - {x: -12, y: 3, z: -9}
     - {x: -11, y: 3, z: -9}
     - {x: -10, y: 3, z: -9}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
-    - 1.4142135
-    - 1
-    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -3443,16 +3542,16 @@ MonoBehaviour:
     - {x: 0, y: 3, z: -9}
     - {x: 1, y: 3, z: -9}
     linkedNodeDistance:
-    - 1.0000001
-    - 1.4142137
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142137
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 1.0000001, y: 2.5062103, z: -8}
+  - <Position>k__BackingField: {x: 1, y: 2.5062103, z: -8}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 2, y: 3, z: -8}
@@ -3464,14 +3563,14 @@ MonoBehaviour:
     - {x: 1, y: 3, z: -9}
     - {x: 2, y: 3, z: -9}
     linkedNodeDistance:
-    - 0.9999999
-    - 1.4142134
     - 1
-    - 1.4142137
-    - 1.0000001
-    - 1.4142137
+    - 1.4142135
     - 1
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 2, y: 2.5062103, z: -8}
     DistanceFromTarget: -1
@@ -3488,9 +3587,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142134
-    - 0.9999999
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -3569,16 +3668,16 @@ MonoBehaviour:
     - {x: 6, y: 3, z: -9}
     - {x: 7, y: 3, z: -9}
     linkedNodeDistance:
-    - 0.9999995
-    - 1.4142132
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 6.9999995, y: 2.5062103, z: -8}
+  - <Position>k__BackingField: {x: 7, y: 2.5062103, z: -8}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 8, y: 3, z: -8}
@@ -3593,13 +3692,13 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
-    - 0.9999995
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 7.9999995, y: 2.5062103, z: -8}
+  - <Position>k__BackingField: {x: 8, y: 2.5062103, z: -8}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 9, y: 3, z: -8}
@@ -3611,14 +3710,14 @@ MonoBehaviour:
     - {x: 8, y: 3, z: -9}
     - {x: 9, y: 3, z: -9}
     linkedNodeDistance:
-    - 1.0000005
-    - 1.4142139
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 9, y: 2.5062103, z: -8}
     DistanceFromTarget: -1
@@ -3635,9 +3734,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
-    - 1.0000005
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -3728,32 +3827,59 @@ MonoBehaviour:
   - <Position>k__BackingField: {x: 14, y: 2.5062103, z: -8}
     DistanceFromTarget: -1
     linkedBoundPositions:
+    - {x: 15, y: 3, z: -8}
+    - {x: 15, y: 3, z: -7}
     - {x: 14, y: 3, z: -7}
     - {x: 13, y: 3, z: -7}
     - {x: 13, y: 3, z: -8}
     - {x: 13, y: 3, z: -9}
     - {x: 14, y: 3, z: -9}
+    - {x: 15, y: 3, z: -9}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: -12, y: 2.5062103, z: -7}
+  - <Position>k__BackingField: {x: 15, y: 2.5062103, z: -8}
     DistanceFromTarget: -1
     linkedBoundPositions:
-    - {x: -11, y: 3, z: -7}
-    - {x: -11, y: 3, z: -6}
-    - {x: -12, y: 3, z: -6}
-    - {x: -12, y: 3, z: -8}
-    - {x: -11, y: 3, z: -8}
+    - {x: 16, y: 3, z: -8}
+    - {x: 16, y: 3, z: -7}
+    - {x: 15, y: 3, z: -7}
+    - {x: 14, y: 3, z: -7}
+    - {x: 14, y: 3, z: -8}
+    - {x: 14, y: 3, z: -9}
+    - {x: 15, y: 3, z: -9}
+    - {x: 16, y: 3, z: -9}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
     - 1
     - 1.4142135
+    - 1
+    - 1.4142135
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: 16, y: 2.5062103, z: -8}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: 16, y: 3, z: -7}
+    - {x: 15, y: 3, z: -7}
+    - {x: 15, y: 3, z: -8}
+    - {x: 15, y: 3, z: -9}
+    - {x: 16, y: 3, z: -9}
+    linkedNodeDistance:
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: -11, y: 2.5062103, z: -7}
     DistanceFromTarget: -1
@@ -3761,18 +3887,12 @@ MonoBehaviour:
     - {x: -10, y: 3, z: -7}
     - {x: -10, y: 3, z: -6}
     - {x: -11, y: 3, z: -6}
-    - {x: -12, y: 3, z: -6}
-    - {x: -12, y: 3, z: -7}
-    - {x: -12, y: 3, z: -8}
     - {x: -11, y: 3, z: -8}
     - {x: -10, y: 3, z: -8}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
-    - 1.4142135
-    - 1
-    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -3998,16 +4118,16 @@ MonoBehaviour:
     - {x: 0, y: 3, z: -8}
     - {x: 1, y: 3, z: -8}
     linkedNodeDistance:
-    - 1.0000001
-    - 1.4142137
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142137
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 1.0000001, y: 2.5062103, z: -7}
+  - <Position>k__BackingField: {x: 1, y: 2.5062103, z: -7}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 2, y: 3, z: -7}
@@ -4019,14 +4139,14 @@ MonoBehaviour:
     - {x: 1, y: 3, z: -8}
     - {x: 2, y: 3, z: -8}
     linkedNodeDistance:
-    - 0.9999999
-    - 1.4142134
     - 1
-    - 1.4142137
-    - 1.0000001
-    - 1.4142137
+    - 1.4142135
     - 1
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 2, y: 2.5062103, z: -7}
     DistanceFromTarget: -1
@@ -4043,9 +4163,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142134
-    - 0.9999999
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -4124,16 +4244,16 @@ MonoBehaviour:
     - {x: 6, y: 3, z: -8}
     - {x: 7, y: 3, z: -8}
     linkedNodeDistance:
-    - 0.9999995
-    - 1.4142132
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 6.9999995, y: 2.5062103, z: -7}
+  - <Position>k__BackingField: {x: 7, y: 2.5062103, z: -7}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 8, y: 3, z: -7}
@@ -4148,13 +4268,13 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
-    - 0.9999995
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 7.9999995, y: 2.5062103, z: -7}
+  - <Position>k__BackingField: {x: 8, y: 2.5062103, z: -7}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 9, y: 3, z: -7}
@@ -4166,14 +4286,14 @@ MonoBehaviour:
     - {x: 8, y: 3, z: -8}
     - {x: 9, y: 3, z: -8}
     linkedNodeDistance:
-    - 1.0000005
-    - 1.4142139
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 9, y: 2.5062103, z: -7}
     DistanceFromTarget: -1
@@ -4190,9 +4310,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
-    - 1.0000005
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -4283,27 +4403,35 @@ MonoBehaviour:
   - <Position>k__BackingField: {x: 14, y: 2.5062103, z: -7}
     DistanceFromTarget: -1
     linkedBoundPositions:
+    - {x: 15, y: 3, z: -7}
+    - {x: 15, y: 3, z: -6}
     - {x: 14, y: 3, z: -6}
     - {x: 13, y: 3, z: -6}
     - {x: 13, y: 3, z: -7}
     - {x: 13, y: 3, z: -8}
     - {x: 14, y: 3, z: -8}
+    - {x: 15, y: 3, z: -8}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: -12, y: 2.5062103, z: -6}
+  - <Position>k__BackingField: {x: 15, y: 2.5062103, z: -7}
     DistanceFromTarget: -1
     linkedBoundPositions:
-    - {x: -11, y: 3, z: -6}
-    - {x: -11, y: 3, z: -5}
-    - {x: -12, y: 3, z: -5}
-    - {x: -13, y: 3, z: -5}
-    - {x: -12, y: 3, z: -7}
-    - {x: -11, y: 3, z: -7}
+    - {x: 16, y: 3, z: -7}
+    - {x: 16, y: 3, z: -6}
+    - {x: 15, y: 3, z: -6}
+    - {x: 14, y: 3, z: -6}
+    - {x: 14, y: 3, z: -7}
+    - {x: 14, y: 3, z: -8}
+    - {x: 15, y: 3, z: -8}
+    - {x: 16, y: 3, z: -8}
     linkedNodeDistance:
     - 1
     - 1.4142135
@@ -4311,6 +4439,23 @@ MonoBehaviour:
     - 1.4142135
     - 1
     - 1.4142135
+    - 1
+    - 1.4142135
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: 16, y: 2.5062103, z: -7}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: 16, y: 3, z: -6}
+    - {x: 15, y: 3, z: -6}
+    - {x: 15, y: 3, z: -7}
+    - {x: 15, y: 3, z: -8}
+    - {x: 16, y: 3, z: -8}
+    linkedNodeDistance:
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: -11, y: 2.5062103, z: -6}
     DistanceFromTarget: -1
@@ -4319,13 +4464,9 @@ MonoBehaviour:
     - {x: -10, y: 3, z: -5}
     - {x: -11, y: 3, z: -5}
     - {x: -12, y: 3, z: -5}
-    - {x: -12, y: 3, z: -6}
-    - {x: -12, y: 3, z: -7}
     - {x: -11, y: 3, z: -7}
     - {x: -10, y: 3, z: -7}
     linkedNodeDistance:
-    - 1
-    - 1.4142135
     - 1
     - 1.4142135
     - 1
@@ -4555,16 +4696,16 @@ MonoBehaviour:
     - {x: 0, y: 3, z: -7}
     - {x: 1, y: 3, z: -7}
     linkedNodeDistance:
-    - 1.0000001
-    - 1.4142137
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142137
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 1.0000001, y: 2.5062103, z: -6}
+  - <Position>k__BackingField: {x: 1, y: 2.5062103, z: -6}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 2, y: 3, z: -6}
@@ -4576,14 +4717,14 @@ MonoBehaviour:
     - {x: 1, y: 3, z: -7}
     - {x: 2, y: 3, z: -7}
     linkedNodeDistance:
-    - 0.9999999
-    - 1.4142134
     - 1
-    - 1.4142137
-    - 1.0000001
-    - 1.4142137
+    - 1.4142135
     - 1
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 2, y: 2.5062103, z: -6}
     DistanceFromTarget: -1
@@ -4600,9 +4741,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142134
-    - 0.9999999
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -4681,16 +4822,16 @@ MonoBehaviour:
     - {x: 6, y: 3, z: -7}
     - {x: 7, y: 3, z: -7}
     linkedNodeDistance:
-    - 0.9999995
-    - 1.4142132
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 6.9999995, y: 2.5062103, z: -6}
+  - <Position>k__BackingField: {x: 7, y: 2.5062103, z: -6}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 8, y: 3, z: -6}
@@ -4705,13 +4846,13 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
-    - 0.9999995
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 7.9999995, y: 2.5062103, z: -6}
+  - <Position>k__BackingField: {x: 8, y: 2.5062103, z: -6}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 9, y: 3, z: -6}
@@ -4723,14 +4864,14 @@ MonoBehaviour:
     - {x: 8, y: 3, z: -7}
     - {x: 9, y: 3, z: -7}
     linkedNodeDistance:
-    - 1.0000005
-    - 1.4142139
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 9, y: 2.5062103, z: -6}
     DistanceFromTarget: -1
@@ -4747,9 +4888,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
-    - 1.0000005
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -4840,25 +4981,56 @@ MonoBehaviour:
   - <Position>k__BackingField: {x: 14, y: 2.5062103, z: -6}
     DistanceFromTarget: -1
     linkedBoundPositions:
+    - {x: 15, y: 3, z: -6}
+    - {x: 15, y: 3, z: -5}
     - {x: 14, y: 3, z: -5}
     - {x: 13, y: 3, z: -5}
     - {x: 13, y: 3, z: -6}
     - {x: 13, y: 3, z: -7}
     - {x: 14, y: 3, z: -7}
+    - {x: 15, y: 3, z: -7}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: -14, y: 2.5062103, z: -5}
+  - <Position>k__BackingField: {x: 15, y: 2.5062103, z: -6}
     DistanceFromTarget: -1
     linkedBoundPositions:
-    - {x: -13, y: 3, z: -5}
-    - {x: -13, y: 3, z: -4}
-    - {x: -14, y: 3, z: -4}
+    - {x: 16, y: 3, z: -6}
+    - {x: 16, y: 3, z: -5}
+    - {x: 15, y: 3, z: -5}
+    - {x: 14, y: 3, z: -5}
+    - {x: 14, y: 3, z: -6}
+    - {x: 14, y: 3, z: -7}
+    - {x: 15, y: 3, z: -7}
+    - {x: 16, y: 3, z: -7}
     linkedNodeDistance:
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: 16, y: 2.5062103, z: -6}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: 16, y: 3, z: -5}
+    - {x: 15, y: 3, z: -5}
+    - {x: 15, y: 3, z: -6}
+    - {x: 15, y: 3, z: -7}
+    - {x: 16, y: 3, z: -7}
+    linkedNodeDistance:
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     - 1
@@ -4869,16 +5041,10 @@ MonoBehaviour:
     - {x: -12, y: 3, z: -5}
     - {x: -12, y: 3, z: -4}
     - {x: -13, y: 3, z: -4}
-    - {x: -14, y: 3, z: -4}
-    - {x: -14, y: 3, z: -5}
-    - {x: -12, y: 3, z: -6}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
-    - 1.4142135
-    - 1
-    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: -12, y: 2.5062103, z: -5}
     DistanceFromTarget: -1
@@ -4888,14 +5054,12 @@ MonoBehaviour:
     - {x: -12, y: 3, z: -4}
     - {x: -13, y: 3, z: -4}
     - {x: -13, y: 3, z: -5}
-    - {x: -12, y: 3, z: -6}
     - {x: -11, y: 3, z: -6}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
     - 1.4142135
-    - 1
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -4907,7 +5071,6 @@ MonoBehaviour:
     - {x: -11, y: 3, z: -4}
     - {x: -12, y: 3, z: -4}
     - {x: -12, y: 3, z: -5}
-    - {x: -12, y: 3, z: -6}
     - {x: -11, y: 3, z: -6}
     - {x: -10, y: 3, z: -6}
     linkedNodeDistance:
@@ -4916,7 +5079,6 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -5142,16 +5304,16 @@ MonoBehaviour:
     - {x: 0, y: 3, z: -6}
     - {x: 1, y: 3, z: -6}
     linkedNodeDistance:
-    - 1.0000001
-    - 1.4142137
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142137
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 1.0000001, y: 2.5062103, z: -5}
+  - <Position>k__BackingField: {x: 1, y: 2.5062103, z: -5}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 2, y: 3, z: -5}
@@ -5163,14 +5325,14 @@ MonoBehaviour:
     - {x: 1, y: 3, z: -6}
     - {x: 2, y: 3, z: -6}
     linkedNodeDistance:
-    - 0.9999999
-    - 1.4142134
     - 1
-    - 1.4142137
-    - 1.0000001
-    - 1.4142137
+    - 1.4142135
     - 1
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 2, y: 2.5062103, z: -5}
     DistanceFromTarget: -1
@@ -5187,9 +5349,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142134
-    - 0.9999999
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -5268,16 +5430,16 @@ MonoBehaviour:
     - {x: 6, y: 3, z: -6}
     - {x: 7, y: 3, z: -6}
     linkedNodeDistance:
-    - 0.9999995
-    - 1.4142132
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 6.9999995, y: 2.5062103, z: -5}
+  - <Position>k__BackingField: {x: 7, y: 2.5062103, z: -5}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 8, y: 3, z: -5}
@@ -5292,13 +5454,13 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
-    - 0.9999995
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 7.9999995, y: 2.5062103, z: -5}
+  - <Position>k__BackingField: {x: 8, y: 2.5062103, z: -5}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 9, y: 3, z: -5}
@@ -5310,14 +5472,14 @@ MonoBehaviour:
     - {x: 8, y: 3, z: -6}
     - {x: 9, y: 3, z: -6}
     linkedNodeDistance:
-    - 1.0000005
-    - 1.4142139
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 9, y: 2.5062103, z: -5}
     DistanceFromTarget: -1
@@ -5334,9 +5496,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
-    - 1.0000005
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -5427,32 +5589,59 @@ MonoBehaviour:
   - <Position>k__BackingField: {x: 14, y: 2.5062103, z: -5}
     DistanceFromTarget: -1
     linkedBoundPositions:
+    - {x: 15, y: 3, z: -5}
+    - {x: 15, y: 3, z: -4}
     - {x: 14, y: 3, z: -4}
     - {x: 13, y: 3, z: -4}
     - {x: 13, y: 3, z: -5}
     - {x: 13, y: 3, z: -6}
     - {x: 14, y: 3, z: -6}
+    - {x: 15, y: 3, z: -6}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: -14, y: 2.5062103, z: -4}
+  - <Position>k__BackingField: {x: 15, y: 2.5062103, z: -5}
     DistanceFromTarget: -1
     linkedBoundPositions:
-    - {x: -13, y: 3, z: -4}
-    - {x: -13, y: 3, z: -3}
-    - {x: -14, y: 3, z: -3}
-    - {x: -14, y: 3, z: -5}
-    - {x: -13, y: 3, z: -5}
+    - {x: 16, y: 3, z: -5}
+    - {x: 16, y: 3, z: -4}
+    - {x: 15, y: 3, z: -4}
+    - {x: 14, y: 3, z: -4}
+    - {x: 14, y: 3, z: -5}
+    - {x: 14, y: 3, z: -6}
+    - {x: 15, y: 3, z: -6}
+    - {x: 16, y: 3, z: -6}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
     - 1
     - 1.4142135
+    - 1
+    - 1.4142135
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: 16, y: 2.5062103, z: -5}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: 16, y: 3, z: -4}
+    - {x: 15, y: 3, z: -4}
+    - {x: 15, y: 3, z: -5}
+    - {x: 15, y: 3, z: -6}
+    - {x: 16, y: 3, z: -6}
+    linkedNodeDistance:
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: -13, y: 2.5062103, z: -4}
     DistanceFromTarget: -1
@@ -5460,18 +5649,12 @@ MonoBehaviour:
     - {x: -12, y: 3, z: -4}
     - {x: -12, y: 3, z: -3}
     - {x: -13, y: 3, z: -3}
-    - {x: -14, y: 3, z: -3}
-    - {x: -14, y: 3, z: -4}
-    - {x: -14, y: 3, z: -5}
     - {x: -13, y: 3, z: -5}
     - {x: -12, y: 3, z: -5}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
-    - 1.4142135
-    - 1
-    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -5739,16 +5922,16 @@ MonoBehaviour:
     - {x: 0, y: 3, z: -5}
     - {x: 1, y: 3, z: -5}
     linkedNodeDistance:
-    - 1.0000001
-    - 1.4142137
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142137
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 1.0000001, y: 2.5062103, z: -4}
+  - <Position>k__BackingField: {x: 1, y: 2.5062103, z: -4}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 2, y: 3, z: -4}
@@ -5760,14 +5943,14 @@ MonoBehaviour:
     - {x: 1, y: 3, z: -5}
     - {x: 2, y: 3, z: -5}
     linkedNodeDistance:
-    - 0.9999999
-    - 1.4142134
     - 1
-    - 1.4142137
-    - 1.0000001
-    - 1.4142137
+    - 1.4142135
     - 1
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 2, y: 2.5062103, z: -4}
     DistanceFromTarget: -1
@@ -5784,9 +5967,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142134
-    - 0.9999999
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -5865,16 +6048,16 @@ MonoBehaviour:
     - {x: 6, y: 3, z: -5}
     - {x: 7, y: 3, z: -5}
     linkedNodeDistance:
-    - 0.9999995
-    - 1.4142132
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 6.9999995, y: 2.5062103, z: -4}
+  - <Position>k__BackingField: {x: 7, y: 2.5062103, z: -4}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 8, y: 3, z: -4}
@@ -5889,13 +6072,13 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
-    - 0.9999995
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 7.9999995, y: 2.5062103, z: -4}
+  - <Position>k__BackingField: {x: 8, y: 2.5062103, z: -4}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 9, y: 3, z: -4}
@@ -5907,14 +6090,14 @@ MonoBehaviour:
     - {x: 8, y: 3, z: -5}
     - {x: 9, y: 3, z: -5}
     linkedNodeDistance:
-    - 1.0000005
-    - 1.4142139
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 9, y: 2.5062103, z: -4}
     DistanceFromTarget: -1
@@ -5931,9 +6114,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
-    - 1.0000005
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -6024,32 +6207,59 @@ MonoBehaviour:
   - <Position>k__BackingField: {x: 14, y: 2.5062103, z: -4}
     DistanceFromTarget: -1
     linkedBoundPositions:
+    - {x: 15, y: 3, z: -4}
+    - {x: 15, y: 3, z: -3}
     - {x: 14, y: 3, z: -3}
     - {x: 13, y: 3, z: -3}
     - {x: 13, y: 3, z: -4}
     - {x: 13, y: 3, z: -5}
     - {x: 14, y: 3, z: -5}
+    - {x: 15, y: 3, z: -5}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: -14, y: 2.5062103, z: -3}
+  - <Position>k__BackingField: {x: 15, y: 2.5062103, z: -4}
     DistanceFromTarget: -1
     linkedBoundPositions:
-    - {x: -13, y: 3, z: -3}
-    - {x: -13, y: 3, z: -2}
-    - {x: -14, y: 3, z: -2}
-    - {x: -14, y: 3, z: -4}
-    - {x: -13, y: 3, z: -4}
+    - {x: 16, y: 3, z: -4}
+    - {x: 16, y: 3, z: -3}
+    - {x: 15, y: 3, z: -3}
+    - {x: 14, y: 3, z: -3}
+    - {x: 14, y: 3, z: -4}
+    - {x: 14, y: 3, z: -5}
+    - {x: 15, y: 3, z: -5}
+    - {x: 16, y: 3, z: -5}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
     - 1
     - 1.4142135
+    - 1
+    - 1.4142135
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: 16, y: 2.5062103, z: -4}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: 16, y: 3, z: -3}
+    - {x: 15, y: 3, z: -3}
+    - {x: 15, y: 3, z: -4}
+    - {x: 15, y: 3, z: -5}
+    - {x: 16, y: 3, z: -5}
+    linkedNodeDistance:
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: -13, y: 2.5062103, z: -3}
     DistanceFromTarget: -1
@@ -6057,18 +6267,12 @@ MonoBehaviour:
     - {x: -12, y: 3, z: -3}
     - {x: -12, y: 3, z: -2}
     - {x: -13, y: 3, z: -2}
-    - {x: -14, y: 3, z: -2}
-    - {x: -14, y: 3, z: -3}
-    - {x: -14, y: 3, z: -4}
     - {x: -13, y: 3, z: -4}
     - {x: -12, y: 3, z: -4}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
-    - 1.4142135
-    - 1
-    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -6336,16 +6540,16 @@ MonoBehaviour:
     - {x: 0, y: 3, z: -4}
     - {x: 1, y: 3, z: -4}
     linkedNodeDistance:
-    - 1.0000001
-    - 1.4142137
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142137
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 1.0000001, y: 2.5062103, z: -3}
+  - <Position>k__BackingField: {x: 1, y: 2.5062103, z: -3}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 2, y: 3, z: -3}
@@ -6357,14 +6561,14 @@ MonoBehaviour:
     - {x: 1, y: 3, z: -4}
     - {x: 2, y: 3, z: -4}
     linkedNodeDistance:
-    - 0.9999999
-    - 1.4142134
     - 1
-    - 1.4142137
-    - 1.0000001
-    - 1.4142137
+    - 1.4142135
     - 1
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 2, y: 2.5062103, z: -3}
     DistanceFromTarget: -1
@@ -6381,9 +6585,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142134
-    - 0.9999999
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -6462,16 +6666,16 @@ MonoBehaviour:
     - {x: 6, y: 3, z: -4}
     - {x: 7, y: 3, z: -4}
     linkedNodeDistance:
-    - 0.9999995
-    - 1.4142132
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 6.9999995, y: 2.5062103, z: -3}
+  - <Position>k__BackingField: {x: 7, y: 2.5062103, z: -3}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 8, y: 3, z: -3}
@@ -6486,13 +6690,13 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
-    - 0.9999995
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 7.9999995, y: 2.5062103, z: -3}
+  - <Position>k__BackingField: {x: 8, y: 2.5062103, z: -3}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 9, y: 3, z: -3}
@@ -6504,14 +6708,14 @@ MonoBehaviour:
     - {x: 8, y: 3, z: -4}
     - {x: 9, y: 3, z: -4}
     linkedNodeDistance:
-    - 1.0000005
-    - 1.4142139
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 9, y: 2.5062103, z: -3}
     DistanceFromTarget: -1
@@ -6528,9 +6732,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
-    - 1.0000005
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -6621,32 +6825,59 @@ MonoBehaviour:
   - <Position>k__BackingField: {x: 14, y: 2.5062103, z: -3}
     DistanceFromTarget: -1
     linkedBoundPositions:
+    - {x: 15, y: 3, z: -3}
+    - {x: 15, y: 3, z: -2}
     - {x: 14, y: 3, z: -2}
     - {x: 13, y: 3, z: -2}
     - {x: 13, y: 3, z: -3}
     - {x: 13, y: 3, z: -4}
     - {x: 14, y: 3, z: -4}
+    - {x: 15, y: 3, z: -4}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: -14, y: 2.5062103, z: -2}
+  - <Position>k__BackingField: {x: 15, y: 2.5062103, z: -3}
     DistanceFromTarget: -1
     linkedBoundPositions:
-    - {x: -13, y: 3, z: -2}
-    - {x: -13, y: 3, z: -1}
-    - {x: -14, y: 3, z: -1}
-    - {x: -14, y: 3, z: -3}
-    - {x: -13, y: 3, z: -3}
+    - {x: 16, y: 3, z: -3}
+    - {x: 16, y: 3, z: -2}
+    - {x: 15, y: 3, z: -2}
+    - {x: 14, y: 3, z: -2}
+    - {x: 14, y: 3, z: -3}
+    - {x: 14, y: 3, z: -4}
+    - {x: 15, y: 3, z: -4}
+    - {x: 16, y: 3, z: -4}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
     - 1
     - 1.4142135
+    - 1
+    - 1.4142135
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: 16, y: 2.5062103, z: -3}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: 16, y: 3, z: -2}
+    - {x: 15, y: 3, z: -2}
+    - {x: 15, y: 3, z: -3}
+    - {x: 15, y: 3, z: -4}
+    - {x: 16, y: 3, z: -4}
+    linkedNodeDistance:
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: -13, y: 2.5062103, z: -2}
     DistanceFromTarget: -1
@@ -6654,18 +6885,12 @@ MonoBehaviour:
     - {x: -12, y: 3, z: -2}
     - {x: -12, y: 3, z: -1}
     - {x: -13, y: 3, z: -1}
-    - {x: -14, y: 3, z: -1}
-    - {x: -14, y: 3, z: -2}
-    - {x: -14, y: 3, z: -3}
     - {x: -13, y: 3, z: -3}
     - {x: -12, y: 3, z: -3}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
-    - 1.4142135
-    - 1
-    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -6933,16 +7158,16 @@ MonoBehaviour:
     - {x: 0, y: 3, z: -3}
     - {x: 1, y: 3, z: -3}
     linkedNodeDistance:
-    - 1.0000001
-    - 1.4142137
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142137
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 1.0000001, y: 2.5062103, z: -2}
+  - <Position>k__BackingField: {x: 1, y: 2.5062103, z: -2}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 2, y: 3, z: -2}
@@ -6954,14 +7179,14 @@ MonoBehaviour:
     - {x: 1, y: 3, z: -3}
     - {x: 2, y: 3, z: -3}
     linkedNodeDistance:
-    - 0.9999999
-    - 1.4142134
     - 1
-    - 1.4142137
-    - 1.0000001
-    - 1.4142137
+    - 1.4142135
     - 1
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 2, y: 2.5062103, z: -2}
     DistanceFromTarget: -1
@@ -6978,9 +7203,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142134
-    - 0.9999999
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -7059,16 +7284,16 @@ MonoBehaviour:
     - {x: 6, y: 3, z: -3}
     - {x: 7, y: 3, z: -3}
     linkedNodeDistance:
-    - 0.9999995
-    - 1.4142132
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 6.9999995, y: 2.5062103, z: -2}
+  - <Position>k__BackingField: {x: 7, y: 2.5062103, z: -2}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 8, y: 3, z: -2}
@@ -7083,13 +7308,13 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
-    - 0.9999995
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 7.9999995, y: 2.5062103, z: -2}
+  - <Position>k__BackingField: {x: 8, y: 2.5062103, z: -2}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 9, y: 3, z: -2}
@@ -7101,14 +7326,14 @@ MonoBehaviour:
     - {x: 8, y: 3, z: -3}
     - {x: 9, y: 3, z: -3}
     linkedNodeDistance:
-    - 1.0000005
-    - 1.4142139
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 9, y: 2.5062103, z: -2}
     DistanceFromTarget: -1
@@ -7125,9 +7350,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
-    - 1.0000005
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -7218,32 +7443,59 @@ MonoBehaviour:
   - <Position>k__BackingField: {x: 14, y: 2.5062103, z: -2}
     DistanceFromTarget: -1
     linkedBoundPositions:
+    - {x: 15, y: 3, z: -2}
+    - {x: 15, y: 3, z: -1}
     - {x: 14, y: 3, z: -1}
     - {x: 13, y: 3, z: -1}
     - {x: 13, y: 3, z: -2}
     - {x: 13, y: 3, z: -3}
     - {x: 14, y: 3, z: -3}
+    - {x: 15, y: 3, z: -3}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: -14, y: 2.5062103, z: -1}
+  - <Position>k__BackingField: {x: 15, y: 2.5062103, z: -2}
     DistanceFromTarget: -1
     linkedBoundPositions:
-    - {x: -13, y: 3, z: -1}
-    - {x: -13, y: 3, z: 0}
-    - {x: -14, y: 3, z: 0}
-    - {x: -14, y: 3, z: -2}
-    - {x: -13, y: 3, z: -2}
+    - {x: 16, y: 3, z: -2}
+    - {x: 16, y: 3, z: -1}
+    - {x: 15, y: 3, z: -1}
+    - {x: 14, y: 3, z: -1}
+    - {x: 14, y: 3, z: -2}
+    - {x: 14, y: 3, z: -3}
+    - {x: 15, y: 3, z: -3}
+    - {x: 16, y: 3, z: -3}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
     - 1
     - 1.4142135
+    - 1
+    - 1.4142135
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: 16, y: 2.5062103, z: -2}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: 16, y: 3, z: -1}
+    - {x: 15, y: 3, z: -1}
+    - {x: 15, y: 3, z: -2}
+    - {x: 15, y: 3, z: -3}
+    - {x: 16, y: 3, z: -3}
+    linkedNodeDistance:
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: -13, y: 2.5062103, z: -1}
     DistanceFromTarget: -1
@@ -7251,18 +7503,12 @@ MonoBehaviour:
     - {x: -12, y: 3, z: -1}
     - {x: -12, y: 3, z: 0}
     - {x: -13, y: 3, z: 0}
-    - {x: -14, y: 3, z: 0}
-    - {x: -14, y: 3, z: -1}
-    - {x: -14, y: 3, z: -2}
     - {x: -13, y: 3, z: -2}
     - {x: -12, y: 3, z: -2}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
-    - 1.4142135
-    - 1
-    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -7530,16 +7776,16 @@ MonoBehaviour:
     - {x: 0, y: 3, z: -2}
     - {x: 1, y: 3, z: -2}
     linkedNodeDistance:
-    - 1.0000001
-    - 1.4142137
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142137
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 1.0000001, y: 2.5062103, z: -1}
+  - <Position>k__BackingField: {x: 1, y: 2.5062103, z: -1}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 2, y: 3, z: -1}
@@ -7551,14 +7797,14 @@ MonoBehaviour:
     - {x: 1, y: 3, z: -2}
     - {x: 2, y: 3, z: -2}
     linkedNodeDistance:
-    - 0.9999999
-    - 1.4142134
     - 1
-    - 1.4142137
-    - 1.0000001
-    - 1.4142137
+    - 1.4142135
     - 1
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 2, y: 2.5062103, z: -1}
     DistanceFromTarget: -1
@@ -7575,9 +7821,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142134
-    - 0.9999999
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -7656,16 +7902,16 @@ MonoBehaviour:
     - {x: 6, y: 3, z: -2}
     - {x: 7, y: 3, z: -2}
     linkedNodeDistance:
-    - 0.9999995
-    - 1.4142132
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 6.9999995, y: 2.5062103, z: -1}
+  - <Position>k__BackingField: {x: 7, y: 2.5062103, z: -1}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 8, y: 3, z: -1}
@@ -7680,13 +7926,13 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
-    - 0.9999995
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 7.9999995, y: 2.5062103, z: -1}
+  - <Position>k__BackingField: {x: 8, y: 2.5062103, z: -1}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 9, y: 3, z: -1}
@@ -7698,14 +7944,14 @@ MonoBehaviour:
     - {x: 8, y: 3, z: -2}
     - {x: 9, y: 3, z: -2}
     linkedNodeDistance:
-    - 1.0000005
-    - 1.4142139
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 9, y: 2.5062103, z: -1}
     DistanceFromTarget: -1
@@ -7722,9 +7968,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
-    - 1.0000005
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -7815,32 +8061,59 @@ MonoBehaviour:
   - <Position>k__BackingField: {x: 14, y: 2.5062103, z: -1}
     DistanceFromTarget: -1
     linkedBoundPositions:
+    - {x: 15, y: 3, z: -1}
+    - {x: 15, y: 3, z: 0}
     - {x: 14, y: 3, z: 0}
     - {x: 13, y: 3, z: 0}
     - {x: 13, y: 3, z: -1}
     - {x: 13, y: 3, z: -2}
     - {x: 14, y: 3, z: -2}
+    - {x: 15, y: 3, z: -2}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: -14, y: 2.5062103, z: 0}
+  - <Position>k__BackingField: {x: 15, y: 2.5062103, z: -1}
     DistanceFromTarget: -1
     linkedBoundPositions:
-    - {x: -13, y: 3, z: 0}
-    - {x: -13, y: 3, z: 1}
-    - {x: -14, y: 3, z: 1}
-    - {x: -14, y: 3, z: -1}
-    - {x: -13, y: 3, z: -1}
+    - {x: 16, y: 3, z: -1}
+    - {x: 16, y: 3, z: 0}
+    - {x: 15, y: 3, z: 0}
+    - {x: 14, y: 3, z: 0}
+    - {x: 14, y: 3, z: -1}
+    - {x: 14, y: 3, z: -2}
+    - {x: 15, y: 3, z: -2}
+    - {x: 16, y: 3, z: -2}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
     - 1
     - 1.4142135
+    - 1
+    - 1.4142135
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: 16, y: 2.5062103, z: -1}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: 16, y: 3, z: 0}
+    - {x: 15, y: 3, z: 0}
+    - {x: 15, y: 3, z: -1}
+    - {x: 15, y: 3, z: -2}
+    - {x: 16, y: 3, z: -2}
+    linkedNodeDistance:
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: -13, y: 2.5062103, z: 0}
     DistanceFromTarget: -1
@@ -7848,18 +8121,12 @@ MonoBehaviour:
     - {x: -12, y: 3, z: 0}
     - {x: -12, y: 3, z: 1}
     - {x: -13, y: 3, z: 1}
-    - {x: -14, y: 3, z: 1}
-    - {x: -14, y: 3, z: 0}
-    - {x: -14, y: 3, z: -1}
     - {x: -13, y: 3, z: -1}
     - {x: -12, y: 3, z: -1}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
-    - 1.4142135
-    - 1
-    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -8127,16 +8394,16 @@ MonoBehaviour:
     - {x: 0, y: 3, z: -1}
     - {x: 1, y: 3, z: -1}
     linkedNodeDistance:
-    - 1.0000001
-    - 1.4142137
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142137
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 1.0000001, y: 2.5062103, z: 0}
+  - <Position>k__BackingField: {x: 1, y: 2.5062103, z: 0}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 2, y: 3, z: 0}
@@ -8148,14 +8415,14 @@ MonoBehaviour:
     - {x: 1, y: 3, z: -1}
     - {x: 2, y: 3, z: -1}
     linkedNodeDistance:
-    - 0.9999999
-    - 1.4142134
     - 1
-    - 1.4142137
-    - 1.0000001
-    - 1.4142137
+    - 1.4142135
     - 1
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 2, y: 2.5062103, z: 0}
     DistanceFromTarget: -1
@@ -8172,9 +8439,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142134
-    - 0.9999999
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -8253,16 +8520,16 @@ MonoBehaviour:
     - {x: 6, y: 3, z: -1}
     - {x: 7, y: 3, z: -1}
     linkedNodeDistance:
-    - 0.9999995
-    - 1.4142132
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 6.9999995, y: 2.5062103, z: 0}
+  - <Position>k__BackingField: {x: 7, y: 2.5062103, z: 0}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 8, y: 3, z: 0}
@@ -8277,13 +8544,13 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
-    - 0.9999995
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 7.9999995, y: 2.5062103, z: 0}
+  - <Position>k__BackingField: {x: 8, y: 2.5062103, z: 0}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 9, y: 3, z: 0}
@@ -8295,14 +8562,14 @@ MonoBehaviour:
     - {x: 8, y: 3, z: -1}
     - {x: 9, y: 3, z: -1}
     linkedNodeDistance:
-    - 1.0000005
-    - 1.4142139
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 9, y: 2.5062103, z: 0}
     DistanceFromTarget: -1
@@ -8319,9 +8586,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
-    - 1.0000005
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -8412,32 +8679,59 @@ MonoBehaviour:
   - <Position>k__BackingField: {x: 14, y: 2.5062103, z: 0}
     DistanceFromTarget: -1
     linkedBoundPositions:
+    - {x: 15, y: 3, z: 0}
+    - {x: 15, y: 3, z: 1}
     - {x: 14, y: 3, z: 1}
     - {x: 13, y: 3, z: 1}
     - {x: 13, y: 3, z: 0}
     - {x: 13, y: 3, z: -1}
     - {x: 14, y: 3, z: -1}
+    - {x: 15, y: 3, z: -1}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: -14, y: 2.5062103, z: 1}
+  - <Position>k__BackingField: {x: 15, y: 2.5062103, z: 0}
     DistanceFromTarget: -1
     linkedBoundPositions:
-    - {x: -13, y: 3, z: 1}
-    - {x: -13, y: 3, z: 2}
-    - {x: -14, y: 3, z: 2}
-    - {x: -14, y: 3, z: 0}
-    - {x: -13, y: 3, z: 0}
+    - {x: 16, y: 3, z: 0}
+    - {x: 16, y: 3, z: 1}
+    - {x: 15, y: 3, z: 1}
+    - {x: 14, y: 3, z: 1}
+    - {x: 14, y: 3, z: 0}
+    - {x: 14, y: 3, z: -1}
+    - {x: 15, y: 3, z: -1}
+    - {x: 16, y: 3, z: -1}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
     - 1
     - 1.4142135
+    - 1
+    - 1.4142135
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: 16, y: 2.5062103, z: 0}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: 16, y: 3, z: 1}
+    - {x: 15, y: 3, z: 1}
+    - {x: 15, y: 3, z: 0}
+    - {x: 15, y: 3, z: -1}
+    - {x: 16, y: 3, z: -1}
+    linkedNodeDistance:
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: -13, y: 2.5062103, z: 1}
     DistanceFromTarget: -1
@@ -8445,18 +8739,12 @@ MonoBehaviour:
     - {x: -12, y: 3, z: 1}
     - {x: -12, y: 3, z: 2}
     - {x: -13, y: 3, z: 2}
-    - {x: -14, y: 3, z: 2}
-    - {x: -14, y: 3, z: 1}
-    - {x: -14, y: 3, z: 0}
     - {x: -13, y: 3, z: 0}
     - {x: -12, y: 3, z: 0}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
-    - 1.4142135
-    - 1
-    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -8724,16 +9012,16 @@ MonoBehaviour:
     - {x: 0, y: 3, z: 0}
     - {x: 1, y: 3, z: 0}
     linkedNodeDistance:
-    - 1.0000001
-    - 1.4142137
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142137
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 1.0000001, y: 2.5062103, z: 1}
+  - <Position>k__BackingField: {x: 1, y: 2.5062103, z: 1}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 2, y: 3, z: 1}
@@ -8745,14 +9033,14 @@ MonoBehaviour:
     - {x: 1, y: 3, z: 0}
     - {x: 2, y: 3, z: 0}
     linkedNodeDistance:
-    - 0.9999999
-    - 1.4142134
     - 1
-    - 1.4142137
-    - 1.0000001
-    - 1.4142137
+    - 1.4142135
     - 1
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 2, y: 2.5062103, z: 1}
     DistanceFromTarget: -1
@@ -8769,9 +9057,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142134
-    - 0.9999999
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -8850,16 +9138,16 @@ MonoBehaviour:
     - {x: 6, y: 3, z: 0}
     - {x: 7, y: 3, z: 0}
     linkedNodeDistance:
-    - 0.9999995
-    - 1.4142132
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 6.9999995, y: 2.5062103, z: 1}
+  - <Position>k__BackingField: {x: 7, y: 2.5062103, z: 1}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 8, y: 3, z: 1}
@@ -8874,13 +9162,13 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
-    - 0.9999995
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 7.9999995, y: 2.5062103, z: 1}
+  - <Position>k__BackingField: {x: 8, y: 2.5062103, z: 1}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 9, y: 3, z: 1}
@@ -8892,14 +9180,14 @@ MonoBehaviour:
     - {x: 8, y: 3, z: 0}
     - {x: 9, y: 3, z: 0}
     linkedNodeDistance:
-    - 1.0000005
-    - 1.4142139
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 9, y: 2.5062103, z: 1}
     DistanceFromTarget: -1
@@ -8916,9 +9204,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
-    - 1.0000005
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -9009,32 +9297,59 @@ MonoBehaviour:
   - <Position>k__BackingField: {x: 14, y: 2.5062103, z: 1}
     DistanceFromTarget: -1
     linkedBoundPositions:
+    - {x: 15, y: 3, z: 1}
+    - {x: 15, y: 3, z: 2}
     - {x: 14, y: 3, z: 2}
     - {x: 13, y: 3, z: 2}
     - {x: 13, y: 3, z: 1}
     - {x: 13, y: 3, z: 0}
     - {x: 14, y: 3, z: 0}
+    - {x: 15, y: 3, z: 0}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: -14, y: 2.5062103, z: 2}
+  - <Position>k__BackingField: {x: 15, y: 2.5062103, z: 1}
     DistanceFromTarget: -1
     linkedBoundPositions:
-    - {x: -13, y: 3, z: 2}
-    - {x: -13, y: 3, z: 3}
-    - {x: -14, y: 3, z: 3}
-    - {x: -14, y: 3, z: 1}
-    - {x: -13, y: 3, z: 1}
+    - {x: 16, y: 3, z: 1}
+    - {x: 16, y: 3, z: 2}
+    - {x: 15, y: 3, z: 2}
+    - {x: 14, y: 3, z: 2}
+    - {x: 14, y: 3, z: 1}
+    - {x: 14, y: 3, z: 0}
+    - {x: 15, y: 3, z: 0}
+    - {x: 16, y: 3, z: 0}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
     - 1
     - 1.4142135
+    - 1
+    - 1.4142135
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: 16, y: 2.5062103, z: 1}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: 16, y: 3, z: 2}
+    - {x: 15, y: 3, z: 2}
+    - {x: 15, y: 3, z: 1}
+    - {x: 15, y: 3, z: 0}
+    - {x: 16, y: 3, z: 0}
+    linkedNodeDistance:
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: -13, y: 2.5062103, z: 2}
     DistanceFromTarget: -1
@@ -9042,18 +9357,12 @@ MonoBehaviour:
     - {x: -12, y: 3, z: 2}
     - {x: -12, y: 3, z: 3}
     - {x: -13, y: 3, z: 3}
-    - {x: -14, y: 3, z: 3}
-    - {x: -14, y: 3, z: 2}
-    - {x: -14, y: 3, z: 1}
     - {x: -13, y: 3, z: 1}
     - {x: -12, y: 3, z: 1}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
-    - 1.4142135
-    - 1
-    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -9321,16 +9630,16 @@ MonoBehaviour:
     - {x: 0, y: 3, z: 1}
     - {x: 1, y: 3, z: 1}
     linkedNodeDistance:
-    - 1.0000001
-    - 1.4142137
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142137
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 1.0000001, y: 2.5062103, z: 2}
+  - <Position>k__BackingField: {x: 1, y: 2.5062103, z: 2}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 2, y: 3, z: 2}
@@ -9342,14 +9651,14 @@ MonoBehaviour:
     - {x: 1, y: 3, z: 1}
     - {x: 2, y: 3, z: 1}
     linkedNodeDistance:
-    - 0.9999999
-    - 1.4142134
     - 1
-    - 1.4142137
-    - 1.0000001
-    - 1.4142137
+    - 1.4142135
     - 1
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 2, y: 2.5062103, z: 2}
     DistanceFromTarget: -1
@@ -9366,9 +9675,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142134
-    - 0.9999999
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -9447,16 +9756,16 @@ MonoBehaviour:
     - {x: 6, y: 3, z: 1}
     - {x: 7, y: 3, z: 1}
     linkedNodeDistance:
-    - 0.9999995
-    - 1.4142132
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 6.9999995, y: 2.5062103, z: 2}
+  - <Position>k__BackingField: {x: 7, y: 2.5062103, z: 2}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 8, y: 3, z: 2}
@@ -9471,13 +9780,13 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
-    - 0.9999995
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 7.9999995, y: 2.5062103, z: 2}
+  - <Position>k__BackingField: {x: 8, y: 2.5062103, z: 2}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 9, y: 3, z: 2}
@@ -9489,14 +9798,14 @@ MonoBehaviour:
     - {x: 8, y: 3, z: 1}
     - {x: 9, y: 3, z: 1}
     linkedNodeDistance:
-    - 1.0000005
-    - 1.4142139
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 9, y: 2.5062103, z: 2}
     DistanceFromTarget: -1
@@ -9513,9 +9822,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
-    - 1.0000005
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -9606,45 +9915,68 @@ MonoBehaviour:
   - <Position>k__BackingField: {x: 14, y: 2.5062103, z: 2}
     DistanceFromTarget: -1
     linkedBoundPositions:
+    - {x: 15, y: 3, z: 2}
+    - {x: 15, y: 3, z: 3}
     - {x: 14, y: 3, z: 3}
     - {x: 13, y: 3, z: 3}
     - {x: 13, y: 3, z: 2}
     - {x: 13, y: 3, z: 1}
     - {x: 14, y: 3, z: 1}
+    - {x: 15, y: 3, z: 1}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: -14, y: 2.5062103, z: 3}
+  - <Position>k__BackingField: {x: 15, y: 2.5062103, z: 2}
     DistanceFromTarget: -1
     linkedBoundPositions:
-    - {x: -13, y: 3, z: 3}
-    - {x: -13, y: 3, z: 4}
-    - {x: -14, y: 3, z: 2}
-    - {x: -13, y: 3, z: 2}
+    - {x: 16, y: 3, z: 2}
+    - {x: 16, y: 3, z: 3}
+    - {x: 15, y: 3, z: 3}
+    - {x: 14, y: 3, z: 3}
+    - {x: 14, y: 3, z: 2}
+    - {x: 14, y: 3, z: 1}
+    - {x: 15, y: 3, z: 1}
+    - {x: 16, y: 3, z: 1}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
     - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: 16, y: 2.5062103, z: 2}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: 16, y: 3, z: 3}
+    - {x: 15, y: 3, z: 3}
+    - {x: 15, y: 3, z: 2}
+    - {x: 15, y: 3, z: 1}
+    - {x: 16, y: 3, z: 1}
+    linkedNodeDistance:
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: -13, y: 2.5062103, z: 3}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: -12, y: 3, z: 3}
     - {x: -12, y: 3, z: 4}
-    - {x: -13, y: 3, z: 4}
-    - {x: -14, y: 3, z: 3}
-    - {x: -14, y: 3, z: 2}
     - {x: -13, y: 3, z: 2}
     - {x: -12, y: 3, z: 2}
     linkedNodeDistance:
-    - 1
-    - 1.4142135
-    - 1
     - 1
     - 1.4142135
     - 1
@@ -9656,7 +9988,6 @@ MonoBehaviour:
     - {x: -11, y: 3, z: 3}
     - {x: -11, y: 3, z: 4}
     - {x: -12, y: 3, z: 4}
-    - {x: -13, y: 3, z: 4}
     - {x: -13, y: 3, z: 3}
     - {x: -13, y: 3, z: 2}
     - {x: -12, y: 3, z: 2}
@@ -9665,7 +9996,6 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142135
     - 1
     - 1.4142135
     - 1
@@ -9914,16 +10244,16 @@ MonoBehaviour:
     - {x: 0, y: 3, z: 2}
     - {x: 1, y: 3, z: 2}
     linkedNodeDistance:
-    - 1.0000001
-    - 1.4142137
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142137
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 1.0000001, y: 2.5062103, z: 3}
+  - <Position>k__BackingField: {x: 1, y: 2.5062103, z: 3}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 2, y: 3, z: 3}
@@ -9935,14 +10265,14 @@ MonoBehaviour:
     - {x: 1, y: 3, z: 2}
     - {x: 2, y: 3, z: 2}
     linkedNodeDistance:
-    - 0.9999999
-    - 1.4142134
     - 1
-    - 1.4142137
-    - 1.0000001
-    - 1.4142137
+    - 1.4142135
     - 1
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 2, y: 2.5062103, z: 3}
     DistanceFromTarget: -1
@@ -9959,9 +10289,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142134
-    - 0.9999999
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -10040,16 +10370,16 @@ MonoBehaviour:
     - {x: 6, y: 3, z: 2}
     - {x: 7, y: 3, z: 2}
     linkedNodeDistance:
-    - 0.9999995
-    - 1.4142132
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 6.9999995, y: 2.5062103, z: 3}
+  - <Position>k__BackingField: {x: 7, y: 2.5062103, z: 3}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 8, y: 3, z: 3}
@@ -10064,13 +10394,13 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
-    - 0.9999995
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 7.9999995, y: 2.5062103, z: 3}
+  - <Position>k__BackingField: {x: 8, y: 2.5062103, z: 3}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 9, y: 3, z: 3}
@@ -10082,14 +10412,14 @@ MonoBehaviour:
     - {x: 8, y: 3, z: 2}
     - {x: 9, y: 3, z: 2}
     linkedNodeDistance:
-    - 1.0000005
-    - 1.4142139
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 9, y: 2.5062103, z: 3}
     DistanceFromTarget: -1
@@ -10106,9 +10436,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
-    - 1.0000005
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -10199,27 +10529,35 @@ MonoBehaviour:
   - <Position>k__BackingField: {x: 14, y: 2.5062103, z: 3}
     DistanceFromTarget: -1
     linkedBoundPositions:
+    - {x: 15, y: 3, z: 3}
+    - {x: 15, y: 3, z: 4}
     - {x: 14, y: 3, z: 4}
     - {x: 13, y: 3, z: 4}
     - {x: 13, y: 3, z: 3}
     - {x: 13, y: 3, z: 2}
     - {x: 14, y: 3, z: 2}
+    - {x: 15, y: 3, z: 2}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: -13, y: 2.5062103, z: 4}
+  - <Position>k__BackingField: {x: 15, y: 2.5062103, z: 3}
     DistanceFromTarget: -1
     linkedBoundPositions:
-    - {x: -12, y: 3, z: 4}
-    - {x: -12, y: 3, z: 5}
-    - {x: -13, y: 3, z: 5}
-    - {x: -14, y: 3, z: 3}
-    - {x: -13, y: 3, z: 3}
-    - {x: -12, y: 3, z: 3}
+    - {x: 16, y: 3, z: 3}
+    - {x: 16, y: 3, z: 4}
+    - {x: 15, y: 3, z: 4}
+    - {x: 14, y: 3, z: 4}
+    - {x: 14, y: 3, z: 3}
+    - {x: 14, y: 3, z: 2}
+    - {x: 15, y: 3, z: 2}
+    - {x: 16, y: 3, z: 2}
     linkedNodeDistance:
     - 1
     - 1.4142135
@@ -10227,6 +10565,23 @@ MonoBehaviour:
     - 1.4142135
     - 1
     - 1.4142135
+    - 1
+    - 1.4142135
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: 16, y: 2.5062103, z: 3}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: 16, y: 3, z: 4}
+    - {x: 15, y: 3, z: 4}
+    - {x: 15, y: 3, z: 3}
+    - {x: 15, y: 3, z: 2}
+    - {x: 16, y: 3, z: 2}
+    linkedNodeDistance:
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: -12, y: 2.5062103, z: 4}
     DistanceFromTarget: -1
@@ -10234,14 +10589,10 @@ MonoBehaviour:
     - {x: -11, y: 3, z: 4}
     - {x: -11, y: 3, z: 5}
     - {x: -12, y: 3, z: 5}
-    - {x: -13, y: 3, z: 5}
-    - {x: -13, y: 3, z: 4}
     - {x: -13, y: 3, z: 3}
     - {x: -12, y: 3, z: 3}
     - {x: -11, y: 3, z: 3}
     linkedNodeDistance:
-    - 1
-    - 1.4142135
     - 1
     - 1.4142135
     - 1
@@ -10492,16 +10843,16 @@ MonoBehaviour:
     - {x: 0, y: 3, z: 3}
     - {x: 1, y: 3, z: 3}
     linkedNodeDistance:
-    - 1.0000001
-    - 1.4142137
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142137
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 1.0000001, y: 2.5062103, z: 4}
+  - <Position>k__BackingField: {x: 1, y: 2.5062103, z: 4}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 2, y: 3, z: 4}
@@ -10513,14 +10864,14 @@ MonoBehaviour:
     - {x: 1, y: 3, z: 3}
     - {x: 2, y: 3, z: 3}
     linkedNodeDistance:
-    - 0.9999999
-    - 1.4142134
     - 1
-    - 1.4142137
-    - 1.0000001
-    - 1.4142137
+    - 1.4142135
     - 1
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 2, y: 2.5062103, z: 4}
     DistanceFromTarget: -1
@@ -10537,9 +10888,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142134
-    - 0.9999999
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -10618,16 +10969,16 @@ MonoBehaviour:
     - {x: 6, y: 3, z: 3}
     - {x: 7, y: 3, z: 3}
     linkedNodeDistance:
-    - 0.9999995
-    - 1.4142132
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 6.9999995, y: 2.5062103, z: 4}
+  - <Position>k__BackingField: {x: 7, y: 2.5062103, z: 4}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 8, y: 3, z: 4}
@@ -10642,13 +10993,13 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
-    - 0.9999995
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 7.9999995, y: 2.5062103, z: 4}
+  - <Position>k__BackingField: {x: 8, y: 2.5062103, z: 4}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 9, y: 3, z: 4}
@@ -10660,14 +11011,14 @@ MonoBehaviour:
     - {x: 8, y: 3, z: 3}
     - {x: 9, y: 3, z: 3}
     linkedNodeDistance:
-    - 1.0000005
-    - 1.4142139
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 9, y: 2.5062103, z: 4}
     DistanceFromTarget: -1
@@ -10684,9 +11035,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
-    - 1.0000005
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -10777,32 +11128,59 @@ MonoBehaviour:
   - <Position>k__BackingField: {x: 14, y: 2.5062103, z: 4}
     DistanceFromTarget: -1
     linkedBoundPositions:
+    - {x: 15, y: 3, z: 4}
+    - {x: 15, y: 3, z: 5}
     - {x: 14, y: 3, z: 5}
     - {x: 13, y: 3, z: 5}
     - {x: 13, y: 3, z: 4}
     - {x: 13, y: 3, z: 3}
     - {x: 14, y: 3, z: 3}
+    - {x: 15, y: 3, z: 3}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: -13, y: 2.5062103, z: 5}
+  - <Position>k__BackingField: {x: 15, y: 2.5062103, z: 4}
     DistanceFromTarget: -1
     linkedBoundPositions:
-    - {x: -12, y: 3, z: 5}
-    - {x: -12, y: 3, z: 6}
-    - {x: -13, y: 3, z: 6}
-    - {x: -13, y: 3, z: 4}
-    - {x: -12, y: 3, z: 4}
+    - {x: 16, y: 3, z: 4}
+    - {x: 16, y: 3, z: 5}
+    - {x: 15, y: 3, z: 5}
+    - {x: 14, y: 3, z: 5}
+    - {x: 14, y: 3, z: 4}
+    - {x: 14, y: 3, z: 3}
+    - {x: 15, y: 3, z: 3}
+    - {x: 16, y: 3, z: 3}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
     - 1
     - 1.4142135
+    - 1
+    - 1.4142135
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: 16, y: 2.5062103, z: 4}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: 16, y: 3, z: 5}
+    - {x: 15, y: 3, z: 5}
+    - {x: 15, y: 3, z: 4}
+    - {x: 15, y: 3, z: 3}
+    - {x: 16, y: 3, z: 3}
+    linkedNodeDistance:
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: -12, y: 2.5062103, z: 5}
     DistanceFromTarget: -1
@@ -10810,18 +11188,12 @@ MonoBehaviour:
     - {x: -11, y: 3, z: 5}
     - {x: -11, y: 3, z: 6}
     - {x: -12, y: 3, z: 6}
-    - {x: -13, y: 3, z: 6}
-    - {x: -13, y: 3, z: 5}
-    - {x: -13, y: 3, z: 4}
     - {x: -12, y: 3, z: 4}
     - {x: -11, y: 3, z: 4}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
-    - 1.4142135
-    - 1
-    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -11068,16 +11440,16 @@ MonoBehaviour:
     - {x: 0, y: 3, z: 4}
     - {x: 1, y: 3, z: 4}
     linkedNodeDistance:
-    - 1.0000001
-    - 1.4142137
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142137
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 1.0000001, y: 2.5062103, z: 5}
+  - <Position>k__BackingField: {x: 1, y: 2.5062103, z: 5}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 2, y: 3, z: 5}
@@ -11089,14 +11461,14 @@ MonoBehaviour:
     - {x: 1, y: 3, z: 4}
     - {x: 2, y: 3, z: 4}
     linkedNodeDistance:
-    - 0.9999999
-    - 1.4142134
     - 1
-    - 1.4142137
-    - 1.0000001
-    - 1.4142137
+    - 1.4142135
     - 1
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 2, y: 2.5062103, z: 5}
     DistanceFromTarget: -1
@@ -11113,9 +11485,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142134
-    - 0.9999999
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -11194,16 +11566,16 @@ MonoBehaviour:
     - {x: 6, y: 3, z: 4}
     - {x: 7, y: 3, z: 4}
     linkedNodeDistance:
-    - 0.9999995
-    - 1.4142132
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 6.9999995, y: 2.5062103, z: 5}
+  - <Position>k__BackingField: {x: 7, y: 2.5062103, z: 5}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 8, y: 3, z: 5}
@@ -11218,13 +11590,13 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
-    - 0.9999995
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 7.9999995, y: 2.5062103, z: 5}
+  - <Position>k__BackingField: {x: 8, y: 2.5062103, z: 5}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 9, y: 3, z: 5}
@@ -11236,14 +11608,14 @@ MonoBehaviour:
     - {x: 8, y: 3, z: 4}
     - {x: 9, y: 3, z: 4}
     linkedNodeDistance:
-    - 1.0000005
-    - 1.4142139
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 9, y: 2.5062103, z: 5}
     DistanceFromTarget: -1
@@ -11260,9 +11632,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
-    - 1.0000005
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -11353,32 +11725,59 @@ MonoBehaviour:
   - <Position>k__BackingField: {x: 14, y: 2.5062103, z: 5}
     DistanceFromTarget: -1
     linkedBoundPositions:
+    - {x: 15, y: 3, z: 5}
+    - {x: 15, y: 3, z: 6}
     - {x: 14, y: 3, z: 6}
     - {x: 13, y: 3, z: 6}
     - {x: 13, y: 3, z: 5}
     - {x: 13, y: 3, z: 4}
     - {x: 14, y: 3, z: 4}
+    - {x: 15, y: 3, z: 4}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: -13, y: 2.5062103, z: 6}
+  - <Position>k__BackingField: {x: 15, y: 2.5062103, z: 5}
     DistanceFromTarget: -1
     linkedBoundPositions:
-    - {x: -12, y: 3, z: 6}
-    - {x: -12, y: 3, z: 7}
-    - {x: -13, y: 3, z: 7}
-    - {x: -13, y: 3, z: 5}
-    - {x: -12, y: 3, z: 5}
+    - {x: 16, y: 3, z: 5}
+    - {x: 16, y: 3, z: 6}
+    - {x: 15, y: 3, z: 6}
+    - {x: 14, y: 3, z: 6}
+    - {x: 14, y: 3, z: 5}
+    - {x: 14, y: 3, z: 4}
+    - {x: 15, y: 3, z: 4}
+    - {x: 16, y: 3, z: 4}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
     - 1
     - 1.4142135
+    - 1
+    - 1.4142135
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: 16, y: 2.5062103, z: 5}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: 16, y: 3, z: 6}
+    - {x: 15, y: 3, z: 6}
+    - {x: 15, y: 3, z: 5}
+    - {x: 15, y: 3, z: 4}
+    - {x: 16, y: 3, z: 4}
+    linkedNodeDistance:
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: -12, y: 2.5062103, z: 6}
     DistanceFromTarget: -1
@@ -11386,18 +11785,12 @@ MonoBehaviour:
     - {x: -11, y: 3, z: 6}
     - {x: -11, y: 3, z: 7}
     - {x: -12, y: 3, z: 7}
-    - {x: -13, y: 3, z: 7}
-    - {x: -13, y: 3, z: 6}
-    - {x: -13, y: 3, z: 5}
     - {x: -12, y: 3, z: 5}
     - {x: -11, y: 3, z: 5}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
-    - 1.4142135
-    - 1
-    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -11644,16 +12037,16 @@ MonoBehaviour:
     - {x: 0, y: 3, z: 5}
     - {x: 1, y: 3, z: 5}
     linkedNodeDistance:
-    - 1.0000001
-    - 1.4142137
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142137
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 1.0000001, y: 2.5062103, z: 6}
+  - <Position>k__BackingField: {x: 1, y: 2.5062103, z: 6}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 2, y: 3, z: 6}
@@ -11665,14 +12058,14 @@ MonoBehaviour:
     - {x: 1, y: 3, z: 5}
     - {x: 2, y: 3, z: 5}
     linkedNodeDistance:
-    - 0.9999999
-    - 1.4142134
     - 1
-    - 1.4142137
-    - 1.0000001
-    - 1.4142137
+    - 1.4142135
     - 1
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 2, y: 2.5062103, z: 6}
     DistanceFromTarget: -1
@@ -11689,9 +12082,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142134
-    - 0.9999999
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -11770,16 +12163,16 @@ MonoBehaviour:
     - {x: 6, y: 3, z: 5}
     - {x: 7, y: 3, z: 5}
     linkedNodeDistance:
-    - 0.9999995
-    - 1.4142132
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 6.9999995, y: 2.5062103, z: 6}
+  - <Position>k__BackingField: {x: 7, y: 2.5062103, z: 6}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 8, y: 3, z: 6}
@@ -11794,13 +12187,13 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
-    - 0.9999995
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 7.9999995, y: 2.5062103, z: 6}
+  - <Position>k__BackingField: {x: 8, y: 2.5062103, z: 6}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 9, y: 3, z: 6}
@@ -11812,14 +12205,14 @@ MonoBehaviour:
     - {x: 8, y: 3, z: 5}
     - {x: 9, y: 3, z: 5}
     linkedNodeDistance:
-    - 1.0000005
-    - 1.4142139
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 9, y: 2.5062103, z: 6}
     DistanceFromTarget: -1
@@ -11836,9 +12229,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
-    - 1.0000005
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -11929,32 +12322,59 @@ MonoBehaviour:
   - <Position>k__BackingField: {x: 14, y: 2.5062103, z: 6}
     DistanceFromTarget: -1
     linkedBoundPositions:
+    - {x: 15, y: 3, z: 6}
+    - {x: 15, y: 3, z: 7}
     - {x: 14, y: 3, z: 7}
     - {x: 13, y: 3, z: 7}
     - {x: 13, y: 3, z: 6}
     - {x: 13, y: 3, z: 5}
     - {x: 14, y: 3, z: 5}
+    - {x: 15, y: 3, z: 5}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: -13, y: 2.5062103, z: 7}
+  - <Position>k__BackingField: {x: 15, y: 2.5062103, z: 6}
     DistanceFromTarget: -1
     linkedBoundPositions:
-    - {x: -12, y: 3, z: 7}
-    - {x: -12, y: 3, z: 8}
-    - {x: -13, y: 3, z: 8}
-    - {x: -13, y: 3, z: 6}
-    - {x: -12, y: 3, z: 6}
+    - {x: 16, y: 3, z: 6}
+    - {x: 16, y: 3, z: 7}
+    - {x: 15, y: 3, z: 7}
+    - {x: 14, y: 3, z: 7}
+    - {x: 14, y: 3, z: 6}
+    - {x: 14, y: 3, z: 5}
+    - {x: 15, y: 3, z: 5}
+    - {x: 16, y: 3, z: 5}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
     - 1
     - 1.4142135
+    - 1
+    - 1.4142135
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: 16, y: 2.5062103, z: 6}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: 16, y: 3, z: 7}
+    - {x: 15, y: 3, z: 7}
+    - {x: 15, y: 3, z: 6}
+    - {x: 15, y: 3, z: 5}
+    - {x: 16, y: 3, z: 5}
+    linkedNodeDistance:
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: -12, y: 2.5062103, z: 7}
     DistanceFromTarget: -1
@@ -11962,18 +12382,12 @@ MonoBehaviour:
     - {x: -11, y: 3, z: 7}
     - {x: -11, y: 3, z: 8}
     - {x: -12, y: 3, z: 8}
-    - {x: -13, y: 3, z: 8}
-    - {x: -13, y: 3, z: 7}
-    - {x: -13, y: 3, z: 6}
     - {x: -12, y: 3, z: 6}
     - {x: -11, y: 3, z: 6}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
-    - 1.4142135
-    - 1
-    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -12220,16 +12634,16 @@ MonoBehaviour:
     - {x: 0, y: 3, z: 6}
     - {x: 1, y: 3, z: 6}
     linkedNodeDistance:
-    - 1.0000001
-    - 1.4142137
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142137
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 1.0000001, y: 2.5062103, z: 7}
+  - <Position>k__BackingField: {x: 1, y: 2.5062103, z: 7}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 2, y: 3, z: 7}
@@ -12241,14 +12655,14 @@ MonoBehaviour:
     - {x: 1, y: 3, z: 6}
     - {x: 2, y: 3, z: 6}
     linkedNodeDistance:
-    - 0.9999999
-    - 1.4142134
     - 1
-    - 1.4142137
-    - 1.0000001
-    - 1.4142137
+    - 1.4142135
     - 1
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 2, y: 2.5062103, z: 7}
     DistanceFromTarget: -1
@@ -12265,9 +12679,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142134
-    - 0.9999999
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -12346,16 +12760,16 @@ MonoBehaviour:
     - {x: 6, y: 3, z: 6}
     - {x: 7, y: 3, z: 6}
     linkedNodeDistance:
-    - 0.9999995
-    - 1.4142132
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 6.9999995, y: 2.5062103, z: 7}
+  - <Position>k__BackingField: {x: 7, y: 2.5062103, z: 7}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 8, y: 3, z: 7}
@@ -12370,13 +12784,13 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
-    - 0.9999995
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 7.9999995, y: 2.5062103, z: 7}
+  - <Position>k__BackingField: {x: 8, y: 2.5062103, z: 7}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 9, y: 3, z: 7}
@@ -12388,14 +12802,14 @@ MonoBehaviour:
     - {x: 8, y: 3, z: 6}
     - {x: 9, y: 3, z: 6}
     linkedNodeDistance:
-    - 1.0000005
-    - 1.4142139
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 9, y: 2.5062103, z: 7}
     DistanceFromTarget: -1
@@ -12412,9 +12826,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
-    - 1.0000005
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -12505,32 +12919,59 @@ MonoBehaviour:
   - <Position>k__BackingField: {x: 14, y: 2.5062103, z: 7}
     DistanceFromTarget: -1
     linkedBoundPositions:
+    - {x: 15, y: 3, z: 7}
+    - {x: 15, y: 3, z: 8}
     - {x: 14, y: 3, z: 8}
     - {x: 13, y: 3, z: 8}
     - {x: 13, y: 3, z: 7}
     - {x: 13, y: 3, z: 6}
     - {x: 14, y: 3, z: 6}
+    - {x: 15, y: 3, z: 6}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: -13, y: 2.5062103, z: 8}
+  - <Position>k__BackingField: {x: 15, y: 2.5062103, z: 7}
     DistanceFromTarget: -1
     linkedBoundPositions:
-    - {x: -12, y: 3, z: 8}
-    - {x: -12, y: 3, z: 9}
-    - {x: -13, y: 3, z: 9}
-    - {x: -13, y: 3, z: 7}
-    - {x: -12, y: 3, z: 7}
+    - {x: 16, y: 3, z: 7}
+    - {x: 16, y: 3, z: 8}
+    - {x: 15, y: 3, z: 8}
+    - {x: 14, y: 3, z: 8}
+    - {x: 14, y: 3, z: 7}
+    - {x: 14, y: 3, z: 6}
+    - {x: 15, y: 3, z: 6}
+    - {x: 16, y: 3, z: 6}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
     - 1
     - 1.4142135
+    - 1
+    - 1.4142135
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: 16, y: 2.5062103, z: 7}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: 16, y: 3, z: 8}
+    - {x: 15, y: 3, z: 8}
+    - {x: 15, y: 3, z: 7}
+    - {x: 15, y: 3, z: 6}
+    - {x: 16, y: 3, z: 6}
+    linkedNodeDistance:
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: -12, y: 2.5062103, z: 8}
     DistanceFromTarget: -1
@@ -12538,18 +12979,12 @@ MonoBehaviour:
     - {x: -11, y: 3, z: 8}
     - {x: -11, y: 3, z: 9}
     - {x: -12, y: 3, z: 9}
-    - {x: -13, y: 3, z: 9}
-    - {x: -13, y: 3, z: 8}
-    - {x: -13, y: 3, z: 7}
     - {x: -12, y: 3, z: 7}
     - {x: -11, y: 3, z: 7}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
-    - 1.4142135
-    - 1
-    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -12796,16 +13231,16 @@ MonoBehaviour:
     - {x: 0, y: 3, z: 7}
     - {x: 1, y: 3, z: 7}
     linkedNodeDistance:
-    - 1.0000001
-    - 1.4142137
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142137
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 1.0000001, y: 2.5062103, z: 8}
+  - <Position>k__BackingField: {x: 1, y: 2.5062103, z: 8}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 2, y: 3, z: 8}
@@ -12817,14 +13252,14 @@ MonoBehaviour:
     - {x: 1, y: 3, z: 7}
     - {x: 2, y: 3, z: 7}
     linkedNodeDistance:
-    - 0.9999999
-    - 1.4142134
     - 1
-    - 1.4142137
-    - 1.0000001
-    - 1.4142137
+    - 1.4142135
     - 1
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 2, y: 2.5062103, z: 8}
     DistanceFromTarget: -1
@@ -12841,9 +13276,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142134
-    - 0.9999999
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -12922,16 +13357,16 @@ MonoBehaviour:
     - {x: 6, y: 3, z: 7}
     - {x: 7, y: 3, z: 7}
     linkedNodeDistance:
-    - 0.9999995
-    - 1.4142132
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 6.9999995, y: 2.5062103, z: 8}
+  - <Position>k__BackingField: {x: 7, y: 2.5062103, z: 8}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 8, y: 3, z: 8}
@@ -12946,13 +13381,13 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
-    - 0.9999995
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 7.9999995, y: 2.5062103, z: 8}
+  - <Position>k__BackingField: {x: 8, y: 2.5062103, z: 8}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 9, y: 3, z: 8}
@@ -12964,14 +13399,14 @@ MonoBehaviour:
     - {x: 8, y: 3, z: 7}
     - {x: 9, y: 3, z: 7}
     linkedNodeDistance:
-    - 1.0000005
-    - 1.4142139
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 9, y: 2.5062103, z: 8}
     DistanceFromTarget: -1
@@ -12988,9 +13423,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
-    - 1.0000005
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -13081,32 +13516,59 @@ MonoBehaviour:
   - <Position>k__BackingField: {x: 14, y: 2.5062103, z: 8}
     DistanceFromTarget: -1
     linkedBoundPositions:
+    - {x: 15, y: 3, z: 8}
+    - {x: 15, y: 3, z: 9}
     - {x: 14, y: 3, z: 9}
     - {x: 13, y: 3, z: 9}
     - {x: 13, y: 3, z: 8}
     - {x: 13, y: 3, z: 7}
     - {x: 14, y: 3, z: 7}
+    - {x: 15, y: 3, z: 7}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: -13, y: 2.5062103, z: 9}
+  - <Position>k__BackingField: {x: 15, y: 2.5062103, z: 8}
     DistanceFromTarget: -1
     linkedBoundPositions:
-    - {x: -12, y: 3, z: 9}
-    - {x: -12, y: 3, z: 10}
-    - {x: -13, y: 3, z: 10}
-    - {x: -13, y: 3, z: 8}
-    - {x: -12, y: 3, z: 8}
+    - {x: 16, y: 3, z: 8}
+    - {x: 16, y: 3, z: 9}
+    - {x: 15, y: 3, z: 9}
+    - {x: 14, y: 3, z: 9}
+    - {x: 14, y: 3, z: 8}
+    - {x: 14, y: 3, z: 7}
+    - {x: 15, y: 3, z: 7}
+    - {x: 16, y: 3, z: 7}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
     - 1
     - 1.4142135
+    - 1
+    - 1.4142135
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: 16, y: 2.5062103, z: 8}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: 16, y: 3, z: 9}
+    - {x: 15, y: 3, z: 9}
+    - {x: 15, y: 3, z: 8}
+    - {x: 15, y: 3, z: 7}
+    - {x: 16, y: 3, z: 7}
+    linkedNodeDistance:
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: -12, y: 2.5062103, z: 9}
     DistanceFromTarget: -1
@@ -13114,18 +13576,12 @@ MonoBehaviour:
     - {x: -11, y: 3, z: 9}
     - {x: -11, y: 3, z: 10}
     - {x: -12, y: 3, z: 10}
-    - {x: -13, y: 3, z: 10}
-    - {x: -13, y: 3, z: 9}
-    - {x: -13, y: 3, z: 8}
     - {x: -12, y: 3, z: 8}
     - {x: -11, y: 3, z: 8}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
-    - 1.4142135
-    - 1
-    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -13372,16 +13828,16 @@ MonoBehaviour:
     - {x: 0, y: 3, z: 8}
     - {x: 1, y: 3, z: 8}
     linkedNodeDistance:
-    - 1.0000001
-    - 1.4142137
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142137
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 1.0000001, y: 2.5062103, z: 9}
+  - <Position>k__BackingField: {x: 1, y: 2.5062103, z: 9}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 2, y: 3, z: 9}
@@ -13393,14 +13849,14 @@ MonoBehaviour:
     - {x: 1, y: 3, z: 8}
     - {x: 2, y: 3, z: 8}
     linkedNodeDistance:
-    - 0.9999999
-    - 1.4142134
     - 1
-    - 1.4142137
-    - 1.0000001
-    - 1.4142137
+    - 1.4142135
     - 1
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 2, y: 2.5062103, z: 9}
     DistanceFromTarget: -1
@@ -13417,9 +13873,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142134
-    - 0.9999999
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -13498,16 +13954,16 @@ MonoBehaviour:
     - {x: 6, y: 3, z: 8}
     - {x: 7, y: 3, z: 8}
     linkedNodeDistance:
-    - 0.9999995
-    - 1.4142132
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 6.9999995, y: 2.5062103, z: 9}
+  - <Position>k__BackingField: {x: 7, y: 2.5062103, z: 9}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 8, y: 3, z: 9}
@@ -13522,13 +13978,13 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
-    - 0.9999995
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 7.9999995, y: 2.5062103, z: 9}
+  - <Position>k__BackingField: {x: 8, y: 2.5062103, z: 9}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 9, y: 3, z: 9}
@@ -13540,14 +13996,14 @@ MonoBehaviour:
     - {x: 8, y: 3, z: 8}
     - {x: 9, y: 3, z: 8}
     linkedNodeDistance:
-    - 1.0000005
-    - 1.4142139
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 9, y: 2.5062103, z: 9}
     DistanceFromTarget: -1
@@ -13564,9 +14020,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
-    - 1.0000005
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -13657,32 +14113,59 @@ MonoBehaviour:
   - <Position>k__BackingField: {x: 14, y: 2.5062103, z: 9}
     DistanceFromTarget: -1
     linkedBoundPositions:
+    - {x: 15, y: 3, z: 9}
+    - {x: 15, y: 3, z: 10}
     - {x: 14, y: 3, z: 10}
     - {x: 13, y: 3, z: 10}
     - {x: 13, y: 3, z: 9}
     - {x: 13, y: 3, z: 8}
     - {x: 14, y: 3, z: 8}
+    - {x: 15, y: 3, z: 8}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: -13, y: 2.5062103, z: 10}
+  - <Position>k__BackingField: {x: 15, y: 2.5062103, z: 9}
     DistanceFromTarget: -1
     linkedBoundPositions:
-    - {x: -12, y: 3, z: 10}
-    - {x: -12, y: 3, z: 11}
-    - {x: -13, y: 3, z: 11}
-    - {x: -13, y: 3, z: 9}
-    - {x: -12, y: 3, z: 9}
+    - {x: 16, y: 3, z: 9}
+    - {x: 16, y: 3, z: 10}
+    - {x: 15, y: 3, z: 10}
+    - {x: 14, y: 3, z: 10}
+    - {x: 14, y: 3, z: 9}
+    - {x: 14, y: 3, z: 8}
+    - {x: 15, y: 3, z: 8}
+    - {x: 16, y: 3, z: 8}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
     - 1
     - 1.4142135
+    - 1
+    - 1.4142135
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: 16, y: 2.5062103, z: 9}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: 16, y: 3, z: 10}
+    - {x: 15, y: 3, z: 10}
+    - {x: 15, y: 3, z: 9}
+    - {x: 15, y: 3, z: 8}
+    - {x: 16, y: 3, z: 8}
+    linkedNodeDistance:
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: -12, y: 2.5062103, z: 10}
     DistanceFromTarget: -1
@@ -13690,18 +14173,12 @@ MonoBehaviour:
     - {x: -11, y: 3, z: 10}
     - {x: -11, y: 3, z: 11}
     - {x: -12, y: 3, z: 11}
-    - {x: -13, y: 3, z: 11}
-    - {x: -13, y: 3, z: 10}
-    - {x: -13, y: 3, z: 9}
     - {x: -12, y: 3, z: 9}
     - {x: -11, y: 3, z: 9}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
-    - 1.4142135
-    - 1
-    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -13948,16 +14425,16 @@ MonoBehaviour:
     - {x: 0, y: 3, z: 9}
     - {x: 1, y: 3, z: 9}
     linkedNodeDistance:
-    - 1.0000001
-    - 1.4142137
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142137
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 1.0000001, y: 2.5062103, z: 10}
+  - <Position>k__BackingField: {x: 1, y: 2.5062103, z: 10}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 2, y: 3, z: 10}
@@ -13969,14 +14446,14 @@ MonoBehaviour:
     - {x: 1, y: 3, z: 9}
     - {x: 2, y: 3, z: 9}
     linkedNodeDistance:
-    - 0.9999999
-    - 1.4142134
     - 1
-    - 1.4142137
-    - 1.0000001
-    - 1.4142137
+    - 1.4142135
     - 1
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 2, y: 2.5062103, z: 10}
     DistanceFromTarget: -1
@@ -13993,9 +14470,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142134
-    - 0.9999999
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -14074,16 +14551,16 @@ MonoBehaviour:
     - {x: 6, y: 3, z: 9}
     - {x: 7, y: 3, z: 9}
     linkedNodeDistance:
-    - 0.9999995
-    - 1.4142132
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 6.9999995, y: 2.5062103, z: 10}
+  - <Position>k__BackingField: {x: 7, y: 2.5062103, z: 10}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 8, y: 3, z: 10}
@@ -14098,13 +14575,13 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
-    - 0.9999995
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 7.9999995, y: 2.5062103, z: 10}
+  - <Position>k__BackingField: {x: 8, y: 2.5062103, z: 10}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 9, y: 3, z: 10}
@@ -14116,14 +14593,14 @@ MonoBehaviour:
     - {x: 8, y: 3, z: 9}
     - {x: 9, y: 3, z: 9}
     linkedNodeDistance:
-    - 1.0000005
-    - 1.4142139
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 9, y: 2.5062103, z: 10}
     DistanceFromTarget: -1
@@ -14140,9 +14617,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
-    - 1.0000005
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -14233,32 +14710,59 @@ MonoBehaviour:
   - <Position>k__BackingField: {x: 14, y: 2.5062103, z: 10}
     DistanceFromTarget: -1
     linkedBoundPositions:
+    - {x: 15, y: 3, z: 10}
+    - {x: 15, y: 3, z: 11}
     - {x: 14, y: 3, z: 11}
     - {x: 13, y: 3, z: 11}
     - {x: 13, y: 3, z: 10}
     - {x: 13, y: 3, z: 9}
     - {x: 14, y: 3, z: 9}
+    - {x: 15, y: 3, z: 9}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: -13, y: 2.5062103, z: 11}
+  - <Position>k__BackingField: {x: 15, y: 2.5062103, z: 10}
     DistanceFromTarget: -1
     linkedBoundPositions:
-    - {x: -12, y: 3, z: 11}
-    - {x: -12, y: 3, z: 12}
-    - {x: -13, y: 3, z: 12}
-    - {x: -13, y: 3, z: 10}
-    - {x: -12, y: 3, z: 10}
+    - {x: 16, y: 3, z: 10}
+    - {x: 16, y: 3, z: 11}
+    - {x: 15, y: 3, z: 11}
+    - {x: 14, y: 3, z: 11}
+    - {x: 14, y: 3, z: 10}
+    - {x: 14, y: 3, z: 9}
+    - {x: 15, y: 3, z: 9}
+    - {x: 16, y: 3, z: 9}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
     - 1
     - 1.4142135
+    - 1
+    - 1.4142135
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: 16, y: 2.5062103, z: 10}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: 16, y: 3, z: 11}
+    - {x: 15, y: 3, z: 11}
+    - {x: 15, y: 3, z: 10}
+    - {x: 15, y: 3, z: 9}
+    - {x: 16, y: 3, z: 9}
+    linkedNodeDistance:
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: -12, y: 2.5062103, z: 11}
     DistanceFromTarget: -1
@@ -14266,18 +14770,12 @@ MonoBehaviour:
     - {x: -11, y: 3, z: 11}
     - {x: -11, y: 3, z: 12}
     - {x: -12, y: 3, z: 12}
-    - {x: -13, y: 3, z: 12}
-    - {x: -13, y: 3, z: 11}
-    - {x: -13, y: 3, z: 10}
     - {x: -12, y: 3, z: 10}
     - {x: -11, y: 3, z: 10}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
-    - 1.4142135
-    - 1
-    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -14524,16 +15022,16 @@ MonoBehaviour:
     - {x: 0, y: 3, z: 10}
     - {x: 1, y: 3, z: 10}
     linkedNodeDistance:
-    - 1.0000001
-    - 1.4142137
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142137
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 1.0000001, y: 2.5062103, z: 11}
+  - <Position>k__BackingField: {x: 1, y: 2.5062103, z: 11}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 2, y: 3, z: 11}
@@ -14545,14 +15043,14 @@ MonoBehaviour:
     - {x: 1, y: 3, z: 10}
     - {x: 2, y: 3, z: 10}
     linkedNodeDistance:
-    - 0.9999999
-    - 1.4142134
     - 1
-    - 1.4142137
-    - 1.0000001
-    - 1.4142137
+    - 1.4142135
     - 1
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 2, y: 2.5062103, z: 11}
     DistanceFromTarget: -1
@@ -14569,9 +15067,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142134
-    - 0.9999999
-    - 1.4142134
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -14650,16 +15148,16 @@ MonoBehaviour:
     - {x: 6, y: 3, z: 10}
     - {x: 7, y: 3, z: 10}
     linkedNodeDistance:
-    - 0.9999995
-    - 1.4142132
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 6.9999995, y: 2.5062103, z: 11}
+  - <Position>k__BackingField: {x: 7, y: 2.5062103, z: 11}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 8, y: 3, z: 11}
@@ -14674,13 +15172,13 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
-    - 0.9999995
-    - 1.4142132
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 7.9999995, y: 2.5062103, z: 11}
+  - <Position>k__BackingField: {x: 8, y: 2.5062103, z: 11}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 9, y: 3, z: 11}
@@ -14692,14 +15190,14 @@ MonoBehaviour:
     - {x: 8, y: 3, z: 10}
     - {x: 9, y: 3, z: 10}
     linkedNodeDistance:
-    - 1.0000005
-    - 1.4142139
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 9, y: 2.5062103, z: 11}
     DistanceFromTarget: -1
@@ -14716,9 +15214,9 @@ MonoBehaviour:
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
-    - 1.0000005
-    - 1.4142139
+    - 1.4142135
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -14809,41 +15307,68 @@ MonoBehaviour:
   - <Position>k__BackingField: {x: 14, y: 2.5062103, z: 11}
     DistanceFromTarget: -1
     linkedBoundPositions:
+    - {x: 15, y: 3, z: 11}
+    - {x: 15, y: 3, z: 12}
     - {x: 14, y: 3, z: 12}
     - {x: 13, y: 3, z: 12}
     - {x: 13, y: 3, z: 11}
     - {x: 13, y: 3, z: 10}
     - {x: 14, y: 3, z: 10}
+    - {x: 15, y: 3, z: 10}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
     - 1.4142135
     - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: -13, y: 2.5062103, z: 12}
+  - <Position>k__BackingField: {x: 15, y: 2.5062103, z: 11}
     DistanceFromTarget: -1
     linkedBoundPositions:
-    - {x: -12, y: 3, z: 12}
-    - {x: -13, y: 3, z: 11}
-    - {x: -12, y: 3, z: 11}
+    - {x: 16, y: 3, z: 11}
+    - {x: 16, y: 3, z: 12}
+    - {x: 15, y: 3, z: 12}
+    - {x: 14, y: 3, z: 12}
+    - {x: 14, y: 3, z: 11}
+    - {x: 14, y: 3, z: 10}
+    - {x: 15, y: 3, z: 10}
+    - {x: 16, y: 3, z: 10}
     linkedNodeDistance:
     - 1
+    - 1.4142135
     - 1
     - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: 16, y: 2.5062103, z: 11}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: 16, y: 3, z: 12}
+    - {x: 15, y: 3, z: 12}
+    - {x: 15, y: 3, z: 11}
+    - {x: 15, y: 3, z: 10}
+    - {x: 16, y: 3, z: 10}
+    linkedNodeDistance:
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
+    - 1
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: -12, y: 2.5062103, z: 12}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: -11, y: 3, z: 12}
-    - {x: -13, y: 3, z: 12}
-    - {x: -13, y: 3, z: 11}
     - {x: -12, y: 3, z: 11}
     - {x: -11, y: 3, z: 11}
     linkedNodeDistance:
     - 1
-    - 1
-    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -15021,13 +15546,13 @@ MonoBehaviour:
     - {x: 0, y: 3, z: 11}
     - {x: 1, y: 3, z: 11}
     linkedNodeDistance:
-    - 1.0000001
+    - 1
     - 1
     - 1.4142135
     - 1
-    - 1.4142137
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 1.0000001, y: 2.5062103, z: 12}
+  - <Position>k__BackingField: {x: 1, y: 2.5062103, z: 12}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 2, y: 3, z: 12}
@@ -15036,11 +15561,11 @@ MonoBehaviour:
     - {x: 1, y: 3, z: 11}
     - {x: 2, y: 3, z: 11}
     linkedNodeDistance:
-    - 0.9999999
-    - 1.0000001
-    - 1.4142137
     - 1
-    - 1.4142134
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 2, y: 2.5062103, z: 12}
     DistanceFromTarget: -1
@@ -15052,8 +15577,8 @@ MonoBehaviour:
     - {x: 3, y: 3, z: 11}
     linkedNodeDistance:
     - 1
-    - 0.9999999
-    - 1.4142134
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -15111,13 +15636,13 @@ MonoBehaviour:
     - {x: 6, y: 3, z: 11}
     - {x: 7, y: 3, z: 11}
     linkedNodeDistance:
-    - 0.9999995
+    - 1
     - 1
     - 1.4142135
     - 1
-    - 1.4142132
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 6.9999995, y: 2.5062103, z: 12}
+  - <Position>k__BackingField: {x: 7, y: 2.5062103, z: 12}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 8, y: 3, z: 12}
@@ -15127,12 +15652,12 @@ MonoBehaviour:
     - {x: 8, y: 3, z: 11}
     linkedNodeDistance:
     - 1
-    - 0.9999995
-    - 1.4142132
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
-  - <Position>k__BackingField: {x: 7.9999995, y: 2.5062103, z: 12}
+  - <Position>k__BackingField: {x: 8, y: 2.5062103, z: 12}
     DistanceFromTarget: -1
     linkedBoundPositions:
     - {x: 9, y: 3, z: 12}
@@ -15141,11 +15666,11 @@ MonoBehaviour:
     - {x: 8, y: 3, z: 11}
     - {x: 9, y: 3, z: 11}
     linkedNodeDistance:
-    - 1.0000005
+    - 1
     - 1
     - 1.4142135
     - 1
-    - 1.4142139
+    - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
   - <Position>k__BackingField: {x: 9, y: 2.5062103, z: 12}
     DistanceFromTarget: -1
@@ -15157,8 +15682,8 @@ MonoBehaviour:
     - {x: 10, y: 3, z: 11}
     linkedNodeDistance:
     - 1
-    - 1.0000005
-    - 1.4142139
+    - 1
+    - 1.4142135
     - 1
     - 1.4142135
     targetDirection: {x: 0, y: 0, z: 0}
@@ -15225,11 +15750,118 @@ MonoBehaviour:
   - <Position>k__BackingField: {x: 14, y: 2.5062103, z: 12}
     DistanceFromTarget: -1
     linkedBoundPositions:
+    - {x: 15, y: 3, z: 12}
     - {x: 13, y: 3, z: 12}
     - {x: 13, y: 3, z: 11}
     - {x: 14, y: 3, z: 11}
+    - {x: 15, y: 3, z: 11}
+    linkedNodeDistance:
+    - 1
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: 15, y: 2.5062103, z: 12}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: 16, y: 3, z: 12}
+    - {x: 14, y: 3, z: 12}
+    - {x: 14, y: 3, z: 11}
+    - {x: 15, y: 3, z: 11}
+    - {x: 16, y: 3, z: 11}
+    linkedNodeDistance:
+    - 1
+    - 1
+    - 1.4142135
+    - 1
+    - 1.4142135
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: 16, y: 2.5062103, z: 12}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: 15, y: 3, z: 12}
+    - {x: 15, y: 3, z: 11}
+    - {x: 16, y: 3, z: 11}
     linkedNodeDistance:
     - 1
     - 1.4142135
     - 1
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: -13, y: 6.3030653, z: 3.9999952}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: -13, y: 6, z: 5}
+    linkedNodeDistance:
+    - 1.0000005
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: -13.000001, y: 6.3030653, z: 4.9999957}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: -13, y: 6, z: 6}
+    - {x: -13, y: 6, z: 4}
+    linkedNodeDistance:
+    - 0.9999995
+    - 1.0000005
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: -13.000001, y: 6.3030653, z: 5.999995}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: -13, y: 6, z: 7}
+    - {x: -13, y: 6, z: 5}
+    linkedNodeDistance:
+    - 1.000001
+    - 0.9999995
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: -13.000001, y: 6.3030653, z: 6.999996}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: -13, y: 6, z: 8}
+    - {x: -13, y: 6, z: 6}
+    linkedNodeDistance:
+    - 1
+    - 1.000001
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: -13.000001, y: 6.3030653, z: 7.999996}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: -13, y: 6, z: 9}
+    - {x: -13, y: 6, z: 7}
+    linkedNodeDistance:
+    - 1
+    - 1
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: -13.000001, y: 6.3030653, z: 8.999996}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: -13, y: 6, z: 10}
+    - {x: -13, y: 6, z: 8}
+    linkedNodeDistance:
+    - 1.000001
+    - 1
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: -13.000001, y: 6.3030653, z: 9.999997}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: -13, y: 6, z: 11}
+    - {x: -13, y: 6, z: 9}
+    linkedNodeDistance:
+    - 1
+    - 1.000001
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: -13.000002, y: 6.3030653, z: 10.999997}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: -13, y: 6, z: 12}
+    - {x: -13, y: 6, z: 10}
+    linkedNodeDistance:
+    - 0.99999905
+    - 1
+    targetDirection: {x: 0, y: 0, z: 0}
+  - <Position>k__BackingField: {x: -13.000002, y: 6.3030653, z: 11.999996}
+    DistanceFromTarget: -1
+    linkedBoundPositions:
+    - {x: -13, y: 6, z: 11}
+    linkedNodeDistance:
+    - 0.99999905
     targetDirection: {x: 0, y: 0, z: 0}
