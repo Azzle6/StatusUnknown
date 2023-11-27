@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: EnemyStats
   m_EditorClassIdentifier: 
   health: 100
-  AggroRange: 30
-  chaseStrength: 5
+  avoidDistance: 1
+  avoidStrength: 1
+  AggroRange: 15
+  chaseStrength: 10
   AttackRange: 2
   AttackDuration: 1
+  AttackCooldown: 0
+  AttackDamage: 5
