@@ -1,6 +1,7 @@
 namespace Module.Definitions
 {
     using System;
+    using Combat.Projectile;
     using Sirenix.OdinInspector;
     using UnityEngine;
 
@@ -18,9 +19,8 @@ namespace Module.Definitions
     [Serializable]
     public struct ProjectileBehaviourData : IBehaviourData
     {
-        [SerializeReference]
-        public HitShape Shape;
-        public float speed;
+        public ProjectileProfile baseProfile;
+        public Projectile projectileBehaviour;
     }
 
     [Serializable]

@@ -20,11 +20,21 @@ namespace Combat.Projectile
             target.TakeDamage(this.profile.damage, Vector3.zero);
         }
 
-        protected virtual void OnUpdate()
+        protected virtual Collider[] CheckCollisions()
+        {
+            return this.profile.hitShape.DetectColliders(this.transform.position, this.transform.rotation,this.profile.collisionMask);
+        }
+
+        protected virtual void Move()
         {
             this.transform.position += this.transform.forward * this.profile.speed;
-            var solidColliders = this.profile.hitShape.DetectColliders(this.transform.position, this.transform.rotation,this.profile.collisionMask);
-            if (solidColliders.Length > 0)
+        }
+
+        protected virtual void OnUpdate()
+        {
+            this.Move();
+            Collider[] hitsItems = this.CheckCollisions();
+            if (hitsItems.Length > 0)
                 this.DestroyProjectile();
         }
         
@@ -40,7 +50,7 @@ namespace Combat.Projectile
         
         public static Projectile InstantiateShoot(Vector3 position, Vector3 direction, ProjectileProfile projectileProfile)
         {
-            Projectile projectile = new Projectile();
+            Projectile projectile = new GameObject().AddComponent<Projectile>();
             projectile.profile = projectileProfile;
             projectile.hitShape = projectileProfile.hitShape;
             projectile.hitMask = projectileProfile.enemyMask;

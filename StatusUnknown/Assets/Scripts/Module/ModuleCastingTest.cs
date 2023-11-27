@@ -11,7 +11,7 @@ namespace Module
         [Button, HideInEditorMode]
         private void Cast()
         {
-            InstantiatedModuleBehaviour.InstantiateModuleBehaviour(
+            ModuleBehaviourHandler.InstantiateModuleBehaviour(
                 this.inventory.equippedWeaponsData[0].triggerInfoData[0].compiledModules.FirstModule,
                 new InstantiatedModuleInfo(transform.position, transform.forward));
         }
