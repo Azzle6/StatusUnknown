@@ -1,5 +1,7 @@
+
 namespace Weapon
 {
+    using Core.Pooler;
     using UnityEngine;
 
     [CreateAssetMenu(fileName = "PhotonPistol", menuName = "CustomAssets/WeaponStat/PhotonPistol", order = 1)]
@@ -11,8 +13,8 @@ namespace Weapon
         [Header("Projectile")]
         public AnimationCurve projectileSize;
         public float maxProjectileSize;
-        public float projectileSpeed;
-        public GameObject projectilePrefab;
+        public float projectileSpeed; 
+        public CoPoolProjectile projectilePool;
         [Header("Charge")]
         public float maxTimeCharge;
         public float cdTime;

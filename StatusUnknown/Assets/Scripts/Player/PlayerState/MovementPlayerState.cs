@@ -87,8 +87,11 @@ namespace Player
                 
                 forwardMovement = camForward * inputDirection.z;
                 rightMovement = camRight * inputDirection.x;
-                
-                tempMovement = (forwardMovement + rightMovement) * playerStat.moveSpeed;
+
+                if (playerStat.isShooting)
+                    tempMovement = (forwardMovement + rightMovement) * playerStat.moveSpeedWhileShooting;
+                else
+                    tempMovement = (forwardMovement + rightMovement) * playerStat.moveSpeed;
 
                 if (playerStat.isAiming == default)
                     playerStateInterpretor.transform.forward = Vector3.Slerp(new Vector3(playerStateInterpretor.transform.forward.x,0,playerStateInterpretor.transform.forward.z), tempMovement.normalized, playerStat.turnSpeed);
