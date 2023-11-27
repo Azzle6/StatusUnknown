@@ -9,6 +9,7 @@ public class ProtoChess : MonoBehaviour
     public GameObject textInteract;
     public GameObject textLoot;
     public bool lootable= true;
+    public GameObject top;
     
     void Start()
     {
@@ -19,9 +20,10 @@ public class ProtoChess : MonoBehaviour
     {
         if (interactInput.IsPressed() && lootable)
         {
+            lootable = false;
+            top.GetComponent<Animator>().SetBool("Lootable",false);
             textInteract.SetActive(false);
             textLoot.SetActive(true);
-            lootable = false;
         }
     }
     private void OnTriggerEnter(Collider other)

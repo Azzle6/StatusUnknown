@@ -12,7 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f15fa3c1ef5e44848bfdc27077e89109, type: 3}
   m_Name: PlayerStat
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  maxHealth: 100
+  medKitHealAmount: 0
+  medikitHealAmount: 40
+  maxMedikitAmount: 10
+  medikitCooldown: 20
+  moveSpeed: 7
+  moveSpeedWhileShooting: 2
   turnAngleLimit: 15
   turnSpeed: 0.0577
   angleRequiredMultiplierByDistance:
@@ -71,3 +77,4 @@ MonoBehaviour:
     m_RotationOrder: 4
   isAiming: 0
   isShooting: 0
+  currentWeaponIsMelee: 1
