@@ -15,6 +15,7 @@ public class MorphBehaviour : MonoBehaviour
     [SerializeField, Range(0, 1)] float timerRandomness;
     [Header("Debug")]
     [SerializeField] bool morphing;
+    float initialTimer;
     
 
     private void OnEnable()
@@ -33,6 +34,8 @@ public class MorphBehaviour : MonoBehaviour
     private void Start()
     {
         currentMorphTimer = Random.Range((1-timerRandomness) * morphTimer, morphTimer);
+        initialTimer = currentMorphTimer;
+        morphTimeCounter = Time.time;
         StartMorphProcess();
     }
 
@@ -40,7 +43,7 @@ public class MorphBehaviour : MonoBehaviour
     {
         startMorphEvent?.RaiseEvent(this);
         MorphEvents.StartMorphEvent(this);
-        Debug.Log("StartMorph");
+        //Debug.Log($"StartMorph {gameObject}");
         morphing = true;
 
         //TODO : morph shit
@@ -65,15 +68,18 @@ public class MorphBehaviour : MonoBehaviour
         if(morphOrigin != this)
             StopMorphProcess();
     }
-
+    [Button("StopMorphProcess")]
     public void StopMorphProcess()
     {
+       
         currentMorphTimer -= Time.time - morphTimeCounter;
+        //Debug.Log($"stop morph {gameObject} {currentMorphTimer}/{initialTimer}");
         CancelInvoke("StartMorph");
     }
     [Button("StartMorphProcess")]
     public void StartMorphProcess()
     {
+        //Debug.Log($"start morph {gameObject} {currentMorphTimer}/{initialTimer}");
         Invoke("StartMorph", currentMorphTimer);
         morphTimeCounter = Time.time;
     }
