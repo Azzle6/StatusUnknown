@@ -7,6 +7,10 @@ public class ProtoFXDialogSO : ScriptableObject
 {
     [SerializeField] public string dialogName;
 
+    [SerializeField] public bool displayDialog;
     [SerializeField] public string text;
     [SerializeField] public float timerAddValue;
+
+    [SerializeField] public bool displayImage;
+    [SerializeField] public Sprite image;
 }
