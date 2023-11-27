@@ -1,6 +1,7 @@
 namespace Module
 {
     using System;
+    using Definitions;
     using Inventory.Item;
 
     [Serializable]

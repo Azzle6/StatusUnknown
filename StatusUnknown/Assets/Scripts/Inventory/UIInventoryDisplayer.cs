@@ -88,7 +88,7 @@ namespace Inventory
                 int index = i;
                 Button triggerButton = new Button(() => this.SelectTriggerIndex(index))
                 {
-                    text = this.selectedWeaponData.triggerInfoData[i].triggerType.name
+                    text = this.selectedWeaponData.triggerInfoData[i].weaponTriggerType.name
                 };
                 this.weaponTriggersRoot.Add(triggerButton);
             }

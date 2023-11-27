@@ -27,7 +27,7 @@ namespace Weapons
                     if (itemView.ItemData == compiledModule.module)
                     {
                         foreach (var trigger in compiledModule.triggersNextModule)
-                            ((ModuleItemView)itemView).SetLinkView(trigger.trigger, trigger.compiledModule != null);
+                            ((ModuleItemView)itemView).SetLinkView(trigger.weaponTrigger, trigger.compiledModule != null);
                         isCompiledModule = true;
                         break;
                     }
@@ -38,7 +38,7 @@ namespace Weapons
                     ModuleItemView moduleView = (ModuleItemView)itemView;
                     
                     foreach (var output in moduleView.ModuleItemData.definition.outputs)
-                        moduleView.SetLinkView(output.triggerType, false);
+                        moduleView.SetLinkView(output.weaponTriggerType, false);
                 }
             }
         }

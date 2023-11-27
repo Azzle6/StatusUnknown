@@ -1,11 +1,10 @@
-using System;
-using UnityEngine;
-using UnityEngine.UIElements;
-
 namespace Inventory
 {
     using Grid;
     using Item;
+    using System;
+    using UnityEngine;
+    using UnityEngine.UIElements;
 
     [Serializable]
     public class Slot : IGridElement
