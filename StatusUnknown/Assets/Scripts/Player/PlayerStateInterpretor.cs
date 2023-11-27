@@ -4,6 +4,7 @@ namespace Player
 {
     using System.Collections.Generic;
     using UnityEngine;
+    using Weapon;
 
     public class PlayerStateInterpretor : MonoBehaviour
     {
@@ -48,22 +49,16 @@ namespace Player
             if (statesSlot[playerStateType] != null)
             {
                 if (statesSlot[playerStateType].inputBufferActive)
-                {
                     inputBufferState = playerStates[state];
-                    //inputBufferStateType = playerStates[state].playerStateType;
-                    //inputBufferStateName = state;
-                }
                 
                 if (statesSlot[playerStateType].lockState)
                     return;
-                
-            
             }
             
             tempState = playerStates[state];
             statesSlot[playerStateType] = tempState;
-            tempState.OnStateEnter();
             statesSlot[playerStateType].lockState = lockState;
+            tempState.OnStateEnter();
 
         }
     
@@ -71,6 +66,7 @@ namespace Player
         {
             if (statesSlot[playerStateType] == null)
                 return;
+            
             tempState = statesSlot[playerStateType];
             tempState.OnStateExit();
             statesSlot[playerStateType].lockState = false;

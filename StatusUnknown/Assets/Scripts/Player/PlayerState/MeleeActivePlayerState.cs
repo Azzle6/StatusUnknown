@@ -1,9 +1,10 @@
-using System.Collections;
-using UnityEngine.Rendering.HighDefinition;
+
 
 namespace Player
 {
     using UnityEngine;
+    using Weapon;
+    using System.Collections;
 
     public class MeleeActivePlayerState : PlayerState
     {

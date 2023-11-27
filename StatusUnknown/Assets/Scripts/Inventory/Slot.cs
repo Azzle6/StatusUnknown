@@ -4,18 +4,26 @@ using UnityEngine.UIElements;
 
 namespace Inventory
 {
+    using Grid;
+    using Item;
+
     [Serializable]
-    public class Slot : GridElement
+    public class Slot : IGridElement
     {
+        public GridView Grid { get; set; }
+        public Vector2Int GridPosition { get; set; }
+        public VisualElement ViewRoot { get; set; }
+        public VisualElement FocusElement { get; set; }
+        
         public ItemView item;
 
         #region CONSTRUCTOR
         public Slot(Vector2Int pos, VisualElement visual, GridView gridView)
         {
-            this.gridPosition = pos;
-            this.viewRoot = visual;
-            this.focusElement = visual.Q<VisualElement>("gridSlot");
-            this.grid = gridView;
+            this.GridPosition = pos;
+            this.ViewRoot = visual;
+            this.FocusElement = visual.Q<VisualElement>("gridSlot");
+            this.Grid = gridView;
         }
         #endregion //CONSTRUCTOR
 
@@ -24,12 +32,14 @@ namespace Inventory
             bool isOccupied = itemRef != null;
             
             if(isOccupied)
-                this.focusElement.AddToClassList("usedSlot");
+                this.FocusElement.AddToClassList("usedSlot");
             else
-                this.focusElement.RemoveFromClassList("usedSlot");
+                this.FocusElement.RemoveFromClassList("usedSlot");
 
             this.item = itemRef;
-            this.focusElement.focusable = !isOccupied;
+            this.FocusElement.focusable = !isOccupied;
         }
+
+        
     }
 }

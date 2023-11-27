@@ -8,7 +8,7 @@ public class EnemySniper : EnemyContext
     public LayerMask obstacleMask;
     [Range(0f, 1f)]
     public float hit = 0;
-    public float hitFreq = 1;
+    public float hitFreq = 0.1f;
 
     [Header("Shoot")]
     public GameObject bulletPrefab;

@@ -75,7 +75,6 @@ namespace Tools.DrawingTool.Editor
         private Vector2Int gridSize;
         private List<Vector2Int> currentHighlightedSquares = new List<Vector2Int>();
         private Vector2 symmetryAxis;
-        private IShaped selectedItemScriptable;
 
         [MenuItem("Status/DrawingTool")]
         public static void Display()
@@ -116,11 +115,11 @@ namespace Tools.DrawingTool.Editor
             this.exportAsBrushButton = treeAsset.Q<Button>("exportAsBrushButton");
             this.exportAsBrushButton.clicked += this.OnExportBrushButtonClicked;
 
-            this.exportToSelectedItemButton = treeAsset.Q<Button>("exportToSelectedButton");
+            /*this.exportToSelectedItemButton = treeAsset.Q<Button>("exportToSelectedButton");
             this.exportToSelectedItemButton.clicked += this.OnExportToSelectedItemButtonClicked;
 
             this.importFromSelectedItemButton = treeAsset.Q<Button>("importFromSelectedButton");
-            this.importFromSelectedItemButton.clicked += this.OnImportFromSelectedItemButtonClicked;
+            this.importFromSelectedItemButton.clicked += this.OnImportFromSelectedItemButtonClicked;*/
 
             this.loadButton = treeAsset.Q<Button>("loadButton");
             this.loadButton.clicked += this.OnLoadButtonClicked;
@@ -197,13 +196,13 @@ namespace Tools.DrawingTool.Editor
         
             this.OnSymmetryToolStateChanged(E_Axis.NONE);
             
-            this.CheckSelectedItem();
+            //this.CheckSelectedItem();
         }
 
-        private void OnSelectionChange()
+        /*private void OnSelectionChange()
         {
             this.CheckSelectedItem();
-        }
+        }*/
 
         #endregion // UNITY_FLOW
 
@@ -801,7 +800,7 @@ namespace Tools.DrawingTool.Editor
             this.RefreshBrushesList();
         }
 
-        private void OnExportToSelectedItemButtonClicked()
+        /*private void OnExportToSelectedItemButtonClicked()
         {
             if(this.selectedItemScriptable == null)
                 return;
@@ -839,10 +838,10 @@ namespace Tools.DrawingTool.Editor
             {
                 for (int x = 0; x < loadedShape.shapeSize.x; x++)
                 {
-                    this.ChangeSquareState(this.squaresData[this.GridPositionToIndex(new Vector2Int(x, loadedShape.shapeSize.y - 1 - y))], loadedShape.shapeContent[this.GridPositionToIndex(new Vector2Int(x, y))] == false ? E_PointState.EMPTY : E_PointState.FILL);
+                    this.ChangeSquareState(this.squaresData[this.GridPositionToIndex(new Vector2Int(x, loadedShape.shapeSize.y - 1 - y))], loadedShape.content[this.GridPositionToIndex(new Vector2Int(x, y))] == false ? E_PointState.EMPTY : E_PointState.FILL);
                 }
             }
-        }
+        }*/
 
         private void OnLoadButtonClicked()
         {
@@ -949,13 +948,13 @@ namespace Tools.DrawingTool.Editor
             return result.ToArray();
         }
 
-        private void CheckSelectedItem()
+        /*private void CheckSelectedItem()
         {
             this.selectedItemScriptable = Selection.activeObject as IShaped;
 
             this.exportToSelectedItemButton.SetEnabled(this.selectedItemScriptable != null);
             this.importFromSelectedItemButton.SetEnabled(this.selectedItemScriptable != null);
-        }
+        }*/
         #endregion //EXPORT_DATA
     
         #region UTILITIES

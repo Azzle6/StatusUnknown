@@ -1,7 +1,7 @@
 namespace Core.SingletonsSO
 {
-    using System;
-    using Inventory;
+    using Inventory.Grid;
+    using Inventory.Item;
     using Sirenix.OdinInspector;
     using UI;
     using UnityEngine;
@@ -13,60 +13,74 @@ namespace Core.SingletonsSO
         public UISettings uiSettings;
         
         [FoldoutGroup("Dynamic data")]
-        public GridView selectedGrid;
-        [FoldoutGroup("Dynamic data")]
         public bool isMovingItem;
-        [FoldoutGroup("Dynamic data")]
-        public ItemView movingItem;
-
-        public Action<GridElement> OnGridElementFocusEvent;
+        [FoldoutGroup("Dynamic data")] 
+        private ItemView movingItem;
+        
+        private GridView selectedGrid;
         
         public void ForceFocus(VisualElement element)
         {
             element.Focus();
-            Debug.Log($"{element.name} get forced focus.");
         }
 
         #region GRID_MANAGEMENT
-        public void OnGridElementFocus(GridElement element)
+        public void OnGridElementFocus(IGridElement element)
         {
-            this.selectedGrid = element.grid;
-            this.OnGridElementFocusEvent?.Invoke(element);
+            this.selectedGrid = element.Grid;
+            if(this.isMovingItem)
+                MoveItem(element);
         }
 
-        public void PickItem(ItemView itemView)
+        public void TryPickItem(ItemView itemView)
+        {
+            if(this.isMovingItem)
+                return;
+            PickItem(itemView);
+        }
+        
+        private void PickItem(ItemView itemView)
         {
             this.movingItem = itemView;
             this.isMovingItem = true;
             
-            itemView.MoveState();
-            
-            itemView.grid.OnPickItem(itemView);
-            this.OnGridElementFocusEvent += this.MoveItem;
+            itemView.SetMoveState();
+            itemView.Grid.OnPickItem(itemView);
         }
 
-        private void MoveItem(GridElement focusedElement)
+        private void MoveItem(IGridElement focusedElement)
         {
-            this.movingItem.CanPlaceItemFeedback(this.selectedGrid.CanPlaceItem(this.movingItem.item.itemDefinition.Shape, focusedElement.gridPosition));
-            this.selectedGrid.SetItemVisualPosition(this.movingItem, focusedElement.gridPosition);
-            Debug.Log($"Move item to {focusedElement.gridPosition} in grid parent {this.selectedGrid}.");
+            bool canPlace =
+                this.selectedGrid.CanPlaceItem(this.movingItem, focusedElement.GridPosition);
+            
+            this.movingItem.SetPlaceItemFeedback(canPlace);
+            this.selectedGrid.SetItemVisualPosition(this.movingItem, focusedElement.GridPosition);
+            //Debug.Log($"Move item to {focusedElement.gridPosition} in grid parent {this.selectedGrid}.");
         }
 
         public void TryDropItem(Vector2Int pos)
         {
-            if (this.selectedGrid.CanPlaceItem(this.movingItem.item.itemDefinition.Shape, pos))
-                this.DropItem(pos);
+            if (this.selectedGrid.CanPlaceItem(this.movingItem, pos))
+                this.DropItem(this.selectedGrid, pos);
+            else
+                this.CancelItemMoving();
+                
         }
 
-        private void DropItem(Vector2Int pos)
+        private void DropItem(GridView grid, Vector2Int pos)
         {
-            this.OnGridElementFocusEvent -= this.MoveItem;
             this.movingItem.PlacedState();
-            this.selectedGrid.DropItem(this.movingItem, pos);
-            this.ForceFocus(this.movingItem.focusElement);
+            grid.DropItem(this.movingItem, pos);
+            this.ForceFocus(this.movingItem.FocusElement);
             
             this.movingItem = null;
             this.isMovingItem = false;
+        }
+
+        private void CancelItemMoving()
+        {
+            if(this.isMovingItem)
+                DropItem(this.movingItem.Grid, this.movingItem.GridPosition);
         }
         #endregion //GRID_MANAGEMENT
     }

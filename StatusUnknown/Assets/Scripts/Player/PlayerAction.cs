@@ -142,6 +142,10 @@ namespace Player
     
         public void OnMedkit(InputAction.CallbackContext ctx)
         {            
+            if (ctx.started)
+            {
+                playerStateInterpretor.AddState("MedikitPlayerState", PlayerStateType.ACTION,false);
+            }
         }
     
         public void OnInteract(InputAction.CallbackContext ctx)

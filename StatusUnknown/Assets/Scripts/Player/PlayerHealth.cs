@@ -1,27 +1,51 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using Player;
-using UnityEngine;
+using Core.VariablesSO.VariableTypes;
 
-public class PlayerHealth : MonoBehaviour, IDamageable
+namespace Player
 {
-    [SerializeField] private PlayerStat stat;
-    private float health;
+    using UnityEngine;
 
-    private void Awake()
+    public class PlayerHealth : MonoBehaviour, IDamageable
     {
-        health = stat.maxHealth;
-    }
+        [SerializeField] private PlayerStat stat;
+        [SerializeField] private FloatVariableSO playerHealth;
+        [SerializeField] private FloatVariableSO playerArmor;
+        private Coroutine medikitCD;
 
-    public void TakeDamage(float damage, Vector3 force)
-    {
-        health -= damage;
-        Debug.Log("Player took " + damage + " damage");
-    }
+
+        private void Awake()
+        {
+            playerHealth.Value = stat.maxHealth;
+        }
+
+        public void TakeDamage(float damage, Vector3 force)
+        {
+            playerHealth.Value -= damage;
+            Debug.Log("Player took " + damage + " damage");
+        }
+
+        private IEnumerator MedikitCD()
+        {
+            yield return new WaitForSeconds(stat.medikitCooldown);
+            medikitCD = null;
+        }
     
-    public void Heal(float amount)
-    {
-        health += amount;
+        public void Heal(float amount)
+        {
+            if (medikitCD != null)
+                return;
+            
+            if (playerHealth.Value + amount >= stat.maxHealth)
+            {
+                playerHealth.Value = stat.maxHealth;
+            }
+            else
+            {
+                playerHealth.Value += amount;
+            }
+            
+            medikitCD = StartCoroutine(MedikitCD());
+        }
     }
+
 }
