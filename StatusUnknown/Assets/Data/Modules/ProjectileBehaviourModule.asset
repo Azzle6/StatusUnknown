@@ -23,11 +23,26 @@ MonoBehaviour:
     localPosition: {x: 1, y: 0}
     direction: 3
   BehaviourData:
-    rid: 4696495293261676560
+    rid: 4696495293261676576
   references:
     version: 2
     RefIds:
-    - rid: 4696495293261676560
+    - rid: 4696495293261676570
+      type: {class: HitBox, ns: , asm: Assembly-CSharp}
+      data:
+        size: {x: 1, y: 1, z: 1}
+    - rid: 4696495293261676576
       type: {class: ProjectileBehaviourData, ns: Module.Definitions, asm: Assembly-CSharp}
       data:
-        behaviour: {fileID: 11500000, guid: 52ad6006665b33347bc6db8216731b6c, type: 3}
+        projectileBehaviour: {fileID: 11500000, guid: 52ad6006665b33347bc6db8216731b6c, type: 3}
+        layerMask:
+          serializedVersion: 2
+          m_Bits: 1
+        quantity: 1
+        mesh: {fileID: 3613567641014311022, guid: ecdbcec36b1082e468192d3cd665f4a9, type: 3}
+        material: {fileID: -876546973899608171, guid: 4a77fad0a2c502e42adef107b7ea51ea, type: 3}
+        shape:
+          rid: 4696495293261676570
+        speed: 10
+        damages: 2
+        lifeTime: 5

@@ -20,7 +20,17 @@ namespace Module.Definitions
     public struct ProjectileBehaviourData : IBehaviourData
     {
         [SerializeField]
-        public MonoScript behaviour;
+        public MonoScript projectileBehaviour;
+
+        public LayerMask layerMask;
+        public int quantity;
+        public Mesh mesh;
+        public Material material;
+        [SerializeReference]
+        public HitShape shape;
+        public float speed;
+        public float damages;
+        public float lifeTime;
     }
 
     [Serializable]

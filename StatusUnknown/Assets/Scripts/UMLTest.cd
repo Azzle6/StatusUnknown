@@ -108,7 +108,7 @@
   <Class Name="Module.Definitions.BehaviourModuleDefinitionSO" Collapsed="true">
     <Position X="13.25" Y="7" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAQAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\Module\Definitions\BehaviourModuleDefinitionSO.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -120,27 +120,34 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Module.Behaviours.InstantiatedModule">
-    <Position X="29" Y="4.25" Width="1.5" />
+    <Position X="28" Y="4.25" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAARCAgAAAAAAAAIAAAAAAADAAAQAAAAAAAQAA=</HashCode>
+      <HashCode>AAQAAAABRiAgAAAAAAAAIAAAAAAADAAAQAIAAAEAQAA=</HashCode>
       <FileName>Assets\Scripts\Module\Behaviours\InstantiatedModule.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Field Name="currentInfo" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="Module.Behaviours.Projectiles.WaveProjectile">
-    <Position X="29" Y="8.25" Width="1.5" />
+  <Class Name="Module.Behaviours.Projectiles.InstantiatedProjectileModule">
+    <Position X="28.5" Y="8.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Assets\Scripts\Module\Behaviours\Projectiles\WaveProjectile.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABCAAAACAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Module\Behaviours\Projectiles\InstantiatedProjectileModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Module.Behaviours.Projectiles.BasicProjectileBehaviour">
+    <Position X="26" Y="11.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAIAAAEAAAA=</HashCode>
+      <FileName>Assets\Scripts\Module\Behaviours\Projectiles\BasicProjectileBehaviour.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Struct Name="Module.Behaviours.InstantiatedModuleInfo">
-    <Position X="31.5" Y="4.25" Width="2.25" />
+    <Position X="24.75" Y="4.25" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAACAAAAAABAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Assets\Scripts\Module\Behaviours\ModuleBehaviourHandler.cs</FileName>
+      <FileName>Assets\Scripts\Module\Behaviours\InstantiatedModule.cs</FileName>
     </TypeIdentifier>
   </Struct>
   <Font Name="Segoe UI" Size="9" />

@@ -9,15 +9,13 @@ namespace Module.Behaviours
     {
         public CompiledModule CompiledModule;
 
-        protected Action OnSpawnEvent;
-        protected Action OnTickEvent;
-        protected Action OnHitEvent;
-
-        protected InstantiatedModuleInfo currentInfo;
+        protected Action<InstantiatedModuleInfo> OnSpawnEvent;
+        protected Action<InstantiatedModuleInfo> OnTickEvent;
+        protected Action<InstantiatedModuleInfo> OnHitEvent;
 
         private void Start()
         {
-            this.OnSpawnEvent?.Invoke();
+            this.OnSpawnEvent?.Invoke(new InstantiatedModuleInfo(transform.position, transform.forward));
         }
 
         private void Update()
@@ -36,10 +34,11 @@ namespace Module.Behaviours
             {
                 yield return new WaitForSeconds(stepDuration);
                 this.OnTick();
-                this.OnTickEvent?.Invoke();
+                this.OnTickEvent?.Invoke(new InstantiatedModuleInfo(transform.position, transform.forward));
             }
         }
 
+        // ReSharper disable Unity.PerformanceAnalysis
         protected virtual void OnTick()
         {
             Debug.Log("Basic module tick.");
@@ -58,7 +57,6 @@ namespace Module.Behaviours
         protected void BaseInit(CompiledModule compiledModule, InstantiatedModuleInfo info)
         {
             this.CompiledModule = compiledModule;
-            this.currentInfo = info;
 
             foreach (var trigger in CompiledModule.triggersNextModule)
             {
@@ -67,13 +65,13 @@ namespace Module.Behaviours
                     switch (trigger.weaponTrigger)
                     {
                         case E_ModuleOutput.ON_SPAWN:
-                            this.OnSpawnEvent += () => this.TriggerNextModule(trigger.compiledModule);
+                            this.OnSpawnEvent += (i) => this.TriggerNextModule(trigger.compiledModule, i);
                             break;
                         case E_ModuleOutput.ON_HIT:
-                            this.OnHitEvent += () => this.TriggerNextModule(trigger.compiledModule);
+                            this.OnHitEvent += (i) => this.TriggerNextModule(trigger.compiledModule, i);
                             break;
                         case E_ModuleOutput.ON_TICK:
-                            this.OnTickEvent += () => this.TriggerNextModule(trigger.compiledModule);
+                            this.OnTickEvent += (i) => this.TriggerNextModule(trigger.compiledModule, i);
                             this.StartCoroutine(Tick(0.3f));
                             break;
                         default:
@@ -83,9 +81,9 @@ namespace Module.Behaviours
             }
         }
 
-        private void TriggerNextModule(CompiledModule nextModule)
+        private void TriggerNextModule(CompiledModule nextModule, InstantiatedModuleInfo info)
         {
-            ModuleBehaviourHandler.Instance.GetModuleBehaviourToInstantiate(nextModule, this.currentInfo);
+            ModuleBehaviourHandler.Instance.GetModuleBehaviourToInstantiate(nextModule, info);
         }
     }
     
