@@ -32,8 +32,9 @@ namespace StatusUnknown.Content
             [HideInInspector] public const bool SHOW_METADATA = false;
             #endregion
 
-            CoreContentStrings s = new CoreContentStrings();  
+            CoreContentStrings s = new CoreContentStrings();
 
+            [SerializeField, LabelWidth(700)] string weaponName = "New_Weapon_Name"; 
             [SerializeField, PreviewField] protected Sprite imageUI;
             [SerializeField, PreviewField] protected GameObject weaponPrefab; // previz
             [SerializeField, PreviewField] protected AudioClip shootDefaultSound; // previz
@@ -44,8 +45,9 @@ namespace StatusUnknown.Content
             [PropertySpace(10), SerializeField, PropertyRange(0.1f, 10f)] private float attackSpeed = 1.5f;
             [SerializeField, PropertyRange(0, 100)] private int damage = 5;
 
-            public int Damage { get => damage; set => damage = value; }
-            public float AttackSpeed { get => attackSpeed; set => attackSpeed = value; }
+            public int Damage { get => damage; }
+            public float AttackSpeed { get => attackSpeed; }
+            public string Description { get => description; }   
         }
 
         internal class Bow : Weapon
@@ -84,8 +86,13 @@ namespace StatusUnknown.Content
         [Serializable]
         public class CameraSettings // load or create new camera settings
         {
-            [SerializeField] private float zoomOutBlendTime = 0.5f;
-            [SerializeField] private float followCharacterDamping = 0.2f;
+            [HorizontalGroup("Default", 800), LabelText("@$property.NiceName"), HideLabel] public bool editSettings; 
+
+            [SerializeField, VerticalGroup("Details"), EnableIf(nameof(editSettings)), PropertyRange(0f, 5f)] private float zoomOutBlendTime = 0.5f;
+            [SerializeField, VerticalGroup("Details"), EnableIf(nameof(editSettings)), PropertyRange(0f, 1f)] private float followCharacterDamping = 0.2f;
+            [SerializeField, VerticalGroup("Details"), EnableIf(nameof(editSettings))] public bool showAllSettings = false;
+            public string ID;
+            public FilterMode TextureFilterMode; 
         }
 
         [Serializable]
@@ -121,9 +128,12 @@ namespace StatusUnknown.Tools
             private static void OpenWindow()
             {
                 CharacterEditorCoreWindow window = GetWindow<CharacterEditorCoreWindow>("Character Editor");
-                window.minSize = new Vector2(1920 * 0.5f, 1080 * 0.5f);
-                window.maxSize = new Vector2(1920, 1080);
-                window.Show();
+
+                Vector2 userScreenSize = new Vector2(Screen.currentResolution.width, Screen.currentResolution.height); 
+                window.minSize = userScreenSize * 0.9f;
+                window.maxSize = userScreenSize * 1f;
+                window.position = new Rect(new Vector2(100,10), window.minSize);
+                window.Show(); 
             }
 
             [EnumToggleButtons, PropertyOrder(-1)][GUIColor(CoreToolsStrings.COLOR_ENUMS)] public Faction Faction;
@@ -132,49 +142,58 @@ namespace StatusUnknown.Tools
 
             [VerticalGroup("Base/left", GroupName = "CHARACTER"), PropertyOrder(0)] public new string name = "Player Character";
             [VerticalGroup("Base/left")][PreviewField(300, ObjectFieldAlignment.Left), PropertyOrder(0)] public Sprite image;
-            [VerticalGroup("Base/left", GroupName = "CHARACTER")][TextArea(10, 20)] public string description;
+            [VerticalGroup("Base/left", GroupName = "CHARACTER")][TextArea(10, 20)] public string description = string.Empty;
             [VerticalGroup("Base/left", GroupName = "CHARACTER")][HideIf("Faction", Faction.Player)] public DialogueSO[] unlockedDialogues = new DialogueSO[2];
 
             [VerticalGroup("Base/right", GroupName = "WEAPON")]
-            [SerializeField, VerticalGroup("Base/right/weapon", GroupName = "WEAPON"), LabelWidth(CoreToolsStrings.LABEL_SIZE_SMALL)] private Weapon Weapon = new Weapon();
+            [SerializeField, VerticalGroup("Base/right/weapon", GroupName = "WEAPON"), LabelWidth(CoreToolsStrings.LABEL_SIZE_SMALL), LabelText("@$value.weaponName")] private Weapon Weapon = new Weapon();
+            [VerticalGroup("Base/right", GroupName = "WEAPON"), SerializeField, InfoBox("@GetWeaponDescription()", Icon = SdfIconType.Info, InfoMessageType = InfoMessageType.Info), HideLabel] string weaponInfos;
+            private string GetWeaponDescription() => string.IsNullOrEmpty(Weapon.Description) ? "No Weapon Description has been written yet" : Weapon.Description;
+
             [VerticalGroup("Base/right/details", GroupName = "DETAILS")]
             [TabGroup("Base/right/details/infos", "Stats"), LabelWidth(CoreToolsStrings.LABEL_SIZE_MEDIUM)] public StatsInfos[] StartingStats = new StatsInfos[1];
             [SerializeField, TabGroup("Base/right/details/infos", "Modules"), LabelWidth(CoreToolsStrings.LABEL_SIZE_MEDIUM)] private ModuleInfos[] StartingModules = new ModuleInfos[3];
 
             [PropertySpace][ShowIf("Faction", Faction.Player)] public bool showCameraAndControls = false;
 
-            [TabGroup("Character", "Controls")][ShowIf("showCameraAndControls", true)] public ControlsSettings ControlSettings = new ControlsSettings();
-            [TabGroup("Character", "Camera")][ShowIf("showCameraAndControls", true)] public CameraSettings CameraSettings = new CameraSettings();
+            [TabGroup("Character", "Controls")][ShowIf(nameof(showCameraAndControls), true)] public ControlsSettings ControlSettings = new ControlsSettings();
+            [TabGroup("Character", "Camera")]
+            [ShowIf(nameof(showCameraAndControls), true), LabelText("@$property.NiceName")]
+
+            [SerializeField] private bool showAllSettings; 
+            [OnStateUpdate("@#(DefaultCameraSettings.ID).State.Visible = " + nameof(showAllSettings))]
+            [OnStateUpdate("@#(DefaultCameraSettings.TextureFilterMode).State.Visible = " + nameof(showAllSettings))]
+            public CameraSettings DefaultCameraSettings = new CameraSettings();
 
             [PropertySpace] public bool showSaveFields = false;
 
-            [ShowIf("showSaveFields", true)][BoxGroup("Save"), Required("Do not forget to fill in the \"Save Name\" field", InfoMessageType.Warning)] public string saveName;
+            [ShowIf(nameof(showSaveFields), true)][BoxGroup("Save"), Required("Do not forget to fill in the \"Save Name\" field", InfoMessageType.Warning)] public string saveName = string.Empty; 
 
-            [ShowIf("showSaveFields", true)]
+            [ShowIf(nameof(showSaveFields), true)]
             [HorizontalGroup("Save/ModulesSet", CoreToolsStrings.BUTTON_LAYOUT_SMALL)]
             [GUIColor(CoreToolsStrings.COLOR_QOL)]
             [Button("Weapon Set - Default Name")]
             public void Faction_Default_ModulesSet() { saveName = $"{Faction}_DialogueSet_ID"; }
 
-            [ShowIf("showSaveFields", true)]
+            [ShowIf(nameof(showSaveFields), true)]
             [HorizontalGroup("Save/WeaponSet", CoreToolsStrings.BUTTON_LAYOUT_SMALL)]
             [GUIColor(CoreToolsStrings.COLOR_QOL)]
             [Button("Module Set - Default Name")]
             public void Faction_Default_WeaponSet() { saveName = $"{Faction}_WeaponSet_ID"; }
 
-            [ShowIf("showSaveFields", true)]
+            [ShowIf(nameof(showSaveFields), true)]
             [HorizontalGroup("Save/DialogueSet", CoreToolsStrings.BUTTON_LAYOUT_SMALL)]
             [GUIColor(CoreToolsStrings.COLOR_QOL)]
             [Button("NPC Set - Default Name")]
             public void Faction_Default_DialogueSet() { saveName = $"{Faction}_DialogueSet_ID"; }
 
-            [ShowIf("saveName", null)]
+            [ShowIf("@saveName != string.Empty && showSaveFields == true")]
             [HorizontalGroup("Save/Save", CoreToolsStrings.BUTTON_LAYOUT_SMALL)]
             [PropertySpace(25), GUIColor(CoreToolsStrings.COLOR_SAVE)]
-            [Button("Save")]
+            [Button("Save", Icon = SdfIconType.Save)]
             public void SaveAsset() { }
 
-            [ShowIf("showSaveFields", true)]
+            [ShowIf(nameof(showSaveFields), true)]
             [BoxGroup("Save"), FolderPath, SerializeField, Required]
             private string rootGameplayDataPath = "Assets/Data/Gameplay";
 

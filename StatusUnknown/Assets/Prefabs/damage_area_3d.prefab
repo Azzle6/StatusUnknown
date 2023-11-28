@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6355086955177130535}
   - component: {fileID: 6842182671870145869}
-  - component: {fileID: 3148009123742364366}
+  - component: {fileID: -2869298285498386192}
   m_Layer: 0
   m_Name: damage_area_3d
   m_TagString: Area
@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   areaShowColor: {r: 0.033018887, g: 1, b: 0.9804577, a: 1}
-  areaCollider: {fileID: 3148009123742364366}
---- !u!135 &3148009123742364366
+  areaCollider: {fileID: -2869298285498386192}
+--- !u!135 &-2869298285498386192
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -66,5 +66,5 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.85
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
