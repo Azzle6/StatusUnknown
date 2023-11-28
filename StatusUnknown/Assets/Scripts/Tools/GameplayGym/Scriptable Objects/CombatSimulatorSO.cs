@@ -1,7 +1,9 @@
 using UnityEngine;
+using StatusUnknown.Utils.AssetManagement;
 
 namespace StatusUnknown.Content
 {
+    [ManageableData]
     [CreateAssetMenu(fileName = "CombatSimualator_Type_Num", menuName = "Status Unknown/Gameplay/Combat/Simulator", order = 50)]
     public class CombatSimulatorSO : ScriptableObject
     {

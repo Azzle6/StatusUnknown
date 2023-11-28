@@ -1,4 +1,5 @@
 using UnityEngine;
+using StatusUnknown.Utils.AssetManagement;
 
 namespace StatusUnknown.Content
 {
@@ -18,6 +19,7 @@ namespace StatusUnknown.Content
         }
     }
 
+    [ManageableData]
     public class AbilityConfigSO_Base : ScriptableObject
     {
         [SerializeField] protected EAbilityType abilityType = EAbilityType.Offense; // editor only

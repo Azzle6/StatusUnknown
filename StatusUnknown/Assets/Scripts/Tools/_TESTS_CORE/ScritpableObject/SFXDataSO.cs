@@ -2,7 +2,9 @@ using Sirenix.OdinInspector;
 using StatusUnknown.Content;
 using System;
 using UnityEngine;
+using StatusUnknown.Utils.AssetManagement;
 
+[ManageableData]
 [CreateAssetMenu(menuName = "New SFX Clip", fileName = CoreContentStrings.PATH_CONTENT_FEEDBACKS + "SFX")]
 public class SFXDataSO : ScriptableObject
 {

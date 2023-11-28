@@ -3,6 +3,7 @@ using StatusUnknown.Tools;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 namespace StatusUnknown.Content.Narrative
 {
     [CreateAssetMenu(fileName = "Dialogue", menuName = CoreContentStrings.PATH_CONTENT_NARRATIVE + "Dialogue")]

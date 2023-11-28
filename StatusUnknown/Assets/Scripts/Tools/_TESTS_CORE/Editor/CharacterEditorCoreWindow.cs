@@ -20,6 +20,7 @@ namespace StatusUnknown.Content
         public const string PATH_CONTENT_GAMEPLAY = PATH_CONTENT_ROOT + "Gameplay/";
         public const string PATH_CONTENT_NARRATIVE = PATH_CONTENT_ROOT + "Narrative/";
         public const string PATH_CONTENT_FEEDBACKS = PATH_CONTENT_ROOT + "Feedbacks/";
+        public const string PATH_DATA_ROOT = "Assets/Data/";
     }
 
     namespace Narrative
