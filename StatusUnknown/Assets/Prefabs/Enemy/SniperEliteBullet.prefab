@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3447921838043190113}
   - component: {fileID: 6909010689405905154}
   - component: {fileID: 2177216268900708113}
-  - component: {fileID: 766970663199409346}
+  - component: {fileID: 3104570633751944546}
   m_Layer: 0
   m_Name: SniperEliteBullet
   m_TagString: Untagged
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  - {fileID: 2100000, guid: 426a7246aefc9da40a762fe1461971a4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -139,7 +139,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &766970663199409346
+--- !u!114 &3104570633751944546
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,10 +148,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6248528393708085188}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cee93a7a41a4da4ba003e276f7fb19b, type: 3}
+  m_Script: {fileID: 11500000, guid: 8845cafccb81df74fa8976fdfee74213, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 2177216268900708113}
   hitContext: {fileID: 6909010689405905154}
   speed: 10
-  damage: 3
+  damage: 2
+  radius: 0.5
+  obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  enemyToSpawn: {fileID: 8449849220990944551, guid: 42638689991654143b0718c2081e3597, type: 3}
