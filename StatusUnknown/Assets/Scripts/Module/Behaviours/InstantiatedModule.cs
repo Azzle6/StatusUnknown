@@ -2,20 +2,32 @@ namespace Module.Behaviours
 {
     using System;
     using System.Collections;
-    using Combat.Projectile;
     using Definitions;
     using UnityEngine;
 
-    public abstract class InstantiatedProjectileModule : Projectile, IInstantiatedModule
+    public class InstantiatedModule : MonoBehaviour
     {
-        public CompiledModule CompiledModule { get; set; }
+        public CompiledModule CompiledModule;
+
+        protected Action OnSpawnEvent;
+        protected Action OnTickEvent;
+        protected Action OnHitEvent;
+
         protected InstantiatedModuleInfo currentInfo;
-        
-        protected Action OnSpawnEvent, OnTickEvent, OnHitEvent;
-        
+
         private void Start()
         {
             this.OnSpawnEvent?.Invoke();
+        }
+
+        private void Update()
+        {
+            this.OnUpdate();
+        }
+
+        private void FixedUpdate()
+        {
+            this.OnFixedUpdate();
         }
 
         private IEnumerator Tick(float stepDuration)
@@ -23,14 +35,27 @@ namespace Module.Behaviours
             while (true)
             {
                 yield return new WaitForSeconds(stepDuration);
-                Debug.Log("Projectile tick.");
                 this.OnTick();
+                this.OnTickEvent?.Invoke();
             }
         }
 
-        protected abstract void OnTick();
+        protected virtual void OnTick()
+        {
+            Debug.Log("Basic module tick.");
+        }
 
-        protected InstantiatedProjectileModule(CompiledModule compiledModule, InstantiatedModuleInfo info)
+        protected virtual void OnUpdate()
+        {
+            Debug.Log("Basic module update.");
+        }
+
+        protected virtual void OnFixedUpdate()
+        {
+            Debug.Log("Basic module fixes update.");
+        }
+
+        protected void BaseInit(CompiledModule compiledModule, InstantiatedModuleInfo info)
         {
             this.CompiledModule = compiledModule;
             this.currentInfo = info;
@@ -49,7 +74,7 @@ namespace Module.Behaviours
                             break;
                         case E_ModuleOutput.ON_TICK:
                             this.OnTickEvent += () => this.TriggerNextModule(trigger.compiledModule);
-                            this.StartCoroutine(this.Tick(0.3f));
+                            this.StartCoroutine(Tick(0.3f));
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();
@@ -60,7 +85,19 @@ namespace Module.Behaviours
 
         private void TriggerNextModule(CompiledModule nextModule)
         {
-            ModuleBehaviourHandler.InstantiateModuleBehaviour(nextModule, this.currentInfo);
+            ModuleBehaviourHandler.Instance.GetModuleBehaviourToInstantiate(nextModule, this.currentInfo);
+        }
+    }
+    
+    public struct InstantiatedModuleInfo
+    {
+        public Vector3 TriggeredPosition;
+        public Vector3 Direction;
+
+        public InstantiatedModuleInfo(Vector3 triggeredPosition, Vector3 direction)
+        {
+            this.TriggeredPosition = triggeredPosition;
+            this.Direction = direction;
         }
     }
 }

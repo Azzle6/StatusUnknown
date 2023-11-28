@@ -1,10 +1,13 @@
 namespace Module.Behaviours
 {
+    using Core;
     using Definitions;
+    using Projectiles;
     using UnityEngine;
-    public static class ModuleBehaviourHandler
+
+    public class ModuleBehaviourHandler : MonoSingleton<ModuleBehaviourHandler>
     {
-        public static void InstantiateModuleBehaviour(CompiledModule compiledModule, InstantiatedModuleInfo info)
+        public void GetModuleBehaviourToInstantiate(CompiledModule compiledModule, InstantiatedModuleInfo info)
         {
             ModuleDefinitionSO moduleDefinition = compiledModule.module.definition;
             
@@ -16,10 +19,12 @@ namespace Module.Behaviours
             
             BehaviourModuleDefinitionSO behaviourDefinition = moduleDefinition as BehaviourModuleDefinitionSO;
             
-            switch (behaviourDefinition.Behaviour)
+            switch (behaviourDefinition.BehaviourData)
             {
                 case ProjectileBehaviourData data:
-                    
+                    var scriptClass = data.behaviour.GetClass();
+                    InstantiatedProjectileModule module = new GameObject("module", scriptClass).GetComponent<InstantiatedProjectileModule>();
+                    module.Init(data, compiledModule, info);
                     break;
                 case ZoneBehaviourData data:
                     
@@ -28,18 +33,6 @@ namespace Module.Behaviours
                     
                     break;
             }
-        }
-    }
-
-    public struct InstantiatedModuleInfo
-    {
-        public Vector3 TriggeredPosition;
-        public Vector3 Direction;
-
-        public InstantiatedModuleInfo(Vector3 triggeredPosition, Vector3 direction)
-        {
-            this.TriggeredPosition = triggeredPosition;
-            this.Direction = direction;
         }
     }
 }

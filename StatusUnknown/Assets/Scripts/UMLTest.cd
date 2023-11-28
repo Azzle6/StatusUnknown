@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Weapons.WeaponData">
-    <Position X="24.25" Y="8.5" Width="1.5" />
+    <Position X="19.25" Y="8.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAIAAABAAAAAAAIAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
       <FileName>Assets\Scripts\Weapons\WeaponData.cs</FileName>
@@ -12,7 +12,7 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="Weapons.WeaponTriggerData" BaseTypeListCollapsed="true">
-    <Position X="27.25" Y="8.5" Width="3.25" />
+    <Position X="22.25" Y="8.5" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAIAAAEAAAAAAQAABAAAAAAAEAAAACAAIAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\Weapons\WeaponData.cs</FileName>
@@ -23,14 +23,14 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="Weapons.WeaponDefinitionSO">
-    <Position X="24.5" Y="5.75" Width="2" />
+    <Position X="19.5" Y="5.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
       <FileName>Assets\Scripts\Weapons\WeaponDefinitionSO.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Weapons.WeaponItemView">
-    <Position X="24.25" Y="12.25" Width="1.5" />
+    <Position X="19.25" Y="12.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAABA=</HashCode>
       <FileName>Assets\Scripts\Weapons\WeaponItemView.cs</FileName>
@@ -40,7 +40,7 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="Module.CompiledModule">
-    <Position X="16" Y="8.25" Width="1.5" />
+    <Position X="11" Y="8.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
       <FileName>Assets\Scripts\Module\CompiledModule.cs</FileName>
@@ -50,7 +50,7 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="Module.ModuleCompilation">
-    <Position X="15.5" Y="10.25" Width="2.5" />
+    <Position X="10.5" Y="10.25" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAEAgAAAAAAIEACAAAAAAAAAAAAAAEAAEAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\Module\ModuleCompilation.cs</FileName>
@@ -60,14 +60,14 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="Module.ModuleData">
-    <Position X="20.5" Y="8.5" Width="1.5" />
+    <Position X="15.5" Y="8.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAIAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\Module\ModuleData.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Module.ModuleItemView">
-    <Position X="20.5" Y="12.25" Width="1.5" />
+    <Position X="15.5" Y="12.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAQAAAAABAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAABA=</HashCode>
       <FileName>Assets\Scripts\Module\ModuleItemView.cs</FileName>
@@ -77,7 +77,7 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="Inventory.Item.ItemView" Collapsed="true">
-    <Position X="22.5" Y="11.25" Width="1.5" />
+    <Position X="17.5" Y="11.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAABggAAEAAAAAAAgAAAgAAAAEAAAAAAAAAAIgAAABg=</HashCode>
       <FileName>Assets\Scripts\Inventory\Item\ItemView.cs</FileName>
@@ -85,39 +85,63 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Inventory.Item.ItemData" Collapsed="true">
-    <Position X="22.5" Y="7.5" Width="1.5" />
+    <Position X="17.5" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\Inventory\Item\ItemData.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Inventory.Item.GridItemSO" Collapsed="true">
-    <Position X="22.5" Y="4.25" Width="1.5" />
+    <Position X="17.5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAABgA=</HashCode>
       <FileName>Assets\Scripts\Inventory\Item\GridItemSO.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Module.Definitions.ModuleDefinitionSO" Collapsed="true">
-    <Position X="19.5" Y="5.75" Width="1.5" />
+    <Position X="14.5" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAQAAgA=</HashCode>
       <FileName>Assets\Scripts\Module\Definitions\ModuleDefinitionSO.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Module.Definitions.BehaviourModuleDefinitionSO" Collapsed="true">
-    <Position X="18.25" Y="7" Width="1.5" />
+    <Position X="13.25" Y="7" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\Module\Definitions\BehaviourModuleDefinitionSO.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Module.Definitions.EffectorModuleDefinitionSO" Collapsed="true">
-    <Position X="20.75" Y="7" Width="1.5" />
+    <Position X="15.75" Y="7" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\Module\Definitions\EffectorModuleDefinitionSO.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="Module.Behaviours.InstantiatedModule">
+    <Position X="29" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAARCAgAAAAAAAAIAAAAAAADAAAQAAAAAAAQAA=</HashCode>
+      <FileName>Assets\Scripts\Module\Behaviours\InstantiatedModule.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="currentInfo" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Module.Behaviours.Projectiles.WaveProjectile">
+    <Position X="29" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Module\Behaviours\Projectiles\WaveProjectile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Module.Behaviours.InstantiatedModuleInfo">
+    <Position X="31.5" Y="4.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAABAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Module\Behaviours\ModuleBehaviourHandler.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

@@ -1,8 +1,8 @@
 namespace Module.Definitions
 {
     using System;
-    using Combat.Projectile;
     using Sirenix.OdinInspector;
+    using UnityEditor;
     using UnityEngine;
 
     [CreateAssetMenu(menuName = "CustomAssets/Definitions/BehaviourModuleDefinition", fileName = "BehaviourModuleDefinition")]
@@ -10,7 +10,7 @@ namespace Module.Definitions
     {
         public override E_ModuleType ModuleType => E_ModuleType.BEHAVIOUR;
         [SerializeReference]
-        public IBehaviourData Behaviour;
+        public IBehaviourData BehaviourData;
     }
     
     public interface IBehaviourData
@@ -19,8 +19,8 @@ namespace Module.Definitions
     [Serializable]
     public struct ProjectileBehaviourData : IBehaviourData
     {
-        public ProjectileProfile baseProfile;
-        public Projectile projectileBehaviour;
+        [SerializeField]
+        public MonoScript behaviour;
     }
 
     [Serializable]

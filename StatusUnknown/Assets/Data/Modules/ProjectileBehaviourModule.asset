@@ -22,18 +22,12 @@ MonoBehaviour:
   - weaponTriggerType: 0
     localPosition: {x: 1, y: 0}
     direction: 3
-  Behaviour:
-    rid: 4696495273133998092
+  BehaviourData:
+    rid: 4696495293261676560
   references:
     version: 2
     RefIds:
-    - rid: 4696495273133998091
-      type: {class: HitBox, ns: , asm: Assembly-CSharp}
-      data:
-        size: {x: 1, y: 1, z: 1}
-    - rid: 4696495273133998092
+    - rid: 4696495293261676560
       type: {class: ProjectileBehaviourData, ns: Module.Definitions, asm: Assembly-CSharp}
       data:
-        Shape:
-          rid: 4696495273133998091
-        speed: 3
+        behaviour: {fileID: 11500000, guid: 52ad6006665b33347bc6db8216731b6c, type: 3}

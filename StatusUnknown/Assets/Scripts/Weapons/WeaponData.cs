@@ -54,7 +54,6 @@ namespace Weapons
         public VectorIntModuleDictionary modules;
         public ModuleCompilation compiledModules;
         
-        
         #region CONSTRUCTOR
         public WeaponTriggerData(WeaponTriggerDefinition triggerDefinitionData)
         {
