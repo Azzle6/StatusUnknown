@@ -1,4 +1,4 @@
-using Sirenix.OdinInspector;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,10 +15,12 @@ public class HitContext : MonoBehaviour
     HashSet<Collider> temp_colliders = new HashSet<Collider>();
     public event Action<IDamageable> HitTriggerEvent,HitStayEvent; // HitStayEvent call is udpateFrequence based
 
-
+    [Header("Debug")]
+    [SerializeField] bool triggerHit;
     private void OnDisable()
     {
         StopCoroutine(processDetection);
+        temp_colliders.Clear();
     }
     private void OnEnable()
     {
@@ -40,10 +42,15 @@ public class HitContext : MonoBehaviour
             IDamageable Idamageable = collider.gameObject.GetComponent<IDamageable>();
             if (Idamageable != null )
             {
-                if (!temp_colliders.Contains(collider) && HitTriggerEvent != null)
-                { 
-                    HitTriggerEvent(Idamageable);
+                if (!temp_colliders.Contains(collider))
+                {
                     temp_colliders.Add(collider);
+                    //Debug.Log("Hit Idamageable " + Idamageable);
+
+                    HitTriggerEvent?.Invoke(Idamageable);
+
+                    if (triggerHit)
+                        Idamageable.TakeDamage(0, Vector3.zero);
                 }
                 else if (HitStayEvent != null)
                 {

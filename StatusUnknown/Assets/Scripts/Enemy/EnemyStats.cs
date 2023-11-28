@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(fileName = "EnemyStats", menuName = "CustomAssets/EnemyStats", order = 1)]
+[CreateAssetMenu(fileName = "EnemyStats", menuName = "CustomAssets/EnemyStats/BaseStats", order = 1)]
 public class EnemyStats : ScriptableObject
 {
     public float health = 100;
+
+    [Header("Avoidance")]
+    public float avoidDistance = 1;
+    public float avoidStrength = 1;
+
     [Header("Aggro")]
     public float AggroRange = 10;
 
@@ -14,4 +19,6 @@ public class EnemyStats : ScriptableObject
     [Header("Attack")]
     public float AttackRange = 0.5f;
     public float AttackDuration = 1f;
+    public float AttackCooldown = 0;
+    public float AttackDamage = 5;
 }
