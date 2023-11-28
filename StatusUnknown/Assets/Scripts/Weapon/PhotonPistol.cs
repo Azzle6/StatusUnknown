@@ -1,13 +1,8 @@
-
-
-using Core.VariablesSO.VariableTypes;
-
 namespace Weapon
 {
     using System.Collections;
     using UnityEngine;
     using Core.Pooler;
-    using System;
     using Unity.Mathematics;
     
     public class PhotonPistol : RangedWeapon
@@ -16,21 +11,26 @@ namespace Weapon
         [SerializeField] private Transform spawnPoint;
         [SerializeField] private Transform mesh;
         [SerializeField] private Transform meshPos;
+        [SerializeField] private CoPoolProjectile projectilePool;
         private Vector3 initMeshPos;
         private float chargeTimer;
         private Coroutine charging;
         private Coroutine reloading;
-        private GameObject tempProjectile;
+        private Projectile tempPhotonPistolBullet;
+        private Transform tempPhotonPistolBulletTr;
         private float currentDamage;
         private bool waitForTriggerRelease;
         private bool isInCD;
         private float cdTimer;
         private bool isReloading;
         
-        private void Awake()
+        private void Start()
         {
             currentAmmo.Value = stat.magazineSize;
             initMeshPos = mesh.localPosition;
+            
+            Debug.Log(stat);
+            ComponentPooler.Instance.CreatePool(stat.projectilePool.prefab.GetComponent<Projectile>(),stat.projectilePool.baseCount);
         }
 
         private void OnDisable()
@@ -57,19 +57,25 @@ namespace Weapon
             
             if ((charging != default) || (isReloading) || (currentAmmo.Value <= 0))
                 return;
-            tempProjectile = Pooler.Instance.GetPooledObject(stat.projectilePrefab.name);
+
+
+            tempPhotonPistolBullet = ComponentPooler.Instance.GetPooledObject<Projectile>(stat.projectilePool.prefab.name);
+            tempPhotonPistolBulletTr = tempPhotonPistolBullet.transform;
+            
             charging = StartCoroutine(Charge());
+
+
         }
         
         private IEnumerator Charge()
         {
             chargeTimer = 0;
-            tempProjectile.transform.parent = spawnPoint;
+            tempPhotonPistolBulletTr.parent = spawnPoint;
             while (chargeTimer < stat.maxTimeCharge)
             {
-              tempProjectile.transform.localPosition = Vector3.zero;
+              tempPhotonPistolBulletTr.localPosition = Vector3.zero;
               chargeTimer += Time.deltaTime;
-              tempProjectile.transform.localScale = Vector3.one * (stat.projectileSize.Evaluate(chargeTimer / stat.maxTimeCharge) * stat.maxProjectileSize);
+              tempPhotonPistolBulletTr.localScale = Vector3.one * (stat.projectileSize.Evaluate(chargeTimer / stat.maxTimeCharge) * stat.maxProjectileSize);
               currentDamage = stat.damageCurve.Evaluate(chargeTimer / stat.maxTimeCharge) * stat.maxDamage;
               yield return null;
             }
@@ -82,7 +88,7 @@ namespace Weapon
             waitForTriggerRelease = true;
             while (waitForTriggerRelease)
             {
-                tempProjectile.transform.localPosition = Vector3.zero;
+                tempPhotonPistolBulletTr.localPosition = Vector3.zero;
                 yield return null;
             }
         }
@@ -97,7 +103,7 @@ namespace Weapon
 
         public override void ActionReleased()
         {
-            if (tempProjectile == default)
+            if (tempPhotonPistolBullet == default)
                 return;
             
             waitForTriggerRelease = false;
@@ -105,17 +111,15 @@ namespace Weapon
             if (charging != default)
                 StopCoroutine(charging);
             
-            tempProjectile.transform.parent = null;
-            tempProjectile.TryGetComponent(out Rigidbody tempRb);
-            tempRb.velocity = spawnPoint.forward * stat.projectileSpeed;
-            tempProjectile.TryGetComponent(out PhotonPistolBullet tempPPbullet);
-            tempPPbullet.damage = currentDamage;
-            tempProjectile.TryGetComponent(out HitContext tempHitContext);
+            tempPhotonPistolBulletTr.transform.parent = null;
+            tempPhotonPistolBullet.Launch(currentDamage, spawnPoint.forward, stat.projectileSpeed);
+            tempPhotonPistolBulletTr.TryGetComponent(out HitContext tempHitContext);
             HitSphere tempHitSphere = tempHitContext.hitShape as HitSphere;
-            tempHitSphere.radius = tempProjectile.transform.localScale.y / 2;
-            tempHitContext.HitTriggerEvent += tempPPbullet.Hit;
+            tempHitSphere.radius = tempPhotonPistolBulletTr.localScale.y / 2;
+            tempHitContext.HitTriggerEvent += tempPhotonPistolBullet.Hit;
             
-            tempProjectile = default;
+            tempPhotonPistolBulletTr = default;
+            tempPhotonPistolBullet = default;
             charging = default;
             currentAmmo.Value--;
         }

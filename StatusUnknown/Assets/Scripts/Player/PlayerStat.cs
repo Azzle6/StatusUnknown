@@ -20,18 +20,19 @@ namespace Player
         
         [Header("Movement")]
         public float moveSpeed;
+        public float moveSpeedWhileShooting;
 
         [Header("Aim")]
         public float turnAngleLimit = 15f;
-        [Range(0.01f, 0.1f)] public float turnSpeed;
+        [Range(0.01f, 0.25f)] public float turnSpeed;
         public AnimationCurve angleRequiredMultiplierByDistance;
         public float headHeightOffset = 0.25f;
         public float timeBeforeStopAiming = 2f;
         public LayerMask aimLayerMask;
+        
         [Header("Inertia")]
         public float inertiaDuration;
         public AnimationCurve inertiaCurve;
-
         
         [Header("Player State ")]
         [ReadOnly] public bool isAiming;

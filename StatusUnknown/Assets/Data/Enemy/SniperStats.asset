@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cf56d72d5e5c9442a41362f14644300, type: 3}
   m_Name: SniperStats
   m_EditorClassIdentifier: 
-  health: 100
+  health: 300
   avoidDistance: 1
   avoidStrength: 1
-  AggroRange: 10
+  AggroRange: 25
   chaseStrength: 5
   AttackRange: 25
-  AttackDuration: 1
-  AttackCooldown: 5
-  AttackDamage: 5
+  AttackDuration: 0.5
+  AttackCooldown: 4
+  AttackDamage: 35
   minTpRange: 10
   maxTpRange: 25
   tpCooldown: 8
