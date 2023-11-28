@@ -4,9 +4,12 @@
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 
-public class JsonHelper
-{
+/// <summary>
+/// Taken form github. Use in conjuction with JsonUtility or Json.Net for very effective JSON data manipulation
+/// </summary>
 
+public static class JsonHelper
+{
     public static string GetJsonObject(string jsonString, string handle)
     {
         string pattern = "\"" + handle + "\"\\s*:\\s*\\{";
