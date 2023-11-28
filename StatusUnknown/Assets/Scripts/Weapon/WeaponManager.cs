@@ -1,10 +1,9 @@
-using Core.VariablesSO.VariableTypes;
-
 namespace Weapon
 {
     using Player;
     using UnityEngine;
     using UnityEngine.Animations.Rigging;
+    using Core.VariablesSO.VariableTypes;
 
 
     public class WeaponManager : MonoBehaviour
@@ -96,21 +95,18 @@ namespace Weapon
         }
         
         public void ReloadWeapon()
-        {
-            if (weapons[currentWeaponIndex].TryGetComponent(out RangedWeapon rangedWeapon))
-                rangedWeapon.Reload(playerAnimator);
+        { 
+            weapons[currentWeaponIndex].Reload(playerAnimator);
         }
 
         public void RestWeapon()
         {
-            if (weapons[currentWeaponIndex].TryGetComponent(out RangedWeapon rangedWeapon))
-                rangedWeapon.RestWeapon();
+            weapons[currentWeaponIndex].RestWeapon();
         }
         
         public void AimWithCurrentWeapon()
         {
-            if (weapons[currentWeaponIndex].TryGetComponent(out RangedWeapon rangedWeapon))
-                rangedWeapon.AimWithCurrentWeapon();
+            weapons[currentWeaponIndex].AimWithCurrentWeapon();
         }
         
         public Weapon GetCurrentWeapon()

@@ -175,7 +175,7 @@ namespace Player
     
         public void OnReload(InputAction.CallbackContext ctx)
         {
-            if (ctx.started)
+            if ((ctx.started) && (!playerStat.isShooting))
             {
                 playerStateInterpretor.AddState("ReloadPlayerState", PlayerStateType.ACTION,false);
             }

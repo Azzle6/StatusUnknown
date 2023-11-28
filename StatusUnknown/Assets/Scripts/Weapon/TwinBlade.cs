@@ -51,6 +51,21 @@ namespace Weapon
             }
         }
 
+        public override void Reload(Animator playerAnimator)
+        {
+            return;
+        }
+
+        public override void AimWithCurrentWeapon()
+        {
+            return;
+        }
+
+        public override void RestWeapon()
+        {
+            return;
+        }
+
         public override void Hit()
         {
             
