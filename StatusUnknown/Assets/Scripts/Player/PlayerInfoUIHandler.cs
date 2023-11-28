@@ -1,20 +1,25 @@
-using System;
-using DG.Tweening;
-using Weapon;
+
+using System.Collections.Generic;
 
 namespace Player
 {
     using Core.VariablesSO.VariableTypes;
     using UnityEngine;
     using UnityEngine.UIElements;
+    using DG.Tweening;
+    using Weapon;
+    using Core;
+
     
     
-    public class PlayerInfoUIHandler : MonoBehaviour
+    public class PlayerInfoUIHandler : MonoSingleton<PlayerInfoUIHandler>
     {
         [SerializeField] private FloatVariableSO playerHealth;
         [SerializeField] private IntVariableSO medikitAmount;
         [SerializeField] private WeaponVariableSO[] weaponVariableSO;
         [SerializeField] private FloatVariableSO[] weaponAmmoVariableSO;
+        [SerializeField] private VisualTreeAsset popupUIDocument;
+        [SerializeField] private VisualElement popUpZone;
         private int tempMedikitAmount;
         [SerializeField] private PlayerStat playerStat;
         [SerializeField] private UIDocument playerInfoUIDocument;
@@ -26,7 +31,14 @@ namespace Player
         private Label weapon2AmmoCount;
         private VisualElement medikitIcon;
         private float[] currentMaxAmmo = new float[2];
-
+        [Header("PopUp")]
+        [SerializeField] private float popUpScaleTime;
+        [SerializeField] private float popUpStayTime;
+        [SerializeField] private float popUpFadeTime;
+        [SerializeField] private int popUpMaxCount = 3;
+        
+        
+        
         private void Start()
         {
             healthBar = playerInfoUIDocument.rootVisualElement.Q<VisualElement>("HealthBar");
@@ -34,6 +46,7 @@ namespace Player
             medikitIcon = playerInfoUIDocument.rootVisualElement.Q<VisualElement>("MedikitIcon");
             weapon1Icon = playerInfoUIDocument.rootVisualElement.Q<VisualElement>("Weapon1Icon");
             weapon2Icon = playerInfoUIDocument.rootVisualElement.Q<VisualElement>("Weapon2Icon");
+            popUpZone = playerInfoUIDocument.rootVisualElement.Q<VisualElement>("MidRightZone");
             weapon1AmmoCount = playerInfoUIDocument.rootVisualElement.Q<Label>("Weapon1AmmoCount");
             weapon2AmmoCount = playerInfoUIDocument.rootVisualElement.Q<Label>("Weapon2AmmoCount");
             weaponVariableSO[0].RegisterOnValueChanged(UpdateWeapon1Icon);
@@ -47,10 +60,11 @@ namespace Player
             InitMedikitCount(medikitAmount.Value);
             UpdateWeapon1Icon(weaponVariableSO[0].Value);
             UpdateWeapon2Icon(weaponVariableSO[1].Value);
-            
-        }
+
+
+    }
         
-        private void UpdateWeapon1Icon(Weapon.Weapon weapon)
+        private void UpdateWeapon1Icon(Weapon weapon)
         {
             weapon1Icon.style.backgroundImage = weapon.weaponSprite.texture;
             weapon1AmmoCount.visible = weaponVariableSO[0].Value.weaponType == WeaponType.RANGED;
@@ -64,7 +78,7 @@ namespace Player
             
         }
         
-        private void UpdateWeapon2Icon(Weapon.Weapon weapon)
+        private void UpdateWeapon2Icon(Weapon weapon)
         {
             weapon2Icon.style.backgroundImage = weapon.weaponSprite.texture;
             weapon2AmmoCount.visible = weaponVariableSO[1].Value.weaponType == WeaponType.RANGED;
@@ -109,6 +123,31 @@ namespace Player
             }
             tempMedikitAmount = medikitAmount.Value;
          
+        }
+        
+        public void ShowPopup(Sprite icon, string text)
+        {
+            VisualElement tempPopup = popupUIDocument.CloneTree();
+            tempPopup.Q<VisualElement>("IconPopUp").style.backgroundImage = icon.texture;
+            tempPopup.Q<Label>("LabelPopUp").text = text;
+            popUpZone.Add(tempPopup);
+            if (popUpMaxCount < popUpZone.childCount)
+            {
+                popUpZone.RemoveAt(0);
+            }
+            tempPopup.transform.scale = Vector3.zero;
+            Vector3 currentScale = tempPopup.transform.scale;
+            DOTween.To(() => currentScale, x => tempPopup.transform.scale = x, Vector3.one, popUpScaleTime)
+                .OnComplete(() =>
+                {
+                    tempPopup.style.opacity = 1;
+                    DOTween.To(() => tempPopup.style.opacity.value, x => tempPopup.style.opacity = x, 0, popUpFadeTime)
+                        .SetDelay(popUpStayTime)
+                        .OnComplete(() =>
+                        {
+                            tempPopup.RemoveFromHierarchy();
+                        });
+                });
         }
         
     }

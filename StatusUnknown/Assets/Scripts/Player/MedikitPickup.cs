@@ -11,6 +11,7 @@ namespace Player
     {
         [SerializeField] private IntVariableSO medikitAmount;
         [SerializeField] private int amount;
+        [SerializeField] private Sprite medikitSprite;
 
         private void Awake()
         {
@@ -23,6 +24,7 @@ namespace Player
             {
                 medikitAmount.Value += amount;
                 gameObject.SetActive(false);
+                PlayerInfoUIHandler.Instance.ShowPopup(medikitSprite, $"Medikit {amount}");
             }
         }
     }

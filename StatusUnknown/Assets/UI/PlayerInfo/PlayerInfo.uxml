@@ -18,7 +18,7 @@
             <ui:VisualElement name="Augment4Bg" style="flex-grow: 0; width: 10%; height: 60%; background-color: rgba(0, 255, 72, 0.25); margin-right: 15px;" />
             <ui:VisualElement name="Augment5Bg" style="flex-grow: 0; width: 10%; height: 60%; background-color: rgba(0, 255, 72, 0.25); margin-right: 15px;" />
         </ui:VisualElement>
-        <ui:VisualElement name="BottomRightZone" style="flex-grow: 0; height: 25%; width: 25%; align-self: flex-end; bottom: -11%; transform-origin: right bottom; rotate: 10deg; margin-right: 70px;">
+        <ui:VisualElement name="BottomRightZone" style="flex-grow: 0; height: 25%; width: 25%; align-self: flex-end; bottom: -11%; transform-origin: right bottom; rotate: 10deg; margin-right: 3%;">
             <ui:VisualElement name="Weapon1Info" style="flex-grow: 1; height: 50%; flex-direction: row;">
                 <ui:VisualElement name="Weapon1Icon" style="flex-grow: 1; width: 30%; background-color: rgba(0, 255, 72, 0.25); background-image: url(&apos;project://database/Assets/Textures/Tools/DrawingTool/anchor.png?fileID=2800000&amp;guid=617ef6bbbf7d1c54c946d775fb573836&amp;type=3#anchor&apos;);" />
                 <ui:VisualElement name="Weapon1Module" style="flex-grow: 1; width: 30%; background-color: rgba(0, 255, 72, 0.25); background-image: none;" />
@@ -30,5 +30,6 @@
                 <ui:Label tabindex="-1" text="0/0&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Weapon2AmmoCount" style="width: 30%; font-size: 50px; background-color: rgba(0, 255, 72, 0.25); -unity-text-align: upper-left;" />
             </ui:VisualElement>
         </ui:VisualElement>
+        <ui:VisualElement name="MidRightZone" style="flex-grow: 0; transform-origin: right; opacity: 1; flex-direction: column; width: 20%; height: 30%; position: absolute; top: 30%; right: 0;" />
     </ui:VisualElement>
 </ui:UXML>
