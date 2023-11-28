@@ -15,10 +15,8 @@ namespace Core.Pooler
         public void CreatePool<T>(T prefab, int baseCount) where T : Component
         {
             string key = prefab.gameObject.name;
-            Debug.Log("Creating pool for " + key + " with base count " + baseCount);
             if (pools.ContainsKey(key))
             {
-                Debug.Log("Pooler: Pool with key " + key + " already exists");
                 return;
             }
 
@@ -31,7 +29,6 @@ namespace Core.Pooler
         {
             if (pools.ContainsKey(key))
             {
-                Debug.Log("Pooler: " + key + " already exists");
                 return;
             }
             pools.Add(key, pool);
@@ -41,11 +38,8 @@ namespace Core.Pooler
         {
             if (!pools.ContainsKey(key))
             {
-                Debug.LogError("Pooler: " + key + " doesn't exist");
                 return default;
             }
-            Debug.Log("Getting pooled object for " + key);
-            Debug.Log("Pool count: " + pools[key].CountInactive);
             T component = (T)pools[key].Get();
             objectToComponent[component.gameObject] = component;
             return component;

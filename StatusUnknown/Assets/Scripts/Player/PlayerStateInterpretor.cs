@@ -134,7 +134,7 @@ namespace Player
         
         public void Behave<T>(T x, PlayerStateType type)
         {
-            if (statesSlot[type] == null)
+            if (statesSlot[type] == default)
                 return;
             
             statesSlot[type].Behave<T>(x);
