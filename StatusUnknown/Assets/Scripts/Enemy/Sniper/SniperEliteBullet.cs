@@ -1,6 +1,8 @@
 namespace Enemy.Sniper
 {
     using UnityEngine;
+    using UnityEngine.UIElements;
+
     public class SniperEliteBullet : SniperBullet
     {
         [SerializeField] GameObject enemyToSpawn;
