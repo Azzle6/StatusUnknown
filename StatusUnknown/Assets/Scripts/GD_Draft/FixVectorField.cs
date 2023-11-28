@@ -15,10 +15,6 @@ public class FixVectorField : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
-        {
-            
-        }
         vectorField.enabled = true;
     }
 
