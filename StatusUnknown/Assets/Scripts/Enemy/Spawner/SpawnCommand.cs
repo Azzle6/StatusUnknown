@@ -10,10 +10,13 @@ public class SpawnCommand : MonoBehaviour
     [SerializeField] int spawnQty =1;
     [SerializeField] float delay = 0;
     [SerializeField] int repeat = 1;
+    [Header("Debug")]
+    [SerializeField] bool spwanOnEwake;
 
     private void Awake()
     {
-        SpawnProcess();
+        if(spwanOnEwake)
+            SpawnProcess();
     }
 
     public void SpawnProcess()
