@@ -11,7 +11,8 @@ public class MorphEgg : MonoBehaviour,IDamageable
     [SerializeField] MeshRenderer meshRenderer;
 
     float currentLifePoints;
-    float currentMorphDuration;
+    [HideInInspector]
+    public float currentMorphDuration;
     bool initialized = false;
 
     [Header("Event")]
