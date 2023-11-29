@@ -100,7 +100,7 @@ public abstract class EnemyContext : MonoBehaviour, IDamageable
         currentHealth -= damage;
         AddForce(force);
         Debug.Log($"{gameObject.name} took {damage} damage {currentHealth}/{stats.health}");
-        if (currentHealth < 0)
+        if (currentHealth <= 0)
             Destroy(gameObject);
     }
     protected virtual void InitializeEnemy()

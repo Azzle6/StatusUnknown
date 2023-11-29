@@ -7,6 +7,7 @@ public class ProtoSpawner : MonoBehaviour
     public GameObject feedback;
     public List<Transform> spawnPoints;
     public List<GameObject> wave;
+    public bool isInfinite;
     public float timer = 10;
     public bool onCD;
     public bool isSpawning;
@@ -22,7 +23,11 @@ public class ProtoSpawner : MonoBehaviour
         if (isSpawning && onCD == false)
         {
             SpawnWave();
-            StartCoroutine("Cooldown");
+            onCD = true;
+            if (isInfinite)
+            {
+                StartCoroutine("Cooldown");
+            }
         }
     }
     
@@ -43,7 +48,6 @@ public class ProtoSpawner : MonoBehaviour
     
     IEnumerator Cooldown()
     {
-        onCD = true;
         yield return new WaitForSeconds(timer);
         onCD = false;
     }

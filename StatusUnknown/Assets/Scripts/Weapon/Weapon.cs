@@ -16,6 +16,13 @@ namespace Weapon
 
         public abstract void Switched(Animator playerAnimator, bool OnOff);
         
+        public abstract void Reload(Animator playerAnimator);
+
+        public abstract void AimWithCurrentWeapon();
+        
+        public abstract void RestWeapon();
+
+        
 
         public abstract void Hit();
 

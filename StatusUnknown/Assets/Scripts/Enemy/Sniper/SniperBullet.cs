@@ -9,6 +9,8 @@ public class SniperBullet : MonoBehaviour
     const int obstacleLayer = 8;
     [SerializeField] float speed = 5;
     [SerializeField] float damage = 3;
+    [SerializeField] float radius = 0.5f;
+    [SerializeField] LayerMask obstacleLayerMask;
     private void OnEnable()
     {
         hitContext.HitTriggerEvent += PerformHit;
@@ -17,11 +19,11 @@ public class SniperBullet : MonoBehaviour
     {
         hitContext.HitTriggerEvent -= PerformHit;
     }
-    private void OnTriggerEnter(Collider other)
+    private void Update()
     {
-        if(other.gameObject.layer == obstacleLayer)
+        if (Physics.CheckSphere(transform.position, radius, obstacleLayerMask))
         {
-            DestroyProjectile();
+            DestroyProjectile(false);
         }
     }
     public void LaunchProjectile(Vector3 start, Vector3 dir)
@@ -31,14 +33,15 @@ public class SniperBullet : MonoBehaviour
         rb.velocity = dir.normalized * speed;
         transform.forward = dir;
     }
-    void DestroyProjectile()
+    protected virtual void DestroyProjectile( bool hitSuccess)
     {
         Destroy(gameObject);
     }
     void PerformHit(IDamageable damageable)
     {
         damageable.TakeDamage(damage,Vector3.zero);
-        DestroyProjectile();
+        DestroyProjectile(true);
     }
+
 
 }

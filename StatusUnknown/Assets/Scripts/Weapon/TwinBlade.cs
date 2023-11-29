@@ -1,3 +1,5 @@
+using UnityEngine.VFX;
+
 namespace Weapon
 {
     using UnityEngine;
@@ -7,6 +9,8 @@ namespace Weapon
         [SerializeField] private TwinBladeStat twinBladeStat;
         [SerializeField] private Transform bladeLeft;
         [SerializeField] private Transform bladeRight;
+        [SerializeField] private VisualEffect bladeLeftVFX;
+        [SerializeField] private VisualEffect bladeRightVFX;
 
         private void OnEnable()
         {
@@ -50,6 +54,22 @@ namespace Weapon
                 weaponManager.rigRHand.weight = 0;
             }
         }
+        
+
+        public override void Reload(Animator playerAnimator)
+        {
+            return;
+        }
+
+        public override void AimWithCurrentWeapon()
+        {
+            return;
+        }
+
+        public override void RestWeapon()
+        {
+            return;
+        }
 
         public override void Hit()
         {
@@ -82,6 +102,19 @@ namespace Weapon
         public override void Active()
         {
             base.Active();
+            switch (comboIndex)
+            {
+                case 0 :
+                    bladeLeftVFX.Play();
+                    return;
+                case 1 :
+                    bladeRightVFX.Play();
+                    return;
+                case 2 : 
+                    bladeLeftVFX.Play();
+                    bladeRightVFX.Play();
+                    return;
+            }
         }
 
         public override void Recovery()

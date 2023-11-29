@@ -4,6 +4,8 @@ namespace Weapon
     using UnityEngine;
     using Core.Pooler;
     using Unity.Mathematics;
+    using UnityEngine.VFX;
+
     
     public class PhotonPistol : RangedWeapon
     {
@@ -11,7 +13,7 @@ namespace Weapon
         [SerializeField] private Transform spawnPoint;
         [SerializeField] private Transform mesh;
         [SerializeField] private Transform meshPos;
-        [SerializeField] private CoPoolProjectile projectilePool;
+        [SerializeField] private VisualEffect chargingVFX;
         private Vector3 initMeshPos;
         private float chargeTimer;
         private Coroutine charging;
@@ -28,7 +30,7 @@ namespace Weapon
         {
             currentAmmo.Value = stat.magazineSize;
             initMeshPos = mesh.localPosition;
-            
+            chargingVFX.Stop();
             Debug.Log(stat);
             ComponentPooler.Instance.CreatePool(stat.projectilePool.prefab.GetComponent<Projectile>(),stat.projectilePool.baseCount);
         }
@@ -71,6 +73,7 @@ namespace Weapon
         {
             chargeTimer = 0;
             tempPhotonPistolBulletTr.parent = spawnPoint;
+            chargingVFX.Play();
             while (chargeTimer < stat.maxTimeCharge)
             {
               tempPhotonPistolBulletTr.localPosition = Vector3.zero;
@@ -106,6 +109,7 @@ namespace Weapon
             if (tempPhotonPistolBullet == default)
                 return;
             
+            chargingVFX.Stop();
             waitForTriggerRelease = false;
             StartCoroutine(Cooldown());
             if (charging != default)
