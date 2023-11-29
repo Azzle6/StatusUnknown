@@ -64,7 +64,7 @@ namespace Player
     
         public void RemoveState(PlayerStateType playerStateType)
         {
-            if (statesSlot[playerStateType] == null)
+            if (statesSlot[playerStateType] == default)
                 return;
             
             tempState = statesSlot[playerStateType];
