@@ -6,7 +6,7 @@ namespace StatusUnknown.Content.Narrative
     [CreateAssetMenu(fileName = "Quest Journal", menuName = "Status Unknown/Narrative/Quest Journal")]
     public class QuestJournalSO : ScriptableObject
     {
-        [SerializeField] private List<QuestSO> activeQuests = new List<QuestSO>(); 
+        [SerializeField] private List<QuestSO> activeQuests; 
 
         public void AddQuest(QuestSO questToAdd)
         {

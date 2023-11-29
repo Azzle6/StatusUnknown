@@ -1,21 +1,32 @@
-﻿using System;
+﻿using StatusUnknown.Content.Narrative;
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using static XNode.Node;
 
 namespace Aurore.DialogSystem
 {
     [RequireComponent(typeof(AudioSource))]
     public abstract class DialogueManagerMaster : MonoBehaviour
     {
+        [Header("General")]
         [Space, SerializeField] protected GameObject startButtonObj;
         [SerializeField] protected GameObject endButtonObj;
+
+        [Header("Quest Handling")]
+        [Space, SerializeField] private QuestJournalSO questJournal;
+        [SerializeField, Output] private QuestSO givenQuest;
+
+        private bool questFieldIsNull = true;
+        private bool questRemoved = false;
 
         protected DialogueNode currentNode;
         protected bool canBeSkipped = false;
 
-        [SerializeField] protected UnityEvent startDialogueEvent;
+        [Header("Events")]
+        [Space, SerializeField] protected UnityEvent startDialogueEvent;
         [SerializeField] protected UnityEvent endDialogueEvent;
         private AudioSource _source;
         private event Action<DialogueNode> OnStartEnded;
@@ -63,6 +74,29 @@ namespace Aurore.DialogSystem
         {
             startButtonObj.SetActive(true);
             endButtonObj.SetActive(false);
+        }
+
+        private void UpdatePlayerQuestJournal()
+        {
+            Debug.Log("updating quest journal");
+
+            if (!questFieldIsNull)
+            {
+                Debug.Log("adding quest");
+                questRemoved = false;
+                questJournal.AddQuest(givenQuest);
+            }
+            else
+            {
+                if (!questRemoved)
+                {
+                    Debug.Log("removing quest");
+                    questRemoved = true;
+                    questJournal.RemoveQuest(givenQuest);
+                }
+            }
+
+            questFieldIsNull = givenQuest == null;
         }
 
         #region Start & End Logic

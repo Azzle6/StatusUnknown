@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 using XNode;
 
@@ -6,12 +7,13 @@ namespace Aurore.DialogSystem
 {
 	[Serializable]
 	public struct Connection {}
-	
-	[CreateNodeMenu("Dialogue Node")]
+
+    [NodeWidth(400), NodeTint(20, 120, 20)]
+    [CreateNodeMenu("Dialogue Node")]
 	public class DialogueNode : Node
 	{
-		[Input] public Connection input;
-		[TextArea] public string initiator;
+        [Input, SerializeField] public Connection input;
+        [TextArea] public string initiator;
 
 		public string title;
 
@@ -19,10 +21,29 @@ namespace Aurore.DialogSystem
 		public AudioClip audio;
 
 		[TextArea][Output(dynamicPortList = true)] public string[] answers;
+		[Input, SerializeField] public bool conditionalAnswer = false;
+		private bool conditionIsValid = false; 
+        [TextArea, ShowIf("conditionIsValid")] public string additionalAnswer;
 
-		public override object GetValue(NodePort port)
+        public override void OnCreateConnection(NodePort from, NodePort to)
+        {
+            if (to.IsOutput) return;
+
+            conditionIsValid = GetInputValue("conditionalAnswer", false);
+            base.OnCreateConnection(from, to);
+        }
+
+        public override void OnRemoveConnection(NodePort port)
+        {
+			if (port.IsOutput) return;
+
+            conditionIsValid = GetInputValue("conditionalAnswer", false);
+            base.OnRemoveConnection(port);
+        }
+
+        public override object GetValue(NodePort port)
 		{
-			return null;
+            return null;
 		}
 
 		public DialogueType GetDialogueType()

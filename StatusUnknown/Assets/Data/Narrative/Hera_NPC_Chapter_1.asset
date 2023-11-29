@@ -1,5 +1,63 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6037929680399807410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90e58730e7e85b946a2d4dffc29306e9, type: 3}
+  m_Name: Quest
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 280, y: -72}
+  ports:
+    keys:
+    - input
+    - answers
+    - conditionalAnswer
+    values:
+    - _fieldName: input
+      _node: {fileID: -6037929680399807410}
+      _typeQualifiedName: Aurore.DialogSystem.Connection, StatusUnknown.Tools.Narrative,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: answers 0
+        node: {fileID: 3619902342217902986}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: answers
+      _node: {fileID: -6037929680399807410}
+      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: conditionalAnswer
+      _node: {fileID: -6037929680399807410}
+      _typeQualifiedName: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  initiator: I just added the informations to your quest journal
+  title: 
+  img: {fileID: 0}
+  audio: {fileID: 0}
+  answers: []
+  conditionalAnswer: 0
+  additionalAnswer: 
+  givenQuest: {fileID: 11400000, guid: a586a2eafa4bad943a6cb8c26af4b6de, type: 2}
 --- !u!114 &-297802684859051533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13,32 +71,15 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -680, y: -280}
+  position: {x: -712, y: -232}
   ports:
     keys:
-    - input
-    - answers
     - answers 0
     - answers 1
+    - input
+    - answers
+    - conditionalAnswer
     values:
-    - _fieldName: input
-      _node: {fileID: -297802684859051533}
-      _typeQualifiedName: Aurore.DialogSystem.Connection, StatusUnknown.Tools.Narrative,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      connections: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: answers
-      _node: {fileID: -297802684859051533}
-      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
     - _fieldName: answers 0
       _node: {fileID: -297802684859051533}
       _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
@@ -63,6 +104,36 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
+    - _fieldName: input
+      _node: {fileID: -297802684859051533}
+      _typeQualifiedName: Aurore.DialogSystem.Connection, StatusUnknown.Tools.Narrative,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: answers
+      _node: {fileID: -297802684859051533}
+      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: conditionalAnswer
+      _node: {fileID: -297802684859051533}
+      _typeQualifiedName: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: result
+        node: {fileID: 8897620741294726878}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
   initiator: Hello Keeper
   title: Initial Dialogue from Chapter 1
   img: {fileID: 0}
@@ -70,6 +141,8 @@ MonoBehaviour:
   answers:
   - Where am I ?
   - Who are you ?
+  conditionalAnswer: 0
+  additionalAnswer: I came back with the object you asked me to find
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,7 +159,8 @@ MonoBehaviour:
   - {fileID: -297802684859051533}
   - {fileID: 1831340819866683008}
   - {fileID: 3619902342217902986}
-  - {fileID: 8513828836908987172}
+  - {fileID: 8897620741294726878}
+  - {fileID: -6037929680399807410}
 --- !u!114 &1831340819866683008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,11 +174,12 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -408, y: -296}
+  position: {x: -216, y: -360}
   ports:
     keys:
     - input
     - answers
+    - conditionalAnswer
     values:
     - _fieldName: input
       _node: {fileID: 1831340819866683008}
@@ -127,11 +202,22 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
+    - _fieldName: conditionalAnswer
+      _node: {fileID: 1831340819866683008}
+      _typeQualifiedName: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
   initiator: On the main engine room of the spaceship
   title: 
   img: {fileID: 0}
   audio: {fileID: 0}
   answers: []
+  conditionalAnswer: 0
+  additionalAnswer: 
 --- !u!114 &3619902342217902986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,13 +231,26 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -408, y: 24}
+  position: {x: -264, y: 184}
   ports:
     keys:
+    - answers 0
     - input
     - answers
-    - answers 0
+    - conditionalAnswer
     values:
+    - _fieldName: answers 0
+      _node: {fileID: 3619902342217902986}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: input
+        node: {fileID: -6037929680399807410}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
     - _fieldName: input
       _node: {fileID: 3619902342217902986}
       _typeQualifiedName: Aurore.DialogSystem.Connection, StatusUnknown.Tools.Narrative,
@@ -173,18 +272,15 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-    - _fieldName: answers 0
+    - _fieldName: conditionalAnswer
       _node: {fileID: 3619902342217902986}
-      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+      _typeQualifiedName: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: input
-        node: {fileID: 8513828836908987172}
-        reroutePoints: []
-      _direction: 1
+      connections: []
+      _direction: 0
       _connectionType: 0
       _typeConstraint: 0
-      _dynamic: 1
+      _dynamic: 0
   initiator: My name should be of little interest to you. Contrary to an offer I'd
     like to give you
   title: 
@@ -192,7 +288,9 @@ MonoBehaviour:
   audio: {fileID: 0}
   answers:
   - I am all ears
---- !u!114 &8513828836908987172
+  conditionalAnswer: 0
+  additionalAnswer: 
+--- !u!114 &8897620741294726878
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -201,30 +299,71 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea24aeccf3449a84c8fb632a88afbf06, type: 3}
-  m_Name: Dialogue
+  m_Script: {fileID: 11500000, guid: c2b66ae2370716b468bdbe16e8121859, type: 3}
+  m_Name: Dialog Comparison
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -104, y: 56}
+  position: {x: -1240, y: 184}
   ports:
     keys:
+    - source
+    - target
+    - ownedQuestObject
+    - result
     - input
     - answers
+    - conditionalAnswer
     values:
+    - _fieldName: source
+      _node: {fileID: 8897620741294726878}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: target
+      _node: {fileID: 8897620741294726878}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: ownedQuestObject
+      _node: {fileID: 8897620741294726878}
+      _typeQualifiedName: StatusUnknown.Content.Narrative.QuestObjectSO, StatusUnknown.Tools.Narrative,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: result
+      _node: {fileID: 8897620741294726878}
+      _typeQualifiedName: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: conditionalAnswer
+        node: {fileID: -297802684859051533}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
     - _fieldName: input
-      _node: {fileID: 8513828836908987172}
+      _node: {fileID: 8897620741294726878}
       _typeQualifiedName: Aurore.DialogSystem.Connection, StatusUnknown.Tools.Narrative,
         Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      connections:
-      - fieldName: answers 0
-        node: {fileID: 3619902342217902986}
-        reroutePoints: []
+      connections: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
     - _fieldName: answers
-      _node: {fileID: 8513828836908987172}
+      _node: {fileID: 8897620741294726878}
       _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       connections: []
@@ -232,8 +371,26 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  initiator: I just added the informations to your quest journal
+    - _fieldName: conditionalAnswer
+      _node: {fileID: 8897620741294726878}
+      _typeQualifiedName: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  initiator: 
   title: 
   img: {fileID: 0}
   audio: {fileID: 0}
   answers: []
+  conditionalAnswer: 0
+  additionalAnswer: 
+  source: 60
+  target: 45
+  ownedQuestObject: {fileID: 11400000, guid: 843bcccac192e6b4aaaad23c1ceb5614, type: 2}
+  requiredQuestObject: {fileID: 11400000, guid: 843bcccac192e6b4aaaad23c1ceb5614,
+    type: 2}
+  comparisonType: 6
+  result: 1

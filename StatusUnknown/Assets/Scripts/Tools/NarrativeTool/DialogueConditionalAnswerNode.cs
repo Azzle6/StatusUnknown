@@ -1,3 +1,4 @@
+using Aurore.DialogSystem;
 using Sirenix.OdinInspector;
 using StatusUnknown.Content.Narrative;
 using UnityEngine;
@@ -7,12 +8,10 @@ using XNode;
 // VALUE SMALLER/EQUAL/GREATER THAN 
 // HAS OBJECT(S)
 
-[NodeWidth(400), NodeTint(180, 0, 200)]
-[CreateNodeMenu("Comparison Node")]
-public class DialogComparisonNode : Node
+[NodeWidth(400), NodeTint(120, 0, 150)]
+[CreateNodeMenu("Conditional Answer Node")]
+public class DialogueConditionalAnswerNode : DialogueNode
 {
-    private const int LABEL_WIDTH_MEDIUM = 200; 
-
     [Input, HideIf("@" + nameof(comparisonType) + " == ComparisonType.HasQuestObjects"), LabelWidth(LABEL_WIDTH_MEDIUM)] public int source;
     [Input, HideIf("@" + nameof(comparisonType) + " == ComparisonType.HasQuestObjects"), LabelWidth(LABEL_WIDTH_MEDIUM)] public int target;
     [Input, ShowIf("@" + nameof(comparisonType) + " == ComparisonType.HasQuestObjects"), LabelWidth(LABEL_WIDTH_MEDIUM)] public QuestObjectSO ownedQuestObject; 
