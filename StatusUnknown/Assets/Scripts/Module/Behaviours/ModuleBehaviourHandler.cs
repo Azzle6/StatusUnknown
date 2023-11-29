@@ -2,13 +2,11 @@ namespace Module.Behaviours
 {
     using Core;
     using Definitions;
-    using Projectiles;
-    using Unity.VisualScripting;
     using UnityEngine;
 
     public class ModuleBehaviourHandler : MonoSingleton<ModuleBehaviourHandler>
     {
-        public void GetModuleBehaviourToInstantiate(CompiledModule compiledModule, InstantiatedModuleInfo info)
+        public void InstantiateModuleBehaviour(CompiledModule compiledModule, InstantiatedModuleInfo info)
         {
             ModuleDefinitionSO moduleDefinition = compiledModule.module.definition;
             
@@ -23,11 +21,7 @@ namespace Module.Behaviours
             switch (behaviourDefinition.BehaviourData)
             {
                 case ProjectileBehaviourData data:
-                    var scriptClass = data.projectileBehaviour.GetClass();
-                    InstantiatedProjectileModule module = new GameObject("module", scriptClass).GetComponent<InstantiatedProjectileModule>();
-                    module.AddComponent<MeshFilter>().mesh = data.mesh;
-                    module.AddComponent<MeshRenderer>().material = data.material;
-                    module.Init(data, compiledModule, info);
+                    this.InstantiateProjectile(compiledModule, info, data);
                     break;
                 case ZoneBehaviourData data:
                     
@@ -35,6 +29,19 @@ namespace Module.Behaviours
                 case DropBehaviourData data:
                     
                     break;
+            }
+        }
+
+        private void InstantiateProjectile(CompiledModule compiledModule, InstantiatedModuleInfo info, ProjectileBehaviourData data)
+        {
+            ElementPositionInfo[] positions =
+                data.InstantiationRule.GetInstantiationInfo(info.TriggeredPosition, info.Direction, data.quantity);
+            
+            for (int i = 0; i < data.quantity; i++)
+            {
+                var scriptClass = data.Behaviour.GetClass();
+                InstantiatedProjectileModule module = new GameObject("module", scriptClass).GetComponent<InstantiatedProjectileModule>();
+                module.Init(data, compiledModule, new InstantiatedModuleInfo(positions[i].Position, positions[i].Rotation));
             }
         }
     }

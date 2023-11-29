@@ -21,9 +21,9 @@ namespace Module
         private void Cast()
         {
             this.CompileModules();
-            ModuleBehaviourHandler.Instance.GetModuleBehaviourToInstantiate(
+            ModuleBehaviourHandler.Instance.InstantiateModuleBehaviour(
                 this.inventory.equippedWeaponsData[0].triggerInfoData[0].compiledModules.FirstModule,
-                new InstantiatedModuleInfo(transform.position, transform.forward));
+                new InstantiatedModuleInfo(transform.position, transform.rotation));
         }
         
         

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c01d336291543644a3bee3a19b552e2, type: 3}
-  m_Name: ProjectileBehaviourModule
+  m_Name: BaseProjectileBehaviourModule
   m_EditorClassIdentifier: 
   itemName: TestModule
   shape:
@@ -19,11 +19,11 @@ MonoBehaviour:
     content: 01010101
   view: {fileID: 0}
   outputs:
-  - weaponTriggerType: 0
+  - weaponTriggerType: 1
     localPosition: {x: 1, y: 0}
     direction: 3
   BehaviourData:
-    rid: 4696495293261676576
+    rid: 4696495314630344756
   references:
     version: 2
     RefIds:
@@ -31,18 +31,22 @@ MonoBehaviour:
       type: {class: HitBox, ns: , asm: Assembly-CSharp}
       data:
         size: {x: 1, y: 1, z: 1}
-    - rid: 4696495293261676576
+    - rid: 4696495314630344756
       type: {class: ProjectileBehaviourData, ns: Module.Definitions, asm: Assembly-CSharp}
       data:
-        projectileBehaviour: {fileID: 11500000, guid: 52ad6006665b33347bc6db8216731b6c, type: 3}
+        quantity: 1
+        <Behaviour>k__BackingField: {fileID: 11500000, guid: 52ad6006665b33347bc6db8216731b6c, type: 3}
+        <InstantiationRule>k__BackingField:
+          rid: 4696495314630344757
+        mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+        material: {fileID: -876546973899608171, guid: 4a77fad0a2c502e42adef107b7ea51ea, type: 3}
         layerMask:
           serializedVersion: 2
-          m_Bits: 1
-        quantity: 1
-        mesh: {fileID: 3613567641014311022, guid: ecdbcec36b1082e468192d3cd665f4a9, type: 3}
-        material: {fileID: -876546973899608171, guid: 4a77fad0a2c502e42adef107b7ea51ea, type: 3}
+          m_Bits: 385
         shape:
           rid: 4696495293261676570
-        speed: 10
+        speed: 1
         damages: 2
-        lifeTime: 5
+    - rid: 4696495314630344757
+      type: {class: ForwardInstantiationRule, ns: Module.Definitions, asm: Assembly-CSharp}
+      data: 

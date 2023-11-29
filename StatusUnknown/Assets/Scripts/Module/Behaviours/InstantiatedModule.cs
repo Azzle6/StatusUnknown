@@ -15,7 +15,7 @@ namespace Module.Behaviours
 
         private void Start()
         {
-            this.OnSpawnEvent?.Invoke(new InstantiatedModuleInfo(transform.position, transform.forward));
+            this.OnSpawnEvent?.Invoke(new InstantiatedModuleInfo(transform.position, transform.rotation));
         }
 
         private void Update()
@@ -34,29 +34,25 @@ namespace Module.Behaviours
             {
                 yield return new WaitForSeconds(stepDuration);
                 this.OnTick();
-                this.OnTickEvent?.Invoke(new InstantiatedModuleInfo(transform.position, transform.forward));
+                this.OnTickEvent?.Invoke(new InstantiatedModuleInfo(transform.position, transform.rotation));
             }
         }
 
-        // ReSharper disable Unity.PerformanceAnalysis
         protected virtual void OnTick()
-        {
-            Debug.Log("Basic module tick.");
-        }
+        { }
 
         protected virtual void OnUpdate()
-        {
-            Debug.Log("Basic module update.");
-        }
+        { }
 
         protected virtual void OnFixedUpdate()
-        {
-            Debug.Log("Basic module fixes update.");
-        }
+        { }
 
         protected void BaseInit(CompiledModule compiledModule, InstantiatedModuleInfo info)
         {
             this.CompiledModule = compiledModule;
+            this.transform.position = info.TriggeredPosition;
+            this.transform.rotation = info.Direction;
+            Debug.Log($"Final rotation : {this.transform.rotation}. (info : {info.Direction})");
 
             foreach (var trigger in CompiledModule.triggersNextModule)
             {
@@ -83,19 +79,21 @@ namespace Module.Behaviours
 
         private void TriggerNextModule(CompiledModule nextModule, InstantiatedModuleInfo info)
         {
-            ModuleBehaviourHandler.Instance.GetModuleBehaviourToInstantiate(nextModule, info);
+            ModuleBehaviourHandler.Instance.InstantiateModuleBehaviour(nextModule, info);
         }
     }
     
     public struct InstantiatedModuleInfo
     {
         public Vector3 TriggeredPosition;
-        public Vector3 Direction;
+        public Quaternion Direction;
+        public Collider LastHit;
 
-        public InstantiatedModuleInfo(Vector3 triggeredPosition, Vector3 direction)
+        public InstantiatedModuleInfo(Vector3 triggeredPosition, Quaternion direction, Collider lastHit = null)
         {
             this.TriggeredPosition = triggeredPosition;
             this.Direction = direction;
+            this.LastHit = lastHit;
         }
     }
 }
