@@ -25,7 +25,6 @@ namespace Augment
                     break;
                 PlayerInfoUIHandler.Instance.UpdateAugmentIcon(x,currentAugments[x].augmentSprite);
             }
-  
         }
 
         public void AugmentUse(int AugmentIndex)

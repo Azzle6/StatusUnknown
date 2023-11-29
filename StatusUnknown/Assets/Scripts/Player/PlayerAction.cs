@@ -186,6 +186,9 @@ namespace Player
         {
             if (ctx.started)
             {
+                if (playerStateInterpretor.statesSlot[PlayerStateType.ACTION] != null)
+                    playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
+                
                 playerStateInterpretor.AddState("AugmentPlayerState", PlayerStateType.ACTION,false);
                 playerStateInterpretor.Behave(augmentNo,PlayerStateType.ACTION);
             }
