@@ -14,6 +14,7 @@ namespace Weapon
         [SerializeField] private Transform mesh;
         [SerializeField] private Transform meshPos;
         [SerializeField] private VisualEffect chargingVFX;
+        [SerializeField] private VisualEffect shootingVFX;
         private Vector3 initMeshPos;
         private float chargeTimer;
         private Coroutine charging;
@@ -31,7 +32,6 @@ namespace Weapon
             currentAmmo.Value = stat.magazineSize;
             initMeshPos = mesh.localPosition;
             chargingVFX.Stop();
-            Debug.Log(stat);
             ComponentPooler.Instance.CreatePool(stat.projectilePool.prefab.GetComponent<Projectile>(),stat.projectilePool.baseCount);
         }
 
@@ -52,7 +52,6 @@ namespace Weapon
 
             if ((isReloading) && (reloading == default))
             {
-                Debug.Log("need to resume reload animation");
                 Reload(weaponManager.playerAnimator);
                 return;
             }
@@ -115,6 +114,7 @@ namespace Weapon
             if (charging != default)
                 StopCoroutine(charging);
             
+            shootingVFX.Play();
             tempPhotonPistolBulletTr.transform.parent = null;
             tempPhotonPistolBullet.Launch(currentDamage, spawnPoint.forward, stat.projectileSpeed);
             tempPhotonPistolBulletTr.TryGetComponent(out HitContext tempHitContext);
