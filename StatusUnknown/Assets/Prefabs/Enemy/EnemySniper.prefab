@@ -97,7 +97,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.25, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8875816988282322516}
@@ -264,9 +264,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   morphEggPrefab: {fileID: 8233590218045599866, guid: 7c6ed457da3fe6240876f1a3b266a884, type: 3}
   startMorphEvent: {fileID: 11400000, guid: 93391f52dc2a3bb4ca7cb9f104e46d9a, type: 2}
-  morphTimer: 5
+  morphTimer: 30
   timerRandomness: 0.5
-  morphing: 0
 --- !u!1 &4681897508976779984
 GameObject:
   m_ObjectHideFlags: 0
