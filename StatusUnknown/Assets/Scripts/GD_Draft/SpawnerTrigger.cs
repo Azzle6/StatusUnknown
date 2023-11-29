@@ -5,15 +5,28 @@ using UnityEngine;
 
 public class SpawnerTrigger : MonoBehaviour
 {
-    public List<ProtoSpawner> spawnerList;
+    public SpawnerLister spawnerLister;
+    public enum TriggerType
+    {
+        Stop, Start
+    }
+
+    public TriggerType triggerType;
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name == "Player")
+        if (other.name == "Player" && triggerType == TriggerType.Start)
         {
-            for (int i = 0; i < spawnerList.Count; i++)
+            for (int i = 0; i < spawnerLister.spawnerList.Count; i++)
             {
-                spawnerList[i].isSpawning = true;
+                spawnerLister.spawnerList[i].isSpawning = true;
+            }
+        }
+        if (other.name == "Player" && triggerType == TriggerType.Stop)
+        {
+            for (int i = 0; i < spawnerLister.spawnerList.Count; i++)
+            {
+                spawnerLister.spawnerList[i].isSpawning = false;
             }
         }
     }
