@@ -42,6 +42,7 @@ namespace Weapon
         {
             reloading = default;
             charging = default;
+            chargingVFX.Stop();
         }
 
         public override void ActionPressed()
