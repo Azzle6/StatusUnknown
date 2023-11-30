@@ -1,3 +1,5 @@
+using Input;
+
 namespace Weapon
 {
     using Player;
@@ -68,6 +70,8 @@ namespace Weapon
         {
             if (weaponNo == currentWeaponIndex)
                 return;
+            
+            GamePadRumbleManager.StopRumble();
             
             if (CheckIfMeleeWeapon(weaponNo))
             {

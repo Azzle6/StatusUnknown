@@ -43,7 +43,7 @@ namespace Player
             DetectAndDamage();
             playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
             activeCoroutine = null;
-            playerStateInterpretor.AddState("MeleeRecoveryPlayerState", PlayerStateType.ACTION, false);
+            playerStateInterpretor.AddState("MeleeRecoveryPlayerState", PlayerStateType.ACTION, true);
             playerStateInterpretor.Behave(currentMeleeWeapon,PlayerStateType.ACTION);
             currentAttack = null;
             currentMeleeWeapon = null;
