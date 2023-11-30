@@ -1,4 +1,5 @@
 using UnityEngine.Pool;
+using UnityEngine.VFX;
 
 namespace Core.Pooler
 {
@@ -10,7 +11,12 @@ namespace Core.Pooler
     {
         private Dictionary<string, IObjectPool<Component>> pools = new Dictionary<string, IObjectPool<Component>>();
         private Dictionary<GameObject, Component> objectToComponent = new Dictionary<GameObject, Component>();
+        [SerializeField] private VisualEffect emptyVFX;
         
+        private void Start()
+        {
+            CreatePool(emptyVFX, 10);
+        }
         
         public void CreatePool<T>(T prefab, int baseCount) where T : Component
         {
@@ -45,7 +51,7 @@ namespace Core.Pooler
             return component;
         }
 
-        public void ReturnObjectToPool(GameObject returnedObj)
+        public void ReturnObjectToPool<T>(T returnedObj) where T : Component
         {
             string key = returnedObj.name;
             key = key.Substring(0, key.Length - 7);
@@ -55,12 +61,10 @@ namespace Core.Pooler
 
             if (pools.ContainsKey(key))
             {
-                if (objectToComponent.TryGetValue(returnedObj, out Component component))
-                {
-                    pools[key].Release(component);
-                    objectToComponent.Remove(returnedObj);
-                }
+                pools[key].Release(returnedObj);
+                //objectToComponent.Remove(returnedObj);
             }
+            
         }
 
         public void ActionOnGet<T>(T obj) where T : Component

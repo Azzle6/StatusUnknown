@@ -20,7 +20,7 @@ MonoBehaviour:
     x: 322
     y: -249
     width: 1044
-    height: 2156
+    height: 2121
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -31,7 +31,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d4c867f6b72b714dbb5fd1780afe208, type: 3}
-  m_Name: VFX_GunHit
+  m_Name: VFX_PistoletHit
   m_EditorClassIdentifier: 
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 0}
@@ -101,7 +101,7 @@ VisualEffectResource:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: VFX_GunHit
+  m_Name: VFX_PistoletHit
   m_Graph: {fileID: 114350483966674976}
   m_Infos:
     m_RendererSettings:
@@ -585,8 +585,7 @@ MonoBehaviour:
   castShadows: 0
   useExposureWeight: 0
   needsOwnSort: 0
-  shaderGraph: {fileID: 4333940904281232215, guid: 32f03e0f7867d9347ab25c4d5d631889,
-    type: 3}
+  shaderGraph: {fileID: 4333940904281232215, guid: 32f03e0f7867d9347ab25c4d5d631889, type: 3}
   materialSettings:
     m_PropertyNames:
     - _RenderQueueType

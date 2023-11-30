@@ -1,4 +1,6 @@
 
+using Input;
+
 namespace Weapon
 {
     using Core.Pooler;
@@ -21,6 +23,9 @@ namespace Weapon
         [Header("Magazine")]
         public int magazineSize;
         public float reloadTime;
+        [Header("Rumble")] 
+        public GamePadRumbleWithTimer rumbleScaling;
+        public GamePadRumbleWithTimer rumbleOnShoot;
     }
 }
 
