@@ -44,7 +44,7 @@ namespace Module.Behaviours
 
         protected virtual void Move()
         {
-            this.transform.Translate(this.transform.forward * (this.Data.speed * Time.fixedDeltaTime));
+            this.transform.position += this.transform.forward * (this.Data.speed * Time.fixedDeltaTime);
         }
 
         protected virtual void CollisionBehaviour()
@@ -58,7 +58,7 @@ namespace Module.Behaviours
                     damageable.TakeDamage(this.Data.damages, Vector3.zero);
                 
                 Vector3 closestPoint = firstCollider.ClosestPoint(this.transform.position);
-                this.OnHitEvent?.Invoke(new InstantiatedModuleInfo(closestPoint, Quaternion.Euler(closestPoint - this.transform.position), firstCollider));
+                this.OnHitEvent?.Invoke(new InstantiatedModuleInfo(closestPoint, transform.rotation, firstCollider));
                 Destroy(this.gameObject);
             }
         }

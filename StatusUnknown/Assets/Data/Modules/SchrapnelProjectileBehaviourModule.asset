@@ -23,7 +23,7 @@ MonoBehaviour:
     localPosition: {x: 1, y: 0}
     direction: 3
   BehaviourData:
-    rid: 4696495314630344766
+    rid: 4696495337976365108
   references:
     version: 2
     RefIds:
@@ -31,13 +31,13 @@ MonoBehaviour:
       type: {class: HitBox, ns: , asm: Assembly-CSharp}
       data:
         size: {x: 0.2, y: 0.2, z: 0.2}
-    - rid: 4696495314630344766
+    - rid: 4696495337976365108
       type: {class: ProjectileBehaviourData, ns: Module.Definitions, asm: Assembly-CSharp}
       data:
-        quantity: 1
+        quantity: 5
         <Behaviour>k__BackingField: {fileID: 11500000, guid: 52ad6006665b33347bc6db8216731b6c, type: 3}
         <InstantiationRule>k__BackingField:
-          rid: 4696495314630344767
+          rid: 4696495337976365109
         mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
         material: {fileID: -876546973899608171, guid: 4a77fad0a2c502e42adef107b7ea51ea, type: 3}
         layerMask:
@@ -45,10 +45,10 @@ MonoBehaviour:
           m_Bits: 385
         shape:
           rid: 4696495314630344721
-        speed: 0.1
+        speed: 1
         damages: 5
-    - rid: 4696495314630344767
+    - rid: 4696495337976365109
       type: {class: ConicInstantiationRule, ns: Module.Definitions, asm: Assembly-CSharp}
       data:
-        angle: 10
-        regular: 0
+        angle: 50.2
+        regular: 1

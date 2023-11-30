@@ -35,7 +35,7 @@ namespace Module.Behaviours
         private void InstantiateProjectile(CompiledModule compiledModule, InstantiatedModuleInfo info, ProjectileBehaviourData data)
         {
             ElementPositionInfo[] positions =
-                data.InstantiationRule.GetInstantiationInfo(info.TriggeredPosition, info.Direction, data.quantity);
+                data.InstantiationRule.GetInstantiationInfo(info.TriggeredPosition, info.Rotation, data.quantity);
             
             for (int i = 0; i < data.quantity; i++)
             {

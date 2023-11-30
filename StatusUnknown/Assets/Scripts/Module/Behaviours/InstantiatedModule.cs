@@ -4,6 +4,7 @@ namespace Module.Behaviours
     using System.Collections;
     using Definitions;
     using UnityEngine;
+    using UnityEngine.Serialization;
 
     public class InstantiatedModule : MonoBehaviour
     {
@@ -51,8 +52,8 @@ namespace Module.Behaviours
         {
             this.CompiledModule = compiledModule;
             this.transform.position = info.TriggeredPosition;
-            this.transform.rotation = info.Direction;
-            Debug.Log($"Final rotation : {this.transform.rotation}. (info : {info.Direction})");
+            this.transform.rotation = info.Rotation;
+            
 
             foreach (var trigger in CompiledModule.triggersNextModule)
             {
@@ -86,13 +87,13 @@ namespace Module.Behaviours
     public struct InstantiatedModuleInfo
     {
         public Vector3 TriggeredPosition;
-        public Quaternion Direction;
+        public Quaternion Rotation;
         public Collider LastHit;
 
-        public InstantiatedModuleInfo(Vector3 triggeredPosition, Quaternion direction, Collider lastHit = null)
+        public InstantiatedModuleInfo(Vector3 triggeredPosition, Quaternion rotation, Collider lastHit = null)
         {
             this.TriggeredPosition = triggeredPosition;
-            this.Direction = direction;
+            this.Rotation = rotation;
             this.LastHit = lastHit;
         }
     }

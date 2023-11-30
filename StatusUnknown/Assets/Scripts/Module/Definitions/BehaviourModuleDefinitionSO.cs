@@ -5,6 +5,7 @@ namespace Module.Definitions
     using UnityEditor;
     using UnityEngine;
     using UnityEngine.Serialization;
+    using Random = UnityEngine.Random;
 
     [CreateAssetMenu(menuName = "CustomAssets/Definitions/BehaviourModuleDefinition", fileName = "BehaviourModuleDefinition")]
     public class BehaviourModuleDefinitionSO : ModuleDefinitionSO
@@ -83,8 +84,11 @@ namespace Module.Definitions
         public ElementPositionInfo[] GetInstantiationInfo(Vector3 pos, Quaternion curRotation, int quantity)
         {
             ElementPositionInfo[] result = new ElementPositionInfo[quantity];
+            
+            Vector3 relativeForward = curRotation * Vector3.forward;
+            
             for (int i = 0; i < quantity; i++)
-                result[i] = new ElementPositionInfo(pos, curRotation);
+                result[i] = new ElementPositionInfo(pos, Quaternion.LookRotation(relativeForward));
             
             return result;
         }
@@ -93,6 +97,7 @@ namespace Module.Definitions
     [Serializable]
     public struct ConicInstantiationRule : IInstantiationRule
     {
+        [Range(0,180)]
         public float angle;
         public bool regular;
         public ElementPositionInfo[] GetInstantiationInfo(Vector3 pos, Quaternion curRotation, int quantity)
@@ -100,10 +105,22 @@ namespace Module.Definitions
             ElementPositionInfo[] result = new ElementPositionInfo[quantity];
             for (int i = 0; i < quantity; i++)
             {
-                Quaternion newRotation = Quaternion.AngleAxis(this.angle, Vector3.up) * curRotation;
-                Debug.DrawRay(pos, newRotation * Vector3.forward, Color.blue, 100f);
-                Debug.Log($"Calculated dir : {newRotation}.");
-                result[i] = new ElementPositionInfo(pos, newRotation);
+                float curAngle;
+                if (this.regular)
+                {
+                    float displacementAngle = this.angle / quantity;
+                    curAngle = displacementAngle * i - this.angle/2 + displacementAngle / 2;
+                }
+                else
+                {
+                    curAngle = Random.Range(-this.angle, this.angle);
+                }
+                Vector3 relativeForward = curRotation * Vector3.forward;
+                Vector3 relativeUp = curRotation * Vector3.up;
+
+                Quaternion baseRotation = Quaternion.AngleAxis(curAngle, relativeUp);
+                Quaternion finalRotation = Quaternion.LookRotation(baseRotation * relativeForward);
+                result[i] = new ElementPositionInfo(pos, finalRotation);
             }
             
             return result;
@@ -116,7 +133,6 @@ namespace Module.Definitions
         public float Length;
         public ElementPositionInfo[] GetInstantiationInfo(Vector3 pos, Quaternion forward, int quantity)
         {
-
         }
     }*/
 
