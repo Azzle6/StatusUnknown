@@ -46,10 +46,12 @@ namespace Weapon
 
         public virtual void Recovery()
         {
-            if ((gameObject.activeSelf) && (cooldownCoroutine == default) && (comboIndex < attacks.Length -1))
+            if ((gameObject.activeSelf) && (cooldownCoroutine == default) && (comboIndex < attacks.Length - 1))
+            {
+                comboIndexWhenCDStarted = comboIndex;
                 cooldownCoroutine = StartCoroutine(Cooldown());
+            }
             
-            weaponManager.playerAnimator.SetTrigger("MeleeRecovery");
             comboIndex++;
 
             if (comboIndex > attacks.Length -1)
@@ -60,7 +62,6 @@ namespace Weapon
 
         public virtual IEnumerator Cooldown()
         {
-            comboIndexWhenCDStarted = comboIndex;
             yield return new WaitForSeconds(attacks[comboIndexWhenCDStarted].cooldownTime + attacks[comboIndexWhenCDStarted].recoveryTime);
             comboIndex = 0;
         }
