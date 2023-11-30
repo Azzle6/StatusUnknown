@@ -25,6 +25,8 @@ namespace Weapon
         
         public abstract float GetMagazineSize();
 
+        public abstract void InitPool();
+
     }
 }
 

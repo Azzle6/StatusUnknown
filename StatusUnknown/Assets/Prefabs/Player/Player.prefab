@@ -927,7 +927,7 @@ MonoBehaviour:
   inputBufferActive: 0
   currentAttack:
     attackDamage: 0
-    attackRange: 0
+    attackLength: 0
     attackAngle: 0
     attackKnockback: 0
     castTime: 0
@@ -936,6 +936,22 @@ MonoBehaviour:
     activeTime: 0
     recoveryTime: 0
     cooldownTime: 0
+    rumbleOnHit:
+      maxLowFrequency: 0
+      maxHighFrequency: 0
+      lowFrequencyCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      highFrequencyCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      duration: 0
   currentMeleeWeapon: {fileID: 0}
   weaponManager: {fileID: 4974381338073703539}
   enemyLayer:
@@ -959,7 +975,7 @@ MonoBehaviour:
   inputBufferActive: 0
   currentAttack:
     attackDamage: 0
-    attackRange: 0
+    attackLength: 0
     attackAngle: 0
     attackKnockback: 0
     castTime: 0
@@ -968,6 +984,22 @@ MonoBehaviour:
     activeTime: 0
     recoveryTime: 0
     cooldownTime: 0
+    rumbleOnHit:
+      maxLowFrequency: 0
+      maxHighFrequency: 0
+      lowFrequencyCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      highFrequencyCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      duration: 0
   weaponManager: {fileID: 4974381338073703539}
   playerHealth: {fileID: 11400000, guid: 57a8cb5156074b147aba2b571370f275, type: 2}
 --- !u!114 &1241682378252029606
@@ -988,7 +1020,7 @@ MonoBehaviour:
   inputBufferActive: 0
   currentAttack:
     attackDamage: 0
-    attackRange: 0
+    attackLength: 0
     attackAngle: 0
     attackKnockback: 0
     castTime: 0
@@ -997,6 +1029,22 @@ MonoBehaviour:
     activeTime: 0
     recoveryTime: 0
     cooldownTime: 0
+    rumbleOnHit:
+      maxLowFrequency: 0
+      maxHighFrequency: 0
+      lowFrequencyCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      highFrequencyCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      duration: 0
   weaponManager: {fileID: 4974381338073703539}
 --- !u!114 &6965172701220603686
 MonoBehaviour:
@@ -1016,7 +1064,7 @@ MonoBehaviour:
   inputBufferActive: 0
   currentAttack:
     attackDamage: 0
-    attackRange: 0
+    attackLength: 0
     attackAngle: 0
     attackKnockback: 0
     castTime: 0
@@ -1025,6 +1073,22 @@ MonoBehaviour:
     activeTime: 0
     recoveryTime: 0
     cooldownTime: 0
+    rumbleOnHit:
+      maxLowFrequency: 0
+      maxHighFrequency: 0
+      lowFrequencyCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      highFrequencyCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      duration: 0
   currentMeleeWeapon: {fileID: 0}
   weaponManager: {fileID: 4974381338073703539}
 --- !u!114 &9187700631984985908
@@ -2008,7 +2072,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2675037210809185590, guid: 1708dfd4bc512924385dc9630c687f1f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4908050324150602532, guid: 1708dfd4bc512924385dc9630c687f1f, type: 3}
       propertyPath: m_Layer
@@ -2135,7 +2199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2003955313394750300, guid: 7ed0d303a9085144893bce6f552c4fa9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2387115202336153330, guid: 7ed0d303a9085144893bce6f552c4fa9, type: 3}
       propertyPath: m_VersionIndex
