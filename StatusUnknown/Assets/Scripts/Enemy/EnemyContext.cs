@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,7 @@ public abstract class EnemyContext : MonoBehaviour, IDamageable
 
     [SerializeField] protected Rigidbody body;
     [SerializeField] protected LayerMask avoidanceMask;
+    public event Action<EnemyContext> OnDeathEvent;
 
     [Header("Debug")]
     [SerializeField] protected MeshRenderer meshRenderer;
@@ -101,7 +103,13 @@ public abstract class EnemyContext : MonoBehaviour, IDamageable
         AddForce(force);
         Debug.Log($"{gameObject.name} took {damage} damage {currentHealth}/{stats.health}");
         if (currentHealth <= 0)
-            Destroy(gameObject);
+            Death();
+    }
+    protected virtual void Death()
+    {
+        Debug.Log($"Death {gameObject.name}");
+        OnDeathEvent?.Invoke(this);
+        Destroy(gameObject);
     }
     protected virtual void InitializeEnemy()
     {

@@ -42,7 +42,7 @@ public class MorphEgg : MonoBehaviour,IDamageable
         // TODO : Define usefull parameters
         endMorphEvent?.RaiseEvent(null);
         MorphEvents.EndMorphEvent(null);
-        StopAllCoroutines();
+        CancelInvoke();
         
     }
     void Explode()
@@ -57,7 +57,7 @@ public class MorphEgg : MonoBehaviour,IDamageable
                 Instantiate(failedEnemiesToSpawn[i], transform.position, Quaternion.identity);
             }
         }
-        
+        Destroy(gameObject);
     }
     void Hatch()
     {
