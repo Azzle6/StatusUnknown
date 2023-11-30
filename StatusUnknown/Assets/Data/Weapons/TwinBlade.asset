@@ -14,16 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponID: 0
   attacks:
-  - attackDamage: 15
-    attackLength: 3
-    attackAngle: 30
+  - attackDamage: 30
+    attackLength: 2
+    attackAngle: 90
     attackKnockback: 10
-    castTime: 0.1
-    buildUpTime: 0.2
+    castTime: 0.05
+    buildUpTime: 0.05
     superArmor: 50
-    activeTime: 0.2
-    recoveryTime: 0.1
-    cooldownTime: 0.5
+    activeTime: 0.1
+    recoveryTime: 0.2
+    cooldownTime: 0.4
     rumbleOnHit:
       maxLowFrequency: 1
       maxHighFrequency: 1
@@ -94,15 +94,15 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
       duration: 0.2
-  - attackDamage: 15
-    attackLength: 3
-    attackAngle: 90
+  - attackDamage: 30
+    attackLength: 2
+    attackAngle: 180
     attackKnockback: 10
-    castTime: 0.1
-    buildUpTime: 0.2
+    castTime: 0.05
+    buildUpTime: 0.1
     superArmor: 50
-    activeTime: 0.2
-    recoveryTime: 0.1
+    activeTime: 0.1
+    recoveryTime: 0.25
     cooldownTime: 0.5
     rumbleOnHit:
       maxLowFrequency: 1
@@ -174,16 +174,16 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
       duration: 0.2
-  - attackDamage: 20
-    attackLength: 3
+  - attackDamage: 40
+    attackLength: 2
     attackAngle: 360
     attackKnockback: 10
-    castTime: 0.1
-    buildUpTime: 0.2
+    castTime: 0.05
+    buildUpTime: 0.05
     superArmor: 50
-    activeTime: 0.2
-    recoveryTime: 0.3
-    cooldownTime: 0.5
+    activeTime: 0.1
+    recoveryTime: 2
+    cooldownTime: 0.01
     rumbleOnHit:
       maxLowFrequency: 1
       maxHighFrequency: 1
@@ -255,5 +255,5 @@ MonoBehaviour:
         m_RotationOrder: 4
       duration: 0.2
   dotDamage: 3
-  dotDuration: 5
-  dotTickRate: 1
+  dotDuration: 10
+  dotTickRate: 2
