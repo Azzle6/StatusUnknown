@@ -46,8 +46,13 @@ namespace Weapon
 
         public virtual void Recovery()
         {
-            if ((gameObject.activeSelf) && (cooldownCoroutine == default) && (comboIndex < attacks.Length - 1))
+            Debug.Log("Recovery time" + attacks[comboIndex].recoveryTime);
+            if (gameObject.activeSelf)
             {
+                if (cooldownCoroutine != default)
+                {
+                    StopCoroutine(cooldownCoroutine);
+                }
                 comboIndexWhenCDStarted = comboIndex;
                 cooldownCoroutine = StartCoroutine(Cooldown());
             }
@@ -57,6 +62,7 @@ namespace Weapon
             if (comboIndex > attacks.Length -1)
             {
                 comboIndex = 0;
+                Debug.Log("comboIndex reset");
             }
         }
 
