@@ -23,30 +23,31 @@ MonoBehaviour:
     localPosition: {x: 1, y: 0}
     direction: 3
   BehaviourData:
-    rid: 4696495314630344756
+    rid: 4696495337976365394
   references:
     version: 2
     RefIds:
-    - rid: 4696495293261676570
-      type: {class: HitBox, ns: , asm: Assembly-CSharp}
+    - rid: 4696495337976365322
+      type: {class: ForwardInstantiationRule, ns: Module, asm: Assembly-CSharp}
+      data: 
+    - rid: 4696495337976365340
+      type: {class: HitSphere, ns: , asm: Assembly-CSharp}
       data:
-        size: {x: 1, y: 1, z: 1}
-    - rid: 4696495314630344756
+        radius: 0.1
+    - rid: 4696495337976365394
       type: {class: ProjectileBehaviourData, ns: Module.Definitions, asm: Assembly-CSharp}
       data:
-        quantity: 1
-        <Behaviour>k__BackingField: {fileID: 11500000, guid: 52ad6006665b33347bc6db8216731b6c, type: 3}
-        <InstantiationRule>k__BackingField:
-          rid: 4696495314630344757
-        mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
-        material: {fileID: -876546973899608171, guid: 4a77fad0a2c502e42adef107b7ea51ea, type: 3}
-        layerMask:
+        <TickRate>k__BackingField: 0
+        <LayerMask>k__BackingField:
           serializedVersion: 2
           m_Bits: 385
-        shape:
-          rid: 4696495293261676570
+        <Behaviour>k__BackingField: {fileID: 11500000, guid: 52ad6006665b33347bc6db8216731b6c, type: 3}
+        <Quantity>k__BackingField: 1
+        <InstantiationRule>k__BackingField:
+          rid: 4696495337976365322
+        <HitShape>k__BackingField:
+          rid: 4696495337976365340
+        <Mesh>k__BackingField: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+        <Material>k__BackingField: {fileID: -876546973899608171, guid: 4a77fad0a2c502e42adef107b7ea51ea, type: 3}
         speed: 1
         damages: 2
-    - rid: 4696495314630344757
-      type: {class: ForwardInstantiationRule, ns: Module.Definitions, asm: Assembly-CSharp}
-      data: 

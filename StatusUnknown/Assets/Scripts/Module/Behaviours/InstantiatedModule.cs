@@ -4,58 +4,27 @@ namespace Module.Behaviours
     using System.Collections;
     using Definitions;
     using UnityEngine;
-    using UnityEngine.Serialization;
 
-    public class InstantiatedModule : MonoBehaviour
+    public abstract class InstantiatedModule : MonoBehaviour
     {
-        public CompiledModule CompiledModule;
+        private CompiledModule compiledModule;
+        private IBehaviourData behaviourData;
 
         protected Action<InstantiatedModuleInfo> OnSpawnEvent;
         protected Action<InstantiatedModuleInfo> OnTickEvent;
         protected Action<InstantiatedModuleInfo> OnHitEvent;
-
-        private void Start()
+        
+        public void Init(CompiledModule compiledModule, InstantiatedModuleInfo info, IBehaviourData data)
         {
-            this.OnSpawnEvent?.Invoke(new InstantiatedModuleInfo(transform.position, transform.rotation));
-        }
-
-        private void Update()
-        {
-            this.OnUpdate();
-        }
-
-        private void FixedUpdate()
-        {
-            this.OnFixedUpdate();
-        }
-
-        private IEnumerator Tick(float stepDuration)
-        {
-            while (true)
-            {
-                yield return new WaitForSeconds(stepDuration);
-                this.OnTick();
-                this.OnTickEvent?.Invoke(new InstantiatedModuleInfo(transform.position, transform.rotation));
-            }
-        }
-
-        protected virtual void OnTick()
-        { }
-
-        protected virtual void OnUpdate()
-        { }
-
-        protected virtual void OnFixedUpdate()
-        { }
-
-        protected void BaseInit(CompiledModule compiledModule, InstantiatedModuleInfo info)
-        {
-            this.CompiledModule = compiledModule;
+            this.behaviourData = data;
+            this.compiledModule = compiledModule;
             this.transform.position = info.TriggeredPosition;
             this.transform.rotation = info.Rotation;
             
+            this.gameObject.AddComponent<MeshFilter>().mesh = data.Mesh;
+            this.gameObject.AddComponent<MeshRenderer>().material = data.Material;
 
-            foreach (var trigger in CompiledModule.triggersNextModule)
+            foreach (var trigger in this.compiledModule.triggersNextModule)
             {
                 if (trigger.compiledModule != null)
                 {
@@ -69,19 +38,79 @@ namespace Module.Behaviours
                             break;
                         case E_ModuleOutput.ON_TICK:
                             this.OnTickEvent += (i) => this.TriggerNextModule(trigger.compiledModule, i);
-                            this.StartCoroutine(Tick(0.3f));
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();
                     }
                 }
             }
+            
+            if(this.behaviourData.TickRate >= 0)
+                this.StartCoroutine(Tick(this.behaviourData.TickRate));
+            
+            OnInit(compiledModule, info, data);
         }
+
+        protected abstract void OnInit(CompiledModule compiledModule, InstantiatedModuleInfo info, IBehaviourData data);
+
+        private IEnumerator Tick(float stepDuration)
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(stepDuration);
+                this.OnTick();
+                this.OnTickEvent?.Invoke(new InstantiatedModuleInfo(transform.position, transform.rotation));
+            }
+        }
+
+        #region OVERRIDABLE_METHODS
+        protected virtual void OnStart()
+        {}
+        
+        protected virtual void OnTick()
+        { }
+
+        protected virtual void OnUpdate()
+        { }
+
+        protected virtual void OnFixedUpdate()
+        { }
+        #endregion
+        
+        #region UTILITIES
+        protected Collider[] CheckCollisions()
+        {
+            Collider[] result = this.behaviourData.HitShape.DetectColliders(this.transform.position, this.transform.rotation,
+                this.behaviourData.LayerMask);
+
+            return result;
+        }
+
+        protected abstract void CollisionBehaviour();
+        #endregion
 
         private void TriggerNextModule(CompiledModule nextModule, InstantiatedModuleInfo info)
         {
             ModuleBehaviourHandler.Instance.InstantiateModuleBehaviour(nextModule, info);
         }
+        
+        #region UNITY_METHODS
+        private void Start()
+        {
+            this.OnStart();
+            this.OnSpawnEvent?.Invoke(new InstantiatedModuleInfo(transform.position, transform.rotation));
+        }
+
+        private void Update()
+        {
+            this.OnUpdate();
+        }
+
+        private void FixedUpdate()
+        {
+            this.OnFixedUpdate();
+        }
+        #endregion
     }
     
     public struct InstantiatedModuleInfo

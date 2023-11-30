@@ -11,13 +11,9 @@ namespace Module.Behaviours
         //Dynamic data
         protected readonly HashSet<Collider> AlreadyHitEnemy = new HashSet<Collider>();
 
-        public void Init(ProjectileBehaviourData data, CompiledModule compiledModule, InstantiatedModuleInfo info)
+        protected override void OnInit(CompiledModule compiledModule, InstantiatedModuleInfo info, IBehaviourData data)
         {
-            this.BaseInit(compiledModule, info);
-            this.Data = data;
-            
-            this.gameObject.AddComponent<MeshFilter>().mesh = data.mesh;
-            this.gameObject.AddComponent<MeshRenderer>().material = data.material;
+            this.Data = (ProjectileBehaviourData)data;
 
             if (info.LastHit != null)
                 this.AlreadyHitEnemy.Add(info.LastHit);
@@ -34,20 +30,12 @@ namespace Module.Behaviours
             this.CollisionBehaviour();
         }
 
-        protected Collider[] CheckCollisions()
-        {
-            Collider[] result = this.Data.shape.DetectColliders(this.transform.position, this.transform.rotation,
-                this.Data.layerMask);
-
-            return result;
-        }
-
         protected virtual void Move()
         {
             this.transform.position += this.transform.forward * (this.Data.speed * Time.fixedDeltaTime);
         }
 
-        protected virtual void CollisionBehaviour()
+        protected override void CollisionBehaviour()
         {
             Collider[] collisions = this.CheckCollisions();
             if (collisions.Length > 0 && !this.AlreadyHitEnemy.Contains(collisions[0]))
