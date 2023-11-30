@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class Teleporter : MonoBehaviour
 {
     public GameObject goal;
+    public float cD;
     public bool onCD = false;
     public InputAction interactInput;
     private GameObject player;
@@ -45,7 +46,7 @@ public class Teleporter : MonoBehaviour
     {
         onCD = true;
         goal.GetComponent<Teleporter>().onCD = true;
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(cD);
         onCD = false;
         goal.GetComponent<Teleporter>().onCD = false;
     }
