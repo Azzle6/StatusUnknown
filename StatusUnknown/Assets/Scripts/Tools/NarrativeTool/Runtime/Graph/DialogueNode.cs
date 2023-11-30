@@ -1,5 +1,7 @@
 ﻿using Sirenix.OdinInspector;
+using StatusUnknown.Tools.Narrative;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using XNode;
 
@@ -20,14 +22,14 @@ namespace Aurore.DialogSystem
 		public Sprite img;
 		public AudioClip audio;
 
-		[TextArea][Output(dynamicPortList = true)] public string[] answers;
+		[TextArea][Output(dynamicPortList = true)] public List<string> answers; // DO NOT CHANGE FIELD SIGNATURE
 		[Input, SerializeField] public bool conditionalAnswer = false;
 		private bool conditionIsValid = false; 
         [TextArea, ShowIf("conditionIsValid")] public string additionalAnswer;
 
         public override void OnCreateConnection(NodePort from, NodePort to)
         {
-            if (to.IsOutput) return;
+			if (from.node.GetType() != typeof(DialogueConditionalAnswerNode)) return; 
 
             conditionIsValid = GetInputValue("conditionalAnswer", false);
             base.OnCreateConnection(from, to);
@@ -35,7 +37,7 @@ namespace Aurore.DialogSystem
 
         public override void OnRemoveConnection(NodePort port)
         {
-			if (port.IsOutput) return;
+			if (port.IsOutput && port.node.GetType() != typeof(DialogueConditionalAnswerNode)) return;
 
             conditionIsValid = GetInputValue("conditionalAnswer", false);
             base.OnRemoveConnection(port);
@@ -53,7 +55,7 @@ namespace Aurore.DialogSystem
 
 		public bool HasAnswers()
 		{
-			return answers.Length != 0 && (answers.Length != 1 || !answers[0].Equals(""));
+			return answers.Count != 0 && (answers.Count != 1 || !answers[0].Equals(""));
 		}
 	}
 }

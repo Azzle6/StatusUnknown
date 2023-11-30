@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -71,7 +72,7 @@ namespace Aurore.DialogSystem
 
         protected override void HideAnswersUI(bool b) => answer.SetActive(!b);
 
-        protected sealed override void UpdateAnswers(string[] answers)
+        protected sealed override void UpdateAnswers(List<string> answers)
         {
             HideAnswersUI(false);
 
@@ -79,7 +80,7 @@ namespace Aurore.DialogSystem
             for (var i = 0; i < answer.transform.childCount; i++)
             {
                 var child = answer.transform.GetChild(i);
-                if (i < answers.Length)
+                if (i < answers.Count)
                 {
                     child.gameObject.SetActive(true);
                     child.GetComponentInChildren<TMP_Text>().text = answers[i];

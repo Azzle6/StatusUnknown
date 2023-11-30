@@ -12,23 +12,55 @@ using XNode;
 [CreateNodeMenu("Conditional Answer Node")]
 public class DialogueConditionalAnswerNode : DialogueNode
 {
-    [Input, HideIf("@" + nameof(comparisonType) + " == ComparisonType.HasQuestObjects"), LabelWidth(LABEL_WIDTH_MEDIUM)] public int source;
-    [Input, HideIf("@" + nameof(comparisonType) + " == ComparisonType.HasQuestObjects"), LabelWidth(LABEL_WIDTH_MEDIUM)] public int target;
-    [Input, ShowIf("@" + nameof(comparisonType) + " == ComparisonType.HasQuestObjects"), LabelWidth(LABEL_WIDTH_MEDIUM)] public QuestObjectSO ownedQuestObject; 
+    [HideIf("@" + nameof(comparisonType) + " == ComparisonType.HasQuestObjects"), LabelWidth(LABEL_WIDTH_MEDIUM), OnValueChanged(nameof(RefreshOnValueChanged))] 
+    public int source;
 
-    [ShowIf("@" + nameof(comparisonType) + " == ComparisonType.HasQuestObjects"), LabelWidth(LABEL_WIDTH_MEDIUM)] public QuestObjectSO requiredQuestObject;
+    [HideIf("@" + nameof(comparisonType) + " == ComparisonType.HasQuestObjects"), LabelWidth(LABEL_WIDTH_MEDIUM), OnValueChanged(nameof(RefreshOnValueChanged))] 
+    public int target;
+
+    [Input, ShowIf("@" + nameof(comparisonType) + " == ComparisonType.HasQuestObjects"), LabelWidth(LABEL_WIDTH_MEDIUM)] 
+    public QuestObjectSO ownedQuestObject; 
+
+    [ShowIf("@" + nameof(comparisonType) + " == ComparisonType.HasQuestObjects"), LabelWidth(LABEL_WIDTH_MEDIUM)] 
+    public QuestObjectSO requiredQuestObject;
+
+    [ShowIf("@comparisonType == ComparisonType.HasQuestObjects"), LabelWidth(LABEL_WIDTH_MEDIUM), HorizontalGroup(200, MarginLeft = 0.225f), Button("Refresh Node On Value Change", ButtonSizes.Large)]
+    public void refreshOnQuestObjectChange() { RefreshOnValueChanged(); } // bootleg solution because I don't know how to directly track a Reference change, only a value change
 
     public enum ComparisonType { SmallerThan, SmallerThanOrEqual, GreaterThan, GreaterThanOrEqual, Equal, NotEqual, HasQuestObjects }
-    [LabelWidth(LABEL_WIDTH_MEDIUM)] public ComparisonType comparisonType = ComparisonType.SmallerThan;
+    [LabelWidth(LABEL_WIDTH_MEDIUM), OnValueChanged(nameof(RefreshOnValueChanged))] public ComparisonType comparisonType = ComparisonType.SmallerThan;
 
     [PropertySpace(spaceBefore:50), Output] public bool result;
+
+    private int previousValue_Source;
+    private int previousValue_Target;
+
+    NodePort output;
+
+    protected override void Init()
+    {
+        base.Init();
+        output = GetOutputPort("result"); 
+    }
+
+    // bootleg solution. Need to find a cleaner way to track value change an callback (not using this OnRemoveConnection to refresh neighbour port.value)
+    // ChangeEvent<T>.GetPooled() and INotifyValueChanged<T> did not work here..
+    private void RefreshOnValueChanged()
+    {
+        GetValue(output); 
+
+        previousValue_Source = source;
+        previousValue_Target = target;
+
+        output.Connection.node.OnRemoveConnection(output);
+    }
 
     public override object GetValue(NodePort port)
     {
         float source = GetInputValue<float>("source", this.source);
-        float target = GetInputValue<float>("target", this.target);
+        float target = GetInputValue<float>("target", this.target); 
 
-        if (port.fieldName == nameof(result))
+        if (port.fieldName == "result")
             result = comparisonType switch
             {
                 ComparisonType.SmallerThanOrEqual => source <= target,
@@ -41,4 +73,7 @@ public class DialogueConditionalAnswerNode : DialogueNode
             }; 
         return result;
     }
+
+    // TODO : update onValueChange (source/target)
+    // TODO : notify output node that value changed
 }

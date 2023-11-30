@@ -1,6 +1,7 @@
 ﻿using StatusUnknown.Content.Narrative;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -31,7 +32,7 @@ namespace Aurore.DialogSystem
         private AudioSource _source;
         private event Action<DialogueNode> OnStartEnded;
 
-        private event Action<string[]> OnSentenceTypingDone;
+        private event Action<List<string>> OnSentenceTypingDone;
         private event Action OnFinalSentenceTypingDone; 
 
         public void UpdateOnStartEnded() => OnStartEnded?.Invoke(currentNode);
@@ -196,7 +197,7 @@ namespace Aurore.DialogSystem
         /// This method update the amount and the content of answers to be displayed.
         /// </summary>
         /// <param name="answers">a string array of the answers to show</param>
-        protected abstract void UpdateAnswers(string[] answers);
+        protected abstract void UpdateAnswers(List<string> answers);
 
         #endregion
 

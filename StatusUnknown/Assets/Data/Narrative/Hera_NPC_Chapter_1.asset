@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Quest
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 280, y: -72}
+  position: {x: 216, y: -88}
   ports:
     keys:
     - input
@@ -24,18 +24,16 @@ MonoBehaviour:
       _node: {fileID: -6037929680399807410}
       _typeQualifiedName: Aurore.DialogSystem.Connection, StatusUnknown.Tools.Narrative,
         Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      connections:
-      - fieldName: answers 0
-        node: {fileID: 3619902342217902986}
-        reroutePoints: []
+      connections: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
     - _fieldName: answers
       _node: {fileID: -6037929680399807410}
-      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
+      _typeQualifiedName: System.Collections.Generic.List`1[[System.String, mscorlib,
+        Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib,
+        Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
       connections: []
       _direction: 1
       _connectionType: 0
@@ -74,36 +72,12 @@ MonoBehaviour:
   position: {x: -712, y: -232}
   ports:
     keys:
-    - answers 0
-    - answers 1
     - input
     - answers
     - conditionalAnswer
+    - answers 0
+    - answers 1
     values:
-    - _fieldName: answers 0
-      _node: {fileID: -297802684859051533}
-      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: input
-        node: {fileID: 1831340819866683008}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 1
-    - _fieldName: answers 1
-      _node: {fileID: -297802684859051533}
-      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: input
-        node: {fileID: 3619902342217902986}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 1
     - _fieldName: input
       _node: {fileID: -297802684859051533}
       _typeQualifiedName: Aurore.DialogSystem.Connection, StatusUnknown.Tools.Narrative,
@@ -115,8 +89,9 @@ MonoBehaviour:
       _dynamic: 0
     - _fieldName: answers
       _node: {fileID: -297802684859051533}
-      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
+      _typeQualifiedName: System.Collections.Generic.List`1[[System.String, mscorlib,
+        Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib,
+        Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
       connections: []
       _direction: 1
       _connectionType: 0
@@ -126,14 +101,32 @@ MonoBehaviour:
       _node: {fileID: -297802684859051533}
       _typeQualifiedName: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: result
-        node: {fileID: 8897620741294726878}
-        reroutePoints: []
+      connections: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
+    - _fieldName: answers 0
+      _node: {fileID: -297802684859051533}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: conditionalAnswer
+        node: {fileID: 1831340819866683008}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: answers 1
+      _node: {fileID: -297802684859051533}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
   initiator: Hello Keeper
   title: Initial Dialogue from Chapter 1
   img: {fileID: 0}
@@ -161,6 +154,7 @@ MonoBehaviour:
   - {fileID: 3619902342217902986}
   - {fileID: 8897620741294726878}
   - {fileID: -6037929680399807410}
+  - {fileID: 8999642151100600730}
 --- !u!114 &1831340819866683008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,18 +179,16 @@ MonoBehaviour:
       _node: {fileID: 1831340819866683008}
       _typeQualifiedName: Aurore.DialogSystem.Connection, StatusUnknown.Tools.Narrative,
         Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      connections:
-      - fieldName: answers 0
-        node: {fileID: -297802684859051533}
-        reroutePoints: []
+      connections: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
     - _fieldName: answers
       _node: {fileID: 1831340819866683008}
-      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
+      _typeQualifiedName: System.Collections.Generic.List`1[[System.String, mscorlib,
+        Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib,
+        Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
       connections: []
       _direction: 1
       _connectionType: 0
@@ -206,7 +198,10 @@ MonoBehaviour:
       _node: {fileID: 1831340819866683008}
       _typeQualifiedName: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
-      connections: []
+      connections:
+      - fieldName: answers 0
+        node: {fileID: -297802684859051533}
+        reroutePoints: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
@@ -234,39 +229,25 @@ MonoBehaviour:
   position: {x: -264, y: 184}
   ports:
     keys:
-    - answers 0
     - input
     - answers
     - conditionalAnswer
+    - answers 0
     values:
-    - _fieldName: answers 0
-      _node: {fileID: 3619902342217902986}
-      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: input
-        node: {fileID: -6037929680399807410}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 1
     - _fieldName: input
       _node: {fileID: 3619902342217902986}
       _typeQualifiedName: Aurore.DialogSystem.Connection, StatusUnknown.Tools.Narrative,
         Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      connections:
-      - fieldName: answers 1
-        node: {fileID: -297802684859051533}
-        reroutePoints: []
+      connections: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
     - _fieldName: answers
       _node: {fileID: 3619902342217902986}
-      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
+      _typeQualifiedName: System.Collections.Generic.List`1[[System.String, mscorlib,
+        Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib,
+        Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
       connections: []
       _direction: 1
       _connectionType: 0
@@ -281,6 +262,15 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
+    - _fieldName: answers 0
+      _node: {fileID: 3619902342217902986}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
   initiator: My name should be of little interest to you. Contrary to an offer I'd
     like to give you
   title: 
@@ -306,32 +296,12 @@ MonoBehaviour:
   position: {x: -1240, y: 184}
   ports:
     keys:
-    - source
-    - target
     - ownedQuestObject
     - result
     - input
     - answers
     - conditionalAnswer
     values:
-    - _fieldName: source
-      _node: {fileID: 8897620741294726878}
-      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: target
-      _node: {fileID: 8897620741294726878}
-      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
     - _fieldName: ownedQuestObject
       _node: {fileID: 8897620741294726878}
       _typeQualifiedName: StatusUnknown.Content.Narrative.QuestObjectSO, StatusUnknown.Tools.Narrative,
@@ -347,7 +317,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: conditionalAnswer
-        node: {fileID: -297802684859051533}
+        node: {fileID: 8999642151100600730}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -364,8 +334,9 @@ MonoBehaviour:
       _dynamic: 0
     - _fieldName: answers
       _node: {fileID: 8897620741294726878}
-      _typeQualifiedName: System.String[], mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
+      _typeQualifiedName: System.Collections.Generic.List`1[[System.String, mscorlib,
+        Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib,
+        Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
       connections: []
       _direction: 1
       _connectionType: 0
@@ -380,17 +351,75 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  initiator: 
+  initiator: 80
   title: 
   img: {fileID: 0}
   audio: {fileID: 0}
   answers: []
   conditionalAnswer: 0
   additionalAnswer: 
-  source: 60
-  target: 45
+  source: 20
+  target: 16
   ownedQuestObject: {fileID: 11400000, guid: 843bcccac192e6b4aaaad23c1ceb5614, type: 2}
   requiredQuestObject: {fileID: 11400000, guid: 843bcccac192e6b4aaaad23c1ceb5614,
     type: 2}
   comparisonType: 6
-  result: 1
+  result: 0
+--- !u!114 &8999642151100600730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea24aeccf3449a84c8fb632a88afbf06, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -744, y: 408}
+  ports:
+    keys:
+    - input
+    - answers
+    - conditionalAnswer
+    values:
+    - _fieldName: input
+      _node: {fileID: 8999642151100600730}
+      _typeQualifiedName: Aurore.DialogSystem.Connection, StatusUnknown.Tools.Narrative,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: answers
+      _node: {fileID: 8999642151100600730}
+      _typeQualifiedName: System.Collections.Generic.List`1[[System.String, mscorlib,
+        Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib,
+        Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: conditionalAnswer
+      _node: {fileID: 8999642151100600730}
+      _typeQualifiedName: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: result
+        node: {fileID: 8897620741294726878}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  initiator: 
+  title: 
+  img: {fileID: 0}
+  audio: {fileID: 0}
+  answers: []
+  conditionalAnswer: 0
+  additionalAnswer: Hi

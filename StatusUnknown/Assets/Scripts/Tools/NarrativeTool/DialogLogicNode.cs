@@ -11,7 +11,7 @@ using XNode;
 // bool I/O from derived classes must be serialized and Hidden, because their value is not edited manually but via other node types
 namespace StatusUnknown.Tools.Narrative
 {
-    public abstract class DialogConditionNode : Node
+    public abstract class DialogLogicNode : Node
     {
         public Action onStateChange;
         public abstract bool Led { get; }
@@ -25,7 +25,7 @@ namespace StatusUnknown.Tools.Narrative
                 NodePort connectedPort = output.GetConnection(i);
 
                 // Get connected ports logic node
-                DialogConditionNode connectedNode = connectedPort.node as DialogConditionNode;
+                DialogLogicNode connectedNode = connectedPort.node as DialogLogicNode;
 
                 // Trigger it
                 if (connectedNode != null) connectedNode.OnInputChanged();

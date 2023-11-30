@@ -6,7 +6,7 @@ namespace StatusUnknown.Tools.Narrative
 {
     [NodeWidth(140), NodeTint(100, 100, 70)]
     [CreateNodeMenu("Logic Node")]
-    public class NOTNode : DialogConditionNode
+    public class NOTNode : DialogLogicNode
     {
         [Input, HideInInspector] public bool input;
         [Output, HideInInspector] public bool output = true;
