@@ -49,7 +49,7 @@ namespace Weapon
             if ((gameObject.activeSelf) && (cooldownCoroutine == default) && (comboIndex < attacks.Length -1))
                 cooldownCoroutine = StartCoroutine(Cooldown());
             
-            
+            weaponManager.playerAnimator.SetTrigger("MeleeRecovery");
             comboIndex++;
 
             if (comboIndex > attacks.Length -1)
