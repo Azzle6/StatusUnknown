@@ -2,6 +2,7 @@ namespace Weapon
 {
     using System;
     using UnityEngine;
+    using Input;
     using UnityEngine.Serialization;
 
     [Serializable]
@@ -19,5 +20,7 @@ namespace Weapon
         public float activeTime;
         public float recoveryTime;
         public float cooldownTime;
+        [Header("Rumble")]
+        public GamePadRumbleWithTimer rumbleOnHit;
     }
 }

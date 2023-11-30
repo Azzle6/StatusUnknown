@@ -1,3 +1,5 @@
+using Input;
+
 namespace Weapon
 {
     using System.Collections;
@@ -19,6 +21,7 @@ namespace Weapon
         private float chargeTimer;
         private Coroutine charging;
         private Coroutine reloading;
+        private Coroutine rumbleScale;
         private Projectile tempPhotonPistolBullet;
         private Transform tempPhotonPistolBulletTr;
         private float currentDamage;
@@ -73,6 +76,7 @@ namespace Weapon
             chargeTimer = 0;
             tempPhotonPistolBulletTr.parent = spawnPoint;
             chargingVFX.Play();
+            rumbleScale ??= StartCoroutine(GamePadRumbleManager.ExecuteRumbleWithTime(stat.rumbleScaling, false));
             while (chargeTimer < stat.maxTimeCharge)
             {
               tempPhotonPistolBulletTr.localPosition = Vector3.zero;
@@ -113,6 +117,16 @@ namespace Weapon
             StartCoroutine(Cooldown());
             if (charging != default)
                 StopCoroutine(charging);
+
+            if (rumbleScale != default)
+            {
+                StopCoroutine(rumbleScale);
+                GamePadRumbleManager.StopRumble(); 
+                rumbleScale = default;
+                StartCoroutine(
+                    GamePadRumbleManager.ExecuteRumbleWithTimeAccordingToAProportion(chargeTimer / stat.maxTimeCharge,
+                        stat.rumbleOnShoot, true));
+            }
             
             shootingVFX.Play();
             tempPhotonPistolBulletTr.transform.parent = null;

@@ -1,5 +1,7 @@
 
 
+using Input;
+
 namespace Player
 {
     using UnityEngine;
@@ -56,6 +58,11 @@ namespace Player
         {
             enemies = Physics.OverlapSphere(transform.position, currentAttack.attackLength, enemyLayer);
 
+            if (enemies.Length != default)
+            {
+                StartCoroutine(GamePadRumbleManager.ExecuteRumbleWithTime(currentAttack.rumbleOnHit, true));
+            }
+            
             foreach (Collider enemy in enemies)
             {
                 Vector3 directionToEnemy = (enemy.transform.position - transform.position).normalized;
