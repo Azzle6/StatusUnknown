@@ -52,7 +52,10 @@ namespace Weapon
             if (weapon.TryGetComponent(out RangedWeapon rangedWeapon))
             {
                 rangedWeapon.currentAmmo = currentAmmoWeapon[weaponNo];
+                rangedWeapon.InitPool();
                 currentAmmoWeapon[weaponNo].Value = ((RangedWeapon) weapon).GetMagazineSize();
+                
+                
             }
         }
         

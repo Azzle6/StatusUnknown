@@ -35,13 +35,13 @@ namespace Weapon
             currentAmmo.Value = stat.magazineSize;
             initMeshPos = mesh.localPosition;
             chargingVFX.Stop();
-            ComponentPooler.Instance.CreatePool(stat.projectilePool.prefab.GetComponent<Projectile>(),stat.projectilePool.baseCount);
         }
 
         private void OnDisable()
         {
             reloading = default;
             charging = default;
+            chargingVFX.Stop();
         }
 
         public override void ActionPressed()
@@ -145,6 +145,11 @@ namespace Weapon
         public override float GetMagazineSize()
         {
             return stat.magazineSize;
+        }
+
+        public override void InitPool()
+        {
+            ComponentPooler.Instance.CreatePool(stat.projectilePool.prefab.GetComponent<Projectile>(),stat.projectilePool.baseCount);
         }
 
         public override void Reload(Animator playerAnimator)

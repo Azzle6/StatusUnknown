@@ -46,8 +46,9 @@ namespace Weapon
 
         public virtual void Recovery()
         {
-            if ((gameObject.activeSelf) && (cooldownCoroutine == default))
+            if ((gameObject.activeSelf) && (cooldownCoroutine == default) && (comboIndex < attacks.Length -1))
                 cooldownCoroutine = StartCoroutine(Cooldown());
+            
             
             comboIndex++;
 
