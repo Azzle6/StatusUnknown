@@ -29,6 +29,8 @@ namespace Aurore.DialogSystem
         [Header("Events")]
         [Space, SerializeField] protected UnityEvent startDialogueEvent;
         [SerializeField] protected UnityEvent endDialogueEvent;
+        [SerializeField] protected UnityEvent questValidationEvent;
+
         private AudioSource _source;
         private event Action<DialogueNode> OnStartEnded;
 
@@ -115,6 +117,7 @@ namespace Aurore.DialogSystem
         {
             EndDialogueDisplay();
             endDialogueEvent?.Invoke();
+            questValidationEvent?.Invoke();
         }
 
         /// <summary>

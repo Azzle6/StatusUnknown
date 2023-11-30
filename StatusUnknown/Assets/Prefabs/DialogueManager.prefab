@@ -1395,6 +1395,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startButtonObj: {fileID: 4535724817829135226}
   endButtonObj: {fileID: 7180384607406480837}
+  questJournal: {fileID: 0}
+  givenQuest: {fileID: 0}
   startDialogueEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1424,6 +1426,21 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+  questValidationEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5950565276119852784}
+        m_TargetAssemblyTypeName: Aurore.DialogSystem.DialogueComponent, StatusUnknown.Tools.Narrative
+        m_MethodName: OnQuestValidated
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
   waitTimeLetter: 0.02
   simpleDialog: {fileID: 4126626959212483637}
@@ -1562,6 +1579,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 186256801986711397}
     m_Modifications:
+    - target: {fileID: 3319652979253855890, guid: f5ed984f23558c34a89e8685171692fd,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 3319652979253855890, guid: f5ed984f23558c34a89e8685171692fd,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 24
+      objectReference: {fileID: 0}
     - target: {fileID: 3600938167969175501, guid: f5ed984f23558c34a89e8685171692fd,
         type: 3}
       propertyPath: m_Name
@@ -1830,6 +1857,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 186256801986711397}
     m_Modifications:
+    - target: {fileID: 3319652979253855890, guid: f5ed984f23558c34a89e8685171692fd,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 3319652979253855890, guid: f5ed984f23558c34a89e8685171692fd,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 24
+      objectReference: {fileID: 0}
     - target: {fileID: 3600938167969175501, guid: f5ed984f23558c34a89e8685171692fd,
         type: 3}
       propertyPath: m_Name
@@ -1969,6 +2006,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 186256801986711397}
     m_Modifications:
+    - target: {fileID: 3319652979253855890, guid: f5ed984f23558c34a89e8685171692fd,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 3319652979253855890, guid: f5ed984f23558c34a89e8685171692fd,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 24
+      objectReference: {fileID: 0}
     - target: {fileID: 3600938167969175501, guid: f5ed984f23558c34a89e8685171692fd,
         type: 3}
       propertyPath: m_Name
@@ -2057,7 +2104,7 @@ PrefabInstance:
     - target: {fileID: 8308897377803826115, guid: f5ed984f23558c34a89e8685171692fd,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -145
+      value: -154
       objectReference: {fileID: 0}
     - target: {fileID: 8308897377803826115, guid: f5ed984f23558c34a89e8685171692fd,
         type: 3}

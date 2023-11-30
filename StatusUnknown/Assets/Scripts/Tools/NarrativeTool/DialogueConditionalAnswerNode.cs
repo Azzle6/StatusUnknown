@@ -10,7 +10,7 @@ using XNode;
 
 [NodeWidth(400), NodeTint(120, 0, 150)]
 [CreateNodeMenu("Conditional Answer Node")]
-public class DialogueConditionalAnswerNode : DialogueNode
+public class DialogueConditionalAnswerNode : Node
 {
     [HideIf("@" + nameof(comparisonType) + " == ComparisonType.HasQuestObjects"), LabelWidth(LABEL_WIDTH_MEDIUM), OnValueChanged(nameof(RefreshOnValueChanged))] 
     public int source;
@@ -24,7 +24,7 @@ public class DialogueConditionalAnswerNode : DialogueNode
     [ShowIf("@" + nameof(comparisonType) + " == ComparisonType.HasQuestObjects"), LabelWidth(LABEL_WIDTH_MEDIUM)] 
     public QuestObjectSO requiredQuestObject;
 
-    [ShowIf("@comparisonType == ComparisonType.HasQuestObjects"), LabelWidth(LABEL_WIDTH_MEDIUM), HorizontalGroup(200, MarginLeft = 0.225f), Button("Refresh Node On Value Change", ButtonSizes.Large)]
+    [ShowIf("@comparisonType == ComparisonType.HasQuestObjects"), LabelWidth(LABEL_WIDTH_MEDIUM), HorizontalGroup(200, MarginLeft = 0.225f), Button("Refresh Self And Neighbour", ButtonSizes.Large)]
     public void refreshOnQuestObjectChange() { RefreshOnValueChanged(); } // bootleg solution because I don't know how to directly track a Reference change, only a value change
 
     public enum ComparisonType { SmallerThan, SmallerThanOrEqual, GreaterThan, GreaterThanOrEqual, Equal, NotEqual, HasQuestObjects }

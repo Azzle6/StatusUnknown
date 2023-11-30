@@ -2,6 +2,7 @@
 using StatusUnknown.Tools.Narrative;
 using System;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 using XNode;
 
@@ -27,20 +28,42 @@ namespace Aurore.DialogSystem
 		private bool conditionIsValid = false; 
         [TextArea, ShowIf("conditionIsValid")] public string additionalAnswer;
 
+        protected override void Init()
+        {
+            base.Init();
+        }
+
         public override void OnCreateConnection(NodePort from, NodePort to)
         {
-			if (from.node.GetType() != typeof(DialogueConditionalAnswerNode)) return; 
+            base.OnCreateConnection(from, to);
+
+            if (from.node.GetType() != typeof(DialogueConditionalAnswerNode)) return; 
 
             conditionIsValid = GetInputValue("conditionalAnswer", false);
-            base.OnCreateConnection(from, to);
+
+            UpdatePorts();  
+            VerifyConnections();
         }
 
         public override void OnRemoveConnection(NodePort port)
         {
-			if (port.IsOutput && port.node.GetType() != typeof(DialogueConditionalAnswerNode)) return;
+            if (port.IsOutput && port.node.GetType() != typeof(DialogueConditionalAnswerNode)) return;
+
+            base.OnRemoveConnection(port);
 
             conditionIsValid = GetInputValue("conditionalAnswer", false);
-            base.OnRemoveConnection(port);
+            if (!conditionIsValid)
+            {
+                answers.Remove(additionalAnswer);
+                return; 
+            }
+
+			if (answers.Contains(additionalAnswer)) return;
+
+            VerifyConnections();
+
+            answers.Add(additionalAnswer);
+            this.UpdatePorts();
         }
 
         public override object GetValue(NodePort port)

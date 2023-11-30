@@ -8,7 +8,12 @@ namespace StatusUnknown.Content.Narrative
         [SerializeField] private string questName;
         [SerializeField] private string questGiver;
         [SerializeField] private QuestObjectSO questObjectToRetrieve;
+        [SerializeField] private QuestObjectSO questReward;
+
+        [field:SerializeField] public bool QuestObjectIsRetrieved { get; set; }
 
         public int QuestIndex { get; set; } 
+        public QuestObjectSO QuestObjectToRetrieve { get => questObjectToRetrieve; }
+        public QuestObjectSO QuestReward { get => questReward; }
     }
 }

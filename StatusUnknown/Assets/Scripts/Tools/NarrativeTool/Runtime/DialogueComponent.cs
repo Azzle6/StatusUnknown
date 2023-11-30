@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 
@@ -24,8 +23,24 @@ namespace Aurore.DialogSystem
         /// <summary>
         /// Start the dialog sequence.
         /// </summary>
-        public void StartSequence() => DialogueUiManager.Instance.Init(dialogueGraph.GetRoot(), audioMumblingVoice);
+        public void StartSequence()
+        {
+            dialogueGraph.Init(); 
+            DialogueUiManager.Instance.Init(dialogueGraph.GetRoot(), audioMumblingVoice);
+        }
 
         // TODO : Edit DialogGraph.GetRoot() if root is conditional (for ex: character has item, has already visited, etc..)
+
+        public void OnQuestValidated()
+        {
+            if (dialogueGraph.CurrentDialogueQuestsDone)
+            {
+                Debug.Log("reward added to your inventory : " +  dialogueGraph.GetQuestReward(0));
+            }
+            else
+            {
+                Debug.Log("Some quest was not fullfilled"); 
+            }
+        }
     }
 }
