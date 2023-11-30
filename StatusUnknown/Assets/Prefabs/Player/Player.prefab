@@ -927,6 +927,9 @@ MonoBehaviour:
   inputBufferActive: 0
   currentAttack:
     attackDamage: 0
+    attackRange: 0
+    attackAngle: 0
+    attackKnockback: 0
     castTime: 0
     buildUpTime: 0
     superArmor: 0
@@ -935,6 +938,9 @@ MonoBehaviour:
     cooldownTime: 0
   currentMeleeWeapon: {fileID: 0}
   weaponManager: {fileID: 4974381338073703539}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &4130879028828508758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -953,6 +959,9 @@ MonoBehaviour:
   inputBufferActive: 0
   currentAttack:
     attackDamage: 0
+    attackRange: 0
+    attackAngle: 0
+    attackKnockback: 0
     castTime: 0
     buildUpTime: 0
     superArmor: 0
@@ -979,6 +988,9 @@ MonoBehaviour:
   inputBufferActive: 0
   currentAttack:
     attackDamage: 0
+    attackRange: 0
+    attackAngle: 0
+    attackKnockback: 0
     castTime: 0
     buildUpTime: 0
     superArmor: 0
@@ -1004,6 +1016,9 @@ MonoBehaviour:
   inputBufferActive: 0
   currentAttack:
     attackDamage: 0
+    attackRange: 0
+    attackAngle: 0
+    attackKnockback: 0
     castTime: 0
     buildUpTime: 0
     superArmor: 0

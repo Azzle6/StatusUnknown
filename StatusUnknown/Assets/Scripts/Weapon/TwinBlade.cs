@@ -9,8 +9,8 @@ namespace Weapon
         [SerializeField] private TwinBladeStat twinBladeStat;
         [SerializeField] private Transform bladeLeft;
         [SerializeField] private Transform bladeRight;
-        [SerializeField] private VisualEffect bladeLeftVFX;
-        [SerializeField] private VisualEffect bladeRightVFX;
+        [SerializeField] private VisualEffect[] attacksVFX;
+
 
         private void OnEnable()
         {
@@ -34,13 +34,9 @@ namespace Weapon
             {
                 bladeLeft.gameObject.SetActive(false);
                 bladeRight.gameObject.SetActive(false);
-                foreach (HitContext hitContext in hitContexts)
-                    hitContext.HitTriggerEvent -= Hit;
             }
             else
             {
-                foreach (HitContext hitContext in hitContexts)
-                    hitContext.HitTriggerEvent += Hit;
                 playerAnimator.SetInteger("WeaponID", twinBladeStat.weaponID);
                 bladeLeft.gameObject.SetActive(true);
                 bladeRight.gameObject.SetActive(true);
@@ -102,19 +98,7 @@ namespace Weapon
         public override void Active()
         {
             base.Active();
-            switch (comboIndex)
-            {
-                case 0 :
-                    bladeLeftVFX.Play();
-                    return;
-                case 1 :
-                    bladeRightVFX.Play();
-                    return;
-                case 2 : 
-                    bladeLeftVFX.Play();
-                    bladeRightVFX.Play();
-                    return;
-            }
+            attacksVFX[comboIndex].Play();
         }
 
         public override void Recovery()

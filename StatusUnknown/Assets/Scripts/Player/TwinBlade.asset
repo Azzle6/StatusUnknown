@@ -15,6 +15,9 @@ MonoBehaviour:
   weaponID: 0
   attacks:
   - attackDamage: 15
+    attackLength: 3
+    attackAngle: 30
+    attackKnockback: 10
     castTime: 0.1
     buildUpTime: 0.2
     superArmor: 50
@@ -22,6 +25,9 @@ MonoBehaviour:
     recoveryTime: 0.1
     cooldownTime: 0.5
   - attackDamage: 15
+    attackLength: 3
+    attackAngle: 90
+    attackKnockback: 10
     castTime: 0.1
     buildUpTime: 0.2
     superArmor: 50
@@ -29,6 +35,9 @@ MonoBehaviour:
     recoveryTime: 0.1
     cooldownTime: 0.5
   - attackDamage: 20
+    attackLength: 3
+    attackAngle: 360
+    attackKnockback: 10
     castTime: 0.1
     buildUpTime: 0.2
     superArmor: 50

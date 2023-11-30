@@ -7,7 +7,12 @@ namespace Weapon
     [Serializable]
     public class MeleeAttack
     {
+        [Header("Attack Stats")]
         public float attackDamage;
+        public float attackLength;
+        public float attackAngle;
+        public float attackKnockback;
+        [Header("Attack Timings")]
         public float castTime;
         public float buildUpTime;
         public float superArmor;

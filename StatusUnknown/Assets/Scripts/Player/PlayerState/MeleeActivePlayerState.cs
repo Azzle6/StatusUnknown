@@ -11,7 +11,9 @@ namespace Player
         [HideInInspector] public MeleeAttack currentAttack;
         [HideInInspector] public MeleeWeapon currentMeleeWeapon;
         [SerializeField] private WeaponManager weaponManager;
+        [SerializeField] private LayerMask enemyLayer;
         private Coroutine activeCoroutine;
+        private Collider[] enemies;
 
         public override void OnStateEnter()
         {
@@ -36,6 +38,7 @@ namespace Player
             currentMeleeWeapon.Active();
             currentAttack = currentMeleeWeapon.GetAttack();
             yield return new WaitForSeconds(currentAttack.activeTime);
+            DetectAndDamage();
             playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
             activeCoroutine = null;
             playerStateInterpretor.AddState("MeleeRecoveryPlayerState", PlayerStateType.ACTION, false);
@@ -48,5 +51,25 @@ namespace Player
         {
             
         }
+
+        private void DetectAndDamage()
+        {
+            enemies = Physics.OverlapSphere(transform.position, currentAttack.attackLength, enemyLayer);
+
+            foreach (Collider enemy in enemies)
+            {
+                Vector3 directionToEnemy = (enemy.transform.position - transform.position).normalized;
+                float angle = Vector3.Angle(transform.forward, directionToEnemy);
+                
+                if (angle < currentAttack.attackAngle)
+                {
+                    if (enemy.TryGetComponent(out IDamageable damageable))
+                    {
+                        damageable.TakeDamage(currentAttack.attackDamage, transform.forward * currentAttack.attackKnockback);
+                    }
+                }
+            }
+        }
+        
     }
 }
