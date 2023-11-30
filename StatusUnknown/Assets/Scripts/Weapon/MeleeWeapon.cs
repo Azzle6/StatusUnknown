@@ -61,7 +61,7 @@ namespace Weapon
         public virtual IEnumerator Cooldown()
         {
             comboIndexWhenCDStarted = comboIndex;
-            yield return new WaitForSeconds(attacks[comboIndexWhenCDStarted].cooldownTime + attacks[comboIndexWhenCDStarted].cooldownTime);
+            yield return new WaitForSeconds(attacks[comboIndexWhenCDStarted].cooldownTime + attacks[comboIndexWhenCDStarted].recoveryTime);
             comboIndex = 0;
         }
         
