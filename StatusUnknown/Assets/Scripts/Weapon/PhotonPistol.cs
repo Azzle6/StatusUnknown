@@ -5,9 +5,7 @@ namespace Weapon
     using System.Collections;
     using UnityEngine;
     using Core.Pooler;
-    using System;
     using Combat.HitProcess;
-    using Core.SingletonsSO;
     using Unity.Mathematics;
     using UnityEngine.VFX;
 

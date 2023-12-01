@@ -1,25 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Cinemachine;
-using Core.Player;
-
-public class CameraSwitch : MonoBehaviour
+namespace CameraEffects
 {
-    public GameObject[] activateCams;
-    public GameObject[] disactivateCams;
-
-    private void OnTriggerEnter(Collider other)
+    using Player;
+    using UnityEngine;
+    public class CameraSwitch : MonoBehaviour
     {
-        if(other.GetComponent<PlayerAction>() != null)
+        public GameObject[] activateCams;
+        public GameObject[] disactivateCams;
+
+        private void OnTriggerEnter(Collider other)
         {
-            for(int i = 0; i < disactivateCams.Length; i++)
+            if(other.GetComponent<PlayerAction>() != null)
             {
-                disactivateCams[i].SetActive(false);
-            }
-            for (int i = 0; i < activateCams.Length; i++)
-            {
-                activateCams[i].SetActive(true);
+                for(int i = 0; i < this.disactivateCams.Length; i++)
+                {
+                    this.disactivateCams[i].SetActive(false);
+                }
+                for (int i = 0; i < this.activateCams.Length; i++)
+                {
+                    this.activateCams[i].SetActive(true);
+                }
             }
         }
     }
