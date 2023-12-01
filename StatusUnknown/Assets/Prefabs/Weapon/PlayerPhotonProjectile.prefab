@@ -79,16 +79,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   hitShape:
-    rid: 3042579943325171973
+    rid: 7591883734605627392
   updateFrequence: 0.01
   triggerHit: 0
   references:
     version: 2
     RefIds:
-    - rid: 3042579943325171973
-      type: {class: HitSphere, ns: , asm: Assembly-CSharp}
+    - rid: 7591883734605627392
+      type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
       data:
-        radius: 0.001
+        radius: 0.1
 --- !u!114 &8586028294311903091
 MonoBehaviour:
   m_ObjectHideFlags: 0

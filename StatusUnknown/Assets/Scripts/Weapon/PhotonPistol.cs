@@ -7,6 +7,7 @@ namespace Weapon
     using Core.Pooler;
     using System;
     using Combat.HitProcess;
+    using Core.SingletonsSO;
     using Unity.Mathematics;
     using UnityEngine.VFX;
 
@@ -126,8 +127,7 @@ namespace Weapon
                 GamePadRumbleManager.StopRumble(); 
                 rumbleScale = default;
                 StartCoroutine(
-                    GamePadRumbleManager.ExecuteRumbleWithTimeAccordingToAProportion(chargeTimer / stat.maxTimeCharge,
-                        stat.rumbleOnShoot, true));
+                    GamePadRumbleManager.ExecuteRumbleWithTime(stat.rumbleOnShoot, true, chargeTimer / stat.maxTimeCharge));
             }
             
             shootingVFX.Play();

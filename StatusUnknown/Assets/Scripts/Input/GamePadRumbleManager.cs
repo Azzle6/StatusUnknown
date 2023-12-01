@@ -9,25 +9,7 @@ namespace Input
 
     public static class GamePadRumbleManager
     {
-        public static IEnumerator ExecuteRumbleWithTime(GamePadRumbleWithTimer rumbleData, bool stopRumbleAfter)
-        {
-            float timer = 0;
-            float lowFrequency;
-            float highFrequency;
-            while (timer < rumbleData.duration)
-            {
-                timer += Time.deltaTime;
-                lowFrequency = rumbleData.maxLowFrequency * rumbleData.lowFrequencyCurve.Evaluate(timer);
-                highFrequency = rumbleData.maxHighFrequency * rumbleData.highFrequencyCurve.Evaluate(timer);
-                Gamepad.current.SetMotorSpeeds(lowFrequency, highFrequency);
-                yield return null;
-            }
-
-            if (stopRumbleAfter)
-                StopRumble();
-        }
-
-        public static IEnumerator ExecuteRumbleWithTimeAccordingToAProportion(float proportion, GamePadRumbleWithTimer rumbleData, bool stopRumbleAfter)
+        public static IEnumerator ExecuteRumbleWithTime(GamePadRumbleWithTimer rumbleData, bool stopRumbleAfter, float proportion = 1)
         {
             float timer = 0;
             float lowFrequency;
