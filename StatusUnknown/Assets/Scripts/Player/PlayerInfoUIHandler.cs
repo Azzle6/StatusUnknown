@@ -19,7 +19,9 @@ namespace Player
         [SerializeField] private WeaponVariableSO[] weaponVariableSO;
         [SerializeField] private FloatVariableSO[] weaponAmmoVariableSO;
         [SerializeField] private VisualTreeAsset popupUIDocument;
-        [SerializeField] private VisualElement popUpZone;
+        private VisualElement popUpZone;
+        private List<VisualElement> augmentIcon;
+        
         private int tempMedikitAmount;
         [SerializeField] private PlayerStat playerStat;
         [SerializeField] private UIDocument playerInfoUIDocument;
@@ -39,7 +41,7 @@ namespace Player
         
         
         
-        private void Start()
+        private void Awake()
         {
             healthBar = playerInfoUIDocument.rootVisualElement.Q<VisualElement>("HealthBar");
             medikitCount = playerInfoUIDocument.rootVisualElement.Q<Label>("MedikitCount");
@@ -49,6 +51,9 @@ namespace Player
             popUpZone = playerInfoUIDocument.rootVisualElement.Q<VisualElement>("MidRightZone");
             weapon1AmmoCount = playerInfoUIDocument.rootVisualElement.Q<Label>("Weapon1AmmoCount");
             weapon2AmmoCount = playerInfoUIDocument.rootVisualElement.Q<Label>("Weapon2AmmoCount");
+            augmentIcon = new List<VisualElement>();
+            for (int x = 0; x < 5; x++)
+                augmentIcon.Add(playerInfoUIDocument.rootVisualElement.Q<VisualElement>($"Augment{x}"));
             weaponVariableSO[0].RegisterOnValueChanged(UpdateWeapon1Icon);
             weaponVariableSO[1].RegisterOnValueChanged(UpdateWeapon2Icon);
             weaponAmmoVariableSO[0].RegisterOnValueChanged(UpdateWeapon1AmmoCount);
@@ -123,6 +128,17 @@ namespace Player
             }
             tempMedikitAmount = medikitAmount.Value;
          
+        }
+        
+        public void UpdateAugmentIcon(int augmentIndex, Sprite augmentSprite)
+        {
+            augmentIcon[augmentIndex].style.backgroundImage = augmentSprite.texture;
+        }
+
+        public void AugmentUsed(int augmentIndex, float cooldown)
+        {
+            augmentIcon[augmentIndex].style.unityBackgroundImageTintColor = Color.black;
+            DOTween.To(() => augmentIcon[augmentIndex].style.unityBackgroundImageTintColor.value, x => augmentIcon[augmentIndex].style.unityBackgroundImageTintColor = x, Color.white, cooldown);
         }
         
         public void ShowPopup(Sprite icon, string text)

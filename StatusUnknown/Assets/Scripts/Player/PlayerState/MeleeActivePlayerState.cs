@@ -1,5 +1,7 @@
 
 
+using Input;
+
 namespace Player
 {
     using UnityEngine;
@@ -11,7 +13,9 @@ namespace Player
         [HideInInspector] public MeleeAttack currentAttack;
         [HideInInspector] public MeleeWeapon currentMeleeWeapon;
         [SerializeField] private WeaponManager weaponManager;
+        [SerializeField] private LayerMask enemyLayer;
         private Coroutine activeCoroutine;
+        private Collider[] enemies;
 
         public override void OnStateEnter()
         {
@@ -36,9 +40,10 @@ namespace Player
             currentMeleeWeapon.Active();
             currentAttack = currentMeleeWeapon.GetAttack();
             yield return new WaitForSeconds(currentAttack.activeTime);
+            DetectAndDamage();
             playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
             activeCoroutine = null;
-            playerStateInterpretor.AddState("MeleeRecoveryPlayerState", PlayerStateType.ACTION, false);
+            playerStateInterpretor.AddState("MeleeRecoveryPlayerState", PlayerStateType.ACTION, true);
             playerStateInterpretor.Behave(currentMeleeWeapon,PlayerStateType.ACTION);
             currentAttack = null;
             currentMeleeWeapon = null;
@@ -48,5 +53,30 @@ namespace Player
         {
             
         }
+
+        private void DetectAndDamage()
+        {
+            enemies = Physics.OverlapSphere(transform.position, currentAttack.attackLength, enemyLayer);
+
+            if (enemies.Length != default)
+            {
+                StartCoroutine(GamePadRumbleManager.ExecuteRumbleWithTime(currentAttack.rumbleOnHit, true));
+            }
+            
+            foreach (Collider enemy in enemies)
+            {
+                Vector3 directionToEnemy = (enemy.transform.position - transform.position).normalized;
+                float angle = Vector3.Angle(transform.forward, directionToEnemy);
+                
+                if (angle < currentAttack.attackAngle)
+                {
+                    if (enemy.TryGetComponent(out IDamageable damageable))
+                    {
+                        damageable.TakeDamage(currentAttack.attackDamage, transform.forward * currentAttack.attackKnockback);
+                    }
+                }
+            }
+        }
+        
     }
 }

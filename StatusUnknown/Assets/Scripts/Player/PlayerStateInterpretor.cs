@@ -64,7 +64,7 @@ namespace Player
     
         public void RemoveState(PlayerStateType playerStateType)
         {
-            if (statesSlot[playerStateType] == null)
+            if (statesSlot[playerStateType] == default)
                 return;
             
             tempState = statesSlot[playerStateType];
@@ -97,12 +97,10 @@ namespace Player
 
         public void ExecuteBufferInput()
         {
-            Debug.Log("Buffer Executing");
             if(inputBufferState == default)
                 return;
             AddState(inputBufferState.GetType().Name, inputBufferState.playerStateType, false);
             inputBufferState = default;
-            Debug.Log("Buffer Executed");
         }
 
         public void LockPlayerInput()

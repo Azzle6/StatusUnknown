@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4321153989920928243}
   - component: {fileID: 2240717559371918215}
+  - component: {fileID: 7984850052380522489}
   m_Layer: 0
   m_Name: Pooler
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 7896996454601738443}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -25.42229, y: 3.8733482, z: 0.6402998}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44,9 +45,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 004f87ff9f0935947bdc660a770a7c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolToInit:
-  - key: 
-    pool:
-      objPrefab: {fileID: 2084647982804730131, guid: b51a3fc02e55aad4c931a631e96295dd,
-        type: 3}
-      baseCount: 10
+  emptyVFX: {fileID: 3168112319541163259, guid: 7f6e19aca110f934c95983956c0fc61e, type: 3}
+--- !u!114 &7984850052380522489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7896996454601738443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0de01777ee9af24ca1254a64a456d1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolToInit: []
