@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [System.Serializable]
-public class SpawnCommand : MonoBehaviour
+public class SpawnTest : MonoBehaviour
 {
     [SerializeField] GameObject objectToSpawn;
     [SerializeField, SerializeReference] SpawnLocation spawnLocation = new SimpleSpawnLocation();
@@ -15,7 +15,7 @@ public class SpawnCommand : MonoBehaviour
     [SerializeField] int repeat = 1;
 
     //Spawn event
-    public event Action<SpawnCommand> SpawnCommandEndEvent;
+    public event Action<SpawnTest> SpawnCommandEndEvent;
     float reapeatCount;
     bool spawnFinished = false;
     public UnityEvent SpawnEndUEvent;

@@ -14,7 +14,7 @@ public class EnemySwarmi : EnemyContext
 
     protected override void EnemyTakeDamage(float damage, Vector3 force)
     {
-        Debug.Log("Enemy took damage");
+        //Debug.Log("Enemy took damage");
         StartCoroutine(HurtBlink());
         base.EnemyTakeDamage(damage, force);
     }
