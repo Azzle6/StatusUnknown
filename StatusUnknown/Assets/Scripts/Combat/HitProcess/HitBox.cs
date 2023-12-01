@@ -1,5 +1,3 @@
-
-using Sirenix.Utilities.Editor.Expressions;
 using UnityEngine;
 [System.Serializable]
 public class HitBox : HitShape

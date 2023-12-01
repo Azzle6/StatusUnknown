@@ -4,6 +4,7 @@ namespace Player
 {
     using System.Collections.Generic;
     using UnityEngine;
+    using Weapon;
 
     public class PlayerStateInterpretor : MonoBehaviour
     {
@@ -48,29 +49,24 @@ namespace Player
             if (statesSlot[playerStateType] != null)
             {
                 if (statesSlot[playerStateType].inputBufferActive)
-                {
                     inputBufferState = playerStates[state];
-                    //inputBufferStateType = playerStates[state].playerStateType;
-                    //inputBufferStateName = state;
-                }
                 
                 if (statesSlot[playerStateType].lockState)
                     return;
-                
-            
             }
             
             tempState = playerStates[state];
             statesSlot[playerStateType] = tempState;
-            tempState.OnStateEnter();
             statesSlot[playerStateType].lockState = lockState;
+            tempState.OnStateEnter();
 
         }
     
         public void RemoveState(PlayerStateType playerStateType)
         {
-            if (statesSlot[playerStateType] == null)
+            if (statesSlot[playerStateType] == default)
                 return;
+            
             tempState = statesSlot[playerStateType];
             tempState.OnStateExit();
             statesSlot[playerStateType].lockState = false;
@@ -101,20 +97,18 @@ namespace Player
 
         public void ExecuteBufferInput()
         {
-            Debug.Log("Buffer Executing");
             if(inputBufferState == default)
                 return;
             AddState(inputBufferState.GetType().Name, inputBufferState.playerStateType, false);
             inputBufferState = default;
-            Debug.Log("Buffer Executed");
         }
 
         public void LockPlayerInput()
         {
-            playerInput.enabled = false;
             RemoveState(PlayerStateType.AIM);
             RemoveState(PlayerStateType.MOVEMENT);
             RemoveState(PlayerStateType.ACTION);
+            playerInput.enabled = false;
         }
 
         public void UnlockPlayerInput()
@@ -138,7 +132,7 @@ namespace Player
         
         public void Behave<T>(T x, PlayerStateType type)
         {
-            if (statesSlot[type] == null)
+            if (statesSlot[type] == default)
                 return;
             
             statesSlot[type].Behave<T>(x);

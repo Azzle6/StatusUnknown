@@ -3,7 +3,7 @@ namespace Player
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
-
+    using Weapon;
     public class ShootingPlayerState : PlayerState
     {
         private Coroutine shooting;
@@ -59,7 +59,6 @@ namespace Player
             }
             else
             {
-                Debug.Log("Shooting");
                 playerStat.isShooting = true;
                 if (shooting == default)
                 {

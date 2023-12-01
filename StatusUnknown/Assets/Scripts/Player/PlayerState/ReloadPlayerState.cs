@@ -1,6 +1,7 @@
 namespace Player
 {
 using UnityEngine;
+using Weapon;
     public class ReloadPlayerState : PlayerState
     {
         [SerializeField] private WeaponManager weaponManager;

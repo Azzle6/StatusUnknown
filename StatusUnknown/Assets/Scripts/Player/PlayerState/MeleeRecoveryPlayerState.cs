@@ -3,6 +3,7 @@ using System.Collections;
 namespace Player
 {
     using UnityEngine;
+    using Weapon;
 
     public class MeleeRecoveryPlayerState : PlayerState
     {
@@ -30,8 +31,8 @@ namespace Player
             while (currentMeleeWeapon == null)
                 yield return null;
             
-            currentMeleeWeapon.Recovery();
             currentAttack = currentMeleeWeapon.GetAttack();
+            currentMeleeWeapon.Recovery();
             yield return new WaitForSeconds(currentAttack.recoveryTime);
             playerStateInterpretor.ExecuteBufferInput();
             playerStateInterpretor.RemoveState(PlayerStateType.ACTION);

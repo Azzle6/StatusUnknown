@@ -1,6 +1,7 @@
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
+using Combat.Projectile;
 using UnityEngine;
 
 public class ProjectileLauncher : MonoBehaviour

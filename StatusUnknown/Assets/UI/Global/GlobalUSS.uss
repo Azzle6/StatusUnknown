@@ -2,12 +2,27 @@
 }
 
 .focusableElement:focus {
+    background-color: rgba(229, 220, 49, 0.82);
+}
+
+.hiddenElement {
+    visibility: hidden;
+}
+
+.baseSlot {
+    align-self: flex-start;
+    width: 46px;
+    height: 46px;
+    margin: 2px;
+    background-color: rgb(91, 88, 88);
+    border-radius: 3px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
     border-top-width: 3px;
     border-right-width: 3px;
     border-bottom-width: 3px;
     border-left-width: 3px;
-    border-left-color: rgb(255, 255, 73);
-    border-right-color: rgb(255, 255, 73);
-    border-top-color: rgb(255, 255, 73);
-    border-bottom-color: rgb(255, 255, 73);
+    flex-shrink: 0;
 }
