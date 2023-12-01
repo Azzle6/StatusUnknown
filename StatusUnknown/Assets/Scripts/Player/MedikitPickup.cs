@@ -1,5 +1,7 @@
 using System;
+using Core.EventsSO.GameEventsTypes;
 using DG.Tweening;
+using UI;
 
 namespace Player
 {
@@ -10,6 +12,8 @@ namespace Player
     public class MedikitPickup : MonoBehaviour
     {
         [SerializeField] private IntVariableSO medikitAmount;
+        [SerializeField] private PopUpDataGameEvent popUpEvent;
+        [SerializeField] private PopUpData popUpData;
         [SerializeField] private int amount;
         [SerializeField] private Sprite medikitSprite;
 
@@ -24,7 +28,7 @@ namespace Player
             {
                 medikitAmount.Value += amount;
                 gameObject.SetActive(false);
-                PlayerInfoUIHandler.Instance.ShowPopup(medikitSprite, $"Medikit {amount}");
+                popUpEvent.RaiseEvent(popUpData);
             }
         }
     }

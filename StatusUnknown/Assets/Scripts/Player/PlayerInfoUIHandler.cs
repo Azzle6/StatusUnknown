@@ -1,4 +1,6 @@
 
+using UI;
+
 namespace Player
 {
     using System.Collections.Generic;
@@ -150,11 +152,11 @@ namespace Player
             DOTween.To(() => augmentIcon[augmentIndex].style.unityBackgroundImageTintColor.value, x => augmentIcon[augmentIndex].style.unityBackgroundImageTintColor = x, Color.white, cooldown);
         }
         
-        public void ShowPopup(Sprite icon, string text)
+        public void ShowPopup(PopUpData popUpData)
         {
             VisualElement tempPopup = popupUIDocument.CloneTree();
-            tempPopup.Q<VisualElement>("IconPopUp").style.backgroundImage = icon.texture;
-            tempPopup.Q<Label>("LabelPopUp").text = text;
+            tempPopup.Q<VisualElement>("IconPopUp").style.backgroundImage = popUpData.icon.texture;
+            tempPopup.Q<Label>("LabelPopUp").text = popUpData.title;
             popUpZone.Add(tempPopup);
             if (popUpMaxCount < popUpZone.childCount)
             {
