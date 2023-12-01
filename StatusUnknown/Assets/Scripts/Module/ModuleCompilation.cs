@@ -33,7 +33,7 @@ namespace Module
 
         private void CalculateLinkedModules(Vector2Int currentModulePosition, CompiledModule compiledModule)
         {
-            List<CompiledTriggerInfo> triggerInfo = new List<CompiledTriggerInfo>();
+            List<CompiledOutputInfo> triggerInfo = new List<CompiledOutputInfo>();
             foreach (var output in compiledModule.module.definition.outputs)
             {
                 Vector2Int positionToCheck = currentModulePosition + output.localPosition +
@@ -44,7 +44,7 @@ namespace Module
                 CompiledModule newCompiledModule =
                     nextModuleResult.Item1 == null ? null : new CompiledModule(nextModuleResult.Item1);
                 
-                triggerInfo.Add(new CompiledTriggerInfo(output.triggerType, newCompiledModule));
+                triggerInfo.Add(new CompiledOutputInfo(output.weaponTriggerType, newCompiledModule));
 
                 if (nextModuleResult.Item1 != null)
                 {

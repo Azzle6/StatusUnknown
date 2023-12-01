@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c01d336291543644a3bee3a19b552e2, type: 3}
+  m_Name: ExplosionZoneBehaviourModule
+  m_EditorClassIdentifier: 
+  itemName: TestModule
+  shape:
+    shapeSize: {x: 2, y: 2}
+    anchor: {x: 0, y: 0}
+    content: 01010101
+  view: {fileID: 0}
+  outputs:
+  - weaponTriggerType: 1
+    localPosition: {x: 1, y: 0}
+    direction: 3
+  BehaviourData:
+    rid: 7591883733765456132
+  references:
+    version: 2
+    RefIds:
+    - rid: 4696495337976365338
+      type: {class: ForwardInstantiationRule, ns: Module, asm: Assembly-CSharp}
+      data: 
+    - rid: 7591883733765456131
+      type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
+      data:
+        radius: 0
+    - rid: 7591883733765456132
+      type: {class: ZoneBehaviourData, ns: Module.Definitions, asm: Assembly-CSharp}
+      data:
+        <TickRate>k__BackingField: 0
+        <LayerMask>k__BackingField:
+          serializedVersion: 2
+          m_Bits: 129
+        <Behaviour>k__BackingField:
+          scriptAsset: {fileID: 11500000, guid: c617c350df4992641a5c764fd427cd92, type: 3}
+          typeName: Module.Behaviours.Zone.ExplosionZoneBehaviour, Assembly-CSharp,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        <Quantity>k__BackingField: 1
+        <InstantiationRule>k__BackingField:
+          rid: 4696495337976365338
+        <CollisionShape>k__BackingField:
+          rid: 7591883733765456131
+        <Mesh>k__BackingField: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+        <Material>k__BackingField: {fileID: -7097115718587537635, guid: ecdbcec36b1082e468192d3cd665f4a9, type: 3}
+        <Damages>k__BackingField: 0
+        damageZone:
+          rid: 7591883733765456133
+    - rid: 7591883733765456133
+      type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
+      data:
+        radius: 0.1

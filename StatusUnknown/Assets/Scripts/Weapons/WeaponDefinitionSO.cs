@@ -5,7 +5,8 @@ namespace Weapons
     using Inventory.Item;
     using Module;
     using UnityEngine;
-    
+    using UnityEngine.Serialization;
+
     [CreateAssetMenu(menuName = "CustomAssets/Definitions/WeaponDefinition", fileName = "WeaponDefinition")]
     public class WeaponDefinitionSO : GridItemSO
     {
@@ -16,7 +17,7 @@ namespace Weapons
     [Serializable]
     public struct WeaponTriggerDefinition
     {
-        public TriggerSO trigger;
+        [FormerlySerializedAs("trigger")] public WeaponTriggerSO weaponTrigger;
         public int triggerRowPosition;
         public Shape shape;
     }

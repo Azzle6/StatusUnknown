@@ -1,9 +1,11 @@
 namespace Module
 {
+    using Definitions;
+
     public class CompiledModule
     {
         public ModuleData module;
-        public CompiledTriggerInfo[] triggersNextModule;
+        public CompiledOutputInfo[] triggersNextModule;
 
         public CompiledModule(ModuleData moduleData)
         {
@@ -12,14 +14,14 @@ namespace Module
         }
     }
 
-    public struct CompiledTriggerInfo
+    public struct CompiledOutputInfo
     {
-        public TriggerSO trigger;
+        public E_ModuleOutput weaponTrigger;
         public CompiledModule compiledModule;
 
-        public CompiledTriggerInfo(TriggerSO trigger, CompiledModule compModule)
+        public CompiledOutputInfo(E_ModuleOutput weaponTrigger, CompiledModule compModule)
         {
-            this.trigger = trigger;
+            this.weaponTrigger = weaponTrigger;
             this.compiledModule = compModule;
         }
     }

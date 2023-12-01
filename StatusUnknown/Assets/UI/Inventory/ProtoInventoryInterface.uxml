@@ -14,7 +14,7 @@
                     <ui:Label tabindex="-1" text="Trigger name" parse-escape-sequences="true" display-tooltip-when-elided="true" name="weaponTriggerName" style="white-space: normal; -unity-text-align: middle-center; -unity-font-style: bold;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="rightSide" style="background-color: rgb(149, 127, 127); width: 70%;">
-                    <ui:VisualElement name="weaponTriggerSelectionButtons" style="flex-direction: row; height: 10%;" />
+                    <ui:VisualElement name="weaponTriggerSelectionButtons" style="flex-direction: row; height: 10%; justify-content: center;" />
                     <ui:VisualElement name="weaponGridDisplayZone" style="height: 90%;">
                         <ui:Instance template="InventoryGrid" name="weaponGrid" style="align-self: center;" />
                     </ui:VisualElement>

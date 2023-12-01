@@ -7,6 +7,7 @@ namespace Weapons
     using Inventory.Item;
     using Module;
     using Sirenix.OdinInspector;
+    using UnityEngine.Serialization;
 
     [Serializable]
     public class WeaponData : ItemData
@@ -48,16 +49,15 @@ namespace Weapons
     [Serializable]
     public class WeaponTriggerData : IItemsDataContainer
     {
-        public TriggerSO triggerType;
+        [FormerlySerializedAs("triggerType")] public WeaponTriggerSO weaponTriggerType;
         public int triggerRowPosition;
         public VectorIntModuleDictionary modules;
         public ModuleCompilation compiledModules;
         
-        
         #region CONSTRUCTOR
         public WeaponTriggerData(WeaponTriggerDefinition triggerDefinitionData)
         {
-            this.triggerType = triggerDefinitionData.trigger;
+            this.weaponTriggerType = triggerDefinitionData.weaponTrigger;
             this.modules = new VectorIntModuleDictionary();
             this.triggerRowPosition = triggerDefinitionData.triggerRowPosition;
             this.compiledModules = new ModuleCompilation();
