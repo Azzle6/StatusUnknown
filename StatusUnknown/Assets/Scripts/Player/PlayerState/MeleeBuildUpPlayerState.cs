@@ -24,8 +24,7 @@ namespace Player
     
         public override void OnStateEnter()
         {
-            buildUpTimer = 0;
-            superArmorDamageTaken = 0;
+     
             //weaponManager.GetCurrentMeleeWeapon().BuildUp();
         }
         
@@ -43,13 +42,17 @@ namespace Player
         
         private IEnumerator BuildUp()
         {
+            buildUpTimer = 0;
+            superArmorDamageTaken = 0;
             currentMeleeWeapon.BuildUp();
             currentAttack = currentMeleeWeapon.GetAttack();
             while (buildUpTimer <= currentAttack.buildUpTime)
             {
                 if (superArmorDamageTaken > currentAttack.superArmor)
                 {
-                    playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
+                    Debug.Log("Super Armor Broken");
+                    playerStateInterpretor.RemoveStateCheck("MeleeBuildUpPlayerState");
+                    buildUpCoroutine = default;
                     yield break;
                 }
                 buildUpTimer += Time.deltaTime;
