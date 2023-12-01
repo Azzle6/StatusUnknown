@@ -1,3 +1,5 @@
+using Player;
+
 namespace Input
 {
     using System.Collections;
@@ -9,7 +11,6 @@ namespace Input
     {
         public static IEnumerator ExecuteRumbleWithTime(GamePadRumbleWithTimer rumbleData, bool stopRumbleAfter)
         {
-    
             float timer = 0;
             float lowFrequency;
             float highFrequency;

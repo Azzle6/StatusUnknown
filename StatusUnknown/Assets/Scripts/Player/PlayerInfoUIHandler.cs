@@ -1,8 +1,7 @@
 
-using System.Collections.Generic;
-
 namespace Player
 {
+    using System.Collections.Generic;
     using Core.VariablesSO.VariableTypes;
     using UnityEngine;
     using UnityEngine.UIElements;
@@ -67,7 +66,17 @@ namespace Player
             UpdateWeapon2Icon(weaponVariableSO[1].Value);
 
 
-    }
+        }
+
+        public void Hide()
+        {
+            playerInfoUIDocument.rootVisualElement.style.display = DisplayStyle.None;
+        }
+
+        public void Show()
+        {
+            playerInfoUIDocument.rootVisualElement.style.display = DisplayStyle.Flex;
+        }
         
         private void UpdateWeapon1Icon(Weapon weapon)
         {

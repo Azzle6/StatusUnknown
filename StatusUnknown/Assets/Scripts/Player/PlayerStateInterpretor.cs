@@ -105,10 +105,10 @@ namespace Player
 
         public void LockPlayerInput()
         {
-            playerInput.enabled = false;
             RemoveState(PlayerStateType.AIM);
             RemoveState(PlayerStateType.MOVEMENT);
             RemoveState(PlayerStateType.ACTION);
+            playerInput.enabled = false;
         }
 
         public void UnlockPlayerInput()
