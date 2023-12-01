@@ -44,7 +44,7 @@ public class ProtoXPDialogManager : MonoBehaviour
     {
         displayedImage.sprite = image;
     }
-
+    
     public void StartDialog(ProtoFXDialogSO dialogSO)
     {
         if(dialogSO.displayDialog)
@@ -57,14 +57,17 @@ public class ProtoXPDialogManager : MonoBehaviour
         {
             DisplayImage(true);
             ChangeImage(dialogSO.image);
-        }
+        }        
 
         ProtoXPTimer.instance.IncrementTimerValue(dialogSO.timerAddValue);
     }
 
-    public void CloseDialogBox()
+    public void CloseDialogBox(InputAction.CallbackContext context)
     {
-        DisplayDialogBox(false);
-        DisplayImage(false);
+        if(context.performed)
+        {
+            DisplayDialogBox(false);
+            DisplayImage(false);
+        }
     }
 }

@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using static HoudiniEngineUnity.HEU_Curve;
+using UnityEngine.InputSystem;
+using TMPro;
 
 public class ProtoXPDialogTrigger : MonoBehaviour
 {
@@ -10,14 +13,79 @@ public class ProtoXPDialogTrigger : MonoBehaviour
     bool activated = true;
     public BoxCollider collider;
 
+    public bool activateOnce = false;
+
+    public bool inputTrigger = false;
+    public InputAction playerInput;
+    public GameObject interactionUI;
+    public TextMeshProUGUI dialogName;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<PlayerAction>() != null && activated)
         {
-            ProtoXPDialogManager.instance.StartDialog(dialogSO);
-            activated = false;
+            if(!inputTrigger)
+            {
+                ProtoXPDialogManager.instance.StartDialog(dialogSO);
+                if (activateOnce)
+                {
+                    activated = false;
+                }
+            }
+            else if (inputTrigger)
+            {
+                playerInput.Enable();
+                SetInteractionFeedback(true);
+            }
         }
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(inputTrigger && other.GetComponent<PlayerAction>() != null)
+        {
+            playerInput.performed += context =>
+            {
+                if (context.performed)
+                {
+                    ProtoXPDialogManager.instance.StartDialog(dialogSO);
+                    playerInput.Disable();
+                    if (activateOnce)
+                    {
+                        activated = false;
+                    }
+                }
+            };
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        playerInput.Disable();
+        SetInteractionFeedback(false);
+    }
+
+    void SetInteractionFeedback(bool state)
+    {
+        interactionUI.SetActive(state);
+
+        if (dialogSO.displayName)
+        {
+            DisplayName(state);
+            ChangeName(dialogSO.dialogName);
+        }
+    }
+
+    void DisplayName(bool enable)
+    {
+        dialogName.gameObject.SetActive(enable);
+    }
+
+    void ChangeName(string newText)
+    {
+        dialogName.text = newText;
+    }
+
 
     private void OnDrawGizmos()
     {
