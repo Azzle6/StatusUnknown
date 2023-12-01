@@ -24,22 +24,32 @@ public class WaveManager : MonoBehaviour
     }
     public void StartWaveProcess()
     {
-        StartCoroutine(ProcessWaveContext(waveContextQueue.Dequeue()));
+        ProcessWave();
+
     }
-    IEnumerator ProcessWaveContext( WaveContext waveContext)
+    void ProcessWave()
     {
-        float timeCounter = Time.time;
+        if (waveContextQueue.Count <= 0) return;
+        var waveContext = waveContextQueue.Dequeue();
         waveContext.wave.DeathEvent += () =>
         {
             waveDeathCounter++;
             if (waveDeathCounter >= waveContexts.Length)
                 CallEndEvent();
         };
-        yield return new WaitUntil(() => Time.time - timeCounter > waveContext.initialDelay || waveContext.wave.finished);
         waveContext.wave.ProcessWave();
-        if(waveContextQueue.Count > 0)
-            StartCoroutine(ProcessWaveContext(waveContextQueue.Dequeue()));
+        StartCoroutine(ProcessNextWave(waveContext));
     }
+    IEnumerator ProcessNextWave(WaveContext previousWave)
+    {
+        float timeCounter = Time.time;
+        yield return new WaitUntil(()=>Time.time-timeCounter >= previousWave.initialDelay || previousWave.wave.finished);
+        ProcessWave();
+    }
+
+
+    
+    
 
     void CallEndEvent()
     {

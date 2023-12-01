@@ -7,6 +7,7 @@ public class Wave : MonoBehaviour
     [SerializeField] Spawn[] enemySpawner;
     [SerializeField] float warningDelay = 0.5f;
     public event Action DeathEvent;
+    [field : SerializeField]
     public bool finished {  get; private set; }
     HashSet<EnemyContext> enemyContexts = new HashSet<EnemyContext>();
     int enemyDeathCounter;
@@ -18,6 +19,7 @@ public class Wave : MonoBehaviour
     }
     public void ProcessWave()
     {
+        Debug.Log("ProcessWave "+gameObject.name);
         foreach (Spawn spawner in enemySpawner)
             StartCoroutine(ProcessSpawn(spawner));
     }
@@ -39,7 +41,8 @@ public class Wave : MonoBehaviour
 
         if (enemyDeathCounter >= enemySpawner.Length)
         {
-            Debug.Log("Death Event");
+            Debug.Log("Death Event "+ gameObject.name);
+            finished = true;
             DeathEvent?.Invoke();
         }
             
