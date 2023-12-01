@@ -185,10 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiDocument: {fileID: 284051421}
-  weaponsTabElementName: WeaponsTabbedMenu
-  inventoryInterfaceName: InventoryInterface
-  inventoryData: {fileID: 11400000, guid: 9d7824d661902054db8419ba1d0d9e51, type: 2}
-  weaponData: {fileID: 11400000, guid: 29cbed7ed4cc6714b882087193a15a43, type: 2}
+  playerInventory: {fileID: 0}
 --- !u!4 &695240134 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5916815514251629923, guid: 544212434da1bcd4aab11cd790711d51, type: 3}
@@ -330,7 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c0fbb8a64f17104ca76d388b1e354a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 284051425}
+  inventoryDisplayer: {fileID: 284051425}
 --- !u!1001 &4747202943319768064
 PrefabInstance:
   m_ObjectHideFlags: 0
