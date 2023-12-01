@@ -5,12 +5,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ProtoXPDialog", menuName = "ScriptableObjects/ProtoXPDialogSO", order = 1)]
 public class ProtoFXDialogSO : ScriptableObject
 {
-    [SerializeField] public string dialogName;
+    public string dialogName;
+    public bool displayName;
 
-    [SerializeField] public bool displayDialog;
-    [SerializeField] public string text;
-    [SerializeField] public float timerAddValue;
+    public bool displayDialog;
+    public string text;
+    public float timerAddValue;
 
-    [SerializeField] public bool displayImage;
-    [SerializeField] public Sprite image;
+    public bool displayImage;
+    public Sprite image;
 }
