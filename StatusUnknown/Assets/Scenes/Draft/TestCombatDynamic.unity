@@ -482,7 +482,165 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!43 &284031380
+--- !u!1 &201735409
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 201735411}
+  - component: {fileID: 201735412}
+  - component: {fileID: 201735414}
+  - component: {fileID: 201735415}
+  m_Layer: 0
+  m_Name: Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &201735411
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201735409}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4, y: 3.25, z: -4.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &201735412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201735409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e06c7ced05420b64cbdd40ed5bc3e905, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemySpawner:
+  - enemy: {fileID: 8449849220990944551, guid: 42638689991654143b0718c2081e3597, type: 3}
+    spawnPoints: []
+    delay: 2
+  - enemy: {fileID: 8449849220990944551, guid: 42638689991654143b0718c2081e3597, type: 3}
+    spawnPoints: []
+    delay: 4
+  spawnOnAwake: 0
+--- !u!114 &201735414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201735409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e06c7ced05420b64cbdd40ed5bc3e905, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemySpawner:
+  - enemy: {fileID: 8449849220990944551, guid: 42638689991654143b0718c2081e3597, type: 3}
+    spawnPoints:
+    - {fileID: 201735411}
+    delay: 2
+  - enemy: {fileID: 8449849220990944551, guid: 42638689991654143b0718c2081e3597, type: 3}
+    spawnPoints:
+    - {fileID: 201735411}
+    delay: 4
+  spawnOnAwake: 0
+--- !u!114 &201735415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201735409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 082e84712b53c604ea9b918387781238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waveContexts:
+  - initialDelay: 0
+    wave: {fileID: 201735412}
+  - initialDelay: 4
+    wave: {fileID: 201735414}
+  EndUEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1921431914}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  startOnAwake: 1
+--- !u!1 &257345582
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 257345584}
+  - component: {fileID: 257345583}
+  m_Layer: 0
+  m_Name: MorphTemplate (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &257345583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 257345582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b60d0250c286e7847a621af8d3e966f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  morphEggPrefab: {fileID: 8233590218045599866, guid: 7c6ed457da3fe6240876f1a3b266a884, type: 3}
+  startMorphEvent: {fileID: 11400000, guid: 93391f52dc2a3bb4ca7cb9f104e46d9a, type: 2}
+  morphTimer: 3
+  timerRandomness: 1
+--- !u!4 &257345584
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 257345582}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.6995726, y: 2.8546777, z: -0.30245805}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 343944837}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!43 &261713983
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
