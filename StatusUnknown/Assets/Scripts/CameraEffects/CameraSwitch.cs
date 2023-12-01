@@ -9,7 +9,7 @@ public class CameraSwitch : MonoBehaviour
     public GameObject[] activateCams;
     public GameObject[] disactivateCams;
 
-    private void OnTriggerEnter(Collider other)
+    /*private void OnTriggerEnter(Collider other)
     {
         if(other.GetComponent<PlayerAction>() != null)
         {
@@ -22,5 +22,5 @@ public class CameraSwitch : MonoBehaviour
                 activateCams[i].SetActive(true);
             }
         }
-    }
+    }*/
 }

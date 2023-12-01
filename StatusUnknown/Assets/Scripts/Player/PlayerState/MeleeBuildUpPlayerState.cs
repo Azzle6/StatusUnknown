@@ -50,7 +50,8 @@ namespace Player
             {
                 if (superArmorDamageTaken > currentAttack.superArmor)
                 {
-                    playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
+                    Debug.Log("Super Armor Broken");
+                    playerStateInterpretor.RemoveStateCheck("MeleeBuildUpPlayerState");
                     buildUpCoroutine = default;
                     yield break;
                 }
