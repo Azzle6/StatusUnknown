@@ -31,6 +31,8 @@ public class HitContext : MonoBehaviour
     {
         yield return new WaitForSeconds(updateFrequence);
         ProcessHitEvents();
+        if (!gameObject.activeInHierarchy)
+            yield break;
         processDetection = StartCoroutine(ProcessDetection());
     }
 

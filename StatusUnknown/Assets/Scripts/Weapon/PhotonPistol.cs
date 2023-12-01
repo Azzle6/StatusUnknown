@@ -1,3 +1,5 @@
+using Input;
+
 namespace Weapon
 {
     using System.Collections;
@@ -6,6 +8,8 @@ namespace Weapon
     using System;
     using Combat.HitProcess;
     using Unity.Mathematics;
+    using UnityEngine.VFX;
+
     
     public class PhotonPistol : RangedWeapon
     {
@@ -13,11 +17,13 @@ namespace Weapon
         [SerializeField] private Transform spawnPoint;
         [SerializeField] private Transform mesh;
         [SerializeField] private Transform meshPos;
-        [SerializeField] private CoPoolProjectile projectilePool;
+        [SerializeField] private VisualEffect chargingVFX;
+        [SerializeField] private VisualEffect shootingVFX;
         private Vector3 initMeshPos;
         private float chargeTimer;
         private Coroutine charging;
         private Coroutine reloading;
+        private Coroutine rumbleScale;
         private Projectile tempPhotonPistolBullet;
         private Transform tempPhotonPistolBulletTr;
         private float currentDamage;
@@ -30,15 +36,14 @@ namespace Weapon
         {
             currentAmmo.Value = stat.magazineSize;
             initMeshPos = mesh.localPosition;
-            
-            Debug.Log(stat);
-            ComponentPooler.Instance.CreatePool(stat.projectilePool.prefab.GetComponent<Projectile>(),stat.projectilePool.baseCount);
+            chargingVFX.Stop();
         }
 
         private void OnDisable()
         {
             reloading = default;
             charging = default;
+            chargingVFX.Stop();
         }
 
         public override void ActionPressed()
@@ -52,7 +57,6 @@ namespace Weapon
 
             if ((isReloading) && (reloading == default))
             {
-                Debug.Log("need to resume reload animation");
                 Reload(weaponManager.playerAnimator);
                 return;
             }
@@ -73,6 +77,8 @@ namespace Weapon
         {
             chargeTimer = 0;
             tempPhotonPistolBulletTr.parent = spawnPoint;
+            chargingVFX.Play();
+            rumbleScale ??= StartCoroutine(GamePadRumbleManager.ExecuteRumbleWithTime(stat.rumbleScaling, false));
             while (chargeTimer < stat.maxTimeCharge)
             {
               tempPhotonPistolBulletTr.localPosition = Vector3.zero;
@@ -108,11 +114,23 @@ namespace Weapon
             if (tempPhotonPistolBullet == default)
                 return;
             
+            chargingVFX.Stop();
             waitForTriggerRelease = false;
             StartCoroutine(Cooldown());
             if (charging != default)
                 StopCoroutine(charging);
+
+            if (rumbleScale != default)
+            {
+                StopCoroutine(rumbleScale);
+                GamePadRumbleManager.StopRumble(); 
+                rumbleScale = default;
+                StartCoroutine(
+                    GamePadRumbleManager.ExecuteRumbleWithTimeAccordingToAProportion(chargeTimer / stat.maxTimeCharge,
+                        stat.rumbleOnShoot, true));
+            }
             
+            shootingVFX.Play();
             tempPhotonPistolBulletTr.transform.parent = null;
             tempPhotonPistolBullet.Launch(currentDamage, spawnPoint.forward, stat.projectileSpeed);
             tempPhotonPistolBulletTr.TryGetComponent(out HitContext tempHitContext);
@@ -129,6 +147,11 @@ namespace Weapon
         public override float GetMagazineSize()
         {
             return stat.magazineSize;
+        }
+
+        public override void InitPool()
+        {
+            ComponentPooler.Instance.CreatePool(stat.projectilePool.prefab.GetComponent<Projectile>(),stat.projectilePool.baseCount);
         }
 
         public override void Reload(Animator playerAnimator)

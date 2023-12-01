@@ -13,18 +13,19 @@ namespace Weapon
         public FloatVariableSO currentAmmo;
 
     
-        public virtual void AimWithCurrentWeapon()
+        public override void AimWithCurrentWeapon()
         {
             adsRotTr.DOLocalRotate(new Vector3(adsAimAngle,0,0), 0.1f);
         }
     
-        public void RestWeapon()
+        public override void RestWeapon()
         {
             adsRotTr.DOLocalRotate(new Vector3(adsRestAngle,0,0), 0.1f);
         }
         
         public abstract float GetMagazineSize();
-        public abstract void Reload(Animator playerAnimator);
+
+        public abstract void InitPool();
 
     }
 }

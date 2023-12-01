@@ -11,7 +11,8 @@ public class MorphEgg : MonoBehaviour,IDamageable
     [SerializeField] MeshRenderer meshRenderer;
 
     float currentLifePoints;
-    float currentMorphDuration;
+    [HideInInspector]
+    public float currentMorphDuration;
     bool initialized = false;
 
     [Header("Event")]
@@ -41,11 +42,12 @@ public class MorphEgg : MonoBehaviour,IDamageable
         // TODO : Define usefull parameters
         endMorphEvent?.RaiseEvent(null);
         MorphEvents.EndMorphEvent(null);
-        StopAllCoroutines();
-        Destroy(gameObject);
+        CancelInvoke();
+        
     }
     void Explode()
     {
+        EndMorph();
         Debug.Log($"Explode{gameObject}");
         for(int i = 0; i < failedEnemiesToSpawn.Length; i++)
         {
@@ -55,20 +57,20 @@ public class MorphEgg : MonoBehaviour,IDamageable
                 Instantiate(failedEnemiesToSpawn[i], transform.position, Quaternion.identity);
             }
         }
-
-        EndMorph();
+        Destroy(gameObject);
     }
     void Hatch()
     {
+        EndMorph();
         Debug.Log($"Hatch{gameObject}");
         if(succesEnemyToSpawn != null)
         {
             //TODO : set spawn location
             Instantiate(succesEnemyToSpawn, transform.position, Quaternion.identity);
         }
-        
-        EndMorph();
-        
+
+        Destroy(gameObject);
+
     }
 
     public void TakeDamage(float damage, Vector3 force)

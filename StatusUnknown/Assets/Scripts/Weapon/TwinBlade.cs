@@ -1,3 +1,5 @@
+using UnityEngine.VFX;
+
 namespace Weapon
 {
     using UnityEngine;
@@ -7,6 +9,8 @@ namespace Weapon
         [SerializeField] private TwinBladeStat twinBladeStat;
         [SerializeField] private Transform bladeLeft;
         [SerializeField] private Transform bladeRight;
+        [SerializeField] private VisualEffect[] attacksVFX;
+
 
         private void OnEnable()
         {
@@ -30,13 +34,9 @@ namespace Weapon
             {
                 bladeLeft.gameObject.SetActive(false);
                 bladeRight.gameObject.SetActive(false);
-                foreach (HitContext hitContext in hitContexts)
-                    hitContext.HitTriggerEvent -= Hit;
             }
             else
             {
-                foreach (HitContext hitContext in hitContexts)
-                    hitContext.HitTriggerEvent += Hit;
                 playerAnimator.SetInteger("WeaponID", twinBladeStat.weaponID);
                 bladeLeft.gameObject.SetActive(true);
                 bladeRight.gameObject.SetActive(true);
@@ -49,6 +49,22 @@ namespace Weapon
                 weaponManager.rigLHand.weight = 0;
                 weaponManager.rigRHand.weight = 0;
             }
+        }
+        
+
+        public override void Reload(Animator playerAnimator)
+        {
+            return;
+        }
+
+        public override void AimWithCurrentWeapon()
+        {
+            return;
+        }
+
+        public override void RestWeapon()
+        {
+            return;
         }
 
         public override void Hit()
@@ -82,6 +98,7 @@ namespace Weapon
         public override void Active()
         {
             base.Active();
+            attacksVFX[comboIndex].Play();
         }
 
         public override void Recovery()

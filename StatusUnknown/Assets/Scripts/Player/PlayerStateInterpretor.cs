@@ -64,7 +64,7 @@ namespace Player
     
         public void RemoveState(PlayerStateType playerStateType)
         {
-            if (statesSlot[playerStateType] == null)
+            if (statesSlot[playerStateType] == default)
                 return;
             
             tempState = statesSlot[playerStateType];
@@ -97,20 +97,18 @@ namespace Player
 
         public void ExecuteBufferInput()
         {
-            Debug.Log("Buffer Executing");
             if(inputBufferState == default)
                 return;
             AddState(inputBufferState.GetType().Name, inputBufferState.playerStateType, false);
             inputBufferState = default;
-            Debug.Log("Buffer Executed");
         }
 
         public void LockPlayerInput()
         {
-            playerInput.enabled = false;
             RemoveState(PlayerStateType.AIM);
             RemoveState(PlayerStateType.MOVEMENT);
             RemoveState(PlayerStateType.ACTION);
+            playerInput.enabled = false;
         }
 
         public void UnlockPlayerInput()
@@ -134,7 +132,7 @@ namespace Player
         
         public void Behave<T>(T x, PlayerStateType type)
         {
-            if (statesSlot[type] == null)
+            if (statesSlot[type] == default)
                 return;
             
             statesSlot[type].Behave<T>(x);

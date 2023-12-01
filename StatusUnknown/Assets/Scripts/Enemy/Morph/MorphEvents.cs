@@ -9,10 +9,12 @@ public static class MorphEvents
     public static event Action<MorphBehaviour> MorphStart, MorphEnd;
     public static void StartMorphEvent(MorphBehaviour morphOrigin)
     {
+        Debug.Log("StartMorphEvent");
         MorphStart?.Invoke(morphOrigin);
     }
     public static void EndMorphEvent(MorphBehaviour morphOrigin)
     {
+        Debug.Log("EndMorphEvent");
         MorphEnd?.Invoke(morphOrigin);
     }
 }

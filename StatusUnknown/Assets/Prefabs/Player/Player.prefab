@@ -524,6 +524,7 @@ Transform:
   - {fileID: 9187977321289586274}
   - {fileID: 4614598561879884469}
   - {fileID: 8545159125544498194}
+  - {fileID: 9140163240855630715}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &2352012637545367710
@@ -847,7 +848,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStateInterpretor: {fileID: 3331217997880427551}
-  playerStateType: 0
+  playerStateType: 2
   lockState: 0
   inputBufferActive: 0
   confirmedInTheFrustrum: []
@@ -907,6 +908,7 @@ MonoBehaviour:
   playerStateType: 2
   lockState: 0
   inputBufferActive: 0
+  augmentManager: {fileID: 7105596036406331963}
 --- !u!114 &4764279643686001967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -925,14 +927,36 @@ MonoBehaviour:
   inputBufferActive: 0
   currentAttack:
     attackDamage: 0
+    attackLength: 0
+    attackAngle: 0
+    attackKnockback: 0
     castTime: 0
     buildUpTime: 0
     superArmor: 0
     activeTime: 0
     recoveryTime: 0
     cooldownTime: 0
+    rumbleOnHit:
+      maxLowFrequency: 0
+      maxHighFrequency: 0
+      lowFrequencyCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      highFrequencyCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      duration: 0
   currentMeleeWeapon: {fileID: 0}
   weaponManager: {fileID: 4974381338073703539}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &4130879028828508758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -951,12 +975,31 @@ MonoBehaviour:
   inputBufferActive: 0
   currentAttack:
     attackDamage: 0
+    attackLength: 0
+    attackAngle: 0
+    attackKnockback: 0
     castTime: 0
     buildUpTime: 0
     superArmor: 0
     activeTime: 0
     recoveryTime: 0
     cooldownTime: 0
+    rumbleOnHit:
+      maxLowFrequency: 0
+      maxHighFrequency: 0
+      lowFrequencyCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      highFrequencyCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      duration: 0
   weaponManager: {fileID: 4974381338073703539}
   playerHealth: {fileID: 11400000, guid: 57a8cb5156074b147aba2b571370f275, type: 2}
 --- !u!114 &1241682378252029606
@@ -977,12 +1020,31 @@ MonoBehaviour:
   inputBufferActive: 0
   currentAttack:
     attackDamage: 0
+    attackLength: 0
+    attackAngle: 0
+    attackKnockback: 0
     castTime: 0
     buildUpTime: 0
     superArmor: 0
     activeTime: 0
     recoveryTime: 0
     cooldownTime: 0
+    rumbleOnHit:
+      maxLowFrequency: 0
+      maxHighFrequency: 0
+      lowFrequencyCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      highFrequencyCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      duration: 0
   weaponManager: {fileID: 4974381338073703539}
 --- !u!114 &6965172701220603686
 MonoBehaviour:
@@ -1002,12 +1064,31 @@ MonoBehaviour:
   inputBufferActive: 0
   currentAttack:
     attackDamage: 0
+    attackLength: 0
+    attackAngle: 0
+    attackKnockback: 0
     castTime: 0
     buildUpTime: 0
     superArmor: 0
     activeTime: 0
     recoveryTime: 0
     cooldownTime: 0
+    rumbleOnHit:
+      maxLowFrequency: 0
+      maxHighFrequency: 0
+      lowFrequencyCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      highFrequencyCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      duration: 0
   currentMeleeWeapon: {fileID: 0}
   weaponManager: {fileID: 4974381338073703539}
 --- !u!114 &9187700631984985908
@@ -1060,6 +1141,73 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1140065125536784206}
   m_LocalEulerAnglesHint: {x: -0.414, y: -1.075, z: 95.078}
+--- !u!1 &9166066965691240099
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9140163240855630715}
+  - component: {fileID: 7105596036406331963}
+  - component: {fileID: 5726709089023334355}
+  m_Layer: 9
+  m_Name: AugmentManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9140163240855630715
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9166066965691240099}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5174330278457101129}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7105596036406331963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9166066965691240099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55af5cc8aa2c0aa448ddf76573640ec9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerStateInterpretor: {fileID: 3331217997880427551}
+  currentAugments:
+  - {fileID: 5726709089023334355}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &5726709089023334355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9166066965691240099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ede9afe233ebf54cad33cc7657afb84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  augmentSprite: {fileID: 21300000, guid: 51da70b5829aa7d458b96d9d67f0d817, type: 3}
+  isReady: 1
+  augmentCooldown: 0
+  augmentManager: {fileID: 7105596036406331963}
+  dashStat: {fileID: 11400000, guid: 7efe5bd9946dc5045af81f7d958abe6f, type: 2}
 --- !u!1 &9223133388869557693
 GameObject:
   m_ObjectHideFlags: 0
@@ -1924,7 +2072,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2675037210809185590, guid: 1708dfd4bc512924385dc9630c687f1f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4908050324150602532, guid: 1708dfd4bc512924385dc9630c687f1f, type: 3}
       propertyPath: m_Layer
@@ -2051,7 +2199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2003955313394750300, guid: 7ed0d303a9085144893bce6f552c4fa9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2387115202336153330, guid: 7ed0d303a9085144893bce6f552c4fa9, type: 3}
       propertyPath: m_VersionIndex

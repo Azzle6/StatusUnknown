@@ -1,9 +1,8 @@
-using System.Reflection;
-
 namespace Player
 {
     using UnityEngine;
     using UnityEngine.InputSystem;
+
 
     public class PlayerAction : MonoBehaviour
     {
@@ -176,7 +175,7 @@ namespace Player
     
         public void OnReload(InputAction.CallbackContext ctx)
         {
-            if (ctx.started)
+            if ((ctx.started) && (!playerStat.isShooting))
             {
                 playerStateInterpretor.AddState("ReloadPlayerState", PlayerStateType.ACTION,false);
             }
@@ -187,6 +186,9 @@ namespace Player
         {
             if (ctx.started)
             {
+                if (playerStateInterpretor.statesSlot[PlayerStateType.ACTION] != null)
+                    playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
+                
                 playerStateInterpretor.AddState("AugmentPlayerState", PlayerStateType.ACTION,false);
                 playerStateInterpretor.Behave(augmentNo,PlayerStateType.ACTION);
             }

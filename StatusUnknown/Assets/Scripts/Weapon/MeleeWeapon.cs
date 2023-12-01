@@ -7,7 +7,6 @@ namespace Weapon
     public abstract class MeleeWeapon : Weapon
     {
         public Coroutine cooldownCoroutine;
-        public HitContext[] hitContexts;
         public int comboIndex;
         public MeleeAttack[] attacks;
         private int comboIndexWhenCDStarted;
@@ -25,11 +24,10 @@ namespace Weapon
             }
             
 
-            foreach (HitContext hitContext in hitContexts)
-                hitContext.enabled = true;
+
             
             weaponManager.playerAnimator.SetTrigger("MeleeHit");   
-            weaponManager.playerAnimator.SetInteger("MeleeCombo", comboIndex);
+            weaponManager.playerAnimator.SetFloat("MeleeCombo", comboIndex);
             
             weaponManager.playerStateInterpretor.Behave(this,PlayerStateType.ACTION);
         }
@@ -48,11 +46,15 @@ namespace Weapon
 
         public virtual void Recovery()
         {
-            foreach (HitContext hitContext in hitContexts)
-                hitContext.enabled = false;
-            
-            if ((gameObject.activeSelf) && (cooldownCoroutine == default))
+            if (gameObject.activeSelf)
+            {
+                if (cooldownCoroutine != default)
+                {
+                    StopCoroutine(cooldownCoroutine);
+                }
+                comboIndexWhenCDStarted = comboIndex;
                 cooldownCoroutine = StartCoroutine(Cooldown());
+            }
             
             comboIndex++;
 
@@ -64,8 +66,7 @@ namespace Weapon
 
         public virtual IEnumerator Cooldown()
         {
-            comboIndexWhenCDStarted = comboIndex;
-            yield return new WaitForSeconds(attacks[comboIndexWhenCDStarted].cooldownTime + attacks[comboIndexWhenCDStarted].cooldownTime);
+            yield return new WaitForSeconds(attacks[comboIndexWhenCDStarted].cooldownTime + attacks[comboIndexWhenCDStarted].recoveryTime);
             comboIndex = 0;
         }
         
