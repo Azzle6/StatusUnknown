@@ -4,9 +4,11 @@ using System;
 using System.Linq;
 using UnityEngine;
 using XNode;
+using StatusUnknown.Tools.Narrative; 
 
 namespace Aurore.DialogSystem
 {
+
 	[CreateAssetMenu(fileName = "Dialogue Graph", menuName = "Status Unknown/Narrative/Dialogue Graph", order = 11)]
 	public class DialogGraph : NodeGraph
 	{
@@ -71,7 +73,16 @@ namespace Aurore.DialogSystem
 		public static DialogueNode GetNext(DialogueNode current, int outputIndex) 
 		{
 			var port = current.GetPort($"answers {outputIndex}");
-			return port is not {IsConnected: true} ? null : port.Connection.node as DialogueNode ;
-		}		
-	}
+			return !port.IsConnected ? null : port.Connection.node as DialogueNode ;
+		}	
+		
+		// to test
+		public static DialogueNode GetPrevious(DialogueNode current)
+		{
+			//string additionalValue = inputIndex == -1 ? "" : inputIndex.ToString(); 
+
+            var port = current.GetPort("input");
+            return !port.IsConnected ? null : port.Connection.node as DialogueNode;
+        }
+    }
 }

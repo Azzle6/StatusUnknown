@@ -61,7 +61,7 @@ namespace StatusUnknown.Content
         }
 
         [Serializable]
-        internal class ModuleInfos // load or create new module
+        public class ModuleInfos // load or create new module
         {
             [SerializeField][GUIColor(CoreToolsStrings.COLOR_ENUMS)] protected EAbilityType abilityType = EAbilityType.Offense;
             [SerializeField][GUIColor(CoreToolsStrings.COLOR_ENUMS)] protected EPayloadType PayloadType;
@@ -106,6 +106,8 @@ namespace StatusUnknown.Content
 namespace StatusUnknown.Tools
 {
     public enum Faction { Player, SAA, Hera, Excelsior, Pulse }
+    public enum Item { Weapon, Armor, Augments, Modules }
+
     public struct CoreToolsStrings
     {
         internal const string ROOT_MENU_PATH = "Status Unknown/Tools/";
@@ -137,6 +139,7 @@ namespace StatusUnknown.Tools
             }
 
             [EnumToggleButtons, PropertyOrder(-1)][GUIColor(CoreToolsStrings.COLOR_ENUMS)] public Faction Faction;
+            [EnumToggleButtons, PropertyOrder(0)][GUIColor(CoreToolsStrings.COLOR_ENUMS)] public Item Items;
 
             [PropertySpace(SpaceAfter = 25), HorizontalGroup("Base", LabelWidth = 100, Title = "BASE")]
 
@@ -146,13 +149,12 @@ namespace StatusUnknown.Tools
             [VerticalGroup("Base/left", GroupName = "CHARACTER")][HideIf("Faction", Faction.Player)] public DialogueSO[] unlockedDialogues = new DialogueSO[2];
 
             [VerticalGroup("Base/right", GroupName = "WEAPON")]
-            [SerializeField, VerticalGroup("Base/right/weapon", GroupName = "WEAPON"), LabelWidth(CoreToolsStrings.LABEL_SIZE_SMALL), LabelText("@$value.weaponName")] private Weapon Weapon = new Weapon();
-            [VerticalGroup("Base/right", GroupName = "WEAPON"), SerializeField, InfoBox("@GetWeaponDescription()", Icon = SdfIconType.Info, InfoMessageType = InfoMessageType.Info), HideLabel] string weaponInfos;
+            [SerializeField, VerticalGroup("Base/right/weapon", GroupName = "WEAPON", VisibleIf = "@Items == Item.Weapon"), LabelWidth(CoreToolsStrings.LABEL_SIZE_SMALL), LabelText("@$value.weaponName")] private Weapon Weapon = new Weapon();
+            [VerticalGroup("Base/right/weapon", GroupName = "WEAPON"), SerializeField, InfoBox("@GetWeaponDescription()", Icon = SdfIconType.Info, InfoMessageType = InfoMessageType.Info), HideLabel] string weaponInfos;
             private string GetWeaponDescription() => string.IsNullOrEmpty(Weapon.Description) ? "No Weapon Description has been written yet" : Weapon.Description;
 
-            [VerticalGroup("Base/right/details", GroupName = "DETAILS")]
-            [TabGroup("Base/right/details/infos", "Stats"), LabelWidth(CoreToolsStrings.LABEL_SIZE_MEDIUM)] public StatsInfos[] StartingStats = new StatsInfos[1];
-            [SerializeField, TabGroup("Base/right/details/infos", "Modules"), LabelWidth(CoreToolsStrings.LABEL_SIZE_MEDIUM)] private ModuleInfos[] StartingModules = new ModuleInfos[3];
+            [VerticalGroup("Base/right/weapon", GroupName = "STATS")][LabelWidth(CoreToolsStrings.LABEL_SIZE_MEDIUM)] public StatsInfos[] StartingStats = new StatsInfos[1];
+            [VerticalGroup("Base/right/modules", GroupName = "MODULES", VisibleIf = "@Items == Item.Modules"), LabelWidth(CoreToolsStrings.LABEL_SIZE_MEDIUM)] public ModuleInfos[] StartingModules = new ModuleInfos[3];
 
             [PropertySpace][ShowIf("Faction", Faction.Player)] public bool showCameraAndControls = false;
 

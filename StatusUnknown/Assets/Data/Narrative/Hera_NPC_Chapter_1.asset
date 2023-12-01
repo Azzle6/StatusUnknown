@@ -1,151 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6037929680399807410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90e58730e7e85b946a2d4dffc29306e9, type: 3}
-  m_Name: Quest
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000}
-  position: {x: 296, y: 328}
-  ports:
-    keys:
-    - input
-    - answers
-    - conditionalAnswer
-    values:
-    - _fieldName: input
-      _node: {fileID: -6037929680399807410}
-      _typeQualifiedName: Aurore.DialogSystem.Connection, StatusUnknown.Tools.Narrative,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      connections:
-      - fieldName: answers 0
-        node: {fileID: 3619902342217902986}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: answers
-      _node: {fileID: -6037929680399807410}
-      _typeQualifiedName: System.Collections.Generic.List`1[[System.String, mscorlib,
-        Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib,
-        Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-      connections: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: conditionalAnswer
-      _node: {fileID: -6037929680399807410}
-      _typeQualifiedName: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-  initiator: I just added the informations to your quest journal
-  title: 
-  img: {fileID: 0}
-  audio: {fileID: 0}
-  answers: []
-  conditionalAnswer: 0
-  additionalAnswer: 
-  givenQuest: {fileID: 11400000, guid: a586a2eafa4bad943a6cb8c26af4b6de, type: 2}
---- !u!114 &-297802684859051533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea24aeccf3449a84c8fb632a88afbf06, type: 3}
-  m_Name: Dialogue
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000}
-  position: {x: -712, y: -232}
-  ports:
-    keys:
-    - input
-    - answers
-    - conditionalAnswer
-    - answers 0
-    - answers 1
-    values:
-    - _fieldName: input
-      _node: {fileID: -297802684859051533}
-      _typeQualifiedName: Aurore.DialogSystem.Connection, StatusUnknown.Tools.Narrative,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      connections: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: answers
-      _node: {fileID: -297802684859051533}
-      _typeQualifiedName: System.Collections.Generic.List`1[[System.String, mscorlib,
-        Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib,
-        Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-      connections: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: conditionalAnswer
-      _node: {fileID: -297802684859051533}
-      _typeQualifiedName: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: result
-        node: {fileID: 8897620741294726878}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: answers 0
-      _node: {fileID: -297802684859051533}
-      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: input
-        node: {fileID: 1831340819866683008}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 1
-    - _fieldName: answers 1
-      _node: {fileID: -297802684859051533}
-      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: input
-        node: {fileID: 3619902342217902986}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 1
-  initiator: Hello Keeper
-  title: Initial Dialogue from Chapter 1
-  img: {fileID: 0}
-  audio: {fileID: 0}
-  answers:
-  - Where am I ?
-  - Who are you ?
-  - I came back with the object you asked me to find
-  conditionalAnswer: 0
-  additionalAnswer: I came back with the object you asked me to find
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,15 +13,281 @@ MonoBehaviour:
   m_Name: Hera_NPC_Chapter_1
   m_EditorClassIdentifier: 
   nodes:
-  - {fileID: -297802684859051533}
   - {fileID: 1831340819866683008}
   - {fileID: 3619902342217902986}
-  - {fileID: 8897620741294726878}
-  - {fileID: -6037929680399807410}
+  - {fileID: 1323829809305765338}
+  - {fileID: 748836987596491962}
+  - {fileID: 1712406976630609570}
+  - {fileID: 732212427511474936}
   hasQuests: 1
   quests:
   - {fileID: 11400000, guid: a586a2eafa4bad943a6cb8c26af4b6de, type: 2}
   playerQuestJournal: {fileID: 11400000, guid: fd04ab0cf72aba14d96176eb1d17eed2, type: 2}
+--- !u!114 &732212427511474936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2b66ae2370716b468bdbe16e8121859, type: 3}
+  m_Name: Dialogue Conditional Answer
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1192, y: 200}
+  ports:
+    keys:
+    - input
+    - result
+    values:
+    - _fieldName: input
+      _node: {fileID: 732212427511474936}
+      _typeQualifiedName: StatusUnknown.Tools.Narrative.Data, StatusUnknown.Tools.Narrative,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: result
+        node: {fileID: 1712406976630609570}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: result
+      _node: {fileID: 732212427511474936}
+      _typeQualifiedName: StatusUnknown.Tools.Narrative.Data, StatusUnknown.Tools.Narrative,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: conditionalAnswer
+        node: {fileID: 1323829809305765338}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  source: 0
+  target: 0
+  input:
+    dialogue: I have what you asked me to retrieve
+    isValid: 1
+  comparisonType: 6
+  result:
+    dialogue: I have what you asked me to retrieve
+    isValid: 1
+--- !u!114 &748836987596491962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90e58730e7e85b946a2d4dffc29306e9, type: 3}
+  m_Name: Quest Journal
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 232, y: 248}
+  ports:
+    keys:
+    - input
+    - answers
+    - conditionalAnswer
+    - answers 0
+    - result
+    values:
+    - _fieldName: input
+      _node: {fileID: 748836987596491962}
+      _typeQualifiedName: StatusUnknown.Tools.Narrative.Connection, StatusUnknown.Tools.Narrative,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: answers 0
+        node: {fileID: 3619902342217902986}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: answers
+      _node: {fileID: 748836987596491962}
+      _typeQualifiedName: System.Collections.Generic.List`1[[System.String, mscorlib,
+        Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib,
+        Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: conditionalAnswer
+      _node: {fileID: 748836987596491962}
+      _typeQualifiedName: StatusUnknown.Tools.Narrative.Data, StatusUnknown.Tools.Narrative,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: answers 0
+      _node: {fileID: 748836987596491962}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: result
+      _node: {fileID: 748836987596491962}
+      _typeQualifiedName: UnityEngine.ScriptableObject, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  initiator: I just added the informations to your quest journal
+  answers:
+  - I'll be on my way then
+  conditionalAnswer:
+    dialogue: 
+    isValid: 0
+  accessType: 1
+  playerQuestJournal: {fileID: 11400000, guid: fd04ab0cf72aba14d96176eb1d17eed2, type: 2}
+  questToGive: {fileID: 11400000, guid: a586a2eafa4bad943a6cb8c26af4b6de, type: 2}
+  result: {fileID: 11400000, guid: a586a2eafa4bad943a6cb8c26af4b6de, type: 2}
+--- !u!114 &1323829809305765338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea24aeccf3449a84c8fb632a88afbf06, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -776, y: -216}
+  ports:
+    keys:
+    - input
+    - answers
+    - conditionalAnswer
+    - answers 0
+    - answers 1
+    - answers 2
+    values:
+    - _fieldName: input
+      _node: {fileID: 1323829809305765338}
+      _typeQualifiedName: StatusUnknown.Tools.Narrative.Connection, StatusUnknown.Tools.Narrative,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: answers
+      _node: {fileID: 1323829809305765338}
+      _typeQualifiedName: System.Collections.Generic.List`1[[System.String, mscorlib,
+        Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib,
+        Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: conditionalAnswer
+      _node: {fileID: 1323829809305765338}
+      _typeQualifiedName: StatusUnknown.Tools.Narrative.Data, StatusUnknown.Tools.Narrative,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: result
+        node: {fileID: 732212427511474936}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: answers 0
+      _node: {fileID: 1323829809305765338}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: input
+        node: {fileID: 1831340819866683008}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: answers 1
+      _node: {fileID: 1323829809305765338}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: input
+        node: {fileID: 3619902342217902986}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: answers 2
+      _node: {fileID: 1323829809305765338}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+  initiator: Hello Keeper
+  answers:
+  - Where am I ?
+  - Who are you ?
+  - I have what you asked me to retrieve
+  conditionalAnswer:
+    dialogue: I have what you asked me to retrieve
+    isValid: 1
+--- !u!114 &1712406976630609570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7f143b37ec09e442a53175347f0bb5a, type: 3}
+  m_Name: Quest
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1640, y: 360}
+  ports:
+    keys:
+    - result
+    values:
+    - _fieldName: result
+      _node: {fileID: 1712406976630609570}
+      _typeQualifiedName: StatusUnknown.Tools.Narrative.Data, StatusUnknown.Tools.Narrative,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: input
+        node: {fileID: 732212427511474936}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  accessType: 0
+  quest: {fileID: 11400000, guid: a586a2eafa4bad943a6cb8c26af4b6de, type: 2}
+  questObject: {fileID: 11400000, guid: 843bcccac192e6b4aaaad23c1ceb5614, type: 2}
+  result:
+    dialogue: I have what you asked me to retrieve
+    isValid: 1
+  optionalDialogue: I have what you asked me to retrieve
 --- !u!114 &1831340819866683008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,7 +301,7 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -200, y: -312}
+  position: {x: -200, y: -248}
   ports:
     keys:
     - input
@@ -190,11 +310,11 @@ MonoBehaviour:
     values:
     - _fieldName: input
       _node: {fileID: 1831340819866683008}
-      _typeQualifiedName: Aurore.DialogSystem.Connection, StatusUnknown.Tools.Narrative,
+      _typeQualifiedName: StatusUnknown.Tools.Narrative.Connection, StatusUnknown.Tools.Narrative,
         Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: answers 0
-        node: {fileID: -297802684859051533}
+        node: {fileID: 1323829809305765338}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -212,20 +332,18 @@ MonoBehaviour:
       _dynamic: 0
     - _fieldName: conditionalAnswer
       _node: {fileID: 1831340819866683008}
-      _typeQualifiedName: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
+      _typeQualifiedName: StatusUnknown.Tools.Narrative.Data, StatusUnknown.Tools.Narrative,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
       connections: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
   initiator: On the main engine room of the spaceship
-  title: 
-  img: {fileID: 0}
-  audio: {fileID: 0}
   answers: []
-  conditionalAnswer: 0
-  additionalAnswer: 
+  conditionalAnswer:
+    dialogue: 
+    isValid: 0
 --- !u!114 &3619902342217902986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,22 +357,21 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -200, y: 72}
+  position: {x: -200, y: 24}
   ports:
     keys:
     - input
     - answers
     - conditionalAnswer
     - answers 0
-    - answers 1
     values:
     - _fieldName: input
       _node: {fileID: 3619902342217902986}
-      _typeQualifiedName: Aurore.DialogSystem.Connection, StatusUnknown.Tools.Narrative,
+      _typeQualifiedName: StatusUnknown.Tools.Narrative.Connection, StatusUnknown.Tools.Narrative,
         Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: answers 1
-        node: {fileID: -297802684859051533}
+        node: {fileID: 1323829809305765338}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -272,8 +389,8 @@ MonoBehaviour:
       _dynamic: 0
     - _fieldName: conditionalAnswer
       _node: {fileID: 3619902342217902986}
-      _typeQualifiedName: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
+      _typeQualifiedName: StatusUnknown.Tools.Narrative.Data, StatusUnknown.Tools.Narrative,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
       connections: []
       _direction: 0
       _connectionType: 0
@@ -285,75 +402,16 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: input
-        node: {fileID: -6037929680399807410}
+        node: {fileID: 748836987596491962}
         reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 1
-    - _fieldName: answers 1
-      _node: {fileID: 3619902342217902986}
-      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
   initiator: My name should be of little interest to you. Contrary to an offer I'd
     like to give you
-  title: 
-  img: {fileID: 0}
-  audio: {fileID: 0}
   answers:
   - I am all ears
-  - 
-  conditionalAnswer: 0
-  additionalAnswer: 
---- !u!114 &8897620741294726878
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2b66ae2370716b468bdbe16e8121859, type: 3}
-  m_Name: Dialog Comparison
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000}
-  position: {x: -1208, y: 312}
-  ports:
-    keys:
-    - ownedQuestObject
-    - result
-    values:
-    - _fieldName: ownedQuestObject
-      _node: {fileID: 8897620741294726878}
-      _typeQualifiedName: StatusUnknown.Content.Narrative.QuestObjectSO, StatusUnknown.Tools.Narrative,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      connections: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: result
-      _node: {fileID: 8897620741294726878}
-      _typeQualifiedName: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: conditionalAnswer
-        node: {fileID: -297802684859051533}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-  source: 20
-  target: 16
-  ownedQuestObject: {fileID: 11400000, guid: 843bcccac192e6b4aaaad23c1ceb5614, type: 2}
-  requiredQuestObject: {fileID: 11400000, guid: 843bcccac192e6b4aaaad23c1ceb5614,
-    type: 2}
-  comparisonType: 6
-  result: 1
+  conditionalAnswer:
+    dialogue: 
+    isValid: 0

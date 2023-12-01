@@ -3,9 +3,13 @@ using UnityEngine;
 
 namespace Aurore.DialogSystem
 {
+    public enum DialogueType { AutoTrigger, Manual }
+
     public class DialogueComponent : MonoBehaviour
     {
+        [Header("Dialogue Data")]
         [SerializeField] protected TMP_Text dialogueTitle;
+        [SerializeField] private DialogueType dialogueType;
 
         [Space, SerializeField] private DialogGraph dialogueGraph;
         [SerializeField] private AudioClip audioMumblingVoice;

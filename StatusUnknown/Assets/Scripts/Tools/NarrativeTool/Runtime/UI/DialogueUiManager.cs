@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using StatusUnknown.Tools.Narrative; 
 
 namespace Aurore.DialogSystem
 {
@@ -60,15 +61,7 @@ namespace Aurore.DialogSystem
             //simpleDialog.transform.GetChild(0).GetComponent<TMP_Text>().text = node.content;
         }
 
-        protected sealed override void UpdateDialogueFull(DialogueNode node)
-        {
-            //Display
-            simpleDialog.SetActive(false);
-            fullDialogue.SetActive(true);
-            //Text, Image modification
-            
-            //TODO : Start playing audio if needed
-        }
+        protected sealed override void UpdateDialogueFull(DialogueNode node) { }
 
         protected override void HideAnswersUI(bool b) => answer.SetActive(!b);
 

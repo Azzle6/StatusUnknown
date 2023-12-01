@@ -1,6 +1,6 @@
 ﻿namespace Aurore.DialogSystem
 {
-    public enum DialogueType
+    public enum DialogueVersion
     {
         Simple, 
         Full,

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using StatusUnknown.Tools.Narrative; 
 using static XNode.Node;
 
 namespace Aurore.DialogSystem
@@ -48,7 +49,7 @@ namespace Aurore.DialogSystem
             _waitLetter = new WaitForSeconds(waitTimeLetter);
         }
 
-        private void Start()
+        protected virtual void Start()
         {
             SetActivationState(); 
         }
@@ -59,7 +60,7 @@ namespace Aurore.DialogSystem
         /// <param name="root">The root node of a DialogGraph</param>
         /// <param name="voice"></param>
         /// <exception cref="NullReferenceException">Thrown if the given node is null</exception>
-        public void Init(DialogueNode root, AudioClip voice = null)
+        public virtual void Init(DialogueNode root, AudioClip voice = null)
         {
             // ReSharper disable once JoinNullCheckWithUsage
             if (root is null) throw new NullReferenceException("Root element of a graph must not be null !");
@@ -79,7 +80,7 @@ namespace Aurore.DialogSystem
             endButtonObj.SetActive(false);
         }
 
-        private void UpdatePlayerQuestJournal()
+        public virtual void UpdatePlayerQuestJournal()
         {
             Debug.Log("updating quest journal");
 
@@ -144,17 +145,7 @@ namespace Aurore.DialogSystem
             }
 
             //Displaying content sequence
-            switch (currentNode.GetDialogueType())
-            {
-                case DialogueType.Simple:
-                    UpdateDialogueSimple(currentNode);
-                    break;
-                case DialogueType.Full:
-                    UpdateDialogueFull(currentNode);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            UpdateDialogueSimple(currentNode);           
             
             //Deal with answers
             canBeSkipped = !currentNode.HasAnswers();
@@ -239,6 +230,11 @@ namespace Aurore.DialogSystem
         {
             var node = DialogGraph.GetNext(currentNode, index);
             UpdateDialogue(node);
+        }
+
+        public void OnBackButtonClicked()
+        {
+            var node = DialogGraph.GetPrevious(currentNode); 
         }
 
         /// <summary>
