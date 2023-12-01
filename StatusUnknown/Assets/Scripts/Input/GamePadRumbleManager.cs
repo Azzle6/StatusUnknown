@@ -1,7 +1,6 @@
-using Player;
-
 namespace Input
 {
+    using Player;
     using System.Collections;
     using UnityEngine.InputSystem;
     using UnityEngine;
@@ -11,6 +10,8 @@ namespace Input
     {
         public static IEnumerator ExecuteRumbleWithTime(GamePadRumbleWithTimer rumbleData, bool stopRumbleAfter, float proportion = 1)
         {
+            if (Gamepad.current == null)
+                yield break;
             float timer = 0;
             float lowFrequency;
             float highFrequency;
@@ -29,11 +30,15 @@ namespace Input
         
         public static void ExecuteRumbleWithoutTime(GamePadRumbleWithoutTimer rumbleData)
         {
+            if (Gamepad.current == null)
+                return;
             Gamepad.current.SetMotorSpeeds(rumbleData.lowFrequency, rumbleData.highFrequency);
         }
     
         public static void StopRumble()
         {
+            if (Gamepad.current == null)
+                return;
             Gamepad.current.SetMotorSpeeds(0, 0);
         }
 
