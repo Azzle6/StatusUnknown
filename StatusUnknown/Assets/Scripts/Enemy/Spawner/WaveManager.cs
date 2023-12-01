@@ -14,10 +14,11 @@ public class WaveManager : MonoBehaviour
     [SerializeField] bool startOnAwake;
     private void Awake()
     {
-        foreach (WaveContext waveContext in waveContexts)
+        for (int i = 0; i < waveContexts.Length; i++)
         {
-            waveContextQueue.Enqueue(waveContext);
+            waveContextQueue.Enqueue(waveContexts[i]);
         }
+
         if (startOnAwake)
             StartWaveProcess();
     }
@@ -58,7 +59,7 @@ public class WaveManager : MonoBehaviour
     }
 }
 [System.Serializable]
-public struct WaveContext
+public class WaveContext
 {
     public float initialDelay;
     public Wave wave;
