@@ -8,6 +8,7 @@ namespace Weapon
     using UnityEngine;
     using Core.Pooler;
     using System;
+    using Combat.HitProcess;
     using Unity.Mathematics;
     
     public class PhotonPistol : RangedWeapon

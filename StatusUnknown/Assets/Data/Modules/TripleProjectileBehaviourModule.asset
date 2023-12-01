@@ -23,7 +23,7 @@ MonoBehaviour:
     localPosition: {x: 1, y: 0}
     direction: 3
   BehaviourData:
-    rid: 4696495337976365402
+    rid: 7591883733765456138
   references:
     version: 2
     RefIds:
@@ -31,24 +31,27 @@ MonoBehaviour:
       type: {class: HorizontalInstantiationRule, ns: Module, asm: Assembly-CSharp}
       data:
         Length: 3
-    - rid: 4696495337976365396
-      type: {class: HitSphere, ns: , asm: Assembly-CSharp}
-      data:
-        radius: 0.1
-    - rid: 4696495337976365402
+    - rid: 7591883733765456138
       type: {class: ProjectileBehaviourData, ns: Module.Definitions, asm: Assembly-CSharp}
       data:
         <TickRate>k__BackingField: 0
         <LayerMask>k__BackingField:
           serializedVersion: 2
           m_Bits: 385
-        <Behaviour>k__BackingField: {fileID: 11500000, guid: 52ad6006665b33347bc6db8216731b6c, type: 3}
+        <Behaviour>k__BackingField:
+          scriptAsset: {fileID: 11500000, guid: 52ad6006665b33347bc6db8216731b6c, type: 3}
+          typeName: Module.Behaviours.Projectiles.BasicProjectileBehaviour, Assembly-CSharp,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         <Quantity>k__BackingField: 3
         <InstantiationRule>k__BackingField:
           rid: 4696495337976365329
-        <HitShape>k__BackingField:
-          rid: 4696495337976365396
+        <CollisionShape>k__BackingField:
+          rid: 7591883733765456139
         <Mesh>k__BackingField: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
         <Material>k__BackingField: {fileID: -876546973899608171, guid: 4a77fad0a2c502e42adef107b7ea51ea, type: 3}
+        <Damages>k__BackingField: 5
         speed: 1
-        damages: 5
+    - rid: 7591883733765456139
+      type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
+      data:
+        radius: 0.1

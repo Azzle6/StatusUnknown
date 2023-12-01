@@ -5,7 +5,8 @@ namespace Module.Behaviours
     using Definitions;
     using UnityEngine;
 
-    public abstract class InstantiatedModule : MonoBehaviour
+    [Serializable]
+    public abstract class InstantiatedModule : MonoBehaviour, ITest
     {
         private CompiledModule compiledModule;
         private IBehaviourData behaviourData;
@@ -80,7 +81,7 @@ namespace Module.Behaviours
         #region UTILITIES
         protected Collider[] CheckCollisions()
         {
-            Collider[] result = this.behaviourData.HitShape.DetectColliders(this.transform.position, this.transform.rotation,
+            Collider[] result = this.behaviourData.CollisionShape.DetectColliders(this.transform.position, this.transform.rotation,
                 this.behaviourData.LayerMask);
 
             return result;
@@ -126,4 +127,6 @@ namespace Module.Behaviours
             this.LastHit = lastHit;
         }
     }
+    
+    public interface ITest{}
 }

@@ -10,7 +10,7 @@ namespace Module.Behaviours.Projectiles
 
         protected override void OnInit()
         {
-            this.currentDamages = this.Data.damages;
+            this.currentDamages = this.Data.Damages;
         }
         
         protected override void CollisionBehaviour()
@@ -33,9 +33,8 @@ namespace Module.Behaviours.Projectiles
                 Vector3 closestPoint = col.ClosestPoint(this.transform.position);
                 this.OnHitEvent?.Invoke(new InstantiatedModuleInfo(closestPoint, quaternion.Euler(closestPoint - this.transform.position), col));
                 
-                Debug.Log("Wave hit");
                 this.collisionsRemaining--;
-                this.currentDamages -= this.Data.damages * 0.15f;
+                this.currentDamages -= this.Data.Damages * 0.15f;
                 if(this.collisionsRemaining <= 0)
                     Destroy(this.gameObject);
             }

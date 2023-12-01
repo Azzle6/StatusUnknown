@@ -43,7 +43,7 @@ namespace Module.Behaviours
                 Collider firstCollider = collisions[0];
                 IDamageable damageable = firstCollider.GetComponent<IDamageable>();
                 if(damageable != null)
-                    damageable.TakeDamage(this.Data.damages, Vector3.zero);
+                    damageable.TakeDamage(this.Data.Damages, Vector3.zero);
                 
                 Vector3 closestPoint = firstCollider.ClosestPoint(this.transform.position);
                 this.OnHitEvent?.Invoke(new InstantiatedModuleInfo(closestPoint, transform.rotation, firstCollider));

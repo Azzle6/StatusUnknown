@@ -1,8 +1,10 @@
 namespace Module.Behaviours
 {
+    using System;
     using Definitions;
     using UnityEngine;
 
+    [Serializable]
     public class InstantiatedZoneModule : InstantiatedModule
     {
         protected ZoneBehaviourData Data;
@@ -19,7 +21,7 @@ namespace Module.Behaviours
             {
                 IDamageable damageable = col.GetComponent<IDamageable>();
                 if(damageable != null)
-                    damageable.TakeDamage(this.Data.damages, Vector3.zero);
+                    damageable.TakeDamage(this.Data.Damages, Vector3.zero);
                 
                 Vector3 closestPoint = col.ClosestPoint(this.transform.position);
                 this.OnHitEvent?.Invoke(new InstantiatedModuleInfo(closestPoint, transform.rotation, col));

@@ -1,15 +1,15 @@
 namespace Module.Behaviours.Zone
 {
-    using UnityEngine;
+    using System;
 
+    [Serializable]
     public class PulsarZoneBehaviour : InstantiatedZoneModule
     {
-        private int remainingPulses = 4;
+        public int remainingPulses = 4;
         
         protected override void OnTick()
         {
             this.CollisionBehaviour();
-            Debug.Log("Pulse");
             this.remainingPulses--;
             if(this.remainingPulses <= 0)
                 Destroy(this.gameObject);

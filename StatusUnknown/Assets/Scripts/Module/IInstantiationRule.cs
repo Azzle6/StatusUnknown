@@ -30,6 +30,8 @@ namespace Module
         [Range(0,180)]
         public float angle;
         public bool regular;
+        [Tooltip("Change the range of instantiation position. Use it to make it spawn further or at random position in the radius.")]
+        public float radius;
         public ElementPositionInfo[] GetInstantiationInfo(Vector3 pos, Quaternion curRotation, int quantity)
         {
             ElementPositionInfo[] result = new ElementPositionInfo[quantity];
@@ -50,7 +52,10 @@ namespace Module
 
                 Quaternion baseRotation = Quaternion.AngleAxis(curAngle, relativeUp);
                 Quaternion finalRotation = Quaternion.LookRotation(baseRotation * relativeForward);
-                result[i] = new ElementPositionInfo(pos, finalRotation);
+
+                Vector3 finalPosition = pos + finalRotation * Vector3.forward * (this.regular ? this.radius : UnityEngine.Random.Range(0, this.radius));
+                
+                result[i] = new ElementPositionInfo(finalPosition, finalRotation);
             }
             
             return result;

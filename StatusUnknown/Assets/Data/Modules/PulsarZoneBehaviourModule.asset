@@ -23,30 +23,39 @@ MonoBehaviour:
     localPosition: {x: 1, y: 0}
     direction: 3
   BehaviourData:
-    rid: 4696495337976365379
+    rid: 7591883733765456126
   references:
     version: 2
     RefIds:
     - rid: 4696495337976365338
       type: {class: ForwardInstantiationRule, ns: Module, asm: Assembly-CSharp}
       data: 
-    - rid: 4696495337976365344
-      type: {class: HitSphere, ns: , asm: Assembly-CSharp}
+    - rid: 7591883733765456125
+      type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
       data:
-        radius: 1
-    - rid: 4696495337976365379
+        radius: 0.1
+    - rid: 7591883733765456126
       type: {class: ZoneBehaviourData, ns: Module.Definitions, asm: Assembly-CSharp}
       data:
         <TickRate>k__BackingField: 1
         <LayerMask>k__BackingField:
           serializedVersion: 2
           m_Bits: 129
-        <Behaviour>k__BackingField: {fileID: 11500000, guid: d663e04b0952640499463adfa3b86c85, type: 3}
+        <Behaviour>k__BackingField:
+          scriptAsset: {fileID: 11500000, guid: d663e04b0952640499463adfa3b86c85, type: 3}
+          typeName: Module.Behaviours.Zone.PulsarZoneBehaviour, Assembly-CSharp,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         <Quantity>k__BackingField: 1
         <InstantiationRule>k__BackingField:
           rid: 4696495337976365338
-        <HitShape>k__BackingField:
-          rid: 4696495337976365344
+        <CollisionShape>k__BackingField:
+          rid: 7591883733765456125
         <Mesh>k__BackingField: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
         <Material>k__BackingField: {fileID: -7097115718587537635, guid: ecdbcec36b1082e468192d3cd665f4a9, type: 3}
-        damages: 5
+        <Damages>k__BackingField: 0
+        damageZone:
+          rid: 7591883733765456127
+    - rid: 7591883733765456127
+      type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
+      data:
+        radius: 1

@@ -1,8 +1,8 @@
 namespace Module.Definitions
 {
     using System;
+    using Core.Helpers;
     using Sirenix.OdinInspector;
-    using UnityEditor;
     using UnityEngine;
 
     [CreateAssetMenu(menuName = "CustomAssets/Definitions/BehaviourModuleDefinition", fileName = "BehaviourModuleDefinition")]
@@ -15,25 +15,26 @@ namespace Module.Definitions
 
     public interface IBehaviourData
     {
-        public MonoScript Behaviour { get; set; }
+        public ScriptReference Behaviour { get; set; }
         public int Quantity { get; set; }
         public IInstantiationRule InstantiationRule { get; set; }
         public float TickRate { get; set; }
         public LayerMask LayerMask { get; set; }
-        public HitShape HitShape { get; set; }
+        public HitShape CollisionShape { get; set; }
         public Mesh Mesh { get; set; }
         public Material Material { get; set; }
+        public float Damages { get; set; }
     }
     
     [Serializable]
     public struct ProjectileBehaviourData : IBehaviourData
     {
-        [BoxGroup("General stats")][Tooltip("Type -1 to disable Ticker.")] [field: SerializeField]
+        [BoxGroup("General stats")][Tooltip("Type 0 to disable Ticker.")] [field: SerializeField]
         public float TickRate { get; set; }
         [BoxGroup("General stats")] [field: SerializeField]
         public LayerMask LayerMask { get; set; }
         [BoxGroup("General stats")] [field: SerializeField]
-        public MonoScript Behaviour { get; set; }
+        public ScriptReference Behaviour { get; set; }
         
         [BoxGroup("Instantiation")] [field: SerializeField]
         public int Quantity { get; set; }
@@ -41,17 +42,17 @@ namespace Module.Definitions
         public IInstantiationRule InstantiationRule { get; set; }
         
         [BoxGroup("General stats")][field:SerializeReference]
-        public HitShape HitShape { get; set; }
+        public HitShape CollisionShape { get; set; }
         
         [BoxGroup("Visual")] [field: SerializeField]
         public Mesh Mesh { get; set; }
         [BoxGroup("Visual")] [field: SerializeField]
         public Material Material { get; set; }
         
-        [BoxGroup("Definition")] 
+        [BoxGroup("Definition")] [field: SerializeField]
+        public float Damages { get; set; }
+        [BoxGroup("Definition")] [field: SerializeField]
         public float speed;
-        [BoxGroup("Definition")]
-        public float damages;
     }
 
     [Serializable]
@@ -62,7 +63,7 @@ namespace Module.Definitions
         [BoxGroup("General stats")] [field: SerializeField]
         public LayerMask LayerMask { get; set; }
         [BoxGroup("General stats")] [field: SerializeField]
-        public MonoScript Behaviour { get; set; }
+        public ScriptReference Behaviour { get; set; }
         
         [BoxGroup("Instantiation")] [field: SerializeField]
         public int Quantity { get; set; }
@@ -70,14 +71,16 @@ namespace Module.Definitions
         public IInstantiationRule InstantiationRule { get; set; }
         
         [BoxGroup("General stats")] [field:SerializeReference]
-        public HitShape HitShape { get; set; }
+        public HitShape CollisionShape { get; set; }
         
         [BoxGroup("Visual")] [field: SerializeField]
         public Mesh Mesh { get; set; }
         [BoxGroup("Visual")] [field: SerializeField]
         public Material Material { get; set; }
-
-        public float damages;
+        [BoxGroup("Definition")] [field: SerializeField]
+        public float Damages { get; set; }
+        [BoxGroup("Definition")] [field:SerializeReference]
+        public HitShape damageZone;
     }
 
     public struct ElementPositionInfo
