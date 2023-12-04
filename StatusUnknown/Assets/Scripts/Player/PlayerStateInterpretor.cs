@@ -72,6 +72,13 @@ namespace Player
             statesSlot[playerStateType].lockState = false;
             statesSlot[playerStateType] = null;
         }
+
+        public void RemoveAllState()
+        {
+            RemoveState(PlayerStateType.AIM);
+            RemoveState(PlayerStateType.MOVEMENT);
+            RemoveState(PlayerStateType.ACTION);
+        }
         public bool CheckState(PlayerStateType playerStateType, string playerStateName)
         {
             if (statesSlot[playerStateType] == null)  

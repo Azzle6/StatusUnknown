@@ -23,7 +23,9 @@ namespace Augment
             {
                 if (currentAugments[x] == default)
                     break;
-                PlayerInfoUIHandler.Instance.UpdateAugmentIcon(x,currentAugments[x].augmentSprite);
+
+                currentAugments[x].GetAugmentStat().augmentSlot = x;
+                currentAugments[x].augmentDataGameEvent.RaiseEvent(currentAugments[x].GetAugmentStat());
             }
         }
 
@@ -36,7 +38,6 @@ namespace Augment
                 return;
 
             currentAugments[AugmentIndex].ActionPressed();
-            PlayerInfoUIHandler.Instance.AugmentUsed(AugmentIndex, currentAugments[AugmentIndex].augmentCooldown);
         }
         
     }

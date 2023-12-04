@@ -1,5 +1,3 @@
-
-
 namespace Augment
 {
     using UnityEngine;
@@ -17,6 +15,7 @@ namespace Augment
         }
         public override void ActionPressed()
         {
+            base.ActionPressed();
             Physics.Raycast(augmentManager.PlayerStateInterpretor.transform.position, augmentManager.PlayerStateInterpretor.transform.forward, out RaycastHit hit, dashStat.dashLength);
             if (hit.collider != default)
             {
@@ -27,8 +26,14 @@ namespace Augment
             {
                 augmentManager.PlayerStateInterpretor.transform.DOMove(augmentManager.PlayerStateInterpretor.transform.position + augmentManager.PlayerStateInterpretor.transform.forward * dashStat.dashLength, dashStat.dashDuration);
             }
+            augmentDataGameEvent.RaiseEvent(dashStat);
 
             StartCoroutine(AugmentCooldownCoroutine());
+        }
+
+        public override AugmentStat GetAugmentStat() 
+        {
+            return dashStat;
         }
 
         public override IEnumerator AugmentCooldownCoroutine()

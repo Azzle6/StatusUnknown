@@ -1,10 +1,13 @@
+using Core;
+using Interactable;
+
 namespace Player
 {
     using UnityEngine;
     using UnityEngine.InputSystem;
 
 
-    public class PlayerAction : MonoBehaviour
+    public class PlayerAction : MonoSingleton<PlayerAction>
     {
        [SerializeField] private PlayerInputController playerInputController;
        [SerializeField] private PlayerStateInterpretor playerStateInterpretor;
@@ -23,7 +26,7 @@ namespace Player
             DisableEvent();
         }
 
-        private void EnableEvent()
+        public void EnableEvent()
         {
             playerInputController.OnMovement += OnMove;
             playerInputController.OnAimK += OnAimK;
@@ -36,8 +39,9 @@ namespace Player
             playerInputController.OnWeapon += OnWeapon;
         }
 
-        private void DisableEvent()
+        public void DisableEvent()
         {
+            playerStateInterpretor.RemoveAllState();
             playerInputController.OnMovement -= OnMove;
             playerInputController.OnAimK -= OnAimK;
             playerInputController.OnAimG -= OnAimG;

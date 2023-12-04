@@ -15,6 +15,7 @@ namespace Interactable
     [System.Serializable]
     public class TeleporterData
     {
+        public string sceneName;
         public Vector3 teleporterPos;
     }
 

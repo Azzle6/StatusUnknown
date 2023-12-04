@@ -8,8 +8,9 @@ namespace Weapon
     using Combat.HitProcess;
     using Unity.Mathematics;
     using UnityEngine.VFX;
+    using Weapons;
 
-    
+
     public class PhotonPistol : RangedWeapon
     {
         [SerializeField] private PhotonPistolStat stat;
@@ -130,11 +131,13 @@ namespace Weapon
             
             shootingVFX.Play();
             tempPhotonPistolBulletTr.transform.parent = null;
-            tempPhotonPistolBullet.Launch(currentDamage, spawnPoint.forward, stat.projectileSpeed);
+            tempPhotonPistolBullet.Launch(currentDamage, spawnPoint.forward, stat.projectileSpeed, this.inventory.GetWeaponTriggerData(this.weaponDefinition, E_WeaponOutput.ON_HIT).compiledModules.FirstModule);
             tempPhotonPistolBulletTr.TryGetComponent(out HitContext tempHitContext);
             HitSphere tempHitSphere = tempHitContext.hitShape as HitSphere;
             tempHitSphere.radius = tempPhotonPistolBulletTr.localScale.y / 2;
             tempHitContext.HitTriggerEvent += tempPhotonPistolBullet.Hit;
+            
+            this.CastModule(E_WeaponOutput.ON_SPAWN, this.spawnPoint);
             
             tempPhotonPistolBulletTr = default;
             tempPhotonPistolBullet = default;
@@ -157,6 +160,7 @@ namespace Weapon
             if (reloading != default)
                 return;
             
+            this.CastModule(E_WeaponOutput.ON_RELOAD, this.spawnPoint);
             weaponManager.rigLHand.weight = 0;
             weaponManager.rigRHand.weight = 0;
             mesh.transform.parent = weaponManager.rHandTr;

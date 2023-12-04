@@ -1,7 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Map/MapFocus.uss?fileID=7433441132597879392&amp;guid=05d6fd43690e9c8478c5dc97f5af3c50&amp;type=3#MapFocus" />
     <ui:VisualElement name="MapContainer" style="flex-grow: 1; align-items: center; width: 100%; height: 100%; flex-direction: row; background-color: rgba(255, 255, 255, 0);">
         <ui:VisualElement name="MapButton" style="align-items: flex-start; flex-direction: column; width: 10%; height: 100%; align-self: flex-start; background-color: rgba(41, 178, 52, 0.73);">
-            <ui:RadioButtonGroup label="Radio Button Group" name="RadioButtonMapGroup" style="flex-direction: column; height: 100%; width: 100%;">
+            <ui:RadioButtonGroup label="Map : " name="RadioButtonMapGroup" style="flex-direction: column; height: 100%; width: 100%;">
                 <ui:RadioButton label="Radio Button" />
                 <ui:RadioButton label="Radio Button" />
             </ui:RadioButtonGroup>
