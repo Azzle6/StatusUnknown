@@ -62,7 +62,11 @@ MonoBehaviour:
   m_RenderPipelineResources: {fileID: 11400000, guid: 3ce144cff5783da45aa5d4fdc2da14b7, type: 2}
   m_RenderPipelineRayTracingResources: {fileID: 11400000, guid: ba6e7f30e5cffc249a8bf7ee5756c196, type: 2}
   beforeTransparentCustomPostProcesses: []
-  beforePostProcessCustomPostProcesses: []
+  beforePostProcessCustomPostProcesses:
+  - UnityEngine.Rendering.HighDefinition.Compositor.ChromaKeying, Unity.RenderPipelines.HighDefinition.Runtime,
+    Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - UnityEngine.Rendering.HighDefinition.Compositor.AlphaInjection, Unity.RenderPipelines.HighDefinition.Runtime,
+    Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   afterPostProcessBlursCustomPostProcesses: []
   afterPostProcessCustomPostProcesses: []
   beforeTAACustomPostProcesses: []
@@ -107,6 +111,10 @@ MonoBehaviour:
       bounds:
         m_Center: {x: -540, y: -202.5, z: -135}
         m_Extent: {x: 675, y: 472.5, z: 405}
+    - sceneGUID: 56526538771da8143942d42f20b2e173
+      bounds:
+        m_Center: {x: 0, y: 0, z: 0}
+        m_Extent: {x: 540, y: 270, z: 270}
     serializedHasVolumes:
     - sceneGUID: ce31f14eba0f1044386249b739363569
       hasProbeVolumes: 1
@@ -115,6 +123,8 @@ MonoBehaviour:
     - sceneGUID: 6796a816deced43449d2c124d7519332
       hasProbeVolumes: 1
     - sceneGUID: df83e9ff973a5974689893ae91efcc7a
+      hasProbeVolumes: 1
+    - sceneGUID: 56526538771da8143942d42f20b2e173
       hasProbeVolumes: 1
     serializedProfiles:
     - sceneGUID: ce31f14eba0f1044386249b739363569
@@ -127,6 +137,8 @@ MonoBehaviour:
       profile: {fileID: 11400000, guid: 8444c98bd469cad4cb4fb69f907e63f0, type: 2}
     - sceneGUID: e5895b77048200342abecfea820c8265
       profile: {fileID: 11400000, guid: 8444c98bd469cad4cb4fb69f907e63f0, type: 2}
+    - sceneGUID: 56526538771da8143942d42f20b2e173
+      profile: {fileID: 11400000, guid: 7cf59c44956aa754fa9fd922fe0857fb, type: 2}
     serializedBakeSettings:
     - sceneGUID: ce31f14eba0f1044386249b739363569
       settings:
@@ -218,11 +230,28 @@ MonoBehaviour:
           collisionMask:
             serializedVersion: 2
             m_Bits: 4294967291
+    - sceneGUID: 56526538771da8143942d42f20b2e173
+      settings:
+        m_Version: 1
+        dilationSettings:
+          enableDilation: 1
+          dilationDistance: 10
+          dilationValidityThreshold: 0.25
+          dilationIterations: 1
+          squaredDistWeighting: 1
+        virtualOffsetSettings:
+          useVirtualOffset: 1
+          outOfGeoOffset: 0.01
+          searchMultiplier: 0.2
+          rayOriginBias: -0.001
+          maxHitsPerRay: 10
+          collisionMask:
+            serializedVersion: 2
+            m_Bits: 4294967291
     serializedBakingSets:
     - name: Baking Set Test
       sceneGUIDs:
       - ce31f14eba0f1044386249b739363569
-      - e5895b77048200342abecfea820c8265
       - df83e9ff973a5974689893ae91efcc7a
       settings:
         m_Version: 1
@@ -267,7 +296,30 @@ MonoBehaviour:
       profile: {fileID: 11400000, guid: b58935d87aecea5498214d39a66cefd3, type: 2}
       lightingScenarios:
       - New Lighting Scenario
-    m_LightingScenario: New Lighting Scenario
+    - name: LA 100
+      sceneGUIDs:
+      - 56526538771da8143942d42f20b2e173
+      settings:
+        m_Version: 1
+        dilationSettings:
+          enableDilation: 1
+          dilationDistance: 10
+          dilationValidityThreshold: 0.25
+          dilationIterations: 1
+          squaredDistWeighting: 1
+        virtualOffsetSettings:
+          useVirtualOffset: 1
+          outOfGeoOffset: 0.01
+          searchMultiplier: 0.2
+          rayOriginBias: -0.001
+          maxHitsPerRay: 10
+          collisionMask:
+            serializedVersion: 2
+            m_Bits: 4294967291
+      profile: {fileID: 11400000, guid: 7cf59c44956aa754fa9fd922fe0857fb, type: 2}
+      lightingScenarios:
+      - Lighting scenario 1
+    m_LightingScenario: Lighting Scenario Test
   m_Version: 5
   m_ShaderVariantLogLevel: 0
   m_ExportShaderVariants: 1
