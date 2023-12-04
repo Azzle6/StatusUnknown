@@ -1,15 +1,16 @@
+
+
+namespace Map
+{
+using System.Collections.Generic;
+using UnityEngine;
 using Core;
+using Core.SingletonsSO;
 using Interactable;
 using Player;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
-
-namespace Map
-{
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
     public class TeleporterUIManager : MonoSingleton<TeleporterUIManager>
     {
@@ -22,6 +23,8 @@ using UnityEngine;
         private VisualElement tempVisualElement;
         private RadioButtonGroup mapRadioButtonGroup;
         private string tempString;
+        private List<Button> currentMapButtons = new List<Button>();
+        private Teleporter currentTeleporter;
 
         private void Awake()
         {
@@ -29,14 +32,22 @@ using UnityEngine;
             mapRadioButtonGroup = mapsUIDoc.rootVisualElement.Q<RadioButtonGroup>("RadioButtonMapGroup");
             mapsUIDoc.rootVisualElement.style.display = DisplayStyle.None;
         }
-        public void Display()
+        public void Display(Teleporter teleporter)
         {
+            currentTeleporter = teleporter;
             mapsUIDoc.rootVisualElement.style.display = DisplayStyle.Flex;
+            PlayerAction.Instance.DisableEvent();
             FetchCurrentMap();
             LoadRadioButton();
             mapRadioButtonGroup.RegisterCallback<ChangeEvent<int>>(OnRadioButtonChanged);
-            eventSystem.SetSelectedGameObject(gameObject);
             PlayerInfoUIHandler.Instance.Hide();
+        }
+
+        private void Hide()
+        {
+            mapRadioButtonGroup.UnregisterCallback<ChangeEvent<int>>(OnRadioButtonChanged);
+            mapsUIDoc.rootVisualElement.style.display = DisplayStyle.None;
+
         }
 
         private void LoadRadioButton()
@@ -50,21 +61,46 @@ using UnityEngine;
                 var radioButton = new RadioButton();
                 radioButton.text = mapData.sceneName;
                 mapRadioButtonGroup.Add(radioButton);
+                radioButton.focusable = true;
                 radioButtonMapData[radioButton] = mapData;
-
-                // Vérifiez si le nom de la scène de la carte correspond au nom de la scène actuelle
+                
                 if (mapData.sceneName == tempString)
                 {
                     selectedIndex = i;
                 }
             }
-
-            // Si une correspondance a été trouvée, définissez le bouton radio sélectionné
+            
             if (selectedIndex != -1)
             {
                 mapRadioButtonGroup.SetValueWithoutNotify(selectedIndex);
+                UIHandler.Instance.ForceFocus(mapRadioButtonGroup.ElementAt(0));
             }
         }
+
+        private void LoadMapButton()
+        {
+            currentMapButtons.Clear();
+            VisualElement map = tempVisualElement.Q<VisualElement>("Map");
+            for (int x = 0; x < map.childCount; x++)
+            {
+                map.ElementAt(x).Q<Button>().RegisterCallback<ClickEvent>(OnTpButton);
+            }
+
+        }
+        private void OnTpButton(ClickEvent clickEvent)
+        {
+            Button clickedButton = (Button)clickEvent.currentTarget;
+            VisualElement parent = clickedButton.parent;
+            int index = parent.IndexOf(clickedButton);
+            currentTeleporter.ReceiveTeleporterData(mapEncyclopedia.tpMapData[tempString].teleporterData[index]);
+            mapDisplay.Clear();
+            mapRadioButtonGroup.Clear();
+
+            Hide();
+        }
+
+
+        
         private void OnRadioButtonChanged(ChangeEvent<int> evt)
         {
             RadioButton selectedRadioButton = (RadioButton)mapRadioButtonGroup.ElementAt(evt.newValue);
@@ -78,6 +114,8 @@ using UnityEngine;
             tempVisualTreeAsset = mapData.sceneMap;
             tempVisualElement = tempVisualTreeAsset.CloneTree();
             mapDisplay.Add(tempVisualElement);
+            LoadMapButton();
+            tempString = mapData.sceneName;
             tempVisualElement.style.width = Length.Percent(100);
             tempVisualElement.style.height = Length.Percent(100);
         }
@@ -87,11 +125,13 @@ using UnityEngine;
         private void FetchCurrentMap()
         {
             tempString = SceneManager.GetActiveScene().name;
+            mapDisplay.Clear();
             if (mapEncyclopedia.tpMapData.ContainsKey(tempString))
             {
                 tempVisualTreeAsset = mapEncyclopedia.tpMapData[tempString].sceneMap;
                 tempVisualElement = tempVisualTreeAsset.CloneTree();
                 mapDisplay.Add(tempVisualElement);
+                LoadMapButton();
                 tempVisualElement.style.width = Length.Percent(100);
                 tempVisualElement.style.height = Length.Percent(100);
             }
@@ -100,7 +140,8 @@ using UnityEngine;
                 Debug.LogError("No map data found for the active scene.");
             }
         }
-        
+
+
     }
 }
 

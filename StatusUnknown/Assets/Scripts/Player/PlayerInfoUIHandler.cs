@@ -11,8 +11,6 @@ namespace Player
     using DG.Tweening;
     using Weapon;
     using Core;
-
-    
     
     public class PlayerInfoUIHandler : MonoSingleton<PlayerInfoUIHandler>
     {

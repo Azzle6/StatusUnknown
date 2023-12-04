@@ -79,9 +79,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5894863403822994359, guid: 380783d3efad2554e9b2a40828ed2e58, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: -5477749408508380018, guid: 380783d3efad2554e9b2a40828ed2e58, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: -3756473180518285571, guid: 380783d3efad2554e9b2a40828ed2e58, type: 3}
+      propertyPath: m_Name
+      value: Sad
+      objectReference: {fileID: 0}
+    - target: {fileID: -3756473180518285571, guid: 380783d3efad2554e9b2a40828ed2e58, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1823322365421230674, guid: 380783d3efad2554e9b2a40828ed2e58, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 380783d3efad2554e9b2a40828ed2e58, type: 3}
       propertyPath: m_Name
@@ -126,6 +142,9 @@ MonoBehaviour:
   mapEncyclopedia: {fileID: 11400000, guid: 7a774a088f3fa7d4ea3fac3f37414a30, type: 2}
   teleporterSas: {fileID: 4328507077838794823}
   teleportPoint: {fileID: 892156004779679203}
+  sasFallingTime: 2
+  sasEndPos: 4
+  sasOpenPos: 20
 --- !u!65 &8310958252929273034
 BoxCollider:
   m_ObjectHideFlags: 0
