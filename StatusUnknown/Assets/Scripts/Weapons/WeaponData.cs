@@ -6,6 +6,7 @@ namespace Weapons
     using Inventory.Containers;
     using Inventory.Item;
     using Module;
+    using Module.Definitions;
     using Sirenix.OdinInspector;
     using UnityEngine.Serialization;
 
@@ -49,7 +50,7 @@ namespace Weapons
     [Serializable]
     public class WeaponTriggerData : IItemsDataContainer
     {
-        [FormerlySerializedAs("triggerType")] public WeaponTriggerSO weaponTriggerType;
+        public E_WeaponOutput weaponTriggerType;
         public int triggerRowPosition;
         public VectorIntModuleDictionary modules;
         public ModuleCompilation compiledModules;

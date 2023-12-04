@@ -1,10 +1,16 @@
 namespace Weapon
 {
+    using Inventory;
+    using Module.Behaviours;
     using Player;
     using UnityEngine;
+    using Weapons;
+
     public abstract class Weapon : MonoBehaviour
     {
         public WeaponManager weaponManager;
+        public PlayerInventorySO inventory;
+        public WeaponDefinitionSO weaponDefinition;
         public PlayerStat playerStat;
         public Sprite weaponSprite;
         public WeaponType weaponType;
@@ -22,7 +28,22 @@ namespace Weapon
         
         public abstract void RestWeapon();
 
+        protected void CastModule(E_WeaponOutput trigger, Transform spawnPoint)
+        {
+            WeaponTriggerData data = this.inventory.GetWeaponTriggerData(this.weaponDefinition, trigger);
+            this.CompileModules(data);
+            ModuleBehaviourHandler.Instance.InstantiateModuleBehaviour(
+                data.compiledModules.FirstModule,
+                new InstantiatedModuleInfo(spawnPoint.position, spawnPoint.rotation));
+        }
         
+        private void CompileModules(WeaponTriggerData data)
+        {
+            if (data.compiledModules.FirstModule != null)
+                return;
+            
+            data.compiledModules.CompileWeaponModules(data.triggerRowPosition, data.modules);
+        }
 
         public abstract void Hit();
 

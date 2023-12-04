@@ -1,10 +1,10 @@
-
-
 namespace Weapon
 {
     using UnityEngine;
     using System.Collections;
     using Core.Pooler;
+    using Module;
+    using Module.Behaviours;
     using UnityEngine.VFX;
     
     public class Projectile : MonoBehaviour
@@ -16,6 +16,8 @@ namespace Weapon
         private VisualEffect tempHitVFX;
         public float knockbackStrength = 10f;
         public float lifeTime = 5f;
+
+        private CompiledModule moduleToCast;
         
         private void OnEnable()
         {
@@ -28,10 +30,11 @@ namespace Weapon
             StopAllCoroutines();
         }
         
-        public void Launch(float damage, Vector3 direction, float speed)
+        public void Launch(float damage, Vector3 direction, float speed, CompiledModule moduleToCast)
         {
             this.damage = damage;
             rb.velocity = direction * speed;
+            this.moduleToCast = moduleToCast;
         }
     
         public void Hit(IDamageable target)
@@ -41,6 +44,10 @@ namespace Weapon
             tempHitVFX.transform.position = transform.position;
             tempHitVFX.Play();
             target.TakeDamage(damage, transform.forward * knockbackStrength);
+            
+            ModuleBehaviourHandler.Instance.InstantiateModuleBehaviour(
+                this.moduleToCast,
+                new InstantiatedModuleInfo(transform.position, transform.rotation));
 
             ComponentPooler.Instance.ReturnObjectToPool(this);
         } 
