@@ -3,11 +3,18 @@ namespace Module.Behaviours
     using Core;
     using Definitions;
     using UnityEngine;
+    using Weapons;
 
     public class ModuleBehaviourHandler : MonoSingleton<ModuleBehaviourHandler>
     {
         public void InstantiateModuleBehaviour(CompiledModule compiledModule, InstantiatedModuleInfo info)
         {
+            if (compiledModule == null)
+            {
+                Debug.Log("Try to trigger null module.");
+                return;
+            }
+            
             ModuleDefinitionSO moduleDefinition = compiledModule.module.definition;
             
             if (moduleDefinition.ModuleType != E_ModuleType.BEHAVIOUR)

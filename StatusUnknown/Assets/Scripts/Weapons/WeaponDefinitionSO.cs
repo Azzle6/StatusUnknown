@@ -4,6 +4,7 @@ namespace Weapons
     using Inventory;
     using Inventory.Item;
     using Module;
+    using Module.Definitions;
     using UnityEngine;
     using UnityEngine.Serialization;
 
@@ -17,8 +18,15 @@ namespace Weapons
     [Serializable]
     public struct WeaponTriggerDefinition
     {
-        [FormerlySerializedAs("trigger")] public WeaponTriggerSO weaponTrigger;
+        public E_WeaponOutput weaponTrigger;
         public int triggerRowPosition;
         public Shape shape;
+    }
+
+    public enum E_WeaponOutput
+    {
+        ON_HIT,
+        ON_SPAWN,
+        ON_RELOAD
     }
 }
