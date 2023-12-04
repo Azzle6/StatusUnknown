@@ -23,7 +23,7 @@ MonoBehaviour:
     localPosition: {x: 1, y: 0}
     direction: 3
   BehaviourData:
-    rid: 7591883733765456126
+    rid: 7591883797994668090
   references:
     version: 2
     RefIds:
@@ -34,7 +34,11 @@ MonoBehaviour:
       type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
       data:
         radius: 0.1
-    - rid: 7591883733765456126
+    - rid: 7591883797994668088
+      type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
+      data:
+        radius: 1
+    - rid: 7591883797994668090
       type: {class: ZoneBehaviourData, ns: Module.Definitions, asm: Assembly-CSharp}
       data:
         <TickRate>k__BackingField: 1
@@ -53,9 +57,7 @@ MonoBehaviour:
         <Mesh>k__BackingField: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
         <Material>k__BackingField: {fileID: -7097115718587537635, guid: ecdbcec36b1082e468192d3cd665f4a9, type: 3}
         <Damages>k__BackingField: 0
-        damageZone:
-          rid: 7591883733765456127
-    - rid: 7591883733765456127
-      type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
-      data:
-        radius: 1
+        DamageZone:
+          rid: 7591883797994668088
+        zoneBurstVFX: {fileID: 8926484042661614526, guid: bbce1fbc9a357924b840873589eb3330, type: 3}
+        hitVFX: {fileID: 8926484042661614526, guid: 4dec6f1bfffe9e9498776c6635cf1bc4, type: 3}

@@ -23,14 +23,18 @@ MonoBehaviour:
     localPosition: {x: 1, y: 0}
     direction: 3
   BehaviourData:
-    rid: 7591883733765456140
+    rid: 7591883797994668086
   references:
     version: 2
     RefIds:
     - rid: 4696495337976365324
       type: {class: ForwardInstantiationRule, ns: Module, asm: Assembly-CSharp}
       data: 
-    - rid: 7591883733765456140
+    - rid: 7591883733765456141
+      type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
+      data:
+        radius: 0.2
+    - rid: 7591883797994668086
       type: {class: ProjectileBehaviourData, ns: Module.Definitions, asm: Assembly-CSharp}
       data:
         <TickRate>k__BackingField: 0
@@ -46,11 +50,10 @@ MonoBehaviour:
           rid: 4696495337976365324
         <CollisionShape>k__BackingField:
           rid: 7591883733765456141
-        <Mesh>k__BackingField: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
-        <Material>k__BackingField: {fileID: -876546973899608171, guid: 4a77fad0a2c502e42adef107b7ea51ea, type: 3}
         <Damages>k__BackingField: 5
         speed: 2
-    - rid: 7591883733765456141
-      type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
-      data:
-        radius: 0.2
+        <Mesh>k__BackingField: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+        <Material>k__BackingField: {fileID: -876546973899608171, guid: 4a77fad0a2c502e42adef107b7ea51ea, type: 3}
+        shootVFX: {fileID: 8926484042661614526, guid: 8e39f5fe11c0c6246a8151305e60416a, type: 3}
+        projectileVFX: {fileID: 8926484042661614526, guid: e5eef9a98be2bfa48946832d79ddc614, type: 3}
+        hitVFX: {fileID: 8926484042661614526, guid: fa43a22012dffb64a9b05920820bcde7, type: 3}

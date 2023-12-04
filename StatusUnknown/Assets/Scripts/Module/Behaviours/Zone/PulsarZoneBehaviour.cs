@@ -9,7 +9,7 @@ namespace Module.Behaviours.Zone
         
         protected override void OnTick()
         {
-            this.CollisionBehaviour();
+            this.ApplyZoneDamage();
             this.remainingPulses--;
             if(this.remainingPulses <= 0)
                 Destroy(this.gameObject);

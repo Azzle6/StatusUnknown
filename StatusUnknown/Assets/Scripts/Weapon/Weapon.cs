@@ -31,23 +31,15 @@ namespace Weapon
         protected void CastModule(E_WeaponOutput trigger, Transform spawnPoint)
         {
             WeaponTriggerData data = this.inventory.GetWeaponTriggerData(this.weaponDefinition, trigger);
-            this.CompileModules(data);
+            if(data == null)
+                return;
+            
             ModuleBehaviourHandler.Instance.InstantiateModuleBehaviour(
                 data.compiledModules.FirstModule,
                 new InstantiatedModuleInfo(spawnPoint.position, spawnPoint.rotation));
         }
-        
-        private void CompileModules(WeaponTriggerData data)
-        {
-            if (data.compiledModules.FirstModule != null)
-                return;
-            
-            data.compiledModules.CompileWeaponModules(data.triggerRowPosition, data.modules);
-        }
 
         public abstract void Hit();
-
-        
     }
 
 }

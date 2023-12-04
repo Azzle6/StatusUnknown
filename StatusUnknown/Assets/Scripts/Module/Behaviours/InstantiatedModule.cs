@@ -2,8 +2,10 @@ namespace Module.Behaviours
 {
     using System;
     using System.Collections;
+    using Core.Pooler;
     using Definitions;
     using UnityEngine;
+    using UnityEngine.VFX;
 
     [Serializable]
     public abstract class InstantiatedModule : MonoBehaviour, ITest
@@ -21,9 +23,6 @@ namespace Module.Behaviours
             this.compiledModule = compiledModule;
             this.transform.position = info.TriggeredPosition;
             this.transform.rotation = info.Rotation;
-            
-            this.gameObject.AddComponent<MeshFilter>().mesh = data.Mesh;
-            this.gameObject.AddComponent<MeshRenderer>().material = data.Material;
 
             foreach (var trigger in this.compiledModule.triggersNextModule)
             {
@@ -76,6 +75,8 @@ namespace Module.Behaviours
 
         protected virtual void OnFixedUpdate()
         { }
+        
+        protected abstract void CollisionBehaviour();
         #endregion
         
         #region UTILITIES
@@ -87,7 +88,7 @@ namespace Module.Behaviours
             return result;
         }
 
-        protected abstract void CollisionBehaviour();
+        
         #endregion
 
         private void TriggerNextModule(CompiledModule nextModule, InstantiatedModuleInfo info)

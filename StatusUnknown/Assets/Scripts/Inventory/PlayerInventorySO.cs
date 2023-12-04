@@ -19,6 +19,8 @@ namespace Inventory
                     {
                         if (triggerData.weaponTriggerType == output)
                         {
+                            if(triggerData.compiledModules.FirstModule == null)
+                                triggerData.compiledModules.CompileWeaponModules(triggerData.triggerRowPosition, triggerData.modules);
                             return triggerData;
                         }
                     }

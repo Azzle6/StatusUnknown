@@ -47,7 +47,7 @@ namespace Module.Behaviours
             {
                 //var scriptClass = data.Behaviour.GetClass();
                 InstantiatedModule module = new GameObject("module", data.Behaviour.ScriptType).GetComponent<InstantiatedModule>();
-                module.Init(compiledModule, new InstantiatedModuleInfo(positions[i].Position, positions[i].Rotation), data);
+                module.Init(compiledModule, new InstantiatedModuleInfo(positions[i].Position, positions[i].Rotation, info.LastHit), data);
             }
         }
     }

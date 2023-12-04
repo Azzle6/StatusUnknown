@@ -1,9 +1,11 @@
 namespace Module.Definitions
 {
     using System;
+    using Combat.HitProcess;
     using Core.Helpers;
     using Sirenix.OdinInspector;
     using UnityEngine;
+    using UnityEngine.VFX;
 
     [CreateAssetMenu(menuName = "CustomAssets/Definitions/BehaviourModuleDefinition", fileName = "BehaviourModuleDefinition")]
     public class BehaviourModuleDefinitionSO : ModuleDefinitionSO
@@ -29,58 +31,69 @@ namespace Module.Definitions
     [Serializable]
     public struct ProjectileBehaviourData : IBehaviourData
     {
-        [BoxGroup("General stats")][Tooltip("Type 0 to disable Ticker.")] [field: SerializeField]
+        [field: SerializeField]
         public float TickRate { get; set; }
-        [BoxGroup("General stats")] [field: SerializeField]
+        [field: SerializeField]
         public LayerMask LayerMask { get; set; }
-        [BoxGroup("General stats")] [field: SerializeField]
+        [field: SerializeField]
         public ScriptReference Behaviour { get; set; }
         
-        [BoxGroup("Instantiation")] [field: SerializeField]
+        [field: SerializeField]
         public int Quantity { get; set; }
-        [BoxGroup("Instantiation")] [field: SerializeReference]
+        [field: SerializeReference]
         public IInstantiationRule InstantiationRule { get; set; }
         
-        [BoxGroup("General stats")][field:SerializeReference]
+        [field:SerializeReference]
         public HitShape CollisionShape { get; set; }
         
-        [BoxGroup("Visual")] [field: SerializeField]
-        public Mesh Mesh { get; set; }
-        [BoxGroup("Visual")] [field: SerializeField]
-        public Material Material { get; set; }
-        
-        [BoxGroup("Definition")] [field: SerializeField]
+        [field: SerializeField]
         public float Damages { get; set; }
-        [BoxGroup("Definition")] [field: SerializeField]
+        [field: SerializeField]
         public float speed;
+        
+        [field: SerializeField]
+        public Mesh Mesh { get; set; }
+        [field: SerializeField]
+        public Material Material { get; set; }
+
+        [SerializeField] 
+        public VisualEffectAsset shootVFX;
+        [SerializeField] 
+        public VisualEffectAsset projectileVFX;
+        [SerializeField] 
+        public VisualEffectAsset hitVFX;
     }
 
     [Serializable]
     public struct ZoneBehaviourData : IBehaviourData
     {
-        [BoxGroup("General stats")][Tooltip("Type -1 to disable Ticker.")] [field: SerializeField]
+        [field: SerializeField]
         public float TickRate { get; set; }
-        [BoxGroup("General stats")] [field: SerializeField]
+        [field: SerializeField]
         public LayerMask LayerMask { get; set; }
-        [BoxGroup("General stats")] [field: SerializeField]
+        [field: SerializeField]
         public ScriptReference Behaviour { get; set; }
         
-        [BoxGroup("Instantiation")] [field: SerializeField]
+        [field: SerializeField]
         public int Quantity { get; set; }
-        [BoxGroup("General stats")] [field: SerializeReference]
+        [field: SerializeReference]
         public IInstantiationRule InstantiationRule { get; set; }
         
-        [BoxGroup("General stats")] [field:SerializeReference]
+        [field:SerializeReference]
         public HitShape CollisionShape { get; set; }
         
-        [BoxGroup("Visual")] [field: SerializeField]
+        [field: SerializeField]
         public Mesh Mesh { get; set; }
-        [BoxGroup("Visual")] [field: SerializeField]
+        [field: SerializeField]
         public Material Material { get; set; }
-        [BoxGroup("Definition")] [field: SerializeField]
+        [field: SerializeField]
         public float Damages { get; set; }
-        [BoxGroup("Definition")] [field:SerializeReference]
-        public HitShape damageZone;
+        [SerializeField]
+        public HitSphere DamageZone;
+        [SerializeField]
+        public VisualEffectAsset zoneBurstVFX;
+        [SerializeField]
+        public VisualEffectAsset hitVFX;
     }
 
     public struct ElementPositionInfo
