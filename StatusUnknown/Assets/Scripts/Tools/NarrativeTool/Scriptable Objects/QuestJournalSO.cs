@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,8 +7,16 @@ namespace StatusUnknown.Content.Narrative
     [CreateAssetMenu(fileName = "Quest Journal", menuName = "Status Unknown/Narrative/Quest Journal")]
     public class QuestJournalSO : ScriptableObject
     {
-        [SerializeField] private List<QuestSO> activeQuests;
-        private QuestSO cachedQuest; 
+        public List<QuestSO> activeQuests = new List<QuestSO>();
+        private QuestSO cachedQuest;
+
+        public List<QuestSO> CompletedQuests = new List<QuestSO>();
+        public Action<int, Faction, QuestObjectSO> OnQuestCompletion; 
+
+        public void Init(Action<int, Faction, QuestObjectSO> OnQuestCompletionCallback)
+        {
+            OnQuestCompletion = OnQuestCompletionCallback;
+        }
 
         public void AddQuest(QuestSO questToAdd)
         {
@@ -27,14 +36,23 @@ namespace StatusUnknown.Content.Narrative
 
         public bool QuestIsDone(QuestSO quest)
         {
-            if (!activeQuests.Contains(quest))
-            {
-                Debug.LogError("Quest was not found in list"); 
-                return false;
-            }
-            
+            if (!activeQuests.Contains(quest)) return false;
             cachedQuest = quest;
+
+            if (quest.QuestObjectIsRetrieved)
+            {
+                CompletedQuests.Add(quest);
+            }
+
             return cachedQuest.QuestObjectIsRetrieved; 
+        }
+
+        public void GiveRewardOnQuestCompletion()
+        {
+            foreach (QuestSO quest in CompletedQuests)
+            {
+                OnQuestCompletion.Invoke(quest.ReputationCompletionBonus, quest.FactionQuestGiver, quest.QuestReward);
+            }
         }
 
         /* public bool QuestObjectWasRetrieved(QuestObjectSO questObj)

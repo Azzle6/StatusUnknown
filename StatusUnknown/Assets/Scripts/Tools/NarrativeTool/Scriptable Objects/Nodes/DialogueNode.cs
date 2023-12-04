@@ -1,8 +1,11 @@
-﻿using Sirenix.OdinInspector;
+﻿using Aurore.DialogSystem;
+using Sirenix.OdinInspector;
 using StatusUnknown.Content.Narrative;
 using System;
 using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 using XNode;
 
@@ -35,26 +38,35 @@ namespace StatusUnknown.Tools.Narrative
         }       
     }
 
-    [Serializable]
-	public struct Input {}
     public enum AccessType { Get, Set }
 
     [NodeWidth(400), NodeTint(20, 120, 20)]
     [CreateNodeMenu("Dialogue Node")]
-    public class DialogueNode : Node
+    public class DialogueNode : Node 
     {
+        // INodeState
 
-        [Input, SerializeField] public Input input;
-        [TextArea] public string initiator;
+        [SerializeField] private bool isRootNode; // PLACEHOLDER
+
+        [Serializable] public class State { }
+
+        [Input, SerializeField] protected State execIn = null;
+        [Output, SerializeField] protected State execOut = null; 
+
+        [TextArea] public string dialogueOpening;
 
         [Output(dynamicPortList = true), SerializeField] public List<DialogueLine> DialogueLines; 
-        public List<string> Answers { get; private set; }
+        public List<string> Answers { get; private set; } // move this to DialogGraph if getting errors in built mode
 
         [Input, SerializeField] public DialogueLine conditionalAnswer;
-		private bool conditionIsValid = false; 
+		private bool conditionIsValid = false;
+
+        // protected INodeState NodeStateInterface { get; private set; }
 
         protected override void Init()
         {
+            if (EditorApplication.isUpdating || EditorApplication.isCompiling) return; 
+
             base.Init();
 
             if (EditorApplication.isPlayingOrWillChangePlaymode || Application.isPlaying)
@@ -66,7 +78,13 @@ namespace StatusUnknown.Tools.Narrative
                     Answers.Add(item.answer); 
                 }
             }
+
+            //NodeStateInterface = this; 
         }
+
+        public bool IsRootNode() => isRootNode; 
+
+        // public virtual INodeState TryGetInterface() => NodeStateInterface;
 
         public override void OnCreateConnection(NodePort from, NodePort to)
         {
@@ -112,7 +130,40 @@ namespace StatusUnknown.Tools.Narrative
 		public bool HasAnswers()
 		{
 			return DialogueLines.Count != 0 && (DialogueLines.Count != 1 || !DialogueLines[0].Equals(""));
-		}
-	}
+        }
+
+        public virtual void MoveNext()
+        {
+            DialogGraph dialogGraph = graph as DialogGraph;
+
+            if (dialogGraph.CurrentNode != this)
+            {
+                Debug.LogWarning("Node isn't active");
+                return;
+            }
+
+            NodePort exitPort = GetOutputPort("execOut");
+
+            if (!exitPort.IsConnected)
+            {
+                Debug.LogWarning("Node isn't connected");
+                return;
+            }
+
+            DialogueNode node = exitPort.Connection.node as DialogueNode;
+            node.OnEnter();
+        }
+
+        public virtual void OnEnter()
+        {
+            DialogGraph fmGraph = graph as DialogGraph;
+            fmGraph.CurrentNode = this;
+        } 
+
+        public virtual void OnExit()
+        {
+            // 
+        }
+    }
 }
 

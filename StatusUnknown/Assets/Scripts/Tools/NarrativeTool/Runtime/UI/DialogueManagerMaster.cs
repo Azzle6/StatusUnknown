@@ -17,15 +17,12 @@ namespace Aurore.DialogSystem
         [Space, SerializeField] protected GameObject startButtonObj;
         [SerializeField] protected GameObject endButtonObj;
 
-        [Header("Quest Handling")]
-        [Space, SerializeField] private QuestJournalSO questJournal;
-        [SerializeField, Output] private QuestSO givenQuest;
-
         private bool questFieldIsNull = true;
         private bool questRemoved = false;
 
         protected DialogueNode currentNode;
         protected bool canBeSkipped = false;
+        protected bool answersAreAllLeafs = false; 
 
         [Header("Events")]
         [Space, SerializeField] protected UnityEvent startDialogueEvent;
@@ -63,8 +60,8 @@ namespace Aurore.DialogSystem
         public virtual void Init(DialogueNode root, AudioClip voice = null)
         {
             // ReSharper disable once JoinNullCheckWithUsage
-            if (root is null) throw new NullReferenceException("Root element of a graph must not be null !");
-            if (root.GetInputPort("input").IsConnected) throw new MonoRootDialogGraphException($"The provided node in {currentNode.graph.name} is not a Root !!!");
+            if (root == null) throw new NullReferenceException("Root element of a graph must not be null !");
+            if (root.GetInputPort("execIn").IsConnected) throw new MonoRootDialogGraphException($"The provided node in {currentNode.graph.name} is not a Root !!!");
 
             if (voice) _source.clip = voice;
 
@@ -78,29 +75,6 @@ namespace Aurore.DialogSystem
         {
             startButtonObj.SetActive(true);
             endButtonObj.SetActive(false);
-        }
-
-        public virtual void UpdatePlayerQuestJournal()
-        {
-            Debug.Log("updating quest journal");
-
-            if (!questFieldIsNull)
-            {
-                Debug.Log("adding quest");
-                questRemoved = false;
-                questJournal.AddQuest(givenQuest);
-            }
-            else
-            {
-                if (!questRemoved)
-                {
-                    Debug.Log("removing quest");
-                    questRemoved = true;
-                    questJournal.RemoveQuest(givenQuest);
-                }
-            }
-
-            questFieldIsNull = givenQuest == null;
         }
 
         #region Start & End Logic
@@ -145,10 +119,20 @@ namespace Aurore.DialogSystem
             }
 
             //Displaying content sequence
-            UpdateDialogueSimple(currentNode);           
-            
+            UpdateDialogueSimple(currentNode);
+
             //Deal with answers
-            canBeSkipped = !currentNode.HasAnswers();
+            canBeSkipped = currentNode.HasAnswers() == false;
+
+            answersAreAllLeafs = false; 
+            foreach (var dynamicOutputs in currentNode.DynamicOutputs) 
+            {
+                if (dynamicOutputs.IsConnected == false)
+                {
+                    answersAreAllLeafs = true; 
+                }
+            }
+
             DealWithAnswers();
         }
 
@@ -158,13 +142,16 @@ namespace Aurore.DialogSystem
         /// <param name="node">The current node</param>
         protected virtual void DealWithAnswers()
         {
-            if(canBeSkipped)
+            if (canBeSkipped)
             {
                 HideAnswersUI(true);
-                OnFinalSentenceTypingDone(); 
                 return;
+            } 
+            else if (answersAreAllLeafs)
+            {
+                OnFinalSentenceTypingDone();
             }
-            
+
             UpdateAnswers(currentNode.Answers);
         }
 

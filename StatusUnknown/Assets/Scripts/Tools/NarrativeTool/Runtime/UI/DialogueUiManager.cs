@@ -57,7 +57,7 @@ namespace Aurore.DialogSystem
             //Text Modification
             var tmp = simpleDialog.transform.GetChild(0).GetComponent<TMP_Text>();
             StopCoroutine(TypeSentence(tmp.text, tmp));
-            StartCoroutine(TypeSentence(node.initiator, tmp));
+            StartCoroutine(TypeSentence(node.dialogueOpening, tmp));
             //simpleDialog.transform.GetChild(0).GetComponent<TMP_Text>().text = node.content;
         }
 
@@ -82,7 +82,6 @@ namespace Aurore.DialogSystem
                 {
                     child.gameObject.SetActive(false);
                 }
-                
             }
         }
 

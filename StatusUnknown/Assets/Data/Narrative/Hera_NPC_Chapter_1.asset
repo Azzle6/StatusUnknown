@@ -1,5 +1,106 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5001946028926808084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90e58730e7e85b946a2d4dffc29306e9, type: 3}
+  m_Name: Quest Journal
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 360, y: 232}
+  ports:
+    keys:
+    - result
+    - execIn
+    - execOut
+    - DialogueLines
+    - conditionalAnswer
+    - DialogueLines 0
+    values:
+    - _fieldName: result
+      _node: {fileID: -5001946028926808084}
+      _typeQualifiedName: UnityEngine.ScriptableObject, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: execIn
+      _node: {fileID: -5001946028926808084}
+      _typeQualifiedName: StatusUnknown.Tools.Narrative.DialogueNode+State, StatusUnknown.Tools.Narrative,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: execOut
+        node: {fileID: -1814068090054664416}
+        reroutePoints: []
+      - fieldName: DialogueLines 0
+        node: {fileID: -1814068090054664416}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: execOut
+      _node: {fileID: -5001946028926808084}
+      _typeQualifiedName: StatusUnknown.Tools.Narrative.DialogueNode+State, StatusUnknown.Tools.Narrative,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: DialogueLines
+      _node: {fileID: -5001946028926808084}
+      _typeQualifiedName: System.Collections.Generic.List`1[[StatusUnknown.Tools.Narrative.DialogueLine,
+        StatusUnknown.Tools.Narrative, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],
+        mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: conditionalAnswer
+      _node: {fileID: -5001946028926808084}
+      _typeQualifiedName: StatusUnknown.Tools.Narrative.DialogueLine, StatusUnknown.Tools.Narrative,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: DialogueLines 0
+      _node: {fileID: -5001946028926808084}
+      _typeQualifiedName: StatusUnknown.Tools.Narrative.DialogueLine, StatusUnknown.Tools.Narrative,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 1
+  isRootNode: 0
+  dialogueOpening: Go and retreive and old medallion from the northern room, and
+    bring it back to me
+  DialogueLines:
+  - answer: I'll be on my way then
+    isOptionalDialogue: 0
+    icon: {fileID: 0}
+    optionalGameplayEffect: {fileID: 0}
+  conditionalAnswer:
+    answer: 
+    isOptionalDialogue: 0
+    icon: {fileID: 0}
+    optionalGameplayEffect: {fileID: 0}
+  accessType: 1
+  playerQuestJournal: {fileID: 11400000, guid: fd04ab0cf72aba14d96176eb1d17eed2, type: 2}
+  questToGive: {fileID: 11400000, guid: a586a2eafa4bad943a6cb8c26af4b6de, type: 2}
+  result: {fileID: 11400000, guid: a586a2eafa4bad943a6cb8c26af4b6de, type: 2}
 --- !u!114 &-3266888839501301425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13,24 +114,12 @@ MonoBehaviour:
   m_Name: Validation
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -1128, y: 104}
+  position: {x: -936, y: 24}
   ports:
     keys:
-    - input
     - result
+    - input
     values:
-    - _fieldName: input
-      _node: {fileID: -3266888839501301425}
-      _typeQualifiedName: StatusUnknown.Tools.Narrative.DialogueLine, StatusUnknown.Tools.Narrative,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      connections:
-      - fieldName: result
-        node: {fileID: 1712406976630609570}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
     - _fieldName: result
       _node: {fileID: -3266888839501301425}
       _typeQualifiedName: StatusUnknown.Tools.Narrative.DialogueLine, StatusUnknown.Tools.Narrative,
@@ -40,6 +129,18 @@ MonoBehaviour:
         node: {fileID: 8170788157396569288}
         reroutePoints: []
       _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: input
+      _node: {fileID: -3266888839501301425}
+      _typeQualifiedName: StatusUnknown.Tools.Narrative.DialogueLine, StatusUnknown.Tools.Narrative,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: result
+        node: {fileID: 1712406976630609570}
+        reroutePoints: []
+      _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
@@ -69,26 +170,15 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -200, y: 136}
+  position: {x: -184, y: 184}
   ports:
     keys:
-    - input
     - DialogueLines
     - conditionalAnswer
     - DialogueLines 0
+    - execOut
+    - execIn
     values:
-    - _fieldName: input
-      _node: {fileID: -1814068090054664416}
-      _typeQualifiedName: StatusUnknown.Tools.Narrative.Input, StatusUnknown.Tools.Narrative,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      connections:
-      - fieldName: DialogueLines 1
-        node: {fileID: 8170788157396569288}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
     - _fieldName: DialogueLines
       _node: {fileID: -1814068090054664416}
       _typeQualifiedName: System.Collections.Generic.List`1[[StatusUnknown.Tools.Narrative.DialogueLine,
@@ -113,15 +203,43 @@ MonoBehaviour:
       _typeQualifiedName: StatusUnknown.Tools.Narrative.DialogueLine, StatusUnknown.Tools.Narrative,
         Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
       connections:
-      - fieldName: input
-        node: {fileID: 748836987596491962}
+      - fieldName: execIn
+        node: {fileID: -5001946028926808084}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  initiator: My name should be of little interest to you. Contrary to an offer I'd
-    like to give you
+    - _fieldName: execOut
+      _node: {fileID: -1814068090054664416}
+      _typeQualifiedName: StatusUnknown.Tools.Narrative.DialogueNode+State, StatusUnknown.Tools.Narrative,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: execIn
+        node: {fileID: -5001946028926808084}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: execIn
+      _node: {fileID: -1814068090054664416}
+      _typeQualifiedName: StatusUnknown.Tools.Narrative.DialogueNode+State, StatusUnknown.Tools.Narrative,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: execOut
+        node: {fileID: 8170788157396569288}
+        reroutePoints: []
+      - fieldName: DialogueLines 1
+        node: {fileID: 8170788157396569288}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  isRootNode: 0
+  dialogueOpening: My name should be of little interest to you. Contrary to an offer
+    I'd like to make..
   DialogueLines:
   - answer: I am all ears
     isOptionalDialogue: 0
@@ -146,111 +264,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodes:
   - {fileID: 1831340819866683008}
-  - {fileID: 748836987596491962}
   - {fileID: 1712406976630609570}
   - {fileID: -3266888839501301425}
   - {fileID: 8170788157396569288}
   - {fileID: -1814068090054664416}
-  hasQuests: 1
-  quests:
+  - {fileID: -5001946028926808084}
+  playerData: {fileID: 11400000, guid: 2674b3c5ad339de458610a2683a206dd, type: 2}
+  dialogueHasQuests: 1
+  completableQuests:
   - {fileID: 11400000, guid: a586a2eafa4bad943a6cb8c26af4b6de, type: 2}
-  playerQuestJournal: {fileID: 11400000, guid: fd04ab0cf72aba14d96176eb1d17eed2, type: 2}
---- !u!114 &748836987596491962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90e58730e7e85b946a2d4dffc29306e9, type: 3}
-  m_Name: Quest Journal
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000}
-  position: {x: 280, y: 264}
-  ports:
-    keys:
-    - input
-    - conditionalAnswer
-    - answers 0
-    - result
-    - DialogueLines
-    - DialogueLines 0
-    values:
-    - _fieldName: input
-      _node: {fileID: 748836987596491962}
-      _typeQualifiedName: StatusUnknown.Tools.Narrative.Input, StatusUnknown.Tools.Narrative,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      connections:
-      - fieldName: DialogueLines 0
-        node: {fileID: -1814068090054664416}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: conditionalAnswer
-      _node: {fileID: 748836987596491962}
-      _typeQualifiedName: StatusUnknown.Tools.Narrative.DialogueLine, StatusUnknown.Tools.Narrative,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      connections: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: answers 0
-      _node: {fileID: 748836987596491962}
-      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 1
-    - _fieldName: result
-      _node: {fileID: 748836987596491962}
-      _typeQualifiedName: UnityEngine.ScriptableObject, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: DialogueLines
-      _node: {fileID: 748836987596491962}
-      _typeQualifiedName: System.Collections.Generic.List`1[[StatusUnknown.Tools.Narrative.DialogueLine,
-        StatusUnknown.Tools.Narrative, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],
-        mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-      connections: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: DialogueLines 0
-      _node: {fileID: 748836987596491962}
-      _typeQualifiedName: StatusUnknown.Tools.Narrative.DialogueLine, StatusUnknown.Tools.Narrative,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      connections: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 1
-  initiator: I just added the informations to your quest journal
-  DialogueLines:
-  - answer: I'll be on my way then !
-    isOptionalDialogue: 0
-    icon: {fileID: 0}
-    optionalGameplayEffect: {fileID: 0}
-  conditionalAnswer:
-    answer: 
-    isOptionalDialogue: 0
-    icon: {fileID: 0}
-    optionalGameplayEffect: {fileID: 0}
-  accessType: 1
-  playerQuestJournal: {fileID: 11400000, guid: fd04ab0cf72aba14d96176eb1d17eed2, type: 2}
-  questToGive: {fileID: 11400000, guid: a586a2eafa4bad943a6cb8c26af4b6de, type: 2}
-  result: {fileID: 11400000, guid: a586a2eafa4bad943a6cb8c26af4b6de, type: 2}
+  CurrentDialogueQuestsDone: 0
 --- !u!114 &1712406976630609570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,10 +287,14 @@ MonoBehaviour:
   m_Name: Quest
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -1528, y: 312}
+  position: {x: -1080, y: 248}
   ports:
     keys:
     - result
+    - DialogueLines
+    - conditionalAnswer
+    - execOut
+    - execIn
     values:
     - _fieldName: result
       _node: {fileID: 1712406976630609570}
@@ -281,9 +308,55 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
+    - _fieldName: DialogueLines
+      _node: {fileID: 1712406976630609570}
+      _typeQualifiedName: System.Collections.Generic.List`1[[StatusUnknown.Tools.Narrative.DialogueLine,
+        StatusUnknown.Tools.Narrative, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],
+        mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: conditionalAnswer
+      _node: {fileID: 1712406976630609570}
+      _typeQualifiedName: StatusUnknown.Tools.Narrative.DialogueLine, StatusUnknown.Tools.Narrative,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: execOut
+      _node: {fileID: 1712406976630609570}
+      _typeQualifiedName: StatusUnknown.Tools.Narrative.DialogueNode+State, StatusUnknown.Tools.Narrative,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: execIn
+      _node: {fileID: 1712406976630609570}
+      _typeQualifiedName: StatusUnknown.Tools.Narrative.DialogueNode+State, StatusUnknown.Tools.Narrative,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  isRootNode: 0
+  dialogueOpening: 
+  DialogueLines: []
+  conditionalAnswer:
+    answer: 
+    isOptionalDialogue: 0
+    icon: {fileID: 0}
+    optionalGameplayEffect: {fileID: 0}
   accessType: 0
   quest: {fileID: 11400000, guid: a586a2eafa4bad943a6cb8c26af4b6de, type: 2}
-  questObject: {fileID: 11400000, guid: 843bcccac192e6b4aaaad23c1ceb5614, type: 2}
+  newQuestObject: {fileID: 11400000, guid: 866cb82553e6c83408db0bf97d9d26c4, type: 2}
+  newQuestReward: {fileID: 11400000, guid: 843bcccac192e6b4aaaad23c1ceb5614, type: 2}
   result:
     answer: I have the object you asked me to retrieve
     isOptionalDialogue: 0
@@ -310,23 +383,11 @@ MonoBehaviour:
   position: {x: -200, y: -248}
   ports:
     keys:
-    - input
     - conditionalAnswer
     - DialogueLines
-    - DialogueLines 0
+    - execOut
+    - execIn
     values:
-    - _fieldName: input
-      _node: {fileID: 1831340819866683008}
-      _typeQualifiedName: StatusUnknown.Tools.Narrative.Input, StatusUnknown.Tools.Narrative,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      connections:
-      - fieldName: DialogueLines 0
-        node: {fileID: 8170788157396569288}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
     - _fieldName: conditionalAnswer
       _node: {fileID: 1831340819866683008}
       _typeQualifiedName: StatusUnknown.Tools.Narrative.DialogueLine, StatusUnknown.Tools.Narrative,
@@ -346,21 +407,33 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-    - _fieldName: DialogueLines 0
+    - _fieldName: execOut
       _node: {fileID: 1831340819866683008}
-      _typeQualifiedName: StatusUnknown.Tools.Narrative.DialogueLine, StatusUnknown.Tools.Narrative,
+      _typeQualifiedName: StatusUnknown.Tools.Narrative.DialogueNode+State, StatusUnknown.Tools.Narrative,
         Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
       connections: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0
-      _dynamic: 1
-  initiator: On the main engine room of the spaceship
-  DialogueLines:
-  - answer: 
-    isOptionalDialogue: 0
-    icon: {fileID: 0}
-    optionalGameplayEffect: {fileID: 0}
+      _dynamic: 0
+    - _fieldName: execIn
+      _node: {fileID: 1831340819866683008}
+      _typeQualifiedName: StatusUnknown.Tools.Narrative.DialogueNode+State, StatusUnknown.Tools.Narrative,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: execOut
+        node: {fileID: 8170788157396569288}
+        reroutePoints: []
+      - fieldName: DialogueLines 0
+        node: {fileID: 8170788157396569288}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  isRootNode: 0
+  dialogueOpening: On the main engine room of an old spaceship
+  DialogueLines: []
   conditionalAnswer:
     answer: 
     isOptionalDialogue: 0
@@ -379,25 +452,17 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -712, y: -280}
+  position: {x: -856, y: -424}
   ports:
     keys:
-    - input
     - DialogueLines
     - conditionalAnswer
     - DialogueLines 0
     - DialogueLines 1
+    - execOut
+    - execIn
     - DialogueLines 2
     values:
-    - _fieldName: input
-      _node: {fileID: 8170788157396569288}
-      _typeQualifiedName: StatusUnknown.Tools.Narrative.Input, StatusUnknown.Tools.Narrative,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      connections: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
     - _fieldName: DialogueLines
       _node: {fileID: 8170788157396569288}
       _typeQualifiedName: System.Collections.Generic.List`1[[StatusUnknown.Tools.Narrative.DialogueLine,
@@ -425,7 +490,7 @@ MonoBehaviour:
       _typeQualifiedName: StatusUnknown.Tools.Narrative.DialogueLine, StatusUnknown.Tools.Narrative,
         Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
       connections:
-      - fieldName: input
+      - fieldName: execIn
         node: {fileID: 1831340819866683008}
         reroutePoints: []
       _direction: 1
@@ -437,13 +502,37 @@ MonoBehaviour:
       _typeQualifiedName: StatusUnknown.Tools.Narrative.DialogueLine, StatusUnknown.Tools.Narrative,
         Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
       connections:
-      - fieldName: input
+      - fieldName: execIn
         node: {fileID: -1814068090054664416}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
+    - _fieldName: execOut
+      _node: {fileID: 8170788157396569288}
+      _typeQualifiedName: StatusUnknown.Tools.Narrative.DialogueNode+State, StatusUnknown.Tools.Narrative,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: execIn
+        node: {fileID: -1814068090054664416}
+        reroutePoints: []
+      - fieldName: execIn
+        node: {fileID: 1831340819866683008}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: execIn
+      _node: {fileID: 8170788157396569288}
+      _typeQualifiedName: StatusUnknown.Tools.Narrative.DialogueNode+State, StatusUnknown.Tools.Narrative,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
     - _fieldName: DialogueLines 2
       _node: {fileID: 8170788157396569288}
       _typeQualifiedName: StatusUnknown.Tools.Narrative.DialogueLine, StatusUnknown.Tools.Narrative,
@@ -453,7 +542,8 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-  initiator: Hello Keeper
+  isRootNode: 1
+  dialogueOpening: Hello Keeper
   DialogueLines:
   - answer: Where am I ?
     isOptionalDialogue: 0
@@ -464,7 +554,11 @@ MonoBehaviour:
     icon: {fileID: 0}
     optionalGameplayEffect: {fileID: 0}
   - answer: I have the object you asked me to retrieve
-    isOptionalDialogue: 1
+    isOptionalDialogue: 0
+    icon: {fileID: 0}
+    optionalGameplayEffect: {fileID: 0}
+  - answer: I have the object you asked me to retrieve
+    isOptionalDialogue: 0
     icon: {fileID: 0}
     optionalGameplayEffect: {fileID: 0}
   conditionalAnswer:

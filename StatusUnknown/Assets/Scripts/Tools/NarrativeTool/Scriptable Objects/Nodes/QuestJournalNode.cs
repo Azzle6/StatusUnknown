@@ -9,17 +9,24 @@ namespace StatusUnknown.Tools.Narrative
     [CreateNodeMenu("Quest Journal Node")]
     public class QuestJournalNode : DialogueNode
     {
-        [SerializeField] AccessType accessType;
+        [SerializeField, LabelWidth(LABEL_WIDTH_MEDIUM)] private AccessType accessType;
         [SerializeField, LabelWidth(LABEL_WIDTH_MEDIUM), ShowIf("@accessType == AccessType.Get")] private QuestJournalSO playerQuestJournal; 
-        [SerializeField, LabelWidth(LABEL_WIDTH_MEDIUM), ShowIf("@accessType == AccessType.Set")] private QuestSO questToGive;
+        [SerializeField, LabelWidth(LABEL_WIDTH_MEDIUM), ShowIf("@accessType == AccessType.Set")] private QuestSO questToGive; 
         [Output] public ScriptableObject result;
+
+        protected override void Init()
+        {
+            base.Init();
+            if (accessType == AccessType.Get)
+                execIn = new State();
+        }
 
         public override object GetValue(NodePort port)
         {
-            switch(accessType)
+            switch (accessType)
             {
-                case AccessType.Get: 
-                    result = playerQuestJournal; 
+                case AccessType.Get:
+                    result = playerQuestJournal;
                     break;
                 case AccessType.Set:
                     result = questToGive;
@@ -28,6 +35,18 @@ namespace StatusUnknown.Tools.Narrative
             }
 
             return result;
+        }
+
+        public override void OnEnter()
+        {
+            base.OnEnter();
+
+            if (accessType == AccessType.Set) 
+            {
+                Debug.Log("adding new quest to journal");
+
+                playerQuestJournal.AddQuest(questToGive);
+            }
         }
     }
 }

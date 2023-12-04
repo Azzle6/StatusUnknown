@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using UnityEditor;
 using UnityEngine;
 using XNode;
 
@@ -10,7 +11,7 @@ namespace StatusUnknown.Tools.Narrative
 
     [NodeWidth(400), NodeTint(120, 0, 150)]
     [CreateNodeMenu("Validation Node")]
-    public class ValidationNode : Node
+    public class ValidationNode : Node, INodeState
     {
         [HideIf("@" + nameof(comparisonType) + " == ComparisonType.QuestIsDone"), LabelWidth(LABEL_WIDTH_MEDIUM), OnValueChanged(nameof(RefreshOnValueChanged))]
         public int source;
@@ -36,6 +37,8 @@ namespace StatusUnknown.Tools.Narrative
 
         protected override void Init()
         {
+            if (EditorApplication.isUpdating || EditorApplication.isCompiling) return;
+
             base.Init();
             output = GetOutputPort("result");
 
@@ -78,6 +81,21 @@ namespace StatusUnknown.Tools.Narrative
 
             object castedResult = result.isValid;
             return comparisonType == ComparisonType.QuestIsDone ? result : castedResult; 
+        }
+
+        public void MoveNext()
+        {
+            //
+        }
+
+        public void OnEnter()
+        {
+            //
+        }
+
+        public void OnExit()
+        {
+            //
         }
 
         // TODO : update onValueChange (source/target)

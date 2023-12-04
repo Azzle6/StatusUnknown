@@ -1383,6 +1383,10 @@ MonoBehaviour:
   dialogueType: 0
   dialogueGraph: {fileID: 11400000, guid: cbac671785857bc4390f1efdc51881b9, type: 2}
   audioMumblingVoice: {fileID: 0}
+  playerData: {fileID: 11400000, guid: 2674b3c5ad339de458610a2683a206dd, type: 2}
+  dialogueHasQuests: 1
+  completableQuests:
+  - {fileID: 11400000, guid: a586a2eafa4bad943a6cb8c26af4b6de, type: 2}
 --- !u!114 &4181276193116075328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1397,8 +1401,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startButtonObj: {fileID: 4535724817829135226}
   endButtonObj: {fileID: 7180384607406480837}
-  questJournal: {fileID: 0}
-  givenQuest: {fileID: 0}
   startDialogueEvent:
     m_PersistentCalls:
       m_Calls:
