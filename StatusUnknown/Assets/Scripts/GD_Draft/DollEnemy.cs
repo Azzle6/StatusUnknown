@@ -8,7 +8,6 @@ public class DollEnemy : MonoBehaviour
 {
     public InputAction interactInput;
     GameObject player;
-    public GameObject textInteract;
     public GameObject doll;
     
     void Start()
@@ -23,7 +22,6 @@ public class DollEnemy : MonoBehaviour
         transform.LookAt(player.transform);
         if (interactInput.IsPressed())
         {
-            textInteract.SetActive(false);
             Destroy(doll);
         }
     }
@@ -31,12 +29,10 @@ public class DollEnemy : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         interactInput.Enable();
-        textInteract.SetActive(true);
     }
 
     private void OnTriggerExit(Collider other)
     {
         interactInput.Disable();
-        textInteract.SetActive(false);
     }
 }
