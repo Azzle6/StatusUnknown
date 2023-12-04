@@ -1,5 +1,4 @@
 using Sirenix.OdinInspector;
-using System;
 using UnityEngine;
 using XNode;
 
@@ -20,7 +19,7 @@ namespace StatusUnknown.Tools.Narrative
         public int target;
 
         [ShowIf("@" + nameof(comparisonType) + " == ComparisonType.QuestIsDone"), LabelWidth(LABEL_WIDTH_MEDIUM)]
-        [Input] public Data input;  
+        [Input] public DialogueLine input;  
 
         [LabelWidth(LABEL_WIDTH_MEDIUM), HorizontalGroup(200, MarginLeft = 0.225f), Button("Refresh Self And Neighbour", ButtonSizes.Large)]
         public void refreshOnQuestObjectChange() { RefreshOnValueChanged(); } // bootleg solution because I don't know how to directly track a Reference change, only a value change
@@ -28,7 +27,7 @@ namespace StatusUnknown.Tools.Narrative
         public enum ComparisonType { SmallerThan, SmallerThanOrEqual, GreaterThan, GreaterThanOrEqual, Equal, NotEqual, QuestIsDone }
         [LabelWidth(LABEL_WIDTH_MEDIUM), OnValueChanged(nameof(RefreshOnValueChanged))] public ComparisonType comparisonType = ComparisonType.SmallerThan;
 
-        [PropertySpace(spaceBefore: 50), Output] public Data result;
+        [PropertySpace(spaceBefore: 50), Output] public DialogueLine result;
 
         private int previousValue_Source;
         private int previousValue_Target;
@@ -47,6 +46,7 @@ namespace StatusUnknown.Tools.Narrative
         // ChangeEvent<T>.GetPooled() and INotifyValueChanged<T> did not work here..
         private void RefreshOnValueChanged()
         {
+            Debug.Log("refreshing");
             GetValue(output);
 
             previousValue_Source = source;
@@ -60,7 +60,7 @@ namespace StatusUnknown.Tools.Narrative
         {
             float source = GetInputValue<float>("source", this.source);
             float target = GetInputValue<float>("target", this.target);
-            input = GetInputValue("input", new Data());
+            input = GetInputValue("input", new DialogueLine());
 
             if (port.fieldName == "result")
                 result.isValid = comparisonType switch
@@ -74,7 +74,7 @@ namespace StatusUnknown.Tools.Narrative
                     _ => false
                 };
 
-            result.dialogue = input.dialogue;
+            result.answer = input.answer;
 
             object castedResult = result.isValid;
             return comparisonType == ComparisonType.QuestIsDone ? result : castedResult; 

@@ -1,8 +1,9 @@
-﻿using StatusUnknown.Content.Narrative;
+﻿using Sirenix.OdinInspector;
+using StatusUnknown.Content.Narrative;
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
 using XNode;
 
 // original credits : Aurora Dialogue System
@@ -15,43 +16,56 @@ using XNode;
 
 namespace StatusUnknown.Tools.Narrative
 {
-	[Serializable]
-	public struct Connection {}
+    [Serializable]
+    public struct DialogueLine
+    {
+        [TextArea] public string answer;
+        [LabelWidth(Node.LABEL_WIDTH_MEDIUM)] public bool isOptionalDialogue;
+        [LabelWidth(Node.LABEL_WIDTH_MEDIUM)] public Sprite icon;
+        [LabelWidth(Node.LABEL_WIDTH_MEDIUM)] public QuestObjectSO optionalGameplayEffect;
+        internal bool isValid;
+
+        public DialogueLine(string answer, bool isOptionalDialogue, Sprite icon, QuestObjectSO optionalGameplayEffect, bool isValid)
+        {
+            this.answer = answer;
+            this.isOptionalDialogue = isOptionalDialogue;
+            this.icon = icon;
+            this.optionalGameplayEffect = optionalGameplayEffect;
+            this.isValid = isValid;
+        }       
+    }
+
+    [Serializable]
+	public struct Input {}
     public enum AccessType { Get, Set }
 
     [NodeWidth(400), NodeTint(20, 120, 20)]
     [CreateNodeMenu("Dialogue Node")]
     public class DialogueNode : Node
     {
-        [Serializable]
-        protected struct DialogueLine
-        {
-            [TextArea] public string answer;
-            public bool isOptionalDialogue;
-            public Sprite icon;
-            public QuestObjectSO optionalGameplayEffect;
 
-            public DialogueLine(string answer, bool isOptionalDialogue, Sprite icon, QuestObjectSO optionalGameplayEffect) 
-            { 
-                this.answer = answer;
-                this.isOptionalDialogue = isOptionalDialogue;
-                this.icon = icon;
-                this.optionalGameplayEffect = optionalGameplayEffect;
-            }
-        }
-
-        [Input, SerializeField] public Connection input;
+        [Input, SerializeField] public Input input;
         [TextArea] public string initiator;
 
-        [TextArea][Output(dynamicPortList = true)] public List<string> answers; // DO NOT CHANGE FIELD SIGNATURE
-        [Output(dynamicPortList = true), SerializeField] protected List<DialogueLine> DialogueLines; 
+        [Output(dynamicPortList = true), SerializeField] public List<DialogueLine> DialogueLines; 
+        public List<string> Answers { get; private set; }
 
-        [Input, SerializeField] public Data conditionalAnswer;
+        [Input, SerializeField] public DialogueLine conditionalAnswer;
 		private bool conditionIsValid = false; 
 
         protected override void Init()
         {
             base.Init();
+
+            if (EditorApplication.isPlayingOrWillChangePlaymode || Application.isPlaying)
+            {
+                Debug.Log("setting answers on entering play mode"); 
+                Answers.Clear();
+                foreach (var item in DialogueLines)
+                {
+                    Answers.Add(item.answer); 
+                }
+            }
         }
 
         public override void OnCreateConnection(NodePort from, NodePort to)
@@ -60,7 +74,7 @@ namespace StatusUnknown.Tools.Narrative
 
             if (from.node.GetType() != typeof(ValidationNode)) return;
 
-            conditionalAnswer = GetInputValue("conditionalAnswer", new Data());
+            conditionalAnswer = GetInputValue("conditionalAnswer", new DialogueLine());
             conditionIsValid = conditionalAnswer.isValid; 
 
             UpdatePorts();  
@@ -73,20 +87,20 @@ namespace StatusUnknown.Tools.Narrative
 
             base.OnRemoveConnection(port);
 
-            conditionalAnswer = GetInputValue("conditionalAnswer", new Data());
+            conditionalAnswer = GetInputValue("conditionalAnswer", new DialogueLine());
             conditionIsValid = conditionalAnswer.isValid;
 
-            if (!conditionIsValid && conditionalAnswer.dialogue != null)
+            if (!conditionIsValid && conditionalAnswer.answer != null)
             {
-                answers.Remove(conditionalAnswer.dialogue);
+                DialogueLines.Remove(conditionalAnswer);
                 return; 
             }
 
-			if (answers.Contains(conditionalAnswer.dialogue)) return;
+			if (DialogueLines.Contains(conditionalAnswer)) return;
 
             VerifyConnections();
 
-            answers.Add(conditionalAnswer.dialogue);
+            DialogueLines.Add(conditionalAnswer);
             UpdatePorts();
         }
 
@@ -97,7 +111,7 @@ namespace StatusUnknown.Tools.Narrative
 
 		public bool HasAnswers()
 		{
-			return answers.Count != 0 && (answers.Count != 1 || !answers[0].Equals(""));
+			return DialogueLines.Count != 0 && (DialogueLines.Count != 1 || !DialogueLines[0].Equals(""));
 		}
 	}
 }

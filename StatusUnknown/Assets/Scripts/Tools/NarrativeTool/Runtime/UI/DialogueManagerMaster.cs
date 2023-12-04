@@ -165,7 +165,7 @@ namespace Aurore.DialogSystem
                 return;
             }
             
-            UpdateAnswers(currentNode.answers);
+            UpdateAnswers(currentNode.Answers);
         }
 
         #region UI Tighly linked abstract method

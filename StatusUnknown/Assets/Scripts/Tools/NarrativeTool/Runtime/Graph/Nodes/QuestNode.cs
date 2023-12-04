@@ -1,18 +1,10 @@
 using Sirenix.OdinInspector;
 using StatusUnknown.Content.Narrative;
-using System;
 using UnityEngine;
 using XNode;
 
 namespace StatusUnknown.Tools.Narrative
 {
-    [Serializable]
-    public struct Data
-    {
-        public string dialogue;
-        public bool isValid;
-    }
-
     [NodeWidth(400), NodeTint(80, 80, 10)]
     [CreateNodeMenu("Quest Node")]
     public class QuestNode : Node
@@ -21,8 +13,8 @@ namespace StatusUnknown.Tools.Narrative
         [SerializeField, LabelWidth(LABEL_WIDTH_MEDIUM), ShowIf("@accessType == AccessType.Get")] private QuestSO quest;
         [SerializeField, LabelWidth(LABEL_WIDTH_MEDIUM), ShowIf("@accessType == AccessType.Set")] private QuestObjectSO questObject;
 
-        [Output] public Data result;  
-        [TextArea, ShowIf(nameof(GetIsValid))] public string optionalDialogue = string.Empty;
+        [Output] public DialogueLine result;  
+        [ShowIf(nameof(GetIsValid))] public DialogueLine optionalDialogue;
 
         [PropertySpace(20), LabelWidth(LABEL_WIDTH_MEDIUM), HorizontalGroup(200, MarginLeft = 0.225f), Button("Refresh Self And Neighbour", ButtonSizes.Large)]
         public void refreshOnQuestObjectChange() { RefreshOnValueChanged(); }
@@ -31,23 +23,23 @@ namespace StatusUnknown.Tools.Narrative
 
         private void RefreshOnValueChanged()
         {
-            SetData();
+            SetDialogueLine();
         }
 
         protected override void Init()
         {
             base.Init();
-            SetData();
+            SetDialogueLine();
         }
 
         public override object GetValue(NodePort port)
         {
-            return SetData(); 
+            return SetDialogueLine(); 
         }
 
-        private Data SetData()
+        private DialogueLine SetDialogueLine()
         {
-            result = new Data();    
+            result = new DialogueLine();    
             switch (accessType)
             {
                 case AccessType.Get:
@@ -59,7 +51,7 @@ namespace StatusUnknown.Tools.Narrative
                 default: return default;
             }
 
-            result.dialogue = optionalDialogue; 
+            result.answer = optionalDialogue.answer; 
 
             return result;
         }

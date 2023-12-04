@@ -72,7 +72,7 @@ namespace Aurore.DialogSystem
 		/// <returns>Return a DialogNode corresponding to the next one.</returns>
 		public static DialogueNode GetNext(DialogueNode current, int outputIndex) 
 		{
-			var port = current.GetPort($"answers {outputIndex}");
+			var port = current.GetPort($"DialogueLines {outputIndex}");
 			return !port.IsConnected ? null : port.Connection.node as DialogueNode ;
 		}	
 		
