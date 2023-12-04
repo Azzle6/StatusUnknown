@@ -69,6 +69,7 @@ namespace VectorField
         }
         public static Node WorldPositiondToNode(Vector3 position, Dictionary<Vector3, Node> nodeField, float depthLinkDistance = 2)
         {
+            if(NodeField == null) return null;
             Vector3 boundPosition = PositionToBoundPosition(position);
             int depthIteration = Mathf.FloorToInt(depthLinkDistance / fieldDensity);
             for (int i = 0; i < depthIteration; i++)
@@ -81,6 +82,7 @@ namespace VectorField
         }
         public static Node WorldPositiondToNode(Vector3 position, float depthLinkDistance = 2)
         {
+            if (NodeField == null) return null;
             Vector3 boundPosition = PositionToBoundPosition(position);
             int depthIteration = Mathf.FloorToInt(depthLinkDistance / fieldDensity);
             for (int i = 0; i < depthIteration; i++)

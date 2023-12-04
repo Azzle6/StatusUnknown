@@ -85,8 +85,8 @@ MonoBehaviour:
   lensAttenuationMode: 0
   colorGradingSpace: 0
   m_ObsoleteDiffusionProfileSettingsList:
-  - {fileID: 11400000, guid: 48e911a1e337b44e2b85dbc65b47a594, type: 2}
-  - {fileID: 11400000, guid: 879ffae44eefa4412bb327928f1a96dd, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   rendererListCulling: 0
   DLSSProjectId: 000000
   useDLSSCustomProjectId: 0
@@ -124,6 +124,8 @@ MonoBehaviour:
       hasProbeVolumes: 0
     - sceneGUID: eab89a1b4b0fb8b4bb1092ec5487e03b
       hasProbeVolumes: 0
+    - sceneGUID: 0191b610c8dbf71498bbb7e93803bdcc
+      hasProbeVolumes: 0
     serializedProfiles:
     - sceneGUID: ce31f14eba0f1044386249b739363569
       profile: {fileID: 11400000, guid: 8444c98bd469cad4cb4fb69f907e63f0, type: 2}
@@ -142,6 +144,8 @@ MonoBehaviour:
     - sceneGUID: 92ac65bd3df1dc74c91840bb5986ff35
       profile: {fileID: 11400000, guid: 8444c98bd469cad4cb4fb69f907e63f0, type: 2}
     - sceneGUID: eab89a1b4b0fb8b4bb1092ec5487e03b
+      profile: {fileID: 11400000, guid: 8444c98bd469cad4cb4fb69f907e63f0, type: 2}
+    - sceneGUID: 0191b610c8dbf71498bbb7e93803bdcc
       profile: {fileID: 11400000, guid: 8444c98bd469cad4cb4fb69f907e63f0, type: 2}
     serializedBakeSettings:
     - sceneGUID: ce31f14eba0f1044386249b739363569
@@ -306,6 +310,24 @@ MonoBehaviour:
           collisionMask:
             serializedVersion: 2
             m_Bits: 4294967291
+    - sceneGUID: 0191b610c8dbf71498bbb7e93803bdcc
+      settings:
+        m_Version: 1
+        dilationSettings:
+          enableDilation: 1
+          dilationDistance: 20
+          dilationValidityThreshold: 0.25
+          dilationIterations: 1
+          squaredDistWeighting: 1
+        virtualOffsetSettings:
+          useVirtualOffset: 1
+          outOfGeoOffset: 0.01
+          searchMultiplier: 0.2
+          rayOriginBias: -0.001
+          maxHitsPerRay: 10
+          collisionMask:
+            serializedVersion: 2
+            m_Bits: 4294967291
     serializedBakingSets:
     - name: Baking Set Test
       sceneGUIDs:
@@ -316,6 +338,7 @@ MonoBehaviour:
       - 8e034ac485c3f924f801ab8af19a8318
       - 92ac65bd3df1dc74c91840bb5986ff35
       - eab89a1b4b0fb8b4bb1092ec5487e03b
+      - 0191b610c8dbf71498bbb7e93803bdcc
       settings:
         m_Version: 1
         dilationSettings:

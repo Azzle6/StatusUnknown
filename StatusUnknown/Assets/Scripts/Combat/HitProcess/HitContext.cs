@@ -70,8 +70,8 @@ public class HitContext : MonoBehaviour
         Gizmos.color = temp_colliders.Count > 0?Color.red : Color.green;
         if (!isActiveAndEnabled)
             Gizmos.color = new Color(0.5f,0.5f,0.5f,0.5f);
-
-        hitShape.DrawGizmos(this);
+        if(hitShape !=  null)
+            hitShape.DrawGizmos(this);
     }
 #endif
 }
