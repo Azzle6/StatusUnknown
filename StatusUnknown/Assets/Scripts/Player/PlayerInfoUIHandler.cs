@@ -1,4 +1,5 @@
 
+using Augment;
 using UI;
 
 namespace Player
@@ -141,17 +142,6 @@ namespace Player
          
         }
         
-        public void UpdateAugmentIcon(int augmentIndex, Sprite augmentSprite)
-        {
-            augmentIcon[augmentIndex].style.backgroundImage = augmentSprite.texture;
-        }
-
-        public void AugmentUsed(int augmentIndex, float cooldown)
-        {
-            augmentIcon[augmentIndex].style.unityBackgroundImageTintColor = Color.black;
-            DOTween.To(() => augmentIcon[augmentIndex].style.unityBackgroundImageTintColor.value, x => augmentIcon[augmentIndex].style.unityBackgroundImageTintColor = x, Color.white, cooldown);
-        }
-        
         public void ShowPopup(PopUpData popUpData)
         {
             VisualElement tempPopup = popupUIDocument.CloneTree();
@@ -176,7 +166,30 @@ namespace Player
                         });
                 });
         }
+
+        public void ReceiveAugmentStat(AugmentStat augmentStat)
+        {
+            if (augmentIcon[augmentStat.augmentSlot].style.backgroundImage == augmentStat.augmentSprite)
+            {
+                UseAugment(augmentStat);
+            }
+            else
+            {
+                SwitchAugmentStat(augmentStat);
+            }
+        }
         
+        public void SwitchAugmentStat(AugmentStat augmentStat)
+        {
+            augmentIcon[augmentStat.augmentSlot].style.backgroundImage = augmentStat.augmentSprite;
+
+        }
+
+        public void UseAugment(AugmentStat augmentStat)
+        {
+            augmentIcon[augmentStat.augmentSlot].style.unityBackgroundImageTintColor = Color.black;
+            DOTween.To(() => augmentIcon[augmentStat.augmentSlot].style.unityBackgroundImageTintColor.value, x => augmentIcon[augmentStat.augmentSlot].style.unityBackgroundImageTintColor = x, Color.white, augmentStat.augmentCooldown);
+        }
     }
 }
 
