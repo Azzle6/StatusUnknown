@@ -1,6 +1,8 @@
-﻿using System;
+﻿using StatusUnknown.Content.Narrative;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 using XNode;
 
 // original credits : Aurora Dialogue System
@@ -19,12 +21,30 @@ namespace StatusUnknown.Tools.Narrative
 
     [NodeWidth(400), NodeTint(20, 120, 20)]
     [CreateNodeMenu("Dialogue Node")]
-	public class DialogueNode : Node
-	{
+    public class DialogueNode : Node
+    {
+        [Serializable]
+        protected struct DialogueLine
+        {
+            [TextArea] public string answer;
+            public bool isOptionalDialogue;
+            public Sprite icon;
+            public QuestObjectSO optionalGameplayEffect;
+
+            public DialogueLine(string answer, bool isOptionalDialogue, Sprite icon, QuestObjectSO optionalGameplayEffect) 
+            { 
+                this.answer = answer;
+                this.isOptionalDialogue = isOptionalDialogue;
+                this.icon = icon;
+                this.optionalGameplayEffect = optionalGameplayEffect;
+            }
+        }
+
         [Input, SerializeField] public Connection input;
         [TextArea] public string initiator;
 
-		[TextArea][Output(dynamicPortList = true)] public List<string> answers; // DO NOT CHANGE FIELD SIGNATURE
+        [TextArea][Output(dynamicPortList = true)] public List<string> answers; // DO NOT CHANGE FIELD SIGNATURE
+        [Output(dynamicPortList = true), SerializeField] protected List<DialogueLine> DialogueLines; 
 
         [Input, SerializeField] public Data conditionalAnswer;
 		private bool conditionIsValid = false; 
@@ -38,7 +58,7 @@ namespace StatusUnknown.Tools.Narrative
         {
             base.OnCreateConnection(from, to);
 
-            if (from.node.GetType() != typeof(DialogueConditionalAnswerNode)) return;
+            if (from.node.GetType() != typeof(ValidationNode)) return;
 
             conditionalAnswer = GetInputValue("conditionalAnswer", new Data());
             conditionIsValid = conditionalAnswer.isValid; 
@@ -49,14 +69,14 @@ namespace StatusUnknown.Tools.Narrative
 
         public override void OnRemoveConnection(NodePort port)
         {
-            if (port.IsOutput && port.node.GetType() != typeof(DialogueConditionalAnswerNode)) return;
+            if (port.IsOutput && port.node.GetType() != typeof(ValidationNode)) return;
 
             base.OnRemoveConnection(port);
 
             conditionalAnswer = GetInputValue("conditionalAnswer", new Data());
             conditionIsValid = conditionalAnswer.isValid;
 
-            if (!conditionIsValid)
+            if (!conditionIsValid && conditionalAnswer.dialogue != null)
             {
                 answers.Remove(conditionalAnswer.dialogue);
                 return; 
@@ -80,48 +100,5 @@ namespace StatusUnknown.Tools.Narrative
 			return answers.Count != 0 && (answers.Count != 1 || !answers[0].Equals(""));
 		}
 	}
-
-    // serialization does not work in the node graph
-    /*
-    public abstract class UnitySerializedDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver
-    {
-        [SerializeField, HideInInspector]
-        private List<TKey> keyData = new List<TKey>();
-
-        [SerializeField, HideInInspector]
-        private List<TValue> valueData = new List<TValue>();
-
-        void ISerializationCallbackReceiver.OnAfterDeserialize()
-        {
-            this.Clear();
-            for (int i = 0; i < this.keyData.Count && i < this.valueData.Count; i++)
-            {
-                this[this.keyData[i]] = this.valueData[i];
-            }
-        }
-
-        void ISerializationCallbackReceiver.OnBeforeSerialize()
-        {
-            this.keyData.Clear();
-            this.valueData.Clear();
-
-            foreach (var item in this)
-            {
-                this.keyData.Add(item.Key);
-                this.valueData.Add(item.Value);
-            }
-        }
-    }
-
-    [Serializable] public class DialogueLine : UnitySerializedDictionary<string, int> { }
-
-    [Serializable]
-    public class DialogueDataHolder
-    {
-        public DialogueLine dialogueLine;
-        public bool dialogueTriggersEffect; 
-
-    }
-    */
 }
 

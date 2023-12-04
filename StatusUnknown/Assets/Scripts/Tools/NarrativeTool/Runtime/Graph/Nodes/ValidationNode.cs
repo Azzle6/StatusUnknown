@@ -10,8 +10,8 @@ namespace StatusUnknown.Tools.Narrative
     // HAS OBJECT(S)
 
     [NodeWidth(400), NodeTint(120, 0, 150)]
-    [CreateNodeMenu("Conditional Answer Node")]
-    public class DialogueConditionalAnswerNode : Node
+    [CreateNodeMenu("Validation Node")]
+    public class ValidationNode : Node
     {
         [HideIf("@" + nameof(comparisonType) + " == ComparisonType.QuestIsDone"), LabelWidth(LABEL_WIDTH_MEDIUM), OnValueChanged(nameof(RefreshOnValueChanged))]
         public int source;
@@ -22,7 +22,7 @@ namespace StatusUnknown.Tools.Narrative
         [ShowIf("@" + nameof(comparisonType) + " == ComparisonType.QuestIsDone"), LabelWidth(LABEL_WIDTH_MEDIUM)]
         [Input] public Data input;  
 
-        [ShowIf("@comparisonType == ComparisonType.QuestIsDone"), LabelWidth(LABEL_WIDTH_MEDIUM), HorizontalGroup(200, MarginLeft = 0.225f), Button("Refresh Self And Neighbour", ButtonSizes.Large)]
+        [LabelWidth(LABEL_WIDTH_MEDIUM), HorizontalGroup(200, MarginLeft = 0.225f), Button("Refresh Self And Neighbour", ButtonSizes.Large)]
         public void refreshOnQuestObjectChange() { RefreshOnValueChanged(); } // bootleg solution because I don't know how to directly track a Reference change, only a value change
 
         public enum ComparisonType { SmallerThan, SmallerThanOrEqual, GreaterThan, GreaterThanOrEqual, Equal, NotEqual, QuestIsDone }
@@ -75,7 +75,9 @@ namespace StatusUnknown.Tools.Narrative
                 };
 
             result.dialogue = input.dialogue;
-            return result;
+
+            object castedResult = result.isValid;
+            return comparisonType == ComparisonType.QuestIsDone ? result : castedResult; 
         }
 
         // TODO : update onValueChange (source/target)
