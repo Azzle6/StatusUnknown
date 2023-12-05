@@ -20,7 +20,7 @@ namespace Weapon
         public float adsRestAngle;
         public Coroutine reloading;
         public Transform spawnPoint;
-        private Vector3 initMeshPos;
+        [SerializeField] private Vector3 initMeshPos;
 
         public WeaponStat weaponStat;
         public FloatVariableSO currentAmmo;
