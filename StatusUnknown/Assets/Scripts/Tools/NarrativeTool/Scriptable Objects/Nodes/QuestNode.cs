@@ -10,8 +10,9 @@ namespace StatusUnknown.Tools.Narrative
     public class QuestNode : DialogueNode
     {
         [SerializeField, LabelWidth(LABEL_WIDTH_MEDIUM)] private AccessType accessType;
-        [SerializeField, LabelWidth(LABEL_WIDTH_MEDIUM), ShowIf("@accessType == AccessType.Get")] private QuestSO quest; 
-        [SerializeField, LabelWidth(LABEL_WIDTH_MEDIUM), ShowIf("@accessType == AccessType.Set")] private QuestObjectSO newQuestObject;
+        [SerializeField, LabelWidth(LABEL_WIDTH_MEDIUM)] private QuestSO quest; 
+
+        [SerializeField, LabelWidth(LABEL_WIDTH_MEDIUM), ShowIf("@accessType == AccessType.Set"), PropertySpace] private QuestObjectSO newQuestObject;
         [SerializeField, LabelWidth(LABEL_WIDTH_MEDIUM), ShowIf("@accessType == AccessType.Set")] private QuestObjectSO newQuestReward;
 
         [Output] public DialogueLine result;  
@@ -31,10 +32,22 @@ namespace StatusUnknown.Tools.Narrative
         protected override void Init()
         {
             base.Init();
-            SetDialogueLine();
 
             if (accessType == AccessType.Get)
                 execIn = new State();
+        }
+
+        public override void OnEnter()
+        {
+            base.OnEnter();
+
+            if (accessType == AccessType.Set)
+            {
+                Debug.Log("updating current quest with new objects and rewards");
+
+                quest.OverrideQuestObject(newQuestObject);
+                quest.OverrideQuestReward(newQuestReward);
+            }
         }
 
         public override object GetValue(NodePort port)
@@ -59,19 +72,6 @@ namespace StatusUnknown.Tools.Narrative
             result.answer = optionalDialogue.answer; 
 
             return result;
-        }
-
-        public override void OnEnter()
-        {
-            base.OnEnter();
-
-            if (accessType == AccessType.Set)
-            {
-                Debug.Log("updating current quest with new objects and rewards");
-
-                quest.OverrideQuestObject(newQuestObject);
-                quest.OverrideQuestReward(newQuestReward);
-            }
         }
     }
 }

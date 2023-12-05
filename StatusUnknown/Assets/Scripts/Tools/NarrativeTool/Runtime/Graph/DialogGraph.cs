@@ -5,7 +5,7 @@ using XNode;
 using StatusUnknown.Tools.Narrative;
 using Sirenix.OdinInspector;
 using StatusUnknown.Content.Narrative;
-using StatusUnknown;
+using System.Collections.Generic;
 
 namespace Aurore.DialogSystem
 {
@@ -19,8 +19,11 @@ namespace Aurore.DialogSystem
         [Space, SerializeField] private bool dialogueHasQuests;
         [SerializeField, ShowIf(nameof(dialogueHasQuests))] QuestSO[] completableQuests;
 
-        public bool CurrentDialogueQuestsDone; // { get; private set; }
+        public bool CurrentDialogueQuestsDone { get; private set; }
+        // public static Dictionary<(Vector2, int), DialogueLine> allStoredDialogueAnswers = new Dictionary<(Vector2, int), DialogueLine>();
 
+        [SerializeField, HideInInspector] private List<DialogueLine> storedDialogueAnswers;
+        [SerializeField, HideInInspector] private List<(Vector2, int)> storedKeys; 
 
         private DialogueNode rootNode;
         public DialogueNode CurrentNode { get; set; }
@@ -28,12 +31,13 @@ namespace Aurore.DialogSystem
         internal void Init()
         {
             playerData.Init();
-            DoQuestValidation(); 
+            DoQuestValidation();
         }
 
 
-        // very basic implementation. If even ONE quest is not done, = false
-        // create new dialog options or anything if quests are done.
+        /// <summary>
+        /// Basic implementation of a quest validation mechanic. If event ONE quest is not done, the validation is false
+        /// </summary>
         private void DoQuestValidation()
         {
             CurrentDialogueQuestsDone = true;
@@ -57,7 +61,8 @@ namespace Aurore.DialogSystem
         public DialogueNode GetRoot()
 		{
 			rootNode = null;
-			//Root node has no input
+
+			//Root node has no input and must be the only node with no input on execIn port
 			foreach (var node in nodes.Where(node => node.HasPort("execIn") && !node.GetInputPort("execIn").IsConnected)) 
 			{
 				if (rootNode != null && rootNode.IsRootNode())
@@ -71,19 +76,13 @@ namespace Aurore.DialogSystem
 				}
             }
 
-			if(rootNode == null) throw new NullReferenceException($"There is no root node in the current graph : {name}");
+			if (rootNode == null) throw new NullReferenceException($"There is no root node in the current graph : {name}");
 
 			CurrentNode = rootNode;
             rootNode.OnEnter();
 
-            /* Type nodeType = rootNode.GetType();
-			if (nodeType.IsAssignableFrom(typeof(INodeState)))
-			{
-                rootNode.OnEnter();
-            } */
-
             return rootNode;
-		} // TODO : Edit Here is root conditional (for ex: character has item, has already visited, etc..)
+		} // TODO : Edit Here if root is conditional (for ex: character has item, has already visited, etc..)
 
 		/// <summary>
 		/// Retrieve the next node in a graph according to the current one and the answer's index chosen.
@@ -93,13 +92,17 @@ namespace Aurore.DialogSystem
 		/// <returns>Return a DialogNode corresponding to the next one.</returns>
 		public static DialogueNode GetNext(DialogueNode current, int outputIndex) 
 		{
-            current.MoveNext(); ; 
+            current.MoveNext(outputIndex);
+            var exitPort = current.GetOutputPort($"DialogueLines {outputIndex}");
 
-            var port = current.GetPort($"DialogueLines {outputIndex}");
-			return !port.IsConnected ? null : port.Connection.node as DialogueNode;
+            return !exitPort.IsConnected ? null : exitPort.Connection.node as DialogueNode;
 		}	
 		
-		// to test
+		/// <summary>
+        /// Called from any back button to go back to the previous node in the graph
+        /// </summary>
+        /// <param name="current">the current node from where to go back</param>
+        /// <returns></returns>
 		public static DialogueNode GetPrevious(DialogueNode current)
 		{
 			//string additionalValue = inputIndex == -1 ? "" : inputIndex.ToString(); 
@@ -108,9 +111,23 @@ namespace Aurore.DialogSystem
             return !port.IsConnected ? null : port.Connection.node as DialogueNode;
         }
 
+        /// <summary>
+        /// Call to the player quest journal to add a QuestObjectSO as reward
+        /// </summary>
         internal void GiveReward()
         {
             playerData.QuestJournal.GiveRewardOnQuestCompletion();
+        }
+
+        /// <summary>
+        /// Stores a dialogue line by getting the node position in the graph and the line index
+        /// </summary>
+        /// <param name="current">the current node to store a dialogue line from</param>
+        /// <param name="dialogueLine">the full dialogue line struct</param>
+        /// <param name="index">the dialogue line index in the graph</param>
+        internal static void StoreDialogueLine(DialogueNode current, DialogueLine dialogueLine, int index)
+        {
+            //allStoredDialogueLines.Add((current.position, index), dialogueLine);
         }
     }
 }

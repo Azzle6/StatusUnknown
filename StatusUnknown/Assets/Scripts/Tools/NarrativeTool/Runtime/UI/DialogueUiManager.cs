@@ -1,7 +1,10 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using StatusUnknown.Tools.Narrative; 
+using StatusUnknown.Tools.Narrative;
+using UnityEngine.UI;
+using System;
+using static SavedDialogueLinesSO;
 
 namespace Aurore.DialogSystem
 {
@@ -17,16 +20,37 @@ namespace Aurore.DialogSystem
             if (Instance is not null && Instance != this) Destroy(gameObject);
             Instance = this;
             _IsOpenAnimHash = Animator.StringToHash("IsOpen");
+
+            //RefreshSerializedDictionary();
         }
 
         #endregion
- 
+
         [SerializeField] private GameObject simpleDialog;
         [SerializeField] private GameObject fullDialogue;
         [SerializeField] private GameObject answer;
         [SerializeField] private Animator animator;
-
+        protected Button[] dialogueAnswers;
         private int _IsOpenAnimHash;
+
+        [Header("Dialogue Save Data")]
+        [SerializeField] private SavedDialogueLinesSO playerSavedDialogues;
+
+        // TODO : use this data for gameplay logic
+        private static Dictionary<(int, Vector2), DialogueDataHolder> dialogueDatas = new Dictionary<(int, Vector2), DialogueDataHolder>();
+
+
+        protected override void Start()
+        {
+            base.Start();
+            dialogueAnswers = new Button[answer.transform.childCount];
+            for (int i = 0; i < dialogueAnswers.Length; i++)
+            {
+                dialogueAnswers[i] = answer.transform.GetChild(i).GetComponent<Button>();             
+            }
+
+            dialogueDatas = playerSavedDialogues.GetSavedDialogueData();
+        }
 
         #region Display
 
@@ -56,7 +80,8 @@ namespace Aurore.DialogSystem
             fullDialogue.SetActive(false);
             //Text Modification
             var tmp = simpleDialog.transform.GetChild(0).GetComponent<TMP_Text>();
-            StopCoroutine(TypeSentence(tmp.text, tmp));
+
+            StopAllCoroutines(); 
             StartCoroutine(TypeSentence(node.dialogueOpening, tmp));
             //simpleDialog.transform.GetChild(0).GetComponent<TMP_Text>().text = node.content;
         }
@@ -85,14 +110,38 @@ namespace Aurore.DialogSystem
             }
         }
 
+        public override void OnAnswerClicked(int index)
+        {
+            // here for aditional dialogueline logic before continuing graph execution
+            // like storing a player choice, triggering a gameplay event, etc..
+            if (DialogueLines[index].storeIfSelected)
+            {
+                Debug.Log("this line has been stored");
+                //DialogGraph.StoreDialogueLine(currentNode, DialogueLines[index], index); // BUG : serialization not working..
+                //Store(DialogueLines[index]);
+                StoreDialogueLineInfos(currentNode, DialogueLines[index], index); 
+            }
+
+            base.OnAnswerClicked(index);
+        }
+
+        private void StoreDialogueLineInfos(DialogueNode current, DialogueLine dialogueLine, int index)
+        {
+            //if (playerSavedDialogues.allStoredDialogueLines.ContainsKey((current.position, index))) return; 
+
+            /* playerSavedDialogues.allStoredDialogueLines.Add((current.position, index), dialogueLine); 
+            Debug.Log("storing dialogue line" + playerSavedDialogues.allStoredDialogueLines); */
+            playerSavedDialogues.savedDialoguesData.Add(new SavedDialogueLinesSO.DialogueDataHolder(dialogueLine, current.position, index)); 
+        }
+
         #endregion
 
         #region Interaction
-        
+
 
         public override void OnSkipHovered(bool b)
         {
-            if (!canBeSkipped)
+            if (!hasNoAnswers)
             {
                 simpleDialog.transform.GetChild(1).gameObject.SetActive(false);
                 return;

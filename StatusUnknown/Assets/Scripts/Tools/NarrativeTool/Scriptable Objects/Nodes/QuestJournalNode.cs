@@ -10,8 +10,8 @@ namespace StatusUnknown.Tools.Narrative
     public class QuestJournalNode : DialogueNode
     {
         [SerializeField, LabelWidth(LABEL_WIDTH_MEDIUM)] private AccessType accessType;
-        [SerializeField, LabelWidth(LABEL_WIDTH_MEDIUM), ShowIf("@accessType == AccessType.Get")] private QuestJournalSO playerQuestJournal; 
-        [SerializeField, LabelWidth(LABEL_WIDTH_MEDIUM), ShowIf("@accessType == AccessType.Set")] private QuestSO questToGive; 
+        [SerializeField, LabelWidth(LABEL_WIDTH_MEDIUM)] private QuestJournalSO playerQuestJournal; 
+        [SerializeField, LabelWidth(LABEL_WIDTH_MEDIUM), ShowIf("@accessType == AccessType.Set")] private QuestSO questToAdd; 
         [Output] public ScriptableObject result;
 
         protected override void Init()
@@ -19,6 +19,18 @@ namespace StatusUnknown.Tools.Narrative
             base.Init();
             if (accessType == AccessType.Get)
                 execIn = new State();
+        }
+
+        public override void OnEnter()
+        {
+            base.OnEnter();
+
+            if (accessType == AccessType.Set)
+            {
+                Debug.Log("adding new quest to journal");
+
+                playerQuestJournal.AddQuest(questToAdd);
+            }
         }
 
         public override object GetValue(NodePort port)
@@ -29,24 +41,12 @@ namespace StatusUnknown.Tools.Narrative
                     result = playerQuestJournal;
                     break;
                 case AccessType.Set:
-                    result = questToGive;
+                    result = questToAdd;
                     break;
                 default: return null;
             }
 
             return result;
-        }
-
-        public override void OnEnter()
-        {
-            base.OnEnter();
-
-            if (accessType == AccessType.Set) 
-            {
-                Debug.Log("adding new quest to journal");
-
-                playerQuestJournal.AddQuest(questToGive);
-            }
         }
     }
 }

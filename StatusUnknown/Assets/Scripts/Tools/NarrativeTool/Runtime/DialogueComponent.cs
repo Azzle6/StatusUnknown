@@ -1,6 +1,3 @@
-using Sirenix.OdinInspector;
-using StatusUnknown;
-using StatusUnknown.Content.Narrative;
 using TMPro;
 using UnityEngine;
 
@@ -15,7 +12,7 @@ namespace Aurore.DialogSystem
         [SerializeField] private DialogueType dialogueType;
         [Space, SerializeField] private DialogGraph dialogueGraph;
         [SerializeField] private AudioClip audioMumblingVoice;
-
+        public DialogGraph Graph => dialogueGraph;
 
         private void OnEnable()
         {
@@ -44,10 +41,5 @@ namespace Aurore.DialogSystem
                 Debug.Log("Some quest was not fullfilled");
             }
         }
-
-        /// <summary>
-        /// Getter for the dialogue graph.
-        /// </summary>
-        public DialogGraph Graph => dialogueGraph;
     }
 }

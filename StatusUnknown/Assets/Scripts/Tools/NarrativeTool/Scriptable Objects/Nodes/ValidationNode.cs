@@ -23,7 +23,7 @@ namespace StatusUnknown.Tools.Narrative
         [Input] public DialogueLine input;  
 
         [LabelWidth(LABEL_WIDTH_MEDIUM), HorizontalGroup(200, MarginLeft = 0.225f), Button("Refresh Self And Neighbour", ButtonSizes.Large)]
-        public void refreshOnQuestObjectChange() { RefreshOnValueChanged(); } // bootleg solution because I don't know how to directly track a Reference change, only a value change
+        public void RefreshOnQuestObjectChange() { RefreshOnValueChanged(); } // bootleg solution because I don't know how to directly track a Reference change, only a value change
 
         public enum ComparisonType { SmallerThan, SmallerThanOrEqual, GreaterThan, GreaterThanOrEqual, Equal, NotEqual, QuestIsDone }
         [LabelWidth(LABEL_WIDTH_MEDIUM), OnValueChanged(nameof(RefreshOnValueChanged))] public ComparisonType comparisonType = ComparisonType.SmallerThan;
@@ -42,7 +42,7 @@ namespace StatusUnknown.Tools.Narrative
             base.Init();
             output = GetOutputPort("result");
 
-            RefreshOnValueChanged(); 
+            RefreshOnValueChanged();
         }
 
         // bootleg solution. Need to find a cleaner way to track value change an callback (not using this OnRemoveConnection to refresh neighbour port.value)
@@ -90,7 +90,7 @@ namespace StatusUnknown.Tools.Narrative
 
         public void OnEnter()
         {
-            //
+            Debug.Log("entering validation node"); 
         }
 
         public void OnExit()

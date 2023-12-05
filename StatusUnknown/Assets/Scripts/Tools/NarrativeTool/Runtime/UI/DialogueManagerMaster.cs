@@ -1,12 +1,11 @@
-﻿using StatusUnknown.Content.Narrative;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using StatusUnknown.Tools.Narrative; 
-using static XNode.Node;
+using StatusUnknown.Tools.Narrative;
+using System.Linq;
 
 namespace Aurore.DialogSystem
 {
@@ -17,11 +16,10 @@ namespace Aurore.DialogSystem
         [Space, SerializeField] protected GameObject startButtonObj;
         [SerializeField] protected GameObject endButtonObj;
 
-        private bool questFieldIsNull = true;
-        private bool questRemoved = false;
-
         protected DialogueNode currentNode;
-        protected bool canBeSkipped = false;
+        protected DialogueLine[] DialogueLines = new DialogueLine[0];
+
+        protected bool hasNoAnswers = false;
         protected bool answersAreAllLeafs = false; 
 
         [Header("Events")]
@@ -33,17 +31,24 @@ namespace Aurore.DialogSystem
         private event Action<DialogueNode> OnStartEnded;
 
         private event Action<List<string>> OnSentenceTypingDone;
-        private event Action OnFinalSentenceTypingDone; 
+        private event Action OnDialogueEndReached; 
 
         public void UpdateOnStartEnded() => OnStartEnded?.Invoke(currentNode);
 
         protected virtual void Awake()
         {
             OnStartEnded += UpdateDialogue;
-            OnFinalSentenceTypingDone += End;
+            OnDialogueEndReached += End;
             OnSentenceTypingDone += UpdateAnswers; 
             _source = GetComponent<AudioSource>();
             _waitLetter = new WaitForSeconds(waitTimeLetter);
+        }
+
+        private void OnDisable()
+        {
+            OnStartEnded -= UpdateDialogue;
+            OnDialogueEndReached -= End;
+            OnSentenceTypingDone -= UpdateAnswers;
         }
 
         protected virtual void Start()
@@ -75,6 +80,8 @@ namespace Aurore.DialogSystem
         {
             startButtonObj.SetActive(true);
             endButtonObj.SetActive(false);
+
+
         }
 
         #region Start & End Logic
@@ -90,6 +97,7 @@ namespace Aurore.DialogSystem
         /// </summary>
         private void End()
         {
+            HideAnswersUI(true);
             EndDialogueDisplay();
             endDialogueEvent?.Invoke();
             questValidationEvent?.Invoke();
@@ -112,9 +120,9 @@ namespace Aurore.DialogSystem
         {
             //Update the current Node and deal with the end of a sequence
             currentNode = node;
-            if (currentNode is null)
+            if (currentNode == null)
             {
-                End();
+                OnDialogueEndReached();
                 return;
             }
 
@@ -122,16 +130,16 @@ namespace Aurore.DialogSystem
             UpdateDialogueSimple(currentNode);
 
             //Deal with answers
-            canBeSkipped = currentNode.HasAnswers() == false;
+            hasNoAnswers = currentNode.HasAnswers() == false;
 
-            answersAreAllLeafs = false; 
+            answersAreAllLeafs = true; 
             foreach (var dynamicOutputs in currentNode.DynamicOutputs) 
             {
-                if (dynamicOutputs.IsConnected == false)
+                if (dynamicOutputs.IsConnected == true)
                 {
-                    answersAreAllLeafs = true; 
+                    answersAreAllLeafs = false; 
                 }
-            }
+            } 
 
             DealWithAnswers();
         }
@@ -142,17 +150,15 @@ namespace Aurore.DialogSystem
         /// <param name="node">The current node</param>
         protected virtual void DealWithAnswers()
         {
-            if (canBeSkipped)
+            if (hasNoAnswers)
             {
-                HideAnswersUI(true);
+                OnDialogueEndReached();
                 return;
             } 
             else if (answersAreAllLeafs)
             {
-                OnFinalSentenceTypingDone();
+                //OnFinalSentenceTypingDone();
             }
-
-            UpdateAnswers(currentNode.Answers);
         }
 
         #region UI Tighly linked abstract method
@@ -196,7 +202,9 @@ namespace Aurore.DialogSystem
         /// <returns></returns>
         protected IEnumerator TypeSentence(string newSentence, TMP_Text uiText)
         {
-            uiText.text = ""; //Reset it
+            HideAnswersUI(true);
+
+            uiText.text = ""; 
             _source.Play();
             foreach (var c in newSentence.ToCharArray())
             {
@@ -205,6 +213,11 @@ namespace Aurore.DialogSystem
                 yield return _waitLetter;
             }
             _source.Stop();
+
+            DialogueLines = new DialogueLine[currentNode.DialogueLines.Count];
+            Array.Copy(currentNode.DialogueLines.ToArray(), DialogueLines, DialogueLines.Length);
+
+            OnSentenceTypingDone(DialogueLines.Select(x => x.answer).ToList()); 
         }
         
         #region Interactions
@@ -213,13 +226,13 @@ namespace Aurore.DialogSystem
         /// This method must be called whenever an answer is chosen. Should be linked to your button callback method.
         /// </summary>d
         /// <param name="index">The index of the answers has given in the original answers array.</param>
-        public void OnAnswerClicked(int index)
+        public virtual void OnAnswerClicked(int index)
         {
-            var node = DialogGraph.GetNext(currentNode, index);
-            UpdateDialogue(node);
+            var nextNode = DialogGraph.GetNext(currentNode, index);
+            UpdateDialogue(nextNode);
         }
 
-        public void OnBackButtonClicked()
+        public virtual void OnBackButtonClicked()
         {
             var node = DialogGraph.GetPrevious(currentNode); 
         }
@@ -244,7 +257,7 @@ namespace Aurore.DialogSystem
         /// </summary>
         public void OnSkipDialog()
         {
-            if (!canBeSkipped) return;
+            if (!hasNoAnswers) return;
 
             UpdateDialogue(DialogGraph.GetNext(currentNode, 0));
         }

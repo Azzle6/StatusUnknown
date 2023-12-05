@@ -7,6 +7,8 @@ using XNode;
 // NOT
 // BRANCH
 // FOR
+// SWITCH
+// DIALOGUE BRANCH
 
 // bool I/O from derived classes must be serialized and Hidden, because their value is not edited manually but via other node types
 namespace StatusUnknown.Tools.Narrative

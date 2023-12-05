@@ -18,29 +18,47 @@ public class PlayerDataSO : SerializedScriptableObject
     {
         [LabelWidth(200)] public int currentReputationValue = 0;
         [LabelWidth(200)] public ReputationRank currentReputationRank;
-        private int[] ReputationCeils; 
+        private int[] ReputationCeils;
+        private const int RANK_MAX = 3; // temp
 
         public void UpdateReputationRank(int additionalReputation, int[] reputationCeils)
         {
             ReputationCeils = new int[reputationCeils.Length]; 
-
             Array.Copy(reputationCeils, ReputationCeils, reputationCeils.Length); 
-            Debug.Log($"reputation update from {currentReputationValue} to {currentReputationValue + additionalReputation}");
+
             currentReputationValue += additionalReputation;
 
             do
             {
-                Debug.Log("New Rank was reached ! ");
-                currentReputationRank = (ReputationRank)Mathf.Min((int)currentReputationRank + 1, 3);
-                currentReputationValue -= ReputationCeils[(int)currentReputationRank];
+                int modifier = MathF.Sign(additionalReputation); 
+                currentReputationRank = (ReputationRank)Mathf.Clamp(Mathf.Min((int)currentReputationRank + modifier, RANK_MAX), 0, RANK_MAX);
+
+                if (modifier > 0)
+                {
+                    currentReputationValue -= ReputationCeils[(int)currentReputationRank];
+                }
+                else
+                {
+                    currentReputationValue = currentReputationRank == ReputationRank.Zero ?
+                        0 :
+                        ReputationCeils[(int)currentReputationRank + 1] - currentReputationValue;
+                }
+
+                Debug.Log($"New rank : {currentReputationRank} \n With remainder xp : {currentReputationValue}");
             }
-            while (currentReputationValue >= ReputationCeils[(int)currentReputationRank + 1]);
+            while (currentReputationValue >= ReputationCeils[Mathf.Clamp((int)currentReputationRank + 1, 0, RANK_MAX)]);
             // remainder is kept
-            Debug.Log("remainder xp : " + currentReputationValue); 
+
+            if (currentReputationRank == (ReputationRank)RANK_MAX)
+            {
+                Debug.Log("max rank was hit");
+                currentReputationValue = 0;
+                return;
+            }
         }
     }
 
-    [DisableInEditorMode, DisableInPlayMode] public Dictionary<Faction, RankData> rankDatas = new Dictionary<Faction, RankData>();
+    public Dictionary<Faction, RankData> rankDatas = new Dictionary<Faction, RankData>();
 
     // TODO : move this to Faction Editor
     private readonly List<int[]> reputationCeils = new List<int[]>()
@@ -79,5 +97,13 @@ public class PlayerDataSO : SerializedScriptableObject
         {
             QuestRewards.Add(questReward);
         }
+    }
+
+    public (int, ReputationRank) GetCurrentReputation(Faction key)
+    {
+        RankData rd = rankDatas[key];
+        (int xpRemainder, ReputationRank reputationRank) returnValue = new(rd.currentReputationValue, rd.currentReputationRank);
+
+        return returnValue; 
     }
 }

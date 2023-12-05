@@ -11,8 +11,11 @@ using XNode;
 
 // original credits : Aurora Dialogue System
 
-// [CreateNodeMenu("Get Quest Journal Node")]
-// [CreateNodeMenu("Register Choice Node")]
+//                  -- COLOR CODE --
+    // green : dialogue
+    // yellow : quest
+    // purple : logic
+    // red : player
 
 // chaque PNJ de faction a un pool de quêtes
 // jauge de réputation % -> nouvelle quête d'histoire (main quest de faction)
@@ -24,18 +27,20 @@ namespace StatusUnknown.Tools.Narrative
     {
         [TextArea] public string answer;
         [LabelWidth(Node.LABEL_WIDTH_MEDIUM)] public bool isOptionalDialogue;
+        [LabelWidth(Node.LABEL_WIDTH_MEDIUM)] public bool storeIfSelected;
         [LabelWidth(Node.LABEL_WIDTH_MEDIUM)] public Sprite icon;
         [LabelWidth(Node.LABEL_WIDTH_MEDIUM)] public QuestObjectSO optionalGameplayEffect;
         internal bool isValid;
 
-        public DialogueLine(string answer, bool isOptionalDialogue, Sprite icon, QuestObjectSO optionalGameplayEffect, bool isValid)
+        public DialogueLine(string answer, bool isOptionalDialogue, bool storeIfSelected, Sprite icon, QuestObjectSO optionalGameplayEffect, bool isValid)
         {
             this.answer = answer;
             this.isOptionalDialogue = isOptionalDialogue;
+            this.storeIfSelected = storeIfSelected;
             this.icon = icon;
             this.optionalGameplayEffect = optionalGameplayEffect;
             this.isValid = isValid;
-        }       
+        }
     }
 
     public enum AccessType { Get, Set }
@@ -51,38 +56,17 @@ namespace StatusUnknown.Tools.Narrative
         [Serializable] public class State { }
 
         [Input, SerializeField] protected State execIn = null;
-        [Output, SerializeField] protected State execOut = null; 
 
         [TextArea] public string dialogueOpening;
 
         [Output(dynamicPortList = true), SerializeField] public List<DialogueLine> DialogueLines; 
-        public List<string> Answers { get; private set; } // move this to DialogGraph if getting errors in built mode
 
         [Input, SerializeField] public DialogueLine conditionalAnswer;
 		private bool conditionIsValid = false;
 
         // protected INodeState NodeStateInterface { get; private set; }
 
-        protected override void Init()
-        {
-            if (EditorApplication.isUpdating || EditorApplication.isCompiling) return; 
-
-            base.Init();
-
-            if (EditorApplication.isPlayingOrWillChangePlaymode || Application.isPlaying)
-            {
-                Debug.Log("setting answers on entering play mode"); 
-                Answers.Clear();
-                foreach (var item in DialogueLines)
-                {
-                    Answers.Add(item.answer); 
-                }
-            }
-
-            //NodeStateInterface = this; 
-        }
-
-        public bool IsRootNode() => isRootNode; 
+        public bool IsRootNode() => isRootNode;
 
         // public virtual INodeState TryGetInterface() => NodeStateInterface;
 
@@ -91,9 +75,6 @@ namespace StatusUnknown.Tools.Narrative
             base.OnCreateConnection(from, to);
 
             if (from.node.GetType() != typeof(ValidationNode)) return;
-
-            conditionalAnswer = GetInputValue("conditionalAnswer", new DialogueLine());
-            conditionIsValid = conditionalAnswer.isValid; 
 
             UpdatePorts();  
             VerifyConnections();
@@ -132,33 +113,27 @@ namespace StatusUnknown.Tools.Narrative
 			return DialogueLines.Count != 0 && (DialogueLines.Count != 1 || !DialogueLines[0].Equals(""));
         }
 
-        public virtual void MoveNext()
+        public virtual void MoveNext(int nextIndex)
         {
+            DialogueNode exitNode = !GetOutputPort($"DialogueLines {nextIndex}").IsConnected ? null : GetOutputPort($"DialogueLines {nextIndex}").Connection.node as DialogueNode;
             DialogGraph dialogGraph = graph as DialogGraph;
 
             if (dialogGraph.CurrentNode != this)
             {
-                Debug.LogWarning("Node isn't active");
+                Debug.LogError("Node isn't active");
                 return;
             }
 
-            NodePort exitPort = GetOutputPort("execOut");
+            if (!exitNode) return; 
 
-            if (!exitPort.IsConnected)
-            {
-                Debug.LogWarning("Node isn't connected");
-                return;
-            }
-
-            DialogueNode node = exitPort.Connection.node as DialogueNode;
-            node.OnEnter();
+            exitNode?.OnEnter();
         }
 
         public virtual void OnEnter()
         {
             DialogGraph fmGraph = graph as DialogGraph;
             fmGraph.CurrentNode = this;
-        } 
+        }
 
         public virtual void OnExit()
         {
