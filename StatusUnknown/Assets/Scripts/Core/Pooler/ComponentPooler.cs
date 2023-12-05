@@ -1,3 +1,4 @@
+using pooler;
 using UnityEngine.Pool;
 using UnityEngine.VFX;
 
@@ -11,7 +12,7 @@ namespace Core.Pooler
     {
         private Dictionary<string, IObjectPool<Component>> pools = new Dictionary<string, IObjectPool<Component>>();
         private Dictionary<GameObject, Component> objectToComponent = new Dictionary<GameObject, Component>();
-        [SerializeField] private VisualEffect emptyVFX;
+        [SerializeField] private VisualEffectHandler emptyVFX;
         
         private void Start()
         {
@@ -25,10 +26,10 @@ namespace Core.Pooler
             {
                 return;
             }
+            
 
             IObjectPool<Component> newPool = new ObjectPool<Component>(() => (Object.Instantiate(prefab)), ActionOnGet, ActionOnRelease,null, false,baseCount);
             AddPool<Component>(prefab.gameObject.name, newPool);
-            
         }
 
         public void AddPool<T>(string key, IObjectPool<Component> pool) where T : Object

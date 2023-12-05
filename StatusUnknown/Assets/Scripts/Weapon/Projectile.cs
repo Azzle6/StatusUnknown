@@ -1,3 +1,5 @@
+using pooler;
+
 namespace Weapon
 {
     using UnityEngine;
@@ -13,7 +15,7 @@ namespace Weapon
         [SerializeField] private Rigidbody rb;
         [SerializeField] private VisualEffectAsset hitVFX;
         [SerializeField] private HitContext hitContext;
-        private VisualEffect tempHitVFX;
+        private VisualEffectHandler tempHitVFX;
         public float knockbackStrength = 10f;
         public float lifeTime = 5f;
 
@@ -39,10 +41,9 @@ namespace Weapon
     
         public void Hit(IDamageable target)
         {
-            tempHitVFX = ComponentPooler.Instance.GetPooledObject<VisualEffect>("EmptyVisualEffect");
-            tempHitVFX.visualEffectAsset = hitVFX;
+            tempHitVFX = ComponentPooler.Instance.GetPooledObject<VisualEffectHandler>("EmptyVisualEffect");
+            tempHitVFX.StartVFX(hitVFX,5);
             tempHitVFX.transform.position = transform.position;
-            tempHitVFX.Play();
             target.TakeDamage(damage, transform.forward * knockbackStrength);
             
             ModuleBehaviourHandler.Instance.InstantiateModuleBehaviour(
