@@ -21,12 +21,14 @@ namespace Weapon
         private VisualEffectHandler tempHitVFX;
         public float knockbackStrength = 10f;
         public float lifeTime = 5f;
+        private bool isCheckingCollision;
 
         private CompiledModule moduleToCast;
         
         private void OnEnable()
         {
             StartCoroutine(DestroyAfterTime());
+            isCheckingCollision = false;
         }
         
         private void OnDisable()
@@ -43,15 +45,23 @@ namespace Weapon
 
         private void FixedUpdate()
         {
+            if (!isCheckingCollision)
+                return;
             CollisionBehaviour();
+        }
+        
+        public void StartCheckingCollision()
+        {
+            isCheckingCollision = true;
         }
         
         protected void CollisionBehaviour()
         {
-            Collider[] collisions = hitShape.DetectColliders(this.transform.position, this.transform.rotation,
+            Collider[] collisions = hitShape.DetectColliders(transform.position,transform.rotation,
                 layerMask);
             if (collisions.Length > 0)
             {
+                Debug.Log("hit");
                 Collider firstCollider = collisions[0];
                 IDamageable damageable = firstCollider.GetComponent<IDamageable>();
                 if (damageable != null)

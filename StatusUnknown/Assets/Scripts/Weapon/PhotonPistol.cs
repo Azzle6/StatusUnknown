@@ -47,7 +47,7 @@ namespace Weapon
 
             if (charging != default)
                 return false;
-
+            
             tempPhotonPistolBullet = ComponentPooler.Instance.GetPooledObject<Projectile>(stat.projectilePool.prefab.name);
             tempPhotonPistolBulletTr = tempPhotonPistolBullet.transform;
             
@@ -106,6 +106,7 @@ namespace Weapon
             shootingVFX.Play();
             tempPhotonPistolBulletTr.transform.parent = null;
             tempPhotonPistolBullet.Launch(currentDamage, spawnPoint.forward, stat.projectileSpeed, inventory.GetWeaponTriggerData(weaponDefinition, E_WeaponOutput.ON_HIT).compiledModules.FirstModule);
+            tempPhotonPistolBullet.StartCheckingCollision();
             tempPhotonPistolBullet.hitShape.radius = tempPhotonPistolBulletTr.localScale.y / 2;
             
             CastModule(E_WeaponOutput.ON_SPAWN, spawnPoint);

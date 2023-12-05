@@ -109,6 +109,7 @@ namespace Weapon
 
         public void InitPool()
         {
+            Debug.Log("pool of bullet created");
             ComponentPooler.Instance.CreatePool(weaponStat.projectilePool.prefab.GetComponent<Projectile>(),weaponStat.projectilePool.baseCount);
         }
         
