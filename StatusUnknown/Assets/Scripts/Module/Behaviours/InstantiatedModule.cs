@@ -25,10 +25,8 @@ namespace Module.Behaviours
 
             foreach (var trigger in this.compiledModule.triggersNextModule)
             {
-                Debug.Log($"Check trigger {trigger.moduleTrigger}");
                 if (trigger.compiledModule != null)
                 {
-                    Debug.Log("Trigger module not null");
                     switch (trigger.moduleTrigger)
                     {
                         case E_ModuleOutput.ON_SPAWN:
@@ -113,7 +111,6 @@ namespace Module.Behaviours
         
         private void TriggerNextModule(CompiledModule nextModule, InstantiatedModuleInfo info)
         {
-            Debug.Log($"Instantiate next module : {nextModule.module.definition}");
             ModuleBehaviourHandler.Instance.InstantiateModuleBehaviour(nextModule, info);
         }
         
