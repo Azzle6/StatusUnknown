@@ -30,7 +30,11 @@ namespace Weapon
 
         protected void CastModule(E_WeaponOutput trigger, Transform spawnPoint)
         {
+            
             WeaponTriggerData data = this.inventory.GetWeaponTriggerData(this.weaponDefinition, trigger);
+            if (data == default)
+                return;
+            
             this.CompileModules(data);
             ModuleBehaviourHandler.Instance.InstantiateModuleBehaviour(
                 data.compiledModules.FirstModule,

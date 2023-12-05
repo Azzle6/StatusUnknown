@@ -21,6 +21,7 @@ namespace Core.SingletonsSO
         
         public void ForceFocus(VisualElement element)
         {
+            Debug.Log($"Force focus on {element}.");
             element.Focus();
         }
 
