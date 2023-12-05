@@ -6,7 +6,7 @@ public abstract class EnemyState
 {
     protected EnemyContext context;
     protected string name = "test";
-    protected Transform transform => context.transform;
+    public Transform transform => context.transform;
     public void SetContext(EnemyContext context)
     {
         this.context = context;

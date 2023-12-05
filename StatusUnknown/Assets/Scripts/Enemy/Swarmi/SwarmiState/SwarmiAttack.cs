@@ -5,9 +5,10 @@ using UnityEngine;
 public class SwarmiAttack : EnemyState
 {
     Color colorState = Color.red;
-    float attackDuration;
-    float attackRange => context.stats.AttackRange;
 
+    float attackRange => context.stats.AttackRange;
+    float attackDuration;
+    float attackCooldown => ((EnemySwarmi)context).attackCoolDown;
     public override void DebugGizmos()
     {
 
@@ -20,7 +21,7 @@ public class SwarmiAttack : EnemyState
         {
             context.RotateTowards(CombatManager.playerTransform.position - transform.position, 180);
         }
-        if (!CombatManager.PlayerInRange(transform.position, attackRange) || attackDuration < 0)
+        if (attackDuration < 0)
         {
             context.SwitchState(new SwarmiChase());
         }
@@ -28,6 +29,8 @@ public class SwarmiAttack : EnemyState
 
     protected override void Initialize()
     {
+
+        ((EnemySwarmi)context).attackCoolDown = context.stats.AttackCooldown;
         attackDuration = context.stats.AttackDuration;
         context.PlayAnimation("SwarmiAttack");
     }
