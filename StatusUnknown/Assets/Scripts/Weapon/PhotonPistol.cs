@@ -105,13 +105,10 @@ namespace Weapon
             
             shootingVFX.Play();
             tempPhotonPistolBulletTr.transform.parent = null;
-            tempPhotonPistolBullet.Launch(currentDamage, spawnPoint.forward, stat.projectileSpeed, this.inventory.GetWeaponTriggerData(this.weaponDefinition, E_WeaponOutput.ON_HIT).compiledModules.FirstModule);
-            tempPhotonPistolBulletTr.TryGetComponent(out HitContext tempHitContext);
-            HitSphere tempHitSphere = tempHitContext.hitShape as HitSphere;
-            tempHitSphere.radius = tempPhotonPistolBulletTr.localScale.y / 2;
-            tempHitContext.HitTriggerEvent += tempPhotonPistolBullet.Hit;
+            tempPhotonPistolBullet.Launch(currentDamage, spawnPoint.forward, stat.projectileSpeed, inventory.GetWeaponTriggerData(weaponDefinition, E_WeaponOutput.ON_HIT).compiledModules.FirstModule);
+            tempPhotonPistolBullet.hitShape.radius = tempPhotonPistolBulletTr.localScale.y / 2;
             
-            this.CastModule(E_WeaponOutput.ON_SPAWN, this.spawnPoint);
+            CastModule(E_WeaponOutput.ON_SPAWN, spawnPoint);
             
             tempPhotonPistolBulletTr = default;
             tempPhotonPistolBullet = default;

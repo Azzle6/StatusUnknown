@@ -1,3 +1,5 @@
+using System;
+using Combat.HitProcess;
 using pooler;
 
 namespace Weapon
@@ -14,7 +16,8 @@ namespace Weapon
         [HideInInspector] public float damage;
         [SerializeField] private Rigidbody rb;
         [SerializeField] private VisualEffectAsset hitVFX;
-        [SerializeField] private HitContext hitContext;
+        public HitSphere hitShape;
+        [SerializeField] private LayerMask layerMask; 
         private VisualEffectHandler tempHitVFX;
         public float knockbackStrength = 10f;
         public float lifeTime = 5f;
@@ -28,7 +31,6 @@ namespace Weapon
         
         private void OnDisable()
         {
-            hitContext.HitTriggerEvent -= Hit;
             StopAllCoroutines();
         }
         
@@ -38,20 +40,32 @@ namespace Weapon
             rb.velocity = direction * speed;
             this.moduleToCast = moduleToCast;
         }
-    
-        public void Hit(IDamageable target)
-        {
-            tempHitVFX = ComponentPooler.Instance.GetPooledObject<VisualEffectHandler>("EmptyVisualEffect");
-            tempHitVFX.StartVFX(hitVFX,5);
-            tempHitVFX.transform.position = transform.position;
-            target.TakeDamage(damage, transform.forward * knockbackStrength);
-            
-            ModuleBehaviourHandler.Instance.InstantiateModuleBehaviour(
-                this.moduleToCast,
-                new InstantiatedModuleInfo(transform.position, transform.rotation));
 
-            ComponentPooler.Instance.ReturnObjectToPool(this);
-        } 
+        private void FixedUpdate()
+        {
+            CollisionBehaviour();
+        }
+        
+        protected void CollisionBehaviour()
+        {
+            Collider[] collisions = hitShape.DetectColliders(this.transform.position, this.transform.rotation,
+                layerMask);
+            if (collisions.Length > 0)
+            {
+                Collider firstCollider = collisions[0];
+                IDamageable damageable = firstCollider.GetComponent<IDamageable>();
+                if (damageable != null)
+                    damageable.TakeDamage(damage, transform.forward * knockbackStrength);
+
+                ModuleBehaviourHandler.Instance.InstantiateModuleBehaviour(this.moduleToCast, new InstantiatedModuleInfo(transform.position, transform.rotation));
+                tempHitVFX = ComponentPooler.Instance.GetPooledObject<VisualEffectHandler>("EmptyVisualEffect");
+
+                tempHitVFX.StartVFX(hitVFX,5);
+                tempHitVFX.transform.position = transform.position;
+                ComponentPooler.Instance.ReturnObjectToPool(this);
+            }
+        }
+        
         
         private IEnumerator DestroyAfterTime()
         {
