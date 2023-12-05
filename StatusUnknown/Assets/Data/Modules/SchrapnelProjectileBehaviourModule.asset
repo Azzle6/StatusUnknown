@@ -19,11 +19,11 @@ MonoBehaviour:
     content: 01010101
   view: {fileID: 0}
   outputs:
-  - weaponTriggerType: 1
+  - moduleTriggerType: 0
     localPosition: {x: 1, y: 0}
     direction: 3
   BehaviourData:
-    rid: 7591883797994668050
+    rid: 7591883820643123234
   references:
     version: 2
     RefIds:
@@ -37,26 +37,27 @@ MonoBehaviour:
       type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
       data:
         radius: 0.1
-    - rid: 7591883797994668050
+    - rid: 7591883820643123234
       type: {class: ProjectileBehaviourData, ns: Module.Definitions, asm: Assembly-CSharp}
       data:
-        <TickRate>k__BackingField: 0
-        <LayerMask>k__BackingField:
-          serializedVersion: 2
-          m_Bits: 385
         <Behaviour>k__BackingField:
           scriptAsset: {fileID: 11500000, guid: 52ad6006665b33347bc6db8216731b6c, type: 3}
           typeName: Module.Behaviours.Projectiles.BasicProjectileBehaviour, Assembly-CSharp,
             Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        <Quantity>k__BackingField: 4
-        <InstantiationRule>k__BackingField:
-          rid: 4696495337976365320
+        <LayerMask>k__BackingField:
+          serializedVersion: 2
+          m_Bits: 385
         <CollisionShape>k__BackingField:
           rid: 7591883733765456137
-        <Damages>k__BackingField: 0
-        speed: 1
         <Mesh>k__BackingField: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
         <Material>k__BackingField: {fileID: -876546973899608171, guid: 4a77fad0a2c502e42adef107b7ea51ea, type: 3}
         shootVFX: {fileID: 8926484042661614526, guid: 2fae113fc0200bf479e9b4e3923b5b47, type: 3}
         projectileVFX: {fileID: 8926484042661614526, guid: 053cfcb6e2fcc79439af58bd416353a9, type: 3}
         hitVFX: {fileID: 8926484042661614526, guid: 40f71ee4f5b0f37459d6ddfbbd50e38e, type: 3}
+        <TickRate>k__BackingField: 0
+        <LifeTime>k__BackingField: 1
+        <Quantity>k__BackingField: 4
+        <InstantiationRule>k__BackingField:
+          rid: 4696495337976365320
+        <Damages>k__BackingField: 1.2
+        speed: 1

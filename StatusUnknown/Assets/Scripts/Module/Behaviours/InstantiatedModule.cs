@@ -14,6 +14,7 @@ namespace Module.Behaviours
         protected Action<InstantiatedModuleInfo> OnSpawnEvent;
         protected Action<InstantiatedModuleInfo> OnTickEvent;
         protected Action<InstantiatedModuleInfo> OnHitEvent;
+        protected Action<InstantiatedModuleInfo> OnEndEvent;
         
         public void Init(CompiledModule compiledModule, InstantiatedModuleInfo info, IBehaviourData data)
         {
@@ -24,9 +25,11 @@ namespace Module.Behaviours
 
             foreach (var trigger in this.compiledModule.triggersNextModule)
             {
+                Debug.Log($"Check trigger {trigger.moduleTrigger}");
                 if (trigger.compiledModule != null)
                 {
-                    switch (trigger.weaponTrigger)
+                    Debug.Log("Trigger module not null");
+                    switch (trigger.moduleTrigger)
                     {
                         case E_ModuleOutput.ON_SPAWN:
                             this.OnSpawnEvent += (i) => this.TriggerNextModule(trigger.compiledModule, i);
@@ -37,6 +40,9 @@ namespace Module.Behaviours
                         case E_ModuleOutput.ON_TICK:
                             this.OnTickEvent += (i) => this.TriggerNextModule(trigger.compiledModule, i);
                             break;
+                        case E_ModuleOutput.ON_END:
+                            this.OnEndEvent += (i) => this.TriggerNextModule(trigger.compiledModule, i);
+                            break;
                         default:
                             throw new ArgumentOutOfRangeException();
                     }
@@ -45,10 +51,10 @@ namespace Module.Behaviours
             
             if(this.behaviourData.TickRate >= 0)
                 this.StartCoroutine(Tick(this.behaviourData.TickRate));
-
-            StartCoroutine(LifeTime(data.LifeTime));
             
             OnInit(compiledModule, info, data);
+            
+            StartCoroutine(LifeTime(data.LifeTime));
         }
 
         protected abstract void OnInit(CompiledModule compiledModule, InstantiatedModuleInfo info, IBehaviourData data);
@@ -75,7 +81,10 @@ namespace Module.Behaviours
 
         protected virtual void OnFixedUpdate()
         { }
-        
+
+        protected virtual void OnBeforeDestroy()
+        { }
+
         protected abstract void CollisionBehaviour();
         #endregion
         
@@ -91,14 +100,20 @@ namespace Module.Behaviours
 
         private IEnumerator LifeTime(float time)
         {
-            yield return new WaitForSeconds(time);
+            yield return (time <= 0 ? new WaitForEndOfFrame() : new WaitForSeconds(time));
             this.DestroyModule();
         }
 
-        protected abstract void DestroyModule();
+        protected void DestroyModule()
+        {
+            this.OnBeforeDestroy();
+            this.OnEndEvent?.Invoke(new InstantiatedModuleInfo(transform.position, transform.rotation));
+            Destroy(this.gameObject);
+        }
         
         private void TriggerNextModule(CompiledModule nextModule, InstantiatedModuleInfo info)
         {
+            Debug.Log($"Instantiate next module : {nextModule.module.definition}");
             ModuleBehaviourHandler.Instance.InstantiateModuleBehaviour(nextModule, info);
         }
         

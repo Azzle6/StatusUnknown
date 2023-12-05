@@ -33,73 +33,74 @@ namespace Module.Definitions
     public struct ProjectileBehaviourData : IBehaviourData
     {
         [field: SerializeField]
-        public float TickRate { get; set; }
+        public ScriptReference Behaviour { get; set; }
         [field: SerializeField]
         public LayerMask LayerMask { get; set; }
-        [field: SerializeField]
-        public ScriptReference Behaviour { get; set; }
-        [field : SerializeField]
-        public float LifeTime { get; set; }
-
-        [field: SerializeField]
-        public int Quantity { get; set; }
-        [field: SerializeReference]
-        public IInstantiationRule InstantiationRule { get; set; }
-        
         [field:SerializeReference]
         public HitShape CollisionShape { get; set; }
         
-        [field: SerializeField]
-        public float Damages { get; set; }
-        [field: SerializeField]
-        public float speed;
-        
+        //Visuals
         [field: SerializeField]
         public Mesh Mesh { get; set; }
         [field: SerializeField]
         public Material Material { get; set; }
-
         [SerializeField] 
         public VisualEffectAsset shootVFX;
         [SerializeField] 
         public VisualEffectAsset projectileVFX;
         [SerializeField] 
         public VisualEffectAsset hitVFX;
+        
+        //Stats
+        [field: SerializeField]
+        public float TickRate { get; set; }
+        [field : SerializeField]
+        public float LifeTime { get; set; }
+        [field: SerializeField]
+        public int Quantity { get; set; }
+        [field: SerializeReference]
+        public IInstantiationRule InstantiationRule { get; set; }
+        [field: SerializeField]
+        public float Damages { get; set; }
+        [field: SerializeField]
+        public float speed;
     }
 
     [Serializable]
     public struct ZoneBehaviourData : IBehaviourData
     {
         [field: SerializeField]
-        public float TickRate { get; set; }
+        public ScriptReference Behaviour { get; set; }
         [field: SerializeField]
         public LayerMask LayerMask { get; set; }
-        [field: SerializeField]
-        public ScriptReference Behaviour { get; set; }
-        [field : SerializeField]
-        public float LifeTime { get; set; }
-        
-        [field: SerializeField]
-        public int Quantity { get; set; }
-        [field: SerializeReference]
-        public IInstantiationRule InstantiationRule { get; set; }
-        
         [field:SerializeReference]
         public HitShape CollisionShape { get; set; }
         
+        //Visuals
         [field: SerializeField]
         public Mesh Mesh { get; set; }
         [field: SerializeField]
         public Material Material { get; set; }
-        [field: SerializeField]
-        public float Damages { get; set; }
-        [SerializeField]
-        public HitSphere DamageZone;
-        
         [SerializeField]
         public VisualEffectAsset zoneBurstVFX;
         [SerializeField]
         public VisualEffectAsset hitVFX;
+        
+        //Stats
+        [field: SerializeField]
+        public float TickRate { get; set; }
+        [field : SerializeField]
+        public float LifeTime { get; set; }
+        [field: SerializeField]
+        public int Quantity { get; set; }
+        [field: SerializeReference]
+        public IInstantiationRule InstantiationRule { get; set; }
+        [field: SerializeField]
+        public float Damages { get; set; }
+        [SerializeField]
+        public HitSphere DamageRadius;
+        
+        
     }
 
     public struct ElementPositionInfo

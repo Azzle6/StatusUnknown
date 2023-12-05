@@ -19,11 +19,11 @@ MonoBehaviour:
     content: 01010101
   view: {fileID: 0}
   outputs:
-  - weaponTriggerType: 1
+  - moduleTriggerType: 0
     localPosition: {x: 1, y: 0}
     direction: 3
   BehaviourData:
-    rid: 7591883797994668097
+    rid: 7591883820643123220
   references:
     version: 2
     RefIds:
@@ -34,30 +34,27 @@ MonoBehaviour:
       type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
       data:
         radius: 0
-    - rid: 7591883797994668097
+    - rid: 7591883820643123220
       type: {class: ZoneBehaviourData, ns: Module.Definitions, asm: Assembly-CSharp}
       data:
-        <TickRate>k__BackingField: 0
-        <LayerMask>k__BackingField:
-          serializedVersion: 2
-          m_Bits: 129
         <Behaviour>k__BackingField:
           scriptAsset: {fileID: 11500000, guid: c617c350df4992641a5c764fd427cd92, type: 3}
           typeName: Module.Behaviours.Zone.ExplosionZoneBehaviour, Assembly-CSharp,
             Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        <Quantity>k__BackingField: 1
-        <InstantiationRule>k__BackingField:
-          rid: 4696495337976365338
+        <LayerMask>k__BackingField:
+          serializedVersion: 2
+          m_Bits: 129
         <CollisionShape>k__BackingField:
           rid: 7591883733765456131
         <Mesh>k__BackingField: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
         <Material>k__BackingField: {fileID: -7097115718587537635, guid: ecdbcec36b1082e468192d3cd665f4a9, type: 3}
-        <Damages>k__BackingField: 0
-        DamageZone:
-          rid: 7591883797994668098
         zoneBurstVFX: {fileID: 8926484042661614526, guid: e4a48a7e06e56454eb2bd706fc8af23e, type: 3}
         hitVFX: {fileID: 8926484042661614526, guid: 0c9ad1197d1f2e14095df34ad0a192bb, type: 3}
-    - rid: 7591883797994668098
-      type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
-      data:
-        radius: 1
+        <TickRate>k__BackingField: 0
+        <LifeTime>k__BackingField: 0
+        <Quantity>k__BackingField: 1
+        <InstantiationRule>k__BackingField:
+          rid: 4696495337976365338
+        <Damages>k__BackingField: 1.25
+        DamageRadius:
+          radius: 2

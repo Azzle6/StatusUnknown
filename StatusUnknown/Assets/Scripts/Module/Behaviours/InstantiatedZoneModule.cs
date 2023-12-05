@@ -32,7 +32,7 @@ namespace Module.Behaviours
             
             damageZoneVFX.Play();
             
-            Collider[] colliders = this.ZoneData.DamageZone.DetectColliders(this.transform.position, this.transform.rotation,
+            Collider[] colliders = this.ZoneData.DamageRadius.DetectColliders(this.transform.position, this.transform.rotation,
                 this.ZoneData.LayerMask);
             
             foreach (var col in colliders)
@@ -50,11 +50,6 @@ namespace Module.Behaviours
                 
                 this.OnHitEvent?.Invoke(new InstantiatedModuleInfo(closestPoint, transform.rotation, col));
             }
-        }
-
-        protected override void DestroyModule()
-        {
-            Destroy(this.gameObject);
         }
     }
 }
