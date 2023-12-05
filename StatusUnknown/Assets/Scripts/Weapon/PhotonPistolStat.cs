@@ -16,13 +16,8 @@ namespace Weapon
         public AnimationCurve projectileSize;
         public float maxProjectileSize;
         public float projectileSpeed; 
-        public CoPoolProjectile projectilePool;
         [Header("Charge")]
         public float maxTimeCharge;
-        public float cdTime;
-        [Header("Magazine")]
-        public int magazineSize;
-        public float reloadTime;
         [Header("Rumble")] 
         public GamePadRumbleWithTimer rumbleScaling;
         public GamePadRumbleWithTimer rumbleOnShoot;

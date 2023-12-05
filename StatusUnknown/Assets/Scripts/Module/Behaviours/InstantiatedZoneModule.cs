@@ -1,3 +1,5 @@
+using pooler;
+
 namespace Module.Behaviours
 {
     using System;
@@ -25,12 +27,11 @@ namespace Module.Behaviours
 
         protected virtual void ApplyZoneDamage()
         {
-            VisualEffect damageZoneVFX = ComponentPooler.Instance.GetPooledObject<VisualEffect>("EmptyVisualEffect");
-            damageZoneVFX.visualEffectAsset = this.ZoneData.zoneBurstVFX;
+            VisualEffectHandler damageZoneVFX = ComponentPooler.Instance.GetPooledObject<VisualEffectHandler>("EmptyVisualEffect");
             damageZoneVFX.transform.rotation = transform.rotation;
             damageZoneVFX.transform.position = transform.position;
             
-            damageZoneVFX.Play();
+            damageZoneVFX.StartVFX(ZoneData.zoneBurstVFX, 1f);
             
             Collider[] colliders = this.ZoneData.DamageRadius.DetectColliders(this.transform.position, this.transform.rotation,
                 this.ZoneData.LayerMask);
@@ -43,11 +44,10 @@ namespace Module.Behaviours
                     damageable.TakeDamage(this.ZoneData.Damages, Vector3.zero);
                 }
                 Vector3 closestPoint = col.ClosestPoint(this.transform.position);
-                VisualEffect hitVFX = ComponentPooler.Instance.GetPooledObject<VisualEffect>("EmptyVisualEffect");
-                hitVFX.visualEffectAsset = this.ZoneData.hitVFX;
+                VisualEffectHandler hitVFX = ComponentPooler.Instance.GetPooledObject<VisualEffectHandler>("EmptyVisualEffect");
                 hitVFX.transform.rotation = transform.rotation;
                 hitVFX.transform.position = col.transform.position;
-                
+                hitVFX.StartVFX(ZoneData.hitVFX, 1f);
                 this.OnHitEvent?.Invoke(new InstantiatedModuleInfo(closestPoint, transform.rotation, col));
             }
         }

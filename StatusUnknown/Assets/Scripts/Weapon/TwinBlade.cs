@@ -19,9 +19,9 @@ namespace Weapon
         }
         
 
-        public override void ActionPressed()
+        public override bool ActionPressed()
         {
-            
+            return false;
         }
 
         public override void ActionReleased()
