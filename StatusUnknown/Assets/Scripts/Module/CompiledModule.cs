@@ -16,12 +16,12 @@ namespace Module
 
     public struct CompiledOutputInfo
     {
-        public E_ModuleOutput weaponTrigger;
+        public E_ModuleOutput moduleTrigger;
         public CompiledModule compiledModule;
 
-        public CompiledOutputInfo(E_ModuleOutput weaponTrigger, CompiledModule compModule)
+        public CompiledOutputInfo(E_ModuleOutput moduleTrigger, CompiledModule compModule)
         {
-            this.weaponTrigger = weaponTrigger;
+            this.moduleTrigger = moduleTrigger;
             this.compiledModule = compModule;
         }
     }

@@ -7,7 +7,7 @@ namespace Module
     public class ModuleCastingTest : MonoBehaviour
     {
         [SerializeField] private PlayerInventorySO inventory;
-
+        
         private void CompileModules()
         {
             foreach (var weapon in this.inventory.equippedWeaponsData)

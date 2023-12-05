@@ -4,6 +4,7 @@ namespace Module.Definitions
     using Core.Helpers;
     using Inventory.Item;
     using UnityEngine;
+    using UnityEngine.Serialization;
 
     public abstract class ModuleDefinitionSO : GridItemSO
     {
@@ -23,13 +24,14 @@ namespace Module.Definitions
     {
         ON_SPAWN,
         ON_HIT,
-        ON_TICK
+        ON_TICK,
+        ON_END
     }
     
     [Serializable]
     public struct Output
     {
-        public E_ModuleOutput weaponTriggerType;
+        public E_ModuleOutput moduleTriggerType;
         public Vector2Int localPosition;
         public E_Direction direction;
     }

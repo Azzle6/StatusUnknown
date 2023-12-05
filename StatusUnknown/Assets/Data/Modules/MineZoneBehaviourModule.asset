@@ -19,46 +19,45 @@ MonoBehaviour:
     content: 01010101
   view: {fileID: 0}
   outputs:
-  - weaponTriggerType: 1
+  - moduleTriggerType: 0
     localPosition: {x: 1, y: 0}
     direction: 3
   BehaviourData:
-    rid: 7591883733765456134
+    rid: 7591883820643123225
   references:
     version: 2
     RefIds:
-    - rid: 7591883730098061325
-      type: {class: ConicInstantiationRule, ns: Module, asm: Assembly-CSharp}
-      data:
-        angle: 180
-        regular: 0
-        radius: 3
     - rid: 7591883733765455883
       type: {class: HitBox, ns: , asm: Assembly-CSharp}
       data:
         size: {x: 0.2, y: 0.1, z: 0.2}
-    - rid: 7591883733765456134
+    - rid: 7591883820643123223
+      type: {class: ConicInstantiationRule, ns: Module, asm: Assembly-CSharp}
+      data:
+        angle: 180
+        regular: 0
+        radius: 2
+    - rid: 7591883820643123225
       type: {class: ZoneBehaviourData, ns: Module.Definitions, asm: Assembly-CSharp}
       data:
-        <TickRate>k__BackingField: 1
-        <LayerMask>k__BackingField:
-          serializedVersion: 2
-          m_Bits: 129
         <Behaviour>k__BackingField:
           scriptAsset: {fileID: 11500000, guid: a192e54c5543c2e45a07ffdfa28e624a, type: 3}
           typeName: Module.Behaviours.Zone.MineBehaviour, Assembly-CSharp, Version=0.0.0.0,
             Culture=neutral, PublicKeyToken=null
-        <Quantity>k__BackingField: 1
-        <InstantiationRule>k__BackingField:
-          rid: 7591883730098061325
+        <LayerMask>k__BackingField:
+          serializedVersion: 2
+          m_Bits: 128
         <CollisionShape>k__BackingField:
           rid: 7591883733765455883
-        <Mesh>k__BackingField: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+        <Mesh>k__BackingField: {fileID: -951608786083511892, guid: 4c702de1e04a93b4dabbee023df4007b, type: 3}
         <Material>k__BackingField: {fileID: -7097115718587537635, guid: ecdbcec36b1082e468192d3cd665f4a9, type: 3}
-        <Damages>k__BackingField: 0
-        damageZone:
-          rid: 7591883733765456135
-    - rid: 7591883733765456135
-      type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
-      data:
-        radius: 1
+        zoneBurstVFX: {fileID: 8926484042661614526, guid: a3bfdcdebba2fd744903f5e8000aa487, type: 3}
+        hitVFX: {fileID: 8926484042661614526, guid: 0c9ad1197d1f2e14095df34ad0a192bb, type: 3}
+        <TickRate>k__BackingField: 0
+        <LifeTime>k__BackingField: 5
+        <Quantity>k__BackingField: 1
+        <InstantiationRule>k__BackingField:
+          rid: 7591883820643123223
+        <Damages>k__BackingField: 2
+        DamageRadius:
+          radius: 2.75
