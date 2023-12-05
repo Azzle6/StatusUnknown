@@ -11,7 +11,8 @@ public class EnemySwarmi : EnemyContext
     public float hitFreq = 1;
     public EnemyStats swarmiStats;
     public override EnemyStats stats => swarmiStats;
-
+    //[HideInInspector]
+    public float attackCoolDown;
     protected override void EnemyTakeDamage(float damage, Vector3 force)
     {
         //Debug.Log("Enemy took damage");

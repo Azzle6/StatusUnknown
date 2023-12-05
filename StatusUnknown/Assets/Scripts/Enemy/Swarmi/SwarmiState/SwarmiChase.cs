@@ -5,9 +5,9 @@ using VectorField;
 
 public class SwarmiChase : EnemyState
 {
+
     float chaseSpeed => context.stats.chaseStrength;
     float attackRange => context.stats.AttackRange;
-    float attackDuration;
     float hoverOffset = 0.5f;
 
     float angleSpeed = 180;
@@ -15,9 +15,10 @@ public class SwarmiChase : EnemyState
     Color stateColor = Color.yellow;
     public override void Update()
     {
-        
+        ((EnemySwarmi)context).attackCoolDown -= Time.deltaTime; // TODO: find a way to implement context inheritance in state
+        bool inRangeAttack = CombatManager.PlayerInRange(transform.position, attackRange);
         Node node = VectorFieldNavigator.WorldPositiondToNode(context.transform.position, 4);
-        if (node != null)
+        if (node != null && !inRangeAttack)
         {
             //Vector3 targetPosition = node.Position + node.targetDirection + Vector3.up;
             
@@ -29,9 +30,12 @@ public class SwarmiChase : EnemyState
             Debug.DrawLine(transform.position, node.Position);
         }
         context.AddForce(context.GetAvoidance());
-        context.RotateTowards(context.Velocity, angleSpeed);
+        if(context.Velocity != Vector3.zero && !inRangeAttack)
+            context.RotateTowards(context.Velocity, angleSpeed);
+        if(CombatManager.playerTransform != null && inRangeAttack)
+            context.RotateTowards(CombatManager.playerTransform.position - transform.position, angleSpeed);
 
-        if (CombatManager.PlayerInRange(transform.position, attackRange))
+        if (inRangeAttack && ((EnemySwarmi)context).attackCoolDown < 0)
             context.SwitchState(new SwarmiAttack());
 
         if (!CombatManager.PlayerInRange(transform.position, context.stats.AggroRange))
@@ -41,7 +45,7 @@ public class SwarmiChase : EnemyState
 
     protected override void Initialize()
     {
-        
+
     }
 
     public override void DebugGizmos()

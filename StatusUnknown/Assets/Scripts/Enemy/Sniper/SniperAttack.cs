@@ -22,6 +22,7 @@ public class SniperAttack : EnemyState
         shootDelay -= Time.deltaTime;
         if(shootDelay <= 0 && !attacked)
         {
+            context.PlayAnimation("SniperAttack");
             attackDuration = sniperStats.AttackDuration;
             attacked = true;
             Debug.Log("Shoot");
@@ -44,6 +45,7 @@ public class SniperAttack : EnemyState
         target = CombatManager.playerTransform.position;
         attackDuration = sniperStats.AttackDuration;
         shootDelay = sniperStats.shootDelay;
+        context.PlayAnimation("SniperBuildUp");
     }
 }
 
