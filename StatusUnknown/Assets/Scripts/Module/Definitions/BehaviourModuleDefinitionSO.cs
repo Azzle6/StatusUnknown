@@ -90,6 +90,7 @@ namespace Module.Definitions
         public float Damages { get; set; }
         [SerializeField]
         public HitSphere DamageZone;
+        
         [SerializeField]
         public VisualEffectAsset zoneBurstVFX;
         [SerializeField]

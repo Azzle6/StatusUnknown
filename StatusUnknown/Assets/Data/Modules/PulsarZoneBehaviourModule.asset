@@ -23,7 +23,7 @@ MonoBehaviour:
     localPosition: {x: 1, y: 0}
     direction: 3
   BehaviourData:
-    rid: 7591883797994668090
+    rid: 7591883820643123201
   references:
     version: 2
     RefIds:
@@ -34,17 +34,13 @@ MonoBehaviour:
       type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
       data:
         radius: 0.1
-    - rid: 7591883797994668088
-      type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
-      data:
-        radius: 1
-    - rid: 7591883797994668090
+    - rid: 7591883820643123201
       type: {class: ZoneBehaviourData, ns: Module.Definitions, asm: Assembly-CSharp}
       data:
         <TickRate>k__BackingField: 1
         <LayerMask>k__BackingField:
           serializedVersion: 2
-          m_Bits: 129
+          m_Bits: 128
         <Behaviour>k__BackingField:
           scriptAsset: {fileID: 11500000, guid: d663e04b0952640499463adfa3b86c85, type: 3}
           typeName: Module.Behaviours.Zone.PulsarZoneBehaviour, Assembly-CSharp,
@@ -58,6 +54,6 @@ MonoBehaviour:
         <Material>k__BackingField: {fileID: -7097115718587537635, guid: ecdbcec36b1082e468192d3cd665f4a9, type: 3}
         <Damages>k__BackingField: 0
         DamageZone:
-          rid: 7591883797994668088
+          radius: 1
         zoneBurstVFX: {fileID: 8926484042661614526, guid: bbce1fbc9a357924b840873589eb3330, type: 3}
         hitVFX: {fileID: 8926484042661614526, guid: 4dec6f1bfffe9e9498776c6635cf1bc4, type: 3}

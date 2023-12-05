@@ -38,10 +38,16 @@ namespace Module.Behaviours
             foreach (var col in colliders)
             {
                 IDamageable damageable = col.GetComponent<IDamageable>();
-                if(damageable != null)
+                if (damageable != null)
+                {
                     damageable.TakeDamage(this.ZoneData.Damages, Vector3.zero);
-                
+                }
                 Vector3 closestPoint = col.ClosestPoint(this.transform.position);
+                VisualEffect hitVFX = ComponentPooler.Instance.GetPooledObject<VisualEffect>("EmptyVisualEffect");
+                hitVFX.visualEffectAsset = this.ZoneData.hitVFX;
+                hitVFX.transform.rotation = transform.rotation;
+                hitVFX.transform.position = col.transform.position;
+                
                 this.OnHitEvent?.Invoke(new InstantiatedModuleInfo(closestPoint, transform.rotation, col));
             }
         }
