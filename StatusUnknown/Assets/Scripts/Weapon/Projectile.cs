@@ -34,7 +34,7 @@ namespace Weapon
             rb.velocity = direction * speed;
         }
     
-        public void Hit(IDamageable target)
+        public void Hit(IDamageable target, Vector3 hitPosition)
         {
             tempHitVFX = ComponentPooler.Instance.GetPooledObject<VisualEffect>("EmptyVisualEffect");
             tempHitVFX.visualEffectAsset = hitVFX;

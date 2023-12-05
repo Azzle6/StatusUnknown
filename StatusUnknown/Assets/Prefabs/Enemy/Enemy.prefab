@@ -26,13 +26,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 868044014069645786}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.169, z: 0.16}
+  m_LocalRotation: {x: -0.091695935, y: -0, z: -0, w: 0.9957871}
+  m_LocalPosition: {x: -0.25, y: 0.25, z: 0.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2391863728582957292}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -10.522, y: 0, z: 0}
 --- !u!2083052967 &3685267458993482965
 VisualEffect:
   m_ObjectHideFlags: 0
@@ -50,7 +50,10 @@ VisualEffect:
   m_ResourceVersion: 1
   m_PropertySheet:
     m_Float:
-      m_Array: []
+      m_Array:
+      - m_Value: 0.06
+        m_Name: Size
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
@@ -414,6 +417,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitContexts:
   - {fileID: 4586539127504081084}
+  hitVfxPrefab: {fileID: 1301853069407882257, guid: e3bdcd04a48cfe44f9052f5839fa313d, type: 3}
   animator: {fileID: 3392131639749682905}
   body: {fileID: 5553896409487144114}
   avoidanceMask:
@@ -423,6 +427,7 @@ MonoBehaviour:
   hit: 0
   hitFreq: 0.1
   swarmiStats: {fileID: 11400000, guid: fd4cf9cc59e2d784585831141016319f, type: 2}
+  attackCoolDown: 0
 --- !u!54 &5553896409487144114
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ public class HitContext : MonoBehaviour
     [SerializeField] protected float updateFrequence = 0.2f;
     Coroutine processDetection;
     HashSet<Collider> temp_colliders = new HashSet<Collider>();
-    public event Action<IDamageable> HitTriggerEvent,HitStayEvent; // HitStayEvent call is udpateFrequence based
+    public event Action<IDamageable,Vector3> HitTriggerEvent,HitStayEvent; // HitStayEvent call is udpateFrequence based
 
     [Header("Debug")]
     [SerializeField] bool triggerHit;
@@ -49,14 +49,14 @@ public class HitContext : MonoBehaviour
                     temp_colliders.Add(collider);
                     //Debug.Log("Hit Idamageable " + Idamageable);
 
-                    HitTriggerEvent?.Invoke(Idamageable);
+                    HitTriggerEvent?.Invoke(Idamageable,collider.ClosestPoint(transform.position));
 
                     if (triggerHit)
                         Idamageable.TakeDamage(0, Vector3.zero);
                 }
                 else if (HitStayEvent != null)
                 {
-                    HitStayEvent(Idamageable);
+                    HitStayEvent(Idamageable, collider.ClosestPoint(transform.position));
                 }
             } 
         }

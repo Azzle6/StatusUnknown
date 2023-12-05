@@ -11,6 +11,8 @@ public class SniperBullet : MonoBehaviour
     [SerializeField] float damage = 3;
     [SerializeField] float radius = 0.5f;
     [SerializeField] LayerMask obstacleLayerMask;
+    [Header("Projectile")]
+    [SerializeField] GameObject hitVFX;
     private void OnEnable()
     {
         hitContext.HitTriggerEvent += PerformHit;
@@ -37,10 +39,20 @@ public class SniperBullet : MonoBehaviour
     {
         Destroy(gameObject);
     }
-    void PerformHit(IDamageable damageable)
+    void PerformHit(IDamageable damageable,Vector3 hitPosition)
     {
         damageable.TakeDamage(damage,Vector3.zero);
+        if(hitVFX)
+            PlayVFX(hitVFX, hitPosition,hitPosition - transform.position,3);
+
         DestroyProjectile(true);
+    }
+    public virtual void PlayVFX(GameObject vfxPrefab, Vector3 position, Vector3 forward, float duration)
+    {
+        // TODO : implement Pooler
+        GameObject vfxObj = Instantiate(vfxPrefab, position, Quaternion.identity);
+        vfxObj.transform.forward = forward;
+        Destroy(vfxObj, duration);
     }
 
 

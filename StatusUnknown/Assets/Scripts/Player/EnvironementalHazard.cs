@@ -14,7 +14,7 @@ namespace Player
             hitContext.HitTriggerEvent += InflictDamage;
         }
         
-        private void InflictDamage(IDamageable target)
+        private void InflictDamage(IDamageable target, Vector3 hitPosition)
         {
             target.TakeDamage(damage, Vector3.zero);
         }

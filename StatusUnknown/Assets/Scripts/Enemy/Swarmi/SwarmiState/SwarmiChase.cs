@@ -30,8 +30,10 @@ public class SwarmiChase : EnemyState
             Debug.DrawLine(transform.position, node.Position);
         }
         context.AddForce(context.GetAvoidance());
-        if(context.Velocity != Vector3.zero)
+        if(context.Velocity != Vector3.zero && !inRangeAttack)
             context.RotateTowards(context.Velocity, angleSpeed);
+        if(CombatManager.playerTransform != null && inRangeAttack)
+            context.RotateTowards(CombatManager.playerTransform.position - transform.position, angleSpeed);
 
         if (inRangeAttack && ((EnemySwarmi)context).attackCoolDown < 0)
             context.SwitchState(new SwarmiAttack());

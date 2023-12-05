@@ -15,7 +15,7 @@ namespace Combat.Projectile
             this.HitTriggerEvent += this.PerformProjectileHit;
         }
         
-        protected virtual void PerformProjectileHit(IDamageable target)
+        protected virtual void PerformProjectileHit(IDamageable target, Vector3 hitPosition)
         {
             target.TakeDamage(this.profile.damage, Vector3.zero);
         }
