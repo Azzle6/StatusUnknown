@@ -16,7 +16,7 @@ namespace Weapon
         public WeaponType weaponType;
         
         
-        public abstract void ActionPressed();
+        public virtual bool ActionPressed() { return false;} 
     
         public abstract void ActionReleased();
 
