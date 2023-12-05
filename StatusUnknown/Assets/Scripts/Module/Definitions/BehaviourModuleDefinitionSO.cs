@@ -18,6 +18,7 @@ namespace Module.Definitions
     public interface IBehaviourData
     {
         public ScriptReference Behaviour { get; set; }
+        public float LifeTime { get; set; }
         public int Quantity { get; set; }
         public IInstantiationRule InstantiationRule { get; set; }
         public float TickRate { get; set; }
@@ -37,7 +38,9 @@ namespace Module.Definitions
         public LayerMask LayerMask { get; set; }
         [field: SerializeField]
         public ScriptReference Behaviour { get; set; }
-        
+        [field : SerializeField]
+        public float LifeTime { get; set; }
+
         [field: SerializeField]
         public int Quantity { get; set; }
         [field: SerializeReference]
@@ -73,6 +76,8 @@ namespace Module.Definitions
         public LayerMask LayerMask { get; set; }
         [field: SerializeField]
         public ScriptReference Behaviour { get; set; }
+        [field : SerializeField]
+        public float LifeTime { get; set; }
         
         [field: SerializeField]
         public int Quantity { get; set; }

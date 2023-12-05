@@ -51,5 +51,10 @@ namespace Module.Behaviours
                 this.OnHitEvent?.Invoke(new InstantiatedModuleInfo(closestPoint, transform.rotation, col));
             }
         }
+
+        protected override void DestroyModule()
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

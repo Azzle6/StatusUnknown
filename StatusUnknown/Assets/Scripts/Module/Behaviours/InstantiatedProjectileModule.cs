@@ -78,7 +78,7 @@ namespace Module.Behaviours
             }
         }
 
-        protected void DestroyModule()
+        protected override void DestroyModule()
         {
             ComponentPooler.Instance.ReturnObjectToPool(this.ProjectileVFX);
             Destroy(this.gameObject);

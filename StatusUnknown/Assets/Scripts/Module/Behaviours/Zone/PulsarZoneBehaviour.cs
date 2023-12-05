@@ -12,7 +12,7 @@ namespace Module.Behaviours.Zone
             this.ApplyZoneDamage();
             this.remainingPulses--;
             if(this.remainingPulses <= 0)
-                Destroy(this.gameObject);
+                this.DestroyModule();
         }
     }
 }

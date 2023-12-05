@@ -19,7 +19,7 @@ namespace Module.Behaviours.Zone
             if (colliders.Length > 0)
             {
                 this.ApplyZoneDamage();
-                Destroy(this.gameObject);
+                this.DestroyModule();
             }
         }
     }

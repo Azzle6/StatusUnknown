@@ -2,10 +2,8 @@ namespace Module.Behaviours
 {
     using System;
     using System.Collections;
-    using Core.Pooler;
     using Definitions;
     using UnityEngine;
-    using UnityEngine.VFX;
 
     [Serializable]
     public abstract class InstantiatedModule : MonoBehaviour, ITest
@@ -47,6 +45,8 @@ namespace Module.Behaviours
             
             if(this.behaviourData.TickRate >= 0)
                 this.StartCoroutine(Tick(this.behaviourData.TickRate));
+
+            StartCoroutine(LifeTime(data.LifeTime));
             
             OnInit(compiledModule, info, data);
         }
@@ -87,10 +87,16 @@ namespace Module.Behaviours
 
             return result;
         }
-
-        
         #endregion
 
+        private IEnumerator LifeTime(float time)
+        {
+            yield return new WaitForSeconds(time);
+            this.DestroyModule();
+        }
+
+        protected abstract void DestroyModule();
+        
         private void TriggerNextModule(CompiledModule nextModule, InstantiatedModuleInfo info)
         {
             ModuleBehaviourHandler.Instance.InstantiateModuleBehaviour(nextModule, info);

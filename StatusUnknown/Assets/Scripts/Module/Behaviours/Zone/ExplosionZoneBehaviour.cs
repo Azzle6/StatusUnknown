@@ -5,7 +5,7 @@ namespace Module.Behaviours.Zone
         protected override void OnStart()
         {
             this.ApplyZoneDamage();
-            Destroy(this.gameObject);
+            this.DestroyModule();
         }
     }
 }
