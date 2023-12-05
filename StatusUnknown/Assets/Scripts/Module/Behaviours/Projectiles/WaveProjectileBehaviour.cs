@@ -8,9 +8,9 @@ namespace Module.Behaviours.Projectiles
         private float currentDamages;
         private int collisionsRemaining = 4;
 
-        protected override void OnInit()
+        protected override void OnInitProjectile()
         {
-            this.currentDamages = this.Data.Damages;
+            this.currentDamages = this.ProjectileData.Damages;
         }
         
         protected override void CollisionBehaviour()
@@ -34,9 +34,10 @@ namespace Module.Behaviours.Projectiles
                 this.OnHitEvent?.Invoke(new InstantiatedModuleInfo(closestPoint, quaternion.Euler(closestPoint - this.transform.position), col));
                 
                 this.collisionsRemaining--;
-                this.currentDamages -= this.Data.Damages * 0.15f;
+                this.currentDamages -= this.ProjectileData.Damages * 0.15f;
+                this.SpawnHitVFX(closestPoint, -transform.forward);
                 if(this.collisionsRemaining <= 0)
-                    Destroy(this.gameObject);
+                    this.DestroyModule();
             }
         }
     }

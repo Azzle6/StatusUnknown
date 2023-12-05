@@ -57,7 +57,7 @@ namespace Module
                 triggerElement.transform.position = ((Vector2)outputInfo.localPosition * slotWidth + directionDisplacement) - (Vector2.one * UIHandler.Instance.uiSettings.triggerWidth/2);
                 triggerElement.style.rotate = new StyleRotate(new Rotate(iconRotation));
                 
-                this.outputsVisual.Add(outputInfo.weaponTriggerType, triggerElement);
+                this.outputsVisual.Add(outputInfo.moduleTriggerType, triggerElement);
             }
         }
 
