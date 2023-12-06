@@ -9,7 +9,6 @@ public class SniperIdle : EnemyState
     const float TpOffset = 1;
     EnemySniper currentContext => context as EnemySniper;
     SniperStats sniperStats => currentContext.sniperStats;
-    float tpCooldown;
     float attackCooldown;
     public override void DebugGizmos()
     {
@@ -26,16 +25,16 @@ public class SniperIdle : EnemyState
     public override void Update()
     {
         attackCooldown -=Time.deltaTime;
-        tpCooldown -= Time.deltaTime;
+        currentContext.tpCooldown -= Time.deltaTime;
         bool playerInView = CombatManager.PlayerInView(transform.position, transform.forward, sniperStats.AttackRange, 180, currentContext.obstacleMask);
 
         if (playerInView && attackCooldown < 0)
             currentContext.SwitchState(new SniperAttack());
 
-        if(!playerInView && tpCooldown < 0)
+        if(currentContext.tpCooldown < 0)
         {
             transform.position = TpPosition();
-            tpCooldown = sniperStats.tpCooldown;
+            currentContext.tpCooldown = sniperStats.TpRndCooldown;
           
         }
         if(CombatManager.playerTransform != null && playerInView) 
@@ -94,7 +93,8 @@ public class SniperIdle : EnemyState
 
     protected override void Initialize()
     {
-        tpCooldown = sniperStats.tpCooldown;
+        currentContext.tpCooldown = sniperStats.TpRndCooldown;
         attackCooldown = sniperStats.AttackCooldown;
     }
+
 }

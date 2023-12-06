@@ -17,9 +17,4 @@ public class SwarmiIdle : EnemyState
         if (CombatManager.PlayerInRange(transform.position, context.stats.AggroRange))
             context.SwitchState(new SwarmiChase());
     }
-
-    protected override void Initialize()
-    {
-        
-    }
 }
