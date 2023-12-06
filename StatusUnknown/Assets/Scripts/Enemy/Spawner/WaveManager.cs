@@ -1,67 +1,69 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Events;
-
-public class WaveManager : MonoBehaviour
+namespace Enemy.Spawner
 {
-    [SerializeField] WaveContext[] waveContexts;
-    Queue<WaveContext> waveContextQueue = new Queue<WaveContext>();
-    public event Action EndEvent;
-    public UnityEvent EndUEvent;
-    int waveDeathCounter;
-    [SerializeField] bool startOnAwake;
-    private void Awake()
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using UnityEngine;
+    using UnityEngine.Events;
+
+    public class WaveManager : MonoBehaviour
     {
-        foreach (WaveContext waveContext in waveContexts)
+        [SerializeField] WaveContext[] waveContexts;
+        Queue<WaveContext> waveContextQueue = new Queue<WaveContext>();
+        public event Action EndEvent;
+        public UnityEvent EndUEvent;
+        int waveDeathCounter;
+        [SerializeField] bool startOnAwake;
+        private void Awake()
         {
-            waveContextQueue.Enqueue(waveContext);
+            for (int i = 0; i < this.waveContexts.Length; i++)
+            {
+                this.waveContextQueue.Enqueue(this.waveContexts[i]);
+            }
+
+            if (this.startOnAwake)
+                this.StartWaveProcess();
         }
-        if (startOnAwake)
-            StartWaveProcess();
-    }
-    public void StartWaveProcess()
-    {
-        ProcessWave();
-
-    }
-    void ProcessWave()
-    {
-        if (waveContextQueue.Count <= 0) return;
-        var waveContext = waveContextQueue.Dequeue();
-        waveContext.wave.DeathEvent += () =>
+        public void StartWaveProcess()
         {
-            waveDeathCounter++;
-            if (waveDeathCounter >= waveContexts.Length)
-                CallEndEvent();
-        };
-        waveContext.wave.ProcessWave();
-        StartCoroutine(ProcessNextWave(waveContext));
-    }
-    IEnumerator ProcessNextWave(WaveContext previousWave)
-    {
-        float timeCounter = Time.time;
-        yield return new WaitUntil(()=>Time.time-timeCounter >= previousWave.initialDelay || previousWave.wave.finished);
-        ProcessWave();
-    }
+            this.ProcessWave();
+
+        }
+        void ProcessWave()
+        {
+            if (this.waveContextQueue.Count <= 0) return;
+            var waveContext = this.waveContextQueue.Dequeue();
+            waveContext.wave.DeathEvent += () =>
+            {
+                this.waveDeathCounter++;
+                if (this.waveDeathCounter >= this.waveContexts.Length)
+                    this.CallEndEvent();
+            };
+            waveContext.wave.ProcessWave();
+            this.StartCoroutine(this.ProcessNextWave(waveContext));
+        }
+        IEnumerator ProcessNextWave(WaveContext previousWave)
+        {
+            float timeCounter = Time.time;
+            yield return new WaitUntil(()=>Time.time-timeCounter >= previousWave.initialDelay || previousWave.wave.finished);
+            this.ProcessWave();
+        }
 
 
     
     
 
-    void CallEndEvent()
+        void CallEndEvent()
+        {
+            Debug.Log("End Event");
+            this.EndEvent?.Invoke();
+            this.EndUEvent?.Invoke();
+        }
+    }
+    [System.Serializable]
+    public class WaveContext
     {
-        Debug.Log("End Event");
-        EndEvent?.Invoke();
-        EndUEvent?.Invoke();
+        public float initialDelay;
+        public Wave wave;
     }
 }
-[System.Serializable]
-public struct WaveContext
-{
-    public float initialDelay;
-    public Wave wave;
-}
-
-

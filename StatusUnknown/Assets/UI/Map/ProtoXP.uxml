@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Map/MapFocus.uss?fileID=7433441132597879392&amp;guid=05d6fd43690e9c8478c5dc97f5af3c50&amp;type=3#MapFocus" />
+    <ui:VisualElement name="MapProtoXP" style="background-image: none; flex-grow: 1; min-width: 100%; min-height: 100%;">
+        <ui:VisualElement name="Map" style="background-image: url(&apos;project://database/Assets/Textures/Map/ProtoXP.png?fileID=2800000&amp;guid=8335956fff04b894cbe3a07822147a3c&amp;type=3#ProtoXP&apos;); width: 100%; height: 100%;">
+            <ui:Button text="Hub" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TP1" style="position: absolute; top: 90%; right: 34%; width: 5%; height: 5%;" />
+            <ui:Button text="First Arianne" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TP2" style="position: relative; top: 62%; right: -4%; width: 5%; height: 5%;" />
+            <ui:Button text="Elevator Top" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TP3" style="position: relative; top: 51%; right: -19%; width: 5%; height: 5%;" />
+            <ui:Button text="Public Zone Entry" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TP4" style="position: relative; top: 49%; right: -70%; width: 5%; height: 5%;" />
+            <ui:Button text="Aquarium" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TP5" style="position: relative; top: 33%; right: -92%; width: 5%; height: 5%;" />
+            <ui:Button text="HyperDrive" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TP6" style="position: relative; top: 13%; right: -77%; width: 5%; height: 5%;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

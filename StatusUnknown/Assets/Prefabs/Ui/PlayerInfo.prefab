@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5916815514251629923}
   - component: {fileID: 4819185939255524208}
   - component: {fileID: 3119805904533653751}
+  - component: {fileID: 1179658032758578729}
   m_Layer: 0
   m_Name: PlayerInfo
   m_TagString: Untagged
@@ -76,3 +77,31 @@ MonoBehaviour:
   popUpStayTime: 1
   popUpFadeTime: 2
   popUpMaxCount: 3
+--- !u!114 &1179658032758578729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7045442916581944998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e427b29519eeb84a9055602091e12d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 80f2162077d0bd646a560968747335af, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3119805904533653751}
+        m_TargetAssemblyTypeName: Player.PlayerInfoUIHandler, Assembly-CSharp
+        m_MethodName: ShowPopup
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
