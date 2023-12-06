@@ -9,16 +9,18 @@ public class EnemySniper : EnemyContext
     [Range(0f, 1f)]
     public float hit = 0;
     public float hitFreq = 0.1f;
-
+    [HideInInspector]
+    public float tpCooldown;
     [Header("Shoot")]
     public GameObject bulletPrefab;
-
-    
+    [HideInInspector]
+    public float initialAttackDuration;
     [field: SerializeField] public Transform shootingPoint {  get; private set; }
     
     public override EnemyStats stats => sniperStats;
     private void Start()
     {
+        initialAttackDuration = stats.AttackDuration * Random.value;
         InitializeEnemy();
         SwitchState(new SniperIdle());
     }

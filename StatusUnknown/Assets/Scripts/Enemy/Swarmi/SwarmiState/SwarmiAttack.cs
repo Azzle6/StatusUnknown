@@ -9,17 +9,13 @@ public class SwarmiAttack : EnemyState
     float attackRange => context.stats.AttackRange;
     float attackDuration;
     float attackCooldown => ((EnemySwarmi)context).attackCoolDown;
-    public override void DebugGizmos()
-    {
-
-    }
 
     public override void Update()
     {
         attackDuration -= Time.deltaTime;
         if(CombatManager.playerTransform != null )
         {
-            context.RotateTowards(CombatManager.playerTransform.position - transform.position, 180);
+            //context.RotateTowards(CombatManager.playerTransform.position - transform.position, 180);
         }
         if (attackDuration < 0)
         {
@@ -34,4 +30,5 @@ public class SwarmiAttack : EnemyState
         attackDuration = context.stats.AttackDuration;
         context.PlayAnimation("SwarmiAttack");
     }
+
 }

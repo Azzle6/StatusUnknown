@@ -12,9 +12,21 @@ public abstract class EnemyState
         this.context = context;
         Initialize();
     }
-    protected abstract void Initialize();
-    public abstract void Update();
+    protected virtual void Initialize()
+    {
 
-    public abstract void DebugGizmos();
+    }
+    public virtual void Update()
+    {
+
+    }
+    public virtual void FixedUpdate()
+    {
+
+    }
+    public virtual void DebugGizmos()
+    {
+
+    }
 
 }

@@ -40,6 +40,11 @@ public abstract class EnemyContext : MonoBehaviour, IDamageable
     {
         currentState.Update();
     }
+
+    private void FixedUpdate()
+    {
+        currentState.FixedUpdate();
+    }
     public void SwitchState(EnemyState state)
     {
         currentState = state;
