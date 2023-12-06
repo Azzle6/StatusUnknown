@@ -20,8 +20,9 @@ namespace Weapon
         public EnemyStatusHandler enemyStatusHandler;
         public Transform lHandTr;
         public Transform rHandTr;
-        public Rig rigLHand;
-        public Rig rigRHand;
+        [SerializeField] private Rig rigLHand;
+        [SerializeField] private RigBuilder rigBuilder;
+        [SerializeField] private Rig rigRHand;
         public FloatVariableSO[] currentAmmoWeapon;
     
         private void Awake()
@@ -74,14 +75,18 @@ namespace Weapon
             if (CheckIfMeleeWeapon(weaponNo))
             {
                 //changing arm layer
+                Debug.Log("Melee");
                 playerStateInterpretor.animator.SetLayerWeight(2,1);
                 playerStateInterpretor.animator.SetLayerWeight(1,0);
+                SwitchHandRigs(false);
                 playerStat.currentWeaponIsMelee = true;
             }
             else
             {
+                Debug.Log("Ranged");
                 playerStateInterpretor.animator.SetLayerWeight(2,0);
                 playerStateInterpretor.animator.SetLayerWeight(1,1);
+                SwitchHandRigs(true);
                 playerStat.currentWeaponIsMelee = false;
                 ReturnIfRangedWeapon(weaponNo).currentAmmo = currentAmmoWeapon[weaponNo];
             }
@@ -91,6 +96,12 @@ namespace Weapon
             weapons[weaponNo].Switched(playerAnimator, true);
             weapons[currentWeaponIndex].gameObject.SetActive(false);
             currentWeaponIndex = weaponNo;
+        }
+
+        public void SwitchHandRigs(bool value)
+        {
+            rigBuilder.layers[1].active = value;
+            rigBuilder.layers[2].active = value;
         }
     
     
@@ -139,16 +150,14 @@ namespace Weapon
         {
             if (weapons[weaponNo].TryGetComponent(out MeleeWeapon meleeWeapon))
                 return true;
-            else
-                return false;
+            return false;
         }
         
         public bool CheckIfRangedWeapon(int weaponNo)
         {
             if (weapons[weaponNo].TryGetComponent(out RangedWeapon rangedWeapon))
                 return true;
-            else
-                return false;
+            return false;
         }
         
         

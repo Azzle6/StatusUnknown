@@ -46,8 +46,6 @@ namespace Weapon
                 bladeRight.parent = weaponManager.rHandTr;
                 bladeRight.position = weaponManager.rHandTr.position;
                 bladeRight.rotation = weaponManager.rHandTr.rotation;
-                weaponManager.rigLHand.weight = 0;
-                weaponManager.rigRHand.weight = 0;
             }
         }
         

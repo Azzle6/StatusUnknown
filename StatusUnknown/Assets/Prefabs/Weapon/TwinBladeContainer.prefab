@@ -26,13 +26,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 455404711285026364}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0.92387956, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0.2550001}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2566550824337828928}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 180}
 --- !u!73398921 &2027334650057412369
 VFXRenderer:
   serializedVersion: 1
@@ -81,7 +81,7 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 455404711285026364}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: 14271b8ef5fa0fc439bd2750cc9bc2a6, type: 3}
+  m_Asset: {fileID: 8926484042661614526, guid: ed9cb1b2c73fbce4ab198204b107353c, type: 3}
   m_InitialEventName: 
   m_InitialEventNameOverriden: 1
   m_StartSeed: 0
@@ -100,7 +100,10 @@ VisualEffect:
     m_Uint:
       m_Array: []
     m_Int:
-      m_Array: []
+      m_Array:
+      - m_Value: 0
+        m_Name: ComboIndex
+        m_Overridden: 1
     m_Matrix4x4f:
       m_Array: []
     m_AnimationCurve:
@@ -169,13 +172,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1747339284485142456}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0, z: 0.2550001}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2566550824337828928}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!73398921 &4505454192601727971
 VFXRenderer:
   serializedVersion: 1
@@ -224,7 +227,7 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1747339284485142456}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: 14271b8ef5fa0fc439bd2750cc9bc2a6, type: 3}
+  m_Asset: {fileID: 8926484042661614526, guid: ed9cb1b2c73fbce4ab198204b107353c, type: 3}
   m_InitialEventName: 
   m_InitialEventNameOverriden: 1
   m_StartSeed: 0
@@ -243,7 +246,10 @@ VisualEffect:
     m_Uint:
       m_Array: []
     m_Int:
-      m_Array: []
+      m_Array:
+      - m_Value: 2
+        m_Name: ComboIndex
+        m_Overridden: 1
     m_Matrix4x4f:
       m_Array: []
     m_AnimationCurve:
@@ -2642,13 +2648,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6552008409878361974}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0.92387956, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0.255}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2566550824337828928}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 180}
 --- !u!73398921 &4611876517637634365
 VFXRenderer:
   serializedVersion: 1
@@ -2697,7 +2703,7 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6552008409878361974}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: 14271b8ef5fa0fc439bd2750cc9bc2a6, type: 3}
+  m_Asset: {fileID: 8926484042661614526, guid: ed9cb1b2c73fbce4ab198204b107353c, type: 3}
   m_InitialEventName: 
   m_InitialEventNameOverriden: 1
   m_StartSeed: 0
@@ -2716,7 +2722,10 @@ VisualEffect:
     m_Uint:
       m_Array: []
     m_Int:
-      m_Array: []
+      m_Array:
+      - m_Value: 1
+        m_Name: ComboIndex
+        m_Overridden: 1
     m_Matrix4x4f:
       m_Array: []
     m_AnimationCurve:
