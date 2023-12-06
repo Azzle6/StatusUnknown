@@ -35,7 +35,7 @@ namespace Inventory
         private VisualElement triggerInfoPanel;
 
         private GridView inventoryGridView;
-        private WeaponGridView weaponGridView;
+        private TriggerGridView triggerGridView;
 
         private bool isDisplayed;
 
@@ -82,7 +82,7 @@ namespace Inventory
 
         private void InitWeaponGridView()
         {
-            this.weaponGridView = new WeaponGridView(this.uiDocument.rootVisualElement.Q<VisualElement>(WEAPON_GRID_NAME),
+            this.triggerGridView = new TriggerGridView(this.uiDocument.rootVisualElement.Q<VisualElement>(WEAPON_GRID_NAME),
                 this.playerInventory.equippedWeaponsData[0].definition.triggers[0].shape, this.playerInventory.equippedWeaponsData[0].triggerInfoData[0], new E_ItemType[] { E_ItemType.MODULE});
         }
 
@@ -128,7 +128,7 @@ namespace Inventory
             if(forceDisplay)
                 DisplayWeaponInfo(false);
             
-            this.weaponGridView.LoadNewData(this.selectedWeaponData.definition.triggers[index].shape, this.selectedWeaponData.triggerInfoData[index]);
+            this.triggerGridView.LoadNewData(this.selectedWeaponData.definition.triggers[index].shape, this.selectedWeaponData.triggerInfoData[index]);
         }
 
         [Button, HideInEditorMode]

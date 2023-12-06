@@ -27,11 +27,11 @@ namespace Module
             this.outputsVisual = new Dictionary<E_ModuleOutput, VisualElement>();
             foreach (var outputInfo in this.ModuleItemData.definition.outputs)
             {
-                VisualElement triggerElement = UIHandler.Instance.uiSettings.triggerTemplate.Instantiate();
-                triggerElement.style.backgroundImage = UIHandler.Instance.iconsReferences.moduleOutputReferences[outputInfo.moduleTriggerType].texture;
+                VisualElement triggerElement = this.UiSettings.triggerTemplate.Instantiate();
+                triggerElement.Q<VisualElement>("triggerIcon").style.backgroundImage = UIHandler.Instance.iconsReferences.moduleOutputReferences[outputInfo.moduleTriggerType].texture;
                 
                 this.ViewRoot.Add(triggerElement);
-                float slotWidth = UIHandler.Instance.uiSettings.slotWidth;
+                float slotWidth = UIHandler.Instance.uiSettings.slotSize;
                 Vector2 directionDisplacement;
                 float iconRotation = 0;
                 switch (outputInfo.direction)
@@ -56,7 +56,7 @@ namespace Module
                         throw new ArgumentOutOfRangeException();
                 }
 
-                triggerElement.transform.position = ((Vector2)outputInfo.localPosition * slotWidth + directionDisplacement) - (Vector2.one * UIHandler.Instance.uiSettings.triggerWidth/2);
+                triggerElement.transform.position = ((Vector2)outputInfo.localPosition * slotWidth + directionDisplacement) - (Vector2.one * this.UiSettings.triggerSize/2);
                 triggerElement.style.rotate = new StyleRotate(new Rotate(iconRotation));
                 
                 this.outputsVisual.Add(outputInfo.moduleTriggerType, triggerElement);
@@ -65,7 +65,8 @@ namespace Module
 
         public void SetLinkView(E_ModuleOutput linkedOutput, bool isLinked)
         {
-            this.outputsVisual[linkedOutput].style.backgroundColor = isLinked ? new StyleColor(Color.green) : new StyleColor(Color.red);
+            this.outputsVisual[linkedOutput].Q<VisualElement>("triggerBackground").style.unityBackgroundImageTintColor = isLinked ? new StyleColor(this.UiSettings.linkedTriggerBackgroundColor) : new StyleColor(this.UiSettings.unlinkedTriggerBackgroundColor);
+            this.outputsVisual[linkedOutput].Q<VisualElement>("triggerIcon").style.unityBackgroundImageTintColor = isLinked ? new StyleColor(this.UiSettings.linkedTriggerIconColor) : new StyleColor(this.UiSettings.unlinkedTriggerIconColor);
         }
     }
 }

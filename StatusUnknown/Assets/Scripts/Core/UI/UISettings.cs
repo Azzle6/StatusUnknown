@@ -22,13 +22,21 @@ namespace Core.UI
         [FoldoutGroup("Assets references")] 
         public VisualTreeAsset triggerSelectionButtonTemplate;
         [FoldoutGroup("Assets references")] 
-        public Texture itemEdgesHideTexture;
+        public VisualTreeAsset itemEdgesHideTemplate;
         
+        [FoldoutGroup("Parameters")]
+        public float slotSize;
+        [FoldoutGroup("Parameters")]
+        public float triggerSize;
 
-        [FoldoutGroup("Parameters")]
-        public float slotWidth;
-        [FoldoutGroup("Parameters")]
-        public float triggerWidth;
+        [FoldoutGroup("Colours")]
+        public Color linkedTriggerBackgroundColor;
+        [FoldoutGroup("Colours")]
+        public Color linkedTriggerIconColor;
+        [FoldoutGroup("Colours")]
+        public Color unlinkedTriggerBackgroundColor;
+        [FoldoutGroup("Colours")]
+        public Color unlinkedTriggerIconColor;
 
         [FoldoutGroup("Styles naming")]
         public string hiddenStyle;

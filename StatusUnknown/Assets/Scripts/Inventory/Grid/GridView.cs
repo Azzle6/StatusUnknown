@@ -25,7 +25,7 @@ namespace Inventory.Grid
             get
             {
                 if (this.slotWidth == 0)
-                    this.slotWidth = UIHandler.Instance.uiSettings.slotWidth;
+                    this.slotWidth = UIHandler.Instance.uiSettings.slotSize;
                 return this.slotWidth;
             }
         }
@@ -96,7 +96,7 @@ namespace Inventory.Grid
 
         protected abstract void OnNewContainerLoad(IItemsDataContainer newContainer);
         
-        public void LoadContent()
+        public virtual void LoadContent()
         {
             this.ClearContent(false);
             foreach (var info in this.container.GetAllItems())
@@ -195,15 +195,17 @@ namespace Inventory.Grid
         #region EVENTS
         private void OnInteract(IGridElement element)
         {
-            //If we interact with an item, we pick it
+            /*//If we interact with an item, we pick it
             if (element is ItemView itemView)
             {
                 UIHandler.Instance.TryPickItem(itemView);
             }
-            else if (element is Slot slot) //If we interact with a slot and we're moving an item, we try to drop it
+            else*/ if (element is Slot slot) //If we interact with a slot and we're moving an item, we try to drop it
             {
                 if (UIHandler.Instance.isMovingItem)
                     UIHandler.Instance.TryDropItem(slot.GridPosition);
+                else if(slot.ItemView != null)
+                    UIHandler.Instance.TryPickItem(slot.ItemView);
             }
         }
         #endregion
@@ -216,7 +218,7 @@ namespace Inventory.Grid
             foreach (var coord in itemShapeCoord)
             {
                 Vector2Int currentPosition = coord + pos;
-                if (!this.shape.GetContentFromPosition(currentPosition) || !GridHelper.IsInGrid(currentPosition, this.shape.shapeSize) || this.GetSlot(currentPosition).item != null || !CanContainsItem(itemView))
+                if (!this.shape.GetContentFromPosition(currentPosition) || !GridHelper.IsInGrid(currentPosition, this.shape.shapeSize) || this.GetSlot(currentPosition).ItemView != null || !CanContainsItem(itemView))
                 {
                     //Debug.LogWarning($"try to setup slot state at {coord + pos} but the position is invalid.");
                     return false;

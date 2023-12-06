@@ -7,14 +7,15 @@ namespace Weapons
     using Module;
     using UnityEngine.UIElements;
 
-    public class WeaponGridView : GridView
+    public class TriggerGridView : GridView
     {
         private WeaponTriggerData weaponTriggerData;
         
-        public WeaponGridView(VisualElement root, Shape shape, WeaponTriggerData container, E_ItemType[] typesContained) : base(root, shape, container, typesContained)
+        public TriggerGridView(VisualElement root, Shape shape, WeaponTriggerData container, E_ItemType[] typesContained) : base(root, shape, container, typesContained)
         {
             this.weaponTriggerData = container;
             this.weaponTriggerData.compiledModules.onNewCompilation += this.OnNewCompilation;
+            this.weaponTriggerData.compiledModules.CompileWeaponModules(this.weaponTriggerData.triggerRowPosition, this.weaponTriggerData.modules);
         }
 
         private void OnNewCompilation(ModuleCompilation newCompilation)
@@ -48,6 +49,9 @@ namespace Weapons
             this.weaponTriggerData.compiledModules.onNewCompilation -= this.OnNewCompilation;
             this.weaponTriggerData = (WeaponTriggerData)newContainer;
             this.weaponTriggerData.compiledModules.onNewCompilation += this.OnNewCompilation;
+            this.weaponTriggerData.compiledModules.CompileWeaponModules(this.weaponTriggerData.triggerRowPosition, this.weaponTriggerData.modules);
         }
+        
+        
     }
 }
