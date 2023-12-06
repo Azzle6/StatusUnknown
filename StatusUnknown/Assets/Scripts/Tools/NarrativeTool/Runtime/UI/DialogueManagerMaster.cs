@@ -217,7 +217,8 @@ namespace Aurore.DialogSystem
             DialogueLines = new DialogueLine[currentNode.DialogueLines.Count];
             Array.Copy(currentNode.DialogueLines.ToArray(), DialogueLines, DialogueLines.Length);
 
-            OnSentenceTypingDone(DialogueLines.Select(x => x.answer).ToList()); 
+            var showableDialogueLines = DialogueLines.Where(x => x.GetIsValid()).Select(x => x.answer).ToList();
+            OnSentenceTypingDone(showableDialogueLines); 
         }
         
         #region Interactions

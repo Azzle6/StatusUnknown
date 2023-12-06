@@ -21,7 +21,7 @@ namespace StatusUnknown.Tools.Narrative
         [PropertySpace(20), LabelWidth(LABEL_WIDTH_MEDIUM), HorizontalGroup(200, MarginLeft = 0.225f), Button("Refresh Self And Neighbour", ButtonSizes.Large)]
         public void RefreshOnQuestObjectChange() { RefreshOnValueChanged(); }
 
-        private bool GetIsValid() => result.isValid && accessType == AccessType.Get;
+        private bool GetIsValid() => result.conditionIsValid && accessType == AccessType.Get;
 
 
         private void RefreshOnValueChanged()
@@ -61,10 +61,10 @@ namespace StatusUnknown.Tools.Narrative
             switch (accessType)
             {
                 case AccessType.Get:
-                    result.isValid = quest.QuestObjectIsRetrieved;
+                    result.conditionIsValid = quest.QuestObjectIsRetrieved;
                     break;
                 case AccessType.Set:
-                    result.isValid = newQuestObject != null && newQuestReward != null;  
+                    result.conditionIsValid = newQuestObject != null && newQuestReward != null;  
                     break;
                 default: return default;
             }

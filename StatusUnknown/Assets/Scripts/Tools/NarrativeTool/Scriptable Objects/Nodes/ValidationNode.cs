@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using StatusUnknown.Content.Narrative;
 using UnityEditor;
 using UnityEngine;
 using XNode;
@@ -13,22 +14,22 @@ namespace StatusUnknown.Tools.Narrative
     [CreateNodeMenu("Validation Node")]
     public class ValidationNode : Node, INodeState
     {
+        //[LabelWidth(LABEL_WIDTH_MEDIUM), HorizontalGroup(200, MarginLeft = 0.225f), Button("Refresh Self And Neighbour", ButtonSizes.Large)]
+        public void RefreshOnQuestObjectChange() { RefreshOnValueChanged(); } // bootleg solution because I don't know how to directly track a Reference change, only a value change
+
+        public enum ComparisonType { SmallerThan, SmallerThanOrEqual, GreaterThan, GreaterThanOrEqual, Equal, NotEqual, QuestIsDone }
+        [LabelWidth(LABEL_WIDTH_MEDIUM), OnValueChanged(nameof(RefreshOnValueChanged))] public ComparisonType comparisonType = ComparisonType.SmallerThan;
+
+        [ShowIf("@" + nameof(comparisonType) + " == ComparisonType.QuestIsDone")]
+        public QuestObjectSO questToValidate; 
+
         [HideIf("@" + nameof(comparisonType) + " == ComparisonType.QuestIsDone"), LabelWidth(LABEL_WIDTH_MEDIUM), OnValueChanged(nameof(RefreshOnValueChanged))]
         public int source;
 
         [HideIf("@" + nameof(comparisonType) + " == ComparisonType.QuestIsDone"), LabelWidth(LABEL_WIDTH_MEDIUM), OnValueChanged(nameof(RefreshOnValueChanged))]
         public int target;
 
-        [ShowIf("@" + nameof(comparisonType) + " == ComparisonType.QuestIsDone"), LabelWidth(LABEL_WIDTH_MEDIUM)]
-        [Input] public DialogueLine input;  
-
-        [LabelWidth(LABEL_WIDTH_MEDIUM), HorizontalGroup(200, MarginLeft = 0.225f), Button("Refresh Self And Neighbour", ButtonSizes.Large)]
-        public void RefreshOnQuestObjectChange() { RefreshOnValueChanged(); } // bootleg solution because I don't know how to directly track a Reference change, only a value change
-
-        public enum ComparisonType { SmallerThan, SmallerThanOrEqual, GreaterThan, GreaterThanOrEqual, Equal, NotEqual, QuestIsDone }
-        [LabelWidth(LABEL_WIDTH_MEDIUM), OnValueChanged(nameof(RefreshOnValueChanged))] public ComparisonType comparisonType = ComparisonType.SmallerThan;
-
-        [PropertySpace(spaceBefore: 50), Output] public DialogueLine result;
+        //[PropertySpace(spaceBefore: 50), Output] public DialogueLine result;
 
         private int previousValue_Source;
         private int previousValue_Target;
@@ -55,6 +56,14 @@ namespace StatusUnknown.Tools.Narrative
             previousValue_Source = source;
             previousValue_Target = target;
 
+            output = GetOutputPort("result");
+            var otherOutput = GetPort("result");
+            var list = output.GetConnections();
+            Debug.Log(list);
+
+            var port = output.GetConnection(1); 
+            Debug.Log(port);
+
             if (output.Connection == null) return; 
             output.Connection.node.OnRemoveConnection(output);
         }
@@ -63,7 +72,7 @@ namespace StatusUnknown.Tools.Narrative
         {
             float source = GetInputValue<float>("source", this.source);
             float target = GetInputValue<float>("target", this.target);
-            input = GetInputValue("input", new DialogueLine());
+            /*input = GetInputValue("input", new DialogueLine());
 
             if (port.fieldName == "result")
                 result.isValid = comparisonType switch
@@ -80,7 +89,8 @@ namespace StatusUnknown.Tools.Narrative
             result.answer = input.answer;
 
             object castedResult = result.isValid;
-            return comparisonType == ComparisonType.QuestIsDone ? result : castedResult; 
+            return comparisonType == ComparisonType.QuestIsDone ? result : castedResult; */
+            return null; 
         }
 
         public void MoveNext()

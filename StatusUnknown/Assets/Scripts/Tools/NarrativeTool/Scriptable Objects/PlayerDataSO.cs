@@ -60,6 +60,10 @@ public class PlayerDataSO : SerializedScriptableObject
 
     public Dictionary<Faction, RankData> rankDatas = new Dictionary<Faction, RankData>();
 
+    // système de progression joueur ?
+    // grinder pour débloquer la quête main
+    // main quest complete -> rank supérieur 
+
     // TODO : move this to Faction Editor
     private readonly List<int[]> reputationCeils = new List<int[]>()
     {
