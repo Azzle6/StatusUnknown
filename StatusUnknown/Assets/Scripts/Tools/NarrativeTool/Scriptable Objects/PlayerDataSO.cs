@@ -1,10 +1,12 @@
 using Sirenix.OdinInspector;
 using StatusUnknown;
 using StatusUnknown.Content.Narrative;
+using StatusUnknown.Utils.AssetManagement;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+[ManageableData]
 [CreateAssetMenu(fileName = "Player Data", menuName = "Status Unknown/Gameplay/Player Data")]
 public class PlayerDataSO : SerializedScriptableObject
 {
@@ -60,11 +62,6 @@ public class PlayerDataSO : SerializedScriptableObject
 
     public Dictionary<Faction, RankData> rankDatas = new Dictionary<Faction, RankData>();
 
-    // système de progression joueur ?
-    // grinder pour débloquer la quête main
-    // main quest complete -> rank supérieur 
-
-    // TODO : move this to Faction Editor
     private readonly List<int[]> reputationCeils = new List<int[]>()
     {
         new int[] { 0, 100, 400, 800 },
@@ -97,7 +94,7 @@ public class PlayerDataSO : SerializedScriptableObject
     {
         rankDatas[key].UpdateReputationRank(additionalReputation, reputationCeils[(int)key]);
 
-        if (questReward != null)
+        if (questReward != null && !QuestRewards.Contains(questReward))
         {
             QuestRewards.Add(questReward);
         }

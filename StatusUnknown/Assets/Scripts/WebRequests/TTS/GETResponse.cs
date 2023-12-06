@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace StatusUnknown
@@ -10,11 +11,12 @@ namespace StatusUnknown
         [CreateAssetMenu(fileName = "GET Json Object", menuName = "Status Unknown/Web/TTS/Response")]
         public class GETResponse : ScriptableObject
         {
-            public string ID { get; set; }
-            public string Url { get; set; }
-            public string Uri { get; set; }
+            private const bool ENABLE = false; 
+            [field:SerializeField, EnableIf("ENABLE")] public string ID { get; set; }
+            [field: SerializeField, EnableIf("ENABLE")] public string Url { get; set; }
+            [field: SerializeField, EnableIf("ENABLE")] public string Uri { get; set; }
 
-            [Space, TextArea(10, 20)] private string Text;
+            [Space, TextArea(10, 20), EnableIf("ENABLE")] public string Text;
 
             public void SetText(string txt)
             {

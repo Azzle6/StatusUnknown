@@ -1,17 +1,20 @@
+using Sirenix.OdinInspector;
+using StatusUnknown.Utils.AssetManagement;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace StatusUnknown.Content.Narrative
 {
+    [ManageableData]
     [CreateAssetMenu(fileName = "Quest Journal", menuName = "Status Unknown/Narrative/Quest Journal")]
-    public class QuestJournalSO : ScriptableObject
+    public class QuestJournalSO : SerializedScriptableObject
     {
         public List<QuestSO> activeQuests = new List<QuestSO>();
         private QuestSO cachedQuest;
 
         public List<QuestSO> CompletedQuests = new List<QuestSO>();
-        public Action<int, Faction, QuestObjectSO> OnQuestCompletion; 
+        private Action<int, Faction, QuestObjectSO> OnQuestCompletion; 
 
         public void Init(Action<int, Faction, QuestObjectSO> OnQuestCompletionCallback)
         {
@@ -39,7 +42,7 @@ namespace StatusUnknown.Content.Narrative
             if (!activeQuests.Contains(quest)) return false;
             cachedQuest = quest;
 
-            if (quest.QuestObjectIsRetrieved)
+            if (quest.QuestObjectIsRetrieved && !CompletedQuests.Contains(quest))
             {
                 CompletedQuests.Add(quest);
             }

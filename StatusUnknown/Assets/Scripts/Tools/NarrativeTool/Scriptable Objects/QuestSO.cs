@@ -1,7 +1,9 @@
+using StatusUnknown.Utils.AssetManagement;
 using UnityEngine;
 
 namespace StatusUnknown.Content.Narrative
 {
+    [ManageableData]
     [CreateAssetMenu(fileName = "Quest", menuName = "Status Unknown/Narrative/Quest")]
     public class QuestSO : ScriptableObject
     {
