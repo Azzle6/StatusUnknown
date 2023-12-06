@@ -1,3 +1,5 @@
+using pooler;
+
 namespace Module.Behaviours
 {
     using System.Collections.Generic;
@@ -12,7 +14,7 @@ namespace Module.Behaviours
         
         //Dynamic data
         protected readonly HashSet<Collider> AlreadyHitEnemy = new HashSet<Collider>();
-        protected VisualEffect ProjectileVFX;
+        protected VisualEffectHandler ProjectileVFX;
 
         protected override void OnInit(CompiledModule compiledModule, InstantiatedModuleInfo info, IBehaviourData data)
         {
@@ -22,29 +24,26 @@ namespace Module.Behaviours
                 this.AlreadyHitEnemy.Add(info.LastHit);
                 
             
-            VisualEffect tempSpawnVFX = ComponentPooler.Instance.GetPooledObject<VisualEffect>("EmptyVisualEffect");
-            tempSpawnVFX.visualEffectAsset = this.ProjectileData.shootVFX;
+            VisualEffectHandler tempSpawnVFX = ComponentPooler.Instance.GetPooledObject<VisualEffectHandler>("EmptyVisualEffect");
             tempSpawnVFX.transform.rotation = info.Rotation;
             tempSpawnVFX.transform.position = transform.position;
-            tempSpawnVFX.Play();
+            tempSpawnVFX.StartVFX(this.ProjectileData.projectileVFX, 1f);
             
-            ProjectileVFX = ComponentPooler.Instance.GetPooledObject<VisualEffect>("EmptyVisualEffect");
-            ProjectileVFX.visualEffectAsset = this.ProjectileData.projectileVFX;
+            ProjectileVFX = ComponentPooler.Instance.GetPooledObject<VisualEffectHandler>("EmptyVisualEffect");
             ProjectileVFX.transform.position = transform.position;
             ProjectileVFX.transform.rotation = info.Rotation;
             ProjectileVFX.transform.SetParent(transform);
-            ProjectileVFX.Play();
+            ProjectileVFX.StartVFX(ProjectileData.projectileVFX,5f);
             
             this.OnInitProjectile();
         }
 
         protected void SpawnHitVFX(Vector3 position, Vector3 direction)
         {
-            VisualEffect hitVFX = ComponentPooler.Instance.GetPooledObject<VisualEffect>("EmptyVisualEffect");
-            hitVFX.visualEffectAsset = this.ProjectileData.hitVFX;
+            VisualEffectHandler hitVFX = ComponentPooler.Instance.GetPooledObject<VisualEffectHandler>("EmptyVisualEffect");
             hitVFX.transform.position = position;
             hitVFX.transform.rotation = Quaternion.Euler(direction);
-            hitVFX.Play();
+            hitVFX.StartVFX(ProjectileData.hitVFX, 1f);
         }
 
         protected virtual void OnInitProjectile()

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c01d336291543644a3bee3a19b552e2, type: 3}
   m_Name: SchrapnelProjectileBehaviourModule
   m_EditorClassIdentifier: 
-  itemName: TestModule
+  itemName: Shrapnell
   shape:
     shapeSize: {x: 2, y: 2}
     anchor: {x: 0, y: 0}
@@ -23,7 +23,7 @@ MonoBehaviour:
     localPosition: {x: 1, y: 0}
     direction: 3
   BehaviourData:
-    rid: 7591883820643123234
+    rid: 6076498417585487891
   references:
     version: 2
     RefIds:
@@ -33,11 +33,7 @@ MonoBehaviour:
         angle: 180
         regular: 0
         radius: 0
-    - rid: 7591883733765456137
-      type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
-      data:
-        radius: 0.1
-    - rid: 7591883820643123234
+    - rid: 6076498417585487891
       type: {class: ProjectileBehaviourData, ns: Module.Definitions, asm: Assembly-CSharp}
       data:
         <Behaviour>k__BackingField:
@@ -55,9 +51,13 @@ MonoBehaviour:
         projectileVFX: {fileID: 8926484042661614526, guid: 053cfcb6e2fcc79439af58bd416353a9, type: 3}
         hitVFX: {fileID: 8926484042661614526, guid: 40f71ee4f5b0f37459d6ddfbbd50e38e, type: 3}
         <TickRate>k__BackingField: 0
-        <LifeTime>k__BackingField: 1
+        <LifeTime>k__BackingField: 2
         <Quantity>k__BackingField: 4
         <InstantiationRule>k__BackingField:
           rid: 4696495337976365320
-        <Damages>k__BackingField: 1.2
-        speed: 1
+        <Damages>k__BackingField: 12
+        speed: 10
+    - rid: 7591883733765456137
+      type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
+      data:
+        radius: 0.25
