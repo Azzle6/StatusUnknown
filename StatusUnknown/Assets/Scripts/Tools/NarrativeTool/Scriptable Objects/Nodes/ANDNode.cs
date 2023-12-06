@@ -4,8 +4,8 @@ using XNode;
 
 namespace StatusUnknown.Tools.Narrative
 {
-    [NodeWidth(140), NodeTint(100, 70, 70)]
-    [CreateNodeMenu("Logic Node")]
+    [NodeWidth(140), NodeTint(100, 0, 100)]
+    [CreateNodeMenu("AND Node")]
     public class ANDNode : DialogLogicNode
     {
         [Input, HideInInspector] public bool input;

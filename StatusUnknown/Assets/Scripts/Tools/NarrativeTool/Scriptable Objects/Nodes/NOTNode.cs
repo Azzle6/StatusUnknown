@@ -4,8 +4,8 @@ using System.Linq;
 
 namespace StatusUnknown.Tools.Narrative
 {
-    [NodeWidth(140), NodeTint(100, 100, 70)]
-    [CreateNodeMenu("Logic Node")]
+    [NodeWidth(140), NodeTint(100, 0, 100)]
+    [CreateNodeMenu("NOT Node")]
     public class NOTNode : DialogLogicNode
     {
         [Input, HideInInspector] public bool input;

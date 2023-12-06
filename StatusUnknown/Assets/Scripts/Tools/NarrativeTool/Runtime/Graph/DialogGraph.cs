@@ -65,15 +65,10 @@ namespace Aurore.DialogSystem
 			//Root node has no input and must be the only node with no input on execIn port
 			foreach (var node in nodes.Where(node => node.HasPort("execIn") && !node.GetInputPort("execIn").IsConnected)) 
 			{
-				if (rootNode != null && rootNode.IsRootNode())
+				if (rootNode != null)
 					throw new MonoRootDialogGraphException($"Two or more roots are found in {name}");
 
                 rootNode = node as DialogueNode;
-
-				if (rootNode.IsRootNode())
-				{
-					break; 
-				}
             }
 
 			if (rootNode == null) throw new NullReferenceException($"There is no root node in the current graph : {name}");

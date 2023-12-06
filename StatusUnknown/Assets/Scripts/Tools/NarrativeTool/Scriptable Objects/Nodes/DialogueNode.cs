@@ -90,8 +90,6 @@ namespace StatusUnknown.Tools.Narrative
     {
         // INodeState
 
-        [SerializeField] private bool isRootNode; // PLACEHOLDER
-
         [Serializable] public class State { }
 
         [Input, SerializeField] protected State execIn = null;
@@ -100,9 +98,6 @@ namespace StatusUnknown.Tools.Narrative
 
         [Output(dynamicPortList = true), SerializeField] public List<DialogueLine> DialogueLines; 
 
-        [Input, SerializeField] public DialogueLine conditionalAnswer;
-        public bool conditionIsValid; 
-
         // protected INodeState NodeStateInterface { get; private set; }
 
         protected override void Init()
@@ -110,40 +105,23 @@ namespace StatusUnknown.Tools.Narrative
             base.Init();
         }
 
-        public bool IsRootNode() => isRootNode;
-
         // public virtual INodeState TryGetInterface() => NodeStateInterface;
 
         public override void OnCreateConnection(NodePort from, NodePort to)
         {
             base.OnCreateConnection(from, to);
 
-            if (from.node.GetType() != typeof(ValidationNode)) return;
-
-            UpdatePorts();  
             VerifyConnections();
+            UpdatePorts();  
         }
 
         public override void OnRemoveConnection(NodePort port)
         {
-            if (port.IsOutput && port.node.GetType() != typeof(ValidationNode)) return;
+            if (port.IsOutput) return;
 
             base.OnRemoveConnection(port);
 
-            conditionalAnswer = GetInputValue("conditionalAnswer", new DialogueLine());
-            conditionIsValid = conditionalAnswer.conditionIsValid;
-
-            if (!conditionIsValid && conditionalAnswer.answer != null)
-            {
-                DialogueLines.Remove(conditionalAnswer);
-                return; 
-            }
-
-			if (DialogueLines.Contains(conditionalAnswer)) return;
-
             VerifyConnections();
-
-            DialogueLines.Add(conditionalAnswer);
             UpdatePorts();
         }
 

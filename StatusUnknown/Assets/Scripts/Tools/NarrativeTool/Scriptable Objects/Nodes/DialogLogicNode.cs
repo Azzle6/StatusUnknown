@@ -7,7 +7,7 @@ using XNode;
 // NOT
 // BRANCH
 // FOR
-// SWITCH
+// SWITCH ON ENUM/ON INT
 // DIALOGUE BRANCH
 
 // bool I/O from derived classes must be serialized and Hidden, because their value is not edited manually but via other node types
