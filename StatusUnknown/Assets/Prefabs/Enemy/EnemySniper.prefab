@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitContexts: []
+  hitVfxPrefab: {fileID: 0}
   animator: {fileID: 1973347756932783132}
   body: {fileID: 2180731430707241527}
   avoidanceMask:
@@ -178,7 +179,9 @@ MonoBehaviour:
     m_Bits: 256
   hit: 0
   hitFreq: 0.1
+  tpCooldown: 0
   bulletPrefab: {fileID: 6248528393708085188, guid: efd80072ba566f544b85fe14b81874c4, type: 3}
+  initialAttackDuration: 0
   <shootingPoint>k__BackingField: {fileID: 933890754964585424}
 --- !u!114 &5944730163289528001
 MonoBehaviour:
