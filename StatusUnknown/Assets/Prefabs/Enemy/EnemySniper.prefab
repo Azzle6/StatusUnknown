@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitContexts: []
+  hitVfxPrefab: {fileID: 0}
   animator: {fileID: 1973347756932783132}
   body: {fileID: 2180731430707241527}
   avoidanceMask:
@@ -178,7 +179,9 @@ MonoBehaviour:
     m_Bits: 256
   hit: 0
   hitFreq: 0.1
+  tpCooldown: 0
   bulletPrefab: {fileID: 6248528393708085188, guid: efd80072ba566f544b85fe14b81874c4, type: 3}
+  initialAttackDuration: 0
   <shootingPoint>k__BackingField: {fileID: 933890754964585424}
 --- !u!114 &5944730163289528001
 MonoBehaviour:
@@ -187,7 +190,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3926380311748740003}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b60d0250c286e7847a621af8d3e966f2, type: 3}
   m_Name: 
