@@ -17,14 +17,14 @@ MonoBehaviour:
     supportSSR: 1
     supportSSRTransparent: 1
     supportSSAO: 1
-    supportSSGI: 1
+    supportSSGI: 0
     supportSubsurfaceScattering: 1
     sssSampleBudget:
       m_Values: 140000002800000050000000
       m_SchemaId:
         m_Id: With3Levels
     supportVolumetrics: 1
-    supportVolumetricClouds: 1
+    supportVolumetricClouds: 0
     supportLightLayers: 1
     supportWater: 0
     waterSimulationResolution: 128
@@ -56,8 +56,8 @@ MonoBehaviour:
     supportDitheringCrossFade: 1
     supportTerrainHole: 0
     lightProbeSystem: 1
-    probeVolumeMemoryBudget: 1024
-    probeVolumeBlendingMemoryBudget: 128
+    probeVolumeMemoryBudget: 2048
+    probeVolumeBlendingMemoryBudget: 512
     supportProbeVolumeStreaming: 1
     probeVolumeSHBands: 1
     supportRayTracing: 1
