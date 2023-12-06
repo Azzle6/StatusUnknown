@@ -1,30 +1,137 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:Template name="InventoryGrid" src="project://database/Assets/UI/Grid/Grid.uxml?fileID=9197481963319205126&amp;guid=d76399139e4e88d4c91451f86a882183&amp;type=3#Grid" />
+    <ui:Template name="weaponSelectionButton" src="project://database/Assets/UI/Inventory/WeaponSelectionButton.uxml?fileID=9197481963319205126&amp;guid=7638d231f3ba9fd4ea03b5c21eb6623d&amp;type=3#WeaponSelectionButton" />
+    <ui:Template name="triggerSelectionButton" src="project://database/Assets/UI/Inventory/TriggerSelectionButton.uxml?fileID=9197481963319205126&amp;guid=ddfd4e99bde2aa940b90a9e43397ec4a&amp;type=3#TriggerSelectionButton" />
     <Style src="project://database/Assets/UI/Global/GlobalUSS.uss?fileID=7433441132597879392&amp;guid=b957b32707326d646b329444c53afc3b&amp;type=3#GlobalUSS" />
-    <ui:VisualElement name="InventoryInterface" style="flex-direction: row; background-color: rgb(128, 128, 128); height: 100%; flex-grow: 1;">
-        <ui:VisualElement name="Stats" style="padding-top: 1%; padding-right: 1%; padding-bottom: 1%; padding-left: 1%; width: 20%;">
-            <ui:VisualElement name="StatsInfosZone" style="margin-top: 5%; margin-right: 5%; margin-bottom: 5%; margin-left: 5%; background-color: rgb(147, 147, 147);">
-                <ui:Label tabindex="-1" text="Stats :" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+    <ui:VisualElement name="InventoryInterface" style="flex-direction: row; background-color: rgb(107, 107, 107); height: 1080%; width: 1920px;">
+        <ui:VisualElement name="WeaponsSelection" style="width: 33%; margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px;">
+            <ui:VisualElement name="weaponsTitle" style="height: 10%; font-size: 50px; -unity-text-align: middle-left; align-items: center;">
+                <ui:Label tabindex="-1" text="WEAPONS" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" style="flex-grow: 1; -unity-font: url(&apos;project://database/Assets/Figma/Fonts/Poppins_500.ttf?fileID=12800000&amp;guid=0b5927674f1aff04db565c224c57204e&amp;type=3#Poppins_500&apos;); font-size: 100px; color: rgb(128, 128, 128); position: absolute; top: -11px; left: 57px; -unity-text-outline-width: 1px; -unity-text-outline-color: rgb(255, 255, 255);" />
+                <ui:Label tabindex="-1" text="WEAPONS" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" style="flex-grow: 1; -unity-font: url(&apos;project://database/Assets/Figma/Fonts/Poppins_500.ttf?fileID=12800000&amp;guid=0b5927674f1aff04db565c224c57204e&amp;type=3#Poppins_500&apos;); font-size: 100px; color: rgb(255, 255, 255);" />
             </ui:VisualElement>
-        </ui:VisualElement>
-        <ui:VisualElement name="WeaponsGrids" style="padding-top: 1%; padding-right: 1%; padding-bottom: 1%; padding-left: 1%; width: 40%;">
-            <ui:VisualElement name="weaponSelectionButtons" style="flex-direction: row; background-color: rgb(147, 147, 147); height: 10%;" />
-            <ui:VisualElement name="weaponMenu" style="flex-direction: row; background-color: rgb(147, 147, 147); margin-top: 3%; margin-right: 3%; margin-bottom: 3%; margin-left: 3%; height: 90%;">
-                <ui:VisualElement name="leftSide" style="background-color: rgb(118, 118, 118); align-items: center; justify-content: center; width: 30%;">
-                    <ui:Label tabindex="-1" text="Trigger name" parse-escape-sequences="true" display-tooltip-when-elided="true" name="weaponTriggerName" style="white-space: normal; -unity-text-align: middle-center; -unity-font-style: bold;" />
+            <ui:VisualElement name="menusSelectionZone" style="flex-grow: 1; height: 90%; flex-direction: row;">
+                <ui:VisualElement name="weaponSelection" style="padding-top: 50px; padding-right: 50px; padding-bottom: 50px; padding-left: 50px; width: 50%;">
+                    <ui:VisualElement name="weaponSelectionButtons" style="width: 220px;">
+                        <ui:Instance template="weaponSelectionButton" name="weaponSelectionButton" />
+                        <ui:Instance template="weaponSelectionButton" name="weaponSelectionButton" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="inputsInfo" style="height: 30px; justify-content: space-between; flex-direction: row;">
+                        <ui:VisualElement name="leftZone" style="flex-direction: row;">
+                            <ui:VisualElement name="leftTriggerLogo" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Figma/ServerRenderedImages/30_475.png?fileID=2800000&amp;guid=5c0f71d8e665fcd4097eb002ca0e5dbe&amp;type=3#30_475&apos;); width: 50px; flex-direction: column-reverse;">
+                                <ui:Label tabindex="-1" text="LT" parse-escape-sequences="true" display-tooltip-when-elided="true" class="halfTitle" style="color: rgb(116, 117, 116); font-size: 16px; padding-bottom: 5px; -unity-text-align: lower-right;" />
+                            </ui:VisualElement>
+                            <ui:VisualElement name="arrowsVisual" style="width: 20px; margin-left: 3px;">
+                                <ui:VisualElement name="VisualElement" style="height: 20px; background-image: url(&apos;project://database/Assets/Figma/ServerRenderedImages/30_435.png?fileID=2800000&amp;guid=486e3ed75a9b1964c89df6c387c822c9&amp;type=3#30_435&apos;);">
+                                    <ui:VisualElement name="VisualElement" style="background-image: url(&apos;project://database/Assets/Figma/ServerRenderedImages/30_439.png?fileID=2800000&amp;guid=71d2ecb16d48736418a105254c7195cf&amp;type=3#30_439&apos;); position: absolute; width: 100%; height: 100%; top: 13px;" />
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                        <ui:VisualElement name="rightZone" style="flex-direction: row-reverse;">
+                            <ui:VisualElement name="leftTriggerLogo" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Figma/ServerRenderedImages/30_478.png?fileID=2800000&amp;guid=d0da90df7b4ef4840b4839b48053db0f&amp;type=3#30_478&apos;); width: 50px; flex-direction: column-reverse;">
+                                <ui:Label tabindex="-1" text="RT" parse-escape-sequences="true" display-tooltip-when-elided="true" class="halfTitle" style="color: rgb(116, 117, 116); font-size: 16px; padding-bottom: 5px;" />
+                            </ui:VisualElement>
+                            <ui:VisualElement name="arrowsVisual" style="width: 20px; margin-right: 3px; flex-direction: column-reverse;">
+                                <ui:VisualElement name="VisualElement" style="height: 20px; background-image: url(&apos;project://database/Assets/Figma/ServerRenderedImages/30_443.png?fileID=2800000&amp;guid=030d99f5a5905a949b0aa993ae562870&amp;type=3#30_443&apos;);">
+                                    <ui:VisualElement name="VisualElement" style="background-image: url(&apos;project://database/Assets/Figma/ServerRenderedImages/30_447.png?fileID=2800000&amp;guid=8ea07dbf047eb574f9486a1f445470dc&amp;type=3#30_447&apos;); position: absolute; width: 100%; height: 100%; top: -13px;" />
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
                 </ui:VisualElement>
-                <ui:VisualElement name="rightSide" style="background-color: rgb(149, 127, 127); width: 70%;">
-                    <ui:VisualElement name="weaponTriggerSelectionButtons" style="flex-direction: row; height: 10%; justify-content: center;" />
-                    <ui:VisualElement name="weaponGridDisplayZone" style="height: 90%;">
-                        <ui:Instance template="InventoryGrid" name="weaponGrid" style="align-self: center;" />
+                <ui:VisualElement name="menuSelectionTabs" style="padding-top: 50px; padding-right: 25px; padding-bottom: 25px; padding-left: 25px; width: 50%;">
+                    <ui:VisualElement name="weaponTriggerSelectionButtons">
+                        <ui:Instance template="triggerSelectionButton" name="triggerSelectionButton" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="weaponInfoButton" focusable="true" class="selectionButton" style="margin-bottom: 12px; flex-direction: row-reverse;">
+                        <ui:Label tabindex="-1" text="WEAPON INFO" parse-escape-sequences="true" display-tooltip-when-elided="true" name="weaponText" class="halfTitle" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="inputsInfo" style="height: 40px; justify-content: space-between; flex-direction: row;">
+                        <ui:VisualElement name="leftZone" style="flex-direction: row;">
+                            <ui:VisualElement name="leftTriggerLogo" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Figma/ServerRenderedImages/30_452.png?fileID=2800000&amp;guid=5d19b7746b095c9479aa411c6710d7f3&amp;type=3#30_452&apos;); width: 30px; flex-direction: column-reverse;">
+                                <ui:Label tabindex="-1" text="LT" parse-escape-sequences="true" display-tooltip-when-elided="true" class="halfTitle" style="color: rgb(116, 117, 116); font-size: 16px; padding-bottom: 5px;" />
+                            </ui:VisualElement>
+                            <ui:VisualElement name="arrowsVisual" style="width: 20px; margin-left: 3px;">
+                                <ui:VisualElement name="VisualElement" style="height: 20px; background-image: url(&apos;project://database/Assets/Figma/ServerRenderedImages/30_435.png?fileID=2800000&amp;guid=486e3ed75a9b1964c89df6c387c822c9&amp;type=3#30_435&apos;);">
+                                    <ui:VisualElement name="VisualElement" style="background-image: url(&apos;project://database/Assets/Figma/ServerRenderedImages/30_439.png?fileID=2800000&amp;guid=71d2ecb16d48736418a105254c7195cf&amp;type=3#30_439&apos;); position: absolute; width: 100%; height: 100%; top: 13px;" />
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                        <ui:VisualElement name="rightZone" style="flex-direction: row-reverse;">
+                            <ui:VisualElement name="leftTriggerLogo" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Figma/ServerRenderedImages/30_452.png?fileID=2800000&amp;guid=5d19b7746b095c9479aa411c6710d7f3&amp;type=3#30_452&apos;); width: 30px; flex-direction: column-reverse;">
+                                <ui:Label tabindex="-1" text="RT" parse-escape-sequences="true" display-tooltip-when-elided="true" class="halfTitle" style="color: rgb(116, 117, 116); font-size: 16px; padding-bottom: 5px;" />
+                            </ui:VisualElement>
+                            <ui:VisualElement name="arrowsVisual" style="width: 20px; margin-right: 3px; flex-direction: column-reverse;">
+                                <ui:VisualElement name="VisualElement" style="height: 20px; background-image: url(&apos;project://database/Assets/Figma/ServerRenderedImages/30_443.png?fileID=2800000&amp;guid=030d99f5a5905a949b0aa993ae562870&amp;type=3#30_443&apos;);">
+                                    <ui:VisualElement name="VisualElement" style="background-image: url(&apos;project://database/Assets/Figma/ServerRenderedImages/30_447.png?fileID=2800000&amp;guid=8ea07dbf047eb574f9486a1f445470dc&amp;type=3#30_447&apos;); position: absolute; width: 100%; height: 100%; top: -13px;" />
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="Inventory" style="padding-top: 1%; padding-right: 1%; padding-bottom: 1%; padding-left: 1%; height: 100%; width: 40%;">
-            <ui:VisualElement name="ModulesInventory" style="flex-grow: 1; background-color: rgb(147, 147, 147); margin-top: 3%; margin-right: 3%; margin-bottom: 3%; margin-left: 3%;">
-                <ui:VisualElement name="inventoryDisplay" style="align-self: center;">
-                    <ui:Instance template="InventoryGrid" name="inventoryGrid" />
+        <ui:VisualElement name="contextElements" style="width: 60%; flex-direction: row; margin-top: 2%; margin-right: 2%; margin-bottom: 2%; margin-left: 2%;">
+            <ui:VisualElement name="weaponInfoPanels" style="width: 100%; flex-direction: row; display: none;">
+                <ui:VisualElement name="WeaponInfo" style="height: 100%; border-top-width: 5px; border-right-width: 5px; border-bottom-width: 5px; border-left-width: 5px; border-left-color: rgb(135, 135, 135); border-right-color: rgb(135, 135, 135); border-top-color: rgb(135, 135, 135); border-bottom-color: rgb(135, 135, 135); display: flex; width: 50%;">
+                    <ui:Label tabindex="-1" text="SUPER GUN GÉNIAL" parse-escape-sequences="true" display-tooltip-when-elided="true" name="weaponName" class="halfTitle" style="height: 7%; -unity-text-align: lower-left; -unity-font-style: bold; font-size: 40px; background-color: rgb(160, 160, 160); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
+                    <ui:VisualElement name="weaponIconZone" style="height: 20%; padding-top: 5%; padding-right: 10%; padding-bottom: 5%; padding-left: 10%; background-image: url(&apos;project://database/Assets/Figma/ServerRenderedImages/49_676.png?fileID=21300000&amp;guid=0d33bb18bd4b5394ba12f392bf1d9e37&amp;type=3#49_676&apos;); -unity-background-scale-mode: scale-and-crop;">
+                        <ui:VisualElement name="weaponIcon" style="background-image: url(&apos;project://database/Assets/Figma/ImageFills/92a946131325bedbe630cac0dc3dfff439660666.png?fileID=2800000&amp;guid=cdbe3d877c2cc94488d511245dec2784&amp;type=3#92a946131325bedbe630cac0dc3dfff439660666&apos;); flex-grow: 1; -unity-background-scale-mode: scale-to-fit;" />
+                    </ui:VisualElement>
+                    <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum" parse-escape-sequences="true" display-tooltip-when-elided="true" name="weaponDescription" style="white-space: normal; height: 10%;" />
+                    <ui:VisualElement name="weaponStatsZone" style="margin-top: 2%; margin-right: 2%; margin-bottom: 2%; margin-left: 2%; border-top-width: 5px; border-right-width: 5px; border-bottom-width: 5px; border-left-width: 5px; border-left-color: rgb(128, 128, 128); border-right-color: rgb(128, 128, 128); border-top-color: rgb(128, 128, 128); border-bottom-color: rgb(128, 128, 128); height: 45%;">
+                        <ui:VisualElement name="statsZone" style="height: 60%;">
+                            <ui:VisualElement name="statsTopZone" style="height: 50%; flex-direction: row;">
+                                <ui:VisualElement name="leftStat" style="justify-content: center; width: 50%;">
+                                    <ui:Label tabindex="-1" text="BASE DAMAGE" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-text-align: middle-center; -unity-font-style: bold; font-size: 20px; -unity-font: url(&apos;project://database/Assets/Figma/Fonts/Poppins_700.ttf?fileID=12800000&amp;guid=19476f3b4d515394786b8b78a697bf2d&amp;type=3#Poppins_700&apos;); color: rgb(137, 137, 137); align-self: center; background-color: rgb(255, 255, 255);" />
+                                    <ui:Label tabindex="-1" text="15" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-text-align: middle-center; -unity-font-style: bold; font-size: 20px; -unity-font: url(&apos;project://database/Assets/Figma/Fonts/Poppins_700.ttf?fileID=12800000&amp;guid=19476f3b4d515394786b8b78a697bf2d&amp;type=3#Poppins_700&apos;); color: rgb(255, 255, 255);" />
+                                </ui:VisualElement>
+                                <ui:VisualElement name="rightStat" style="justify-content: center; width: 50%;">
+                                    <ui:Label tabindex="-1" text="MAX CAPACITY" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-text-align: middle-center; -unity-font-style: bold; font-size: 20px; -unity-font: url(&apos;project://database/Assets/Figma/Fonts/Poppins_700.ttf?fileID=12800000&amp;guid=19476f3b4d515394786b8b78a697bf2d&amp;type=3#Poppins_700&apos;); color: rgb(137, 137, 137); align-self: center; background-color: rgb(255, 255, 255);" />
+                                    <ui:Label tabindex="-1" text="24" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-text-align: middle-center; -unity-font-style: bold; font-size: 20px; -unity-font: url(&apos;project://database/Assets/Figma/Fonts/Poppins_700.ttf?fileID=12800000&amp;guid=19476f3b4d515394786b8b78a697bf2d&amp;type=3#Poppins_700&apos;); color: rgb(255, 255, 255);" />
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                            <ui:VisualElement name="statsBottomZone" style="height: 40%; flex-direction: row;">
+                                <ui:VisualElement name="secondaryStat" style="flex-grow: 1; justify-content: center; padding-top: 0; padding-right: 6px; padding-bottom: 6px; padding-left: 6px; width: 30%;">
+                                    <ui:Label tabindex="-1" text="POWER" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-text-align: middle-center; -unity-font-style: bold; font-size: 20px; -unity-font: url(&apos;project://database/Assets/Figma/Fonts/Poppins_700.ttf?fileID=12800000&amp;guid=19476f3b4d515394786b8b78a697bf2d&amp;type=3#Poppins_700&apos;); color: rgb(255, 255, 255);" />
+                                    <ui:ProgressBar value="22" />
+                                </ui:VisualElement>
+                                <ui:VisualElement name="secondaryStat" style="flex-grow: 1; justify-content: center; padding-top: 0; padding-right: 6px; padding-bottom: 6px; padding-left: 6px; width: 30%;">
+                                    <ui:Label tabindex="-1" text="SPEED" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-text-align: middle-center; -unity-font-style: bold; font-size: 20px; -unity-font: url(&apos;project://database/Assets/Figma/Fonts/Poppins_700.ttf?fileID=12800000&amp;guid=19476f3b4d515394786b8b78a697bf2d&amp;type=3#Poppins_700&apos;); color: rgb(255, 255, 255);" />
+                                    <ui:ProgressBar value="22" />
+                                </ui:VisualElement>
+                                <ui:VisualElement name="secondaryStat" style="flex-grow: 1; justify-content: center; padding-top: 0; padding-right: 6px; padding-bottom: 6px; padding-left: 6px; width: 30%;">
+                                    <ui:Label tabindex="-1" text="AREA" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-text-align: middle-center; -unity-font-style: bold; font-size: 20px; -unity-font: url(&apos;project://database/Assets/Figma/Fonts/Poppins_700.ttf?fileID=12800000&amp;guid=19476f3b4d515394786b8b78a697bf2d&amp;type=3#Poppins_700&apos;); color: rgb(255, 255, 255);" />
+                                    <ui:ProgressBar value="22" />
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                        <ui:VisualElement name="triggersDescriptionZone" style="flex-grow: 1; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;">
+                            <ui:VisualElement name="triggerDescription" style="height: 50px; flex-direction: row;">
+                                <ui:VisualElement name="triggerLogo" style="width: 50px; height: 50px; background-image: url(&apos;project://database/Assets/Figma/ServerRenderedImages/19_120.png?fileID=2800000&amp;guid=b7c7a78b142b4a7479e2a7026cbfef1b&amp;type=3#19_120&apos;);" />
+                                <ui:Label tabindex="-1" text="TriggerDescription" parse-escape-sequences="true" display-tooltip-when-elided="true" name="triggerDescription" style="flex-grow: 1; -unity-text-align: middle-left; white-space: normal;" />
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="specialDescriptionZone" style="margin-top: 2%; margin-right: 2%; margin-bottom: 2%; margin-left: 2%;">
+                        <ui:Label tabindex="-1" text="Special :" parse-escape-sequences="true" display-tooltip-when-elided="true" name="specialDescriptionTitle" style="-unity-font-style: bold; font-size: 20px;" />
+                        <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum" parse-escape-sequences="true" display-tooltip-when-elided="true" name="specialDescription" style="white-space: normal; text-overflow: ellipsis;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement name="KeeperIcon" style="background-image: url(&apos;project://database/Assets/Thirdparty/Ciathyza/Gridbox%20Prototype%20Materials/Textures/prototype_512x512_blue1.png?fileID=2800000&amp;guid=44cced520ecfd9f4292979a4fe8268c4&amp;type=3#prototype_512x512_blue1&apos;); display: flex; width: 50%;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="weaponInfoPanels" style="width: 100%; flex-direction: row; display: flex;">
+                <ui:VisualElement name="weaponModulationZone" style="width: 60%; margin-top: 2%; margin-right: 2%; margin-bottom: 2%; margin-left: 2%;">
+                    <ui:VisualElement name="weaponTriggerGridZone" style="height: 65%; margin-bottom: 10%; border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px; border-left-color: rgb(136, 136, 136); border-right-color: rgb(136, 136, 136); border-top-color: rgb(136, 136, 136); border-bottom-color: rgb(136, 136, 136);">
+                        <ui:VisualElement name="capacityInfo" style="height: 10%;" />
+                        <ui:VisualElement name="weaponTriggerGrid" style="height: 90%;">
+                            <ui:VisualElement name="verticalParent" style="align-self: center;" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="triggerInfoZone" style="height: 25%; border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px; border-left-color: rgb(218, 218, 218); border-right-color: rgb(218, 218, 218); border-top-color: rgb(218, 218, 218); border-bottom-color: rgb(218, 218, 218);" />
+                </ui:VisualElement>
+                <ui:VisualElement name="inventoryZone" style="width: 40%; margin-top: 2%; margin-right: 2%; margin-bottom: 2%; margin-left: 2%; border-left-color: rgb(136, 136, 136); border-right-color: rgb(136, 136, 136); border-top-color: rgb(136, 136, 136); border-bottom-color: rgb(136, 136, 136); border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px;">
+                    <ui:VisualElement name="inventoryGrid" style="height: 100%;">
+                        <ui:VisualElement name="verticalParent" style="align-self: center;" />
+                    </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>

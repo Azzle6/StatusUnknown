@@ -1,5 +1,6 @@
 namespace Inventory
 {
+    using Core.SingletonsSO;
     using Grid;
     using Item;
     using Sirenix.OdinInspector;
@@ -11,14 +12,13 @@ namespace Inventory
     {
         private const string INVENTORY_NAME = "InventoryInterface";
         private const string INVENTORY_GRID_NAME = "inventoryGrid";
-        private const string WEAPON_GRID_NAME = "weaponGrid";
+        private const string WEAPON_GRID_NAME = "weaponTriggerGrid";
         private const string WEAPON_TRIGGERS_BUTTONS_NAME = "weaponTriggerSelectionButtons";
         private const string WEAPON_SELECTION_BUTTONS_NAME = "weaponSelectionButtons";
         
         [SerializeField]
         private UIDocument uiDocument;
-
-        [SerializeField, BoxGroup("Debug")] 
+        [SerializeField]
         private PlayerInventorySO playerInventory;
 
         //Data
@@ -53,11 +53,14 @@ namespace Inventory
             this.weaponSelectionRoot.Clear();
             foreach (WeaponData weapon in this.playerInventory.equippedWeaponsData)
             {
-                Button tabButton = new Button(() => this.SelectWeapon(weapon))
-                {
-                    text = weapon.definition.itemName
-                };
-                this.weaponSelectionRoot.Add(tabButton);
+                VisualElement weaponSelectionButton =
+                    UIHandler.Instance.uiSettings.weaponSelectionButtonTemplate.Instantiate();
+                weaponSelectionButton.RegisterCallback<NavigationSubmitEvent>((e) => this.SelectWeapon(weapon));
+                weaponSelectionButton.Q<VisualElement>("weaponIcon").style.backgroundImage =
+                    weapon.definition.view.texture;
+                weaponSelectionButton.Q<TextElement>("weaponName").text = weapon.definition.itemName;
+                
+                this.weaponSelectionRoot.Add(weaponSelectionButton);
             }
         }
 
@@ -86,11 +89,15 @@ namespace Inventory
             for (var i = 0; i < this.selectedWeaponData.triggerInfoData.Length; i++)
             {
                 int index = i;
-                Button triggerButton = new Button(() => this.SelectTriggerIndex(index))
-                {
-                    text = this.selectedWeaponData.triggerInfoData[i].weaponTriggerType.ToString()
-                };
-                this.weaponTriggersRoot.Add(triggerButton);
+                VisualElement triggerSelectionButton =
+                    UIHandler.Instance.uiSettings.triggerSelectionButtonTemplate.Instantiate();
+                triggerSelectionButton.RegisterCallback<NavigationSubmitEvent>((e) => this.SelectTriggerIndex(index));
+                triggerSelectionButton.Q<VisualElement>("triggerIcon").style.backgroundImage =
+                    UIHandler.Instance.iconsReferences.weaponOutputReferences[this.selectedWeaponData.triggerInfoData[i].weaponTriggerType].texture;
+                triggerSelectionButton.Q<TextElement>("triggerName").text = this.selectedWeaponData.triggerInfoData[i].weaponTriggerType.ToString();
+                triggerSelectionButton.Q<TextElement>("triggerIndex").text = $"T{i + 1}";
+                
+                this.weaponTriggersRoot.Add(triggerSelectionButton);
             }
         }
 

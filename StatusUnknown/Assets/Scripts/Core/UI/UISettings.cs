@@ -9,7 +9,7 @@ namespace Core.UI
     [CreateAssetMenu(menuName = "CustomAssets/Data/UISettings", fileName = "UISettings")]
     public class UISettings : ScriptableObject
     {
-        [FormerlySerializedAs("slotTreeAsset")] [FoldoutGroup("Assets references")]
+        [FoldoutGroup("Assets references")]
         public VisualTreeAsset slotTemplate;
         [FoldoutGroup("Assets references")] 
         public VisualTreeAsset itemSquareTemplate;
@@ -17,6 +17,10 @@ namespace Core.UI
         public VisualTreeAsset itemTemplate;
         [FoldoutGroup("Assets references")] 
         public VisualTreeAsset triggerTemplate;
+        [FoldoutGroup("Assets references")] 
+        public VisualTreeAsset weaponSelectionButtonTemplate;
+        [FoldoutGroup("Assets references")] 
+        public VisualTreeAsset triggerSelectionButtonTemplate;
         [FoldoutGroup("Assets references")]
         public InputActionAsset inputsAction;
         [FoldoutGroup("Assets references")] 

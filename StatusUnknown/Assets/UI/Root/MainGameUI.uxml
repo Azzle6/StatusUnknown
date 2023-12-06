@@ -2,7 +2,7 @@
     <ui:Template name="ProtoInventoryInterface" src="project://database/Assets/UI/Inventory/ProtoInventoryInterface.uxml?fileID=9197481963319205126&amp;guid=66627ee1737b3a54cabab26d7847fc53&amp;type=3#ProtoInventoryInterface" />
     <Style src="project://database/Assets/UI/Root/MainGameUI.uss?fileID=7433441132597879392&amp;guid=019b92c3d6581974989b3593bcfaf4d7&amp;type=3#MainGameUI" />
     <ui:VisualElement name="mainRoot" style="flex-grow: 1; align-items: center; justify-content: center;">
-        <ui:VisualElement name="centerParent" style="flex-direction: row; width: 80%; height: 80%; align-items: center; justify-content: center;">
+        <ui:VisualElement name="centerParent" style="flex-direction: row; width: 1732px; height: 902px; align-items: center; justify-content: center;">
             <ui:Instance template="ProtoInventoryInterface" name="ProtoInventoryInterface" style="flex-grow: 1;" />
         </ui:VisualElement>
     </ui:VisualElement>

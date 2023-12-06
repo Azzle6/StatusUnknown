@@ -5,12 +5,14 @@ namespace Core.SingletonsSO
     using Sirenix.OdinInspector;
     using UI;
     using UnityEngine;
+    using UnityEngine.Serialization;
     using UnityEngine.UIElements;
 
     [CreateAssetMenu(menuName = "CustomAssets/SingletonSO/UIHandler", fileName = "UIHandler")]
     public class UIHandler : SingletonSO<UIHandler>
     {
         public UISettings uiSettings;
+        public IconsReferencesSO iconsReferences;
         
         [FoldoutGroup("Dynamic data")]
         public bool isMovingItem;
@@ -21,7 +23,6 @@ namespace Core.SingletonsSO
         
         public void ForceFocus(VisualElement element)
         {
-            Debug.Log($"Force focus on {element}.");
             element.Focus();
         }
 
