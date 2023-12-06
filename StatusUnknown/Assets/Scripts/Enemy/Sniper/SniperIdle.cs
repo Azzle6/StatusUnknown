@@ -30,8 +30,8 @@ public class SniperIdle : EnemyState
         currentContext.tpCooldown -= Time.deltaTime;
         bool playerInView = CombatManager.PlayerInView(transform.position, transform.forward, sniperStats.AttackRange, 180, currentContext.obstacleMask);
 
-        /*if (playerInView && attackCooldown < 0)
-            currentContext.SwitchState(new SniperAttack());*/
+        if (playerInView && attackCooldown < 0)
+            currentContext.SwitchState(new SniperAttack());
 
         if(currentContext.tpCooldown < 0)
         {
