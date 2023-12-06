@@ -15,7 +15,7 @@ public class SwarmiAttack : EnemyState
         attackDuration -= Time.deltaTime;
         if(CombatManager.playerTransform != null )
         {
-            context.RotateTowards(CombatManager.playerTransform.position - transform.position, 180);
+            //context.RotateTowards(CombatManager.playerTransform.position - transform.position, 180);
         }
         if (attackDuration < 0)
         {
