@@ -1,4 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI/Grid/TriggerUI.uss?fileID=7433441132597879392&amp;guid=39f473dd8c8429e4cb051252d63bb5f6&amp;type=3#TriggerUI" />
-    <ui:VisualElement name="trigger" class="trigger" />
+    <Style src="project://database/Assets/UI/Inventory/Grid/TriggerUI.uss?fileID=7433441132597879392&amp;guid=39f473dd8c8429e4cb051252d63bb5f6&amp;type=3#TriggerUI" />
+    <ui:VisualElement name="triggerBackground" class="triggerWidth" style="background-image: url(&apos;project://database/Assets/Figma/ServerRenderedImages/21_159.png?fileID=2800000&amp;guid=b8e5adf9ba2ef794c8e4aa66ef50c5ac&amp;type=3#21_159&apos;); justify-content: center; align-items: center; position: absolute;">
+        <ui:VisualElement name="triggerLogo" style="background-image: url(&apos;project://database/Assets/Figma/ServerRenderedImages/19_120.png?fileID=2800000&amp;guid=b7c7a78b142b4a7479e2a7026cbfef1b&amp;type=3#19_120&apos;); width: 50%; height: 50%; -unity-background-image-tint-color: rgb(123, 123, 123);" />
+    </ui:VisualElement>
 </ui:UXML>

@@ -70,7 +70,7 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="contextElements" style="width: 60%; flex-direction: row; margin-top: 2%; margin-right: 2%; margin-bottom: 2%; margin-left: 2%;">
-            <ui:VisualElement name="weaponInfoPanels" style="width: 100%; flex-direction: row; display: none;">
+            <ui:VisualElement name="weaponInfoPanel" style="width: 100%; flex-direction: row; display: none;">
                 <ui:VisualElement name="WeaponInfo" style="height: 100%; border-top-width: 5px; border-right-width: 5px; border-bottom-width: 5px; border-left-width: 5px; border-left-color: rgb(135, 135, 135); border-right-color: rgb(135, 135, 135); border-top-color: rgb(135, 135, 135); border-bottom-color: rgb(135, 135, 135); display: flex; width: 50%;">
                     <ui:Label tabindex="-1" text="SUPER GUN GÉNIAL" parse-escape-sequences="true" display-tooltip-when-elided="true" name="weaponName" class="halfTitle" style="height: 7%; -unity-text-align: lower-left; -unity-font-style: bold; font-size: 40px; background-color: rgb(160, 160, 160); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
                     <ui:VisualElement name="weaponIconZone" style="height: 20%; padding-top: 5%; padding-right: 10%; padding-bottom: 5%; padding-left: 10%; background-image: url(&apos;project://database/Assets/Figma/ServerRenderedImages/49_676.png?fileID=21300000&amp;guid=0d33bb18bd4b5394ba12f392bf1d9e37&amp;type=3#49_676&apos;); -unity-background-scale-mode: scale-and-crop;">
@@ -118,19 +118,25 @@
                 </ui:VisualElement>
                 <ui:VisualElement name="KeeperIcon" style="background-image: url(&apos;project://database/Assets/Thirdparty/Ciathyza/Gridbox%20Prototype%20Materials/Textures/prototype_512x512_blue1.png?fileID=2800000&amp;guid=44cced520ecfd9f4292979a4fe8268c4&amp;type=3#prototype_512x512_blue1&apos;); display: flex; width: 50%;" />
             </ui:VisualElement>
-            <ui:VisualElement name="weaponInfoPanels" style="width: 100%; flex-direction: row; display: flex;">
+            <ui:VisualElement name="triggerInfoPanel" style="width: 100%; flex-direction: row; display: flex;">
                 <ui:VisualElement name="weaponModulationZone" style="width: 60%; margin-top: 2%; margin-right: 2%; margin-bottom: 2%; margin-left: 2%;">
                     <ui:VisualElement name="weaponTriggerGridZone" style="height: 65%; margin-bottom: 10%; border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px; border-left-color: rgb(136, 136, 136); border-right-color: rgb(136, 136, 136); border-top-color: rgb(136, 136, 136); border-bottom-color: rgb(136, 136, 136);">
-                        <ui:VisualElement name="capacityInfo" style="height: 10%;" />
-                        <ui:VisualElement name="weaponTriggerGrid" style="height: 90%;">
-                            <ui:VisualElement name="verticalParent" style="align-self: center;" />
+                        <ui:VisualElement name="capacityInfo" style="height: 10%; flex-direction: column-reverse;">
+                            <ui:Label tabindex="-1" text="Capacity : ?/?" parse-escape-sequences="true" display-tooltip-when-elided="true" class="halfTitle" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="weaponTriggerGridZone" style="height: 90%; overflow: hidden;">
+                            <ui:VisualElement name="weaponTriggerGrid" style="align-self: center;">
+                                <ui:VisualElement name="verticalParent" style="align-self: center; flex-shrink: 0;" />
+                            </ui:VisualElement>
                         </ui:VisualElement>
                     </ui:VisualElement>
                     <ui:VisualElement name="triggerInfoZone" style="height: 25%; border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px; border-left-color: rgb(218, 218, 218); border-right-color: rgb(218, 218, 218); border-top-color: rgb(218, 218, 218); border-bottom-color: rgb(218, 218, 218);" />
                 </ui:VisualElement>
                 <ui:VisualElement name="inventoryZone" style="width: 40%; margin-top: 2%; margin-right: 2%; margin-bottom: 2%; margin-left: 2%; border-left-color: rgb(136, 136, 136); border-right-color: rgb(136, 136, 136); border-top-color: rgb(136, 136, 136); border-bottom-color: rgb(136, 136, 136); border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px;">
-                    <ui:VisualElement name="inventoryGrid" style="height: 100%;">
-                        <ui:VisualElement name="verticalParent" style="align-self: center;" />
+                    <ui:VisualElement name="inventoryGridZone" style="height: 100%; overflow: hidden;">
+                        <ui:VisualElement name="inventoryGrid" style="align-self: center;">
+                            <ui:VisualElement name="verticalParent" style="align-self: center; flex-shrink: 0;" />
+                        </ui:VisualElement>
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>

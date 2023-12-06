@@ -21,10 +21,9 @@ namespace Core.UI
         public VisualTreeAsset weaponSelectionButtonTemplate;
         [FoldoutGroup("Assets references")] 
         public VisualTreeAsset triggerSelectionButtonTemplate;
-        [FoldoutGroup("Assets references")]
-        public InputActionAsset inputsAction;
         [FoldoutGroup("Assets references")] 
-        public Texture basicTriggerIcon;
+        public Texture itemEdgesHideTexture;
+        
 
         [FoldoutGroup("Parameters")]
         public float slotWidth;

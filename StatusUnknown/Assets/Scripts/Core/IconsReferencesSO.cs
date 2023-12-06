@@ -1,6 +1,5 @@
 namespace Core
 {
-    using System;
     using Helpers;
     using Module.Definitions;
     using UnityEngine;
@@ -11,12 +10,5 @@ namespace Core
     {
         public IconReferencesDictionary<E_ModuleOutput> moduleOutputReferences;
         public IconReferencesDictionary<E_WeaponOutput> weaponOutputReferences;
-    }
-
-    [Serializable]
-    public struct IconReferences<T>
-    {
-        public T reference;
-        public Sprite icon;
     }
 }

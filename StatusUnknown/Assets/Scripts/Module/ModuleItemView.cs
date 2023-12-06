@@ -28,6 +28,8 @@ namespace Module
             foreach (var outputInfo in this.ModuleItemData.definition.outputs)
             {
                 VisualElement triggerElement = UIHandler.Instance.uiSettings.triggerTemplate.Instantiate();
+                triggerElement.style.backgroundImage = UIHandler.Instance.iconsReferences.moduleOutputReferences[outputInfo.moduleTriggerType].texture;
+                
                 this.ViewRoot.Add(triggerElement);
                 float slotWidth = UIHandler.Instance.uiSettings.slotWidth;
                 Vector2 directionDisplacement;

@@ -34,6 +34,7 @@ namespace Inventory.Grid
         private readonly Action<IGridElement> gridElementFocusEvent;
 
         private VisualElement firstFocus;
+        private VisualElement verticalParent;
         
         #region CONSTRUCTOR
         public GridView(VisualElement root, Shape shape, IItemsDataContainer container, E_ItemType[] typesContained)
@@ -58,9 +59,9 @@ namespace Inventory.Grid
         private void BuildGrid()
         {
             this.firstFocus = null;
-            VisualElement verticalParent = this.gridRoot.Q<VisualElement>("verticalParent");
+            this.verticalParent = this.gridRoot.Q<VisualElement>("verticalParent");
             
-            VisualElement[] gridSlots = GridBuilder.BuildGrid(this.shape, verticalParent, UIHandler.Instance.uiSettings.slotTemplate);
+            VisualElement[] gridSlots = GridBuilder.BuildGrid(this.shape, this.verticalParent, UIHandler.Instance.uiSettings.slotTemplate);
 
             List<Slot> slotsList = new List<Slot>();
             for (int y = 0; y < this.shape.shapeSize.y; y++)
@@ -147,8 +148,8 @@ namespace Inventory.Grid
         public void SetItemVisualPosition(ItemView itemView, Vector2Int position)
         {
             this.gridRoot.Add(itemView.ViewRoot);
-            Vector3 newPosition = (Vector2)position * this.SlotWidth;
-            itemView.ViewRoot.transform.position = newPosition;
+            Vector2 result = (Vector2)position * this.SlotWidth;
+            itemView.ViewRoot.transform.position = result;
         }
         #endregion
         
