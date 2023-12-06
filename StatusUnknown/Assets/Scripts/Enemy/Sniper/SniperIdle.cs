@@ -93,8 +93,8 @@ public class SniperIdle : EnemyState
 
     protected override void Initialize()
     {
-        currentContext.tpCooldown = sniperStats.TpRndCooldown;
-        attackCooldown = sniperStats.AttackCooldown;
+        attackCooldown = sniperStats.AttackCooldown+currentContext.initialAttackDuration;
+        currentContext.initialAttackDuration = 0;
     }
 
 }

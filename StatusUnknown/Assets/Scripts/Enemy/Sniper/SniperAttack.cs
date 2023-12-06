@@ -44,7 +44,7 @@ public class SniperAttack : EnemyState
     {
         target = CombatManager.playerTransform.position;
         attackDuration = sniperStats.AttackDuration;
-        shootDelay = sniperStats.ShootDelayRnd;
+        shootDelay = sniperStats.shootDelay;
         context.PlayAnimation("SniperBuildUp");
     }
 }
