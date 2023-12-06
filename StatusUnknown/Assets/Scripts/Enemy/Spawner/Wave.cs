@@ -15,6 +15,7 @@ namespace Enemy.Spawner
         HashSet<EnemyContext> enemyContexts = new HashSet<EnemyContext>();
         int enemyDeathCounter;
         [SerializeField] bool spawnOnAwake;
+        [SerializeField] GameObject VFX_Spawn;
         private void Awake()
         {
             if(this.spawnOnAwake)
@@ -30,6 +31,11 @@ namespace Enemy.Spawner
         {
             yield return new WaitForSeconds(spawn.delay);
             // Play warning VFX here
+            if(VFX_Spawn != null)
+            {
+                var VFXobj = Instantiate(VFX_Spawn, spawn.spawnPosition, Quaternion.identity);
+                Destroy(VFXobj, warningDelay);
+            }
             yield return new WaitForSeconds(spawn.delay + this.warningDelay);
             GameObject obj = Instantiate(spawn.enemy, spawn.spawnPosition, Quaternion.identity);
             EnemyContext enemy = obj.GetComponent<EnemyContext>();
