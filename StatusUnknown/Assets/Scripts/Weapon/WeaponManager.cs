@@ -56,8 +56,6 @@ namespace Weapon
                 rangedWeapon.currentAmmo = currentAmmoWeapon[weaponNo];
                 rangedWeapon.InitPool();
                 currentAmmoWeapon[weaponNo].Value = ((RangedWeapon) weapon).GetMagazineSize();
-                
-                
             }
         }
         

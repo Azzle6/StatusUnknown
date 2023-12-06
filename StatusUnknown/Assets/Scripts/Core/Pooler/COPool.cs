@@ -16,11 +16,7 @@ namespace Core.Pooler
     [System.Serializable]
     public class CoPoolVFX : COPool<VisualEffect> {}
     
-    public enum PoolType
-    {
-        PROJECTILE,
-        VFX
-    }
+
     
 
     

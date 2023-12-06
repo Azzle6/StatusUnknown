@@ -13,6 +13,7 @@ public class SwarmiIdle : EnemyState
 
     public override void Update()
     {
+        ((EnemySwarmi)context).attackCoolDown -= Time.deltaTime;
         if (CombatManager.PlayerInRange(transform.position, context.stats.AggroRange))
             context.SwitchState(new SwarmiChase());
     }

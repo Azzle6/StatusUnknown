@@ -2,10 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public abstract class EnemyContext : MonoBehaviour, IDamageable
 {
     [SerializeField] HitContext[] hitContexts;
+    [SerializeField] protected GameObject hitVfxPrefab;
     [SerializeField] protected Animator animator;
     EnemyState currentState;
     public string stateName => currentState.ToString();
@@ -43,10 +45,12 @@ public abstract class EnemyContext : MonoBehaviour, IDamageable
         currentState = state;
         currentState.SetContext(this);
     }
-    void PerformHitEffect(IDamageable target)
+    void PerformHitEffect(IDamageable target,Vector3 hitPosition)
     {
         if(target.ToString() == "null") return;
         target.TakeDamage(stats.AttackDamage, transform.forward * 3);
+        if (hitVfxPrefab != null)
+            PlayVFX(hitVfxPrefab, hitPosition, ( hitPosition - transform.position ), 5);
     }
     public void AddForce(Vector3 force)
     {
@@ -116,6 +120,14 @@ public abstract class EnemyContext : MonoBehaviour, IDamageable
         currentHealth = stats.health;
         Debug.Log($" current health {currentHealth}");
         rotation = transform.rotation;
+    }
+
+    public virtual void PlayVFX(GameObject vfxPrefab,Vector3 position, Vector3 forward, float duration)
+    {
+        // TODO : implement Pooler
+        GameObject vfxObj = Instantiate(vfxPrefab,position, Quaternion.identity);
+        vfxObj.transform.forward = forward;
+        Destroy(vfxObj,duration);
     }
     void OnDrawGizmos()
     {
