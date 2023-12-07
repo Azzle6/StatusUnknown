@@ -1,4 +1,3 @@
-using System;
 using Combat.HitProcess;
 using pooler;
 
@@ -63,12 +62,11 @@ namespace Weapon
             {
        
                 Collider firstCollider = collisions[0];
-                Debug.Log(firstCollider.name);
                 IDamageable damageable = firstCollider.GetComponent<IDamageable>();
                 if (damageable != null)
                     damageable.TakeDamage(damage, transform.forward * knockbackStrength);
 
-                ModuleBehaviourHandler.Instance.InstantiateModuleBehaviour(this.moduleToCast, new InstantiatedModuleInfo(transform.position, transform.rotation));
+                ModuleBehaviourHandler.Instance.InstantiateModuleBehaviour(this.moduleToCast, new InstantiatedModuleInfo(transform.position, transform.rotation, collisions[0]));
                 tempHitVFX = ComponentPooler.Instance.GetPooledObject<VisualEffectHandler>("EmptyVisualEffect");
 
                 tempHitVFX.StartVFX(hitVFX,5);

@@ -13,15 +13,13 @@ namespace Module.Behaviours
         protected ProjectileBehaviourData ProjectileData;
         
         //Dynamic data
-        protected readonly HashSet<Collider> AlreadyHitEnemy = new HashSet<Collider>();
         protected VisualEffectHandler ProjectileVFX;
 
         protected override void OnInit(CompiledModule compiledModule, InstantiatedModuleInfo info, IBehaviourData data)
         {
             this.ProjectileData = (ProjectileBehaviourData)data;
-
-            if (info.LastHit != null)
-                this.AlreadyHitEnemy.Add(info.LastHit);
+            
+            this.ElementToIgnore = info.LastHit;
                 
             
             VisualEffectHandler tempSpawnVFX = ComponentPooler.Instance.GetPooledObject<VisualEffectHandler>("EmptyVisualEffect");
@@ -66,7 +64,7 @@ namespace Module.Behaviours
             
             if (collisions.Length > 0)
             {
-                if(this.AlreadyHitEnemy.Contains(collisions[0]))
+                if(this.ElementToIgnore == collisions[0])
                     return;
                 
                 Collider firstCollider = collisions[0];
@@ -74,10 +72,8 @@ namespace Module.Behaviours
                 if(damageable != null)
                     damageable.TakeDamage(this.ProjectileData.Damages, Vector3.zero);
                 
-                Vector3 closestPoint = firstCollider.ClosestPoint(this.transform.position);
-                this.OnHitEvent?.Invoke(new InstantiatedModuleInfo(closestPoint, transform.rotation, firstCollider));
-                this.SpawnHitVFX(closestPoint, -transform.forward);
-                Debug.Log($"Hit {firstCollider.gameObject}.");
+                this.OnHitEvent?.Invoke(new InstantiatedModuleInfo(this.transform.position, transform.rotation, firstCollider));
+                this.SpawnHitVFX(this.transform.position, -transform.forward);
                 this.DestroyModule();
             }
         }
