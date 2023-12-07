@@ -76,21 +76,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 0
   rb: {fileID: 1794472797588995133}
-  hitVFX: {fileID: 8926484042661614526, guid: 757ff23eca4d7dd41934e0e9da6d8123, type: 3}
+  hitVFX: {fileID: 8926484042661614526, guid: 919006018855920409bbed5db822d51a, type: 3}
   hitShape:
-    rid: 6888268950076391431
+    radius: 1
   layerMask:
     serializedVersion: 2
     m_Bits: 129
   knockbackStrength: 10
   lifeTime: 5
-  references:
-    version: 2
-    RefIds:
-    - rid: 6888268950076391431
-      type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
-      data:
-        radius: 1
 --- !u!2083052967 &5642355942973502361
 VisualEffect:
   m_ObjectHideFlags: 0
@@ -99,7 +92,7 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2084647982804730131}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: 53fec3f099edffb4eab6e87035764142, type: 3}
+  m_Asset: {fileID: 8926484042661614526, guid: 6f1c15c530db5444ab96f4f65c9af4cc, type: 3}
   m_InitialEventName: OnPlay
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0
@@ -108,7 +101,10 @@ VisualEffect:
   m_ResourceVersion: 1
   m_PropertySheet:
     m_Float:
-      m_Array: []
+      m_Array:
+      - m_Value: 10
+        m_Name: Lifetime
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:

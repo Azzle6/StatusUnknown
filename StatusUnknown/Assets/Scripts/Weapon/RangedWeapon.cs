@@ -73,8 +73,7 @@ namespace Weapon
                 return;
             
             CastModule(E_WeaponOutput.ON_RELOAD, spawnPoint);
-            weaponManager.rigLHand.weight = 0;
-            weaponManager.rigRHand.weight = 0;
+            weaponManager.SwitchHandRigs(false);
             mesh.transform.parent = weaponManager.rHandTr;
             reloading = StartCoroutine(ReloadingTimer());
             playerAnimator.SetTrigger("Reload");
@@ -86,8 +85,7 @@ namespace Weapon
             yield return new WaitForSeconds(weaponStat.reloadTime);
             currentAmmo.Value = weaponStat.magazineSize;
             //isReloading = false;
-            weaponManager.rigLHand.weight = 1;
-            weaponManager.rigRHand.weight = 1;
+            weaponManager.SwitchHandRigs(true);
             mesh.transform.parent = meshPos;
             mesh.transform.localRotation = quaternion.identity;
             mesh.transform.localPosition = initMeshPos; 
@@ -119,8 +117,7 @@ namespace Weapon
             {
                 playerAnimator.SetLayerWeight(2,0);
                 playerAnimator.SetLayerWeight(1,1);
-                weaponManager.rigLHand.weight = 1;
-                weaponManager.rigRHand.weight = 1;
+                
             }
             else
             {

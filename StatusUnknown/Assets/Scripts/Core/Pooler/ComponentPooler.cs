@@ -22,8 +22,6 @@ namespace Core.Pooler
         public void CreatePool<T>(T prefab, int baseCount) where T : Component
         {
             string key = prefab.gameObject.name;
-            Debug.Log("key");
-
             if (pools.ContainsKey(key))
             {
                 return;

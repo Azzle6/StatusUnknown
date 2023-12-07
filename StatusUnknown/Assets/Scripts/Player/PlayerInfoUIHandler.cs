@@ -28,6 +28,8 @@ namespace Player
         private VisualElement healthBar;
         private VisualElement weapon1Icon;
         private VisualElement weapon2Icon;
+        private VisualElement ammoRoot1;
+        private VisualElement ammoRoot2;
         private Label medikitCount;
         private Label weapon1AmmoCount;
         private Label weapon2AmmoCount;
@@ -51,11 +53,13 @@ namespace Player
             popUpZone = playerInfoUIDocument.rootVisualElement.Q<VisualElement>("MidRightZone");
             weapon1AmmoCount = playerInfoUIDocument.rootVisualElement.Q<Label>("Weapon1AmmoCount");
             weapon2AmmoCount = playerInfoUIDocument.rootVisualElement.Q<Label>("Weapon2AmmoCount");
+            ammoRoot1 = playerInfoUIDocument.rootVisualElement.Q<VisualElement>("AmmoWeapon1");
+            ammoRoot2 = playerInfoUIDocument.rootVisualElement.Q<VisualElement>("AmmoWeapon2");
             augmentIcon = new List<VisualElement>();
             for (int x = 0; x < 5; x++)
                 augmentIcon.Add(playerInfoUIDocument.rootVisualElement.Q<VisualElement>($"Augment{x}"));
-            weaponVariableSO[0].RegisterOnValueChanged(UpdateWeapon1Icon);
-            weaponVariableSO[1].RegisterOnValueChanged(UpdateWeapon2Icon);
+            weaponVariableSO[0].RegisterOnValueChanged(weapon => UpdateWeaponIcon(0, weapon));
+            weaponVariableSO[1].RegisterOnValueChanged(weapon => UpdateWeaponIcon(1, weapon));
             weaponAmmoVariableSO[0].RegisterOnValueChanged(UpdateWeapon1AmmoCount);
             weaponAmmoVariableSO[1].RegisterOnValueChanged(UpdateWeapon2AmmoCount);
             playerHealth.RegisterOnValueChanged(UpdateHealthBar);
@@ -63,8 +67,9 @@ namespace Player
             tempMedikitAmount = medikitAmount.Value;
             UpdateHealthBar(playerHealth.Value);
             InitMedikitCount(medikitAmount.Value);
-            UpdateWeapon1Icon(weaponVariableSO[0].Value);
-            UpdateWeapon2Icon(weaponVariableSO[1].Value);
+            UpdateWeaponIcon(0, weaponVariableSO[0].Value);
+            UpdateWeaponIcon(1, weaponVariableSO[1].Value);
+     
 
 
         }
@@ -79,34 +84,22 @@ namespace Player
             playerInfoUIDocument.rootVisualElement.style.display = DisplayStyle.Flex;
         }
         
-        private void UpdateWeapon1Icon(Weapon weapon)
+        private void UpdateWeaponIcon(int index, Weapon weapon)
         {
-            weapon1Icon.style.backgroundImage = weapon.weaponSprite.texture;
-            weapon1Icon.style.width = weapon.weaponSprite.texture.width;
-            weapon1Icon.style.height = weapon.weaponSprite.texture.height;
-            weapon1AmmoCount.visible = weaponVariableSO[0].Value.weaponType == WeaponType.RANGED;
+            VisualElement weaponIcon = index == 0 ? weapon1Icon : weapon2Icon;
+            Label weaponAmmoCount = index == 0 ? weapon1AmmoCount : weapon2AmmoCount;
+            VisualElement ammoRoot = index == 0 ? ammoRoot1 : ammoRoot2;
 
-            if (weaponVariableSO[0].Value.weaponType == WeaponType.RANGED)
+            weaponIcon.style.backgroundImage = weapon.weaponSprite.texture;
+            weaponIcon.style.width = weapon.weaponSprite.texture.width;
+            weaponIcon.style.height = weapon.weaponSprite.texture.height;
+            ammoRoot.style.display = weaponVariableSO[index].Value.weaponType == WeaponType.RANGED ? DisplayStyle.Flex : DisplayStyle.None;
+
+            if (weaponVariableSO[index].Value.weaponType == WeaponType.RANGED)
             {
-                RangedWeapon rangedWeapon = (RangedWeapon) weaponVariableSO[0].Value;
-                currentMaxAmmo[0] = rangedWeapon.GetMagazineSize();
-                weapon1AmmoCount.text = $"{currentMaxAmmo[0]} / {currentMaxAmmo[0]}";
-            }
-            
-        }
-        
-        private void UpdateWeapon2Icon(Weapon weapon)
-        {
-            weapon2Icon.style.backgroundImage = weapon.weaponSprite.texture;
-            weapon2Icon.style.width = weapon.weaponSprite.texture.width;
-            weapon2Icon.style.height = weapon.weaponSprite.texture.height;
-            weapon2AmmoCount.visible = weaponVariableSO[1].Value.weaponType == WeaponType.RANGED;
-            
-            if (weaponVariableSO[1].Value.weaponType == WeaponType.RANGED)
-            {
-                RangedWeapon rangedWeapon = (RangedWeapon) weaponVariableSO[1].Value;
-                currentMaxAmmo[1] = rangedWeapon.GetMagazineSize();
-                weapon2AmmoCount.text = $"{currentMaxAmmo[1]} / {currentMaxAmmo[1]}";
+                RangedWeapon rangedWeapon = (RangedWeapon) weaponVariableSO[index].Value;
+                currentMaxAmmo[index] = rangedWeapon.GetMagazineSize();
+                weaponAmmoCount.text = $"{currentMaxAmmo[index]} / {currentMaxAmmo[index]}";
             }
         }
         
