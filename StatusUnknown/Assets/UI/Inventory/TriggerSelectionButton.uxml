@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Global/GlobalUSS.uss?fileID=7433441132597879392&amp;guid=b957b32707326d646b329444c53afc3b&amp;type=3#GlobalUSS" />
+    <ui:VisualElement name="triggerButton" focusable="true" class="selectionButton" style="margin-bottom: 12px; flex-direction: row; justify-content: space-between;">
+        <ui:VisualElement name="leftZone" style="width: 80px;">
+            <ui:VisualElement name="triangle" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Figma/ServerRenderedImages/16_74.png?fileID=2800000&amp;guid=45fb599c9d38ac14f851feffeaa80438&amp;type=3#16_74&apos;); -unity-background-image-tint-color: rgb(218, 218, 218); flex-direction: column-reverse;">
+                <ui:Label tabindex="-1" text="T1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="triggerIndex" class="halfTitle" style="color: rgb(128, 128, 128);" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="rightZone" style="align-items: flex-end;">
+            <ui:VisualElement name="triggerIcon" style="height: 50px; width: 50px; background-image: url(&apos;project://database/Assets/Figma/ServerRenderedImages/19_120.png?fileID=2800000&amp;guid=b7c7a78b142b4a7479e2a7026cbfef1b&amp;type=3#19_120&apos;);" />
+            <ui:Label tabindex="-1" text="TRIGGER" parse-escape-sequences="true" display-tooltip-when-elided="true" name="triggerName" class="halfTitle" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

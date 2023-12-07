@@ -43,4 +43,8 @@ namespace Core.Helpers
     [Serializable]
     public class VectorIntWeaponDictionary : CustomSerializedDictionary<Vector2Int, WeaponData>
     { }
+
+    [Serializable]
+    public class IconReferencesDictionary<T> : CustomSerializedDictionary<T, Sprite>
+    { }
 }

@@ -155,7 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PanelSettings: {fileID: 11400000, guid: 69da892ffc2138f40ad579e3a2224bf1, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 656c9742cb6c7564f8e65a0eed7784bd, type: 3}
+  sourceAsset: {fileID: 9197481963319205126, guid: 66627ee1737b3a54cabab26d7847fc53, type: 3}
   m_SortingOrder: 0
 --- !u!4 &284051422
 Transform:
@@ -390,6 +390,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MapTelporter
       objectReference: {fileID: 0}
+    - target: {fileID: 3320408941533415863, guid: 32c7a38372ec2744699272e2347686ef, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8062382204240570871, guid: 32c7a38372ec2744699272e2347686ef, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -490,6 +494,10 @@ PrefabInstance:
     - target: {fileID: 7045442916581944998, guid: 544212434da1bcd4aab11cd790711d51, type: 3}
       propertyPath: m_Name
       value: PlayerInfo
+      objectReference: {fileID: 0}
+    - target: {fileID: 7045442916581944998, guid: 544212434da1bcd4aab11cd790711d51, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

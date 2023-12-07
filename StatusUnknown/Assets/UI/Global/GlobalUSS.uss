@@ -10,19 +10,56 @@
 }
 
 .baseSlot {
-    align-self: flex-start;
-    width: 46px;
-    height: 46px;
     margin: 2px;
-    background-color: rgb(91, 88, 88);
+    background-color: rgb(85, 85, 85);
     border-radius: 3px;
-    border-left-color: rgb(0, 0, 0);
-    border-right-color: rgb(0, 0, 0);
-    border-top-color: rgb(0, 0, 0);
-    border-bottom-color: rgb(0, 0, 0);
+    border-left-color: rgb(137, 137, 136);
+    border-right-color: rgb(137, 137, 136);
+    border-top-color: rgb(137, 137, 136);
+    border-bottom-color: rgb(137, 137, 136);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+}
+
+.selectionButton {
+    background-color: rgb(123, 123, 123);
     border-top-width: 3px;
     border-right-width: 3px;
     border-bottom-width: 3px;
     border-left-width: 3px;
+    border-left-color: rgb(218, 218, 218);
+    border-right-color: rgb(218, 218, 218);
+    border-top-color: rgb(218, 218, 218);
+    border-bottom-color: rgb(218, 218, 218);
+}
+
+.selectionButton:focus {
+    background-color: rgba(137, 132, 90, 0.53);
+}
+
+.halfTitle {
+    -unity-font: url('project://database/Assets/Figma/Fonts/Poppins_700.ttf?fileID=12800000&guid=19476f3b4d515394786b8b78a697bf2d&type=3#Poppins_700');
+    -unity-text-align: lower-left;
+    -unity-font-style: bold;
+    font-size: 24px;
+    color: rgb(255, 255, 255);
+    letter-spacing: -0.7px;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.slotDimension {
+    width: 100px;
+    height: 100px;
     flex-shrink: 0;
 }

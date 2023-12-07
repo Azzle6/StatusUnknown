@@ -8,9 +8,10 @@ namespace Core.SingletonsSO
     using UnityEngine.UIElements;
 
     [CreateAssetMenu(menuName = "CustomAssets/SingletonSO/UIHandler", fileName = "UIHandler")]
-    public class UIHandler : SingletonSO<UIHandler>
+    public partial class UIHandler : SingletonSO<UIHandler>
     {
         public UISettings uiSettings;
+        public IconsReferencesSO iconsReferences;
         
         [FoldoutGroup("Dynamic data")]
         public bool isMovingItem;
@@ -21,16 +22,29 @@ namespace Core.SingletonsSO
         
         public void ForceFocus(VisualElement element)
         {
-            Debug.Log($"Force focus on {element}.");
             element.Focus();
         }
 
         #region GRID_MANAGEMENT
+        public void ResetMovingData()
+        {
+            this.isMovingItem = false;
+            this.movingItem = null;
+        }
+        
         public void OnGridElementFocus(IGridElement element)
         {
             this.selectedGrid = element.Grid;
-            if(this.isMovingItem)
+            if (this.isMovingItem)
+            {
+                if (this.movingItem == null)
+                {
+                    this.ResetMovingData();
+                    return;
+                }
                 MoveItem(element);
+            }
+                
         }
 
         public void TryPickItem(ItemView itemView)
@@ -72,10 +86,8 @@ namespace Core.SingletonsSO
         {
             this.movingItem.PlacedState();
             grid.DropItem(this.movingItem, pos);
-            this.ForceFocus(this.movingItem.FocusElement);
             
-            this.movingItem = null;
-            this.isMovingItem = false;
+            this.ResetMovingData();
         }
 
         private void CancelItemMoving()
@@ -85,4 +97,11 @@ namespace Core.SingletonsSO
         }
         #endregion //GRID_MANAGEMENT
     }
+
+    #if UNITY_EDITOR
+    public partial class UIHandler : SingletonSO<UIHandler>
+    {
+        
+    }
+    #endif
 }

@@ -15,7 +15,7 @@ namespace Inventory.Grid
             for (int y = 0; y < shape.shapeSize.y; y++)
             {
                 VisualElement horizontalParent = new VisualElement();
-                horizontalParent.AddToClassList("horizontalParent");
+                horizontalParent.style.flexDirection = FlexDirection.Row;
                 verticalParent.Insert(y, horizontalParent);
                 
                 for (int x = 0; x < shape.shapeSize.x; x++)

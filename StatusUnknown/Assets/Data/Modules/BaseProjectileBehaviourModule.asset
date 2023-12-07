@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: SimpleProjectile
   shape:
-    shapeSize: {x: 2, y: 2}
+    shapeSize: {x: 1, y: 2}
     anchor: {x: 0, y: 0}
-    content: 01010101
-  view: {fileID: 0}
+    content: 0101
+  icon: {fileID: 21300000, guid: 42f16c45feee3fa478a67ff4a03f675e, type: 3}
   outputs:
   - moduleTriggerType: 0
-    localPosition: {x: 1, y: 0}
+    localPosition: {x: 0, y: 0}
     direction: 3
   - moduleTriggerType: 3
-    localPosition: {x: 1, y: 1}
-    direction: 3
+    localPosition: {x: 0, y: 1}
+    direction: 1
   BehaviourData:
     rid: 6076498459536392196
   references:
