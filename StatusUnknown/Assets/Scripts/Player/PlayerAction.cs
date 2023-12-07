@@ -3,6 +3,7 @@ using Interactable;
 
 namespace Player
 {
+    using Core.EventsSO.GameEventsTypes;
     using UnityEngine;
     using UnityEngine.InputSystem;
 
@@ -13,6 +14,7 @@ namespace Player
        [SerializeField] private PlayerStateInterpretor playerStateInterpretor;
        [SerializeField] private DeviceLog deviceLog;
        [SerializeField] private PlayerStat playerStat;
+
        private Vector2 mousePos;
        private Vector2 aimDirection;
 
@@ -33,7 +35,7 @@ namespace Player
             playerInputController.OnAimG += OnAimG;
             playerInputController.OnMedkit += OnMedkit;
             playerInputController.OnInteract += OnInteract;
-            playerInputController.OnInventory += OnInventory;
+            //playerInputController.OnInventory += OnInventory;
             playerInputController.OnReload += OnReload;
             playerInputController.OnAugment += OnAugment;
             playerInputController.OnWeapon += OnWeapon;
@@ -47,7 +49,7 @@ namespace Player
             playerInputController.OnAimG -= OnAimG;
             playerInputController.OnMedkit -= OnMedkit;
             playerInputController.OnInteract -= OnInteract; 
-            playerInputController.OnInventory -= OnInventory;
+            //playerInputController.OnInventory -= OnInventory;
             playerInputController.OnReload -= OnReload;
             playerInputController.OnAugment -= OnAugment;
             playerInputController.OnWeapon -= OnWeapon;
@@ -161,20 +163,12 @@ namespace Player
         
         }
     
-        public void OnInventory(InputAction.CallbackContext ctx)
+        public void OnInventory(bool isOpen)
         {
-            if (ctx.started)
-            {
-                if (playerStateInterpretor.CheckState(PlayerStateType.ACTION, "InventoryPlayerState"))
-                {
-                    playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
-                }
-                else
-                {
-                    playerStateInterpretor.AddState("InventoryPlayerState", PlayerStateType.ACTION,true);
-                }
-            }
-
+            if(isOpen)
+                this.playerStateInterpretor.LockPlayerInput();
+            else
+                this.playerStateInterpretor.UnlockPlayerInput();
         }
     
         public void OnReload(InputAction.CallbackContext ctx)

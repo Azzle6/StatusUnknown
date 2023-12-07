@@ -507,6 +507,7 @@ GameObject:
   - component: {fileID: 3331217997880427551}
   - component: {fileID: 5190767570319545551}
   - component: {fileID: 6516842071234829007}
+  - component: {fileID: 8689088191660182921}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -618,6 +619,7 @@ MonoBehaviour:
   rb: {fileID: 5190767570319545551}
   animator: {fileID: 7009230116547685489}
   weaponManager: {fileID: 4974381338073703539}
+  playerInput: {fileID: 1402947876674598048}
 --- !u!54 &5190767570319545551
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -660,6 +662,34 @@ MonoBehaviour:
   stat: {fileID: 11400000, guid: 96563a0c89298fe42a7e0015e37b4023, type: 2}
   playerHealth: {fileID: 11400000, guid: 57a8cb5156074b147aba2b571370f275, type: 2}
   playerArmor: {fileID: 11400000, guid: 1618b7701b57cc04aabf97a8964b5dcb, type: 2}
+--- !u!114 &8689088191660182921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6830114000119859290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e71f810d0eac820458d95ad10fe8df52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: b4f0c796a4b89fa4688458081ea75881, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1402947876674598048}
+        m_TargetAssemblyTypeName: Player.PlayerAction, Assembly-CSharp
+        m_MethodName: OnInventory
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6958750807055486155
 GameObject:
   m_ObjectHideFlags: 0

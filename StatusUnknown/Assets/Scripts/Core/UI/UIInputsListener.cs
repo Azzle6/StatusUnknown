@@ -1,5 +1,6 @@
 namespace Core.UI
 {
+    using EventsSO.GameEventsTypes;
     using Inventory;
     using Sirenix.OdinInspector;
     using UnityEngine;
@@ -8,11 +9,13 @@ namespace Core.UI
     public class UIInputsListener : MonoBehaviour
     {
         [FormerlySerializedAs("inventory")] [SerializeField, Required]
-        private UIInventoryDisplayer inventoryDisplayer;
+        private BoolGameEvent openInventoryGameEvent;
 
-        /*private void OnStart()
+        [SerializeField] private UIInventoryDisplayer inventoryDisplayer;
+
+        private void OnStart()
         {
-            this.inventoryDisplayer.Display();
-        }*/
+            this.openInventoryGameEvent.RaiseEvent(!this.inventoryDisplayer.IsOpen());
+        }
     }
 }

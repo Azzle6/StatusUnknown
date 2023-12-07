@@ -136,7 +136,7 @@ namespace Inventory
         {
             this.isDisplayed = display;
             
-            Debug.Log($"{(this.isDisplayed ? "Display" : "Hide")} inventory.");
+            //Debug.Log($"{(this.isDisplayed ? "Display" : "Hide")} inventory.");
             
             this.inventoryRoot.style.display = this.isDisplayed ? DisplayStyle.Flex : DisplayStyle.None;
             if (this.isDisplayed)
@@ -145,6 +145,11 @@ namespace Inventory
                 this.inventoryGridView.LoadContent();
                 this.SelectWeapon(this.playerInventory.equippedWeaponsData[0]);
             }
+        }
+
+        public bool IsOpen()
+        {
+            return this.inventoryRoot.style.display == DisplayStyle.Flex;
         }
     }
 }
