@@ -36,7 +36,6 @@ namespace Inventory
                 this.FocusElement.RemoveFromClassList("usedSlot");
 
             this.ItemView = itemRef;
-            //this.FocusElement.focusable = !isOccupied;
         }
 
         

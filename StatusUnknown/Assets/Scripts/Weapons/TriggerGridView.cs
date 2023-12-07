@@ -1,10 +1,12 @@
 namespace Weapons
 {
+    using Core.SingletonsSO;
     using Inventory;
     using Inventory.Containers;
     using Inventory.Grid;
     using Inventory.Item;
     using Module;
+    using UnityEngine;
     using UnityEngine.UIElements;
 
     public class TriggerGridView : GridView
@@ -16,6 +18,16 @@ namespace Weapons
             this.weaponTriggerData = container;
             this.weaponTriggerData.compiledModules.onNewCompilation += this.OnNewCompilation;
             this.weaponTriggerData.compiledModules.CompileWeaponModules(this.weaponTriggerData.triggerRowPosition, this.weaponTriggerData.modules);
+            
+            VisualElement outputElement = UIHandler.Instance.uiSettings.triggerTemplate.Instantiate();
+            outputElement.Q<VisualElement>("triggerIcon").style.backgroundImage = UIHandler.Instance.iconsReferences
+                .weaponOutputReferences[this.weaponTriggerData.weaponTriggerType].texture;
+            
+            outputElement.style.position = Position.Absolute;
+            this.gridRoot.Add(outputElement);
+            float triggerSize = UIHandler.Instance.uiSettings.triggerSize;
+            float slotSize = UIHandler.Instance.uiSettings.slotSize;
+            outputElement.transform.position = new Vector3(-triggerSize * 0.75f, slotSize * this.weaponTriggerData.triggerRowPosition + slotSize / 2 - triggerSize/2);
         }
 
         private void OnNewCompilation(ModuleCompilation newCompilation)

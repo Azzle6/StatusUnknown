@@ -18,7 +18,7 @@ namespace Inventory.Grid
         private Slot[] slots;
         protected readonly HashSet<ItemView> ItemsView = new HashSet<ItemView>();
         
-        private readonly VisualElement gridRoot;
+        protected readonly VisualElement gridRoot;
 
         private float SlotWidth
         {
@@ -46,6 +46,7 @@ namespace Inventory.Grid
             this.canContainsTypes = typesContained;
             this.BuildGrid();
         }
+
         #endregion //CONSTRUCTOR
 
         #region GRID_DISPLAY

@@ -31,7 +31,7 @@ namespace Module
                 triggerElement.Q<VisualElement>("triggerIcon").style.backgroundImage = UIHandler.Instance.iconsReferences.moduleOutputReferences[outputInfo.moduleTriggerType].texture;
                 
                 this.ViewRoot.Add(triggerElement);
-                float slotWidth = UIHandler.Instance.uiSettings.slotSize;
+                float slotWidth = UiSettings.slotSize;
                 Vector2 directionDisplacement;
                 float iconRotation = 0;
                 switch (outputInfo.direction)
@@ -57,7 +57,7 @@ namespace Module
                 }
 
                 triggerElement.transform.position = ((Vector2)outputInfo.localPosition * slotWidth + directionDisplacement) - (Vector2.one * this.UiSettings.triggerSize/2);
-                triggerElement.style.rotate = new StyleRotate(new Rotate(iconRotation));
+                //triggerElement.style.rotate = new StyleRotate(new Rotate(iconRotation));
                 
                 this.outputsVisual.Add(outputInfo.moduleTriggerType, triggerElement);
             }
