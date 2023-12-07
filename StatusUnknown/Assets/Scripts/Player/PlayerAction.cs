@@ -1,9 +1,7 @@
 using Core;
-using Interactable;
 
 namespace Player
 {
-    using Core.EventsSO.GameEventsTypes;
     using UnityEngine;
     using UnityEngine.InputSystem;
 
