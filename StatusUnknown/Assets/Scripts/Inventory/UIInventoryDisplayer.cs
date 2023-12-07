@@ -67,7 +67,7 @@ namespace Inventory
                     UIHandler.Instance.uiSettings.weaponSelectionButtonTemplate.Instantiate();
                 weaponSelectionButton.RegisterCallback<NavigationSubmitEvent>((e) => this.SelectWeapon(weapon));
                 weaponSelectionButton.Q<VisualElement>("weaponIcon").style.backgroundImage =
-                    weapon.definition.view.texture;
+                    weapon.definition.icon.texture;
                 weaponSelectionButton.Q<TextElement>("weaponName").text = weapon.definition.itemName;
                 
                 this.weaponSelectionButtonsRoot.Add(weaponSelectionButton);

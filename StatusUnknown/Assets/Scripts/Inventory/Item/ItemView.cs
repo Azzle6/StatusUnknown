@@ -21,6 +21,7 @@ namespace Inventory.Item
         public ItemData ItemData;
         
         private VisualElement verticalRoot;
+        private VisualElement iconElement;
         protected UISettings UiSettings;
 
         #region CONSTRUCTOR
@@ -36,6 +37,12 @@ namespace Inventory.Item
         
         private void GenerateBaseView()
         {
+            if (this.iconElement != null)
+            {
+                this.iconElement.RemoveFromHierarchy();
+                this.iconElement = null;
+            }
+            
             Shape shape = this.ItemData.GridItemDefinition.shape;
             VisualElement itemView = this.UiSettings.itemTemplate.Instantiate();
             itemView.style.position = Position.Absolute;
@@ -43,6 +50,8 @@ namespace Inventory.Item
             this.verticalRoot = itemView.Q<VisualElement>("verticalRoot");
             GridBuilder.BuildGrid(shape, this.verticalRoot, this.UiSettings.itemSquareTemplate);
 
+            
+            
             for (int y = 0; y < shape.shapeSize.y; y++)
             {
                 for (int x = 0; x < shape.shapeSize.x; x++)
@@ -50,6 +59,13 @@ namespace Inventory.Item
                     Vector2Int currentPosition = new Vector2Int(x, y);
                     if (shape.GetContentFromPosition(currentPosition))
                     {
+                        if (this.iconElement == null)
+                        {
+                            this.iconElement = UiSettings.itemIconTemplate.Instantiate();
+                            this.iconElement.Q<VisualElement>("itemIcon").style.backgroundImage = this.ItemData.GridItemDefinition.icon.texture;
+                            itemView.Add(this.iconElement);
+                            this.iconElement.transform.position = (Vector2)currentPosition * this.UiSettings.slotSize;
+                        }
                         foreach (var direction in Enum.GetValues(typeof(E_Direction)))
                         {
                             if(shape.GetContentFromPosition(currentPosition + GridHelper.DirectionToVectorInt((E_Direction)direction, true)))
@@ -93,6 +109,7 @@ namespace Inventory.Item
                 edgeHide.style.rotate = new StyleRotate(new Rotate(rotation));
             }
             
+            this.iconElement.BringToFront();
             if (this.ViewRoot != null)
                 this.ViewRoot.RemoveFromHierarchy();
             this.ViewRoot = itemView;

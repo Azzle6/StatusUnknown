@@ -7,7 +7,7 @@ namespace Inventory.Item
         public abstract E_ItemType ItemType { get; }
         public string itemName;
         public Shape shape;
-        public Sprite view;
+        public Sprite icon;
     }
 
     public enum E_ItemType

@@ -15,6 +15,8 @@ namespace Core.UI
         public VisualTreeAsset itemSquareTemplate;
         [FoldoutGroup("Assets references")]
         public VisualTreeAsset itemTemplate;
+        [FoldoutGroup("Assets references")]
+        public VisualTreeAsset itemIconTemplate;
         [FoldoutGroup("Assets references")] 
         public VisualTreeAsset triggerTemplate;
         [FoldoutGroup("Assets references")] 
