@@ -10,9 +10,9 @@ namespace Core.UI
         [FormerlySerializedAs("inventory")] [SerializeField, Required]
         private UIInventoryDisplayer inventoryDisplayer;
 
-        private void OnStart()
+        /*private void OnStart()
         {
             this.inventoryDisplayer.Display();
-        }
+        }*/
     }
 }

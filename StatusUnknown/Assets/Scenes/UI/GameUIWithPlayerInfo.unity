@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 284051422}
   - component: {fileID: 284051421}
   - component: {fileID: 284051425}
+  - component: {fileID: 284051426}
   m_Layer: 0
   m_Name: MainUI
   m_TagString: Untagged
@@ -186,6 +187,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiDocument: {fileID: 284051421}
   playerInventory: {fileID: 11400000, guid: 90eb184a4bcc3344db97c0cec831b74e, type: 2}
+--- !u!114 &284051426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284051420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e71f810d0eac820458d95ad10fe8df52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: b4f0c796a4b89fa4688458081ea75881, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 284051425}
+        m_TargetAssemblyTypeName: Inventory.UIInventoryDisplayer, Assembly-CSharp
+        m_MethodName: Display
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &695240134 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5916815514251629923, guid: 544212434da1bcd4aab11cd790711d51, type: 3}
@@ -390,10 +419,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MapTelporter
       objectReference: {fileID: 0}
-    - target: {fileID: 3320408941533415863, guid: 32c7a38372ec2744699272e2347686ef, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8062382204240570871, guid: 32c7a38372ec2744699272e2347686ef, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -494,10 +519,6 @@ PrefabInstance:
     - target: {fileID: 7045442916581944998, guid: 544212434da1bcd4aab11cd790711d51, type: 3}
       propertyPath: m_Name
       value: PlayerInfo
-      objectReference: {fileID: 0}
-    - target: {fileID: 7045442916581944998, guid: 544212434da1bcd4aab11cd790711d51, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

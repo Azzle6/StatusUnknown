@@ -132,9 +132,9 @@ namespace Inventory
         }
 
         [Button, HideInEditorMode]
-        public void Display()
+        public void Display(bool display)
         {
-            this.isDisplayed = !this.isDisplayed;
+            this.isDisplayed = display;
             
             Debug.Log($"{(this.isDisplayed ? "Display" : "Hide")} inventory.");
             
