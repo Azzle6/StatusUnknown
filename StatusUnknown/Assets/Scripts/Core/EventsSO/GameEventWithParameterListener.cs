@@ -3,7 +3,7 @@ namespace Core.EventsSO
     using UnityEngine;
     using UnityEngine.Events;
     
-    public abstract class GameEventWithParameterListener<T> : ScriptableObject
+    public abstract class GameEventWithParameterListener<T> : MonoBehaviour
     {
         [SerializeField] private GameEventWithParameter<T> gameEvent;
 

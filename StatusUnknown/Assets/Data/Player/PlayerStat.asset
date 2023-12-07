@@ -12,9 +12,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f15fa3c1ef5e44848bfdc27077e89109, type: 3}
   m_Name: PlayerStat
   m_EditorClassIdentifier: 
+  maxHealth: 100
+  medKitHealAmount: 0
+  medikitHealAmount: 40
+  maxMedikitAmount: 10
+  medikitCooldown: 20
   moveSpeed: 7
+  moveSpeedWhileShooting: 2
   turnAngleLimit: 15
+  turnSpeed: 0.25
+  angleRequiredMultiplierByDistance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 30
+      inSlope: 0.00058852206
+      outSlope: 0.00058852206
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 1
+    - serializedVersion: 3
+      time: 30
+      value: 5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   headHeightOffset: 0.25
+  timeBeforeStopAiming: 2
+  aimLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
   inertiaDuration: 0.5
   inertiaCurve:
     serializedVersion: 2
@@ -40,29 +75,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  turnSpeed: 0.0461
-  angleRequiredMultiplierByDistance:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 30
-      inSlope: 0.00058852206
-      outSlope: 0.00058852206
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 1
-    - serializedVersion: 3
-      time: 30
-      value: 5
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   isAiming: 0
+  isShooting: 0
+  currentWeaponIsMelee: 0

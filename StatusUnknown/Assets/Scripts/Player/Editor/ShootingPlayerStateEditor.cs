@@ -2,7 +2,7 @@ namespace Editor
 {
     using UnityEngine;
     using UnityEditor;
-    using Core.Player;
+    using Player;
     
     
     [CustomEditor(typeof(ShootingPlayerState), true)]
@@ -41,7 +41,7 @@ namespace Editor
             if (shootingPlayerState.closestTarget != default)
                 Handles.Label(shootingPlayerState.closestTarget.transform.position + Vector3.up * 5, "I am the target", style);
                 
-            if ((shootingPlayerState.confirmedInTheFrustrum != null) && (shootingPlayerState.isShooting))
+            if ((shootingPlayerState.confirmedInTheFrustrum != null) && (shootingPlayerState.playerStat.isShooting))
             {
                 for (int x = 0; x < shootingPlayerState.confirmedInTheFrustrum.Count; x++)
                 {

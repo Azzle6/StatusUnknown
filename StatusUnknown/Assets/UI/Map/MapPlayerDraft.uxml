@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="MapPlayerDraft" style="background-image: none; flex-grow: 1; min-width: 100%; min-height: 100%;">
+        <ui:VisualElement name="Map" style="background-image: url(&apos;project://database/Assets/Textures/Map/PlayerDraftMap.png?fileID=2800000&amp;guid=3c9921d1b556f1a4ebb08442f284159e&amp;type=3#PlayerDraftMap&apos;); width: 100%; height: 100%;">
+            <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TP2" style="position: relative; top: 61%; right: -76%; width: 5%; height: 5%;" />
+            <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TP1" style="position: absolute; top: 50%; right: 83%; width: 5%; height: 5%;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -15,27 +15,28 @@ namespace Inventory
         [ReadOnly]
         public Vector2Int anchor;
         [ReadOnly]
-        public bool[] shapeContent;
+        public bool[] content = Array.Empty<bool>();
 
-        public Shape(Vector2Int shapeSize, Vector2Int anchor, bool[] shapeContent)
+        public Shape(Vector2Int shapeSize, Vector2Int anchor, bool[] content)
         {
             this.shapeSize = shapeSize;
             this.anchor = anchor;
-            this.shapeContent = shapeContent;
+            this.content = content;
         }
 
         #region UTILITIES
         public bool GetContentFromPosition(Vector2Int position)
         {
-            return shapeContent[position.y * this.shapeSize.x + position.x];
+            int index = position.y * this.shapeSize.x + position.x;
+            return index < this.content.Length && this.content[index];
         }
 
         public Vector2Int[] GetPositionsRelativeToAnchor()
         {
             List<Vector2Int> result = new List<Vector2Int>();
-            for (int i = 0; i < shapeContent.Length; i++)
+            for (int i = 0; i < this.content.Length; i++)
             {
-                if (shapeContent[i])
+                if (this.content[i])
                     result.Add(GridHelper.GetGridPositionFromIndex(i, shapeSize.x) - anchor);
             }
             return result.ToArray();

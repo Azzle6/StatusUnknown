@@ -29,6 +29,7 @@
 
         protected virtual void Awake()
         {
+            instance = null;
             if (instance == null)
             {
                 instance = this as T;
@@ -39,6 +40,8 @@
                 Destroy(gameObject);
             }
         }
+        
+        
     }
 }
 

@@ -1,16 +1,20 @@
-namespace Core.Player
+namespace Player
 {
 using UnityEngine;
+using Weapon;
     public class ReloadPlayerState : PlayerState
     {
+        [SerializeField] private WeaponManager weaponManager;
+        
+        
         public override void OnStateEnter()
         {
-            Debug.Log("Reload has been started");
+            weaponManager.ReloadWeapon();
         }
 
         public override void OnStateExit()
         {
-            Debug.Log("Reload has been finished");
+            
         }
     }
 }

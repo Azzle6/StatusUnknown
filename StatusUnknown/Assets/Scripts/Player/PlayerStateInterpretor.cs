@@ -1,7 +1,10 @@
-namespace Core.Player
+using UnityEngine.Serialization;
+
+namespace Player
 {
     using System.Collections.Generic;
     using UnityEngine;
+    using Weapon;
 
     public class PlayerStateInterpretor : MonoBehaviour
     {
@@ -12,6 +15,8 @@ namespace Core.Player
         [HideInInspector] public PlayerState movementState;
         [HideInInspector] public PlayerState aimState;
         [HideInInspector] public PlayerState actionState;
+        [HideInInspector] public PlayerState inputBufferState;
+        //[HideInInspector] public string inputBufferStateName;
         [SerializeField] private List<PlayerState> unusedPlayerStates;
         private PlayerState tempState;
         [Header("Player Component")]
@@ -38,27 +43,34 @@ namespace Core.Player
             statesSlot.Add(PlayerStateType.MOVEMENT, movementState);
         }
     
+        //before adding a state need to remove previous state
         public void AddState(string state, PlayerStateType playerStateType, bool lockState)
         {
             if (statesSlot[playerStateType] != null)
             {
+                if (statesSlot[playerStateType].inputBufferActive)
+                    inputBufferState = playerStates[state];
+                
                 if (statesSlot[playerStateType].lockState)
                     return;
             }
+            
             tempState = playerStates[state];
             statesSlot[playerStateType] = tempState;
             statesSlot[playerStateType].lockState = lockState;
             tempState.OnStateEnter();
+
         }
     
         public void RemoveState(PlayerStateType playerStateType)
         {
-            if (statesSlot[playerStateType] == null)
+            if (statesSlot[playerStateType] == default)
                 return;
+            
             tempState = statesSlot[playerStateType];
+            tempState.OnStateExit();
             statesSlot[playerStateType].lockState = false;
             statesSlot[playerStateType] = null;
-            tempState.OnStateExit();
         }
         public bool CheckState(PlayerStateType playerStateType, string playerStateName)
         {
@@ -83,12 +95,20 @@ namespace Core.Player
             tempState.OnStateExit();
         }
 
+        public void ExecuteBufferInput()
+        {
+            if(inputBufferState == default)
+                return;
+            AddState(inputBufferState.GetType().Name, inputBufferState.playerStateType, false);
+            inputBufferState = default;
+        }
+
         public void LockPlayerInput()
         {
-            playerInput.enabled = false;
             RemoveState(PlayerStateType.AIM);
             RemoveState(PlayerStateType.MOVEMENT);
             RemoveState(PlayerStateType.ACTION);
+            playerInput.enabled = false;
         }
 
         public void UnlockPlayerInput()
@@ -112,7 +132,7 @@ namespace Core.Player
         
         public void Behave<T>(T x, PlayerStateType type)
         {
-            if (statesSlot[type] == null)
+            if (statesSlot[type] == default)
                 return;
             
             statesSlot[type].Behave<T>(x);

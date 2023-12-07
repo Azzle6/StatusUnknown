@@ -1,4 +1,4 @@
-namespace Core.Player
+namespace Player
 {
     using System.Numerics;
     public class IdlePlayerState : PlayerState
