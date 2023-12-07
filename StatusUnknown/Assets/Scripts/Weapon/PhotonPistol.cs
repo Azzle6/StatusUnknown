@@ -26,7 +26,7 @@ namespace Weapon
         private bool waitForTriggerRelease;
         private float cdTimer;
         
-        private void Start()
+        private void Awake()
         {
             chargingVFX.Stop();
             stat = weaponStat as PhotonPistolStat;
