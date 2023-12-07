@@ -129,7 +129,7 @@ namespace Player
 
         private void AdjustAnimAcordingToAim()
         {
-            tempMovementAnim = playerStateInterpretor.transform.InverseTransformDirection(tempMovementAnim);
+            tempMovementAnim = playerStateInterpretor.transform.InverseTransformDirection(tempMovement); ;
             playerStateInterpretor.animator.SetFloat("WalkMagnitude", inputDirection.magnitude);
             playerStateInterpretor.animator.SetFloat("WalkDirX", tempMovementAnim.x);
             playerStateInterpretor.animator.SetFloat("WalkDirY", tempMovementAnim.z);
