@@ -172,7 +172,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &2180731430707241527
 Rigidbody:
@@ -264,6 +264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitContexts: []
+  hitVfxPrefab: {fileID: 0}
   animator: {fileID: 8748143321681919880}
   body: {fileID: 2180731430707241527}
   avoidanceMask:
@@ -276,7 +277,9 @@ MonoBehaviour:
     m_Bits: 256
   hit: 0
   hitFreq: 0.1
+  tpCooldown: 0
   bulletPrefab: {fileID: 6248528393708085188, guid: 57fd7b16bf0b01c4aa4cf239eb995e54, type: 3}
+  initialAttackDuration: 0
   <shootingPoint>k__BackingField: {fileID: 933890754964585424}
 --- !u!95 &8748143321681919880
 Animator:
@@ -325,7 +328,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_LocalScale: {x: 1.8, y: 1.8, z: 2.4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1552175077233724042}

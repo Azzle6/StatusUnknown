@@ -1081,6 +1081,17 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!114 &108066188 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2875921016714515856, guid: e49cc5f766cb4354ead5819d0ebe3d0e, type: 3}
+  m_PrefabInstance: {fileID: 455227553}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e05f0417baac1c04a95ca08d4c8b82c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &124281465
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6810,6 +6821,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4974381338073703539, guid: e49cc5f766cb4354ead5819d0ebe3d0e, type: 3}
+      propertyPath: weapons.Array.data[0]
+      value: 
+      objectReference: {fileID: 108066188}
+    - target: {fileID: 4974381338073703539, guid: e49cc5f766cb4354ead5819d0ebe3d0e, type: 3}
+      propertyPath: weapons.Array.data[1]
+      value: 
+      objectReference: {fileID: 2106512283}
     - target: {fileID: 5038193574154565409, guid: e49cc5f766cb4354ead5819d0ebe3d0e, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -33560,6 +33579,17 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!114 &2106512283 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3048650242929717248, guid: e49cc5f766cb4354ead5819d0ebe3d0e, type: 3}
+  m_PrefabInstance: {fileID: 455227553}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d75b433304910479abac5c0eea2c29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2136432545
 GameObject:
   m_ObjectHideFlags: 0
