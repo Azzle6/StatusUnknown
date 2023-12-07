@@ -1,3 +1,5 @@
+using UnityEngine.VFX;
+
 namespace Augment
 {
     using UnityEngine;
@@ -7,6 +9,7 @@ namespace Augment
     public class Dash : Augment
     {
         [SerializeField] private DashStat dashStat;
+        [SerializeField] private VisualEffect dashVFX;
         private Vector3 tempTargetPos;
         
         private void Awake()
@@ -16,11 +19,12 @@ namespace Augment
         public override void ActionPressed()
         {
             base.ActionPressed();
+            dashVFX.Play();
             Physics.Raycast(augmentManager.PlayerStateInterpretor.transform.position, augmentManager.PlayerStateInterpretor.transform.forward, out RaycastHit hit, dashStat.dashLength);
             if (hit.collider != default)
             {
                 tempTargetPos = hit.point - augmentManager.PlayerStateInterpretor.transform.forward;
-                augmentManager.PlayerStateInterpretor.transform.DOMove(tempTargetPos, dashStat.dashDuration);
+                augmentManager.PlayerStateInterpretor.transform.DOMove(tempTargetPos, dashStat.dashDuration).OnComplete((() => dashVFX.Stop()));
             }
             else
             {
