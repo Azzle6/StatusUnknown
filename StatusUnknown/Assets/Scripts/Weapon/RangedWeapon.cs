@@ -117,6 +117,7 @@ namespace Weapon
             {
                 playerAnimator.SetLayerWeight(2,0);
                 playerAnimator.SetLayerWeight(1,1);
+                
             }
             else
             {

@@ -20,6 +20,8 @@ namespace Weapon
         public EnemyStatusHandler enemyStatusHandler;
         public Transform lHandTr;
         public Transform rHandTr;
+        public Transform lHandHint;
+        public Transform rHandHint;
         [SerializeField] private Rig rigLHand;
         [SerializeField] private RigBuilder rigBuilder;
         [SerializeField] private Rig rigRHand;

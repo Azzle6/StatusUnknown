@@ -61,8 +61,9 @@ namespace Weapon
                 layerMask);
             if (collisions.Length > 0)
             {
-                Debug.Log("hit");
+       
                 Collider firstCollider = collisions[0];
+                Debug.Log(firstCollider.name);
                 IDamageable damageable = firstCollider.GetComponent<IDamageable>();
                 if (damageable != null)
                     damageable.TakeDamage(damage, transform.forward * knockbackStrength);

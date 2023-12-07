@@ -111,6 +111,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3102636911626132260}
+  - component: {fileID: 691129275573640728}
   m_Layer: 9
   m_Name: L_Hint
   m_TagString: Untagged
@@ -133,6 +134,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8950905301502203513}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &691129275573640728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 921559841023640553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a77460d7a7534ee4fa4d81dae6757632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handTransform: {fileID: 5829191506026335434}
 --- !u!1 &1392872196027900108
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,6 +249,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handTransform: {fileID: 8454800106030930285}
+--- !u!1 &3390898660707874088
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8877644326467804485}
+  m_Layer: 0
+  m_Name: HandRigPhotonPistol
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8877644326467804485
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3390898660707874088}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8950905301502203513}
+  - {fileID: 867214268337551574}
+  m_Father: {fileID: 4009863325473486347}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4784582543325438014
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,6 +344,8 @@ MonoBehaviour:
   enemyStatusHandler: {fileID: 4741601364681424715}
   lHandTr: {fileID: 2285797934929402617}
   rHandTr: {fileID: 1177203377855351517}
+  lHandHint: {fileID: 0}
+  rHandHint: {fileID: 0}
   rigLHand: {fileID: 5856259894772495535}
   rigBuilder: {fileID: 8092339911218207217}
   rigRHand: {fileID: 1625318843248141356}
@@ -644,7 +693,7 @@ Transform:
   m_Children:
   - {fileID: 5741217271880450406}
   - {fileID: 3102636911626132260}
-  m_Father: {fileID: 4009863325473486347}
+  m_Father: {fileID: 8877644326467804485}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5856259894772495535
 MonoBehaviour:
@@ -1147,7 +1196,7 @@ Transform:
   m_Children:
   - {fileID: 5360574122567775271}
   - {fileID: 4287626557593907560}
-  m_Father: {fileID: 4009863325473486347}
+  m_Father: {fileID: 8877644326467804485}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1625318843248141356
 MonoBehaviour:
@@ -1172,6 +1221,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4287626557593907560}
+  - component: {fileID: 2367831319808802188}
   m_Layer: 9
   m_Name: R_Hint
   m_TagString: Untagged
@@ -1194,6 +1244,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 867214268337551574}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2367831319808802188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8583212510563657222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a77460d7a7534ee4fa4d81dae6757632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handTransform: {fileID: 5647952279543728212}
 --- !u!1 &8595492639957892660
 GameObject:
   m_ObjectHideFlags: 0
@@ -1360,10 +1423,7 @@ PrefabInstance:
       addedObject: {fileID: 2503135460117009332}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2aa12575684503d408ebc5525959fa5e, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8950905301502203513}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2aa12575684503d408ebc5525959fa5e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 867214268337551574}
+      addedObject: {fileID: 8877644326467804485}
     - targetCorrespondingSourceObject: {fileID: -4949100798147094089, guid: 2aa12575684503d408ebc5525959fa5e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2285797934929402617}
@@ -1943,9 +2003,9 @@ PrefabInstance:
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5384648505860239895, guid: 1708dfd4bc512924385dc9630c687f1f, type: 3}
-      propertyPath: initMeshPos.z
-      value: 0.3
-      objectReference: {fileID: 0}
+      propertyPath: muzzle
+      value: 
+      objectReference: {fileID: 8107735732288109391}
     - target: {fileID: 5384648505860239895, guid: 1708dfd4bc512924385dc9630c687f1f, type: 3}
       propertyPath: weaponManager
       value: 
@@ -2040,6 +2100,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7d75b433304910479abac5c0eea2c29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &5647952279543728212 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3356704390245714499, guid: 1708dfd4bc512924385dc9630c687f1f, type: 3}
+  m_PrefabInstance: {fileID: 6986462321507353111}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5829191506026335434 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3463713129948794589, guid: 1708dfd4bc512924385dc9630c687f1f, type: 3}
+  m_PrefabInstance: {fileID: 6986462321507353111}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8107735732288109391 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1184605882913061208, guid: 1708dfd4bc512924385dc9630c687f1f, type: 3}
+  m_PrefabInstance: {fileID: 6986462321507353111}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8454800106030930285 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1558700194440174458, guid: 1708dfd4bc512924385dc9630c687f1f, type: 3}

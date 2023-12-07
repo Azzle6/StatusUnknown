@@ -1,4 +1,5 @@
 using Input;
+using UnityEngine.VFX.Utility;
 
 namespace Weapon
 {
@@ -50,7 +51,7 @@ namespace Weapon
             
             tempPhotonPistolBullet = ComponentPooler.Instance.GetPooledObject<Projectile>(stat.projectilePool.prefab.name);
             tempPhotonPistolBulletTr = tempPhotonPistolBullet.transform;
-            
+            chargingVFX.SetFloat("Size", 0);
             charging = StartCoroutine(Charge());
             return true;
         }
@@ -66,6 +67,7 @@ namespace Weapon
               tempPhotonPistolBulletTr.localPosition = Vector3.zero;
               chargeTimer += Time.deltaTime;
               tempPhotonPistolBulletTr.localScale = Vector3.one * (stat.projectileSize.Evaluate(chargeTimer / stat.maxTimeCharge) * stat.maxProjectileSize);
+              chargingVFX.SetFloat("Size", stat.projectileSize.Evaluate(chargeTimer / stat.maxTimeCharge));
               currentDamage = stat.damageCurve.Evaluate(chargeTimer / stat.maxTimeCharge) * stat.maxDamage;
               yield return null;
             }
@@ -89,6 +91,7 @@ namespace Weapon
                 return;
             
             chargingVFX.Stop();
+            chargingVFX.SetFloat("Size", 0);
             waitForTriggerRelease = false;
             StartCoroutine(Cooldown());
             if (charging != default)
