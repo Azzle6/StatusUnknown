@@ -21,7 +21,7 @@ namespace Player
         public void TakeDamage(float damage, Vector3 force)
         {
             playerHealth.Value -= damage;
-            Debug.Log("Player took " + damage + " damage");
+            //Debug.Log("Player took " + damage + " damage");
         }
 
         private IEnumerator MedikitCD()

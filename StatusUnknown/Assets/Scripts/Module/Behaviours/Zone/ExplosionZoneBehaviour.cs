@@ -4,8 +4,8 @@ namespace Module.Behaviours.Zone
     {
         protected override void OnStart()
         {
-            this.CollisionBehaviour();
-            Destroy(this.gameObject);
+            this.ApplyZoneDamage();
+            this.DestroyModule();
         }
     }
 }

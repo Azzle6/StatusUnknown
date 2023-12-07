@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c01d336291543644a3bee3a19b552e2, type: 3}
   m_Name: TripleProjectileBehaviourModule
   m_EditorClassIdentifier: 
-  itemName: TestModule
+  itemName: TripleProjectile
   shape:
     shapeSize: {x: 2, y: 2}
     anchor: {x: 0, y: 0}
     content: 01010101
   view: {fileID: 0}
   outputs:
-  - weaponTriggerType: 1
+  - moduleTriggerType: 0
     localPosition: {x: 1, y: 0}
     direction: 3
   BehaviourData:
-    rid: 7591883733765456138
+    rid: 6076498417585487883
   references:
     version: 2
     RefIds:
@@ -31,27 +31,31 @@ MonoBehaviour:
       type: {class: HorizontalInstantiationRule, ns: Module, asm: Assembly-CSharp}
       data:
         Length: 3
-    - rid: 7591883733765456138
+    - rid: 6076498417585487883
       type: {class: ProjectileBehaviourData, ns: Module.Definitions, asm: Assembly-CSharp}
       data:
-        <TickRate>k__BackingField: 0
-        <LayerMask>k__BackingField:
-          serializedVersion: 2
-          m_Bits: 385
         <Behaviour>k__BackingField:
           scriptAsset: {fileID: 11500000, guid: 52ad6006665b33347bc6db8216731b6c, type: 3}
           typeName: Module.Behaviours.Projectiles.BasicProjectileBehaviour, Assembly-CSharp,
             Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        <Quantity>k__BackingField: 3
-        <InstantiationRule>k__BackingField:
-          rid: 4696495337976365329
+        <LayerMask>k__BackingField:
+          serializedVersion: 2
+          m_Bits: 385
         <CollisionShape>k__BackingField:
           rid: 7591883733765456139
         <Mesh>k__BackingField: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
         <Material>k__BackingField: {fileID: -876546973899608171, guid: 4a77fad0a2c502e42adef107b7ea51ea, type: 3}
-        <Damages>k__BackingField: 5
-        speed: 1
+        shootVFX: {fileID: 8926484042661614526, guid: 198b78bbc4d57b34dbb8dc94c531a38f, type: 3}
+        projectileVFX: {fileID: 8926484042661614526, guid: 4f516e67353b2f54c81dea0fe26ab815, type: 3}
+        hitVFX: {fileID: 8926484042661614526, guid: c3516814188dadb489ac299f4da58528, type: 3}
+        <TickRate>k__BackingField: 0
+        <LifeTime>k__BackingField: 2
+        <Quantity>k__BackingField: 3
+        <InstantiationRule>k__BackingField:
+          rid: 4696495337976365329
+        <Damages>k__BackingField: 14
+        speed: 10
     - rid: 7591883733765456139
       type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
       data:
-        radius: 0.1
+        radius: 0.25

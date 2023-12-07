@@ -16,7 +16,7 @@ namespace Weapon
         public WeaponType weaponType;
         
         
-        public abstract void ActionPressed();
+        public virtual bool ActionPressed() { return false;} 
     
         public abstract void ActionReleased();
 
@@ -32,26 +32,15 @@ namespace Weapon
         {
             
             WeaponTriggerData data = this.inventory.GetWeaponTriggerData(this.weaponDefinition, trigger);
-            if (data == default)
+            if(data == null)
                 return;
             
-            this.CompileModules(data);
             ModuleBehaviourHandler.Instance.InstantiateModuleBehaviour(
                 data.compiledModules.FirstModule,
                 new InstantiatedModuleInfo(spawnPoint.position, spawnPoint.rotation));
         }
-        
-        private void CompileModules(WeaponTriggerData data)
-        {
-            if (data.compiledModules.FirstModule != null)
-                return;
-            
-            data.compiledModules.CompileWeaponModules(data.triggerRowPosition, data.modules);
-        }
 
         public abstract void Hit();
-
-        
     }
 
 }

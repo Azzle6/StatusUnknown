@@ -44,7 +44,7 @@ namespace Module
                 CompiledModule newCompiledModule =
                     nextModuleResult.Item1 == null ? null : new CompiledModule(nextModuleResult.Item1);
                 
-                triggerInfo.Add(new CompiledOutputInfo(output.weaponTriggerType, newCompiledModule));
+                triggerInfo.Add(new CompiledOutputInfo(output.moduleTriggerType, newCompiledModule));
 
                 if (nextModuleResult.Item1 != null)
                 {

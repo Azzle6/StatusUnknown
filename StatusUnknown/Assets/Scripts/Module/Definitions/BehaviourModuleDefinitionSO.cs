@@ -1,9 +1,11 @@
 namespace Module.Definitions
 {
     using System;
+    using Combat.HitProcess;
     using Core.Helpers;
     using Sirenix.OdinInspector;
     using UnityEngine;
+    using UnityEngine.VFX;
 
     [CreateAssetMenu(menuName = "CustomAssets/Definitions/BehaviourModuleDefinition", fileName = "BehaviourModuleDefinition")]
     public class BehaviourModuleDefinitionSO : ModuleDefinitionSO
@@ -16,6 +18,7 @@ namespace Module.Definitions
     public interface IBehaviourData
     {
         public ScriptReference Behaviour { get; set; }
+        public float LifeTime { get; set; }
         public int Quantity { get; set; }
         public IInstantiationRule InstantiationRule { get; set; }
         public float TickRate { get; set; }
@@ -29,58 +32,75 @@ namespace Module.Definitions
     [Serializable]
     public struct ProjectileBehaviourData : IBehaviourData
     {
-        [BoxGroup("General stats")][Tooltip("Type 0 to disable Ticker.")] [field: SerializeField]
-        public float TickRate { get; set; }
-        [BoxGroup("General stats")] [field: SerializeField]
-        public LayerMask LayerMask { get; set; }
-        [BoxGroup("General stats")] [field: SerializeField]
+        [field: SerializeField]
         public ScriptReference Behaviour { get; set; }
-        
-        [BoxGroup("Instantiation")] [field: SerializeField]
-        public int Quantity { get; set; }
-        [BoxGroup("Instantiation")] [field: SerializeReference]
-        public IInstantiationRule InstantiationRule { get; set; }
-        
-        [BoxGroup("General stats")][field:SerializeReference]
+        [field: SerializeField]
+        public LayerMask LayerMask { get; set; }
+        [field:SerializeReference]
         public HitShape CollisionShape { get; set; }
         
-        [BoxGroup("Visual")] [field: SerializeField]
+        //Visuals
+        [field: SerializeField]
         public Mesh Mesh { get; set; }
-        [BoxGroup("Visual")] [field: SerializeField]
+        [field: SerializeField]
         public Material Material { get; set; }
+        [SerializeField] 
+        public VisualEffectAsset shootVFX;
+        [SerializeField] 
+        public VisualEffectAsset projectileVFX;
+        [SerializeField] 
+        public VisualEffectAsset hitVFX;
         
-        [BoxGroup("Definition")] [field: SerializeField]
+        //Stats
+        [field: SerializeField]
+        public float TickRate { get; set; }
+        [field : SerializeField]
+        public float LifeTime { get; set; }
+        [field: SerializeField]
+        public int Quantity { get; set; }
+        [field: SerializeReference]
+        public IInstantiationRule InstantiationRule { get; set; }
+        [field: SerializeField]
         public float Damages { get; set; }
-        [BoxGroup("Definition")] [field: SerializeField]
+        [field: SerializeField]
         public float speed;
     }
 
     [Serializable]
     public struct ZoneBehaviourData : IBehaviourData
     {
-        [BoxGroup("General stats")][Tooltip("Type -1 to disable Ticker.")] [field: SerializeField]
-        public float TickRate { get; set; }
-        [BoxGroup("General stats")] [field: SerializeField]
-        public LayerMask LayerMask { get; set; }
-        [BoxGroup("General stats")] [field: SerializeField]
+        [field: SerializeField]
         public ScriptReference Behaviour { get; set; }
-        
-        [BoxGroup("Instantiation")] [field: SerializeField]
-        public int Quantity { get; set; }
-        [BoxGroup("General stats")] [field: SerializeReference]
-        public IInstantiationRule InstantiationRule { get; set; }
-        
-        [BoxGroup("General stats")] [field:SerializeReference]
+        [field: SerializeField]
+        public LayerMask LayerMask { get; set; }
+        [field:SerializeReference]
         public HitShape CollisionShape { get; set; }
         
-        [BoxGroup("Visual")] [field: SerializeField]
+        //Visuals
+        [field: SerializeField]
         public Mesh Mesh { get; set; }
-        [BoxGroup("Visual")] [field: SerializeField]
+        [field: SerializeField]
         public Material Material { get; set; }
-        [BoxGroup("Definition")] [field: SerializeField]
+        [SerializeField]
+        public VisualEffectAsset zoneBurstVFX;
+        [SerializeField]
+        public VisualEffectAsset hitVFX;
+        
+        //Stats
+        [field: SerializeField]
+        public float TickRate { get; set; }
+        [field : SerializeField]
+        public float LifeTime { get; set; }
+        [field: SerializeField]
+        public int Quantity { get; set; }
+        [field: SerializeReference]
+        public IInstantiationRule InstantiationRule { get; set; }
+        [field: SerializeField]
         public float Damages { get; set; }
-        [BoxGroup("Definition")] [field:SerializeReference]
-        public HitShape damageZone;
+        [SerializeField]
+        public HitSphere DamageRadius;
+        
+        
     }
 
     public struct ElementPositionInfo

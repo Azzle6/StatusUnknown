@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4308815085367974013}
   - component: {fileID: 1794472797588995133}
-  - component: {fileID: 8611682885871718163}
   - component: {fileID: 8586028294311903091}
   - component: {fileID: 5642355942973502361}
   - component: {fileID: 2397777451131272997}
@@ -63,32 +62,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!114 &8611682885871718163
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2084647982804730131}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bb4780582780be4b87c3ee1754f5fcd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitMask:
-    serializedVersion: 2
-    m_Bits: 128
-  hitShape:
-    rid: 7591883734605627392
-  updateFrequence: 0.01
-  triggerHit: 0
-  references:
-    version: 2
-    RefIds:
-    - rid: 7591883734605627392
-      type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
-      data:
-        radius: 0.1
 --- !u!114 &8586028294311903091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,9 +77,20 @@ MonoBehaviour:
   damage: 0
   rb: {fileID: 1794472797588995133}
   hitVFX: {fileID: 8926484042661614526, guid: 757ff23eca4d7dd41934e0e9da6d8123, type: 3}
-  hitContext: {fileID: 8611682885871718163}
+  hitShape:
+    rid: 6888268950076391431
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 129
   knockbackStrength: 10
   lifeTime: 5
+  references:
+    version: 2
+    RefIds:
+    - rid: 6888268950076391431
+      type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
+      data:
+        radius: 1
 --- !u!2083052967 &5642355942973502361
 VisualEffect:
   m_ObjectHideFlags: 0

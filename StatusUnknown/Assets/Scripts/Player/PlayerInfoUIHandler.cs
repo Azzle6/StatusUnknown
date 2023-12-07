@@ -82,6 +82,8 @@ namespace Player
         private void UpdateWeapon1Icon(Weapon weapon)
         {
             weapon1Icon.style.backgroundImage = weapon.weaponSprite.texture;
+            weapon1Icon.style.width = weapon.weaponSprite.texture.width;
+            weapon1Icon.style.height = weapon.weaponSprite.texture.height;
             weapon1AmmoCount.visible = weaponVariableSO[0].Value.weaponType == WeaponType.RANGED;
 
             if (weaponVariableSO[0].Value.weaponType == WeaponType.RANGED)
@@ -96,6 +98,8 @@ namespace Player
         private void UpdateWeapon2Icon(Weapon weapon)
         {
             weapon2Icon.style.backgroundImage = weapon.weaponSprite.texture;
+            weapon2Icon.style.width = weapon.weaponSprite.texture.width;
+            weapon2Icon.style.height = weapon.weaponSprite.texture.height;
             weapon2AmmoCount.visible = weaponVariableSO[1].Value.weaponType == WeaponType.RANGED;
             
             if (weaponVariableSO[1].Value.weaponType == WeaponType.RANGED)
