@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class MorphEgg : MonoBehaviour,IDamageable
@@ -8,7 +9,7 @@ public class MorphEgg : MonoBehaviour,IDamageable
     
     [SerializeField] GameObject succesEnemyToSpawn;
     [SerializeField] GameObject[] failedEnemiesToSpawn;
-    [SerializeField] MeshRenderer meshRenderer;
+    [SerializeField] MeshRenderer[] meshRenderers;
 
     float currentLifePoints;
     [HideInInspector]
@@ -16,7 +17,8 @@ public class MorphEgg : MonoBehaviour,IDamageable
     bool initialized = false;
 
     [Header("Event")]
-    [SerializeField] MorphGameEvent endMorphEvent;// TODO fix editor implementation
+    [SerializeField] MorphGameEvent endMorphGameEvent;
+    public event Action<bool> endMorphEvent;
 
 
     [Header("TODO : Morph Scriptable")]
@@ -37,21 +39,27 @@ public class MorphEgg : MonoBehaviour,IDamageable
         currentMorphDuration = UnityEngine.Random.Range((1 - durationRandomness) * morphDuration, morphDuration); ;
         Invoke("Hatch", currentMorphDuration);
     }
-    void EndMorph()
+    void EndMorph( bool sucess)
     {
         // TODO : Define usefull parameters
-        endMorphEvent?.RaiseEvent(null);
+        endMorphGameEvent?.RaiseEvent(null);
+        endMorphEvent?.Invoke(sucess);
         MorphEvents.EndMorphEvent(null);
         CancelInvoke();
         
     }
     void Explode()
     {
-        EndMorph();
+        EndMorph(false);
         Debug.Log($"Explode{gameObject}");
-        for(int i = 0; i < failedEnemiesToSpawn.Length; i++)
+        ProcessExplodeDelay();
+    }
+    async void ProcessExplodeDelay()
+    {
+        await Task.Delay(2000);
+        for (int i = 0; i < failedEnemiesToSpawn.Length; i++)
         {
-            if(failedEnemiesToSpawn[i] != null)
+            if (failedEnemiesToSpawn[i] != null)
             {
                 //TODO : set spawn location
                 Instantiate(failedEnemiesToSpawn[i], transform.position, Quaternion.identity);
@@ -61,30 +69,39 @@ public class MorphEgg : MonoBehaviour,IDamageable
     }
     void Hatch()
     {
-        EndMorph();
+        EndMorph(true);
         Debug.Log($"Hatch{gameObject}");
-        if(succesEnemyToSpawn != null)
+        ProcessHatchDelay();
+    }
+    async void ProcessHatchDelay()
+    {
+        await Task.Delay(2000);
+        if (succesEnemyToSpawn != null)
         {
             //TODO : set spawn location
             Instantiate(succesEnemyToSpawn, transform.position, Quaternion.identity);
         }
 
-        Destroy(gameObject);
-
+        Destroy(gameObject, 1);
     }
 
     public void TakeDamage(float damage, Vector3 force)
     {
         currentLifePoints -= damage;
-        Debug.Log($"{damage} {currentLifePoints}/{lifePoints}");
-        StartCoroutine(HurtBlink(0.1f));
+        //Debug.Log($"{damage} {currentLifePoints}/{lifePoints}");
+        HurtBlinkAll(meshRenderers);
         if(currentLifePoints < 0)
         {
             Explode();
         }
     }
+    void HurtBlinkAll(MeshRenderer[] renderers)
+    {
+        for(int i = 0;i < renderers.Length;i++)
+            StartCoroutine(HurtBlink(0.1f, renderers[i]));
 
-    public IEnumerator HurtBlink(float blinkFreq)
+    }
+    public IEnumerator HurtBlink(float blinkFreq, MeshRenderer meshRenderer)
     {
         float hit = 1;
         meshRenderer.material.SetFloat("_Hit", hit);
