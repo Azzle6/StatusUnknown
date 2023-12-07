@@ -63,8 +63,12 @@ namespace Module.Behaviours
         protected override void CollisionBehaviour()
         {
             Collider[] collisions = this.CheckCollisions();
-            if (collisions.Length > 0 && !this.AlreadyHitEnemy.Contains(collisions[0]))
+            
+            if (collisions.Length > 0)
             {
+                if(this.AlreadyHitEnemy.Contains(collisions[0]))
+                    return;
+                
                 Collider firstCollider = collisions[0];
                 IDamageable damageable = firstCollider.GetComponent<IDamageable>();
                 if(damageable != null)
@@ -73,6 +77,7 @@ namespace Module.Behaviours
                 Vector3 closestPoint = firstCollider.ClosestPoint(this.transform.position);
                 this.OnHitEvent?.Invoke(new InstantiatedModuleInfo(closestPoint, transform.rotation, firstCollider));
                 this.SpawnHitVFX(closestPoint, -transform.forward);
+                Debug.Log($"Hit {firstCollider.gameObject}.");
                 this.DestroyModule();
             }
         }

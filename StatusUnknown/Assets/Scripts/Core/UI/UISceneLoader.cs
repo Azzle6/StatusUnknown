@@ -10,7 +10,8 @@ namespace Core.UI
 
         private void Awake()
         {
-            Addressables.LoadSceneAsync(this.UIScene, LoadSceneMode.Additive);
+            SceneManager.LoadScene("GameUIWithPlayerInfo", LoadSceneMode.Additive);
+            //Addressables.LoadSceneAsync(this.UIScene, LoadSceneMode.Additive);
         }
     }
 }
