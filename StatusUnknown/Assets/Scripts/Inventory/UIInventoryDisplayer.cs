@@ -77,7 +77,7 @@ namespace Inventory
         private void InitInventoryView()
         {
             this.inventoryGridView = new BasicGridView(this.uiDocument.rootVisualElement.Q<VisualElement>(INVENTORY_GRID_NAME),
-                this.playerInventory.inventory.Shape, this.playerInventory.inventory, new E_ItemType[] { E_ItemType.MODULE, E_ItemType.WEAPON});
+                this.playerInventory.InventoryData.Shape, this.playerInventory.InventoryData, new E_ItemType[] { E_ItemType.MODULE, E_ItemType.WEAPON});
         }
 
         private void InitWeaponGridView()
