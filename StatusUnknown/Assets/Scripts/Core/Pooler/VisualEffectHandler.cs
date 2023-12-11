@@ -9,7 +9,7 @@ namespace pooler
     
     public class VisualEffectHandler : MonoBehaviour
     {
-        [SerializeField] private VisualEffect vfx;
+        [SerializeField] public VisualEffect vfx;
 
         public void StartVFX(VisualEffectAsset vFXToPlay,float timeBeforeReturningToPool)
         {

@@ -32,6 +32,7 @@ namespace Module.Behaviours
             damageZoneVFX.transform.position = transform.position;
             
             damageZoneVFX.StartVFX(ZoneData.zoneBurstVFX, 1f);
+            damageZoneVFX.vfx.SetFloat("Size", this.ZoneData.DamageRadius.radius);
             
             Collider[] colliders = this.ZoneData.DamageRadius.DetectColliders(this.transform.position, this.transform.rotation,
                 this.ZoneData.LayerMask);
