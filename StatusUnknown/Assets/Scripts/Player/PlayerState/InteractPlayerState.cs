@@ -1,17 +1,25 @@
-using System.Collections;
 
-namespace Core.Player
+namespace Player
 {
+    using System.Collections; 
     using UnityEngine;
 
     public class InteractPlayerState : PlayerState
     {
         private float holdTimer;
+        private Collider[] interactables;
         public override void OnStateEnter()
         {
             StopAllCoroutines();
             holdTimer = 0;
-            Debug.Log("Player tried to interact");
+            interactables = Physics.OverlapSphere(transform.position, 2f);
+            foreach (Collider interactable in interactables)
+            {
+                if (interactable.TryGetComponent(out IInteractable iInteractable))
+                {
+                    iInteractable.Interact();
+                }
+            }
         }
 
         private IEnumerator HoldTimer(float holdMax)

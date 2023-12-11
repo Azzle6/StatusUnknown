@@ -1,6 +1,4 @@
-using UnityEngine.Serialization;
-
-namespace Core.Player
+namespace Player
 {
     using UnityEngine;
     using System.Collections;
@@ -10,30 +8,56 @@ namespace Core.Player
     {
         private Vector2 aimDirection;
         private Coroutine aiming;
+        private Coroutine stopAiming;
         [SerializeField] private PlayerStat playerStat;
         [SerializeField] private Rig aimRig;
         [SerializeField] private Transform aimHeadTarget;
         private Vector3 desiredAimTargetPos;
+        
         public override void OnStateEnter()
         {
-            aiming = StartCoroutine(Aim());
-            playerStateInterpretor.weaponManager.AimWithCurrentWeapon();
-            playerStateInterpretor.animator.SetBool("Aim", true);
-            playerStat.isAiming = true;
-            aimRig.weight = 1;
+            if (aiming == default)
+                aiming = StartCoroutine(Aim());
+            if (!playerStat.currentWeaponIsMelee)
+            {
+                playerStateInterpretor.weaponManager.AimWithCurrentWeapon();
+                aimRig.weight = 1;
+                playerStateInterpretor.animator.SetBool("Aim", true);
+            }
+            
+            
+            if (stopAiming == default)
+                stopAiming = StartCoroutine(CheckIfStopAiming());
 
         }
         public override void Behave<T>(T x)
         {
             if (x is Vector2 aim)
+            {
                 aimDirection = aim;
-            if (aiming == default)
-                aiming = StartCoroutine(Aim());
+                Aim();
+            }
+            aiming ??= StartCoroutine(Aim());
+        }
+        
+        private IEnumerator CheckIfStopAiming()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(playerStat.timeBeforeStopAiming);
+                if (!playerStat.isShooting && !playerStat.isAiming)
+                {
+                    playerStateInterpretor.RemoveState(PlayerStateType.AIM);
+                    yield break;
+                }
+            }
         }
 
-        private IEnumerator Aim()
+
+       private IEnumerator Aim()
         {
-            while (aimDirection.magnitude > 0.01f)
+            //match stick dead zone
+            while (playerStat.isAiming)
             {
                 Debug.DrawRay(playerStateInterpretor.transform.position ,playerStateInterpretor.transform.forward *50, Color.blue);
                 //Check angle of aim direction and change forward when angle is higher than limit 
@@ -58,16 +82,16 @@ namespace Core.Player
 
         public override void OnStateExit()
         {
-            if (aiming != default)
-            {
                 aimRig.weight = 0;
-                StopCoroutine(aiming);
-                playerStat.isAiming = false;
+                if (aiming != default)
+                    StopCoroutine(aiming);
+                if (stopAiming != default)
+                    StopCoroutine(stopAiming);
+                stopAiming = default;
                 aiming = default;
+                playerStat.isAiming = false;
                 playerStateInterpretor.weaponManager.RestWeapon();
                 playerStateInterpretor.animator.SetBool("Aim", false);
-
-            } 
         }
     }
 }

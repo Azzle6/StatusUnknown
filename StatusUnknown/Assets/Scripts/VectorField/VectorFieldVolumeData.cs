@@ -8,7 +8,7 @@ namespace VectorField
     using UnityEditor;
 #endif
 
-    [CreateAssetMenu(fileName = "VectorFieldData", menuName = "CustomAssets/VectorFieldData", order = 1)]
+    [CreateAssetMenu(fileName = "VectorFieldData", menuName = "CustomAssets//DataVectorFieldData", order = 1)]
     public class VectorFieldVolumeData : ScriptableObject
     {
         [SerializeField]

@@ -1,4 +1,4 @@
-namespace Core.Player
+namespace Player
 {
     using UnityEngine;
 
@@ -7,6 +7,7 @@ namespace Core.Player
         [SerializeField] protected PlayerStateInterpretor playerStateInterpretor;
         public PlayerStateType playerStateType;
         [HideInInspector] public bool lockState;
+        [HideInInspector] public bool inputBufferActive;
 
         public abstract void OnStateEnter();
     

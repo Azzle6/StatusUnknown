@@ -1,4 +1,4 @@
-namespace Core.Pooler
+/*namespace Core.Pooler
 {
     using System.Collections.Generic;
     using SingletonsSO;
@@ -15,4 +15,4 @@ namespace Core.Pooler
             pool.Add(addedPool);
         }
     }
-}
+}*/

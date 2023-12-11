@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Global/TabbedMenu/TabbedMenu.uss?fileID=7433441132597879392&amp;guid=3b96a7988fdb52046b3d1e24f9255b3c&amp;type=3#TabbedMenu" />
+    <ui:VisualElement name="tabs">
+        <ui:Label text="firstTab" parse-escape-sequences="true" display-tooltip-when-elided="true" name="firstTab" focusable="true" tabindex="0" class="tab currentlySelectedTab" />
+        <ui:Label text="secondTab" parse-escape-sequences="true" display-tooltip-when-elided="true" name="secondTab" focusable="true" tabindex="0" class="tab" />
+        <ui:Label text="thirdTab" parse-escape-sequences="true" display-tooltip-when-elided="true" name="thirdTab" focusable="true" tabindex="0" class="tab" />
+    </ui:VisualElement>
+    <ui:VisualElement name="tabContent">
+        <ui:Label tabindex="-1" text="firstContent" parse-escape-sequences="true" display-tooltip-when-elided="true" name="firstContent" />
+        <ui:Label tabindex="-1" text="secondContent" parse-escape-sequences="true" display-tooltip-when-elided="true" name="secondContent" class="unselectedContent" />
+        <ui:Label tabindex="-1" text="thirdContent" parse-escape-sequences="true" display-tooltip-when-elided="true" name="thirdContent" class="unselectedContent" />
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,25 +1,43 @@
-namespace Core.Player
+using UnityEngine.Serialization;
+
+namespace Player
 {
     using UnityEngine;
-    using Core.SingletonsSO;
+    using Sirenix.OdinInspector;
     
     [CreateAssetMenu(fileName = "PlayerStat", menuName = "CustomAssets/PlayerStat", order = 1)]
     public class PlayerStat : ScriptableObject
     {
+        
+        [Header("Health")]
+        public float maxHealth;
+        public float medKitHealAmount;
+        
+        [Header("Medikit")]
+        public float medikitHealAmount;
+        public int maxMedikitAmount;
+        public float medikitCooldown;
+        
         [Header("Movement")]
         public float moveSpeed;
+        public float moveSpeedWhileShooting;
 
         [Header("Aim")]
         public float turnAngleLimit = 15f;
-
+        [Range(0.01f, 0.25f)] public float turnSpeed;
+        public AnimationCurve angleRequiredMultiplierByDistance;
         public float headHeightOffset = 0.25f;
+        public float timeBeforeStopAiming = 2f;
+        public LayerMask aimLayerMask;
+        
         [Header("Inertia")]
         public float inertiaDuration;
         public AnimationCurve inertiaCurve;
-        [Range(0.01f, 0.1f)] public float turnSpeed;
-        [Header("Aim")]
-        public AnimationCurve angleRequiredMultiplierByDistance;
-        [HideInInspector] public bool isAiming;
+        
+        [Header("Player State ")]
+        [ReadOnly] public bool isAiming;
+        [ReadOnly] public bool isShooting;
+        [ReadOnly] public bool currentWeaponIsMelee;
 
     }
 }

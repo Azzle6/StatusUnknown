@@ -1,23 +1,23 @@
-using UnityEngine;
+using Augment;
 
-namespace Core.Player
+namespace Player
 {
-
+    using UnityEngine;
 
     public class AugmentPlayerState : PlayerState
     {
-        
-        private int lastAugmentIndex;
+        [SerializeField] private AugmentManager augmentManager;
         public override void OnStateEnter()
         {
-            Debug.Log("Augment");
+            
         }
 
-        public void Behave<T>(T x)
+        public override void Behave<T>(T x)
         {
             if (x is int index)
             {
-                lastAugmentIndex = index;
+                augmentManager.AugmentUse(index);
+                playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
             }
         }
 

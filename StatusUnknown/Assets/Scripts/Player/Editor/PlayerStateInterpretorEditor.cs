@@ -2,7 +2,7 @@ namespace Editor
 {
     using UnityEngine;
     using UnityEditor;
-    using Core.Player;
+    using Player;
     
     [CustomEditor (typeof (PlayerStateInterpretor),true)]
     public class PlayerStateInterpretorEditor : Editor
@@ -44,6 +44,11 @@ namespace Editor
                 psi.statesSlot[PlayerStateType.ACTION] != default
                     ? $"Action : {psi.statesSlot[PlayerStateType.ACTION].GetType().Name}"
                     : $"Action : Null", style);
+            
+            Handles.Label(psi.transform.position + Vector3.up * 5,
+                psi.inputBufferState != default
+                    ? $"InputBuffer : {psi.inputBufferState.GetType().Name}"
+                    : $"InputBuffer : Null", style);
         }
     }
 }
