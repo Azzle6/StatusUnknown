@@ -1,3 +1,5 @@
+using Core.EventsSO.GameEventsTypes;
+
 namespace Inventory
 {
     using Core.SingletonsSO;
@@ -40,6 +42,8 @@ namespace Inventory
         private bool isDisplayed;
 
         private WeaponData selectedWeaponData;
+        
+        [SerializeField] private BoolGameEvent displayPlayerInfoEvent;
 
         private void OnEnable()
         {
@@ -137,7 +141,7 @@ namespace Inventory
             this.isDisplayed = display;
             
             //Debug.Log($"{(this.isDisplayed ? "Display" : "Hide")} inventory.");
-            
+            displayPlayerInfoEvent.RaiseEvent(!display);
             this.inventoryRoot.style.display = this.isDisplayed ? DisplayStyle.Flex : DisplayStyle.None;
             if (this.isDisplayed)
             {

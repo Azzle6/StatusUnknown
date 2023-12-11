@@ -41,6 +41,7 @@ namespace Player
         [SerializeField] private float popUpStayTime;
         [SerializeField] private float popUpFadeTime;
         [SerializeField] private int popUpMaxCount = 3;
+        private bool isDisplayed;
         
         
         
@@ -64,8 +65,8 @@ namespace Player
 
             for (int x = 0; x < augmentVariableSO.Length; x++)
             {
-                SwitchAugmentStat(augmentVariableSO[x].Value.GetAugmentStat());
-                augmentVariableSO[x].RegisterOnValueChanged(augment => SwitchAugmentStat(augmentVariableSO[x].Value.GetAugmentStat()));
+                augmentVariableSO[x].RegisterOnValueChanged(augment => SwitchAugmentStat(augment.GetAugmentStat()));
+                
             }
             
             UpdateWeaponIcon(0, weaponVariableSO[0].Value);
@@ -80,18 +81,18 @@ namespace Player
             InitMedikitCount(medikitAmount.Value);
             UpdateWeaponIcon(0, weaponVariableSO[0].Value);
             UpdateWeaponIcon(1, weaponVariableSO[1].Value);
-     
-
-
+            
         }
 
         public void Hide()
         {
+            isDisplayed = false;
             playerInfoUIDocument.rootVisualElement.style.display = DisplayStyle.None;
         }
 
         public void Show()
         {
+            isDisplayed = true;
             playerInfoUIDocument.rootVisualElement.style.display = DisplayStyle.Flex;
         }
         
@@ -194,6 +195,18 @@ namespace Player
         {
             augmentIcon[augmentStat.augmentSlot].style.unityBackgroundImageTintColor = Color.black;
             DOTween.To(() => augmentIcon[augmentStat.augmentSlot].style.unityBackgroundImageTintColor.value, x => augmentIcon[augmentStat.augmentSlot].style.unityBackgroundImageTintColor = x, Color.white, augmentStat.augmentCooldown);
+        }
+        
+        public void DisplayEvent(bool display)
+        {
+            if (display)
+            {
+                Show();
+            }
+            else
+            {
+                Hide();
+            }
         }
     }
 }
