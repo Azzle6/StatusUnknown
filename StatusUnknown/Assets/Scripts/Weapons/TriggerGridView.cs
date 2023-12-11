@@ -20,8 +20,8 @@ namespace Weapons
             this.weaponTriggerData.compiledModules.CompileWeaponModules(this.weaponTriggerData.triggerRowPosition, this.weaponTriggerData.modules);
             
             VisualElement outputElement = UIHandler.Instance.uiSettings.triggerTemplate.Instantiate();
-            outputElement.Q<VisualElement>("triggerIcon").style.backgroundImage = UIHandler.Instance.iconsReferences
-                .weaponOutputReferences[this.weaponTriggerData.weaponTriggerType].texture;
+            outputElement.Q<VisualElement>("triggerIcon").style.backgroundImage = UIHandler.Instance.outputReferences
+                .weaponOutputReferences[this.weaponTriggerData.weaponTriggerType].icon.texture;
             
             outputElement.style.position = Position.Absolute;
             this.gridRoot.Add(outputElement);

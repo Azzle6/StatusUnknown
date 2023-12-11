@@ -19,14 +19,6 @@ namespace Module.Definitions
         EFFECTOR,
         PASSIVE,
     }
-
-    public enum E_ModuleOutput
-    {
-        ON_SPAWN,
-        ON_HIT,
-        ON_TICK,
-        ON_END
-    }
     
     [Serializable]
     public struct Output

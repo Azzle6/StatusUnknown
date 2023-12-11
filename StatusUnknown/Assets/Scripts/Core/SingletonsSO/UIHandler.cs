@@ -5,13 +5,14 @@ namespace Core.SingletonsSO
     using Sirenix.OdinInspector;
     using UI;
     using UnityEngine;
+    using UnityEngine.Serialization;
     using UnityEngine.UIElements;
 
     [CreateAssetMenu(menuName = "CustomAssets/SingletonSO/UIHandler", fileName = "UIHandler")]
     public partial class UIHandler : SingletonSO<UIHandler>
     {
         public UISettings uiSettings;
-        public IconsReferencesSO iconsReferences;
+        [FormerlySerializedAs("iconsReferences")] public OutputReferencesSO outputReferences;
         
         [FoldoutGroup("Dynamic data")]
         public bool isMovingItem;

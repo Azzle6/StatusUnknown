@@ -41,9 +41,8 @@ namespace Module.Behaviours
             {
                 IDamageable damageable = col.GetComponent<IDamageable>();
                 if (damageable != null)
-                {
                     damageable.TakeDamage(this.ZoneData.Damages, Vector3.zero);
-                }
+                
                 Vector3 closestPoint = col.ClosestPoint(this.transform.position);
                 VisualEffectHandler hitVFX = ComponentPooler.Instance.GetPooledObject<VisualEffectHandler>("EmptyVisualEffect");
                 hitVFX.transform.rotation = transform.rotation;

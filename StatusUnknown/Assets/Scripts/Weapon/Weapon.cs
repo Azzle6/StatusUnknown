@@ -32,7 +32,7 @@ namespace Weapon
         {
             
             WeaponTriggerData data = this.inventory.GetWeaponTriggerData(this.weaponDefinition, trigger);
-            if(data == null)
+            if(data == null || data.compiledModules.FirstModule == null)
                 return;
             
             ModuleBehaviourHandler.Instance.InstantiateModuleBehaviour(
