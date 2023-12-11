@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4e183a017c2afe43b7fde9fc76c19d8, type: 3}
+  m_Name: Secondary Quest
+  m_EditorClassIdentifier: 
+  questName: Finding a hidden medallion
+  description: The Hera tasked you to find a hidden medallion in the northernmost
+    part of the ship. You don't know a lot about it, except that it emit a stranger
+    reddish halo that drives weak minds to utter madness..
+  factionQuestGiver: 1
+  questObjectToRetrieve:
+  - {fileID: 11400000, guid: 843bcccac192e6b4aaaad23c1ceb5614, type: 2}
+  - {fileID: 11400000, guid: 6be24673fe7165e45947acb842502c11, type: 2}
+  questReward:
+  - {fileID: 11400000, guid: ad2c6abc3e854fe4190690f0ab4b53a9, type: 2}
+  - {fileID: 11400000, guid: 866cb82553e6c83408db0bf97d9d26c4, type: 2}
+  - {fileID: 11400000, guid: e7be25ac54d299a4f927896849333359, type: 2}
+  reputationCompletionBonus: 150
+  <AllQuestObjectAreRetrieved>k__BackingField: 0

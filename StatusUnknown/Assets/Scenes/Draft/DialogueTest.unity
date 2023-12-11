@@ -597,6 +597,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1183700468530189192, guid: 30c654c254c4fc6468653cf8e185dbc8,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 610366130}
+    - target: {fileID: 1183700468530189192, guid: 30c654c254c4fc6468653cf8e185dbc8,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5771783592393582421, guid: 30c654c254c4fc6468653cf8e185dbc8,
         type: 3}
       propertyPath: m_Pivot.x
@@ -635,6 +645,21 @@ PrefabInstance:
     - target: {fileID: 5771783592393582421, guid: 30c654c254c4fc6468653cf8e185dbc8,
         type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5771783592393582421, guid: 30c654c254c4fc6468653cf8e185dbc8,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5771783592393582421, guid: 30c654c254c4fc6468653cf8e185dbc8,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5771783592393582421, guid: 30c654c254c4fc6468653cf8e185dbc8,
+        type: 3}
+      propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5771783592393582421, guid: 30c654c254c4fc6468653cf8e185dbc8,
@@ -696,6 +721,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6936352429827713562, guid: 30c654c254c4fc6468653cf8e185dbc8,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8270700139000621746, guid: 30c654c254c4fc6468653cf8e185dbc8,
         type: 3}

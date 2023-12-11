@@ -4,31 +4,31 @@ using UnityEngine;
 namespace StatusUnknown.Content.Narrative
 {
     [ManageableData]
-    [CreateAssetMenu(fileName = "Quest", menuName = "Status Unknown/Narrative/Quest")]
-    public class QuestSO : ScriptableObject
+    public abstract class QuestSO : ScriptableObject
     {
-        [SerializeField] private string questName;
-        [SerializeField] private Faction factionQuestGiver;
-        [SerializeField] private QuestObjectSO questObjectToRetrieve;
-        [SerializeField] private QuestObjectSO questReward;
-        [SerializeField, Range(0, 1000)] private int reputationCompletionBonus = 10; 
+        [SerializeField] protected string questName;
+        [SerializeField, TextArea(5,10)] protected string description;
+        [SerializeField] protected Faction factionQuestGiver;
+        [SerializeField] protected QuestObjectSO[] questObjectToRetrieve;
+        [SerializeField] protected QuestObjectSO[] questReward;
+        [SerializeField, Range(0, 1000)] protected int reputationCompletionBonus = 10; 
 
-        [field:SerializeField] public bool QuestObjectIsRetrieved { get; set; }
-        public int ReputationCompletionBonus { get => reputationCompletionBonus; }
+        [field:SerializeField] public virtual bool AllQuestObjectAreRetrieved { get; set; }
+        public virtual int ReputationCompletionBonus { get => reputationCompletionBonus; }
 
-        public int QuestIndex { get; set; } 
-        public QuestObjectSO QuestObjectToRetrieve { get => questObjectToRetrieve; private set => questObjectToRetrieve = value; }
-        public QuestObjectSO QuestReward { get => questReward; private set => questReward = value; }
-        public Faction FactionQuestGiver { get => factionQuestGiver; }
+        public virtual int QuestIndex { get; set; } 
+        public virtual QuestObjectSO[] QuestObjectsToRetrieve { get => questObjectToRetrieve; private set => questObjectToRetrieve = value; }
+        public virtual QuestObjectSO[] QuestRewards { get => questReward; private set => questReward = value; }
+        public virtual Faction FactionQuestGiver { get => factionQuestGiver; }
 
-        public void OverrideQuestObject(QuestObjectSO newQuestObject)
+        public virtual void OverrideQuestObject(QuestObjectSO newQuestObject, int index = 0)
         {
-            QuestObjectToRetrieve = newQuestObject; 
+            QuestObjectsToRetrieve[index] = newQuestObject; 
         }
 
-        public void OverrideQuestReward(QuestObjectSO newQuestReward)
+        public virtual void OverrideQuestReward(QuestObjectSO newQuestReward, int index = 0)
         {
-            questReward = newQuestReward;
+            questReward[index] = newQuestReward;
         }
     }
 }

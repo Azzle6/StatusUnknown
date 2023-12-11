@@ -14,9 +14,9 @@ namespace StatusUnknown.Content.Narrative
         private QuestSO cachedQuest;
 
         public List<QuestSO> CompletedQuests = new List<QuestSO>();
-        private Action<int, Faction, QuestObjectSO> OnQuestCompletion; 
+        private Action<int, Faction, QuestObjectSO[]> OnQuestCompletion; 
 
-        public void Init(Action<int, Faction, QuestObjectSO> OnQuestCompletionCallback)
+        public void Init(Action<int, Faction, QuestObjectSO[]> OnQuestCompletionCallback)
         {
             OnQuestCompletion = OnQuestCompletionCallback;
         }
@@ -42,19 +42,19 @@ namespace StatusUnknown.Content.Narrative
             if (!activeQuests.Contains(quest)) return false;
             cachedQuest = quest;
 
-            if (quest.QuestObjectIsRetrieved && !CompletedQuests.Contains(quest))
+            if (quest.AllQuestObjectAreRetrieved && !CompletedQuests.Contains(quest))
             {
                 CompletedQuests.Add(quest);
             }
 
-            return cachedQuest.QuestObjectIsRetrieved; 
+            return cachedQuest.AllQuestObjectAreRetrieved; 
         }
 
         public void GiveRewardOnQuestCompletion()
         {
             foreach (QuestSO quest in CompletedQuests)
             {
-                OnQuestCompletion.Invoke(quest.ReputationCompletionBonus, quest.FactionQuestGiver, quest.QuestReward);
+                OnQuestCompletion.Invoke(quest.ReputationCompletionBonus, quest.FactionQuestGiver, quest.QuestRewards);
             }
         }
 

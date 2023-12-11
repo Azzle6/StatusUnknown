@@ -49,6 +49,7 @@ namespace Aurore.DialogSystem
                 dialogueAnswers[i] = answer.transform.GetChild(i).GetComponent<Button>();             
             }
 
+            dialogueDatas.Clear(); 
             dialogueDatas = playerSavedDialogues.GetSavedDialogueData();
         }
 

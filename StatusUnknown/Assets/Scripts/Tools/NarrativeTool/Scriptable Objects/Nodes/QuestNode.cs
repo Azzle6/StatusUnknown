@@ -61,7 +61,7 @@ namespace StatusUnknown.Tools.Narrative
             switch (accessType)
             {
                 case AccessType.Get:
-                    result.conditionIsValid = quest.QuestObjectIsRetrieved;
+                    result.conditionIsValid = quest.AllQuestObjectAreRetrieved;
                     break;
                 case AccessType.Set:
                     result.conditionIsValid = newQuestObject != null && newQuestReward != null;  

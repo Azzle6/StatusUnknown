@@ -78,7 +78,7 @@ namespace StatusUnknown.Tools.Narrative
                 ComparisonType.GreaterThanOrEqual => source >= target,
                 ComparisonType.Equal => source == target,
                 ComparisonType.NotEqual => source != target,
-                ComparisonType.QuestIsDone => questToValidate.QuestObjectIsRetrieved,
+                ComparisonType.QuestIsDone => questToValidate.AllQuestObjectAreRetrieved,
                 _ => false,
             };
         }
@@ -153,8 +153,6 @@ namespace StatusUnknown.Tools.Narrative
 
         public virtual void OnEnter()
         {
-            Debug.Log("initialising dialogue node");
-
             DialogGraph fmGraph = graph as DialogGraph;
             fmGraph.CurrentNode = this;
         }

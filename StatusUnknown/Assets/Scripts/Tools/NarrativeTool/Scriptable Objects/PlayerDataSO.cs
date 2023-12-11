@@ -1,9 +1,11 @@
 using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using StatusUnknown;
 using StatusUnknown.Content.Narrative;
 using StatusUnknown.Utils.AssetManagement;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [ManageableData]
@@ -13,8 +15,8 @@ public class PlayerDataSO : SerializedScriptableObject
     public enum ReputationRank { Zero, One, Two, Three }
     [field: SerializeField] public QuestJournalSO QuestJournal { get; private set; }
 
-    private Action<int, Faction, QuestObjectSO> OnQuestCompletion;
-    [field: SerializeField] private List<QuestObjectSO> QuestRewards { get; set; }
+    private Action<int, Faction, QuestObjectSO[]> OnQuestCompletion;
+    [field: SerializeField] private List<QuestObjectSO> CompletedQuestRewards { get; set; }
 
     public class RankData
     {
@@ -22,6 +24,7 @@ public class PlayerDataSO : SerializedScriptableObject
         [LabelWidth(200)] public ReputationRank currentReputationRank;
         private int[] ReputationCeils;
         private const int RANK_MAX = 3; // temp
+        bool rankingUp, rankingDown;
 
         public void UpdateReputationRank(int additionalReputation, int[] reputationCeils)
         {
@@ -32,31 +35,40 @@ public class PlayerDataSO : SerializedScriptableObject
 
             do
             {
-                int modifier = MathF.Sign(additionalReputation); 
-                currentReputationRank = (ReputationRank)Mathf.Clamp(Mathf.Min((int)currentReputationRank + modifier, RANK_MAX), 0, RANK_MAX);
+                rankingUp = currentReputationValue - reputationCeils[(int)currentReputationRank + 1] >= 0;
+                rankingDown = Math.Sign(additionalReputation) < 0;
 
-                if (modifier > 0)
+                int newRankToInt = (int)currentReputationRank + (rankingDown ? -1 : 1);
+
+                // nothing more to do if just changing reputation value but not rank
+                if (rankingDown || rankingUp)
                 {
-                    currentReputationValue -= ReputationCeils[(int)currentReputationRank];
-                }
-                else
-                {
-                    currentReputationValue = currentReputationRank == ReputationRank.Zero ?
-                        0 :
-                        ReputationCeils[(int)currentReputationRank + 1] - currentReputationValue;
-                }
+                    // rank upgrade
+                    currentReputationRank = (ReputationRank)Math.Clamp(Math.Min(newRankToInt, RANK_MAX), 0, RANK_MAX);
 
-                Debug.Log($"New rank : {currentReputationRank} \n With remainder xp : {currentReputationValue}");
-            }
-            while (currentReputationValue >= ReputationCeils[Mathf.Clamp((int)currentReputationRank + 1, 0, RANK_MAX)]);
-            // remainder is kept
+                    // carrry over
+                    if (rankingUp)
+                    {
+                        currentReputationValue -= ReputationCeils[(int)currentReputationRank];
+                    }
+                    else
+                    {
+                        currentReputationValue = newRankToInt < 0 ?
+                            0 : // can't go into a negative value if you are at bottom of rank zero
+                            currentReputationValue + ReputationCeils[(int)currentReputationRank + 1]; // negative + positive = missin reputation to reach rank again
+                    }
 
-            if (currentReputationRank == (ReputationRank)RANK_MAX)
-            {
-                Debug.Log("max rank was hit");
-                currentReputationValue = 0;
-                return;
-            }
+                    Debug.Log($"New rank : {currentReputationRank} \n With remainder xp : {currentReputationValue}");
+
+                    // remainder is kept unless you hit max rank (no ghost leveling)
+                    if (currentReputationRank == (ReputationRank)RANK_MAX)
+                    {
+                        Debug.Log("max rank was hit");
+                        currentReputationValue = 0;
+                        return;
+                    }
+                }
+            } while (rankingUp || rankingDown); 
         }
     }
 
@@ -90,13 +102,20 @@ public class PlayerDataSO : SerializedScriptableObject
         QuestJournal.Init(OnQuestCompletion); 
     }
 
-    public void UpdateCurrentReputation(int additionalReputation, Faction key, QuestObjectSO questReward = null)
+    public void UpdateCurrentReputation(int additionalReputation, Faction key, QuestObjectSO[] questReward = null)
     {
+        // DO NOT modify the player rank if the quest was already completed
         rankDatas[key].UpdateReputationRank(additionalReputation, reputationCeils[(int)key]);
 
-        if (questReward != null && !QuestRewards.Contains(questReward))
+        if (questReward == null || questReward.Length == 0) return;
+
+        for (int i = 0; i < questReward.Length; i++)
         {
-            QuestRewards.Add(questReward);
+            var currentCachedReward = questReward[i]; 
+            if (!CompletedQuestRewards.Contains(currentCachedReward))
+            {
+                 CompletedQuestRewards.Add(currentCachedReward);
+            }
         }
     }
 
