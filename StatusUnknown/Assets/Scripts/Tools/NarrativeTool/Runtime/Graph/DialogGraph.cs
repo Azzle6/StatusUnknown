@@ -6,6 +6,8 @@ using StatusUnknown.Tools.Narrative;
 using Sirenix.OdinInspector;
 using StatusUnknown.Content.Narrative;
 using System.Collections.Generic;
+using StatusUnknown;
+using StatusUnknown.Content; 
 
 namespace Aurore.DialogSystem
 {
@@ -18,6 +20,7 @@ namespace Aurore.DialogSystem
         [Header("Quest Data")]
         [Space, SerializeField] private bool dialogueHasQuests;
         [SerializeField, ShowIf(nameof(dialogueHasQuests))] QuestSO[] completableQuests;
+        [SerializeField] protected Faction factionDialogueNPC;
 
         public bool CurrentDialogueQuestsDone { get; private set; }
         // public static Dictionary<(Vector2, int), DialogueLine> allStoredDialogueAnswers = new Dictionary<(Vector2, int), DialogueLine>();
@@ -114,15 +117,11 @@ namespace Aurore.DialogSystem
             playerData.QuestJournal.GiveRewardOnQuestCompletion();
         }
 
-        /// <summary>
-        /// Stores a dialogue line by getting the node position in the graph and the line index
-        /// </summary>
-        /// <param name="current">the current node to store a dialogue line from</param>
-        /// <param name="dialogueLine">the full dialogue line struct</param>
-        /// <param name="index">the dialogue line index in the graph</param>
-        internal static void StoreDialogueLine(DialogueNode current, DialogueLine dialogueLine, int index)
+        internal (bool isTrue, int newRankIndex) CanUnlockFactionMainQuest()
         {
-            //allStoredDialogueLines.Add((current.position, index), dialogueLine);
+            // if player can go to next rank
+            return playerData.CanUnlockFactionMainQuest(factionDialogueNPC); 
+
         }
     }
 }

@@ -1,6 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 using XNode;
+using StatusUnknown.Content;
 
 namespace StatusUnknown.Tools.Narrative
 {

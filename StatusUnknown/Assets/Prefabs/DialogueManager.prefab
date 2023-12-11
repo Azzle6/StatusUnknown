@@ -1157,6 +1157,7 @@ GameObject:
   - component: {fileID: 2093241620523691606}
   - component: {fileID: 5950565276119852784}
   - component: {fileID: 4181276193116075328}
+  - component: {fileID: 7060781280454499384}
   m_Layer: 5
   m_Name: DialogueManager
   m_TagString: Untagged
@@ -1379,10 +1380,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88fd3b58121bf0243ac579f9c8c81a8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: 2674b3c5ad339de458610a2683a206dd, type: 2}
   dialogueTitle: {fileID: 5894424046861146229}
   dialogueType: 0
-  dialogueGraph: {fileID: 11400000, guid: cbac671785857bc4390f1efdc51881b9, type: 2}
+  mainQuests:
+  - rank: 0
+    mainQuestDialogue: {fileID: 11400000, guid: 9d382c3e80e15e44a83abd5087212011,
+      type: 2}
+  - rank: 1
+    mainQuestDialogue: {fileID: 11400000, guid: 00a1eb38cde42c541afae6f2577fd865,
+      type: 2}
+  secondaryQuests:
+  - secondaryQuestDialogue: {fileID: 11400000, guid: cbac671785857bc4390f1efdc51881b9,
+      type: 2}
+    secondaryQuestsPool: []
   audioMumblingVoice: {fileID: 0}
+  OnReachingFactionMainQuest:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &4181276193116075328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1449,6 +1464,27 @@ MonoBehaviour:
   animator: {fileID: 2093241620523691606}
   playerSavedDialogues: {fileID: 11400000, guid: c47f44d5ee632dd40ab9249497fa902b,
     type: 2}
+--- !u!65 &7060781280454499384
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8270700139000621746}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &263886750093662123
 PrefabInstance:
   m_ObjectHideFlags: 0
