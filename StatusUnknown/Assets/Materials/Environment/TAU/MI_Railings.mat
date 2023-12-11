@@ -31,11 +31,12 @@ Material:
   - _DISABLE_SSR_TRANSPARENT
   m_InvalidKeywords:
   - _NORMALMAP_TANGENT_SPACE
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_LightmapFlags: 1
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 2225
-  stringTagMap: {}
+  stringTagMap:
+    MotionVector: User
   disabledShaderPasses:
   - TransparentDepthPrepass
   - TransparentDepthPostpass
@@ -59,7 +60,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColorTexture_VP:
-        m_Texture: {fileID: 2800000, guid: 8446341e0062f174c93c22751f78e648, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1d49c8be716b3a649a247d227cc8e565, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColorTexture_WS:
@@ -123,7 +124,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap_VP:
-        m_Texture: {fileID: 2800000, guid: e0eb940895a40154099cfc045f8756d1, type: 3}
+        m_Texture: {fileID: 2800000, guid: 12583504e74c3cb42862178ad7749f63, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap_WS:
@@ -135,7 +136,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ORM_VP:
-        m_Texture: {fileID: 2800000, guid: deff1c6dab2f691488943b811a163f15, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3736eda81dbe15345b62f18bc4c761f0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ORM_WS:
@@ -206,7 +207,7 @@ Material:
     - _AlphaRemapMax: 1
     - _AlphaRemapMin: 0
     - _AlphaSrcBlend: 1
-    - _AmbientOcclusionIntensity_Main: 0.27
+    - _AmbientOcclusionIntensity_Main: 0.15
     - _AmbientOcclusionIntensity_VP: 1
     - _AmbientOcclusionIntensity_WS: 1
     - _Anisotropy: 0
@@ -217,7 +218,7 @@ Material:
     - _CullModeForward: 2
     - _Cutoff: 0.5
     - _DNIntensity_A_DDN: 0
-    - _DNIntensity_B_DDN: 0
+    - _DNIntensity_B_DDN: 0.5
     - _DarkeningTint_VP: 1
     - _DepthOffsetEnable: 0
     - _DetailAlbedoScale: 1
@@ -242,13 +243,13 @@ Material:
     - _EnergyConservingSpecularColor: 1
     - _HeightAmplitude: 0.02
     - _HeightCenter: 0.5
-    - _HeightIntensity: 1
+    - _HeightIntensity: 2
     - _HeightMapParametrization: 0
     - _HeightMax: 1
-    - _HeightMin: -1
+    - _HeightMin: 0
     - _HeightOffset: 0
     - _HeightPoMAmplitude: 2
-    - _HeightPosition: 1
+    - _HeightPosition: 0
     - _HeightTessAmplitude: 2
     - _HeightTessCenter: 0.5
     - _InvTilingScale: 1
@@ -274,7 +275,7 @@ Material:
     - _NoiseMain_Min_WS: 0.2
     - _NoiseMain_Tiling_WS: 3
     - _NoiseStrength_WS: 0
-    - _NormalIntensity_Main: 2
+    - _NormalIntensity_Main: 1.8
     - _NormalIntensity_VP: 1
     - _NormalIntensity_WS: 1
     - _NormalMapSpace: 0
@@ -293,10 +294,10 @@ Material:
     - _RefractionModel: 0
     - _RenderQueueType: 1
     - _RequireSplitLighting: 0
-    - _RoughnessAdjust_Main: 1.35
+    - _RoughnessAdjust_Main: 0.42
     - _RoughnessAdjust_VP: 0
     - _RoughnessAdjust_WS: 0
-    - _RoughnessContrast_Main: 0.92
+    - _RoughnessContrast_Main: 0.17
     - _RoughnessContrast_VP: 1
     - _RoughnessContrast_WS: 1
     - _Smoothness: 0.5
@@ -334,18 +335,18 @@ Material:
     - _TransparentSortPriority: 0
     - _TransparentWritingMotionVec: 0
     - _TransparentZWrite: 0
-    - _UTiling_DDN: 1
+    - _UTiling_DDN: 7
     - _UVBase: 0
     - _UVDetail: 0
     - _UVEmissive: 0
     - _U_Scale_Main: 1
-    - _U_Scale_VP: 1
+    - _U_Scale_VP: 5
     - _U_Scale_WS: 1
     - _UseEmissiveIntensity: 0
     - _UseShadowThreshold: 0
-    - _VTiling_DDN: 1
+    - _VTiling_DDN: 7
     - _V_Scale_Main: 1
-    - _V_Scale_VP: 1
+    - _V_Scale_VP: 5
     - _V_Scale_WS: 1
     - _X_Factor_WS: 1
     - _Y_Factor_WS: 1

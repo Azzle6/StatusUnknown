@@ -31,11 +31,12 @@ Material:
   - _DISABLE_SSR_TRANSPARENT
   m_InvalidKeywords:
   - _NORMALMAP_TANGENT_SPACE
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_LightmapFlags: 2
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 2225
-  stringTagMap: {}
+  stringTagMap:
+    MotionVector: User
   disabledShaderPasses:
   - TransparentDepthPrepass
   - TransparentDepthPostpass
@@ -206,7 +207,7 @@ Material:
     - _AlphaRemapMax: 1
     - _AlphaRemapMin: 0
     - _AlphaSrcBlend: 1
-    - _AmbientOcclusionIntensity_Main: 0.38
+    - _AmbientOcclusionIntensity_Main: 0.28
     - _AmbientOcclusionIntensity_VP: 1
     - _AmbientOcclusionIntensity_WS: 1
     - _Anisotropy: 0
@@ -218,7 +219,7 @@ Material:
     - _Cutoff: 0.5
     - _DNIntensity_A_DDN: 0
     - _DNIntensity_B_DDN: 0
-    - _DarkeningTint_VP: 1
+    - _DarkeningTint_VP: 0.1
     - _DepthOffsetEnable: 0
     - _DetailAlbedoScale: 1
     - _DetailNormalScale: 1
@@ -242,20 +243,20 @@ Material:
     - _EnergyConservingSpecularColor: 1
     - _HeightAmplitude: 0.02
     - _HeightCenter: 0.5
-    - _HeightIntensity: 1
+    - _HeightIntensity: 2.07
     - _HeightMapParametrization: 0
-    - _HeightMax: 1
-    - _HeightMin: -1
+    - _HeightMax: 1.08
+    - _HeightMin: 0.18
     - _HeightOffset: 0
     - _HeightPoMAmplitude: 2
-    - _HeightPosition: 1
+    - _HeightPosition: 0.6
     - _HeightTessAmplitude: 2
     - _HeightTessCenter: 0.5
     - _InvTilingScale: 1
     - _Ior: 1.5
     - _IridescenceMask: 1
     - _IridescenceThickness: 1
-    - _LerpContrast_VP: 0.5
+    - _LerpContrast_VP: 1
     - _LinkDetailsWithBase: 1
     - _MaterialID: 1
     - _MetalAdjust_Main: 0
@@ -293,7 +294,7 @@ Material:
     - _RefractionModel: 0
     - _RenderQueueType: 1
     - _RequireSplitLighting: 0
-    - _RoughnessAdjust_Main: 0.55
+    - _RoughnessAdjust_Main: 0.62
     - _RoughnessAdjust_VP: 0
     - _RoughnessAdjust_WS: 0
     - _RoughnessContrast_Main: -0.05
