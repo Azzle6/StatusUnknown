@@ -1,3 +1,5 @@
+using UnityEngine.InputSystem;
+
 namespace Core.UI
 {
     using EventsSO.GameEventsTypes;
@@ -10,12 +12,18 @@ namespace Core.UI
     {
         [FormerlySerializedAs("inventory")] [SerializeField, Required]
         private BoolGameEvent openInventoryGameEvent;
+        [SerializeField] private BoolGameEvent pauseDisplayGameEvent;
 
         [SerializeField] private UIInventoryDisplayer inventoryDisplayer;
 
         private void OnStart()
         {
             this.openInventoryGameEvent.RaiseEvent(!this.inventoryDisplayer.IsOpen());
+        }
+
+        private void OnPause()
+        {
+            pauseDisplayGameEvent.RaiseEvent(true);
         }
     }
 }

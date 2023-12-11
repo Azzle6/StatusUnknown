@@ -43,7 +43,6 @@ namespace Inventory
 
         private WeaponData selectedWeaponData;
         
-        [SerializeField] private BoolGameEvent displayPlayerInfoEvent;
 
         private void OnEnable()
         {

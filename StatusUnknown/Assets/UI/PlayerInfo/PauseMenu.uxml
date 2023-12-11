@@ -1,0 +1,18 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/PlayerInfo/PauseMenuUss.uss?fileID=7433441132597879392&amp;guid=da5fc85298f7a164f8e8dfa1624c3371&amp;type=3#PauseMenuUss" />
+    <ui:VisualElement name="Root" style="flex-grow: 1;">
+        <ui:VisualElement name="BG" style="width: 100%; height: 100%; background-color: rgba(96, 96, 96, 0.3); position: absolute;" />
+        <ui:VisualElement name="PauseMenu" style="width: 30%; height: 50%; left: 35%; top: 20%; display: flex;">
+            <ui:Label tabindex="-1" text="Pause" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PauseLabel" style="-unity-text-align: upper-center; font-size: 50px; padding-bottom: 10%; -unity-font-definition: url(&apos;project://database/Assets/Textures/PlayerInfo/Font/Poppins-Bold%20SDF.asset?fileID=11400000&amp;guid=ee67fdaeb862b0e41ab342e6d438b972&amp;type=2#Poppins-Bold SDF&apos;);" />
+            <ui:Button text="Resume" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ResumeButton" class="PauseButton" />
+            <ui:Button text="Option" parse-escape-sequences="true" display-tooltip-when-elided="true" name="OptionButton" class="PauseButton" />
+            <ui:Button text="Restart" parse-escape-sequences="true" display-tooltip-when-elided="true" name="RestartButton" class="PauseButton" />
+            <ui:Button text="Exit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ExitButton" class="PauseButton" />
+        </ui:VisualElement>
+        <ui:VisualElement name="OptionMenu" style="width: 50%; height: 50%; left: 25%; top: 20%; display: flex; position: absolute; align-items: center;">
+            <ui:Label tabindex="-1" text="Option" parse-escape-sequences="true" display-tooltip-when-elided="true" name="OptionLabel" style="-unity-text-align: upper-center; font-size: 50px; padding-bottom: 10%; -unity-font-definition: url(&apos;project://database/Assets/Textures/PlayerInfo/Font/Poppins-Bold%20SDF.asset?fileID=11400000&amp;guid=ee67fdaeb862b0e41ab342e6d438b972&amp;type=2#Poppins-Bold SDF&apos;); height: 25%;" />
+            <ui:RadioButtonGroup label="Controls : " value="0" choices="Controller, Keyboard &amp; Mouse" name="ControlRadioButtons" style="flex-direction: column; -unity-font-definition: url(&apos;project://database/Assets/Textures/PlayerInfo/Font/Poppins-Bold%20SDF.asset?fileID=11400000&amp;guid=ee67fdaeb862b0e41ab342e6d438b972&amp;type=2#Poppins-Bold SDF&apos;); font-size: 40px;" />
+            <ui:Button text="Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="OptionReturnButton" class="PauseButton" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
