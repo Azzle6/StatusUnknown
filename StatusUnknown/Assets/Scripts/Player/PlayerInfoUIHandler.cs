@@ -18,6 +18,7 @@ namespace Player
         [SerializeField] private IntVariableSO medikitAmount;
         [SerializeField] private WeaponVariableSO[] weaponVariableSO;
         [SerializeField] private FloatVariableSO[] weaponAmmoVariableSO;
+        [SerializeField] private AugmentVariableSO[] augmentVariableSO;
         [SerializeField] private VisualTreeAsset popupUIDocument;
         private VisualElement popUpZone;
         private List<VisualElement> augmentIcon;
@@ -60,6 +61,16 @@ namespace Player
                 augmentIcon.Add(playerInfoUIDocument.rootVisualElement.Q<VisualElement>($"Augment{x}"));
             weaponVariableSO[0].RegisterOnValueChanged(weapon => UpdateWeaponIcon(0, weapon));
             weaponVariableSO[1].RegisterOnValueChanged(weapon => UpdateWeaponIcon(1, weapon));
+
+            for (int x = 0; x < augmentVariableSO.Length; x++)
+            {
+                SwitchAugmentStat(augmentVariableSO[x].Value.GetAugmentStat());
+                augmentVariableSO[x].RegisterOnValueChanged(augment => SwitchAugmentStat(augmentVariableSO[x].Value.GetAugmentStat()));
+            }
+            
+            UpdateWeaponIcon(0, weaponVariableSO[0].Value);
+            UpdateWeaponIcon(1, weaponVariableSO[1].Value);
+            
             weaponAmmoVariableSO[0].RegisterOnValueChanged(UpdateWeapon1AmmoCount);
             weaponAmmoVariableSO[1].RegisterOnValueChanged(UpdateWeapon2AmmoCount);
             playerHealth.RegisterOnValueChanged(UpdateHealthBar);
@@ -177,7 +188,6 @@ namespace Player
         public void SwitchAugmentStat(AugmentStat augmentStat)
         {
             augmentIcon[augmentStat.augmentSlot].style.backgroundImage = augmentStat.augmentSprite;
-
         }
 
         public void UseAugment(AugmentStat augmentStat)
