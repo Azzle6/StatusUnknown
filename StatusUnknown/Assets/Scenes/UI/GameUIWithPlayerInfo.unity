@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 284051422}
   - component: {fileID: 284051421}
   - component: {fileID: 284051425}
+  - component: {fileID: 284051426}
   m_Layer: 0
   m_Name: MainUI
   m_TagString: Untagged
@@ -155,7 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PanelSettings: {fileID: 11400000, guid: 69da892ffc2138f40ad579e3a2224bf1, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 656c9742cb6c7564f8e65a0eed7784bd, type: 3}
+  sourceAsset: {fileID: 9197481963319205126, guid: 66627ee1737b3a54cabab26d7847fc53, type: 3}
   m_SortingOrder: 0
 --- !u!4 &284051422
 Transform:
@@ -186,6 +187,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiDocument: {fileID: 284051421}
   playerInventory: {fileID: 11400000, guid: 90eb184a4bcc3344db97c0cec831b74e, type: 2}
+--- !u!114 &284051426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284051420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e71f810d0eac820458d95ad10fe8df52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: b4f0c796a4b89fa4688458081ea75881, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 284051425}
+        m_TargetAssemblyTypeName: Inventory.UIInventoryDisplayer, Assembly-CSharp
+        m_MethodName: Display
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &695240134 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5916815514251629923, guid: 544212434da1bcd4aab11cd790711d51, type: 3}
@@ -342,6 +371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c0fbb8a64f17104ca76d388b1e354a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  openInventoryGameEvent: {fileID: 11400000, guid: b4f0c796a4b89fa4688458081ea75881, type: 2}
   inventoryDisplayer: {fileID: 284051425}
 --- !u!114 &1917496563
 MonoBehaviour:

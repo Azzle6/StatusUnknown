@@ -16,21 +16,28 @@ MonoBehaviour:
   shape:
     shapeSize: {x: 2, y: 2}
     anchor: {x: 0, y: 0}
-    content: 01010101
-  view: {fileID: 0}
+    content: 01000101
+  icon: {fileID: 21300000, guid: 0fbe8a50840ab75478bd878009b9cf1e, type: 3}
   outputs:
-  - moduleTriggerType: 0
-    localPosition: {x: 1, y: 0}
+  - moduleTriggerType: 1
+    localPosition: {x: 0, y: 0}
     direction: 3
+  - moduleTriggerType: 3
+    localPosition: {x: 1, y: 1}
+    direction: 1
   BehaviourData:
-    rid: 6076498417585487884
+    rid: 7591883874691448836
   references:
     version: 2
     RefIds:
     - rid: 4696495337976365324
       type: {class: ForwardInstantiationRule, ns: Module, asm: Assembly-CSharp}
       data: 
-    - rid: 6076498417585487884
+    - rid: 6076498417585487885
+      type: {class: HitBox, ns: , asm: Assembly-CSharp}
+      data:
+        size: {x: 3, y: 1, z: 1}
+    - rid: 7591883874691448836
       type: {class: ProjectileBehaviourData, ns: Module.Definitions, asm: Assembly-CSharp}
       data:
         <Behaviour>k__BackingField:
@@ -39,7 +46,7 @@ MonoBehaviour:
             Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         <LayerMask>k__BackingField:
           serializedVersion: 2
-          m_Bits: 385
+          m_Bits: 384
         <CollisionShape>k__BackingField:
           rid: 6076498417585487885
         <Mesh>k__BackingField: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
@@ -54,7 +61,3 @@ MonoBehaviour:
           rid: 4696495337976365324
         <Damages>k__BackingField: 13
         speed: 7
-    - rid: 6076498417585487885
-      type: {class: HitBox, ns: , asm: Assembly-CSharp}
-      data:
-        size: {x: 3, y: 1, z: 1}

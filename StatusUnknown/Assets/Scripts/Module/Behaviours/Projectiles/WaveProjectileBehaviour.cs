@@ -1,5 +1,6 @@
 namespace Module.Behaviours.Projectiles
 {
+    using System.Collections.Generic;
     using Unity.Mathematics;
     using UnityEngine;
 
@@ -7,6 +8,7 @@ namespace Module.Behaviours.Projectiles
     {
         private float currentDamages;
         private int collisionsRemaining = 4;
+        protected readonly HashSet<Collider> AlreadyHitElements = new HashSet<Collider>();
 
         protected override void OnInitProjectile()
         {
@@ -19,10 +21,10 @@ namespace Module.Behaviours.Projectiles
 
             foreach (var col in collisions)
             {
-                if(this.AlreadyHitEnemy.Contains(col))
+                if(this.AlreadyHitElements.Contains(col))
                     continue;
                 
-                this.AlreadyHitEnemy.Add(col);
+                this.AlreadyHitElements.Add(col);
                 
                 IDamageable damageable = col.GetComponent<IDamageable>();
                 if (damageable != null)

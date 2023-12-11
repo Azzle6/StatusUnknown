@@ -1,5 +1,3 @@
-using UnityEngine.Serialization;
-
 namespace Player
 {
     using System.Collections.Generic;
@@ -23,6 +21,7 @@ namespace Player
         public Rigidbody rb;
         public Animator animator;
         public WeaponManager weaponManager;
+        [SerializeField]
         private PlayerAction playerInput;
         
         

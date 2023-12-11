@@ -9,23 +9,36 @@ namespace Core.UI
     [CreateAssetMenu(menuName = "CustomAssets/Data/UISettings", fileName = "UISettings")]
     public class UISettings : ScriptableObject
     {
-        [FormerlySerializedAs("slotTreeAsset")] [FoldoutGroup("Assets references")]
+        [FoldoutGroup("Assets references")]
         public VisualTreeAsset slotTemplate;
         [FoldoutGroup("Assets references")] 
         public VisualTreeAsset itemSquareTemplate;
         [FoldoutGroup("Assets references")]
         public VisualTreeAsset itemTemplate;
+        [FoldoutGroup("Assets references")]
+        public VisualTreeAsset itemIconTemplate;
         [FoldoutGroup("Assets references")] 
         public VisualTreeAsset triggerTemplate;
-        [FoldoutGroup("Assets references")]
-        public InputActionAsset inputsAction;
         [FoldoutGroup("Assets references")] 
-        public Texture basicTriggerIcon;
+        public VisualTreeAsset weaponSelectionButtonTemplate;
+        [FoldoutGroup("Assets references")] 
+        public VisualTreeAsset triggerSelectionButtonTemplate;
+        [FoldoutGroup("Assets references")] 
+        public VisualTreeAsset itemEdgesHideTemplate;
+        
+        [FoldoutGroup("Parameters")]
+        public float slotSize;
+        [FoldoutGroup("Parameters")]
+        public float triggerSize;
 
-        [FoldoutGroup("Parameters")]
-        public float slotWidth;
-        [FoldoutGroup("Parameters")]
-        public float triggerWidth;
+        [FoldoutGroup("Colours")]
+        public Color linkedTriggerBackgroundColor;
+        [FoldoutGroup("Colours")]
+        public Color linkedTriggerIconColor;
+        [FoldoutGroup("Colours")]
+        public Color unlinkedTriggerBackgroundColor;
+        [FoldoutGroup("Colours")]
+        public Color unlinkedTriggerIconColor;
 
         [FoldoutGroup("Styles naming")]
         public string hiddenStyle;

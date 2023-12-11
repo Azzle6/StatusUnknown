@@ -15,7 +15,7 @@ namespace Inventory.Grid
             for (int y = 0; y < shape.shapeSize.y; y++)
             {
                 VisualElement horizontalParent = new VisualElement();
-                horizontalParent.AddToClassList("horizontalParent");
+                horizontalParent.style.flexDirection = FlexDirection.Row;
                 verticalParent.Insert(y, horizontalParent);
                 
                 for (int x = 0; x < shape.shapeSize.x; x++)
@@ -25,7 +25,7 @@ namespace Inventory.Grid
                     horizontalParent.Insert(x, slotView);
                     slotsList.Add(slotView);
 
-                    if (shape.GetContentFromPosition(new Vector2Int(x, y)))
+                    if (shape.IsValidPosition(new Vector2Int(x, y)))
                     {
                         slotView.name = $"{x},{y}";
                     }

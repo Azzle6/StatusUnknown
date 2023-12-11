@@ -1,9 +1,8 @@
 using Player;
-using System.Collections;
-using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
-using static HoudiniEngineUnity.HEU_Curve;
 using UnityEngine.InputSystem;
 using TMPro;
 
@@ -87,6 +86,7 @@ public class ProtoXPDialogTrigger : MonoBehaviour
     }
 
 
+    #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
@@ -95,4 +95,5 @@ public class ProtoXPDialogTrigger : MonoBehaviour
         GUI.color = Color.white;
         Handles.Label(transform.position + collider.center, dialogSO.name);
     }
+    #endif
 }

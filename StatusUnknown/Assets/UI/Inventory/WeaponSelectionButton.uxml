@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Global/GlobalUSS.uss?fileID=7433441132597879392&amp;guid=b957b32707326d646b329444c53afc3b&amp;type=3#GlobalUSS" />
+    <ui:VisualElement name="primaryWeapon" focusable="true" class="selectionButton" style="height: 300px; margin-bottom: 20px;">
+        <ui:VisualElement name="weaponIcon" style="height: 85%; background-image: url(&apos;project://database/Assets/Figma/ImageFills/bf7b6503088a541e38c00e73d2cd25022652640a.png?fileID=2800000&amp;guid=fc72d43941737c14d8674d6d163752fd&amp;type=3#bf7b6503088a541e38c00e73d2cd25022652640a&apos;); -unity-background-scale-mode: scale-to-fit;" />
+        <ui:Label tabindex="-1" text="WEAPON NAME" parse-escape-sequences="true" display-tooltip-when-elided="true" name="weaponName" class="halfTitle" style="margin-left: 10px; height: 15%; letter-spacing: -0.7px; white-space: normal;" />
+    </ui:VisualElement>
+</ui:UXML>

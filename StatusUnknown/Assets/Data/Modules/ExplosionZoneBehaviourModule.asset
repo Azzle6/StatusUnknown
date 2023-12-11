@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c01d336291543644a3bee3a19b552e2, type: 3}
   m_Name: ExplosionZoneBehaviourModule
   m_EditorClassIdentifier: 
-  itemName: Explosion
+  itemName: ExplosionSmall
   shape:
-    shapeSize: {x: 2, y: 2}
+    shapeSize: {x: 2, y: 1}
     anchor: {x: 0, y: 0}
-    content: 01010101
-  view: {fileID: 0}
+    content: 0101
+  icon: {fileID: 21300000, guid: 0db3dd7422d7b38469ef77d3ada6d8b1, type: 3}
   outputs:
   - moduleTriggerType: 0
     localPosition: {x: 1, y: 0}
-    direction: 3
+    direction: 0
   BehaviourData:
-    rid: 7591883820643123220
+    rid: 7591883874691448834
   references:
     version: 2
     RefIds:
@@ -34,7 +34,7 @@ MonoBehaviour:
       type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
       data:
         radius: 0
-    - rid: 7591883820643123220
+    - rid: 7591883874691448834
       type: {class: ZoneBehaviourData, ns: Module.Definitions, asm: Assembly-CSharp}
       data:
         <Behaviour>k__BackingField:
@@ -43,7 +43,7 @@ MonoBehaviour:
             Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         <LayerMask>k__BackingField:
           serializedVersion: 2
-          m_Bits: 129
+          m_Bits: 384
         <CollisionShape>k__BackingField:
           rid: 7591883733765456131
         <Mesh>k__BackingField: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
@@ -51,10 +51,10 @@ MonoBehaviour:
         zoneBurstVFX: {fileID: 8926484042661614526, guid: e4a48a7e06e56454eb2bd706fc8af23e, type: 3}
         hitVFX: {fileID: 8926484042661614526, guid: 0c9ad1197d1f2e14095df34ad0a192bb, type: 3}
         <TickRate>k__BackingField: 0
-        <LifeTime>k__BackingField: 0
+        <LifeTime>k__BackingField: 0.01
         <Quantity>k__BackingField: 1
         <InstantiationRule>k__BackingField:
           rid: 4696495337976365338
-        <Damages>k__BackingField: 1.25
+        <Damages>k__BackingField: 16
         DamageRadius:
-          radius: 2
+          radius: 1

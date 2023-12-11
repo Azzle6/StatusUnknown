@@ -17,17 +17,23 @@ MonoBehaviour:
     shapeSize: {x: 2, y: 2}
     anchor: {x: 0, y: 0}
     content: 01010101
-  view: {fileID: 0}
+  icon: {fileID: 21300000, guid: 9f84de3325904e24c87371f6d1400053, type: 3}
   outputs:
   - moduleTriggerType: 0
     localPosition: {x: 1, y: 0}
     direction: 3
   BehaviourData:
-    rid: 6076498417585487897
+    rid: 7591883870548525056
   references:
     version: 2
     RefIds:
-    - rid: 6076498417585487897
+    - rid: 7591883820643123223
+      type: {class: ConicInstantiationRule, ns: Module, asm: Assembly-CSharp}
+      data:
+        angle: 180
+        regular: 0
+        radius: 2
+    - rid: 7591883870548525056
       type: {class: ZoneBehaviourData, ns: Module.Definitions, asm: Assembly-CSharp}
       data:
         <Behaviour>k__BackingField:
@@ -38,7 +44,7 @@ MonoBehaviour:
           serializedVersion: 2
           m_Bits: 128
         <CollisionShape>k__BackingField:
-          rid: 7591883733765455883
+          rid: 7591883870548525057
         <Mesh>k__BackingField: {fileID: -951608786083511892, guid: 4c702de1e04a93b4dabbee023df4007b, type: 3}
         <Material>k__BackingField: {fileID: -7097115718587537635, guid: ecdbcec36b1082e468192d3cd665f4a9, type: 3}
         zoneBurstVFX: {fileID: 8926484042661614526, guid: a3bfdcdebba2fd744903f5e8000aa487, type: 3}
@@ -51,13 +57,7 @@ MonoBehaviour:
         <Damages>k__BackingField: 20
         DamageRadius:
           radius: 2.5
-    - rid: 7591883733765455883
-      type: {class: HitBox, ns: , asm: Assembly-CSharp}
+    - rid: 7591883870548525057
+      type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
       data:
-        size: {x: 0.2, y: 0.1, z: 0.2}
-    - rid: 7591883820643123223
-      type: {class: ConicInstantiationRule, ns: Module, asm: Assembly-CSharp}
-      data:
-        angle: 180
-        regular: 0
-        radius: 2
+        radius: 0.1

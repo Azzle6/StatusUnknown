@@ -93,7 +93,7 @@ namespace Player
             weaponIcon.style.backgroundImage = weapon.weaponSprite.texture;
             weaponIcon.style.width = weapon.weaponSprite.texture.width;
             weaponIcon.style.height = weapon.weaponSprite.texture.height;
-            ammoRoot.style.display = weaponVariableSO[index].Value.weaponType == WeaponType.RANGED ? DisplayStyle.Flex : DisplayStyle.None;
+            ammoRoot.style.visibility = weaponVariableSO[index].Value.weaponType == WeaponType.RANGED ? Visibility.Visible : Visibility.Hidden;
 
             if (weaponVariableSO[index].Value.weaponType == WeaponType.RANGED)
             {

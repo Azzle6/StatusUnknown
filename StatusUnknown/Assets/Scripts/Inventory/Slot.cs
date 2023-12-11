@@ -14,7 +14,7 @@ namespace Inventory
         public VisualElement ViewRoot { get; set; }
         public VisualElement FocusElement { get; set; }
         
-        public ItemView item;
+        public ItemView ItemView;
 
         #region CONSTRUCTOR
         public Slot(Vector2Int pos, VisualElement visual, GridView gridView)
@@ -35,8 +35,7 @@ namespace Inventory
             else
                 this.FocusElement.RemoveFromClassList("usedSlot");
 
-            this.item = itemRef;
-            this.FocusElement.focusable = !isOccupied;
+            this.ItemView = itemRef;
         }
 
         
