@@ -190,7 +190,11 @@
             "m_Id": "b27e7fcfab0b4808a6b08b7f9431cd1b"
         }
     ],
-    "m_Keywords": [],
+    "m_Keywords": [
+        {
+            "m_Id": "a6715ba282bb4b1ead126704301ff8f1"
+        }
+    ],
     "m_Dropdowns": [],
     "m_CategoryData": [
         {
@@ -1097,6 +1101,9 @@
         },
         {
             "m_Id": "631b196339b84e97afe190034f891de9"
+        },
+        {
+            "m_Id": "8c99809b3cf3409eb15b0d16cb0f20e9"
         }
     ],
     "m_GroupDatas": [
@@ -12354,6 +12361,30 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
+    "m_ObjectId": "30e465868a4d4c40b3e91e89c3a3b983",
+    "m_Id": 2,
+    "m_DisplayName": "Off",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Off",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    }
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Texture2DInputMaterialSlot",
     "m_ObjectId": "30fb38db89b24baba6a02233e4c15420",
     "m_Id": 1,
@@ -22956,10 +22987,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1853.9998779296875,
-            "y": 99.99996948242188,
-            "width": 180.9998779296875,
-            "height": 34.00001525878906
+            "x": -1859.9998779296875,
+            "y": 102.0,
+            "width": 181.0,
+            "height": 34.0
         }
     },
     "m_Slots": [
@@ -23128,6 +23159,48 @@
         "m_Guid": ""
     },
     "m_DefaultType": 3
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.KeywordNode",
+    "m_ObjectId": "8c99809b3cf3409eb15b0d16cb0f20e9",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "switch test",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -1871.000244140625,
+            "y": 1875.0,
+            "width": 135.0001220703125,
+            "height": 118.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "fa82b8b726d0461b92464c38d4e60bfc"
+        },
+        {
+            "m_Id": "ef9f6a857b6d40e3bc28c4eeb01664ea"
+        },
+        {
+            "m_Id": "30e465868a4d4c40b3e91e89c3a3b983"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": false,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Keyword": {
+        "m_Id": "a6715ba282bb4b1ead126704301ff8f1"
+    }
 }
 
 {
@@ -26390,6 +26463,31 @@
         "z": 0.0,
         "w": 0.0
     }
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.ShaderKeyword",
+    "m_ObjectId": "a6715ba282bb4b1ead126704301ff8f1",
+    "m_Guid": {
+        "m_GuidSerialized": "cc1eeba7-2e64-4b14-b2f9-5a5932b8141d"
+    },
+    "m_Name": "switch test",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "switch test",
+    "m_DefaultReferenceName": "_SWITCH_TEST",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_KeywordType": 0,
+    "m_KeywordDefinition": 0,
+    "m_KeywordScope": 0,
+    "m_KeywordStages": 63,
+    "m_Entries": [],
+    "m_Value": 0,
+    "m_IsEditable": true
 }
 
 {
@@ -32683,7 +32781,11 @@
     "m_Type": "UnityEditor.ShaderGraph.CategoryData",
     "m_ObjectId": "d8fe4a7d70bb4ca3b2ab94fd21e418c1",
     "m_Name": "",
-    "m_ChildObjectList": []
+    "m_ChildObjectList": [
+        {
+            "m_Id": "a6715ba282bb4b1ead126704301ff8f1"
+        }
+    ]
 }
 
 {
@@ -35324,6 +35426,30 @@
 {
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
+    "m_ObjectId": "ef9f6a857b6d40e3bc28c4eeb01664ea",
+    "m_Id": 1,
+    "m_DisplayName": "On",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "On",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
     "m_ObjectId": "efa55f9104754d35889ab9c7885ff70f",
     "m_Id": 0,
     "m_DisplayName": "",
@@ -36352,6 +36478,30 @@
         "z": 0.0
     },
     "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
+    "m_ObjectId": "fa82b8b726d0461b92464c38d4e60bfc",
+    "m_Id": 0,
+    "m_DisplayName": "Out",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    }
 }
 
 {
