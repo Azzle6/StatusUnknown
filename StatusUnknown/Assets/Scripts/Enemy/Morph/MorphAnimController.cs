@@ -18,7 +18,7 @@ public class MorphAnimController : MonoBehaviour
 
     void ProcessEggEndAnimation(bool sucess)
     {
-        string animationClip = sucess ? "MorphEggDestroyed" : "MorphEggFinish";
+        string animationClip = (!sucess) ? "MorphEggDestroyed" : "MorphEggFinish";
         eggAnimator.Play(animationClip);
     }
 

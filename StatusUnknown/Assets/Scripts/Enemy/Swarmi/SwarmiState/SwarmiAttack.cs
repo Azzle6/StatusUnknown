@@ -1,34 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-public class SwarmiAttack : EnemyState
+namespace Enemy.Swarmi
 {
-    Color colorState = Color.red;
-
-    float attackRange => context.stats.AttackRange;
-    float attackDuration;
-    float attackCooldown => ((EnemySwarmi)context).attackCoolDown;
-
-    public override void Update()
+    public class SwarmiAttack : EnemyState
     {
-        attackDuration -= Time.deltaTime;
-        if(CombatManager.playerTransform != null )
+        Color colorState = Color.red;
+
+        float attackRange => context.stats.AttackRange;
+        float attackDuration;
+        float attackCooldown => ((EnemySwarmi)context).attackCoolDown;
+
+        public override void Update()
         {
-            //context.RotateTowards(CombatManager.playerTransform.position - transform.position, 180);
+            attackDuration -= Time.deltaTime;
+            if (CombatManager.playerTransform != null)
+            {
+                //context.RotateTowards(CombatManager.playerTransform.position - transform.position, 180);
+            }
+            if (attackDuration < 0)
+            {
+                context.SwitchState(new SwarmiChase());
+            }
         }
-        if (attackDuration < 0)
+
+        protected override void Initialize()
         {
-            context.SwitchState(new SwarmiChase());
+
+            ((EnemySwarmi)context).attackCoolDown = context.stats.AttackCooldown;
+            attackDuration = context.stats.AttackDuration;
+            context.PlayAnimation("SwarmiAttack");
         }
+
     }
-
-    protected override void Initialize()
-    {
-
-        ((EnemySwarmi)context).attackCoolDown = context.stats.AttackCooldown;
-        attackDuration = context.stats.AttackDuration;
-        context.PlayAnimation("SwarmiAttack");
-    }
-
 }

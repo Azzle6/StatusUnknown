@@ -1,32 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public abstract class EnemyState 
+namespace Enemy
 {
-    protected EnemyContext context;
-    protected string name = "test";
-    public Transform transform => context.transform;
-    public void SetContext(EnemyContext context)
+    using UnityEngine;
+    public abstract class EnemyState
     {
-        this.context = context;
-        Initialize();
-    }
-    protected virtual void Initialize()
-    {
+        protected EnemyContext context;
+        protected string name = "test";
+        public Transform transform => context.transform;
+        public void SetContext(EnemyContext context)
+        {
+            this.context = context;
+            Initialize();
+        }
+        protected virtual void Initialize()
+        {
+
+        }
+        public virtual void Update()
+        {
+
+        }
+        public virtual void FixedUpdate()
+        {
+
+        }
+        public virtual void DebugGizmos()
+        {
+
+        }
 
     }
-    public virtual void Update()
-    {
-
-    }
-    public virtual void FixedUpdate()
-    {
-
-    }
-    public virtual void DebugGizmos()
-    {
-
-    }
-
 }

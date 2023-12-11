@@ -1,3 +1,4 @@
+using Enemy;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,11 +16,11 @@ public class MorphEgg : MonoBehaviour,IDamageable
     [HideInInspector]
     public float currentMorphDuration;
     bool initialized = false;
+    bool broken;
 
     [Header("Event")]
     [SerializeField] MorphGameEvent endMorphGameEvent;
     public event Action<bool> endMorphEvent;
-
 
     [Header("TODO : Morph Scriptable")]
 
@@ -35,22 +36,24 @@ public class MorphEgg : MonoBehaviour,IDamageable
         if (initialized) return;
         initialized = true;
 
+        broken = false;
+        MorphEvents.RegisterActiveMorphEgg(this);
+
         currentLifePoints = lifePoints;
         currentMorphDuration = UnityEngine.Random.Range((1 - durationRandomness) * morphDuration, morphDuration); ;
         Invoke("Hatch", currentMorphDuration);
     }
-    void EndMorph( bool sucess)
+
+    void callEndMorphEvent(bool sucess)
     {
-        // TODO : Define usefull parameters
         endMorphGameEvent?.RaiseEvent(null);
         endMorphEvent?.Invoke(sucess);
-        MorphEvents.EndMorphEvent(null);
-        CancelInvoke();
-        
     }
     void Explode()
     {
-        EndMorph(false);
+        broken = true;
+        CancelInvoke();
+
         Debug.Log($"Explode{gameObject}");
         ProcessExplodeDelay();
     }
@@ -65,11 +68,14 @@ public class MorphEgg : MonoBehaviour,IDamageable
                 Instantiate(failedEnemiesToSpawn[i], transform.position, Quaternion.identity);
             }
         }
+        callEndMorphEvent(false);
         Destroy(gameObject);
     }
     void Hatch()
     {
-        EndMorph(true);
+        broken = true;
+        CancelInvoke();
+
         Debug.Log($"Hatch{gameObject}");
         ProcessHatchDelay();
     }
@@ -81,7 +87,7 @@ public class MorphEgg : MonoBehaviour,IDamageable
             //TODO : set spawn location
             Instantiate(succesEnemyToSpawn, transform.position, Quaternion.identity);
         }
-
+        callEndMorphEvent(true);
         Destroy(gameObject, 1);
     }
 
@@ -90,7 +96,7 @@ public class MorphEgg : MonoBehaviour,IDamageable
         currentLifePoints -= damage;
         //Debug.Log($"{damage} {currentLifePoints}/{lifePoints}");
         HurtBlinkAll(meshRenderers);
-        if(currentLifePoints < 0)
+        if(currentLifePoints < 0 && ! broken)
         {
             Explode();
         }

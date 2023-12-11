@@ -12,8 +12,11 @@ namespace Enemy.Spawner
         Queue<WaveContext> waveContextQueue = new Queue<WaveContext>();
         public event Action EndEvent;
         public UnityEvent EndUEvent;
-        int waveDeathCounter;
+        [SerializeField]
+        int waveCounter;
         [SerializeField] bool startOnAwake;
+
+        public List<EnemyContext> enemyContexts = new List<EnemyContext>();
         private void Awake()
         {
             for (int i = 0; i < this.waveContexts.Length; i++)
@@ -24,8 +27,19 @@ namespace Enemy.Spawner
             if (this.startOnAwake)
                 this.StartWaveProcess();
         }
+        private void OnEnable()
+        {
+            EnemyEvents.EnemyBirth += (EnemyContext Ec) => { enemyContexts = EnemyEvents.enemiesAlive; };
+            EnemyEvents.EnemyDeath += (EnemyContext Ec) => { enemyContexts = EnemyEvents.enemiesAlive; };
+        }
+        private void OnDisable()
+        {
+            EnemyEvents.AllEnemiesDied -= SkipToNextWave;
+        }
         public void StartWaveProcess()
         {
+            waveCounter = 0;
+            EnemyEvents.AllEnemiesDied += SkipToNextWave;
             this.ProcessWave();
 
         }
@@ -33,29 +47,32 @@ namespace Enemy.Spawner
         {
             if (this.waveContextQueue.Count <= 0) return;
             var waveContext = this.waveContextQueue.Dequeue();
-            waveContext.wave.DeathEvent += () =>
-            {
-                this.waveDeathCounter++;
-                if (this.waveDeathCounter >= this.waveContexts.Length)
-                    this.CallEndEvent();
-            };
-            waveContext.wave.ProcessWave();
-            this.StartCoroutine(this.ProcessNextWave(waveContext));
+
+            waveContext.wave?.ProcessWave();
+            this.waveCounter++;
+            // Next Wave
+            StartCoroutine(ProcessNextWave(waveContext.initialDelay));
         }
-        IEnumerator ProcessNextWave(WaveContext previousWave)
+        void SkipToNextWave()
         {
-            float timeCounter = Time.time;
-            yield return new WaitUntil(()=>Time.time-timeCounter >= previousWave.initialDelay || previousWave.wave.finished);
-            this.ProcessWave();
+            this?.StopAllCoroutines();
+            if (this.waveCounter >= this.waveContexts.Length)
+            {
+                Debug.Log($"{this.waveCounter} > {this.waveContexts.Length}");
+                this.EndProcessWave();
+            }
+            else
+                ProcessWave();
         }
-
-
-    
-    
-
-        void CallEndEvent()
+        IEnumerator ProcessNextWave(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            ProcessWave();
+        }
+        void EndProcessWave()
         {
             Debug.Log("End Event");
+            //EnemyEvents.AllEnemiesDied -= SkipToNextWave;
             this.EndEvent?.Invoke();
             this.EndUEvent?.Invoke();
         }

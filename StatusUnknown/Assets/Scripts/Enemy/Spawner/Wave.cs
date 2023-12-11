@@ -1,6 +1,5 @@
 namespace Enemy.Spawner
 {
-    using System;
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
@@ -8,8 +7,8 @@ namespace Enemy.Spawner
     public class Wave : MonoBehaviour
     {
         [SerializeField] Spawn[] enemySpawner;
+        int spawnCount;
         [SerializeField] float warningDelay = 0.5f;
-        public event Action DeathEvent;
         [field : SerializeField]
         public bool finished {  get; private set; }
         HashSet<EnemyContext> enemyContexts = new HashSet<EnemyContext>();
@@ -24,6 +23,8 @@ namespace Enemy.Spawner
         public void ProcessWave()
         {
             Debug.Log("ProcessWave "+this.gameObject.name);
+            spawnCount = enemySpawner.Length;
+            EnemyEvents.SetSpawning(true);
             foreach (Spawn spawner in this.enemySpawner)
                 this.StartCoroutine(this.ProcessSpawn(spawner));
         }
@@ -39,29 +40,12 @@ namespace Enemy.Spawner
             yield return new WaitForSeconds(spawn.delay + this.warningDelay);
             GameObject obj = Instantiate(spawn.enemy, spawn.spawnPosition, Quaternion.identity);
             EnemyContext enemy = obj.GetComponent<EnemyContext>();
-            if (enemy != null) this.AddEnemy(enemy);
+
+            spawnCount--;
+            if (spawnCount <= 0)
+                EnemyEvents.SetSpawning(false);
         }
 
-        void RemoveEnemy(EnemyContext enemy)
-        {
-            enemy.OnDeathEvent -= this.RemoveEnemy;
-            this.enemyContexts.Remove(enemy);
-            this.enemyDeathCounter++;
-
-            if (this.enemyDeathCounter >= this.enemySpawner.Length)
-            {
-                Debug.Log("Death Event "+ this.gameObject.name);
-                this.finished = true;
-                this.DeathEvent?.Invoke();
-            }
-            
-        }
-        public void AddEnemy(EnemyContext enemy)
-        {
-            if (this.enemyContexts.Contains(enemy)) return;
-            this.enemyContexts.Add(enemy);
-            enemy.OnDeathEvent += this.RemoveEnemy;
-        }
     }
     [System.Serializable]
     public struct Spawn
@@ -70,8 +54,6 @@ namespace Enemy.Spawner
         [SerializeField]
         public Transform[] spawnPoints;
         public Vector3 spawnPosition { get { return this.spawnPoints[UnityEngine.Random.Range(0, this.spawnPoints.Length)].position; } }
-
-       
 
         public float delay;
     }
