@@ -865,6 +865,8 @@ Transform:
   - {fileID: 1473265053}
   - {fileID: 1926396704}
   - {fileID: 1948679621}
+  - {fileID: 436250142}
+  - {fileID: 990093945}
   m_Father: {fileID: 203077362}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &25336254
@@ -873,7 +875,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 25281618}
     m_Modifications:
     - target: {fileID: 2159007176447907725, guid: fa4987195659a4c4db344186dec1f710, type: 3}
       propertyPath: action.m_PersistentCalls.m_Calls.Array.size
@@ -936,8 +938,12 @@ PrefabInstance:
       value: Inventory.Item.GridItemSO, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4380656471674634365, guid: fa4987195659a4c4db344186dec1f710, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4380656471674634365, guid: fa4987195659a4c4db344186dec1f710, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -84.52
+      value: -0.51999664
       objectReference: {fileID: 0}
     - target: {fileID: 4380656471674634365, guid: fa4987195659a4c4db344186dec1f710, type: 3}
       propertyPath: m_LocalPosition.y
@@ -945,7 +951,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4380656471674634365, guid: fa4987195659a4c4db344186dec1f710, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -43.65
+      value: -5.9000015
       objectReference: {fileID: 0}
     - target: {fileID: 4380656471674634365, guid: fa4987195659a4c4db344186dec1f710, type: 3}
       propertyPath: m_LocalRotation.w
@@ -953,7 +959,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4380656471674634365, guid: fa4987195659a4c4db344186dec1f710, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4380656471674634365, guid: fa4987195659a4c4db344186dec1f710, type: 3}
       propertyPath: m_LocalRotation.y
@@ -961,7 +967,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4380656471674634365, guid: fa4987195659a4c4db344186dec1f710, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4380656471674634365, guid: fa4987195659a4c4db344186dec1f710, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1311,8 +1317,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 1835900376}
     m_Modifications:
     - target: {fileID: 1755396349850162328, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
+      propertyPath: timer
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755396349850162328, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
       propertyPath: isInfinite
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1755396349850162328, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
       propertyPath: wave.Array.size
@@ -6510,6 +6520,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1359004616}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &436250142 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4380656471674634365, guid: fa4987195659a4c4db344186dec1f710, type: 3}
+  m_PrefabInstance: {fileID: 25336254}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &437630412
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14462,11 +14477,23 @@ PrefabInstance:
     m_TransformParent: {fileID: 34654675}
     m_Modifications:
     - target: {fileID: 1755396349850162328, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
+      propertyPath: onCD
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755396349850162328, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
+      propertyPath: timer
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755396349850162328, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1755396349850162328, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
       propertyPath: isInfinite
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755396349850162328, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
+      propertyPath: isSpawning
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1755396349850162328, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
@@ -14555,11 +14582,23 @@ PrefabInstance:
     m_TransformParent: {fileID: 34654675}
     m_Modifications:
     - target: {fileID: 1755396349850162328, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
+      propertyPath: onCD
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755396349850162328, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
+      propertyPath: timer
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755396349850162328, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1755396349850162328, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
       propertyPath: isInfinite
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755396349850162328, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
+      propertyPath: isSpawning
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1755396349850162328, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
@@ -15241,7 +15280,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 25281618}
     m_Modifications:
     - target: {fileID: 2159007176447907725, guid: fa4987195659a4c4db344186dec1f710, type: 3}
       propertyPath: action.m_PersistentCalls.m_Calls.Array.size
@@ -15276,8 +15315,12 @@ PrefabInstance:
       value: Inventory.Item.GridItemSO, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4380656471674634365, guid: fa4987195659a4c4db344186dec1f710, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4380656471674634365, guid: fa4987195659a4c4db344186dec1f710, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -87.73
+      value: -3.7300034
       objectReference: {fileID: 0}
     - target: {fileID: 4380656471674634365, guid: fa4987195659a4c4db344186dec1f710, type: 3}
       propertyPath: m_LocalPosition.y
@@ -15285,7 +15328,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4380656471674634365, guid: fa4987195659a4c4db344186dec1f710, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -43.71
+      value: -5.959999
       objectReference: {fileID: 0}
     - target: {fileID: 4380656471674634365, guid: fa4987195659a4c4db344186dec1f710, type: 3}
       propertyPath: m_LocalRotation.w
@@ -15293,7 +15336,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4380656471674634365, guid: fa4987195659a4c4db344186dec1f710, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4380656471674634365, guid: fa4987195659a4c4db344186dec1f710, type: 3}
       propertyPath: m_LocalRotation.y
@@ -15301,7 +15344,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4380656471674634365, guid: fa4987195659a4c4db344186dec1f710, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4380656471674634365, guid: fa4987195659a4c4db344186dec1f710, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -15335,6 +15378,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f2d7da18e787bc49833ede0f32d9826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &990093945 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4380656471674634365, guid: fa4987195659a4c4db344186dec1f710, type: 3}
+  m_PrefabInstance: {fileID: 990093940}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &992680029
 Mesh:
   m_ObjectHideFlags: 0
@@ -21929,8 +21977,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 1835900376}
     m_Modifications:
     - target: {fileID: 1755396349850162328, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
+      propertyPath: timer
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755396349850162328, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
       propertyPath: isInfinite
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1755396349850162328, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
       propertyPath: wave.Array.size
@@ -22195,8 +22247,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 1835900376}
     m_Modifications:
     - target: {fileID: 1755396349850162328, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
+      propertyPath: timer
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755396349850162328, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
       propertyPath: isInfinite
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1755396349850162328, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
       propertyPath: wave.Array.size
@@ -26330,12 +26386,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 1103558829}
     m_Modifications:
     - target: {fileID: 1755396349850162328, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
+      propertyPath: timer
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755396349850162328, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1755396349850162328, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
       propertyPath: isInfinite
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1755396349850162328, guid: 54c025fd76efc214eb472fd9f71c3163, type: 3}
       propertyPath: wave.Array.size
@@ -34239,5 +34299,3 @@ SceneRoots:
   - {fileID: 447982499}
   - {fileID: 203077362}
   - {fileID: 1375739144}
-  - {fileID: 25336254}
-  - {fileID: 990093940}
