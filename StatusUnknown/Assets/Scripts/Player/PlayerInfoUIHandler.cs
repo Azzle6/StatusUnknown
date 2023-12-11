@@ -201,11 +201,11 @@ namespace Player
         {
             if (display)
             {
-                Show();
+                Hide();
             }
             else
             {
-                Hide();
+                Show();
             }
         }
     }

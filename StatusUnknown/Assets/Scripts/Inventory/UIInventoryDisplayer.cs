@@ -139,9 +139,8 @@ namespace Inventory
         public void Display(bool display)
         {
             this.isDisplayed = display;
-            
+
             //Debug.Log($"{(this.isDisplayed ? "Display" : "Hide")} inventory.");
-            displayPlayerInfoEvent.RaiseEvent(!display);
             this.inventoryRoot.style.display = this.isDisplayed ? DisplayStyle.Flex : DisplayStyle.None;
             if (this.isDisplayed)
             {
