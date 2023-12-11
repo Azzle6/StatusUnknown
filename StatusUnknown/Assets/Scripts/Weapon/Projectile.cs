@@ -22,6 +22,7 @@ namespace Weapon
         public float lifeTime = 5f;
         private bool isCheckingCollision;
 
+        private float speed;
         private CompiledModule moduleToCast;
         
         private void OnEnable()
@@ -35,10 +36,12 @@ namespace Weapon
             StopAllCoroutines();
         }
         
-        public void Launch(float damage, Vector3 direction, float speed, CompiledModule moduleToCast)
+        public void Launch(float damage, Quaternion direction, float speed, CompiledModule moduleToCast)
         {
             this.damage = damage;
-            rb.velocity = direction * speed;
+            this.speed = speed;
+            //rb.velocity = direction * speed;
+            this.transform.rotation = direction;
             this.moduleToCast = moduleToCast;
         }
 
@@ -46,6 +49,7 @@ namespace Weapon
         {
             if (!isCheckingCollision)
                 return;
+            transform.position += this.transform.forward * (this.speed * Time.fixedDeltaTime);
             CollisionBehaviour();
         }
         
@@ -66,6 +70,7 @@ namespace Weapon
                 if (damageable != null)
                     damageable.TakeDamage(damage, transform.forward * knockbackStrength);
 
+                Debug.Log(transform.rotation);
                 ModuleBehaviourHandler.Instance.InstantiateModuleBehaviour(this.moduleToCast, new InstantiatedModuleInfo(transform.position, transform.rotation, collisions[0]));
                 tempHitVFX = ComponentPooler.Instance.GetPooledObject<VisualEffectHandler>("EmptyVisualEffect");
 

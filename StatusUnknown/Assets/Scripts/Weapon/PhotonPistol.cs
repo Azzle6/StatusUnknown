@@ -108,7 +108,7 @@ namespace Weapon
             
             shootingVFX.Play();
             tempPhotonPistolBulletTr.transform.parent = null;
-            tempPhotonPistolBullet.Launch(currentDamage, spawnPoint.forward, stat.projectileSpeed, inventory.GetWeaponTriggerData(weaponDefinition, E_WeaponOutput.ON_HIT).compiledModules.FirstModule);
+            tempPhotonPistolBullet.Launch(currentDamage, spawnPoint.rotation, stat.projectileSpeed, inventory.GetWeaponTriggerData(weaponDefinition, E_WeaponOutput.ON_HIT).compiledModules.FirstModule);
             tempPhotonPistolBullet.StartCheckingCollision();
             tempPhotonPistolBullet.hitShape.radius = tempPhotonPistolBulletTr.localScale.y / 2;
             
