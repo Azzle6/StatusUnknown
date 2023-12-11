@@ -70,7 +70,6 @@ namespace Weapon
                 if (damageable != null)
                     damageable.TakeDamage(damage, transform.forward * knockbackStrength);
 
-                Debug.Log(transform.rotation);
                 ModuleBehaviourHandler.Instance.InstantiateModuleBehaviour(this.moduleToCast, new InstantiatedModuleInfo(transform.position, transform.rotation, collisions[0]));
                 tempHitVFX = ComponentPooler.Instance.GetPooledObject<VisualEffectHandler>("EmptyVisualEffect");
 
