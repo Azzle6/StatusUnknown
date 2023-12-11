@@ -45,6 +45,10 @@ namespace Core.Helpers
     { }
 
     [Serializable]
-    public class IconReferencesDictionary<T> : CustomSerializedDictionary<T, Sprite>
+    public class WeaponOutputReferencesDictionary: CustomSerializedDictionary<E_WeaponOutput, WeaponOutputDefinition>
+    { }
+    
+    [Serializable]
+    public class ModuleOutputReferencesDictionary: CustomSerializedDictionary<E_ModuleOutput, ModuleOutputDefinition>
     { }
 }

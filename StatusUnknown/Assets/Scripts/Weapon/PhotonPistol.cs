@@ -108,7 +108,10 @@ namespace Weapon
             
             shootingVFX.Play();
             tempPhotonPistolBulletTr.transform.parent = null;
-            tempPhotonPistolBullet.Launch(currentDamage, spawnPoint.rotation, stat.projectileSpeed, inventory.GetWeaponTriggerData(weaponDefinition, E_WeaponOutput.ON_HIT).compiledModules.FirstModule);
+            tempPhotonPistolBullet.Launch(currentDamage, spawnPoint.rotation, stat.projectileSpeed);
+            Transform pistolTransform = this.tempPhotonPistolBullet.transform;
+            bool isFullyCharged = this.chargeTimer >= this.stat.maxTimeCharge;
+            this.tempPhotonPistolBullet.onHit += () => OnProjectileHit(isFullyCharged, pistolTransform);
             tempPhotonPistolBullet.StartCheckingCollision();
             tempPhotonPistolBullet.hitShape.radius = tempPhotonPistolBulletTr.localScale.y / 2;
             
@@ -119,7 +122,12 @@ namespace Weapon
             charging = default;
             currentAmmo.Value--;
         }
-        
+
+        private void OnProjectileHit(bool isFullCharged, Transform projectile)
+        {
+            CastModule(E_WeaponOutput.ON_HIT, projectile);
+            if(isFullCharged) CastModule(E_WeaponOutput.ON_HIT_FULL_CHARGED, projectile);
+        }
         
         public override void Hit()
         {
