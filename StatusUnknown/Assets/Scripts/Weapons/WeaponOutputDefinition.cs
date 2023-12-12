@@ -16,6 +16,8 @@ namespace Weapons
         ON_SPAWN,
         ON_RELOAD,
         ON_HIT_FULL_CHARGED,
+        ON_HIT_FIRST_ATTACK,
+        ON_HIT_SECOND_ATTACK,
         ON_HIT_THIRD_ATTACK
     }
 }

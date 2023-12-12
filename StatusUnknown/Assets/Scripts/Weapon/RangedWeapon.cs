@@ -8,7 +8,7 @@ namespace Weapon
     using UnityEngine;
     using Unity.Mathematics;
     using System.Collections;
-
+    using Module.Behaviours;
     using Weapons;
 
     
@@ -72,7 +72,7 @@ namespace Weapon
             if (reloading != default)
                 return;
             
-            CastModule(E_WeaponOutput.ON_RELOAD, spawnPoint);
+            ModuleBehaviourHandler.Instance.CastModule(this.inventory, this.weaponDefinition,E_WeaponOutput.ON_RELOAD, spawnPoint);
             weaponManager.SwitchHandRigs(false);
             mesh.transform.parent = weaponManager.rHandTr;
             reloading = StartCoroutine(ReloadingTimer());
