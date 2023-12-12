@@ -43,8 +43,12 @@ namespace Enemy.Sniper
         protected override void Initialize()
         {
             target = CombatManager.playerTransform.position;
+
             attackDuration = sniperStats.AttackDuration;
+            currentContext.attackCooldown = sniperStats.AttackCooldown + currentContext.initialAttackDuration;
+            currentContext.initialAttackDuration = 0;
             shootDelay = sniperStats.shootDelay;
+
             context.PlayAnimation("SniperBuildUp");
         }
     }
