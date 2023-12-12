@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: TwinBlade
   m_EditorClassIdentifier: 
   weaponID: 0
+  magazineSize: 0
+  reloadTime: 0
+  projectilePool:
+    prefab: {fileID: 0}
+    baseCount: 0
+  fireRate: 0
   attacks:
   - attackDamage: 30
     attackLength: 2
@@ -20,7 +26,7 @@ MonoBehaviour:
     attackKnockback: 10
     castTime: 0.05
     buildUpTime: 0.05
-    superArmor: 1000
+    superArmor: 50
     activeTime: 0.1
     recoveryTime: 0.2
     cooldownTime: 0.5
@@ -100,7 +106,7 @@ MonoBehaviour:
     attackKnockback: 10
     castTime: 0.05
     buildUpTime: 0.1
-    superArmor: 1000
+    superArmor: 50
     activeTime: 0.1
     recoveryTime: 0.25
     cooldownTime: 0.5
@@ -180,7 +186,7 @@ MonoBehaviour:
     attackKnockback: 10
     castTime: 0.05
     buildUpTime: 0.05
-    superArmor: 1000
+    superArmor: 50
     activeTime: 0.1
     recoveryTime: 0.5
     cooldownTime: 0.01
