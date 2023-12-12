@@ -26,7 +26,7 @@ MonoBehaviour:
     localPosition: {x: 1, y: 0}
     direction: 0
   BehaviourData:
-    rid: 7591883874691448837
+    rid: 6076498572378112012
   references:
     version: 2
     RefIds:
@@ -34,11 +34,7 @@ MonoBehaviour:
       type: {class: HorizontalInstantiationRule, ns: Module, asm: Assembly-CSharp}
       data:
         Length: 3
-    - rid: 7591883733765456139
-      type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
-      data:
-        radius: 0.25
-    - rid: 7591883874691448837
+    - rid: 6076498572378112012
       type: {class: ProjectileBehaviourData, ns: Module.Definitions, asm: Assembly-CSharp}
       data:
         <Behaviour>k__BackingField:
@@ -61,4 +57,8 @@ MonoBehaviour:
         <InstantiationRule>k__BackingField:
           rid: 4696495337976365329
         <Damages>k__BackingField: 14
-        speed: 10
+        speed: 20
+    - rid: 7591883733765456139
+      type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
+      data:
+        radius: 0.375
