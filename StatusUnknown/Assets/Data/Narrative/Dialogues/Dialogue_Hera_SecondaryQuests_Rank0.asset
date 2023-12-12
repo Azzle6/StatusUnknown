@@ -233,7 +233,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1680b6a6dcedc744eb2f7e4380f147a4, type: 3}
-  m_Name: EXAMPLE_Hera_NPC_Chapter_1_SecondaryQuests 1
+  m_Name: Dialogue_Hera_SecondaryQuests_Rank0
   m_EditorClassIdentifier: 
   nodes:
   - {fileID: 1831340819866683008}
@@ -248,6 +248,7 @@ MonoBehaviour:
   dialogueHasQuests: 1
   completableQuests:
   - {fileID: 11400000, guid: b1b708f1719f47546898ba886d255e28, type: 2}
+  factionDialogueNPC: 0
   storedDialogueAnswers: []
 --- !u!114 &692118110554904736
 MonoBehaviour:
@@ -348,7 +349,7 @@ MonoBehaviour:
   accessType: 1
   playerData: {fileID: 11400000, guid: 2674b3c5ad339de458610a2683a206dd, type: 2}
   Faction: 1
-  valueToAdd: 1000
+  valueToAdd: 400
 --- !u!114 &1831340819866683008
 MonoBehaviour:
   m_ObjectHideFlags: 0

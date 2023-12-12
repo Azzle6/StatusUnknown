@@ -116,12 +116,5 @@ namespace Aurore.DialogSystem
         {
             playerData.QuestJournal.GiveRewardOnQuestCompletion();
         }
-
-        internal (bool isTrue, int newRankIndex) CanUnlockFactionMainQuest()
-        {
-            // if player can go to next rank
-            return playerData.CanUnlockFactionMainQuest(factionDialogueNPC); 
-
-        }
     }
 }

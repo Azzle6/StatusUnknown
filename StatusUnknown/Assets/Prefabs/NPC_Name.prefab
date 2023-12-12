@@ -550,8 +550,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5950565276119852784}
-        m_TargetAssemblyTypeName: Aurore.DialogSystem.DialogueComponent, StatusUnknown.Tools.Narrative
-        m_MethodName: StartSequence
+        m_TargetAssemblyTypeName: Aurore.DialogSystem.FactionNPC, StatusUnknown.Tools.Narrative
+        m_MethodName: StartDialogue
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1141,6 +1141,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5950565276119852784}
+        m_TargetAssemblyTypeName: Aurore.DialogSystem.FactionNPC, StatusUnknown.Tools.Narrative
+        m_MethodName: ValidateMainQuest
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8270700139000621746
 GameObject:
   m_ObjectHideFlags: 0
@@ -1159,7 +1171,7 @@ GameObject:
   - component: {fileID: 4181276193116075328}
   - component: {fileID: 7060781280454499384}
   m_Layer: 5
-  m_Name: DialogueManager
+  m_Name: NPC_Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1383,21 +1395,11 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: 2674b3c5ad339de458610a2683a206dd, type: 2}
   dialogueTitle: {fileID: 5894424046861146229}
   dialogueType: 0
-  mainQuests:
-  - rank: 0
-    mainQuestDialogue: {fileID: 11400000, guid: 9d382c3e80e15e44a83abd5087212011,
-      type: 2}
-  - rank: 1
-    mainQuestDialogue: {fileID: 11400000, guid: 00a1eb38cde42c541afae6f2577fd865,
-      type: 2}
-  secondaryQuests:
-  - secondaryQuestDialogue: {fileID: 11400000, guid: cbac671785857bc4390f1efdc51881b9,
-      type: 2}
-    secondaryQuestsPool: []
+  npcFaction: 1
+  npcMainQuestPools: {fileID: 11400000, guid: 1688422c8b4f30844b81cbf34434e8bd, type: 2}
+  npcSecondaryQuestPools: {fileID: 11400000, guid: 584964a3b04e4814db35bf466af4e763,
+    type: 2}
   audioMumblingVoice: {fileID: 0}
-  OnReachingFactionMainQuest:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &4181276193116075328
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -26,9 +26,10 @@ namespace StatusUnknown.Content
             [LabelWidth(200)] public ReputationRank currentReputationRank;
             [LabelWidth(200)] public ReputationMechanic reputationMechanic;
             private int[] ReputationCeils;
-            private const int RANK_MAX = 3; // temp
-            bool canUnlockNextFactionQuest, hittingRankBottomValue;
-            public bool CanUnlockNextFactionQuest { get => canUnlockNextFactionQuest; }
+            private const int RANK_MAX = 3; 
+            public bool canUnlockFactionMainQuest; // temp public to playtest
+            private bool hittingRankBottomValue;
+            public bool CanUnlockFactionMainQuest { get => canUnlockFactionMainQuest; }
 
             // This system must be kept independant from the quest, because other elements may upgrade the player reputation (for ex: dialogue options)
             public void UpdateReputationRank(int additionalReputation, int[] reputationCeils)
@@ -51,16 +52,16 @@ namespace StatusUnknown.Content
 
             private void CalculateReputation_Simple(int additionalReputation, int[] reputationCeils)
             {
-                canUnlockNextFactionQuest = currentReputationValue - reputationCeils[(int)currentReputationRank + 1] >= 0;
+                canUnlockFactionMainQuest = currentReputationValue - reputationCeils[((int)currentReputationRank + 1) % RANK_MAX] >= 0;
                 hittingRankBottomValue = Math.Sign(currentReputationValue) < 0;
 
                 int newRankToInt = (int)currentReputationRank + (hittingRankBottomValue ? -1 : 1);
 
-                if (canUnlockNextFactionQuest)
+                if (canUnlockFactionMainQuest)
                 {
                     // rank upgrade
                     //UpgradeToNewRank(newRankToInt);
-                    currentReputationValue = ReputationCeils[(int)currentReputationRank];
+                    currentReputationValue = ReputationCeils[((int)currentReputationRank + 1) % RANK_MAX];
 
                     Debug.Log($"New faction quest is available to gain rank : {newRankToInt}");
                 }
@@ -71,17 +72,18 @@ namespace StatusUnknown.Content
                 }
             }
 
-            private void UpgradeToNewRank(int newRankToInt)
+            internal void UpgradeToNewRank(ReputationRank newRank)
             {
-                currentReputationRank = (ReputationRank)Math.Clamp(Math.Min(newRankToInt, RANK_MAX), 0, RANK_MAX);
-
-                // remainder is kept unless you hit max rank (no ghost leveling)
+                // no ghost levels
                 if (currentReputationRank == (ReputationRank)RANK_MAX)
                 {
                     Debug.Log("max rank was hit");
-                    currentReputationValue = 0;
                     return;
                 }
+
+                currentReputationRank = newRank;
+                currentReputationValue = 0;
+                canUnlockFactionMainQuest = false; 
             }
 
 
@@ -90,27 +92,27 @@ namespace StatusUnknown.Content
             {
                 do
                 {
-                    canUnlockNextFactionQuest = currentReputationValue - reputationCeils[(int)currentReputationRank + 1] >= 0;
+                    canUnlockFactionMainQuest = currentReputationValue - reputationCeils[((int)currentReputationRank + 1) % RANK_MAX] >= 0;
                     hittingRankBottomValue = Math.Sign(additionalReputation) < 0;
 
                     int newRankToInt = (int)currentReputationRank + (hittingRankBottomValue ? -1 : 1);
 
                     // nothing more to do if just changing reputation value but not rank
-                    if (hittingRankBottomValue || canUnlockNextFactionQuest)
+                    if (hittingRankBottomValue || canUnlockFactionMainQuest)
                     {
                         // rank upgrade
                         currentReputationRank = (ReputationRank)Math.Clamp(Math.Min(newRankToInt, RANK_MAX), 0, RANK_MAX);
 
                         // carrry over
-                        if (canUnlockNextFactionQuest)
+                        if (canUnlockFactionMainQuest)
                         {
-                            currentReputationValue -= ReputationCeils[(int)currentReputationRank];
+                            currentReputationValue -= ReputationCeils[((int)currentReputationRank + 1) % RANK_MAX];
                         }
                         else
                         {
                             currentReputationValue = newRankToInt < 0 ?
                                 0 : // can't go into a negative value if you are at bottom of rank zero
-                                currentReputationValue + ReputationCeils[(int)currentReputationRank + 1]; // negative + positive = missin reputation to reach rank again
+                                currentReputationValue + ReputationCeils[((int)currentReputationRank + 1) % RANK_MAX]; // negative + positive = missin reputation to reach rank again
                         }
 
                         Debug.Log($"New rank : {currentReputationRank} \n With remainder xp : {currentReputationValue}");
@@ -123,7 +125,7 @@ namespace StatusUnknown.Content
                             return;
                         }
                     }
-                } while (canUnlockNextFactionQuest || hittingRankBottomValue);
+                } while (canUnlockFactionMainQuest || hittingRankBottomValue);
             }
         }
 
@@ -157,6 +159,22 @@ namespace StatusUnknown.Content
             QuestJournal.Init(OnQuestCompletion);
         }
 
+        public ReputationRank GetReputationRank_Simple(Faction key)
+        {
+            return rankDatas[key].currentReputationRank;
+        }
+
+        public (int, ReputationRank) GetReputationRank_Full(Faction key)
+        {
+            return (rankDatas[key].currentReputationValue, rankDatas[key].currentReputationRank);
+        }
+
+        public bool CanUnlockFactionMainQuest(Faction key)
+        {
+            return rankDatas[key].CanUnlockFactionMainQuest;
+        }
+
+        #region Player Progression System
         public void UpdateCurrentReputation(int additionalReputation, Faction key, QuestObjectSO[] questReward = null)
         {
             // DO NOT modify the player rank if the quest was already completed
@@ -174,18 +192,11 @@ namespace StatusUnknown.Content
             }
         }
 
-        public (int, ReputationRank) GetCurrentReputation(Faction key)
+        public void UpdatePlayerRank(Faction key)
         {
-            RankData rd = rankDatas[key];
-            (int xpRemainder, ReputationRank reputationRank) returnValue = new(rd.currentReputationValue, rd.currentReputationRank);
-
-            return returnValue;
+            rankDatas[key].UpgradeToNewRank((rankDatas[key].currentReputationRank + 1));
         }
-
-        public (bool, int) CanUnlockFactionMainQuest(Faction key)
-        {
-            return (rankDatas[key].CanUnlockNextFactionQuest, (int)rankDatas[key].currentReputationRank + 1);
-        }
+        #endregion
     }
 }
 

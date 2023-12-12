@@ -27,5 +27,6 @@ public class SavedDialogueLinesSO : SerializedScriptableObject
 
     public List<DialogueDataHolder> savedDialoguesData = new List<DialogueDataHolder>();
 
+    // ToDictionary doesn't check if key already exists and can therefore throw errors...
     public Dictionary<(int, Vector2), DialogueDataHolder> GetSavedDialogueData() => savedDialoguesData.ToDictionary(x => (x.ID, x.pos)); 
 }

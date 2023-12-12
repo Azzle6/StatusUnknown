@@ -23,7 +23,7 @@ MonoBehaviour:
     SerializationNodes:
     - Name: rankDatas
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[StatusUnknown.Faction, StatusUnknown.Tools],[PlayerDataSO+RankData,
+      Data: 0|System.Collections.Generic.Dictionary`2[[StatusUnknown.Faction, StatusUnknown.Tools],[StatusUnknown.Content.PlayerDataSO+RankData,
         StatusUnknown.Tools.Narrative]], mscorlib
     - Name: comparer
       Entry: 7
@@ -49,13 +49,19 @@ MonoBehaviour:
       Data: 1
     - Name: $v
       Entry: 7
-      Data: 2|PlayerDataSO+RankData, StatusUnknown.Tools.Narrative
+      Data: 2|StatusUnknown.Content.PlayerDataSO+RankData, StatusUnknown.Tools.Narrative
     - Name: currentReputationValue
       Entry: 3
       Data: 0
     - Name: currentReputationRank
       Entry: 3
+      Data: 2
+    - Name: reputationMechanic
+      Entry: 3
       Data: 0
+    - Name: canUnlockFactionMainQuest
+      Entry: 5
+      Data: false
     - Name: 
       Entry: 8
       Data: 
@@ -70,13 +76,19 @@ MonoBehaviour:
       Data: 2
     - Name: $v
       Entry: 7
-      Data: 3|PlayerDataSO+RankData, StatusUnknown.Tools.Narrative
+      Data: 3|StatusUnknown.Content.PlayerDataSO+RankData, StatusUnknown.Tools.Narrative
     - Name: currentReputationValue
       Entry: 3
       Data: 0
     - Name: currentReputationRank
       Entry: 3
       Data: 0
+    - Name: reputationMechanic
+      Entry: 3
+      Data: 0
+    - Name: canUnlockFactionMainQuest
+      Entry: 5
+      Data: false
     - Name: 
       Entry: 8
       Data: 
@@ -91,13 +103,19 @@ MonoBehaviour:
       Data: 3
     - Name: $v
       Entry: 7
-      Data: 4|PlayerDataSO+RankData, StatusUnknown.Tools.Narrative
+      Data: 4|StatusUnknown.Content.PlayerDataSO+RankData, StatusUnknown.Tools.Narrative
     - Name: currentReputationValue
       Entry: 3
       Data: 0
     - Name: currentReputationRank
       Entry: 3
       Data: 0
+    - Name: reputationMechanic
+      Entry: 3
+      Data: 0
+    - Name: canUnlockFactionMainQuest
+      Entry: 5
+      Data: false
     - Name: 
       Entry: 8
       Data: 
@@ -112,13 +130,19 @@ MonoBehaviour:
       Data: 0
     - Name: $v
       Entry: 7
-      Data: 5|PlayerDataSO+RankData, StatusUnknown.Tools.Narrative
+      Data: 5|StatusUnknown.Content.PlayerDataSO+RankData, StatusUnknown.Tools.Narrative
     - Name: currentReputationValue
       Entry: 3
       Data: 0
     - Name: currentReputationRank
       Entry: 3
       Data: 0
+    - Name: reputationMechanic
+      Entry: 3
+      Data: 0
+    - Name: canUnlockFactionMainQuest
+      Entry: 5
+      Data: false
     - Name: 
       Entry: 8
       Data: 

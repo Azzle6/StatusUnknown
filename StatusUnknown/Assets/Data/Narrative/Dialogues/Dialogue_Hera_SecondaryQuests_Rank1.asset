@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1680b6a6dcedc744eb2f7e4380f147a4, type: 3}
+  m_Name: Dialogue_Hera_SecondaryQuests_Rank1
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: 8170788157396569288}
+  playerData: {fileID: 11400000, guid: 2674b3c5ad339de458610a2683a206dd, type: 2}
+  dialogueHasQuests: 1
+  completableQuests:
+  - {fileID: 11400000, guid: b1b708f1719f47546898ba886d255e28, type: 2}
+  factionDialogueNPC: 0
+  storedDialogueAnswers: []
+--- !u!114 &8170788157396569288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea24aeccf3449a84c8fb632a88afbf06, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -280, y: -152}
+  ports:
+    keys:
+    - DialogueLines
+    - execIn
+    values:
+    - _fieldName: DialogueLines
+      _node: {fileID: 8170788157396569288}
+      _typeQualifiedName: System.Collections.Generic.List`1[[StatusUnknown.Tools.Narrative.DialogueLine,
+        StatusUnknown.Tools.Narrative, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],
+        mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: execIn
+      _node: {fileID: 8170788157396569288}
+      _typeQualifiedName: StatusUnknown.Tools.Narrative.DialogueNode+State, StatusUnknown.Tools.Narrative,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  dialogueOpening: Hi again my friend
+  DialogueLines: []

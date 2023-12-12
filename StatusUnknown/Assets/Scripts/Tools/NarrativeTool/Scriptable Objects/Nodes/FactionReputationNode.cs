@@ -29,7 +29,7 @@ namespace StatusUnknown.Tools.Narrative
             switch (accessType)
             {
                 case AccessType.Get:
-                    result = playerData.GetCurrentReputation(Faction);
+                    result = playerData.GetReputationRank_Full(Faction);
                     break;
                 case AccessType.Set:
                     playerData.UpdateCurrentReputation(valueToAdd, Faction);
