@@ -19,25 +19,21 @@ MonoBehaviour:
     content: 0101
   icon: {fileID: 21300000, guid: 42f16c45feee3fa478a67ff4a03f675e, type: 3}
   outputs:
-  - moduleTriggerType: 0
+  - moduleTriggerType: 3
     localPosition: {x: 0, y: 0}
     direction: 3
-  - moduleTriggerType: 3
+  - moduleTriggerType: 2
     localPosition: {x: 0, y: 1}
     direction: 1
   BehaviourData:
-    rid: 7591883874691448835
+    rid: 6076498576369778689
   references:
     version: 2
     RefIds:
     - rid: 4696495337976365322
       type: {class: ForwardInstantiationRule, ns: Module, asm: Assembly-CSharp}
       data: 
-    - rid: 7591883733765456129
-      type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
-      data:
-        radius: 0.375
-    - rid: 7591883874691448835
+    - rid: 6076498576369778689
       type: {class: ProjectileBehaviourData, ns: Module.Definitions, asm: Assembly-CSharp}
       data:
         <Behaviour>k__BackingField:
@@ -54,10 +50,14 @@ MonoBehaviour:
         shootVFX: {fileID: 8926484042661614526, guid: 796b1615d7e10c841b34daa3f91694fb, type: 3}
         projectileVFX: {fileID: 8926484042661614526, guid: 8325c273348b57943984ca8d4dff44c3, type: 3}
         hitVFX: {fileID: 8926484042661614526, guid: 652ec25da3795954ca0fde48c926d59f, type: 3}
-        <TickRate>k__BackingField: 0
+        <TickRate>k__BackingField: 0.25
         <LifeTime>k__BackingField: 2
         <Quantity>k__BackingField: 1
         <InstantiationRule>k__BackingField:
           rid: 4696495337976365322
         <Damages>k__BackingField: 14
         speed: 20
+    - rid: 7591883733765456129
+      type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
+      data:
+        radius: 0.375
