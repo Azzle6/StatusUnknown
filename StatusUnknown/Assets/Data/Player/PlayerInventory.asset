@@ -18,8 +18,16 @@ MonoBehaviour:
       anchor: {x: 0, y: 0}
       content: 010101010101010101010101010101010101010101010101010101010101010101010101
     modules:
-      keyData: []
-      valueData: []
+      keyData:
+      - {x: 0, y: 0}
+      - {x: 1, y: 0}
+      - {x: 2, y: 1}
+      - {x: 0, y: 2}
+      valueData:
+      - definition: {fileID: 11400000, guid: 8bef12c80bca45d42a0aff2575407261, type: 2}
+      - definition: {fileID: 11400000, guid: 8bef12c80bca45d42a0aff2575407261, type: 2}
+      - definition: {fileID: 11400000, guid: e794c261062fcdb4dbed5a4349eaa94d, type: 2}
+      - definition: {fileID: 11400000, guid: 5eae479b53dc86d4dbae710781db9468, type: 2}
     weapons:
       keyData: []
       valueData: []
@@ -29,27 +37,48 @@ MonoBehaviour:
     - weaponTriggerType: 3
       triggerRowPosition: 1
       modules:
+        keyData:
+        - {x: 0, y: 1}
+        - {x: 2, y: 1}
+        - {x: 3, y: 0}
+        valueData:
+        - definition: {fileID: 11400000, guid: ace4dc3b1292ec8479ae57fbd8248515, type: 2}
+        - definition: {fileID: 11400000, guid: e794c261062fcdb4dbed5a4349eaa94d, type: 2}
+        - definition: {fileID: 11400000, guid: 6619b6a16cac8c8478758b7b995db060, type: 2}
+    - weaponTriggerType: 0
+      triggerRowPosition: 1
+      modules:
         keyData: []
         valueData: []
     - weaponTriggerType: 2
       triggerRowPosition: 1
       modules:
-        keyData: []
-        valueData: []
+        keyData:
+        - {x: 0, y: 0}
+        - {x: 2, y: 0}
+        valueData:
+        - definition: {fileID: 11400000, guid: 5eae479b53dc86d4dbae710781db9468, type: 2}
+        - definition: {fileID: 11400000, guid: df23cc6a6d03539448e6a04d63316304, type: 2}
   - definition: {fileID: 11400000, guid: ddfda7b31cc8afb49abd392993bea013, type: 2}
     triggerInfoData:
     - weaponTriggerType: 4
       triggerRowPosition: 1
       modules:
-        keyData: []
-        valueData: []
+        keyData:
+        - {x: 0, y: 0}
+        - {x: 0, y: 2}
+        - {x: 1, y: 2}
+        valueData:
+        - definition: {fileID: 11400000, guid: cd72a096e40a1864a9637e9cb68083a2, type: 2}
+        - definition: {fileID: 11400000, guid: 6619b6a16cac8c8478758b7b995db060, type: 2}
+        - definition: {fileID: 11400000, guid: df23cc6a6d03539448e6a04d63316304, type: 2}
     - weaponTriggerType: 5
-      triggerRowPosition: 0
+      triggerRowPosition: 1
       modules:
         keyData: []
         valueData: []
     - weaponTriggerType: 6
-      triggerRowPosition: 0
+      triggerRowPosition: 1
       modules:
         keyData: []
         valueData: []
