@@ -6,6 +6,7 @@ namespace Inventory.Item
     {
         public abstract E_ItemType ItemType { get; }
         public string itemName;
+        public string description;
         public Shape shape;
         public Sprite icon;
     }

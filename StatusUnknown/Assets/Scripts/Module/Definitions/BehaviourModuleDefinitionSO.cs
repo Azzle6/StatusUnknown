@@ -60,6 +60,9 @@ namespace Module.Definitions
         public int Quantity { get; set; }
         [field: SerializeReference]
         public IInstantiationRule InstantiationRule { get; set; }
+
+        [SerializeField, InfoBox("Type -1  for infinite.")]
+        public int maxDamagedEnemies;
         [field: SerializeField]
         public float Damages { get; set; }
         [field: SerializeField]

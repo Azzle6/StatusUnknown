@@ -1,22 +1,24 @@
 namespace Core.SingletonsSO
 {
+    using System;
     using Inventory.Grid;
     using Inventory.Item;
     using Sirenix.OdinInspector;
     using UI;
     using UnityEngine;
-    using UnityEngine.Serialization;
     using UnityEngine.UIElements;
 
     [CreateAssetMenu(menuName = "CustomAssets/SingletonSO/UIHandler", fileName = "UIHandler")]
-    public partial class UIHandler : SingletonSO<UIHandler>
+    public class UIHandler : SingletonSO<UIHandler>
     {
         public UISettings uiSettings;
-        [FormerlySerializedAs("iconsReferences")] public OutputReferencesSO outputReferences;
+        public OutputReferencesSO outputReferences;
+
+        public Action<ItemView> hoverItem;
         
         [FoldoutGroup("Dynamic data")]
         public bool isMovingItem;
-        [FoldoutGroup("Dynamic data")] 
+        [FoldoutGroup("Dynamic data")]
         private ItemView movingItem;
         
         private GridView selectedGrid;
@@ -45,7 +47,11 @@ namespace Core.SingletonsSO
                 }
                 MoveItem(element);
             }
-                
+        }
+        
+        public void OnItemHover(ItemView element)
+        {
+            this.hoverItem?.Invoke(element);
         }
 
         public void TryPickItem(ItemView itemView)
@@ -98,11 +104,4 @@ namespace Core.SingletonsSO
         }
         #endregion //GRID_MANAGEMENT
     }
-
-    #if UNITY_EDITOR
-    public partial class UIHandler : SingletonSO<UIHandler>
-    {
-        
-    }
-    #endif
 }

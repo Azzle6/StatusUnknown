@@ -32,6 +32,7 @@ namespace Inventory.Grid
         private float slotWidth;
 
         private readonly Action<IGridElement> gridElementFocusEvent;
+        private readonly Action<ItemView> hoverItemEvent;
 
         private VisualElement firstFocus;
         private VisualElement verticalParent;
@@ -43,6 +44,7 @@ namespace Inventory.Grid
             this.shape = shape;
             this.container = container;
             this.gridElementFocusEvent += UIHandler.Instance.OnGridElementFocus;
+            this.hoverItemEvent += UIHandler.Instance.OnItemHover;
             this.canContainsTypes = typesContained;
             this.BuildGrid();
         }
@@ -72,7 +74,12 @@ namespace Inventory.Grid
                     Vector2Int pos = new Vector2Int(x, y);
                     VisualElement slotView = gridSlots[GridHelper.GetIndexFromGridPosition(pos, this.shape.shapeSize.x)];
                     Slot slot = new Slot(pos, slotView, this);
-                    slot.FocusElement.RegisterCallback<FocusEvent>(e => this.gridElementFocusEvent?.Invoke(slot));
+                    slot.FocusElement.RegisterCallback<FocusEvent>((e) =>
+                    {
+                        this.gridElementFocusEvent?.Invoke(slot);
+                        if(slot.ItemView != null)
+                            this.hoverItemEvent?.Invoke(slot.ItemView);
+                    });
                     slot.FocusElement.RegisterCallback<NavigationSubmitEvent>(e => this.OnInteract(slot));
                     slotsList.Add(slot);
                     if (!slotView.ClassListContains("hiddenSlot"))

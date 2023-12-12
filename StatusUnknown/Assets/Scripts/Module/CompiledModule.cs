@@ -1,7 +1,5 @@
 namespace Module
 {
-    using Definitions;
-
     public class CompiledModule
     {
         public ModuleData module;

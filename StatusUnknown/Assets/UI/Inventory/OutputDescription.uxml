@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Global/GlobalUSS.uss?fileID=7433441132597879392&amp;guid=b957b32707326d646b329444c53afc3b&amp;type=3#GlobalUSS" />
+    <ui:VisualElement name="selectedIOutputInfo" style="flex-direction: row;">
+        <ui:VisualElement name="outputIcon" style="width: 50px; height: 50px; flex-shrink: 0;" />
+        <ui:VisualElement name="VisualElement">
+            <ui:Label tabindex="-1" text="aaaa" parse-escape-sequences="true" display-tooltip-when-elided="true" name="outputName" class="halfTitle" style="white-space: normal; margin-left: 20px; flex-shrink: 1; -unity-text-align: upper-left;" />
+            <ui:Label tabindex="-1" text="aaaa" parse-escape-sequences="true" display-tooltip-when-elided="true" name="outputDescription" class="halfTitle" style="white-space: normal; margin-left: 20px; flex-shrink: 1; font-size: 18px; -unity-text-align: upper-left;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
