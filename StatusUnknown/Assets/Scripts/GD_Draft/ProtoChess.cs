@@ -1,3 +1,5 @@
+using System.Collections;
+using Unity.VisualScripting;
 using Core.SingletonsSO;
 using Inventory.Item;
 using UnityEngine;
@@ -12,6 +14,7 @@ public class ProtoChess : MonoBehaviour
     public bool lootable= true;
     public GameObject top;
     public UnityEvent action;
+    public bool isInfinite;
     
     void Start()
     {
@@ -27,6 +30,10 @@ public class ProtoChess : MonoBehaviour
             textInteract.SetActive(false);
             textLoot.SetActive(true);
             this.action?.Invoke();
+            if (isInfinite)
+            {
+                StartCoroutine("Cooldown");
+            }
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -51,5 +58,14 @@ public class ProtoChess : MonoBehaviour
     public void AddItem(GridItemSO itemDefinition)
     {
         PlayerHandler.Instance.AddItemToInventory(ItemData.CreateItemData(itemDefinition));
+    }
+    
+    IEnumerator Cooldown()
+    {
+        yield return new WaitForSeconds(0.25f);
+        top.GetComponent<Animator>().SetBool("Lootable",true);
+        lootable = true;
+        textLoot.SetActive(false);
+        textInteract.SetActive(true);
     }
 }
