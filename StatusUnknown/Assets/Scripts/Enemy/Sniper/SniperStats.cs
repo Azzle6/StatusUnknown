@@ -12,6 +12,7 @@ public class SniperStats : EnemyStats
     [SerializeField, Range(0f, 1f)]
     float tpCooldownRnd = 0.5f;
     public float TpRndCooldown { get {  return tpCooldown * (1 - Random.Range(0, tpCooldownRnd)); }  }
+    public float tpWarningDelay = 1;
     [Header("Shoot")]
     public float shootDelay = 0.5f;
 

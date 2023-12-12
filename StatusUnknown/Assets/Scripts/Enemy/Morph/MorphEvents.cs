@@ -5,8 +5,9 @@ using UnityEngine;
 
 public static class MorphEvents 
 {
-    // TODO : Define usefull parameters more tahn MorphBehaviour
+    // TODO : Define usefull parameters more than MorphBehaviour
     public static event Action<MorphBehaviour> MorphStart, MorphEnd;
+    public static MorphEgg activeMorphEgg {  get; private set; }
     public static void StartMorphEvent(MorphBehaviour morphOrigin)
     {
         Debug.Log("StartMorphEvent");
@@ -17,4 +18,11 @@ public static class MorphEvents
         Debug.Log("EndMorphEvent");
         MorphEnd?.Invoke(morphOrigin);
     }
+
+    public static void RegisterActiveMorphEgg(MorphEgg egg)
+    {
+        activeMorphEgg = egg;
+        egg.endMorphEvent += (bool sucess) => { activeMorphEgg = null; };
+    }
+
 }

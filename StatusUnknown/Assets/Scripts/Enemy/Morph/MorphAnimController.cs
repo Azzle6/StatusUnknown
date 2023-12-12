@@ -15,11 +15,11 @@ namespace Enemy.Morph
             this.morphEgg.endMorphEvent -= this.ProcessEggEndAnimation;
         }
 
-        void ProcessEggEndAnimation(bool sucess)
-        {
-            string animationClip = sucess ? "MorphEggDestroyed" : "MorphEggFinish";
-            this.eggAnimator.Play(animationClip);
-        }
+    void ProcessEggEndAnimation(bool sucess)
+    {
+        string animationClip = (!sucess) ? "MorphEggDestroyed" : "MorphEggFinish";
+        eggAnimator.Play(animationClip);
+    }
 
     }
 }
