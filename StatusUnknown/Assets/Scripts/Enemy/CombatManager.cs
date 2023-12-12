@@ -16,7 +16,6 @@ public static class CombatManager
         float sqrtPlayerDistance = Vector3.SqrMagnitude(position - playerTransform.position);
         return (sqrtPlayerDistance < range * range);
     }
-
     public static bool PlayerInView(Vector3 position, Vector3 lookDirection, float range, float viewAngle, LayerMask obstructMask)
     {
         if (playerTransform == null) return false;
