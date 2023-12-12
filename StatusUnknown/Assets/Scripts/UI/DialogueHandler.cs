@@ -1,4 +1,5 @@
 using Core.SingletonsSO;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 namespace UI
@@ -9,16 +10,24 @@ namespace UI
     {
         [SerializeField] private UIDocument uiDocument;
         private VisualElement dialogueContainer;
+        private Label timerLabel;
         private Label dialogueLabel;
         private Button closeButton;
         private VisualElement imageDisplayer;
         
         void Start()
         {
+            timerLabel = uiDocument.rootVisualElement.Q<Label>("Timer");
             dialogueContainer = uiDocument.rootVisualElement.Q<VisualElement>("Dialogue");
             closeButton = uiDocument.rootVisualElement.Q<Button>("CloseButton");
             imageDisplayer = uiDocument.rootVisualElement.Q<VisualElement>("ImageDisplayer");
 
+            Debug.Log(SceneManager.GetActiveScene().name);
+            if (SceneManager.GetActiveScene().name == "ProtoXP")
+            {
+                timerLabel.style.display = DisplayStyle.Flex;
+
+            }
             closeButton.clicked += CloseDialogue;
             dialogueLabel = uiDocument.rootVisualElement.Q<Label>("DialogueLabel");
             CloseDialogue();
