@@ -208,10 +208,10 @@ MonoBehaviour:
     m_Value: {r: 1, g: 1, b: 1, a: 1}
   dirtTexture:
     m_OverrideState: 1
-    m_Value: {fileID: 2800000, guid: 2d71c7189cd6e37439e5815d3587a55e, type: 3}
+    m_Value: {fileID: 2800000, guid: 47872fa8fe19eb14898e77aa998b773e, type: 3}
   dirtIntensity:
     m_OverrideState: 1
-    m_Value: 3
+    m_Value: 15
   anamorphic:
     m_OverrideState: 0
     m_Value: 1
@@ -319,7 +319,7 @@ MonoBehaviour:
     m_Value: 1
   fixedExposure:
     m_OverrideState: 1
-    m_Value: 12
+    m_Value: 11
   compensation:
     m_OverrideState: 1
     m_Value: 0
@@ -756,10 +756,10 @@ MonoBehaviour:
   active: 1
   type:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 3
   intensity:
     m_OverrideState: 1
-    m_Value: 0.021
+    m_Value: 0.15
   response:
     m_OverrideState: 1
     m_Value: 0
@@ -862,10 +862,10 @@ MonoBehaviour:
     m_Value: 0
   contrast:
     m_OverrideState: 1
-    m_Value: -17
+    m_Value: 10
   colorFilter:
     m_OverrideState: 1
-    m_Value: {r: 1, g: 0.9858491, b: 0.9481132, a: 1}
+    m_Value: {r: 1, g: 0.96081275, b: 0.8726415, a: 1}
   hueShift:
     m_OverrideState: 1
     m_Value: 0
@@ -884,7 +884,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 953beb541740ddc499d005ee80c9ff29, type: 3}
   m_Name: Fog
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   quality:
     m_OverrideState: 1
     m_Value: 2
@@ -893,10 +893,10 @@ MonoBehaviour:
     m_Value: 1
   colorMode:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   color:
     m_OverrideState: 1
-    m_Value: {r: 0.4341537, g: 0.5647117, b: 0.9646866, a: 1}
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
   tint:
     m_OverrideState: 1
     m_Value: {r: 1, g: 1, b: 1, a: 1}
@@ -920,19 +920,19 @@ MonoBehaviour:
     m_Value: 206.76
   meanFreePath:
     m_OverrideState: 1
-    m_Value: 22.5
+    m_Value: 50
   enableVolumetricFog:
     m_OverrideState: 1
     m_Value: 1
   albedo:
     m_OverrideState: 1
-    m_Value: {r: 0.7019608, g: 0.79001313, b: 1, a: 1}
+    m_Value: {r: 0.7735849, g: 0.7735849, b: 0.7735849, a: 1}
   globalLightProbeDimmer:
     m_OverrideState: 1
     m_Value: 1
   depthExtent:
     m_OverrideState: 1
-    m_Value: 60
+    m_Value: 800
   denoisingMode:
     m_OverrideState: 1
     m_Value: 3
@@ -1054,18 +1054,18 @@ MonoBehaviour:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
-          time: 0
-          value: 0.015544057
+          time: 0.011363637
+          value: 0.038277507
           inSlope: 0
-          outSlope: 1
+          outSlope: 0.7017543
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 1
-          value: 0.97409326
-          inSlope: 1
+          time: 0.98636365
+          value: 0.94258374
+          inSlope: 1.3157895
           outSlope: 0
           tangentMode: 0
           weightedMode: 0
