@@ -18,6 +18,7 @@ namespace Player
         [SerializeField] private IntVariableSO medikitAmount;
         [SerializeField] private WeaponVariableSO[] weaponVariableSO;
         [SerializeField] private FloatVariableSO[] weaponAmmoVariableSO;
+        [SerializeField] private AugmentVariableSO[] augmentVariableSO;
         [SerializeField] private VisualTreeAsset popupUIDocument;
         private VisualElement popUpZone;
         private List<VisualElement> augmentIcon;
@@ -40,6 +41,7 @@ namespace Player
         [SerializeField] private float popUpStayTime;
         [SerializeField] private float popUpFadeTime;
         [SerializeField] private int popUpMaxCount = 3;
+        private bool isDisplayed;
         
         
         
@@ -60,6 +62,16 @@ namespace Player
                 augmentIcon.Add(playerInfoUIDocument.rootVisualElement.Q<VisualElement>($"Augment{x}"));
             weaponVariableSO[0].RegisterOnValueChanged(weapon => UpdateWeaponIcon(0, weapon));
             weaponVariableSO[1].RegisterOnValueChanged(weapon => UpdateWeaponIcon(1, weapon));
+
+            for (int x = 0; x < augmentVariableSO.Length; x++)
+            {
+                augmentVariableSO[x].RegisterOnValueChanged(augment => SwitchAugmentStat(augment.GetAugmentStat()));
+                
+            }
+            
+            UpdateWeaponIcon(0, weaponVariableSO[0].Value);
+            UpdateWeaponIcon(1, weaponVariableSO[1].Value);
+            
             weaponAmmoVariableSO[0].RegisterOnValueChanged(UpdateWeapon1AmmoCount);
             weaponAmmoVariableSO[1].RegisterOnValueChanged(UpdateWeapon2AmmoCount);
             playerHealth.RegisterOnValueChanged(UpdateHealthBar);
@@ -69,18 +81,18 @@ namespace Player
             InitMedikitCount(medikitAmount.Value);
             UpdateWeaponIcon(0, weaponVariableSO[0].Value);
             UpdateWeaponIcon(1, weaponVariableSO[1].Value);
-     
-
-
+            
         }
 
         public void Hide()
         {
+            isDisplayed = false;
             playerInfoUIDocument.rootVisualElement.style.display = DisplayStyle.None;
         }
 
         public void Show()
         {
+            isDisplayed = true;
             playerInfoUIDocument.rootVisualElement.style.display = DisplayStyle.Flex;
         }
         
@@ -177,13 +189,24 @@ namespace Player
         public void SwitchAugmentStat(AugmentStat augmentStat)
         {
             augmentIcon[augmentStat.augmentSlot].style.backgroundImage = augmentStat.augmentSprite;
-
         }
 
         public void UseAugment(AugmentStat augmentStat)
         {
             augmentIcon[augmentStat.augmentSlot].style.unityBackgroundImageTintColor = Color.black;
             DOTween.To(() => augmentIcon[augmentStat.augmentSlot].style.unityBackgroundImageTintColor.value, x => augmentIcon[augmentStat.augmentSlot].style.unityBackgroundImageTintColor = x, Color.white, augmentStat.augmentCooldown);
+        }
+        
+        public void DisplayEvent(bool display)
+        {
+            if (display)
+            {
+                Hide();
+            }
+            else
+            {
+                Show();
+            }
         }
     }
 }

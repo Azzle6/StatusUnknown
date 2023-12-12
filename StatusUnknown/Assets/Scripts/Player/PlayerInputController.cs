@@ -68,9 +68,9 @@ namespace Player
             playerInput.PlayerActionMaps.Interact.performed += ctx => Interact(ctx);
             playerInput.PlayerActionMaps.Interact.canceled += ctx => Interact(ctx);
             
-            playerInput.PlayerActionMaps.Inventory.started += ctx => Inventory(ctx);
+            /*playerInput.PlayerActionMaps.Inventory.started += ctx => Inventory(ctx);
             playerInput.PlayerActionMaps.Inventory.performed += ctx => Inventory(ctx);
-            playerInput.PlayerActionMaps.Inventory.canceled += ctx => Inventory(ctx);
+            playerInput.PlayerActionMaps.Inventory.canceled += ctx => Inventory(ctx);*/
             
             playerInput.PlayerActionMaps.Reload.started += ctx => Reload(ctx);
             playerInput.PlayerActionMaps.Reload.performed += ctx => Reload(ctx);

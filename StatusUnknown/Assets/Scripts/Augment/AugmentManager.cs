@@ -11,6 +11,7 @@ namespace Augment
     {
         public PlayerStateInterpretor PlayerStateInterpretor;
         [SerializeField] private Augment[] currentAugments;
+        [SerializeField] private AugmentVariableSO[] augmentsVariableSO;
 
         private void Start()
         {
@@ -26,6 +27,7 @@ namespace Augment
 
                 currentAugments[x].GetAugmentStat().augmentSlot = x;
                 currentAugments[x].augmentDataGameEvent.RaiseEvent(currentAugments[x].GetAugmentStat());
+                augmentsVariableSO[x].Value = currentAugments[x];
             }
         }
 

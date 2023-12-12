@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UIElements;
 
 public class ProtoXPTimer : MonoBehaviour
 {
     public static ProtoXPTimer instance;
+    [SerializeField] private UIDocument uiDocument;
+    private Label timerLabel;
     [NonSerialized] public float timer;
-    public TMP_Text text;
 
     private void Awake()
     {
@@ -20,6 +22,8 @@ public class ProtoXPTimer : MonoBehaviour
         {
             instance = this;
         }
+        
+        timerLabel = uiDocument.rootVisualElement.Q<Label>("Timer");
     }
 
     private void Update()
@@ -29,7 +33,7 @@ public class ProtoXPTimer : MonoBehaviour
 
     void RefreshTimerUI()
     {
-        text.text = "Timer : " + Mathf.FloorToInt(timer / 60).ToString() + " minutes " + (timer % 60).ToString("#.00");
+        timerLabel.text = "Timer : " + Mathf.FloorToInt(timer / 60) + " minutes " + (timer % 60).ToString("#.00");
     }
 
     public void IncrementTimerValue(float value)

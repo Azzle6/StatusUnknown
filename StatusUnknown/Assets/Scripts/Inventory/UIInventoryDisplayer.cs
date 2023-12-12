@@ -1,3 +1,5 @@
+using Core.EventsSO.GameEventsTypes;
+
 namespace Inventory
 {
     using Core.SingletonsSO;
@@ -40,6 +42,7 @@ namespace Inventory
         private bool isDisplayed;
 
         private WeaponData selectedWeaponData;
+        
 
         private void OnEnable()
         {
@@ -135,9 +138,8 @@ namespace Inventory
         public void Display(bool display)
         {
             this.isDisplayed = display;
-            
+
             //Debug.Log($"{(this.isDisplayed ? "Display" : "Hide")} inventory.");
-            
             this.inventoryRoot.style.display = this.isDisplayed ? DisplayStyle.Flex : DisplayStyle.None;
             if (this.isDisplayed)
             {

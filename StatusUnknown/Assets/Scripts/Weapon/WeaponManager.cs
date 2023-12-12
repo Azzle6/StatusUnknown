@@ -77,7 +77,6 @@ namespace Weapon
             if (CheckIfMeleeWeapon(weaponNo))
             {
                 //changing arm layer
-                Debug.Log("Melee");
                 playerStateInterpretor.animator.SetLayerWeight(2,1);
                 playerStateInterpretor.animator.SetLayerWeight(1,0);
                 SwitchHandRigs(false);
@@ -85,7 +84,6 @@ namespace Weapon
             }
             else
             {
-                Debug.Log("Ranged");
                 playerStateInterpretor.animator.SetLayerWeight(2,0);
                 playerStateInterpretor.animator.SetLayerWeight(1,1);
                 SwitchHandRigs(true);

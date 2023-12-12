@@ -1,3 +1,5 @@
+using Sirenix.OdinInspector;
+
 namespace Augment
 {
     using UnityEngine;
@@ -6,7 +8,7 @@ namespace Augment
     {
         public float augmentCooldown; 
         public Texture2D augmentSprite;
-        [HideInInspector] public int augmentSlot;
+        [ReadOnly] public int augmentSlot;
     }
 
 }
