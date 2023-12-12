@@ -110,7 +110,7 @@ namespace Inventory
                 triggerSelectionButton.RegisterCallback<NavigationSubmitEvent>((e) => this.SelectTriggerIndex(index));
                 triggerSelectionButton.Q<VisualElement>("triggerIcon").style.backgroundImage =
                     UIHandler.Instance.outputReferences.weaponOutputReferences[this.selectedWeaponData.triggerInfoData[i].weaponTriggerType].icon.texture;
-                triggerSelectionButton.Q<TextElement>("triggerName").text = this.selectedWeaponData.triggerInfoData[i].weaponTriggerType.ToString();
+                triggerSelectionButton.Q<TextElement>("triggerName").text = this.selectedWeaponData.triggerInfoData[i].weaponTriggerType.ToString().Replace("_", " ");
                 triggerSelectionButton.Q<TextElement>("triggerIndex").text = $"T{i + 1}";
                 
                 this.triggersButtonsRoot.Add(triggerSelectionButton);

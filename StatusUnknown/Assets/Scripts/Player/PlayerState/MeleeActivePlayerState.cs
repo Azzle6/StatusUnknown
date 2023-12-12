@@ -7,6 +7,9 @@ namespace Player
     using UnityEngine;
     using Weapon;
     using System.Collections;
+    using Core.SingletonsSO;
+    using Module.Behaviours;
+    using Weapons;
 
     public class MeleeActivePlayerState : PlayerState
     {
@@ -73,10 +76,29 @@ namespace Player
                     if (enemy.TryGetComponent(out IDamageable damageable))
                     {
                         damageable.TakeDamage(currentAttack.attackDamage, transform.forward * currentAttack.attackKnockback);
+                        Quaternion baseRotation = Quaternion.AngleAxis(Quaternion.Angle(transform.rotation, enemy.transform.rotation), transform.up);
+                        Quaternion finalRotation = Quaternion.LookRotation(baseRotation * transform.forward);
+                        E_WeaponOutput output;
+                        switch (this.currentMeleeWeapon.comboIndex)
+                        {
+                            case 0:
+                                output = E_WeaponOutput.ON_HIT_FIRST_ATTACK;
+                                break;
+                            case 1:
+                                output = E_WeaponOutput.ON_HIT_SECOND_ATTACK;
+                                break;
+                            case 2:
+                                output = E_WeaponOutput.ON_HIT_THIRD_ATTACK;
+                                break;
+                            default:
+                                output = E_WeaponOutput.ON_HIT_FIRST_ATTACK;
+                                break;
+                        }
+                        ModuleBehaviourHandler.Instance.CastModule(this.currentMeleeWeapon.inventory, this.currentMeleeWeapon.weaponDefinition, output, enemy.transform.position, finalRotation);
+                        ModuleBehaviourHandler.Instance.CastModule(this.currentMeleeWeapon.inventory, this.currentMeleeWeapon.weaponDefinition, E_WeaponOutput.ON_HIT, enemy.transform.position, finalRotation);
                     }
                 }
             }
         }
-        
     }
 }

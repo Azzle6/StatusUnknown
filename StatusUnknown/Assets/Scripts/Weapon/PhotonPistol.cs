@@ -7,6 +7,7 @@ namespace Weapon
     using UnityEngine;
     using Core.Pooler;
     using Combat.HitProcess;
+    using Module.Behaviours;
     using Unity.Mathematics;
     using UnityEngine.VFX;
     using Weapons;
@@ -115,7 +116,7 @@ namespace Weapon
             tempPhotonPistolBullet.StartCheckingCollision();
             tempPhotonPistolBullet.hitShape.radius = tempPhotonPistolBulletTr.localScale.y / 2;
             
-            CastModule(E_WeaponOutput.ON_SPAWN, spawnPoint);
+            ModuleBehaviourHandler.Instance.CastModule(this.inventory, this.weaponDefinition,E_WeaponOutput.ON_SPAWN, spawnPoint);
             
             tempPhotonPistolBulletTr = default;
             tempPhotonPistolBullet = default;
@@ -125,8 +126,8 @@ namespace Weapon
 
         private void OnProjectileHit(bool isFullCharged, Transform projectile)
         {
-            CastModule(E_WeaponOutput.ON_HIT, projectile);
-            if(isFullCharged) CastModule(E_WeaponOutput.ON_HIT_FULL_CHARGED, projectile);
+            ModuleBehaviourHandler.Instance.CastModule(this.inventory, this.weaponDefinition, E_WeaponOutput.ON_HIT, projectile);
+            if(isFullCharged) ModuleBehaviourHandler.Instance.CastModule(this.inventory, this.weaponDefinition,E_WeaponOutput.ON_HIT_FULL_CHARGED, projectile);
         }
         
         public override void Hit()

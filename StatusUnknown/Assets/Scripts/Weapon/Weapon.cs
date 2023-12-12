@@ -28,18 +28,6 @@ namespace Weapon
         
         public abstract void RestWeapon();
 
-        protected void CastModule(E_WeaponOutput trigger, Transform spawnPoint)
-        {
-            
-            WeaponTriggerData data = this.inventory.GetWeaponTriggerData(this.weaponDefinition, trigger);
-            if(data == null || data.compiledModules.FirstModule == null)
-                return;
-            
-            ModuleBehaviourHandler.Instance.InstantiateModuleBehaviour(
-                data.compiledModules.FirstModule,
-                new InstantiatedModuleInfo(spawnPoint.position, spawnPoint.rotation));
-        }
-
         public abstract void Hit();
     }
 

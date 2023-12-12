@@ -2,6 +2,7 @@ namespace Module.Behaviours
 {
     using Core;
     using Definitions;
+    using Inventory;
     using UnityEngine;
     using Weapons;
 
@@ -37,6 +38,38 @@ namespace Module.Behaviours
             {
                 new GameObject("module", data.Behaviour.ScriptType).GetComponent<InstantiatedModule>().Init(compiledModule, new InstantiatedModuleInfo(positions[i].Position, positions[i].Rotation, info.LastHit), data);
             }
+        }
+        
+        public void CastModule(WeaponTriggerData data, Transform spawnPoint)
+        {
+            if(data == null || data.compiledModules.FirstModule == null)
+                return;
+            
+            Instance.InstantiateModuleBehaviour(
+                data.compiledModules.FirstModule,
+                new InstantiatedModuleInfo(spawnPoint.position, spawnPoint.rotation));
+        }
+        
+        public void CastModule(PlayerInventorySO inventory, WeaponDefinitionSO weaponDef, E_WeaponOutput trigger, Transform spawnPoint)
+        {
+            WeaponTriggerData data = inventory.GetWeaponTriggerData(weaponDef, trigger);
+            CastModule(data, spawnPoint);
+        }
+        
+        public void CastModule(WeaponTriggerData data, Vector3 spawnPoint, Quaternion rotation)
+        {
+            if(data == null || data.compiledModules.FirstModule == null)
+                return;
+            
+            Instance.InstantiateModuleBehaviour(
+                data.compiledModules.FirstModule,
+                new InstantiatedModuleInfo(spawnPoint, rotation));
+        }
+        
+        public void CastModule(PlayerInventorySO inventory, WeaponDefinitionSO weaponDef, E_WeaponOutput trigger, Vector3 spawnPoint, Quaternion rotation)
+        {
+            WeaponTriggerData data = inventory.GetWeaponTriggerData(weaponDef, trigger);
+            CastModule(data, spawnPoint, rotation);
         }
     }
 }
