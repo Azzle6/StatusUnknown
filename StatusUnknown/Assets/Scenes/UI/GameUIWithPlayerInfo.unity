@@ -338,6 +338,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7181684523958890670, guid: c84982c4a467d4f4da384f01d716322c, type: 3}
   m_PrefabInstance: {fileID: 1916121538}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1916121540 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5756491042388220542, guid: c84982c4a467d4f4da384f01d716322c, type: 3}
+  m_PrefabInstance: {fileID: 1916121538}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1917496555
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,6 +461,7 @@ MonoBehaviour:
   openInventoryGameEvent: {fileID: 11400000, guid: b4f0c796a4b89fa4688458081ea75881, type: 2}
   pauseDisplayGameEvent: {fileID: 11400000, guid: 671e02dc5edb30f4ba0616e923f3d0ee, type: 2}
   inventoryDisplayer: {fileID: 284051425}
+  pauseUiDoc: {fileID: 1916121540}
 --- !u!114 &1917496563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -467,11 +479,11 @@ MonoBehaviour:
   m_MoveRepeatRate: 0.1
   m_XRTrackingOrigin: {fileID: 0}
   m_ActionsAsset: {fileID: -944628639613478452, guid: e6afd96437de4024aa72882a5e04ea63, type: 3}
-  m_PointAction: {fileID: 0}
+  m_PointAction: {fileID: -2322966601750506923, guid: e6afd96437de4024aa72882a5e04ea63, type: 3}
   m_MoveAction: {fileID: 8775204439418194932, guid: e6afd96437de4024aa72882a5e04ea63, type: 3}
   m_SubmitAction: {fileID: 1576816916465008161, guid: e6afd96437de4024aa72882a5e04ea63, type: 3}
   m_CancelAction: {fileID: 5322217111664783191, guid: e6afd96437de4024aa72882a5e04ea63, type: 3}
-  m_LeftClickAction: {fileID: 0}
+  m_LeftClickAction: {fileID: 721178272820896345, guid: e6afd96437de4024aa72882a5e04ea63, type: 3}
   m_MiddleClickAction: {fileID: 0}
   m_RightClickAction: {fileID: 0}
   m_ScrollWheelAction: {fileID: 0}
@@ -530,7 +542,7 @@ MonoBehaviour:
   m_PanelSettings: {fileID: 11400000, guid: 69da892ffc2138f40ad579e3a2224bf1, type: 2}
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 1559570adaa9bdd47883cc1ec6542863, type: 3}
-  m_SortingOrder: 1
+  m_SortingOrder: -1
 --- !u!114 &2067287834
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -64,6 +64,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiDocument: {fileID: 5756491042388220542}
   playerInfo: {fileID: 11400000, guid: 572cc3af9fe3b424497af5c08e7df714, type: 2}
+  displayPauseMenu: {fileID: 11400000, guid: 671e02dc5edb30f4ba0616e923f3d0ee, type: 2}
   deviceLog: {fileID: 11400000, guid: 03f0add060b72a64482755963028eead, type: 2}
 --- !u!114 &2365236100076075197
 MonoBehaviour:
@@ -84,7 +85,7 @@ MonoBehaviour:
       - m_Target: {fileID: 2782849606029301381}
         m_TargetAssemblyTypeName: UI.PauseMenuUIHandler, Assembly-CSharp
         m_MethodName: ReceiveSignal
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

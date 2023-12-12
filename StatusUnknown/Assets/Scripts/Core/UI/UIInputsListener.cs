@@ -1,4 +1,5 @@
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 namespace Core.UI
 {
@@ -15,6 +16,7 @@ namespace Core.UI
         [SerializeField] private BoolGameEvent pauseDisplayGameEvent;
 
         [SerializeField] private UIInventoryDisplayer inventoryDisplayer;
+        [SerializeField] private UIDocument pauseUiDoc;
 
         private void OnStart()
         {
@@ -23,7 +25,7 @@ namespace Core.UI
 
         private void OnPause()
         {
-            pauseDisplayGameEvent.RaiseEvent(true);
+            pauseDisplayGameEvent.RaiseEvent(pauseUiDoc.rootVisualElement.style.display == DisplayStyle.None);
         }
     }
 }

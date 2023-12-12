@@ -12,6 +12,7 @@ namespace UI
     {
         [SerializeField] private UIDocument uiDocument;
         [SerializeField] private BoolGameEvent playerInfo;
+        [SerializeField] private BoolGameEvent displayPauseMenu;
         [SerializeField] private DeviceLog deviceLog;
         private Button resumeButton;
         private Button restartButton;
@@ -20,6 +21,8 @@ namespace UI
         private Button optionReturnButton;
         private RadioButtonGroup controlRadioButtons;
         private VisualElement pauseMenu;
+
+
         private VisualElement optionMenu;
 
         private void Start()
@@ -34,39 +37,17 @@ namespace UI
             controlRadioButtons = uiDocument.rootVisualElement.Q<RadioButtonGroup>("ControlRadioButtons");
             optionReturnButton = uiDocument.rootVisualElement.Q<Button>("OptionReturnButton");
             
-            resumeButton.RegisterCallback<ClickEvent>(e => Resume());
-            restartButton.RegisterCallback<ClickEvent>(e => Restart());
-            optionButton.RegisterCallback<ClickEvent>(e => Option());
-            exitButton.RegisterCallback<ClickEvent>(e => Exit());
-            optionReturnButton.RegisterCallback<ClickEvent>(e => OptionBack());
+            resumeButton.clicked += Resume;
+            restartButton.clicked += Restart;
+            optionButton.clicked += Option;
+            exitButton.clicked += Exit;
+            optionReturnButton.clicked += OptionBack;
         }
-
-        private void SwitchDisplay()
-        {
-            uiDocument.rootVisualElement.style.display = uiDocument.rootVisualElement.style.display == DisplayStyle.None ? DisplayStyle.Flex : DisplayStyle.None;
-            playerInfo.RaiseEvent(uiDocument.rootVisualElement.style.display == DisplayStyle.Flex);
-
-            if (uiDocument.rootVisualElement.style.display == DisplayStyle.Flex)
-            {
-                Time.timeScale = 0;
-                optionMenu.style.visibility = Visibility.Hidden;
-                pauseMenu.style.visibility = Visibility.Visible;
-                UIHandler.Instance.ForceFocus(resumeButton);
-            }
-            else
-            {
-                Time.timeScale = 1;
-                if (controlRadioButtons.value == 0)
-                    deviceLog.currentDevice = Player.DeviceType.GAMEPAD;
-                if (controlRadioButtons.value == 1) 
-                    deviceLog.currentDevice = Player.DeviceType.KEYBOARD;
-            }
-        }
+        
 
         private void Resume()
         {
-            Time.timeScale = 1;
-            SwitchDisplay();
+            displayPauseMenu.RaiseEvent(false);
         }
         
         private void Restart()
@@ -97,13 +78,32 @@ namespace UI
         
         private void Exit()
         {
-            SceneManager.LoadScene("MainMenu");
+            Application.Quit();
         }
 
 
-        public void ReceiveSignal()
+        public void ReceiveSignal(bool display)
         {
-            SwitchDisplay();
+
+            if (display)
+            {
+                uiDocument.rootVisualElement.style.display = DisplayStyle.Flex;
+                Time.timeScale = 0;
+                optionMenu.style.visibility = Visibility.Hidden;
+                pauseMenu.style.visibility = Visibility.Visible;
+                UIHandler.Instance.ForceFocus(resumeButton);
+            }
+            else
+            {
+                uiDocument.rootVisualElement.style.display = DisplayStyle.None;
+                Time.timeScale = 1;
+                if (controlRadioButtons.value == 0)
+                    deviceLog.currentDevice = Player.DeviceType.GAMEPAD;
+                if (controlRadioButtons.value == 1) 
+                    deviceLog.currentDevice = Player.DeviceType.KEYBOARD;
+            }
+            playerInfo.RaiseEvent(uiDocument.rootVisualElement.style.display == DisplayStyle.Flex);
+
         }
     }
 

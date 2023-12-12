@@ -1,3 +1,4 @@
+using System;
 using Core.EventsSO.GameEventsTypes;
 using Player;
 #if UNITY_EDITOR
@@ -7,15 +8,17 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 
-public class ProtoXPDialogTrigger : MonoBehaviour
+public class ProtoXPDialogTrigger : MonoBehaviour, IInteractable
 {
     public ProtoFXDialogSO dialogSO;
     bool activated = true;
     public BoxCollider collider;
 
     public bool activateOnce = false;
-    
-    public TextMeshProUGUI dialogName;
+    public bool isInteractable;
+
+
+    [SerializeField] private GameObject aIcon;
     [SerializeField] private DialogueSOGameEvent dialogueSOGameEvent;
 
     private void OnTriggerEnter(Collider other)
@@ -23,12 +26,19 @@ public class ProtoXPDialogTrigger : MonoBehaviour
         if (other.GetComponent<PlayerAction>() != null && activated)
         {
             Debug.Log("enter");
-            ProtoXPDialogManager.instance.StartDialog(dialogSO);
-            if (activateOnce)
-            {
-                activated = false;
-                dialogueSOGameEvent.RaiseEvent(dialogSO);
 
+            if (isInteractable == false)
+            {
+                ProtoXPDialogManager.instance.StartDialog(dialogSO);
+                if (activateOnce)
+                {
+                    activated = false;
+                    dialogueSOGameEvent.RaiseEvent(dialogSO);
+                }
+            }
+            else
+            {
+                aIcon.SetActive(true);
             }
         }
     }
@@ -40,6 +50,7 @@ public class ProtoXPDialogTrigger : MonoBehaviour
             dialogueSOGameEvent.RaiseEvent(null);
             
         }
+        aIcon.SetActive(false);
     }
     
 
@@ -53,4 +64,11 @@ public class ProtoXPDialogTrigger : MonoBehaviour
         Handles.Label(transform.position + collider.center, dialogSO.name);
     }
     #endif
+    public void Interact()
+    {
+        if (isInteractable)
+        {
+            dialogueSOGameEvent.RaiseEvent(dialogSO);
+        }
+    }
 }

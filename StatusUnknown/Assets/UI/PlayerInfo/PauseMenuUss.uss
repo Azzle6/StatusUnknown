@@ -16,3 +16,14 @@
     -unity-font-definition: url('project://database/Assets/Textures/PlayerInfo/Font/Poppins-Bold%20SDF.asset?fileID=11400000&guid=ee67fdaeb862b0e41ab342e6d438b972&type=2#Poppins-Bold SDF');
     background-color: rgb(72, 72, 72);
 }
+
+RadioButton:focus {
+    border-left-color: rgba(0, 147, 117, 0.62);
+    border-right-color: rgba(0, 147, 117, 0.62);
+    border-top-color: rgba(0, 147, 117, 0.62);
+    border-bottom-color: rgba(0, 147, 117, 0.62);
+    border-top-width: 5px;
+    border-right-width: 5px;
+    border-bottom-width: 5px;
+    border-left-width: 5px;
+}

@@ -11,7 +11,7 @@
         </ui:VisualElement>
         <ui:VisualElement name="OptionMenu" style="width: 50%; height: 50%; left: 25%; top: 20%; display: flex; position: absolute; align-items: center;">
             <ui:Label tabindex="-1" text="Option" parse-escape-sequences="true" display-tooltip-when-elided="true" name="OptionLabel" style="-unity-text-align: upper-center; font-size: 50px; padding-bottom: 10%; -unity-font-definition: url(&apos;project://database/Assets/Textures/PlayerInfo/Font/Poppins-Bold%20SDF.asset?fileID=11400000&amp;guid=ee67fdaeb862b0e41ab342e6d438b972&amp;type=2#Poppins-Bold SDF&apos;); height: 25%;" />
-            <ui:RadioButtonGroup label="Controls : " value="0" choices="Controller, Keyboard &amp; Mouse" name="ControlRadioButtons" style="flex-direction: column; -unity-font-definition: url(&apos;project://database/Assets/Textures/PlayerInfo/Font/Poppins-Bold%20SDF.asset?fileID=11400000&amp;guid=ee67fdaeb862b0e41ab342e6d438b972&amp;type=2#Poppins-Bold SDF&apos;); font-size: 40px;" />
+            <ui:RadioButtonGroup label="Controls : " value="0" choices="Controller, Keyboard &amp; Mouse" name="ControlRadioButtons" style="flex-direction: column; -unity-font-definition: url(&apos;project://database/Assets/Textures/PlayerInfo/Font/Poppins-Bold%20SDF.asset?fileID=11400000&amp;guid=ee67fdaeb862b0e41ab342e6d438b972&amp;type=2#Poppins-Bold SDF&apos;); font-size: 40px; height: 42%;" />
             <ui:Button text="Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="OptionReturnButton" class="PauseButton" />
         </ui:VisualElement>
     </ui:VisualElement>

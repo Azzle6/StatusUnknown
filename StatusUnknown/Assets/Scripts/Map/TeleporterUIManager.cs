@@ -34,7 +34,7 @@ using UnityEngine.UIElements;
             currentTeleporter = teleporter;
             mapsUIDoc.rootVisualElement.style.display = DisplayStyle.Flex;
             PlayerAction.Instance.DisableEvent();
-            FetchCurrentMap();
+            //FetchCurrentMap();
             LoadRadioButton();
             mapRadioButtonGroup.RegisterCallback<ChangeEvent<int>>(OnRadioButtonChanged);
             PlayerInfoUIHandler.Instance.Hide();
@@ -69,7 +69,6 @@ using UnityEngine.UIElements;
             
             if (selectedIndex != -1)
             {
-                mapRadioButtonGroup.SetValueWithoutNotify(selectedIndex);
                 UIHandler.Instance.ForceFocus(mapRadioButtonGroup.ElementAt(0));
             }
         }
@@ -80,13 +79,21 @@ using UnityEngine.UIElements;
             VisualElement map = tempVisualElement.Q<VisualElement>("Map");
             for (int x = 0; x < map.childCount; x++)
             {
-                map.ElementAt(x).Q<Button>().RegisterCallback<ClickEvent>(OnTpButton);
+                if (x < map.childCount)
+                {
+                    Button button = map.ElementAt(x).Q<Button>();
+                    button.clicked += () => OnTpButton(button);
+                    button.tabIndex = x; // Définir l'ordre de navigation
+                    button.focusable = true; // Rendre le bouton navigable
+                }
             }
-
+            UIHandler.Instance.ForceFocus(map.ElementAt(0).Q<Button>());
         }
-        private void OnTpButton(ClickEvent clickEvent)
+        
+        private void OnTpButton(Button button)
         {
-            Button clickedButton = (Button)clickEvent.currentTarget;
+            //Button clickedButton = (Button)clickEvent.currentTarget;
+            Button clickedButton = button;
             VisualElement parent = clickedButton.parent;
             int index = parent.IndexOf(clickedButton);
             currentTeleporter.ReceiveTeleporterData(mapEncyclopedia.tpMapData[tempString].teleporterData[index]);
@@ -115,9 +122,8 @@ using UnityEngine.UIElements;
             tempString = mapData.sceneName;
             tempVisualElement.style.width = Length.Percent(100);
             tempVisualElement.style.height = Length.Percent(100);
+            UIHandler.Instance.ForceFocus(mapDisplay.Q<Button>("TP1"));
         }
-        
-        
 
         private void FetchCurrentMap()
         {
