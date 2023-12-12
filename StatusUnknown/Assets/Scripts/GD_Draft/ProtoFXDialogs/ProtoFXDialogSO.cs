@@ -9,9 +9,10 @@ public class ProtoFXDialogSO : ScriptableObject
     public bool displayName;
 
     public bool displayDialog;
+    public bool justTimer;
     public string text;
     public float timerAddValue;
-
+    
     public bool displayImage;
     public Sprite image;
 }

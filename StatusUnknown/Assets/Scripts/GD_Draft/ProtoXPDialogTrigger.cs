@@ -1,3 +1,4 @@
+using Core.EventsSO.GameEventsTypes;
 using Player;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -13,78 +14,34 @@ public class ProtoXPDialogTrigger : MonoBehaviour
     public BoxCollider collider;
 
     public bool activateOnce = false;
-
-    public bool inputTrigger = false;
-    public InputAction playerInput;
-    public GameObject interactionUI;
+    
     public TextMeshProUGUI dialogName;
+    [SerializeField] private DialogueSOGameEvent dialogueSOGameEvent;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<PlayerAction>() != null && activated)
         {
-            if(!inputTrigger)
+            Debug.Log("enter");
+            ProtoXPDialogManager.instance.StartDialog(dialogSO);
+            if (activateOnce)
             {
-                ProtoXPDialogManager.instance.StartDialog(dialogSO);
-                if (activateOnce)
-                {
-                    activated = false;
-                }
-            }
-            else if (inputTrigger)
-            {
-                playerInput.Enable();
-                SetInteractionFeedback(true);
+                activated = false;
+                dialogueSOGameEvent.RaiseEvent(dialogSO);
+
             }
         }
     }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if(inputTrigger && other.GetComponent<PlayerAction>() != null)
-        {
-            playerInput.performed += context =>
-            {
-                if (context.performed)
-                {
-                    ProtoXPDialogManager.instance.StartDialog(dialogSO);
-                    playerInput.Disable();
-                    if (activateOnce)
-                    {
-                        activated = false;
-                    }
-                }
-            };
-        }
-    }
-
     private void OnTriggerExit(Collider other)
     {
-        playerInput.Disable();
-        SetInteractionFeedback(false);
-    }
-
-    void SetInteractionFeedback(bool state)
-    {
-        interactionUI.SetActive(state);
-
-        if (dialogSO.displayName)
+        Debug.Log("exit");
+        if (other.GetComponent<PlayerAction>() != null)
         {
-            DisplayName(state);
-            ChangeName(dialogSO.dialogName);
+            dialogueSOGameEvent.RaiseEvent(null);
+            
         }
     }
-
-    void DisplayName(bool enable)
-    {
-        dialogName.gameObject.SetActive(enable);
-    }
-
-    void ChangeName(string newText)
-    {
-        dialogName.text = newText;
-    }
-
+    
 
     #if UNITY_EDITOR
     private void OnDrawGizmos()

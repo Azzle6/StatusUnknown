@@ -1,5 +1,3 @@
-
-
 namespace Map
 {
 using System.Collections.Generic;
@@ -14,7 +12,6 @@ using UnityEngine.UIElements;
 
     public class TeleporterUIManager : MonoSingleton<TeleporterUIManager>
     {
-        [SerializeField] private EventSystem eventSystem;
         [SerializeField] private UIDocument mapsUIDoc;
         [SerializeField] private MapEncyclopedia mapEncyclopedia;
         private Dictionary<RadioButton, TeleporterMapData> radioButtonMapData = new Dictionary<RadioButton, TeleporterMapData>();
