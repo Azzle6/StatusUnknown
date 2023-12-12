@@ -1,25 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditorInternal;
-using UnityEngine;
-
-public class MorphAnimController : MonoBehaviour 
+namespace Enemy.Morph
 {
-    [SerializeField] Animator eggAnimator;
-    [SerializeField] MorphEgg morphEgg;
-    private void OnEnable()
+    using UnityEngine;
+    
+    public class MorphAnimController : MonoBehaviour 
     {
-        morphEgg.endMorphEvent += ProcessEggEndAnimation;
-    }
-    private void OnDisable()
-    {
-        morphEgg.endMorphEvent -= ProcessEggEndAnimation;
-    }
+        [SerializeField] Animator eggAnimator;
+        [SerializeField] MorphEgg morphEgg;
+        private void OnEnable()
+        {
+            this.morphEgg.endMorphEvent += this.ProcessEggEndAnimation;
+        }
+        private void OnDisable()
+        {
+            this.morphEgg.endMorphEvent -= this.ProcessEggEndAnimation;
+        }
 
-    void ProcessEggEndAnimation(bool sucess)
-    {
-        string animationClip = sucess ? "MorphEggDestroyed" : "MorphEggFinish";
-        eggAnimator.Play(animationClip);
-    }
+        void ProcessEggEndAnimation(bool sucess)
+        {
+            string animationClip = sucess ? "MorphEggDestroyed" : "MorphEggFinish";
+            this.eggAnimator.Play(animationClip);
+        }
 
+    }
 }

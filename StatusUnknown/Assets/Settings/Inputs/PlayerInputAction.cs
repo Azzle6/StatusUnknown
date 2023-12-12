@@ -73,6 +73,15 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""06682d00-4f82-48d5-acbf-c6c1541dff70"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Reload"",
                     ""type"": ""Button"",
                     ""id"": ""2cd0ff2d-cd9f-45fd-ba6d-162653b359db"",
@@ -134,60 +143,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Move"",
-                    ""type"": ""Value"",
-                    ""id"": ""b423a292-50a2-44aa-9472-6896c010900a"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Pause"",
-                    ""type"": ""Button"",
-                    ""id"": ""cb5447e7-661c-4b82-9bb6-c918c7d3e1cc"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Mouse"",
-                    ""type"": ""Value"",
-                    ""id"": ""5b695622-18fe-4916-a58d-896787ae4df9"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Start"",
-                    ""type"": ""Button"",
-                    ""id"": ""a60d5bbc-8305-4cb4-8b73-6b2ede1884cc"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Submit"",
-                    ""type"": ""Button"",
-                    ""id"": ""03daea95-094d-4978-a53e-1d6de1dd9301"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Cancel"",
-                    ""type"": ""Button"",
-                    ""id"": ""887fdfc4-c591-4fa5-b702-10b7f5ef1046"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -232,6 +187,28 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8d0b0bac-a1e4-43fd-9896-e58e4a70ac9f"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2f2a0f4d-101e-4b38-86e1-2d41f6077f60"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Inventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -476,120 +453,118 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""action"": ""AimG"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""b465a80f-c4a9-43e8-95c8-f41de0a981e4"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""a4afaabb-9703-4eca-8b17-f8f1da58727a"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""3f054df1-2124-4950-9ee7-5c8630085307"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Submit"",
+                    ""type"": ""Button"",
+                    ""id"": ""1c9f0431-ea4e-4fe8-a887-70ccc9729044"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Start"",
+                    ""type"": ""Button"",
+                    ""id"": ""dab9985c-0e90-47c0-98af-eb84983b1e1e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Mouse"",
+                    ""type"": ""Value"",
+                    ""id"": ""feef130b-230a-425c-b516-f8c15f13026d"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
                     ""name"": """",
-                    ""id"": ""66adcad6-60c4-442a-a0e0-5062e743b1a6"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""id"": ""eb7802c5-f7a2-413e-b626-69d910aa1798"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad"",
+                    ""groups"": ""ControllerScheme;Gamepad"",
                     ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""5424e723-4474-414b-ac2c-ed0a70382250"",
+                    ""id"": ""2b8a016e-8b1a-4966-8b63-48edfa5f653c"",
                     ""path"": ""<Keyboard>/backspace"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad"",
+                    ""groups"": ""Keyboard;Keyboard&Mouse"",
                     ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""e406ec2b-5070-41dc-8315-19623034c0cf"",
+                    ""id"": ""e80b07f1-20f8-47c8-93c9-0ffbc211ec3a"",
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad"",
+                    ""groups"": ""ControllerScheme;Gamepad"",
                     ""action"": ""Submit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""342915a3-c3f8-4f6b-996e-d778c8a93f99"",
+                    ""id"": ""3f285295-2877-4395-a3ec-b229e0bc38cf"",
                     ""path"": ""<Keyboard>/enter"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad"",
+                    ""groups"": ""Keyboard;Keyboard&Mouse"",
                     ""action"": ""Submit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""671f35d5-91ab-4869-bf01-1c529bcaaea9"",
-                    ""path"": ""<Gamepad>/start"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Start"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""981864d4-59a4-4c5a-91ba-194933b6af35"",
-                    ""path"": ""<Keyboard>/i"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Start"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""fe145215-89f3-40ad-94c9-42d195dc4dcb"",
-                    ""path"": ""<Mouse>/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Mouse"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f179cfeb-df11-41f0-b1d7-a116ed57626a"",
-                    ""path"": ""<Gamepad>/select"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Pause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""0f230b9b-bb81-4e2d-99b7-541971114902"",
-                    ""path"": ""<Keyboard>/#(²)"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Pause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""39c1e310-a8e6-405a-a3c2-13137bcb3964"",
+                    ""id"": ""3025e1d4-6fc0-4851-990c-e986ab665a5b"",
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
+                    ""processors"": ""StickDeadzone(max=1),NormalizeVector2"",
+                    ""groups"": ""ControllerScheme;Gamepad"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": ""2D Vector"",
-                    ""id"": ""a4a60003-047f-445d-b408-b378823088df"",
+                    ""id"": ""50e4e796-0088-405c-8ac7-93d62961076f"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -600,47 +575,80 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""up"",
-                    ""id"": ""f05b4c99-d322-4994-ba5b-3d31862c9ac5"",
+                    ""id"": ""bbcbb160-d26f-4f95-a4bb-e2af0d6ed0dd"",
                     ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad"",
+                    ""groups"": ""Keyboard;Keyboard&Mouse"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""down"",
-                    ""id"": ""5b4cac69-3a67-472c-9b4e-c25d7223f20b"",
+                    ""id"": ""c674b51f-27c9-4bcb-83f5-f49351e1e420"",
                     ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad"",
+                    ""groups"": ""Keyboard;Keyboard&Mouse"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""left"",
-                    ""id"": ""69b04d78-33ac-439e-8c17-28bb2e7a6f49"",
+                    ""id"": ""391b9d63-94b5-4b36-b6a7-367f229c30f0"",
                     ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad"",
+                    ""groups"": ""Keyboard;Keyboard&Mouse"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""right"",
-                    ""id"": ""6ba7ce56-d71e-4422-81b3-f1e608ac1597"",
+                    ""id"": ""a66df25d-e3dd-4306-bb7c-3100545d3015"",
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad"",
+                    ""groups"": ""Keyboard;Keyboard&Mouse"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9b95ff32-d594-406e-82db-a6706590c8a4"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Start"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""76b3bcc6-3abe-41af-862d-6dab622106d7"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Start"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5707181f-c8c2-4090-8c00-79e640e919a6"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Mouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -682,6 +690,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_PlayerActionMaps_AimG = m_PlayerActionMaps.FindAction("AimG", throwIfNotFound: true);
         m_PlayerActionMaps_Medkit = m_PlayerActionMaps.FindAction("Medkit", throwIfNotFound: true);
         m_PlayerActionMaps_Interact = m_PlayerActionMaps.FindAction("Interact", throwIfNotFound: true);
+        m_PlayerActionMaps_Inventory = m_PlayerActionMaps.FindAction("Inventory", throwIfNotFound: true);
         m_PlayerActionMaps_Reload = m_PlayerActionMaps.FindAction("Reload", throwIfNotFound: true);
         m_PlayerActionMaps_Map = m_PlayerActionMaps.FindAction("Map", throwIfNotFound: true);
         m_PlayerActionMaps_Augment1 = m_PlayerActionMaps.FindAction("Augment1", throwIfNotFound: true);
@@ -689,12 +698,13 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_PlayerActionMaps_Augment3 = m_PlayerActionMaps.FindAction("Augment3", throwIfNotFound: true);
         m_PlayerActionMaps_Weapon1 = m_PlayerActionMaps.FindAction("Weapon1", throwIfNotFound: true);
         m_PlayerActionMaps_Weapon2 = m_PlayerActionMaps.FindAction("Weapon2", throwIfNotFound: true);
-        m_PlayerActionMaps_Move = m_PlayerActionMaps.FindAction("Move", throwIfNotFound: true);
-        m_PlayerActionMaps_Pause = m_PlayerActionMaps.FindAction("Pause", throwIfNotFound: true);
-        m_PlayerActionMaps_Mouse = m_PlayerActionMaps.FindAction("Mouse", throwIfNotFound: true);
-        m_PlayerActionMaps_Start = m_PlayerActionMaps.FindAction("Start", throwIfNotFound: true);
-        m_PlayerActionMaps_Submit = m_PlayerActionMaps.FindAction("Submit", throwIfNotFound: true);
-        m_PlayerActionMaps_Cancel = m_PlayerActionMaps.FindAction("Cancel", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_Move = m_UI.FindAction("Move", throwIfNotFound: true);
+        m_UI_Cancel = m_UI.FindAction("Cancel", throwIfNotFound: true);
+        m_UI_Submit = m_UI.FindAction("Submit", throwIfNotFound: true);
+        m_UI_Start = m_UI.FindAction("Start", throwIfNotFound: true);
+        m_UI_Mouse = m_UI.FindAction("Mouse", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -761,6 +771,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActionMaps_AimG;
     private readonly InputAction m_PlayerActionMaps_Medkit;
     private readonly InputAction m_PlayerActionMaps_Interact;
+    private readonly InputAction m_PlayerActionMaps_Inventory;
     private readonly InputAction m_PlayerActionMaps_Reload;
     private readonly InputAction m_PlayerActionMaps_Map;
     private readonly InputAction m_PlayerActionMaps_Augment1;
@@ -768,12 +779,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActionMaps_Augment3;
     private readonly InputAction m_PlayerActionMaps_Weapon1;
     private readonly InputAction m_PlayerActionMaps_Weapon2;
-    private readonly InputAction m_PlayerActionMaps_Move;
-    private readonly InputAction m_PlayerActionMaps_Pause;
-    private readonly InputAction m_PlayerActionMaps_Mouse;
-    private readonly InputAction m_PlayerActionMaps_Start;
-    private readonly InputAction m_PlayerActionMaps_Submit;
-    private readonly InputAction m_PlayerActionMaps_Cancel;
     public struct PlayerActionMapsActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -783,6 +788,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @AimG => m_Wrapper.m_PlayerActionMaps_AimG;
         public InputAction @Medkit => m_Wrapper.m_PlayerActionMaps_Medkit;
         public InputAction @Interact => m_Wrapper.m_PlayerActionMaps_Interact;
+        public InputAction @Inventory => m_Wrapper.m_PlayerActionMaps_Inventory;
         public InputAction @Reload => m_Wrapper.m_PlayerActionMaps_Reload;
         public InputAction @Map => m_Wrapper.m_PlayerActionMaps_Map;
         public InputAction @Augment1 => m_Wrapper.m_PlayerActionMaps_Augment1;
@@ -790,12 +796,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @Augment3 => m_Wrapper.m_PlayerActionMaps_Augment3;
         public InputAction @Weapon1 => m_Wrapper.m_PlayerActionMaps_Weapon1;
         public InputAction @Weapon2 => m_Wrapper.m_PlayerActionMaps_Weapon2;
-        public InputAction @Move => m_Wrapper.m_PlayerActionMaps_Move;
-        public InputAction @Pause => m_Wrapper.m_PlayerActionMaps_Pause;
-        public InputAction @Mouse => m_Wrapper.m_PlayerActionMaps_Mouse;
-        public InputAction @Start => m_Wrapper.m_PlayerActionMaps_Start;
-        public InputAction @Submit => m_Wrapper.m_PlayerActionMaps_Submit;
-        public InputAction @Cancel => m_Wrapper.m_PlayerActionMaps_Cancel;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActionMaps; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -820,6 +820,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @Inventory.started += instance.OnInventory;
+            @Inventory.performed += instance.OnInventory;
+            @Inventory.canceled += instance.OnInventory;
             @Reload.started += instance.OnReload;
             @Reload.performed += instance.OnReload;
             @Reload.canceled += instance.OnReload;
@@ -841,24 +844,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Weapon2.started += instance.OnWeapon2;
             @Weapon2.performed += instance.OnWeapon2;
             @Weapon2.canceled += instance.OnWeapon2;
-            @Move.started += instance.OnMove;
-            @Move.performed += instance.OnMove;
-            @Move.canceled += instance.OnMove;
-            @Pause.started += instance.OnPause;
-            @Pause.performed += instance.OnPause;
-            @Pause.canceled += instance.OnPause;
-            @Mouse.started += instance.OnMouse;
-            @Mouse.performed += instance.OnMouse;
-            @Mouse.canceled += instance.OnMouse;
-            @Start.started += instance.OnStart;
-            @Start.performed += instance.OnStart;
-            @Start.canceled += instance.OnStart;
-            @Submit.started += instance.OnSubmit;
-            @Submit.performed += instance.OnSubmit;
-            @Submit.canceled += instance.OnSubmit;
-            @Cancel.started += instance.OnCancel;
-            @Cancel.performed += instance.OnCancel;
-            @Cancel.canceled += instance.OnCancel;
         }
 
         private void UnregisterCallbacks(IPlayerActionMapsActions instance)
@@ -878,6 +863,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @Inventory.started -= instance.OnInventory;
+            @Inventory.performed -= instance.OnInventory;
+            @Inventory.canceled -= instance.OnInventory;
             @Reload.started -= instance.OnReload;
             @Reload.performed -= instance.OnReload;
             @Reload.canceled -= instance.OnReload;
@@ -899,24 +887,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Weapon2.started -= instance.OnWeapon2;
             @Weapon2.performed -= instance.OnWeapon2;
             @Weapon2.canceled -= instance.OnWeapon2;
-            @Move.started -= instance.OnMove;
-            @Move.performed -= instance.OnMove;
-            @Move.canceled -= instance.OnMove;
-            @Pause.started -= instance.OnPause;
-            @Pause.performed -= instance.OnPause;
-            @Pause.canceled -= instance.OnPause;
-            @Mouse.started -= instance.OnMouse;
-            @Mouse.performed -= instance.OnMouse;
-            @Mouse.canceled -= instance.OnMouse;
-            @Start.started -= instance.OnStart;
-            @Start.performed -= instance.OnStart;
-            @Start.canceled -= instance.OnStart;
-            @Submit.started -= instance.OnSubmit;
-            @Submit.performed -= instance.OnSubmit;
-            @Submit.canceled -= instance.OnSubmit;
-            @Cancel.started -= instance.OnCancel;
-            @Cancel.performed -= instance.OnCancel;
-            @Cancel.canceled -= instance.OnCancel;
         }
 
         public void RemoveCallbacks(IPlayerActionMapsActions instance)
@@ -934,6 +904,84 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActionMapsActions @PlayerActionMaps => new PlayerActionMapsActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
+    private readonly InputAction m_UI_Move;
+    private readonly InputAction m_UI_Cancel;
+    private readonly InputAction m_UI_Submit;
+    private readonly InputAction m_UI_Start;
+    private readonly InputAction m_UI_Mouse;
+    public struct UIActions
+    {
+        private @PlayerInputAction m_Wrapper;
+        public UIActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_UI_Move;
+        public InputAction @Cancel => m_Wrapper.m_UI_Cancel;
+        public InputAction @Submit => m_Wrapper.m_UI_Submit;
+        public InputAction @Start => m_Wrapper.m_UI_Start;
+        public InputAction @Mouse => m_Wrapper.m_UI_Mouse;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void AddCallbacks(IUIActions instance)
+        {
+            if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
+            @Move.started += instance.OnMove;
+            @Move.performed += instance.OnMove;
+            @Move.canceled += instance.OnMove;
+            @Cancel.started += instance.OnCancel;
+            @Cancel.performed += instance.OnCancel;
+            @Cancel.canceled += instance.OnCancel;
+            @Submit.started += instance.OnSubmit;
+            @Submit.performed += instance.OnSubmit;
+            @Submit.canceled += instance.OnSubmit;
+            @Start.started += instance.OnStart;
+            @Start.performed += instance.OnStart;
+            @Start.canceled += instance.OnStart;
+            @Mouse.started += instance.OnMouse;
+            @Mouse.performed += instance.OnMouse;
+            @Mouse.canceled += instance.OnMouse;
+        }
+
+        private void UnregisterCallbacks(IUIActions instance)
+        {
+            @Move.started -= instance.OnMove;
+            @Move.performed -= instance.OnMove;
+            @Move.canceled -= instance.OnMove;
+            @Cancel.started -= instance.OnCancel;
+            @Cancel.performed -= instance.OnCancel;
+            @Cancel.canceled -= instance.OnCancel;
+            @Submit.started -= instance.OnSubmit;
+            @Submit.performed -= instance.OnSubmit;
+            @Submit.canceled -= instance.OnSubmit;
+            @Start.started -= instance.OnStart;
+            @Start.performed -= instance.OnStart;
+            @Start.canceled -= instance.OnStart;
+            @Mouse.started -= instance.OnMouse;
+            @Mouse.performed -= instance.OnMouse;
+            @Mouse.canceled -= instance.OnMouse;
+        }
+
+        public void RemoveCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IUIActions instance)
+        {
+            foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public UIActions @UI => new UIActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -959,6 +1007,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnAimG(InputAction.CallbackContext context);
         void OnMedkit(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnInventory(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
         void OnMap(InputAction.CallbackContext context);
         void OnAugment1(InputAction.CallbackContext context);
@@ -966,11 +1015,13 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnAugment3(InputAction.CallbackContext context);
         void OnWeapon1(InputAction.CallbackContext context);
         void OnWeapon2(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
+    {
         void OnMove(InputAction.CallbackContext context);
-        void OnPause(InputAction.CallbackContext context);
-        void OnMouse(InputAction.CallbackContext context);
-        void OnStart(InputAction.CallbackContext context);
-        void OnSubmit(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
+        void OnSubmit(InputAction.CallbackContext context);
+        void OnStart(InputAction.CallbackContext context);
+        void OnMouse(InputAction.CallbackContext context);
     }
 }

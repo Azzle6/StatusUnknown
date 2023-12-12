@@ -99,8 +99,6 @@ namespace Module.Definitions
         public float Damages { get; set; }
         [SerializeField]
         public HitSphere DamageRadius;
-        
-        
     }
 
     public struct ElementPositionInfo

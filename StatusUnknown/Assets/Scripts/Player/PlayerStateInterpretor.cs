@@ -1,5 +1,3 @@
-using UnityEngine.Serialization;
-
 namespace Player
 {
     using System.Collections.Generic;

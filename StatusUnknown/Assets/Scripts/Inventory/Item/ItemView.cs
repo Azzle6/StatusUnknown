@@ -57,7 +57,7 @@ namespace Inventory.Item
                 for (int x = 0; x < shape.shapeSize.x; x++)
                 {
                     Vector2Int currentPosition = new Vector2Int(x, y);
-                    if (shape.GetContentFromPosition(currentPosition))
+                    if (shape.IsValidPosition(currentPosition))
                     {
                         if (this.iconElement == null)
                         {
@@ -68,7 +68,7 @@ namespace Inventory.Item
                         }
                         foreach (var direction in Enum.GetValues(typeof(E_Direction)))
                         {
-                            if(shape.GetContentFromPosition(currentPosition + GridHelper.DirectionToVectorInt((E_Direction)direction, true)))
+                            if(shape.IsValidPosition(currentPosition + GridHelper.DirectionToVectorInt((E_Direction)direction, true)))
                                HideEdge(currentPosition, (E_Direction)direction);
                         }
                     }

@@ -12,28 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc991c3a9dc0ad04eb9df11c000a8bcb, type: 3}
   m_Name: PlayerInventory
   m_EditorClassIdentifier: 
-  inventory: {fileID: 11400000, guid: 9d7824d661902054db8419ba1d0d9e51, type: 2}
+  InventoryData:
+    <Shape>k__BackingField:
+      shapeSize: {x: 4, y: 9}
+      anchor: {x: 0, y: 0}
+      content: 010101010101010101010101010101010101010101010101010101010101010101010101
+    modules:
+      keyData: []
+      valueData: []
+    weapons:
+      keyData: []
+      valueData: []
   equippedWeaponsData:
   - definition: {fileID: 11400000, guid: 122a42ee52fa1d44ea3b18b00cc00351, type: 2}
     triggerInfoData:
     - weaponTriggerType: 0
-      triggerRowPosition: 0
+      triggerRowPosition: 1
       modules:
-        keyData:
-        - {x: 0, y: 1}
-        - {x: 2, y: 1}
-        valueData:
-        - definition: {fileID: 11400000, guid: 8bef12c80bca45d42a0aff2575407261, type: 2}
-        - definition: {fileID: 11400000, guid: ace4dc3b1292ec8479ae57fbd8248515, type: 2}
+        keyData: []
+        valueData: []
     - weaponTriggerType: 1
-      triggerRowPosition: 0
+      triggerRowPosition: 1
       modules:
         keyData: []
         valueData: []
   - definition: {fileID: 11400000, guid: ddfda7b31cc8afb49abd392993bea013, type: 2}
     triggerInfoData:
     - weaponTriggerType: 0
-      triggerRowPosition: 0
+      triggerRowPosition: 1
       modules:
         keyData: []
         valueData: []

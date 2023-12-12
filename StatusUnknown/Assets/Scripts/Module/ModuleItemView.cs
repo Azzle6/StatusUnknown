@@ -28,7 +28,7 @@ namespace Module
             foreach (var outputInfo in this.ModuleItemData.definition.outputs)
             {
                 VisualElement triggerElement = this.UiSettings.triggerTemplate.Instantiate();
-                triggerElement.Q<VisualElement>("triggerIcon").style.backgroundImage = UIHandler.Instance.iconsReferences.moduleOutputReferences[outputInfo.moduleTriggerType].texture;
+                triggerElement.Q<VisualElement>("triggerIcon").style.backgroundImage = UIHandler.Instance.outputReferences.moduleOutputReferences[outputInfo.moduleTriggerType].icon.texture;
                 
                 this.ViewRoot.Add(triggerElement);
                 float slotWidth = UiSettings.slotSize;

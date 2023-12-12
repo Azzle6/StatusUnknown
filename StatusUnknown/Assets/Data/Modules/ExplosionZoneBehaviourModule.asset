@@ -23,14 +23,18 @@ MonoBehaviour:
     localPosition: {x: 1, y: 0}
     direction: 0
   BehaviourData:
-    rid: 6076498459536392199
+    rid: 7591883874691448834
   references:
     version: 2
     RefIds:
     - rid: 4696495337976365338
       type: {class: ForwardInstantiationRule, ns: Module, asm: Assembly-CSharp}
       data: 
-    - rid: 6076498459536392199
+    - rid: 7591883733765456131
+      type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
+      data:
+        radius: 0
+    - rid: 7591883874691448834
       type: {class: ZoneBehaviourData, ns: Module.Definitions, asm: Assembly-CSharp}
       data:
         <Behaviour>k__BackingField:
@@ -39,7 +43,7 @@ MonoBehaviour:
             Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         <LayerMask>k__BackingField:
           serializedVersion: 2
-          m_Bits: 129
+          m_Bits: 384
         <CollisionShape>k__BackingField:
           rid: 7591883733765456131
         <Mesh>k__BackingField: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
@@ -54,7 +58,3 @@ MonoBehaviour:
         <Damages>k__BackingField: 16
         DamageRadius:
           radius: 1
-    - rid: 7591883733765456131
-      type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
-      data:
-        radius: 0

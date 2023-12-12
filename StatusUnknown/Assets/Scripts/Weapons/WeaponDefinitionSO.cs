@@ -22,11 +22,4 @@ namespace Weapons
         public int triggerRowPosition;
         public Shape shape;
     }
-
-    public enum E_WeaponOutput
-    {
-        ON_HIT,
-        ON_SPAWN,
-        ON_RELOAD
-    }
 }

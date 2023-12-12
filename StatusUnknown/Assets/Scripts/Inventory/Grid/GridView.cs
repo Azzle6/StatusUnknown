@@ -219,7 +219,7 @@ namespace Inventory.Grid
             foreach (var coord in itemShapeCoord)
             {
                 Vector2Int currentPosition = coord + pos;
-                if (!this.shape.GetContentFromPosition(currentPosition) || !GridHelper.IsInGrid(currentPosition, this.shape.shapeSize) || this.GetSlot(currentPosition).ItemView != null || !CanContainsItem(itemView))
+                if (!this.shape.IsValidPosition(currentPosition) || !GridHelper.IsInGrid(currentPosition, this.shape.shapeSize) || this.GetSlot(currentPosition).ItemView != null || !CanContainsItem(itemView))
                 {
                     //Debug.LogWarning($"try to setup slot state at {coord + pos} but the position is invalid.");
                     return false;
@@ -246,7 +246,7 @@ namespace Inventory.Grid
             
             foreach (var coord in itemShapeCoord)
             {
-                if (!this.shape.GetContentFromPosition(coord + pos))
+                if (!this.shape.IsValidPosition(coord + pos))
                 {
                     Debug.LogWarning($"try to get slot from {coord + pos} but this slot doesn't exists.");
                     continue;
@@ -259,7 +259,7 @@ namespace Inventory.Grid
 
         private Slot GetSlot(Vector2Int pos)
         {
-            if (!this.shape.GetContentFromPosition(pos))
+            if (!this.shape.IsValidPosition(pos))
             {
                 Debug.LogWarning($"try to setup slot state at {pos}. but this slot doesn't exists.");
                 return null;

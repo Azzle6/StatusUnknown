@@ -25,7 +25,7 @@ namespace Inventory.Grid
                     horizontalParent.Insert(x, slotView);
                     slotsList.Add(slotView);
 
-                    if (shape.GetContentFromPosition(new Vector2Int(x, y)))
+                    if (shape.IsValidPosition(new Vector2Int(x, y)))
                     {
                         slotView.name = $"{x},{y}";
                     }

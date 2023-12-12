@@ -80,7 +80,7 @@ namespace Inventory
         private void InitInventoryView()
         {
             this.inventoryGridView = new BasicGridView(this.uiDocument.rootVisualElement.Q<VisualElement>(INVENTORY_GRID_NAME),
-                this.playerInventory.inventory.Shape, this.playerInventory.inventory, new E_ItemType[] { E_ItemType.MODULE, E_ItemType.WEAPON});
+                this.playerInventory.InventoryData.Shape, this.playerInventory.InventoryData, new E_ItemType[] { E_ItemType.MODULE, E_ItemType.WEAPON});
         }
 
         private void InitWeaponGridView()
@@ -112,7 +112,7 @@ namespace Inventory
                     UIHandler.Instance.uiSettings.triggerSelectionButtonTemplate.Instantiate();
                 triggerSelectionButton.RegisterCallback<NavigationSubmitEvent>((e) => this.SelectTriggerIndex(index));
                 triggerSelectionButton.Q<VisualElement>("triggerIcon").style.backgroundImage =
-                    UIHandler.Instance.iconsReferences.weaponOutputReferences[this.selectedWeaponData.triggerInfoData[i].weaponTriggerType].texture;
+                    UIHandler.Instance.outputReferences.weaponOutputReferences[this.selectedWeaponData.triggerInfoData[i].weaponTriggerType].icon.texture;
                 triggerSelectionButton.Q<TextElement>("triggerName").text = this.selectedWeaponData.triggerInfoData[i].weaponTriggerType.ToString();
                 triggerSelectionButton.Q<TextElement>("triggerIndex").text = $"T{i + 1}";
                 

@@ -25,7 +25,7 @@ namespace Inventory
         }
 
         #region UTILITIES
-        public bool GetContentFromPosition(Vector2Int position)
+        public bool IsValidPosition(Vector2Int position)
         {
             int index = position.y * this.shapeSize.x + position.x;
             return index < this.content.Length && GridHelper.IsInGrid(position, this.shapeSize) && this.content[index];

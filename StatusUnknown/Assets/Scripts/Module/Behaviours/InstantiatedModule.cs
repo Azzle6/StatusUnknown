@@ -15,6 +15,8 @@ namespace Module.Behaviours
         protected Action<InstantiatedModuleInfo> OnTickEvent;
         protected Action<InstantiatedModuleInfo> OnHitEvent;
         protected Action<InstantiatedModuleInfo> OnEndEvent;
+
+        protected Collider ElementToIgnore;
         
         public void Init(CompiledModule compiledModule, InstantiatedModuleInfo info, IBehaviourData data)
         {
