@@ -11,12 +11,16 @@ namespace Enemy.Sniper
         public float hit = 0;
         public float hitFreq = 0.1f;
         public float tpCooldown;
+        
         [Header("Shoot")]
         public GameObject bulletPrefab;
         [HideInInspector]
         public float initialAttackDuration;
-        [field: SerializeField] public Transform shootingPoint { get; private set; }
+        public float attackCooldown;
 
+        [field: SerializeField] public Transform shootingPoint { get; private set; }
+        [Header("TP")]
+        [SerializeField] GameObject tpVFx;
         public override EnemyStats stats => sniperStats;
         private void Start()
         {
@@ -48,6 +52,14 @@ namespace Enemy.Sniper
             meshRenderer.material.SetFloat("_Hit", hit);
             yield return null;
 
+        }
+        public void PlayTpVfx(Vector3 position, Vector3 direction, float killTime, Transform parent = null)
+        {
+            if (tpVFx == null) return;
+            GameObject vfxObject = Instantiate(tpVFx,position,Quaternion.identity);
+            vfxObject.transform.parent = parent;
+            vfxObject.transform.forward = direction;
+            Destroy(vfxObject,killTime);
         }
     }
 }
