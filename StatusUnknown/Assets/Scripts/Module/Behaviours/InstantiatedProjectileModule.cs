@@ -3,10 +3,10 @@ using pooler;
 namespace Module.Behaviours
 {
     using System.Collections.Generic;
+    using Combat.HitProcess;
     using Core.Pooler;
     using Definitions;
     using UnityEngine;
-    using UnityEngine.VFX;
 
     public abstract class InstantiatedProjectileModule : InstantiatedModule
     {
@@ -14,13 +14,15 @@ namespace Module.Behaviours
         
         //Dynamic data
         protected VisualEffectHandler ProjectileVFX;
+        protected int hitsRemaining;
+        protected float currentDamages;
+        protected HashSet<Collider> alreadyHitColliders;
 
         protected override void OnInit(CompiledModule compiledModule, InstantiatedModuleInfo info, IBehaviourData data)
         {
             this.ProjectileData = (ProjectileBehaviourData)data;
             
-            this.ElementToIgnore = info.LastHit;
-                
+            this.alreadyHitColliders = new HashSet<Collider>() { info.LastHit };
             
             VisualEffectHandler tempSpawnVFX = ComponentPooler.Instance.GetPooledObject<VisualEffectHandler>("EmptyVisualEffect");
             tempSpawnVFX.transform.rotation = info.Rotation;
@@ -31,7 +33,11 @@ namespace Module.Behaviours
             ProjectileVFX.transform.position = transform.position;
             ProjectileVFX.transform.rotation = info.Rotation;
             ProjectileVFX.transform.SetParent(transform);
-            ProjectileVFX.StartVFX(ProjectileData.projectileVFX,5f);
+            ProjectileVFX.StartVFX(ProjectileData.projectileVFX, data.LifeTime);
+            this.ProjectileVFX.vfx.SetFloat("Size", this.GetAverageProjectileWidth());
+
+            this.hitsRemaining = this.ProjectileData.maxDamagedEnemies;
+            this.currentDamages = this.ProjectileData.Damages;
             
             this.OnInitProjectile();
         }
@@ -61,20 +67,34 @@ namespace Module.Behaviours
         protected override void CollisionBehaviour()
         {
             Collider[] collisions = this.CheckCollisions();
-            
-            if (collisions.Length > 0)
+
+            foreach (var col in collisions)
             {
-                if(this.ElementToIgnore == collisions[0])
+                if(this.alreadyHitColliders.Contains(col))
                     return;
+
+                this.alreadyHitColliders.Add(col);
                 
-                Collider firstCollider = collisions[0];
-                IDamageable damageable = firstCollider.GetComponent<IDamageable>();
-                if(damageable != null)
-                    damageable.TakeDamage(this.ProjectileData.Damages, Vector3.zero);
-                
-                this.OnHitEvent?.Invoke(new InstantiatedModuleInfo(this.transform.position, transform.rotation, firstCollider));
+                IDamageable damageable = col.GetComponent<IDamageable>();
                 this.SpawnHitVFX(this.transform.position, -transform.forward);
-                this.DestroyModule();
+                
+                if (damageable != null)
+                {
+                    damageable.TakeDamage(this.currentDamages, Vector3.zero);
+                    this.OnHit(damageable);
+                    this.OnHitEvent?.Invoke(new InstantiatedModuleInfo(this.transform.position, transform.rotation, col));
+                    this.hitsRemaining--;
+                    if (this.hitsRemaining == 0)
+                    {
+                        this.DestroyModule();
+                        return;
+                    }
+                }
+                else
+                {
+                    this.DestroyModule();
+                    return;
+                }
             }
         }
 
@@ -82,5 +102,20 @@ namespace Module.Behaviours
         {
             ComponentPooler.Instance.ReturnObjectToPool(this.ProjectileVFX);
         }
+        
+        #region UTILITY
+        protected float GetAverageProjectileWidth()
+        {
+            switch (this.ProjectileData.CollisionShape)
+            {
+                case HitSphere sphere:
+                    return sphere.radius;
+                case HitBox box :
+                    return box.size.x;
+                default:
+                    return 1;
+            }
+        }
+        #endregion
     }
 }

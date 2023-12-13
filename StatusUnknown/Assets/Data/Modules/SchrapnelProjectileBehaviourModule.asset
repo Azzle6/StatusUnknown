@@ -38,22 +38,21 @@ MonoBehaviour:
       type: {class: ProjectileBehaviourData, ns: Module.Definitions, asm: Assembly-CSharp}
       data:
         <Behaviour>k__BackingField:
-          scriptAsset: {fileID: 11500000, guid: 52ad6006665b33347bc6db8216731b6c, type: 3}
-          typeName: Module.Behaviours.Projectiles.BasicProjectileBehaviour, Assembly-CSharp,
-            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+          scriptAsset: {fileID: 0}
+          typeName: 
         <LayerMask>k__BackingField:
           serializedVersion: 2
-          m_Bits: 384
+          m_Bits: 0
         <CollisionShape>k__BackingField:
-          rid: 7591883733765456137
-        <Mesh>k__BackingField: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
-        <Material>k__BackingField: {fileID: -876546973899608171, guid: 4a77fad0a2c502e42adef107b7ea51ea, type: 3}
-        shootVFX: {fileID: 8926484042661614526, guid: 2fae113fc0200bf479e9b4e3923b5b47, type: 3}
-        projectileVFX: {fileID: 8926484042661614526, guid: 053cfcb6e2fcc79439af58bd416353a9, type: 3}
-        hitVFX: {fileID: 8926484042661614526, guid: 40f71ee4f5b0f37459d6ddfbbd50e38e, type: 3}
+          rid: -2
+        <Mesh>k__BackingField: {fileID: 0}
+        <Material>k__BackingField: {fileID: 0}
+        shootVFX: {fileID: 0}
+        projectileVFX: {fileID: 0}
+        hitVFX: {fileID: 0}
         <TickRate>k__BackingField: 0
-        <LifeTime>k__BackingField: 2
-        <Quantity>k__BackingField: 4
+        <LifeTime>k__BackingField: 0
+        <Quantity>k__BackingField: 0
         <InstantiationRule>k__BackingField:
           rid: 4696495337976365320
         maxDamagedEnemies: 1
