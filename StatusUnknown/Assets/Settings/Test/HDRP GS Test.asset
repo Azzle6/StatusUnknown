@@ -119,6 +119,14 @@ MonoBehaviour:
       bounds:
         m_Center: {x: 0, y: 0, z: -67.5}
         m_Extent: {x: 405, y: 270, z: 202.5}
+    - sceneGUID: c55cdf790773ac44c8402af673ebc5ec
+      bounds:
+        m_Center: {x: -135, y: 0, z: 0}
+        m_Extent: {x: 405, y: 270, z: 270}
+    - sceneGUID: 56ff87c6dba73ff4e8a5815820074174
+      bounds:
+        m_Center: {x: -135, y: 0, z: 0}
+        m_Extent: {x: 405, y: 270, z: 270}
     serializedHasVolumes:
     - sceneGUID: ce31f14eba0f1044386249b739363569
       hasProbeVolumes: 1
@@ -133,6 +141,10 @@ MonoBehaviour:
     - sceneGUID: 42c7e30151322b349958296233f1cacd
       hasProbeVolumes: 1
     - sceneGUID: 87d46863c0ed7be49972dde60c4512f5
+      hasProbeVolumes: 1
+    - sceneGUID: c55cdf790773ac44c8402af673ebc5ec
+      hasProbeVolumes: 1
+    - sceneGUID: 56ff87c6dba73ff4e8a5815820074174
       hasProbeVolumes: 1
     serializedProfiles:
     - sceneGUID: ce31f14eba0f1044386249b739363569
@@ -151,6 +163,10 @@ MonoBehaviour:
       profile: {fileID: 11400000, guid: 8444c98bd469cad4cb4fb69f907e63f0, type: 2}
     - sceneGUID: 87d46863c0ed7be49972dde60c4512f5
       profile: {fileID: 11400000, guid: 8444c98bd469cad4cb4fb69f907e63f0, type: 2}
+    - sceneGUID: c55cdf790773ac44c8402af673ebc5ec
+      profile: {fileID: 11400000, guid: ace90d7ac2d1a4b40b58695e413cee95, type: 2}
+    - sceneGUID: 56ff87c6dba73ff4e8a5815820074174
+      profile: {fileID: 11400000, guid: b86181cc341614a488d6b72674d12d92, type: 2}
     serializedBakeSettings:
     - sceneGUID: ce31f14eba0f1044386249b739363569
       settings:
@@ -296,6 +312,42 @@ MonoBehaviour:
           collisionMask:
             serializedVersion: 2
             m_Bits: 4294967291
+    - sceneGUID: c55cdf790773ac44c8402af673ebc5ec
+      settings:
+        m_Version: 1
+        dilationSettings:
+          enableDilation: 1
+          dilationDistance: 10
+          dilationValidityThreshold: 0.25
+          dilationIterations: 1
+          squaredDistWeighting: 1
+        virtualOffsetSettings:
+          useVirtualOffset: 1
+          outOfGeoOffset: 0.01
+          searchMultiplier: 0.2
+          rayOriginBias: -0.001
+          maxHitsPerRay: 10
+          collisionMask:
+            serializedVersion: 2
+            m_Bits: 4294967291
+    - sceneGUID: 56ff87c6dba73ff4e8a5815820074174
+      settings:
+        m_Version: 1
+        dilationSettings:
+          enableDilation: 1
+          dilationDistance: 140
+          dilationValidityThreshold: 0.25
+          dilationIterations: 1
+          squaredDistWeighting: 1
+        virtualOffsetSettings:
+          useVirtualOffset: 1
+          outOfGeoOffset: 0.01
+          searchMultiplier: 0.2
+          rayOriginBias: -0.001
+          maxHitsPerRay: 10
+          collisionMask:
+            serializedVersion: 2
+            m_Bits: 4294967291
     serializedBakingSets:
     - name: Baking Set Test
       sceneGUIDs:
@@ -346,7 +398,7 @@ MonoBehaviour:
       profile: {fileID: 11400000, guid: b58935d87aecea5498214d39a66cefd3, type: 2}
       lightingScenarios:
       - New Lighting Scenario
-    - name: LA 100
+    - name: LA 100 off
       sceneGUIDs:
       - 56526538771da8143942d42f20b2e173
       settings:
@@ -369,7 +421,53 @@ MonoBehaviour:
       profile: {fileID: 11400000, guid: 7cf59c44956aa754fa9fd922fe0857fb, type: 2}
       lightingScenarios:
       - Lighting scenario 1
-    m_LightingScenario: Lighting scenario 1
+    - name: LA 100 on
+      sceneGUIDs:
+      - c55cdf790773ac44c8402af673ebc5ec
+      settings:
+        m_Version: 1
+        dilationSettings:
+          enableDilation: 1
+          dilationDistance: 10
+          dilationValidityThreshold: 0.25
+          dilationIterations: 1
+          squaredDistWeighting: 1
+        virtualOffsetSettings:
+          useVirtualOffset: 1
+          outOfGeoOffset: 0.01
+          searchMultiplier: 0.2
+          rayOriginBias: -0.001
+          maxHitsPerRay: 10
+          collisionMask:
+            serializedVersion: 2
+            m_Bits: 4294967291
+      profile: {fileID: 11400000, guid: ace90d7ac2d1a4b40b58695e413cee95, type: 2}
+      lightingScenarios:
+      - LightsOnScenario
+    - name: LA 100
+      sceneGUIDs:
+      - 56ff87c6dba73ff4e8a5815820074174
+      settings:
+        m_Version: 1
+        dilationSettings:
+          enableDilation: 1
+          dilationDistance: 140
+          dilationValidityThreshold: 0.25
+          dilationIterations: 1
+          squaredDistWeighting: 1
+        virtualOffsetSettings:
+          useVirtualOffset: 1
+          outOfGeoOffset: 0.01
+          searchMultiplier: 0.2
+          rayOriginBias: -0.001
+          maxHitsPerRay: 10
+          collisionMask:
+            serializedVersion: 2
+            m_Bits: 4294967291
+      profile: {fileID: 11400000, guid: b86181cc341614a488d6b72674d12d92, type: 2}
+      lightingScenarios:
+      - New Lighting Scenario
+    m_LightingScenario: New Lighting Scenario
   m_Version: 5
   m_ShaderVariantLogLevel: 0
   m_ExportShaderVariants: 1
