@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BaseProjectileBehaviourModule
   m_EditorClassIdentifier: 
   itemName: Simple Projectile
-  description: Super projectile qui va tout droit !
+  description: A single projectile moving in a straight line.
   shape:
     shapeSize: {x: 1, y: 2}
     anchor: {x: 0, y: 0}
@@ -27,14 +27,14 @@ MonoBehaviour:
     localPosition: {x: 0, y: 1}
     direction: 1
   BehaviourData:
-    rid: 6076498576369778689
+    rid: 6076498593481490432
   references:
     version: 2
     RefIds:
     - rid: 4696495337976365322
       type: {class: ForwardInstantiationRule, ns: Module, asm: Assembly-CSharp}
       data: 
-    - rid: 6076498576369778689
+    - rid: 6076498593481490432
       type: {class: ProjectileBehaviourData, ns: Module.Definitions, asm: Assembly-CSharp}
       data:
         <Behaviour>k__BackingField:
@@ -56,7 +56,7 @@ MonoBehaviour:
         <Quantity>k__BackingField: 1
         <InstantiationRule>k__BackingField:
           rid: 4696495337976365322
-        maxDamagedEnemies: 0
+        maxDamagedEnemies: 1
         <Damages>k__BackingField: 14
         speed: 20
     - rid: 7591883733765456129
