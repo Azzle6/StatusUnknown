@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: TripleProjectileBehaviourModule
   m_EditorClassIdentifier: 
   itemName: Triple bullets
-  description: PIOU PIOU PIOU
+  description: Creates 3 aligned projectiles that moves in a straight line, in the
+    same direction.
   shape:
     shapeSize: {x: 2, y: 2}
     anchor: {x: 0, y: 0}
@@ -27,7 +28,7 @@ MonoBehaviour:
     localPosition: {x: 1, y: 0}
     direction: 0
   BehaviourData:
-    rid: 6076498572378112012
+    rid: 6076498593481490434
   references:
     version: 2
     RefIds:
@@ -35,7 +36,7 @@ MonoBehaviour:
       type: {class: HorizontalInstantiationRule, ns: Module, asm: Assembly-CSharp}
       data:
         Length: 3
-    - rid: 6076498572378112012
+    - rid: 6076498593481490434
       type: {class: ProjectileBehaviourData, ns: Module.Definitions, asm: Assembly-CSharp}
       data:
         <Behaviour>k__BackingField:
@@ -57,7 +58,7 @@ MonoBehaviour:
         <Quantity>k__BackingField: 3
         <InstantiationRule>k__BackingField:
           rid: 4696495337976365329
-        maxDamagedEnemies: 0
+        maxDamagedEnemies: 1
         <Damages>k__BackingField: 14
         speed: 20
     - rid: 7591883733765456139

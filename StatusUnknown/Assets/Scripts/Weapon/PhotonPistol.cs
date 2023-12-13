@@ -1,23 +1,23 @@
-using Input;
-using UnityEngine.VFX.Utility;
-
 namespace Weapon
 {
     using System.Collections;
     using UnityEngine;
     using Core.Pooler;
-    using Combat.HitProcess;
     using Module.Behaviours;
-    using Unity.Mathematics;
     using UnityEngine.VFX;
     using Weapons;
+    using Input;
+
 
 
     public class PhotonPistol : RangedWeapon
     {
         private PhotonPistolStat stat;
-        [SerializeField] private VisualEffect chargingVFX;
         [SerializeField] private VisualEffect shootingVFX;
+        [SerializeField] private VisualEffectAsset tinyProjectileVFX;
+        [SerializeField] private VisualEffectAsset chargedProjectileVFX;
+        private VisualEffect tempProjectileVFX;
+        private float chargeVFXSize;
         private float chargeTimer;
         private Coroutine charging;
         private Coroutine rumbleScale;
@@ -29,7 +29,6 @@ namespace Weapon
         
         private void Awake()
         {
-            chargingVFX.Stop();
             stat = weaponStat as PhotonPistolStat;
         }
 
@@ -37,7 +36,6 @@ namespace Weapon
         {
             reloading = default;
             charging = default;
-            chargingVFX.Stop();
         }
 
         public override bool ActionPressed()
@@ -52,7 +50,10 @@ namespace Weapon
             
             tempPhotonPistolBullet = ComponentPooler.Instance.GetPooledObject<Projectile>(stat.projectilePool.prefab.name);
             tempPhotonPistolBulletTr = tempPhotonPistolBullet.transform;
-            chargingVFX.SetFloat("Size", 0);
+            tempPhotonPistolBulletTr.forward = spawnPoint.forward;
+            shootingVFX = tempPhotonPistolBullet.GetProjectileVFX();
+            shootingVFX.visualEffectAsset = tinyProjectileVFX;
+            shootingVFX.SetFloat("Size", 0);
             charging = StartCoroutine(Charge());
             return true;
         }
@@ -61,14 +62,24 @@ namespace Weapon
         {
             chargeTimer = 0;
             tempPhotonPistolBulletTr.parent = spawnPoint;
-            chargingVFX.Play();
+            shootingVFX.enabled = true;
+            shootingVFX.Play();
             rumbleScale ??= StartCoroutine(GamePadRumbleManager.ExecuteRumbleWithTime(stat.rumbleScaling, false));
             while (chargeTimer < stat.maxTimeCharge)
             {
               tempPhotonPistolBulletTr.localPosition = Vector3.zero;
               chargeTimer += Time.deltaTime;
               tempPhotonPistolBulletTr.localScale = Vector3.one * (stat.projectileSize.Evaluate(chargeTimer / stat.maxTimeCharge) * stat.maxProjectileSize);
-              chargingVFX.SetFloat("Size", stat.projectileSize.Evaluate(chargeTimer / stat.maxTimeCharge));
+              chargeVFXSize = stat.projectileSize.Evaluate(chargeTimer / stat.maxTimeCharge) * stat.maxProjectileSize;
+
+              if (chargeVFXSize >= stat.projectileTinytoChargedTreshold &&
+                  shootingVFX.visualEffectAsset != chargedProjectileVFX)
+              {
+                  shootingVFX.visualEffectAsset = chargedProjectileVFX;
+              }
+              
+                  
+              shootingVFX.SetFloat("Size", stat.projectileSize.Evaluate(chargeTimer / stat.maxTimeCharge));
               currentDamage = stat.damageCurve.Evaluate(chargeTimer / stat.maxTimeCharge) * stat.maxDamage;
               yield return null;
             }
@@ -90,9 +101,7 @@ namespace Weapon
         {
             if (tempPhotonPistolBullet == default)
                 return;
-            
-            chargingVFX.Stop();
-            chargingVFX.SetFloat("Size", 0);
+                
             waitForTriggerRelease = false;
             StartCoroutine(Cooldown());
             if (charging != default)
@@ -107,12 +116,15 @@ namespace Weapon
                     GamePadRumbleManager.ExecuteRumbleWithTime(stat.rumbleOnShoot, true, chargeTimer / stat.maxTimeCharge));
             }
             
+            //change projectile size
+            tempProjectileVFX = tempPhotonPistolBullet.GetProjectileVFX();
+            tempProjectileVFX.SetFloat("Size", chargeVFXSize);
             shootingVFX.Play();
             tempPhotonPistolBulletTr.transform.parent = null;
             tempPhotonPistolBullet.Launch(currentDamage, spawnPoint.rotation, stat.projectileSpeed);
-            Transform pistolTransform = this.tempPhotonPistolBullet.transform;
-            bool isFullyCharged = this.chargeTimer >= this.stat.maxTimeCharge;
-            this.tempPhotonPistolBullet.onHit += () => OnProjectileHit(isFullyCharged, pistolTransform);
+            Transform pistolTransform = tempPhotonPistolBullet.transform;
+            bool isFullyCharged = chargeTimer >= stat.maxTimeCharge;
+            tempPhotonPistolBullet.onHit += () => OnProjectileHit(isFullyCharged, pistolTransform);
             tempPhotonPistolBullet.StartCheckingCollision();
             tempPhotonPistolBullet.hitShape.radius = tempPhotonPistolBulletTr.localScale.y / 2;
             

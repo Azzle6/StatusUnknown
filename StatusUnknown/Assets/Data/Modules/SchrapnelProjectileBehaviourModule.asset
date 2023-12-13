@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SchrapnelProjectileBehaviourModule
   m_EditorClassIdentifier: 
   itemName: Shrapnell
-  description: PRRRRRRRRRRRR
+  description: Generates 4 projectiles from its origin in random directions.
   shape:
     shapeSize: {x: 2, y: 2}
     anchor: {x: 0, y: 0}
@@ -24,7 +24,7 @@ MonoBehaviour:
     localPosition: {x: 1, y: 0}
     direction: 3
   BehaviourData:
-    rid: 6076498572378112007
+    rid: 6076498593481490433
   references:
     version: 2
     RefIds:
@@ -34,7 +34,7 @@ MonoBehaviour:
         angle: 180
         regular: 0
         radius: 0
-    - rid: 6076498572378112007
+    - rid: 6076498593481490433
       type: {class: ProjectileBehaviourData, ns: Module.Definitions, asm: Assembly-CSharp}
       data:
         <Behaviour>k__BackingField:
@@ -56,7 +56,7 @@ MonoBehaviour:
         <Quantity>k__BackingField: 4
         <InstantiationRule>k__BackingField:
           rid: 4696495337976365320
-        maxDamagedEnemies: 0
+        maxDamagedEnemies: 1
         <Damages>k__BackingField: 12
         speed: 20
     - rid: 7591883733765456137

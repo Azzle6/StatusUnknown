@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: WaveProjectileBehaviourModule
   m_EditorClassIdentifier: 
   itemName: Remanent Wave
-  description: VRRRRRRRRRRRR
+  description: A wave that moves slowly in a direction. Each time it touches an enemy,
+    its size and damages are reduced by 15% compared to the initial stats.
   shape:
     shapeSize: {x: 2, y: 2}
     anchor: {x: 0, y: 0}
@@ -24,7 +25,7 @@ MonoBehaviour:
     localPosition: {x: 0, y: 0}
     direction: 3
   BehaviourData:
-    rid: 7591883874691448836
+    rid: 6076498593481490435
   references:
     version: 2
     RefIds:
@@ -35,7 +36,7 @@ MonoBehaviour:
       type: {class: HitBox, ns: , asm: Assembly-CSharp}
       data:
         size: {x: 3, y: 1, z: 1}
-    - rid: 7591883874691448836
+    - rid: 6076498593481490435
       type: {class: ProjectileBehaviourData, ns: Module.Definitions, asm: Assembly-CSharp}
       data:
         <Behaviour>k__BackingField:
@@ -57,6 +58,6 @@ MonoBehaviour:
         <Quantity>k__BackingField: 1
         <InstantiationRule>k__BackingField:
           rid: 4696495337976365324
-        maxDamagedEnemies: 0
+        maxDamagedEnemies: 4
         <Damages>k__BackingField: 13
         speed: 7

@@ -1,4 +1,3 @@
-
 using Input;
 
 namespace Weapon
@@ -16,6 +15,7 @@ namespace Weapon
         public AnimationCurve projectileSize;
         public float maxProjectileSize;
         public float projectileSpeed; 
+        public float projectileTinytoChargedTreshold = 0.2f;
         [Header("Charge")]
         public float maxTimeCharge;
         [Header("Rumble")] 
