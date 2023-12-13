@@ -19,9 +19,10 @@ namespace Enemy
         [SerializeField] protected Rigidbody body;
         [SerializeField] protected LayerMask avoidanceMask;
         public event Action<EnemyContext> OnDeathEvent;
-
+    
         [Header("Debug")]
         [SerializeField] protected MeshRenderer meshRenderer;
+        [SerializeField] GameObject deathVFXPrefab;
         float currentHealth;
         void OnEnable()
         {
@@ -122,6 +123,8 @@ namespace Enemy
         protected virtual void Death()
         {
             //Debug.Log($"Death {gameObject.name}");
+            if(deathVFXPrefab != null)
+                PlayVFX(deathVFXPrefab, transform.position, transform.forward, 1);
             Destroy(gameObject);
         }
         protected virtual void InitializeEnemy()
