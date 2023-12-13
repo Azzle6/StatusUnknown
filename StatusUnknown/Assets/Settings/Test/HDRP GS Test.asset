@@ -366,6 +366,24 @@ MonoBehaviour:
           collisionMask:
             serializedVersion: 2
             m_Bits: 4294967291
+    - sceneGUID: 0191b610c8dbf71498bbb7e93803bdcc
+      settings:
+        m_Version: 1
+        dilationSettings:
+          enableDilation: 1
+          dilationDistance: 20
+          dilationValidityThreshold: 0.25
+          dilationIterations: 1
+          squaredDistWeighting: 1
+        virtualOffsetSettings:
+          useVirtualOffset: 1
+          outOfGeoOffset: 0.01
+          searchMultiplier: 0.2
+          rayOriginBias: -0.001
+          maxHitsPerRay: 10
+          collisionMask:
+            serializedVersion: 2
+            m_Bits: 4294967291
     serializedBakingSets:
     - name: Baking Set Test
       sceneGUIDs:

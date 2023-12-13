@@ -271,6 +271,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   meshRenderer: {fileID: 5780524416884182768}
+  deathVFXPrefab: {fileID: 8721225929222002372, guid: 8fee0525da970564aaf978b3858093a2, type: 3}
   sniperStats: {fileID: 11400000, guid: 4b9354ebdaf4e1e44a3775eb1d65af72, type: 2}
   obstacleMask:
     serializedVersion: 2
@@ -280,7 +281,9 @@ MonoBehaviour:
   tpCooldown: 0
   bulletPrefab: {fileID: 6248528393708085188, guid: 57fd7b16bf0b01c4aa4cf239eb995e54, type: 3}
   initialAttackDuration: 0
+  attackCooldown: 0
   <shootingPoint>k__BackingField: {fileID: 933890754964585424}
+  tpVFx: {fileID: 6318086042592288758, guid: 21426598470300441aa55daf69825d9b, type: 3}
 --- !u!95 &8748143321681919880
 Animator:
   serializedVersion: 5

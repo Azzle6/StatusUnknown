@@ -5,7 +5,8 @@ using UnityEngine;
 public class MorphBehaviour : MonoBehaviour
 {
     
-    [SerializeField] GameObject morphEggPrefab;
+
+    [SerializeField] MorphEgg morphEggPrefab;
     [SerializeField] MorphGameEvent startMorphEvent;// TODO fix editor implementation
     float currentMorphTimer;
     float morphTimeCounter;
@@ -42,16 +43,14 @@ public class MorphBehaviour : MonoBehaviour
         MorphEvents.StartMorphEvent(this);
         //Debug.Log($"StartMorph {gameObject}");
 
-
-        //TODO : morph shit
         SpawnEgg();
         Destroy(gameObject);
     }
     void SpawnEgg()
     {
-        GameObject eggPrefab = Instantiate(morphEggPrefab,transform.position,Quaternion.identity);
-        MorphEgg morphEgg = eggPrefab.GetComponent<MorphEgg>();
-        morphEgg.InitializeEgg();
+        //TODO : Implement pooler
+        MorphEgg eggPrefab = Instantiate(morphEggPrefab,transform.position,Quaternion.identity);
+        eggPrefab.InitializeEgg();
     }
 
 
