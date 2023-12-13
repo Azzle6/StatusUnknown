@@ -18,6 +18,11 @@ namespace pooler
             StartCoroutine(ReturnToPool(timeBeforeReturningToPool));
         }
         
+        public VisualEffect GetVFX()
+        {
+            return vfx;
+        }
+        
         private IEnumerator ReturnToPool(float timeBeforeReturningToPool)
         {
             yield return new WaitForSeconds(timeBeforeReturningToPool);
