@@ -53,7 +53,7 @@ namespace UI
         private void Restart()
         {
             Time.timeScale = 1;
-            UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         private void Option()

@@ -1,3 +1,5 @@
+using System.Net.NetworkInformation;
+
 namespace Map
 {
 using System.Collections.Generic;
@@ -19,6 +21,7 @@ using UnityEngine.UIElements;
         private VisualTreeAsset tempVisualTreeAsset;
         private VisualElement tempVisualElement;
         private RadioButtonGroup mapRadioButtonGroup;
+        private Button exitButton;
         private string tempString;
         private List<Button> currentMapButtons = new List<Button>();
         private Teleporter currentTeleporter;
@@ -28,6 +31,8 @@ using UnityEngine.UIElements;
             mapDisplay = mapsUIDoc.rootVisualElement.Q<VisualElement>("MapDisplay");
             mapRadioButtonGroup = mapsUIDoc.rootVisualElement.Q<RadioButtonGroup>("RadioButtonMapGroup");
             mapsUIDoc.rootVisualElement.style.display = DisplayStyle.None;
+            exitButton = mapsUIDoc.rootVisualElement.Q<Button>("ExitButton");
+            exitButton.clicked += () => Exit();
         }
         public void Display(Teleporter teleporter)
         {
@@ -38,6 +43,13 @@ using UnityEngine.UIElements;
             LoadRadioButton();
             mapRadioButtonGroup.RegisterCallback<ChangeEvent<int>>(OnRadioButtonChanged);
             PlayerInfoUIHandler.Instance.Hide();
+        }
+
+        private void Exit()
+        {
+            PlayerAction.Instance.EnableEvent();
+            PlayerInfoUIHandler.Instance.DisplayEvent(false);
+            mapsUIDoc.rootVisualElement.style.display = DisplayStyle.None;
         }
 
         private void Hide()

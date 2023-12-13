@@ -128,7 +128,15 @@ namespace Player
         private void UpdateHealthBar(float newHealth)
         {
             Vector3 newScale = new Vector3(newHealth / playerStat.maxHealth, 1, 1);
-            DOTween.To(() => healthBar.transform.scale, x => healthBar.transform.scale = x, newScale, 0.1f);
+            if (newScale.x < 0)
+            {
+                newScale.x = 0;
+            }
+            else
+            {
+                DOTween.To(() => healthBar.transform.scale, x => healthBar.transform.scale = x, newScale, 0.1f);
+            }
+            
         }
         
         private void InitMedikitCount(int newMedikitCount)
