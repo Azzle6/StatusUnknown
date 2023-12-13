@@ -14,7 +14,7 @@ public class MorphEgg : MonoBehaviour,IDamageable
 
     float currentLifePoints;
     [HideInInspector]
-    public float currentMorphDuration;
+    public float currentMorphDuration, startMorphTime;
     bool initialized = false;
     bool broken;
 
@@ -27,7 +27,7 @@ public class MorphEgg : MonoBehaviour,IDamageable
     [SerializeField] float morphDuration = 2f;
     [SerializeField,Range(0,1)] float durationRandomness = 0.5f;
     [SerializeField] float lifePoints = 100;
-    void Start()
+    void Awake()
     {
         InitializeEgg();
     }
@@ -40,6 +40,7 @@ public class MorphEgg : MonoBehaviour,IDamageable
         MorphEvents.RegisterActiveMorphEgg(this);
 
         currentLifePoints = lifePoints;
+        startMorphTime = Time.time;
         currentMorphDuration = UnityEngine.Random.Range((1 - durationRandomness) * morphDuration, morphDuration); ;
         Invoke("Hatch", currentMorphDuration);
     }
