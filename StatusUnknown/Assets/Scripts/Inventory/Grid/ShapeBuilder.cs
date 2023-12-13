@@ -5,17 +5,22 @@ namespace Inventory.Grid
     using UnityEngine;
     using UnityEngine.UIElements;
 
-    public static class GridBuilder
+    public static class ShapeBuilder
     {
-        public static VisualElement[] BuildGrid(Shape shape, VisualElement verticalParent, VisualTreeAsset slotTemplate)
+        public static VisualElement[] BuildShape(Shape shape, VisualElement verticalParent, VisualTreeAsset slotTemplate)
         {
             List<VisualElement> slotsList = new List<VisualElement>();
             
             verticalParent.Clear();
             for (int y = 0; y < shape.shapeSize.y; y++)
             {
-                VisualElement horizontalParent = new VisualElement();
-                horizontalParent.style.flexDirection = FlexDirection.Row;
+                VisualElement horizontalParent = new VisualElement
+                {
+                    style =
+                    {
+                        flexDirection = FlexDirection.Row
+                    }
+                };
                 verticalParent.Insert(y, horizontalParent);
                 
                 for (int x = 0; x < shape.shapeSize.x; x++)

@@ -25,6 +25,8 @@ namespace Core.UI
         public VisualTreeAsset triggerSelectionButtonTemplate;
         [FoldoutGroup("Assets references")] 
         public VisualTreeAsset itemEdgesHideTemplate;
+        [FoldoutGroup("Assets references")] 
+        public VisualTreeAsset outputDescriptionTemplate;
         
         [FoldoutGroup("Parameters")]
         public float slotSize;

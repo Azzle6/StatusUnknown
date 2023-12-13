@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c01d336291543644a3bee3a19b552e2, type: 3}
   m_Name: BaseProjectileBehaviourModule
   m_EditorClassIdentifier: 
-  itemName: SimpleProjectile
+  itemName: Simple Projectile
+  description: Super projectile qui va tout droit !
   shape:
     shapeSize: {x: 1, y: 2}
     anchor: {x: 0, y: 0}
@@ -55,6 +56,7 @@ MonoBehaviour:
         <Quantity>k__BackingField: 1
         <InstantiationRule>k__BackingField:
           rid: 4696495337976365322
+        maxDamagedEnemies: 0
         <Damages>k__BackingField: 14
         speed: 20
     - rid: 7591883733765456129
