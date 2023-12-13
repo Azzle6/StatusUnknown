@@ -27,7 +27,7 @@ namespace Module.Behaviours
             VisualEffectHandler tempSpawnVFX = ComponentPooler.Instance.GetPooledObject<VisualEffectHandler>("EmptyVisualEffect");
             tempSpawnVFX.transform.rotation = info.Rotation;
             tempSpawnVFX.transform.position = transform.position;
-            tempSpawnVFX.StartVFX(this.ProjectileData.projectileVFX, 1f);
+            tempSpawnVFX.StartVFX(this.ProjectileData.shootVFX, 0.5f);
             
             ProjectileVFX = ComponentPooler.Instance.GetPooledObject<VisualEffectHandler>("EmptyVisualEffect");
             ProjectileVFX.transform.position = transform.position;
@@ -35,6 +35,7 @@ namespace Module.Behaviours
             ProjectileVFX.transform.SetParent(transform);
             ProjectileVFX.StartVFX(ProjectileData.projectileVFX, data.LifeTime);
             this.ProjectileVFX.vfx.SetFloat("Size", this.GetAverageProjectileWidth());
+            this.ProjectileVFX.vfx.SetFloat("Lifetime", this.ProjectileData.LifeTime);
 
             this.hitsRemaining = this.ProjectileData.maxDamagedEnemies;
             this.currentDamages = this.ProjectileData.Damages;
