@@ -75,8 +75,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
+  fullyChargedDamage: 0
+  fullyChargedRadius: 0
   rb: {fileID: 1794472797588995133}
   hitVFX: {fileID: 8926484042661614526, guid: 919006018855920409bbed5db822d51a, type: 3}
+  fullyChargedVFX: {fileID: 8926484042661614526, guid: bbce1fbc9a357924b840873589eb3330, type: 3}
   projectileVFX: {fileID: 5642355942973502361}
   hitShape:
     radius: 1

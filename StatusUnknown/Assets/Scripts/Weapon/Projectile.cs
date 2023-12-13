@@ -14,8 +14,11 @@ namespace Weapon
         public Action onHit;
         
         [HideInInspector] public float damage;
+        [HideInInspector] public float fullyChargedDamage;
+        [HideInInspector] public float fullyChargedRadius;
         [SerializeField] private Rigidbody rb;
         [SerializeField] private VisualEffectAsset hitVFX;
+        [SerializeField] private VisualEffectAsset fullyChargedVFX;
         [SerializeField] private VisualEffect projectileVFX;
         public HitSphere hitShape;
         [SerializeField] private LayerMask layerMask; 
@@ -38,10 +41,11 @@ namespace Weapon
             StopAllCoroutines();
         }
         
-        public void Launch(float damage, Quaternion direction, float speed)
+        public void Launch(float damage, Quaternion direction, float speed, float fullyChargedDamage, float fullyChargedRadius)
         {
             this.damage = damage;
             this.speed = speed;
+            this.fullyChargedDamage = fullyChargedDamage;
             
             this.transform.rotation = direction;
             rb.velocity = transform.forward * speed;
@@ -67,19 +71,30 @@ namespace Weapon
             
             if (collisions.Length > 0)
             {
-       
                 Collider firstCollider = collisions[0];
                 IDamageable damageable = firstCollider.GetComponent<IDamageable>();
                 if (damageable != null)
                     damageable.TakeDamage(damage, transform.forward * knockbackStrength);
-
-                //ModuleBehaviourHandler.Instance.InstantiateModuleBehaviour(this.moduleToCast, new InstantiatedModuleInfo(transform.position, transform.rotation, collisions[0]));
+                
                 tempHitVFX = ComponentPooler.Instance.GetPooledObject<VisualEffectHandler>("EmptyVisualEffect");
 
                 tempHitVFX.StartVFX(hitVFX,5);
                 tempHitVFX.transform.position = transform.position;
                 this.onHit?.Invoke();
                 ComponentPooler.Instance.ReturnObjectToPool(this);
+            }
+        }
+
+        public void Explode()
+        {
+            Collider[] collisions = Physics.OverlapSphere(transform.position, fullyChargedRadius, layerMask);
+            tempHitVFX = ComponentPooler.Instance.GetPooledObject<VisualEffectHandler>("EmptyVisualEffect");
+
+            foreach (Collider collider in collisions)
+            {
+                IDamageable damageable = collider.GetComponent<IDamageable>();
+                if (damageable != null)
+                    damageable.TakeDamage(fullyChargedDamage, transform.forward * knockbackStrength);
             }
         }
         

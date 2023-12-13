@@ -26,6 +26,7 @@ namespace Weapon
         private float currentDamage;
         private bool waitForTriggerRelease;
         private float cdTimer;
+        private bool fullyCharged;
         
         private void Awake()
         {
@@ -47,7 +48,7 @@ namespace Weapon
 
             if (charging != default)
                 return false;
-            
+            fullyCharged = false;
             tempPhotonPistolBullet = ComponentPooler.Instance.GetPooledObject<Projectile>(stat.projectilePool.prefab.name);
             tempPhotonPistolBulletTr = tempPhotonPistolBullet.transform;
             tempPhotonPistolBulletTr.forward = spawnPoint.forward;
@@ -83,7 +84,7 @@ namespace Weapon
               currentDamage = stat.damageCurve.Evaluate(chargeTimer / stat.maxTimeCharge) * stat.maxDamage;
               yield return null;
             }
-
+            fullyCharged = true;
             StartCoroutine(WaitForTriggerRelease());
         }
         
@@ -121,7 +122,7 @@ namespace Weapon
             tempProjectileVFX.SetFloat("Size", chargeVFXSize);
             shootingVFX.Play();
             tempPhotonPistolBulletTr.transform.parent = null;
-            tempPhotonPistolBullet.Launch(currentDamage, spawnPoint.rotation, stat.projectileSpeed);
+            tempPhotonPistolBullet.Launch(currentDamage, spawnPoint.rotation, stat.projectileSpeed,stat.fullyChargedDamage,stat.fullyChargedRadius);
             Transform pistolTransform = tempPhotonPistolBullet.transform;
             bool isFullyCharged = chargeTimer >= stat.maxTimeCharge;
             tempPhotonPistolBullet.onHit += () => OnProjectileHit(isFullyCharged, pistolTransform);
@@ -139,7 +140,11 @@ namespace Weapon
         private void OnProjectileHit(bool isFullCharged, Transform projectile)
         {
             ModuleBehaviourHandler.Instance.CastModule(this.inventory, this.weaponDefinition, E_WeaponOutput.ON_HIT, projectile);
-            if(isFullCharged) ModuleBehaviourHandler.Instance.CastModule(this.inventory, this.weaponDefinition,E_WeaponOutput.ON_HIT_FULL_CHARGED, projectile);
+            if (isFullCharged)
+            {
+                
+                ModuleBehaviourHandler.Instance.CastModule(this.inventory, this.weaponDefinition,E_WeaponOutput.ON_HIT_FULL_CHARGED, projectile);
+            }
         }
         
         public override void Hit()

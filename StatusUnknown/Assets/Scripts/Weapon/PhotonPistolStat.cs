@@ -18,6 +18,9 @@ namespace Weapon
         public float projectileTinytoChargedTreshold = 0.2f;
         [Header("Charge")]
         public float maxTimeCharge;
+        [Header("Fully Charged")] 
+        public float fullyChargedDamage;
+        public float fullyChargedRadius;
         [Header("Rumble")] 
         public GamePadRumbleWithTimer rumbleScaling;
         public GamePadRumbleWithTimer rumbleOnShoot;
