@@ -1,21 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-2218835765958426275
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 13
-  hdPluginSubTargetMaterialVersions:
-    m_Keys: []
-    m_Values: 
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -23,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MI_FailleEnnemi 1
+  m_Name: MI_Faille1
   m_Shader: {fileID: -6465566751694194690, guid: dfb1255adb2f921488253d755b2d96db, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -75,10 +59,6 @@ Material:
         m_Texture: {fileID: 2800000, guid: 800d85c4316bbfa41b0829a9c6a16ce7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_46d609d04a3248acad55d6adeb1d8221_Texture_1_Texture2D:
-        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_486b7c6365274325a9cc5b9c02309960_Texture_1_Texture2D:
         m_Texture: {fileID: 2800000, guid: 800d85c4316bbfa41b0829a9c6a16ce7, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -113,7 +93,7 @@ Material:
     - _AlphaCutoffEnable: 0
     - _AlphaDstBlend: 10
     - _AlphaSrcBlend: 1
-    - _BlackThreshold: 0.2
+    - _BlackThreshold: 0.16
     - _BlendMode: 0
     - _BorderMaskPower: 0.2
     - _ChromaticAberrationAmount: 0.015
@@ -129,9 +109,9 @@ Material:
     - _CullMode: 2
     - _CullModeForward: 2
     - _DepthOffsetEnable: 0
-    - _DetaiLLoss: 1
-    - _DetailLossMidSectionThreshold: 0.8
-    - _DetailLossOpacityThreshold: 0.1
+    - _DetaiLLoss: 0
+    - _DetailLossMidSectionThreshold: 0.75
+    - _DetailLossOpacityThreshold: 0.2
     - _DoubleSidedEnable: 0
     - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 2
@@ -140,9 +120,9 @@ Material:
     - _EnableFogOnTransparent: 1
     - _EyeDepth: 0
     - _EyeNoiseIntensity: 0
-    - _LeftBorderMask: 1
+    - _LeftBorderMask: 0
     - _MidSectionThreshold: 0.8
-    - _OpacityPower: 1.67
+    - _OpacityPower: 1
     - _OpacityThreshold: 0.05
     - _OpaqueCullMode: 2
     - _PanningSpeed: 0.075
@@ -151,7 +131,7 @@ Material:
     - _ParallaxPower: 2
     - _RadialMask: 0
     - _RenderQueueType: 4
-    - _RightBorderMask: 1
+    - _RightBorderMask: 0
     - _SrcBlend: 1
     - _StencilRef: 0
     - _StencilRefDepth: 1
@@ -162,9 +142,9 @@ Material:
     - _StencilWriteMaskDistortionVec: 4
     - _StencilWriteMaskMV: 43
     - _SurfaceType: 1
-    - _TextureStretch: 1.62
-    - _TextureTiling: 0.57
-    - _Threshold: 0.285
+    - _TextureStretch: 1.1
+    - _TextureTiling: 1
+    - _Threshold: 0.3
     - _ThresholdSineIntensity: 0.01
     - _ThresholdSineSpeed: 1.3
     - _TransparentBackfaceEnable: 0
@@ -182,3 +162,19 @@ Material:
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
+--- !u!114 &7164138016964114644
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 13
+  hdPluginSubTargetMaterialVersions:
+    m_Keys: []
+    m_Values: 
