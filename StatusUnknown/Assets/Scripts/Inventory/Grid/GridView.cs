@@ -31,8 +31,7 @@ namespace Inventory.Grid
         }
         private float slotWidth;
 
-        private readonly Action<IGridElement> gridElementFocusEvent;
-        private readonly Action<ItemView> hoverItemEvent;
+        private readonly Action<Slot> slotFocusEvent;
 
         private VisualElement firstFocus;
         private VisualElement verticalParent;
@@ -43,8 +42,7 @@ namespace Inventory.Grid
             this.gridRoot = root;
             this.shape = shape;
             this.container = container;
-            this.gridElementFocusEvent += UIHandler.Instance.OnGridElementFocus;
-            this.hoverItemEvent += UIHandler.Instance.OnItemHover;
+            this.slotFocusEvent += UIHandler.Instance.OnSlotFocus;
             this.canContainsTypes = typesContained;
             this.BuildGrid();
         }
@@ -64,7 +62,7 @@ namespace Inventory.Grid
             this.firstFocus = null;
             this.verticalParent = this.gridRoot.Q<VisualElement>("verticalParent");
             
-            VisualElement[] gridSlots = GridBuilder.BuildGrid(this.shape, this.verticalParent, UIHandler.Instance.uiSettings.slotTemplate);
+            VisualElement[] gridSlots = ShapeBuilder.BuildShape(this.shape, this.verticalParent, UIHandler.Instance.uiSettings.slotTemplate);
 
             List<Slot> slotsList = new List<Slot>();
             for (int y = 0; y < this.shape.shapeSize.y; y++)
@@ -76,9 +74,7 @@ namespace Inventory.Grid
                     Slot slot = new Slot(pos, slotView, this);
                     slot.FocusElement.RegisterCallback<FocusEvent>((e) =>
                     {
-                        this.gridElementFocusEvent?.Invoke(slot);
-                        if(slot.ItemView != null)
-                            this.hoverItemEvent?.Invoke(slot.ItemView);
+                        this.slotFocusEvent?.Invoke(slot);
                     });
                     slot.FocusElement.RegisterCallback<NavigationSubmitEvent>(e => this.OnInteract(slot));
                     slotsList.Add(slot);
@@ -117,8 +113,8 @@ namespace Inventory.Grid
                 ItemView itemView = ItemView.InstantiateItemView(info.ItemData, info.Coordinates, this);
                 this.SetItemPosition(itemView, info.Coordinates);
                 this.ItemsView.Add(itemView);
-                itemView.FocusElement.RegisterCallback<FocusEvent>(e => this.gridElementFocusEvent?.Invoke(itemView));
-                itemView.FocusElement.RegisterCallback<NavigationSubmitEvent>(e => this.OnInteract(itemView));
+                //itemView.FocusElement.RegisterCallback<FocusEvent>(e => this.gridElementFocusEvent?.Invoke(itemView));
+                //itemView.FocusElement.RegisterCallback<NavigationSubmitEvent>(e => this.OnInteract(itemView));
             }
         }
         

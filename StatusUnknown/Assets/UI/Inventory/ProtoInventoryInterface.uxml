@@ -133,7 +133,7 @@
                     <ui:VisualElement name="selectedItemInfoZone" style="height: 25%; border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px; border-left-color: rgb(218, 218, 218); border-right-color: rgb(218, 218, 218); border-top-color: rgb(218, 218, 218); border-bottom-color: rgb(218, 218, 218);">
                         <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="itemInfoName" class="halfTitle" style="white-space: normal;" />
                         <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="itemInfoDescription" class="halfTitle" style="white-space: normal; font-size: 18px;" />
-                        <ui:VisualElement name="itemOutputInfoZone" />
+                        <ui:VisualElement name="itemOutputInfoZone" style="margin-top: 20px;" />
                     </ui:VisualElement>
                 </ui:VisualElement>
                 <ui:VisualElement name="inventoryZone" style="width: 40%; margin-top: 2%; margin-right: 2%; margin-bottom: 2%; margin-left: 2%; border-left-color: rgb(136, 136, 136); border-right-color: rgb(136, 136, 136); border-top-color: rgb(136, 136, 136); border-bottom-color: rgb(136, 136, 136); border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px;">

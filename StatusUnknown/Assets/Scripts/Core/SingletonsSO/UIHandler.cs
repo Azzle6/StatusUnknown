@@ -1,6 +1,7 @@
 namespace Core.SingletonsSO
 {
     using System;
+    using Inventory;
     using Inventory.Grid;
     using Inventory.Item;
     using Sirenix.OdinInspector;
@@ -13,14 +14,13 @@ namespace Core.SingletonsSO
     {
         public UISettings uiSettings;
         public OutputReferencesSO outputReferences;
-
-        public Action<ItemView> hoverItem;
         
         [FoldoutGroup("Dynamic data")]
         public bool isMovingItem;
         [FoldoutGroup("Dynamic data")]
         private ItemView movingItem;
-        
+
+        public Action<Slot> onSlotFocusEvent;
         private GridView selectedGrid;
         
         public void ForceFocus(VisualElement element)
@@ -35,9 +35,10 @@ namespace Core.SingletonsSO
             this.movingItem = null;
         }
         
-        public void OnGridElementFocus(IGridElement element)
+        public void OnSlotFocus(Slot element)
         {
             this.selectedGrid = element.Grid;
+            this.onSlotFocusEvent?.Invoke(element);
             if (this.isMovingItem)
             {
                 if (this.movingItem == null)
@@ -47,11 +48,6 @@ namespace Core.SingletonsSO
                 }
                 MoveItem(element);
             }
-        }
-        
-        public void OnItemHover(ItemView element)
-        {
-            this.hoverItem?.Invoke(element);
         }
 
         public void TryPickItem(ItemView itemView)

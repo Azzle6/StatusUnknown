@@ -23,6 +23,7 @@ namespace Inventory.Item
         private VisualElement verticalRoot;
         private VisualElement iconElement;
         protected UISettings UiSettings;
+        protected VisualElement[] visualSquares;
 
         #region CONSTRUCTOR
         protected ItemView(ItemData itemData, Vector2Int gridPosition, GridView gridView)
@@ -48,9 +49,7 @@ namespace Inventory.Item
             itemView.style.position = Position.Absolute;
             
             this.verticalRoot = itemView.Q<VisualElement>("verticalRoot");
-            GridBuilder.BuildGrid(shape, this.verticalRoot, this.UiSettings.itemSquareTemplate);
-
-            
+            this.visualSquares = ShapeBuilder.BuildShape(shape, this.verticalRoot, this.UiSettings.itemSquareTemplate);
             
             for (int y = 0; y < shape.shapeSize.y; y++)
             {
@@ -120,20 +119,29 @@ namespace Inventory.Item
 
         public void SetMoveState()
         {
-            this.FocusElement.AddToClassList("movingElement");
+            foreach (var square in this.visualSquares)
+            {
+                square.AddToClassList("movingElement");
+            }
         }
 
         public void SetPlaceItemFeedback(bool canPlace)
         {
-            this.FocusElement.AddToClassList(canPlace ? "canPlace" : "cantPlace");
-            this.FocusElement.RemoveFromClassList(canPlace ? "cantPlace" : "canPlace");
+            foreach (var square in this.visualSquares)
+            {
+                square.AddToClassList(canPlace ? "canPlace" : "cantPlace");
+                square.RemoveFromClassList(canPlace ? "cantPlace" : "canPlace");
+            }
         }
 
         public void PlacedState()
         {
-            this.FocusElement.RemoveFromClassList("movingElement");
-            this.FocusElement.RemoveFromClassList("canPlace");
-            this.FocusElement.RemoveFromClassList("cantPlace");
+            foreach (var square in this.visualSquares)
+            { 
+                square.RemoveFromClassList("movingElement");
+                square.RemoveFromClassList("canPlace");
+                square.RemoveFromClassList("cantPlace");
+            }
         }
 
         public static ItemView InstantiateItemView(ItemData itemData, Vector2Int gridPosition, GridView gridView)

@@ -61,7 +61,7 @@ namespace Inventory
             this.uiSettings = UIHandler.Instance.uiSettings;
             this.outputReferences = UIHandler.Instance.outputReferences;
 
-            UIHandler.Instance.hoverItem += this.OnHoverItem;
+            UIHandler.Instance.onSlotFocusEvent += this.OnSlotFocus;
             
             this.RefreshWeaponsList();
             this.InitInventoryView();
@@ -145,11 +145,23 @@ namespace Inventory
             this.triggerGridView.LoadNewData(this.selectedWeaponData.definition.triggers[index].shape, this.selectedWeaponData.triggerInfoData[index]);
         }
 
+        private void OnSlotFocus(Slot slot)
+        {
+            this.OnHoverItem(slot.ItemView);
+        }
+        
         private void OnHoverItem(ItemView itemView)
         {
-            ItemData data = itemView.ItemData;
             VisualElement itemOutputDescriptionParent = this.itemInfoPanel.Q<VisualElement>("itemOutputInfoZone");
             itemOutputDescriptionParent.Clear();
+            if (itemView == null)
+            {
+                SetName("");
+                SetDescription("");
+                return;
+            }
+            
+            ItemData data = itemView.ItemData;
             
             switch (data.GridItemDefinition.ItemType)
             {
@@ -223,7 +235,7 @@ namespace Inventory
 
         private void OnDisable()
         {
-            UIHandler.Instance.hoverItem -= this.OnHoverItem;
+            UIHandler.Instance.onSlotFocusEvent -= this.OnSlotFocus;
         }
     }
 }
