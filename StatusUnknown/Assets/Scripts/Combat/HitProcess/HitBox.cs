@@ -20,4 +20,11 @@ public class HitBox : HitShape
             debugMesh = Resources.GetBuiltinResource<Mesh>("Cube.fbx");
         Gizmos.DrawWireMesh(debugMesh, hitContext.transform.position, hitContext.transform.rotation, size * this.Scale);
     }
+
+    public override void DrawGizmos(Transform transform)
+    {
+        if (debugMesh == null)
+            debugMesh = Resources.GetBuiltinResource<Mesh>("Cube.fbx");
+        Gizmos.DrawWireMesh(debugMesh, transform.position, transform.rotation, size * this.Scale);
+    }
 }

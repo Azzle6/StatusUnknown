@@ -1,6 +1,7 @@
 namespace Inventory.Item
 {
     using System;
+    using System.Collections.Generic;
     using Core.Helpers;
     using Core.SingletonsSO;
     using Core.UI;
@@ -23,7 +24,8 @@ namespace Inventory.Item
         private VisualElement verticalRoot;
         private VisualElement iconElement;
         protected UISettings UiSettings;
-        protected VisualElement[] visualSquares;
+        protected VisualElement[] visualSquareParents;
+        protected VisualElement[] visualSquare;
 
         #region CONSTRUCTOR
         protected ItemView(ItemData itemData, Vector2Int gridPosition, GridView gridView)
@@ -49,7 +51,11 @@ namespace Inventory.Item
             itemView.style.position = Position.Absolute;
             
             this.verticalRoot = itemView.Q<VisualElement>("verticalRoot");
-            this.visualSquares = ShapeBuilder.BuildShape(shape, this.verticalRoot, this.UiSettings.itemSquareTemplate);
+            this.visualSquareParents = ShapeBuilder.BuildShape(shape, this.verticalRoot, this.UiSettings.itemSquareTemplate);
+            List<VisualElement> squares = new List<VisualElement>();
+            foreach (var squareParent in this.visualSquareParents)
+                squares.Add(squareParent.Q<VisualElement>("square"));
+            this.visualSquare = squares.ToArray();
             
             for (int y = 0; y < shape.shapeSize.y; y++)
             {
@@ -119,7 +125,7 @@ namespace Inventory.Item
 
         public void SetMoveState()
         {
-            foreach (var square in this.visualSquares)
+            foreach (var square in this.visualSquare)
             {
                 square.AddToClassList("movingElement");
             }
@@ -127,7 +133,7 @@ namespace Inventory.Item
 
         public void SetPlaceItemFeedback(bool canPlace)
         {
-            foreach (var square in this.visualSquares)
+            foreach (var square in this.visualSquare)
             {
                 square.AddToClassList(canPlace ? "canPlace" : "cantPlace");
                 square.RemoveFromClassList(canPlace ? "cantPlace" : "canPlace");
@@ -136,7 +142,7 @@ namespace Inventory.Item
 
         public void PlacedState()
         {
-            foreach (var square in this.visualSquares)
+            foreach (var square in this.visualSquare)
             { 
                 square.RemoveFromClassList("movingElement");
                 square.RemoveFromClassList("canPlace");
