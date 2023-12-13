@@ -16,6 +16,7 @@ namespace Weapon
         [HideInInspector] public float damage;
         [SerializeField] private Rigidbody rb;
         [SerializeField] private VisualEffectAsset hitVFX;
+        [SerializeField] private VisualEffect projectileVFX;
         public HitSphere hitShape;
         [SerializeField] private LayerMask layerMask; 
         private VisualEffectHandler tempHitVFX;
@@ -87,6 +88,11 @@ namespace Weapon
         {
             yield return new WaitForSeconds(lifeTime);
             ComponentPooler.Instance.ReturnObjectToPool(this);
+        }
+
+        public VisualEffect GetProjectileVFX()
+        {
+            return projectileVFX;
         }
     }
 }
