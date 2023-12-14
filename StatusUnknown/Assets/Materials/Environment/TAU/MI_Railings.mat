@@ -213,6 +213,9 @@ Material:
     - _Anisotropy: 0
     - _BlendMode: 0
     - _CoatMask: 0
+    - _ColorMax: 1
+    - _ColorMin: 0
+    - _ColorMin_1: 0
     - _ConservativeDepthOffsetEnable: 0
     - _CullMode: 2
     - _CullModeForward: 2
@@ -294,12 +297,13 @@ Material:
     - _RefractionModel: 0
     - _RenderQueueType: 1
     - _RequireSplitLighting: 0
-    - _RoughnessAdjust_Main: 0.45
+    - _RoughnessAdjust_Main: 0.42
     - _RoughnessAdjust_VP: 0
     - _RoughnessAdjust_WS: 0
-    - _RoughnessContrast_Main: 0.1
+    - _RoughnessContrast_Main: 0.04
     - _RoughnessContrast_VP: 1
     - _RoughnessContrast_WS: 1
+    - _SWITCH_TEST: 0
     - _Smoothness: 0.5
     - _SmoothnessRemapMax: 1
     - _SmoothnessRemapMin: 0
@@ -323,7 +327,7 @@ Material:
     - _TexWorldScale: 1
     - _TexWorldScaleEmissive: 1
     - _Thickness: 1
-    - _TintIntensity_Main: 0
+    - _TintIntensity_Main: 0.25
     - _TintIntensity_VP: 0
     - _TintIntensity_WS: 0
     - _TransmissionEnable: 1
@@ -358,7 +362,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
-    - _BaseColorTint_Main: {r: 0, g: 0, b: 0, a: 0}
+    - _BaseColorTint_Main: {r: 1, g: 0.60045624, b: 0, a: 0}
     - _BaseColorTint_VP: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColorTint_WS: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
