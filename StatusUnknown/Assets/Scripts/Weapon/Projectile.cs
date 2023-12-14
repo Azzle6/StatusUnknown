@@ -26,6 +26,7 @@ namespace Weapon
         public float knockbackStrength = 10f;
         public float lifeTime = 5f;
         private bool isCheckingCollision;
+        private bool fullycharged;
 
         private float speed;
         
@@ -41,11 +42,13 @@ namespace Weapon
             StopAllCoroutines();
         }
         
-        public void Launch(float damage, Quaternion direction, float speed, float fullyChargedDamage, float fullyChargedRadius)
+        public void Launch(float damage, Quaternion direction, float speed, float fullyChargedDamage, float fullyChargedRadius, bool fullycharged)
         {
             this.damage = damage;
             this.speed = speed;
             this.fullyChargedDamage = fullyChargedDamage;
+            this.fullyChargedRadius = fullyChargedRadius;
+            this.fullycharged = fullycharged;
             
             this.transform.rotation = direction;
             rb.velocity = transform.forward * speed;
@@ -82,14 +85,20 @@ namespace Weapon
                 tempHitVFX.transform.position = transform.position;
                 this.onHit?.Invoke();
                 ComponentPooler.Instance.ReturnObjectToPool(this);
+                if (fullycharged)
+                    Explode();
             }
         }
 
         public void Explode()
         {
-            Collider[] collisions = Physics.OverlapSphere(transform.position, fullyChargedRadius, layerMask);
+            Debug.Log(fullyChargedRadius + " fullyChargedRadius");
+            hitShape.radius = fullyChargedRadius;
+            Collider[] collisions = hitShape.DetectColliders(transform.position,transform.rotation, layerMask);
             tempHitVFX = ComponentPooler.Instance.GetPooledObject<VisualEffectHandler>("EmptyVisualEffect");
-
+            tempHitVFX.transform.position = transform.position;
+            tempHitVFX.StartVFX(fullyChargedVFX,5);
+            tempHitVFX.GetVFX().SetFloat("Size", fullyChargedRadius);
             foreach (Collider collider in collisions)
             {
                 IDamageable damageable = collider.GetComponent<IDamageable>();

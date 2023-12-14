@@ -122,7 +122,7 @@ namespace Weapon
             tempProjectileVFX.SetFloat("Size", chargeVFXSize);
             shootingVFX.Play();
             tempPhotonPistolBulletTr.transform.parent = null;
-            tempPhotonPistolBullet.Launch(currentDamage, spawnPoint.rotation, stat.projectileSpeed,stat.fullyChargedDamage,stat.fullyChargedRadius);
+            tempPhotonPistolBullet.Launch(currentDamage, spawnPoint.rotation, stat.projectileSpeed,stat.fullyChargedDamage,stat.fullyChargedRadius,fullyCharged);
             Transform pistolTransform = tempPhotonPistolBullet.transform;
             bool isFullyCharged = chargeTimer >= stat.maxTimeCharge;
             tempPhotonPistolBullet.onHit += () => OnProjectileHit(isFullyCharged, pistolTransform);
@@ -142,7 +142,6 @@ namespace Weapon
             ModuleBehaviourHandler.Instance.CastModule(this.inventory, this.weaponDefinition, E_WeaponOutput.ON_HIT, projectile);
             if (isFullCharged)
             {
-                
                 ModuleBehaviourHandler.Instance.CastModule(this.inventory, this.weaponDefinition,E_WeaponOutput.ON_HIT_FULL_CHARGED, projectile);
             }
         }
