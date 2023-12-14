@@ -213,6 +213,9 @@ Material:
     - _Anisotropy: 0
     - _BlendMode: 0
     - _CoatMask: 0
+    - _ColorMax: 1.31
+    - _ColorMin: -0.25
+    - _ColorMin_1: 0
     - _ConservativeDepthOffsetEnable: 0
     - _CullMode: 2
     - _CullModeForward: 2
@@ -259,10 +262,10 @@ Material:
     - _LerpContrast_VP: 0.5
     - _LinkDetailsWithBase: 1
     - _MaterialID: 1
-    - _MetalAdjust_Main: 0
+    - _MetalAdjust_Main: 1
     - _MetalAdjust_VP: 0
     - _MetalAdjust_WS: 0
-    - _MetalContrast_Main: 0
+    - _MetalContrast_Main: 0.51
     - _MetalContrast_VP: 1
     - _MetalContrast_WS: 1
     - _Metallic: 0
@@ -300,6 +303,7 @@ Material:
     - _RoughnessContrast_Main: -0.07
     - _RoughnessContrast_VP: 1
     - _RoughnessContrast_WS: 1
+    - _SWITCH_TEST: 0
     - _Smoothness: 0.5
     - _SmoothnessRemapMax: 1
     - _SmoothnessRemapMin: 0
@@ -323,7 +327,7 @@ Material:
     - _TexWorldScale: 1
     - _TexWorldScaleEmissive: 1
     - _Thickness: 1
-    - _TintIntensity_Main: 0.47
+    - _TintIntensity_Main: 0.85
     - _TintIntensity_VP: 0
     - _TintIntensity_WS: 0
     - _TransmissionEnable: 1
@@ -358,7 +362,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
-    - _BaseColorTint_Main: {r: 0, g: 0, b: 0, a: 0}
+    - _BaseColorTint_Main: {r: 0.2264151, g: 0.12149104, b: 0, a: 0}
     - _BaseColorTint_VP: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColorTint_WS: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
