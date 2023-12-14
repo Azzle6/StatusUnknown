@@ -1,0 +1,31 @@
+.Button {
+    height: 30%;
+    -unity-font-definition: url('project://database/Assets/Textures/PlayerInfo/Font/Poppins-Bold%20SDF.asset?fileID=11400000&guid=ee67fdaeb862b0e41ab342e6d438b972&type=2#Poppins-Bold SDF');
+    font-size: 30px;
+}
+
+.Button:focus {
+    border-left-color: rgb(18, 195, 255);
+    border-right-color: rgb(18, 195, 255);
+    border-top-color: rgb(18, 195, 255);
+    border-bottom-color: rgb(18, 195, 255);
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+    border-bottom-left-radius: 7px;
+    border-top-width: 7px;
+    border-right-width: 7px;
+    border-bottom-width: 7px;
+    border-left-width: 7px;
+}
+RadioButton:focus {
+    border-left-color: rgba(0, 147, 117, 0.62);
+    border-right-color: rgba(0, 147, 117, 0.62);
+    border-top-color: rgba(0, 147, 117, 0.62);
+    border-bottom-color: rgba(0, 147, 117, 0.62);
+    border-top-width: 5px;
+    border-right-width: 5px;
+    border-bottom-width: 5px;
+    border-left-width: 5px;
+}
+
