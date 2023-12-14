@@ -7,5 +7,14 @@ namespace Core.SingletonsSO
 
     [CreateAssetMenu(menuName = "CustomAssets/SingletonSO/PlayerHandler", fileName = "PlayerHandler")]
     public class PlayerHandler : SingletonSO<PlayerHandler>
-    { }
+    {
+        public PlayerInventorySO playerInventory;
+
+        [Button]
+        public void AddItemToInventory(ItemData item)
+        {
+            Debug.Log("Add item to inventory.");
+            this.playerInventory.InventoryData.AddNewItem(item);
+        }
+    }
 }

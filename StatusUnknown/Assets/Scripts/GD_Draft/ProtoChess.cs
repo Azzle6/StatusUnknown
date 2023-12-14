@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using Core.SingletonsSO;
 using Inventory.Item;
 using UnityEngine;
@@ -62,5 +61,10 @@ public class ProtoChess : MonoBehaviour
         lootable = true;
         textLoot.SetActive(false);
         textInteract.SetActive(true);
+    }
+
+    public void AddItem(GridItemSO item)
+    {
+        PlayerHandler.Instance.AddItemToInventory(ItemData.CreateItemData(item));
     }
 }
