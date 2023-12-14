@@ -2,6 +2,7 @@ using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using StatusUnknown.Content.Narrative;
 using StatusUnknown.Utils.AssetManagement;
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -24,13 +25,16 @@ namespace StatusUnknown.Tools.FactionEditor
         }
 
         #region Tabs
-        [HorizontalGroup("FactionTabs")][EnumToggleButtons, PropertyOrder(-1)][GUIColor(CoreToolsStrings.COLOR_ENUMS), HideLabel] public Faction Faction;
-        [HorizontalGroup("NPCTabs")][EnumToggleButtons, PropertyOrder(0)][GUIColor(CoreToolsStrings.COLOR_ENUMS), HideLabel] public NPCEditorOptions Options;
+        [HorizontalGroup("NPCTabs")][EnumToggleButtons, PropertyOrder(0)][GUIColor(CoreToolsStrings.COLOR_QOL), HideLabel, OnValueChanged(nameof(UpdateShowOptions))] public NPCEditorOptions Options;
         #endregion
 
-
-        public NPC FactionNPC = new NPC();
+        [PropertySpace(40)] public NPC FactionNPC = new NPC();
         internal NpcSO npcToCreate;
+
+        private void UpdateShowOptions()
+        {
+            FactionNPC.ShowQuestOptions(Options == NPCEditorOptions.Quest); 
+        }
 
         #region Save
         [BoxGroup("Save")] public bool showSaveFields = false;
@@ -40,7 +44,7 @@ namespace StatusUnknown.Tools.FactionEditor
         [ShowIf(nameof(showSaveFields), true)]
         [GUIColor(CoreToolsStrings.COLOR_QOL)]
         [Button("Give Default Name", CoreToolsStrings.BUTTON_LAYOUT_SMALL, Icon = SdfIconType.Newspaper, Stretch = false, ButtonAlignment = 0f, ButtonHeight = 50)]
-        public void GiveDefaultSaveName() { saveName = Faction + "_NPC_Name"; }
+        public void GiveDefaultSaveName() { saveName = FactionNPC.Faction + "_NPC_Name"; }
 
         [ShowIf("@saveName != string.Empty && showSaveFields == true")]
         [BoxGroup("Save")]
@@ -51,6 +55,7 @@ namespace StatusUnknown.Tools.FactionEditor
         {
             npcToCreate = CreateInstance<NpcSO>(); 
 
+            npcToCreate.npcFaction = FactionNPC.Faction;   
             npcToCreate.name = saveName;
             npcToCreate.sprite = FactionNPC.sprite;
             npcToCreate.description = FactionNPC.description; 
@@ -63,6 +68,8 @@ namespace StatusUnknown.Tools.FactionEditor
             npcToCreate.mainQuest = FactionNPC.mainQuest;
             npcToCreate.secondaryQuests = FactionNPC.secondaryQuests;   
             npcToCreate.npcVoice = FactionNPC.npcVoice;
+
+            npcToCreate.placeholderItems = FactionNPC.placeholderItems; 
 
             StatusUnknown_AssetManager.SaveSO(npcToCreate, CoreAssetManagementStrings.SAVE_PATH_NPC, saveName, ".asset"); 
         }
@@ -95,6 +102,8 @@ namespace StatusUnknown.Tools.FactionEditor
             FactionNPC.mainQuest = reference.mainQuest;
             FactionNPC.secondaryQuests = reference.secondaryQuests;
             FactionNPC.npcVoice = reference.npcVoice;
+
+            FactionNPC.placeholderItems = reference.placeholderItems;
         }
         #endregion
 
@@ -105,20 +114,41 @@ namespace StatusUnknown.Tools.FactionEditor
             private const float g = 0f;
             private const float b = 0f;
             private const int rankCeilMax = 2000;
+            private bool showQuestOptions = true; 
 
             #region Data
             [HorizontalGroup("Core")]
-            [VerticalGroup("Core/left"), PropertyOrder(0)] public string name = "Faction NPC";
-            [VerticalGroup("Core/left")][PreviewField(300, ObjectFieldAlignment.Left), PropertyOrder(0)] public Sprite sprite;
-            [VerticalGroup("Core/left")][TextArea(10, 20)] public string description = string.Empty;
-            [VerticalGroup("Core/left"), ProgressBar(0, rankCeilMax, r, g, b), LabelText("Rank 1 Ceil"), PropertySpace(SpaceBefore = 20)] public float rank1ceil = 100;
-            [VerticalGroup("Core/left"), ProgressBar(0, rankCeilMax, r, g, b), LabelText("Rank 2 Ceil")] public float rank2ceil = 300;
-            [VerticalGroup("Core/left"), ProgressBar(0, rankCeilMax, r, g, b), LabelText("Rank 3 Ceil")] public float rank3ceil = 600;
-            [VerticalGroup("Core/left"), ProgressBar(0, rankCeilMax, r, g, b), LabelText("Rank 4 Ceil"), PropertySpace(SpaceBefore = 0, SpaceAfter = 20)] public float rank4ceil = 1000;
+            [VerticalGroup("Core/character")][GUIColor(CoreToolsStrings.COLOR_ENUMS), HideLabel] public Faction Faction;
+            [VerticalGroup("Core/character"), PropertyOrder(0)] public string name = "Faction NPC";
+            [VerticalGroup("Core/character")][PreviewField(300, ObjectFieldAlignment.Left), PropertyOrder(0)] public Sprite sprite;
+            [VerticalGroup("Core/character")][TextArea(10, 20)] public string description = "This is the default NPC from the SAA Faction"; 
+            [VerticalGroup("Core/character"), ProgressBar(0, rankCeilMax, r, g, b), LabelText("Rank 1 Ceil"), PropertySpace(SpaceBefore = 20)] public float rank1ceil = 100;
+            [VerticalGroup("Core/character"), ProgressBar(0, rankCeilMax, r, g, b), LabelText("Rank 2 Ceil")] public float rank2ceil = 300;
+            [VerticalGroup("Core/character"), ProgressBar(0, rankCeilMax, r, g, b), LabelText("Rank 3 Ceil")] public float rank3ceil = 600;
+            [VerticalGroup("Core/character"), ProgressBar(0, rankCeilMax, r, g, b), LabelText("Rank 4 Ceil"), PropertySpace(SpaceBefore = 0, SpaceAfter = 20)] public float rank4ceil = 1000;
 
-            [VerticalGroup("Core/right")][LabelWidth(CoreToolsStrings.LABEL_SIZE_MEDIUM)] public MainQuestsDataSO mainQuest = null;
-            [VerticalGroup("Core/right")][LabelWidth(CoreToolsStrings.LABEL_SIZE_MEDIUM)] public SecondaryQuestDataSO secondaryQuests = null;
-            [VerticalGroup("Core/right")][LabelWidth(CoreToolsStrings.LABEL_SIZE_MEDIUM), PreviewField(Alignment = ObjectFieldAlignment.Left)] public AudioClip npcVoice = null;
+            [VerticalGroup("Core/quests", VisibleIf = nameof(showQuestOptions))][LabelWidth(CoreToolsStrings.LABEL_SIZE_MEDIUM)] public MainQuestsDataSO mainQuest = null;
+            [VerticalGroup("Core/quests")][LabelWidth(CoreToolsStrings.LABEL_SIZE_MEDIUM)] public SecondaryQuestDataSO secondaryQuests = null;
+            [VerticalGroup("Core/quests")][LabelWidth(CoreToolsStrings.LABEL_SIZE_MEDIUM), PreviewField(Alignment = ObjectFieldAlignment.Left)] public AudioClip npcVoice = null;
+
+
+            /* [Serializable] public struct FactionItems
+            {
+                readonly string itemName;
+                readonly ReputationRank unlockRank; 
+                
+                public FactionItems(string name, ReputationRank rank)
+                {
+                    itemName  = name;   
+                    unlockRank = rank;
+                }
+            } */
+            [VerticalGroup("Core/items", VisibleIf = "@showQuestOptions == false")][LabelWidth(CoreToolsStrings.LABEL_SIZE_MEDIUM)] public string[] placeholderItems = new string[5]; 
+
+            public void ShowQuestOptions(bool showQuestOptions)
+            {
+                this.showQuestOptions = showQuestOptions;   
+            }
             #endregion
         }
         #endregion
