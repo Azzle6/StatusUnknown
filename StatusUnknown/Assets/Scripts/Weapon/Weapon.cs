@@ -1,5 +1,6 @@
 namespace Weapon
 {
+    using Core.SingletonsSO;
     using Inventory;
     using Module.Behaviours;
     using Player;

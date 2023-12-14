@@ -54,11 +54,6 @@ public class ProtoChess : MonoBehaviour
             textLoot.SetActive(false);
         }
     }
-
-    public void AddItem(GridItemSO itemDefinition)
-    {
-        PlayerHandler.Instance.AddItemToInventory(ItemData.CreateItemData(itemDefinition));
-    }
     
     IEnumerator Cooldown()
     {

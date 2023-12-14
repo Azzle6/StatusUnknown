@@ -29,8 +29,8 @@ namespace Inventory
         
         [SerializeField]
         private UIDocument uiDocument;
-        [SerializeField]
-        private PlayerInventorySO playerInventory;
+
+        [SerializeField] private PlayerInventorySO playerInventory;
 
         //Data
         private VisualElement inventoryRoot;
@@ -60,6 +60,8 @@ namespace Inventory
 
             this.uiSettings = UIHandler.Instance.uiSettings;
             this.outputReferences = UIHandler.Instance.outputReferences;
+            
+            Debug.Log(this.playerInventory.GetInstanceID());
 
             UIHandler.Instance.onSlotFocusEvent += this.OnSlotFocus;
             
