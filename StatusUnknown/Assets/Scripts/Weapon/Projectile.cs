@@ -27,6 +27,7 @@ namespace Weapon
         public float lifeTime = 5f;
         private bool isCheckingCollision;
         private bool fullycharged;
+        public float fullyChargedOffset;
 
         private float speed;
         
@@ -96,7 +97,7 @@ namespace Weapon
             hitShape.radius = fullyChargedRadius;
             Collider[] collisions = hitShape.DetectColliders(transform.position,transform.rotation, layerMask);
             tempHitVFX = ComponentPooler.Instance.GetPooledObject<VisualEffectHandler>("EmptyVisualEffect");
-            tempHitVFX.transform.position = transform.position;
+            tempHitVFX.transform.position = transform.position+new Vector3(0,fullyChargedOffset,0);
             tempHitVFX.StartVFX(fullyChargedVFX,5);
             tempHitVFX.GetVFX().SetFloat("Size", fullyChargedRadius);
             foreach (Collider collider in collisions)
