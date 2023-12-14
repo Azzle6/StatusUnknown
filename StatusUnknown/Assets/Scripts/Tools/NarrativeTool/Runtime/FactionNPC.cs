@@ -10,20 +10,15 @@ namespace Aurore.DialogSystem
 
     public class FactionNPC : MonoBehaviour
     {
+        [Header("NPC Data")]
         [SerializeField] private NpcSO npcData; 
-
-        [Header("Player Data")] // TEMP
-        [SerializeField] private PlayerDataSO playerData; 
 
         [Header("Dialogue Data")]
         [SerializeField] protected TMP_Text dialogueTitle;
         [SerializeField] private DialogueType dialogueType;
-        [SerializeField] private Faction npcFaction;
 
-        [Header("Quest Data")]
-        [Space, SerializeField] private MainQuestsDataSO mainQuests;
-        [SerializeField] private SecondaryQuestDataSO secondaryQuests;
-        [HideInInspector, SerializeField] private AudioClip npcVoice;
+        [Header("Player Data")]
+        [SerializeField] private PlayerDataSO playerData;
 
         private ReputationRank currentPlayerReputationRank;
         private QuestDataSO currentQuestPool;
@@ -36,18 +31,18 @@ namespace Aurore.DialogSystem
         /// </summary>
         public void StartDialogue()
         {
-            currentPlayerReputationRank = playerData.GetReputationRank_Simple(npcFaction);
-            currentQuestPool = secondaryQuests;
+            currentPlayerReputationRank = playerData.GetReputationRank_Simple(npcData.Faction);
+            currentQuestPool = npcData.secondaryQuests;
 
-            if (playerData.CanUnlockFactionMainQuest(npcFaction))
+            if (playerData.CanUnlockFactionMainQuest(npcData.Faction))
             {
-                currentQuestPool = mainQuests;
+                currentQuestPool = npcData.mainQuests;
             }
 
             UpdateCurrentDialogueGraph();
 
             currentDialogueGraph.Init();
-            DialogueUiManager.Instance.Init(currentDialogueGraph.GetRoot(), npcVoice);
+            DialogueUiManager.Instance.Init(currentDialogueGraph.GetRoot(), npcData.npcVoice);
         }
 
         private void UpdateCurrentDialogueGraph()
@@ -76,8 +71,8 @@ namespace Aurore.DialogSystem
             // only do this if the ongoing quest is a main one
             if (currentQuestPool.GetType() == typeof(SecondaryQuestDataSO)) return;
 
-            Debug.Log($"player hit new rank with faction {npcFaction}"); 
-            playerData.UpdatePlayerRank(npcFaction);
+            Debug.Log($"player hit new rank with faction {npcData.Faction}"); 
+            playerData.UpdatePlayerRank(npcData.Faction);
         }
         #endregion 
     }

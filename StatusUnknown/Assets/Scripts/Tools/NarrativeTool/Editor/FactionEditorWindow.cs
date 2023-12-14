@@ -55,7 +55,7 @@ namespace StatusUnknown.Tools.FactionEditor
         {
             npcToCreate = CreateInstance<NpcSO>(); 
 
-            npcToCreate.npcFaction = FactionNPC.Faction;   
+            npcToCreate.Faction = FactionNPC.Faction;   
             npcToCreate.name = saveName;
             npcToCreate.sprite = FactionNPC.sprite;
             npcToCreate.description = FactionNPC.description; 
@@ -65,7 +65,7 @@ namespace StatusUnknown.Tools.FactionEditor
             npcToCreate.rank3ceil = FactionNPC.rank3ceil;
             npcToCreate.rank4ceil = FactionNPC.rank4ceil;
 
-            npcToCreate.mainQuest = FactionNPC.mainQuest;
+            npcToCreate.mainQuests = FactionNPC.mainQuest;
             npcToCreate.secondaryQuests = FactionNPC.secondaryQuests;   
             npcToCreate.npcVoice = FactionNPC.npcVoice;
 
@@ -99,7 +99,7 @@ namespace StatusUnknown.Tools.FactionEditor
             FactionNPC.rank3ceil = reference.rank3ceil;
             FactionNPC.rank4ceil = reference.rank4ceil;
 
-            FactionNPC.mainQuest = reference.mainQuest;
+            FactionNPC.mainQuest = reference.mainQuests;
             FactionNPC.secondaryQuests = reference.secondaryQuests;
             FactionNPC.npcVoice = reference.npcVoice;
 

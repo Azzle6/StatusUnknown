@@ -12,20 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 600600c647ab9614e97b5be57b104d06, type: 3}
   m_Name: Hera_NPC_Boris
   m_EditorClassIdentifier: 
-  npcFaction: 1
+  Faction: 1
   name: Hera_NPC_Boris
   sprite: {fileID: 21300000, guid: 6ec9f0a52e122ac49b16b198c9e436bd, type: 3}
-  description: This is the default NPC from the HERA Faction
+  description: This is the default NPC from the Hera faction
   rank1ceil: 100
   rank2ceil: 300
   rank3ceil: 600
   rank4ceil: 1000
-  mainQuest: {fileID: 11400000, guid: 1688422c8b4f30844b81cbf34434e8bd, type: 2}
+  mainQuests: {fileID: 11400000, guid: 1688422c8b4f30844b81cbf34434e8bd, type: 2}
   secondaryQuests: {fileID: 11400000, guid: 584964a3b04e4814db35bf466af4e763, type: 2}
   npcVoice: {fileID: 8300000, guid: fd24261248f15344d97c5493b4629909, type: 3}
   placeholderItems:
-  - sword
-  - coin
   - backpack
+  - gun
+  - rifle
+  - coin
   - box
-  - square

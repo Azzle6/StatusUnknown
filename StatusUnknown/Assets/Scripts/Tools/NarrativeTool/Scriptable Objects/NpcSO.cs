@@ -15,7 +15,7 @@ namespace StatusUnknown.Content.Narrative
         private const int rankCeilMax = 2000;
         private const bool disableField = true; 
 
-        [DisableIf(nameof(disableField)), PropertySpace(SpaceBefore = 0, SpaceAfter = 20)] public Faction npcFaction; 
+        [DisableIf(nameof(disableField)), PropertySpace(SpaceBefore = 0, SpaceAfter = 20)] public Faction Faction; 
 
         [HorizontalGroup("Core")]
         [VerticalGroup("Core/left"), PropertyOrder(0)] public new string name = "Faction NPC";
@@ -26,7 +26,7 @@ namespace StatusUnknown.Content.Narrative
         [VerticalGroup("Core/left"), ProgressBar(0, rankCeilMax, r, g, b), LabelText("Rank 3 Ceil")] public float rank3ceil = 600;
         [VerticalGroup("Core/left"), ProgressBar(0, rankCeilMax, r, g, b), LabelText("Rank 4 Ceil"), PropertySpace(SpaceBefore = 0, SpaceAfter = 20)] public float rank4ceil = 1000;
 
-        [VerticalGroup("Core/right")][LabelWidth(CoreToolsStrings.LABEL_SIZE_MEDIUM)] public MainQuestsDataSO mainQuest = null;
+        [VerticalGroup("Core/right")][LabelWidth(CoreToolsStrings.LABEL_SIZE_MEDIUM)] public MainQuestsDataSO mainQuests = null;
         [VerticalGroup("Core/right")][LabelWidth(CoreToolsStrings.LABEL_SIZE_MEDIUM)] public SecondaryQuestDataSO secondaryQuests = null;
         [VerticalGroup("Core/right")][LabelWidth(CoreToolsStrings.LABEL_SIZE_MEDIUM), PreviewField(Alignment = ObjectFieldAlignment.Left)] public AudioClip npcVoice = null;
 
