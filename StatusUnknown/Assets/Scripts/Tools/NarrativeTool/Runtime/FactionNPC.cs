@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using StatusUnknown.Content;
 using StatusUnknown.Content.Narrative;
 using StatusUnknown;
@@ -19,12 +18,12 @@ namespace Aurore.DialogSystem
         [SerializeField] private DialogueType dialogueType;
         [SerializeField] private Faction npcFaction;
 
-        [Space, SerializeField] private MainQuestsPoolSO npcMainQuestPools;
-        [SerializeField] private SecondaryQuestPoolSO npcSecondaryQuestPools;
+        [Space, SerializeField] private MainQuestsDataSO npcMainQuestPools;
+        [SerializeField] private SecondaryQuestDataSO npcSecondaryQuestPools;
         [HideInInspector, SerializeField] private AudioClip audioMumblingVoice;
 
         private ReputationRank currentPlayerReputationRank;
-        private QuestPoolSO currentQuestPool;
+        private QuestDataSO currentQuestPool;
         private DialogGraph currentDialogueGraph;
 
         //[SerializeField] private UnityEvent OnReachingFactionMainQuest; 
@@ -72,7 +71,7 @@ namespace Aurore.DialogSystem
         public void ValidateMainQuest()
         {
             // only do this if the ongoing quest is a main one
-            if (currentQuestPool.GetType() == typeof(SecondaryQuestPoolSO)) return;
+            if (currentQuestPool.GetType() == typeof(SecondaryQuestDataSO)) return;
 
             Debug.Log($"player hit new rank with faction {npcFaction}"); 
             playerData.UpdatePlayerRank(npcFaction);

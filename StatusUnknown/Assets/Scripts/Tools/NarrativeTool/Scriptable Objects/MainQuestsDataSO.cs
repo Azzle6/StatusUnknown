@@ -7,7 +7,7 @@ namespace StatusUnknown.Content.Narrative
 {
     [ManageableData]
     [CreateAssetMenu(fileName = "Main Quest Pool", menuName = "Status Unknown/Narrative/Main Quest Pool")]
-    public class MainQuestsPoolSO : QuestPoolSO
+    public class MainQuestsDataSO : QuestDataSO
     {
 
         [SerializeField] private Dictionary<ReputationRank, (DialogGraph dialogue, QuestSO quest)> questPools;
@@ -17,7 +17,7 @@ namespace StatusUnknown.Content.Narrative
             return questPools[key].dialogue;
         }
 
-        public override QuestSO GetQuestFromPool(ReputationRank key)
+        public override QuestSO GetQuest(ReputationRank key)
         {
             return questPools[key].quest;
         }

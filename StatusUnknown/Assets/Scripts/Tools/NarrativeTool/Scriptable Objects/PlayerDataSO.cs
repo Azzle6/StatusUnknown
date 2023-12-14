@@ -7,18 +7,68 @@ using UnityEngine;
 
 namespace StatusUnknown.Content
 {
-    public enum ReputationRank { Zero, One, Two, Three }
+    public enum ReputationMechanic { Simple, AllowMultiRanking }
 
     [ManageableData]
     [CreateAssetMenu(fileName = "Player Data", menuName = "Status Unknown/Gameplay/Player Data")]
     public class PlayerDataSO : SerializedScriptableObject
     {
-        public enum ReputationMechanic { Simple, AllowMultiRanking }
-
+        // User interface IQuestSystem
+        #region Quest System
         [field: SerializeField] public QuestJournalSO QuestJournal { get; private set; }
 
         private Action<int, Faction, QuestObjectSO[]> OnQuestCompletion;
         [field: SerializeField] private List<QuestObjectSO> CompletedQuestRewards { get; set; }
+
+        private void OnEnable()
+        {
+            OnQuestCompletion += UpdateCurrentReputation;
+        }
+
+        private void OnDisable()
+        {
+            OnQuestCompletion -= UpdateCurrentReputation;
+        }
+
+        public void Init()
+        {
+            QuestJournal.Init(OnQuestCompletion);
+        }
+
+        public ReputationRank GetReputationRank_Simple(Faction key)
+        {
+            return rankDatas[key].currentReputationRank;
+        }
+
+        public (int, ReputationRank) GetReputationRank_Full(Faction key)
+        {
+            return (rankDatas[key].currentReputationValue, rankDatas[key].currentReputationRank);
+        }
+
+        public bool CanUnlockFactionMainQuest(Faction key)
+        {
+            return rankDatas[key].CanUnlockFactionMainQuest;
+        }
+        #endregion
+
+        // User interface IProgressionSystem
+        #region Progression System
+
+        #region Faction
+        private readonly List<int[]> reputationCeils = new List<int[]>()
+        {
+            new int[] { 0, 100, 400, 800 },
+            new int[] { 0, 300, 600, 1000 },
+            new int[] { 0, 200, 500, 750 },
+            new int[] { 0, 150, 450, 1200 },
+        }; /* temporary gameplay data storage       SAA, 
+                                                    Hera, 
+                                                    Excelsior, 
+                                                    Pulse
+        */
+        #endregion
+
+        public Dictionary<Faction, RankData> rankDatas = new Dictionary<Faction, RankData>();
 
         public class RankData
         {
@@ -26,7 +76,7 @@ namespace StatusUnknown.Content
             [LabelWidth(200)] public ReputationRank currentReputationRank;
             [LabelWidth(200)] public ReputationMechanic reputationMechanic;
             private int[] ReputationCeils;
-            private const int RANK_MAX = 3; 
+            private const int RANK_MAX = 3;
             public bool canUnlockFactionMainQuest; // temp public to playtest
             private bool hittingRankBottomValue;
             public bool CanUnlockFactionMainQuest { get => canUnlockFactionMainQuest; }
@@ -83,9 +133,8 @@ namespace StatusUnknown.Content
 
                 currentReputationRank = newRank;
                 currentReputationValue = 0;
-                canUnlockFactionMainQuest = false; 
+                canUnlockFactionMainQuest = false;
             }
-
 
             // allows for multi ranking. May be removed in the future
             private void CalculateReputation_Multi(int additionalReputation, int[] reputationCeils)
@@ -129,52 +178,6 @@ namespace StatusUnknown.Content
             }
         }
 
-        public Dictionary<Faction, RankData> rankDatas = new Dictionary<Faction, RankData>();
-
-        private readonly List<int[]> reputationCeils = new List<int[]>()
-    {
-        new int[] { 0, 100, 400, 800 },
-        new int[] { 0, 300, 600, 1000 },
-        new int[] { 0, 200, 500, 750 },
-        new int[] { 0, 150, 450, 1200 },
-    }; /* temporary gameplay data storage       SAA, 
-                                                Hera, 
-                                                Excelsior, 
-                                                Pulse
-    */
-
-
-        private void OnEnable()
-        {
-            OnQuestCompletion += UpdateCurrentReputation;
-        }
-
-        private void OnDisable()
-        {
-            OnQuestCompletion -= UpdateCurrentReputation;
-        }
-
-        public void Init()
-        {
-            QuestJournal.Init(OnQuestCompletion);
-        }
-
-        public ReputationRank GetReputationRank_Simple(Faction key)
-        {
-            return rankDatas[key].currentReputationRank;
-        }
-
-        public (int, ReputationRank) GetReputationRank_Full(Faction key)
-        {
-            return (rankDatas[key].currentReputationValue, rankDatas[key].currentReputationRank);
-        }
-
-        public bool CanUnlockFactionMainQuest(Faction key)
-        {
-            return rankDatas[key].CanUnlockFactionMainQuest;
-        }
-
-        #region Player Progression System
         public void UpdateCurrentReputation(int additionalReputation, Faction key, QuestObjectSO[] questReward = null)
         {
             // DO NOT modify the player rank if the quest was already completed
