@@ -1,7 +1,9 @@
 namespace Enemy.Sniper
 {
     using System.Collections;
+    using System.Xml.Linq;
     using UnityEngine;
+    using UnityEngine.VFX;
 
     public class EnemySniper : EnemyContext
     {
@@ -20,7 +22,7 @@ namespace Enemy.Sniper
 
         [field: SerializeField] public Transform shootingPoint { get; private set; }
         [Header("TP")]
-        [SerializeField] GameObject tpVFx;
+        [SerializeField] VisualEffect VFX_TP;
         public override EnemyStats stats => sniperStats;
         private void Start()
         {
@@ -53,13 +55,15 @@ namespace Enemy.Sniper
             yield return null;
 
         }
-        public void PlayTpVfx(Vector3 position, Vector3 direction, float killTime, Transform parent = null)
+
+        public void PlayTpVfx(Vector3 position, Vector3 endPosition, float killTime)
         {
-            if (tpVFx == null) return;
-            GameObject vfxObject = Instantiate(tpVFx,position,Quaternion.identity);
-            vfxObject.transform.parent = parent;
-            vfxObject.transform.forward = direction;
-            Destroy(vfxObject,killTime);
+           if(VFX_TP == null) return;
+           VisualEffect vfx = Instantiate(VFX_TP,position,Quaternion.identity);
+            vfx.SetVector3("TargetPosition", endPosition);
+            vfx.SetFloat("Duration", killTime);
+            Destroy(vfx.gameObject,killTime);
         }
+
     }
 }
