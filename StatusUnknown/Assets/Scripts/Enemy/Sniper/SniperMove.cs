@@ -29,9 +29,8 @@ namespace Enemy.Sniper
             currentContext.tpCooldown = sniperStats.TpRndCooldown;
             tpWarning = sniperStats.tpWarningDelay;
             tpPosition = TpPosition();
-            Vector3 tpDir = transform.position - tpPosition;
-            currentContext.PlayTpVfx(transform.position, -tpDir,tpWarning,transform);
-            currentContext.PlayTpVfx(tpPosition, tpDir,tpWarning);
+            currentContext.PlayTpVfx(transform.position, tpPosition,tpWarning);
+
         }
         public override void Update()
         {
