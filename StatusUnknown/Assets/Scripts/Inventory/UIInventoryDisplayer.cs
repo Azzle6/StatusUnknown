@@ -8,6 +8,7 @@ namespace Inventory
     using Item;
     using Module;
     using Sirenix.OdinInspector;
+    using UI.Global;
     using UnityEngine;
     using UnityEngine.UIElements;
     using Weapons;
@@ -46,6 +47,7 @@ namespace Inventory
         private bool isDisplayed;
 
         private WeaponData selectedWeaponData;
+        private ItemData selectedItemData;
         private UISettings uiSettings;
         private OutputReferencesSO outputReferences;
 
@@ -176,6 +178,8 @@ namespace Inventory
                             this.outputReferences.moduleOutputReferences[modDef.moduleTriggerType];
                         AddOutputList(def.icon, def.description, def.output.ToString());
                     }
+                    if(selectedItemData != data)
+                        UIFeedbackHelper.BumpElement(this.itemInfoPanel);
                     break;
                 case E_ItemType.WEAPON:
                     WeaponData weaponData = (WeaponData)data;
@@ -187,11 +191,13 @@ namespace Inventory
                             this.outputReferences.weaponOutputReferences[weaponTrigger.weaponTrigger];
                         AddOutputList(def.icon, def.description, def.output.ToString());
                     }
+                    if(selectedItemData != data)
+                        UIFeedbackHelper.BumpElement(this.itemInfoPanel);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-
+            selectedItemData = data;
             return;
 
             void SetName(string itemName)
