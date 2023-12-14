@@ -20,7 +20,7 @@ MonoBehaviour:
     baseCount: 0
   fireRate: 0
   attacks:
-  - attackDamage: 30
+  - attackDamage: 15
     attackLength: 2
     attackAngle: 90
     attackKnockback: 10
@@ -28,11 +28,11 @@ MonoBehaviour:
     buildUpTime: 0.05
     superArmor: 50
     activeTime: 0.1
-    recoveryTime: 0.2
-    cooldownTime: 0.5
+    recoveryTime: 0.1
+    cooldownTime: 0.4
     rumbleOnHit:
-      maxLowFrequency: 0.5
-      maxHighFrequency: 0.5
+      maxLowFrequency: 0.25
+      maxHighFrequency: 0.25
       lowFrequencyCurve:
         serializedVersion: 2
         m_Curve:
@@ -100,19 +100,19 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
       duration: 0.2
-  - attackDamage: 30
+  - attackDamage: 15
     attackLength: 2
     attackAngle: 180
     attackKnockback: 10
     castTime: 0.05
-    buildUpTime: 0.1
+    buildUpTime: 0.05
     superArmor: 50
     activeTime: 0.1
-    recoveryTime: 0.25
+    recoveryTime: 0.1
     cooldownTime: 0.5
     rumbleOnHit:
-      maxLowFrequency: 0.75
-      maxHighFrequency: 0.75
+      maxLowFrequency: 0.5
+      maxHighFrequency: 0.5
       lowFrequencyCurve:
         serializedVersion: 2
         m_Curve:
@@ -180,7 +180,7 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
       duration: 0.2
-  - attackDamage: 40
+  - attackDamage: 30
     attackLength: 2
     attackAngle: 360
     attackKnockback: 10
@@ -188,7 +188,7 @@ MonoBehaviour:
     buildUpTime: 0.05
     superArmor: 50
     activeTime: 0.1
-    recoveryTime: 0.5
+    recoveryTime: 0.2
     cooldownTime: 0.01
     rumbleOnHit:
       maxLowFrequency: 1
