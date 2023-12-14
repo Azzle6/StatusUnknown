@@ -28,6 +28,10 @@ namespace Module
                 this.AllCompiledModules.Add(this.FirstModule);
                 this.CalculateLinkedModules(firstModuleInfo.Item2, this.FirstModule);
             }
+            else
+            {
+                this.FirstModule = null;
+            }
             this.onNewCompilation?.Invoke(this);
         }
 

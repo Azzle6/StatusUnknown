@@ -1,5 +1,6 @@
 using System.Collections;
 using Core.SingletonsSO;
+using Inventory;
 using Inventory.Item;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,6 +13,7 @@ public class ProtoChess : MonoBehaviour
     public GameObject textLoot;
     public bool lootable= true;
     public GameObject top;
+    public PlayerInventorySO inventory;
     public UnityEvent action;
     public bool isInfinite;
     
@@ -65,6 +67,7 @@ public class ProtoChess : MonoBehaviour
 
     public void AddItem(GridItemSO item)
     {
-        PlayerHandler.Instance.AddItemToInventory(ItemData.CreateItemData(item));
+        this.inventory.AddItemToInventory(ItemData.CreateItemData(item));
+        //PlayerHandler.Instance.AddItemToInventory(ItemData.CreateItemData(item));
     }
 }

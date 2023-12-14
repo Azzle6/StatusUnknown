@@ -30,7 +30,7 @@ namespace Inventory
         
         [SerializeField]
         private UIDocument uiDocument;
-
+        [SerializeField]
         private PlayerInventorySO playerInventory;
 
         //Data
@@ -62,7 +62,6 @@ namespace Inventory
 
             this.uiSettings = UIHandler.Instance.uiSettings;
             this.outputReferences = UIHandler.Instance.outputReferences;
-            this.playerInventory = PlayerHandler.Instance.playerInventory;
 
             UIHandler.Instance.onSlotFocusEvent += this.OnSlotFocus;
             

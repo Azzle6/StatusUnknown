@@ -9,7 +9,7 @@ namespace Weapon
     public abstract class Weapon : MonoBehaviour
     {
         public WeaponManager weaponManager;
-        public PlayerInventorySO inventory => PlayerHandler.Instance.playerInventory;
+        public PlayerInventorySO inventory;
         public WeaponDefinitionSO weaponDefinition;
         public PlayerStat playerStat;
         public Sprite weaponSprite;

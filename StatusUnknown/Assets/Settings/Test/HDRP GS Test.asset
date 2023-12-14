@@ -146,6 +146,8 @@ MonoBehaviour:
       hasProbeVolumes: 1
     - sceneGUID: 56ff87c6dba73ff4e8a5815820074174
       hasProbeVolumes: 1
+    - sceneGUID: 8e034ac485c3f924f801ab8af19a8318
+      hasProbeVolumes: 0
     serializedProfiles:
     - sceneGUID: ce31f14eba0f1044386249b739363569
       profile: {fileID: 11400000, guid: 8444c98bd469cad4cb4fb69f907e63f0, type: 2}
@@ -167,6 +169,10 @@ MonoBehaviour:
       profile: {fileID: 11400000, guid: ace90d7ac2d1a4b40b58695e413cee95, type: 2}
     - sceneGUID: 56ff87c6dba73ff4e8a5815820074174
       profile: {fileID: 11400000, guid: b86181cc341614a488d6b72674d12d92, type: 2}
+    - sceneGUID: 8e034ac485c3f924f801ab8af19a8318
+      profile: {fileID: 11400000, guid: 8444c98bd469cad4cb4fb69f907e63f0, type: 2}
+    - sceneGUID: 45c45fbd60d0f024a852fbcb783e9c30
+      profile: {fileID: 11400000, guid: 8444c98bd469cad4cb4fb69f907e63f0, type: 2}
     serializedBakeSettings:
     - sceneGUID: ce31f14eba0f1044386249b739363569
       settings:
@@ -336,6 +342,42 @@ MonoBehaviour:
         dilationSettings:
           enableDilation: 1
           dilationDistance: 140
+          dilationValidityThreshold: 0.25
+          dilationIterations: 1
+          squaredDistWeighting: 1
+        virtualOffsetSettings:
+          useVirtualOffset: 1
+          outOfGeoOffset: 0.01
+          searchMultiplier: 0.2
+          rayOriginBias: -0.001
+          maxHitsPerRay: 10
+          collisionMask:
+            serializedVersion: 2
+            m_Bits: 4294967291
+    - sceneGUID: 8e034ac485c3f924f801ab8af19a8318
+      settings:
+        m_Version: 1
+        dilationSettings:
+          enableDilation: 1
+          dilationDistance: 20
+          dilationValidityThreshold: 0.25
+          dilationIterations: 1
+          squaredDistWeighting: 1
+        virtualOffsetSettings:
+          useVirtualOffset: 1
+          outOfGeoOffset: 0.01
+          searchMultiplier: 0.2
+          rayOriginBias: -0.001
+          maxHitsPerRay: 10
+          collisionMask:
+            serializedVersion: 2
+            m_Bits: 4294967291
+    - sceneGUID: 45c45fbd60d0f024a852fbcb783e9c30
+      settings:
+        m_Version: 1
+        dilationSettings:
+          enableDilation: 1
+          dilationDistance: 20
           dilationValidityThreshold: 0.25
           dilationIterations: 1
           squaredDistWeighting: 1
