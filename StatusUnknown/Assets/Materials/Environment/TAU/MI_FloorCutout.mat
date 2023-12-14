@@ -221,16 +221,16 @@ Material:
     - _AmbientOcclusionIntensity_VP: 1
     - _AmbientOcclusionIntensity_WS: 0
     - _Anisotropy: 0
-    - _BCMax: 1.38
-    - _BCMin: -0.44
+    - _BCMax: 1
+    - _BCMin: 0
     - _BlendMode: 0
     - _CoatMask: 0
     - _ConservativeDepthOffsetEnable: 0
     - _CullMode: 2
     - _CullModeForward: 2
     - _Cutoff: 0.5
-    - _DNIntensity_A_DDN: -0.1
-    - _DNIntensity_B_DDN: 0.2
+    - _DNIntensity_A_DDN: 1
+    - _DNIntensity_B_DDN: -2
     - _DarkeningTint_VP: 0.5
     - _DepthOffsetEnable: 0
     - _DetailAlbedoScale: 1
@@ -268,14 +268,14 @@ Material:
     - _Ior: 1.5
     - _IridescenceMask: 1
     - _IridescenceThickness: 1
-    - _LerpContrast_VP: 0.5
+    - _LerpContrast_VP: 0
     - _LinkDetailsWithBase: 1
     - _MaterialID: 1
     - _MaxPos: 129.45
-    - _MetalAdjust_Main: 0.28
+    - _MetalAdjust_Main: -1
     - _MetalAdjust_VP: 0
     - _MetalAdjust_WS: 0
-    - _MetalContrast_Main: 0.1
+    - _MetalContrast_Main: -0.5
     - _MetalContrast_VP: 1
     - _MetalContrast_WS: 1
     - _Metallic: 0
@@ -308,10 +308,10 @@ Material:
     - _RefractionModel: 0
     - _RenderQueueType: 1
     - _RequireSplitLighting: 0
-    - _RoughnessAdjust_Main: 0.33
+    - _RoughnessAdjust_Main: 0.8
     - _RoughnessAdjust_VP: 0
     - _RoughnessAdjust_WS: -0.5
-    - _RoughnessContrast_Main: 0.23
+    - _RoughnessContrast_Main: -1
     - _RoughnessContrast_VP: 1
     - _RoughnessContrast_WS: 0.1
     - _Smoothness: 0.5
@@ -337,7 +337,7 @@ Material:
     - _TexWorldScale: 1
     - _TexWorldScaleEmissive: 1
     - _Thickness: 1
-    - _TintIntensity_Main: 1.24
+    - _TintIntensity_Main: 1
     - _TintIntensity_VP: 0
     - _TintIntensity_WS: 0
     - _TransmissionEnable: 1
@@ -350,7 +350,7 @@ Material:
     - _TransparentWritingMotionVec: 0
     - _TransparentZWrite: 0
     - _UScale: 0.05
-    - _UTiling_DDN: 4
+    - _UTiling_DDN: 6
     - _UVBase: 0
     - _UVDetail: 0
     - _UVEmissive: 0
@@ -361,7 +361,7 @@ Material:
     - _UseEmissiveIntensity: 0
     - _UseShadowThreshold: 0
     - _VScale: 0
-    - _VTiling_DDN: 4
+    - _VTiling_DDN: 6
     - _V_Scale_Main: 1
     - _V_Scale_VP: 1
     - _V_Scale_WS: 5
@@ -375,7 +375,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
-    - _BaseColorTint_Main: {r: 0.41438237, g: 0.9056604, b: 0.71405804, a: 1}
+    - _BaseColorTint_Main: {r: 0.52400005, g: 0.5943396, b: 0.44014773, a: 1}
     - _BaseColorTint_VP: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColorTint_WS: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
