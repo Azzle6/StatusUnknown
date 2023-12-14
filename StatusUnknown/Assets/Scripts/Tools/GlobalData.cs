@@ -1,7 +1,4 @@
-using Sirenix.OdinInspector;
-using System;
 using UnityEngine;
-using StatusUnknown.Tools;
 
 namespace StatusUnknown
 {
@@ -53,7 +50,8 @@ namespace StatusUnknown
         Delayed
     }
 
-    #region EditorOnly
+    #region EditorWindowsOnly
+
     public enum NPCEditorOptions
     {
         Quest,
@@ -81,11 +79,10 @@ namespace StatusUnknown
     {
         public struct CoreContentStrings
         {
-            public const string PATH_CONTENT_ROOT = "Status Unknown/";
-            public const string PATH_CONTENT_GAMEPLAY = PATH_CONTENT_ROOT + "Gameplay/";
-            public const string PATH_CONTENT_NARRATIVE = PATH_CONTENT_ROOT + "Narrative/";
-            public const string PATH_CONTENT_FEEDBACKS = PATH_CONTENT_ROOT + "Feedbacks/";
-            public const string PATH_DATA_ROOT = "Assets/Data/";
+            public const string PATH_ROOT_CONTENT = "Status Unknown/";
+            public const string PATH_CONTENT_GAMEPLAY = PATH_ROOT_CONTENT + "Gameplay/";
+            public const string PATH_CONTENT_NARRATIVE = PATH_ROOT_CONTENT + "Narrative/";
+            public const string PATH_CONTENT_FEEDBACKS = PATH_ROOT_CONTENT + "Feedbacks/";
         }
     }
 }

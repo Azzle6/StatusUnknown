@@ -6,7 +6,7 @@ using UnityEngine;
 namespace StatusUnknown.Content.Narrative
 {
     [ManageableData]
-    [CreateAssetMenu(fileName = "Secondary Quest Pool", menuName = "Status Unknown/Narrative/Secondary Quest Pool")]
+    [CreateAssetMenu(fileName = "Secondary Quest Pool", menuName = CoreContentStrings.PATH_CONTENT_NARRATIVE + "Secondary Quest Pool")]
     public class SecondaryQuestDataSO : QuestDataSO
     {
         [SerializeField] private Dictionary<ReputationRank, (DialogGraph dialogue, QuestSO[] quests)> questPools;

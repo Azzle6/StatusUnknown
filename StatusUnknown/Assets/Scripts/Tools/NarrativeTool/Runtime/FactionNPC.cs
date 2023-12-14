@@ -10,6 +10,8 @@ namespace Aurore.DialogSystem
 
     public class FactionNPC : MonoBehaviour
     {
+        [SerializeField] private NpcSO npcData; 
+
         [Header("Player Data")] // TEMP
         [SerializeField] private PlayerDataSO playerData; 
 
@@ -18,9 +20,10 @@ namespace Aurore.DialogSystem
         [SerializeField] private DialogueType dialogueType;
         [SerializeField] private Faction npcFaction;
 
-        [Space, SerializeField] private MainQuestsDataSO npcMainQuestPools;
-        [SerializeField] private SecondaryQuestDataSO npcSecondaryQuestPools;
-        [HideInInspector, SerializeField] private AudioClip audioMumblingVoice;
+        [Header("Quest Data")]
+        [Space, SerializeField] private MainQuestsDataSO mainQuests;
+        [SerializeField] private SecondaryQuestDataSO secondaryQuests;
+        [HideInInspector, SerializeField] private AudioClip npcVoice;
 
         private ReputationRank currentPlayerReputationRank;
         private QuestDataSO currentQuestPool;
@@ -34,17 +37,17 @@ namespace Aurore.DialogSystem
         public void StartDialogue()
         {
             currentPlayerReputationRank = playerData.GetReputationRank_Simple(npcFaction);
-            currentQuestPool = npcSecondaryQuestPools;
+            currentQuestPool = secondaryQuests;
 
             if (playerData.CanUnlockFactionMainQuest(npcFaction))
             {
-                currentQuestPool = npcMainQuestPools;
+                currentQuestPool = mainQuests;
             }
 
             UpdateCurrentDialogueGraph();
 
             currentDialogueGraph.Init();
-            DialogueUiManager.Instance.Init(currentDialogueGraph.GetRoot(), audioMumblingVoice);
+            DialogueUiManager.Instance.Init(currentDialogueGraph.GetRoot(), npcVoice);
         }
 
         private void UpdateCurrentDialogueGraph()

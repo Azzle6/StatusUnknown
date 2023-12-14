@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "General Infos", menuName = CoreContentStrings.PATH_CONTENT_ROOT + "General Infos", order = -20)]
+[CreateAssetMenu(fileName = "General Infos", menuName = CoreContentStrings.PATH_ROOT_CONTENT + "General Infos", order = -20)]
 public class ProjectGeneralInfosSO : SerializedScriptableObject
 {
     public enum InfoType { Gameplay, Systems, Combat, Narrative }

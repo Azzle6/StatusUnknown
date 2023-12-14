@@ -10,7 +10,7 @@ namespace StatusUnknown.Content
     public enum ReputationMechanic { Simple, AllowMultiRanking }
 
     [ManageableData]
-    [CreateAssetMenu(fileName = "Player Data", menuName = "Status Unknown/Gameplay/Player Data")]
+    [CreateAssetMenu(fileName = "Player Data", menuName = CoreContentStrings.PATH_CONTENT_GAMEPLAY + "Player Data")]
     public class PlayerDataSO : SerializedScriptableObject
     {
         // User interface IQuestSystem

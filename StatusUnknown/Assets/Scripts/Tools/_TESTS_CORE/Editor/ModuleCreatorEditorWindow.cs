@@ -59,7 +59,7 @@ public class ModuleCreatorEditorWindow : OdinEditorWindow
         if (abilityConfig != null)
             SaveConfig();
 
-        List<AbilityConfigSO_Burst> templates = StatusUnknown_AssetManager.GetScriptableObjects<AbilityConfigSO_Burst>(path);
+        List<AbilityConfigSO_Burst> templates = StatusUnknown_AssetManager.GetScriptableObjects<AbilityConfigSO_Burst>(path).ToList();
         AbilityConfigSO_Burst configTemplate = null;
 
         if (templates != null && templates.Count > 0)

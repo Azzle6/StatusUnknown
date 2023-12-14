@@ -40,7 +40,7 @@ namespace StatusUnknown.Utils.AssetManagement
             {
                 { "Create New", createNewData } // AS TEMPLATE (keep in mind : this only exists in memory on the heap, not as a unity file)
             };
-            tree.AddAllAssetsAtPath(selectedType.Name, CoreContentStrings.PATH_DATA_ROOT, selectedType, true, true);
+            tree.AddAllAssetsAtPath(selectedType.Name, CoreAssetManagementStrings.PATH_ROOT_DATA, selectedType, true, true);
 
             return tree;
         }
@@ -97,13 +97,10 @@ namespace StatusUnknown.Utils.AssetManagement
         [Button("Add New Burst Config")]
         private void CreateNewData()
         {
-            AssetDatabase.CreateAsset(burstConfig, CoreContentStrings.PATH_DATA_ROOT + burstConfig.name + ".asset");
-            AssetDatabase.SaveAssets(); 
-            AssetDatabase.Refresh();
-
-            // create a new instance of this asset for the editor window (AS REFERENCE)
             burstConfig = ScriptableObject.CreateInstance<AbilityConfigSO_Burst>();
             burstConfig.name = "New Burst Config";
+
+            StatusUnknown_AssetManager.SaveSO(burstConfig, CoreAssetManagementStrings.PATH_ROOT_DATA, burstConfig.name, ".asset"); 
         }
 
         public void Dispose()

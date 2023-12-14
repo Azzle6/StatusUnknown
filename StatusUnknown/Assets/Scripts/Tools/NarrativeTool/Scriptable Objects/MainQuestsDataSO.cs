@@ -6,7 +6,7 @@ using UnityEngine;
 namespace StatusUnknown.Content.Narrative
 {
     [ManageableData]
-    [CreateAssetMenu(fileName = "Main Quest Pool", menuName = "Status Unknown/Narrative/Main Quest Pool")]
+    [CreateAssetMenu(fileName = "Main Quest Pool", menuName = CoreContentStrings.PATH_CONTENT_NARRATIVE + "Main Quest Pool")]
     public class MainQuestsDataSO : QuestDataSO
     {
 

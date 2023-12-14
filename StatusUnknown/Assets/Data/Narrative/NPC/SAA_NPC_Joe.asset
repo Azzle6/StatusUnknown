@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 600600c647ab9614e97b5be57b104d06, type: 3}
+  m_Name: SAA_NPC_Joe
+  m_EditorClassIdentifier: 
+  name: SAA_NPC_Joe
+  sprite: {fileID: 21300000, guid: 617ef6bbbf7d1c54c946d775fb573836, type: 3}
+  description: This is the basic NPC of the SAA faction
+  rank1ceil: 110.85868
+  rank2ceil: 292.6589
+  rank3ceil: 790.63336
+  rank4ceil: 0
+  mainQuest: {fileID: 11400000, guid: 1688422c8b4f30844b81cbf34434e8bd, type: 2}
+  secondaryQuests: {fileID: 11400000, guid: 584964a3b04e4814db35bf466af4e763, type: 2}
+  npcVoice: {fileID: 8300000, guid: fd24261248f15344d97c5493b4629909, type: 3}

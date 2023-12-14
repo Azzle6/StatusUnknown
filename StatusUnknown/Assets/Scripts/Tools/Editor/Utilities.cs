@@ -10,17 +10,25 @@ namespace StatusUnknown.Utils
 {
     namespace AssetManagement
     {
+        public enum AssetType
+        {
+            NPC
+        }
+
         public struct CoreAssetManagementStrings
         {
-            public const string SAVE_PATH_BUILD = "Assets/Data/Gameplay/Combat/Simulators/";
-            public const string SAVE_PATH_ABILITY = "Assets/Data/Gameplay/Combat/Abilities/";
-            public const string SAVE_PATH_ENCOUNTER = "Assets/Data/Gameplay/Combat/Encounters/";
-            public const string SAVE_PATH_PREFABS = "Assets/Prefabs/";
+            public const string PATH_ROOT_DATA = "Assets/Data/";
+            public const string PATH_ROOT_PREFABS = "Assets/Prefabs/";
+
+            public const string SAVE_PATH_BUILD = PATH_ROOT_DATA + "Gameplay/Combat/Simulators/";
+            public const string SAVE_PATH_ABILITY = PATH_ROOT_DATA + "Gameplay/Combat/Abilities/";
+            public const string SAVE_PATH_ENCOUNTER = PATH_ROOT_DATA + "Gameplay/Combat/Encounters/";
+            public const string SAVE_PATH_NPC = PATH_ROOT_DATA + "Narrative/NPC/"; 
         }
 
         public static class StatusUnknown_AssetManager
         {
-            public static void SaveSO(ScriptableObject assetToSave, string savePath, string saveName, string extension)
+            public static void SaveSO(ScriptableObject assetToSave, string savePath = "Assets/Data/", string saveName = "Default_Name", string extension = ".asset")
             {
                 if (saveName == string.Empty || extension == string.Empty)
                 {
@@ -32,6 +40,19 @@ namespace StatusUnknown.Utils
                 AssetDatabase.SaveAssets();
                 AssetDatabase.Refresh();
             }
+
+            // CANT DO THIS : because of my crappy architecture for scriptable objects (DON'T puth them within your tools folder)
+            /* public static T LoadSO<T>(AssetType assetType,  string path) where T : ScriptableObject 
+            {
+                Type t; 
+                switch(assetType)
+                {
+                    case AssetType.NPC:
+                        t = NpcSO; 
+                        return (T)(AssetDatabase.LoadAssetAtPath(path, t) as NpcSO)
+                    break;
+                }
+            } */
 
             public static GameObject InstantiatePrefabAtPosition(Object obj, Vector3 pos)
             {
@@ -72,7 +93,7 @@ namespace StatusUnknown.Utils
                 return outObjs; 
             }
 
-            public static List<T> GetScriptableObjects<T>(string path)
+            public static T[] GetScriptableObjects<T>(string path)
             {
                 throw new NotImplementedException();
             }

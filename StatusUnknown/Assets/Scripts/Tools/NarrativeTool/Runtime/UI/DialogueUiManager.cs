@@ -3,7 +3,8 @@ using TMPro;
 using UnityEngine;
 using StatusUnknown.Tools.Narrative;
 using UnityEngine.UI;
-using static SavedDialogueLinesSO;
+using StatusUnknown.Content.Narrative;
+using static StatusUnknown.Content.Narrative.SavedDialogueLinesSO;
 
 namespace Aurore.DialogSystem
 {

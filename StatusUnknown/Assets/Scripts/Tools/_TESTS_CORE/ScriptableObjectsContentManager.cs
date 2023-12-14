@@ -106,7 +106,7 @@ namespace StatusUnknown.Utils.AssetManagement
                 labelsToFetch += string.Concat("l:", queryFilters[i], separator);
             }
 
-            StatusUnknown_AssetManager.LoadAssetsWithMatchingLabels(labelsToFetch, out List<Object> list, CoreAssetManagementStrings.SAVE_PATH_PREFABS, true);
+            StatusUnknown_AssetManager.LoadAssetsWithMatchingLabels(labelsToFetch, out List<Object> list, CoreAssetManagementStrings.PATH_ROOT_PREFABS, true);
 
             loadedPrefabs.Clear();
             foreach (var item in list)
