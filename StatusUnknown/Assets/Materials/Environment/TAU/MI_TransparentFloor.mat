@@ -201,8 +201,8 @@ Material:
     - _CullMode: 2
     - _CullModeForward: 2
     - _Cutoff: 0.5
-    - _DNIntensity_A_DDN: 0.05
-    - _DNIntensity_B_DDN: 0.02
+    - _DNIntensity_A_DDN: 0.2
+    - _DNIntensity_B_DDN: 0
     - _DarkeningTint_VP: 0.1
     - _DepthOffsetEnable: 0
     - _DetailAlbedoScale: 1
@@ -241,7 +241,7 @@ Material:
     - _Ior: 1.5
     - _IridescenceMask: 1
     - _IridescenceThickness: 1
-    - _LerpContrast_VP: 0
+    - _LerpContrast_VP: -0.2
     - _LinkDetailsWithBase: 1
     - _MaterialID: 1
     - _Metallic: 0
@@ -254,7 +254,7 @@ Material:
     - _NoiseMain_Min_WS: 0.2
     - _NoiseMain_Tiling_WS: 3
     - _NoiseStrength_WS: 1
-    - _NormalIntensity_Main: 0.4
+    - _NormalIntensity_Main: 0.3
     - _NormalIntensity_WS: 1
     - _NormalMapSpace: 0
     - _NormalScale: 1
@@ -269,13 +269,13 @@ Material:
     - _RayTracing: 0
     - _ReceivesSSR: 1
     - _ReceivesSSRTransparent: 1
-    - _RefractionAdjust: 1.1
+    - _RefractionAdjust: 0.1
     - _RefractionModel: 1
-    - _RefractionMult: 3
+    - _RefractionMult: 6
     - _RenderQueueType: 4
     - _RequireSplitLighting: 0
     - _RoughnessAdjust_Main: -0.38
-    - _RoughnessAdjust_WS: 0
+    - _RoughnessAdjust_WS: -0.08
     - _RoughnessContrast_Main: -0.52
     - _RoughnessContrast_WS: 0
     - _Smoothness: 0.5
@@ -300,7 +300,7 @@ Material:
     - _SurfaceType: 1
     - _TexWorldScale: 1
     - _TexWorldScaleEmissive: 1
-    - _Thickness: 1
+    - _Thickness: 0.3
     - _TintIntensity_Main: 0.42
     - _TransmissionEnable: 1
     - _TransmissionMask: 1
@@ -317,7 +317,7 @@ Material:
     - _TransparentWritingMotionVec: 0
     - _TransparentZWrite: 0
     - _TrnasparencyMult: -10
-    - _UTiling_DDN: 7
+    - _UTiling_DDN: 10
     - _UVBase: 0
     - _UVDetail: 0
     - _UVEmissive: 0
@@ -325,7 +325,7 @@ Material:
     - _U_Scale_WS: 10
     - _UseEmissiveIntensity: 0
     - _UseShadowThreshold: 0
-    - _VTiling_DDN: 7
+    - _VTiling_DDN: 10
     - _V_Scale_Main: 1
     - _V_Scale_WS: 10
     - _X_Factor_WS: 1
@@ -337,8 +337,8 @@ Material:
     - _Z_Factor_WS: 1
     - _help: 0
     - _index: 0
-    - _refractionsMax: 0.5
-    - _refractionsMin: -0.35
+    - _refractionsMax: 0.78
+    - _refractionsMin: -1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
