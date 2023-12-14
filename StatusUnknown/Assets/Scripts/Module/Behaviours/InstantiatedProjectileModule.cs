@@ -2,6 +2,7 @@ using pooler;
 
 namespace Module.Behaviours
 {
+    using System;
     using System.Collections.Generic;
     using Combat.HitProcess;
     using Core.Pooler;
@@ -68,9 +69,10 @@ namespace Module.Behaviours
         protected override void CollisionBehaviour()
         {
             Collider[] collisions = this.CheckCollisions();
-
+            
             foreach (var col in collisions)
             {
+                Debug.Log("Collides");
                 if(this.alreadyHitColliders.Contains(col))
                     return;
 
@@ -98,11 +100,6 @@ namespace Module.Behaviours
                 }
             }
         }
-
-        protected override void OnBeforeDestroy()
-        {
-            ComponentPooler.Instance.ReturnObjectToPool(this.ProjectileVFX);
-        }
         
         #region UTILITY
         protected float GetAverageProjectileWidth()
@@ -118,5 +115,12 @@ namespace Module.Behaviours
             }
         }
         #endregion
+
+#if UNITY_EDITOR
+        private void OnDrawGizmosSelected()
+        {
+            this.ProjectileData.CollisionShape.DrawGizmos(transform);
+        }
+#endif
     }
 }

@@ -1,7 +1,7 @@
 namespace Weapon
 {
+    using Core.SingletonsSO;
     using Inventory;
-    using Module.Behaviours;
     using Player;
     using UnityEngine;
     using Weapons;
@@ -9,7 +9,7 @@ namespace Weapon
     public abstract class Weapon : MonoBehaviour
     {
         public WeaponManager weaponManager;
-        public PlayerInventorySO inventory;
+        public PlayerInventorySO inventory => PlayerHandler.Instance.playerInventory;
         public WeaponDefinitionSO weaponDefinition;
         public PlayerStat playerStat;
         public Sprite weaponSprite;

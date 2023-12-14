@@ -20,5 +20,10 @@ namespace Combat.HitProcess
         {
             Gizmos.DrawWireSphere(hitContext.transform.position, this.radius * this.Scale);
         }
+        
+        public override void DrawGizmos(Transform transform)
+        {
+            Gizmos.DrawWireSphere(transform.position, this.radius * this.Scale);
+        }
     }
 }

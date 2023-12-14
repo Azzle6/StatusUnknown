@@ -1,5 +1,6 @@
 namespace Inventory
 {
+    using Item;
     using UnityEngine;
     using Weapons;
 
@@ -27,6 +28,11 @@ namespace Inventory
                 }
             }
             return null;
+        }
+        
+        public void AddItemToInventory(ItemData item)
+        {
+            this.InventoryData.AddNewItem(item);
         }
     }
 }

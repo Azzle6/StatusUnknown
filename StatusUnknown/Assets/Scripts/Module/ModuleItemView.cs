@@ -4,7 +4,6 @@ namespace Module
     using System.Collections.Generic;
     using Core.Helpers;
     using Core.SingletonsSO;
-    using Definitions;
     using Inventory.Grid;
     using Inventory.Item;
     using UnityEngine;
