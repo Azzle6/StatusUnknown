@@ -1,7 +1,9 @@
 using System.Collections;
+using Core.EventsSO.GameEventsTypes;
 using Core.SingletonsSO;
 using Inventory;
 using Inventory.Item;
+using UI;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -16,10 +18,14 @@ public class ProtoChess : MonoBehaviour
     public PlayerInventorySO inventory;
     public UnityEvent action;
     public bool isInfinite;
+    [SerializeField] private PopUpDataGameEvent popUpDataGameEvent;
+    private PopUpData popUpData;
     
     void Start()
     {
         interactInput.Disable();
+        popUpData = new PopUpData();
+
     }
     
     void Update()
@@ -68,6 +74,9 @@ public class ProtoChess : MonoBehaviour
     public void AddItem(GridItemSO item)
     {
         this.inventory.AddItemToInventory(ItemData.CreateItemData(item));
+        popUpData.icon = item.icon;
+        popUpData.title = item.itemName;
+        popUpDataGameEvent.RaiseEvent(popUpData);
         //PlayerHandler.Instance.AddItemToInventory(ItemData.CreateItemData(item));
     }
 }
