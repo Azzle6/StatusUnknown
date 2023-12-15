@@ -1,0 +1,167 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8547908802893765084
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 13
+  hdPluginSubTargetMaterialVersions:
+    m_Keys: []
+    m_Values: 
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MI_FailleStrings2
+  m_Shader: {fileID: -6465566751694194690, guid: a4ff9dccc06216e4ea934c11aa6a3167, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _ENABLE_FOG_ON_TRANSPARENT
+  - _SURFACE_TYPE_TRANSPARENT
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 3000
+  stringTagMap:
+    MotionVector: User
+    RenderType: Transparent
+  disabledShaderPasses:
+  - TransparentDepthPrepass
+  - TransparentDepthPostpass
+  - TransparentBackface
+  - MOTIONVECTORS
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _ParallaxMapping_58539b42f4c142d9b2ec4575950bf242_Heightmap_1_Texture2D:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMapping_9856baad9c514024b2ca18e7255ba4e6_Heightmap_1_Texture2D:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMapping_ade6643f9b7a4473b4c46aa420ed04de_Heightmap_1_Texture2D:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMapping_d8a02927ee314daa801f205c9493e119_Heightmap_1_Texture2D:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_2b7bdb9682434bc39772ea31ad6abba8_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 353b170a2cb82014db888d6fe7feb3d3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_5a53ad43a8cf4864ba616c321fbe5408_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 26c8e50b87420374bb850e6f1943015f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_64746542057a4819ae2bd31b3e998fec_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 26c8e50b87420374bb850e6f1943015f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_99f0b84eeebb48148b336c8f88081a4f_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 26c8e50b87420374bb850e6f1943015f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_ebba631426ec4f1eaca881d138339d77_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 26c8e50b87420374bb850e6f1943015f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AddPrecomputedVelocity: 0
+    - _AlphaCutoffEnable: 0
+    - _AlphaDstBlend: 10
+    - _AlphaSrcBlend: 1
+    - _BlendMode: 0
+    - _BorderMaskPower: 5
+    - _CloudPower: 3
+    - _CloudTiling: 0.125
+    - _ConservativeDepthOffsetEnable: 0
+    - _CullMode: 2
+    - _CullModeForward: 2
+    - _DepthOffsetEnable: 0
+    - _DistortBlend: 0.15
+    - _DistortIntensity: -862.1
+    - _DoubleSidedEnable: 0
+    - _DoubleSidedGIMode: 0
+    - _DoubleSidedNormalMode: 2
+    - _DstBlend: 10
+    - _EnableBlendModePreserveSpecularLighting: 0
+    - _EnableFogOnTransparent: 1
+    - _FadePower: 1.5
+    - _LeftBorderMask: 0
+    - _MiddleWidth: 0.15
+    - _OpaqueCullMode: 2
+    - _PanningSpeed: 0.1
+    - _ParallaxIntensity: -250
+    - _ParallaxPower: 1.5
+    - _ParallaxSineIntensity: 45
+    - _ParallaxSineIntensity2D: 0.0003
+    - _ParallaxSinePower: 0.7
+    - _ParallaxSineSpeed: 3
+    - _Power: 0.78
+    - _RadialMask: 0
+    - _RenderQueueType: 4
+    - _RightBorderMask: 0
+    - _SrcBlend: 1
+    - _StencilRef: 0
+    - _StencilRefDepth: 1
+    - _StencilRefDistortionVec: 4
+    - _StencilRefMV: 33
+    - _StencilWriteMask: 6
+    - _StencilWriteMaskDepth: 9
+    - _StencilWriteMaskDistortionVec: 4
+    - _StencilWriteMaskMV: 43
+    - _StringsStretch: 2.99
+    - _StringsTiling: 4
+    - _SurfaceType: 1
+    - _Threshold: 0.32
+    - _TransparentBackfaceEnable: 0
+    - _TransparentCullMode: 2
+    - _TransparentDepthPostpassEnable: 0
+    - _TransparentDepthPrepassEnable: 0
+    - _TransparentSortPriority: 0
+    - _TransparentWritingMotionVec: 0
+    - _TransparentZWrite: 0
+    - _UseShadowThreshold: 0
+    - _ZTestDepthEqualForOpaque: 4
+    - _ZTestTransparent: 4
+    - _ZWrite: 0
+    m_Colors:
+    - _Color: {r: 8.47419, g: 2.689641, b: 0, a: 0}
+    - _Color_1: {r: 0.2099246, g: 0, b: 2.996078, a: 0}
+    - _Color_2: {r: 7.906699, g: 0, b: 0.07902732, a: 0}
+    - _Color_3: {r: 2.996079, g: 0.6900856, b: 0, a: 0}
+    - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ParallaxSineTiling: {r: 15, g: -50, b: 0, a: 0}
+  m_BuildTextureStacks: []
