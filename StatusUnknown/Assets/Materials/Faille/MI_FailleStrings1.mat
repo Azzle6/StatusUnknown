@@ -1,21 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8547908802893765084
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 13
-  hdPluginSubTargetMaterialVersions:
-    m_Keys: []
-    m_Values: 
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -103,7 +87,7 @@ Material:
     - _AlphaSrcBlend: 1
     - _BlendMode: 0
     - _BorderMaskPower: 5
-    - _CloudPower: 3
+    - _CloudPower: 4
     - _CloudTiling: 0.125
     - _ConservativeDepthOffsetEnable: 0
     - _CullMode: 2
@@ -122,11 +106,11 @@ Material:
     - _MiddleWidth: 0.15
     - _OpaqueCullMode: 2
     - _PanningSpeed: 0.1
-    - _ParallaxIntensity: -250
+    - _ParallaxIntensity: -150
     - _ParallaxPower: 1.5
-    - _ParallaxSineIntensity: 25
-    - _ParallaxSineIntensity2D: 0.0003
-    - _ParallaxSinePower: 0.7
+    - _ParallaxSineIntensity: 15
+    - _ParallaxSineIntensity2D: 0.0007
+    - _ParallaxSinePower: 0.5
     - _ParallaxSineSpeed: 3
     - _Power: 0.78
     - _RadialMask: 0
@@ -141,8 +125,8 @@ Material:
     - _StencilWriteMaskDepth: 9
     - _StencilWriteMaskDistortionVec: 4
     - _StencilWriteMaskMV: 43
-    - _StringsStretch: 1
-    - _StringsTiling: 2
+    - _StringsStretch: 0.75
+    - _StringsTiling: 2.5
     - _SurfaceType: 1
     - _Threshold: 0.32
     - _TransparentBackfaceEnable: 0
@@ -157,11 +141,27 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 8.47419, g: 2.689641, b: 0, a: 0}
-    - _Color_1: {r: 0.2099246, g: 0, b: 2.996078, a: 0}
+    - _Color: {r: 0, g: 2.784147, b: 8.47419, a: 0}
+    - _Color_1: {r: 0.631471, g: 0, b: 2.996078, a: 0}
     - _Color_2: {r: 7.906699, g: 0, b: 0.07902732, a: 0}
-    - _Color_3: {r: 2.996079, g: 0.6900856, b: 0, a: 0}
+    - _Color_3: {r: 3.2165, g: 0, b: 4.541205, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _ParallaxSineTiling: {r: 15, g: -50, b: 0, a: 0}
+    - _ParallaxSineTiling: {r: 15, g: -35, b: 0, a: 0}
   m_BuildTextureStacks: []
+--- !u!114 &317974154175610616
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 13
+  hdPluginSubTargetMaterialVersions:
+    m_Keys: []
+    m_Values: 
