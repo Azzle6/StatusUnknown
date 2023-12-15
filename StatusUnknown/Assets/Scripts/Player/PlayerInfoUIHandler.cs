@@ -1,5 +1,6 @@
 
 using Augment;
+using Core.EventsSO.GameEventsTypes;
 using UI;
 
 namespace Player
@@ -31,6 +32,8 @@ namespace Player
         private VisualElement weapon2Icon;
         private VisualElement ammoRoot1;
         private VisualElement ammoRoot2;
+        private VisualElement ammoReload1;
+        private VisualElement ammoReload2;
         private Label medikitCount;
         private Label weapon1AmmoCount;
         private Label weapon2AmmoCount;
@@ -57,6 +60,8 @@ namespace Player
             weapon2AmmoCount = playerInfoUIDocument.rootVisualElement.Q<Label>("Weapon2AmmoCount");
             ammoRoot1 = playerInfoUIDocument.rootVisualElement.Q<VisualElement>("AmmoWeapon1");
             ammoRoot2 = playerInfoUIDocument.rootVisualElement.Q<VisualElement>("AmmoWeapon2");
+            ammoReload1 = playerInfoUIDocument.rootVisualElement.Q<VisualElement>("AmmoReload1");
+            ammoReload2 = playerInfoUIDocument.rootVisualElement.Q<VisualElement>("AmmoReload2");
             augmentIcon = new List<VisualElement>();
             for (int x = 0; x < 5; x++)
                 augmentIcon.Add(playerInfoUIDocument.rootVisualElement.Q<VisualElement>($"Augment{x}"));
@@ -203,6 +208,28 @@ namespace Player
         {
             augmentIcon[augmentStat.augmentSlot].style.unityBackgroundImageTintColor = Color.black;
             DOTween.To(() => augmentIcon[augmentStat.augmentSlot].style.unityBackgroundImageTintColor.value, x => augmentIcon[augmentStat.augmentSlot].style.unityBackgroundImageTintColor = x, Color.white, augmentStat.augmentCooldown);
+        }
+
+        public void ReceiveReload1(float reloadTime)
+        {
+            Reload(reloadTime, ammoReload1);
+        }
+        
+        public void ReceiveReload2(float reloadTime)
+        {
+            Reload(reloadTime, ammoReload2);
+        }
+        
+        public void Reload(float reloadTime, VisualElement ammoReload)
+        {
+            //DOTween.Kill(ammoReload);
+            ammoReload.style.visibility = Visibility.Visible;
+            ammoReload.transform.scale = new Vector3(0,1,1);
+            DOTween.To(() => ammoReload.transform.scale, x => ammoReload.transform.scale = x, Vector3.one, reloadTime)
+                .OnComplete(() =>
+                {
+                    ammoReload.style.visibility = Visibility.Hidden;
+                });
         }
         
         public void DisplayEvent(bool display)

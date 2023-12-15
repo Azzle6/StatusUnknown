@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 1179658032758578729}
   - component: {fileID: 2783212793661333772}
   - component: {fileID: 3396864198151891161}
+  - component: {fileID: 4437506867426523127}
+  - component: {fileID: 3000024966115949896}
   m_Layer: 0
   m_Name: PlayerInfo
   m_TagString: Untagged
@@ -158,6 +160,62 @@ MonoBehaviour:
       - m_Target: {fileID: 3119805904533653751}
         m_TargetAssemblyTypeName: Player.PlayerInfoUIHandler, Assembly-CSharp
         m_MethodName: DisplayEvent
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4437506867426523127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7045442916581944998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b2b50536c53300469fd7e641fc076ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 625f38da58ba9524d8170a2b178818fe, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3119805904533653751}
+        m_TargetAssemblyTypeName: Player.PlayerInfoUIHandler, Assembly-CSharp
+        m_MethodName: ReceiveReload1
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3000024966115949896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7045442916581944998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b2b50536c53300469fd7e641fc076ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 7e312742fd2f9c543abb79141d939b17, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3119805904533653751}
+        m_TargetAssemblyTypeName: Player.PlayerInfoUIHandler, Assembly-CSharp
+        m_MethodName: ReceiveReload2
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

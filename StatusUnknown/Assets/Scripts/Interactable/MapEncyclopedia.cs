@@ -1,4 +1,5 @@
 using System;
+using Sirenix.OdinInspector;
 
 namespace Interactable
 {
@@ -8,22 +9,30 @@ namespace Interactable
     [CreateAssetMenu(fileName = "MapEncyclopedia", menuName = "CustomAssets/Map")]
     public class MapEncyclopedia : ScriptableObject
     {
-        public Dictionary<string, TeleporterMapData> tpMapData = new Dictionary<string, TeleporterMapData>();
+        public Dictionary<string, TeleporterMapData> tpMapData => GetDictionary();
         public List<TeleporterMapData> maps;
         
-        public void UpdateDictionary()
+        [Button("UpdateDictionary")]
+        public Dictionary<string, TeleporterMapData> GetDictionary()
         {
-            tpMapData.Clear();
+            Dictionary<string, TeleporterMapData> result = new Dictionary<string, TeleporterMapData>();
             foreach (TeleporterMapData mapData in maps)
             {
-                tpMapData.Add(mapData.sceneName, mapData);
+                result.Add(mapData.sceneName, mapData);
             }
+
+            return result;
+        }
+
+        /*private void Awake()
+        {
+            GetDictionary();
         }
 
         private void OnValidate()
         {
-            UpdateDictionary();
-        }
+            GetDictionary();
+        }*/
     }
     
     
