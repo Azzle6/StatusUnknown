@@ -18,7 +18,7 @@ MonoBehaviour:
     shapeSize: {x: 2, y: 1}
     anchor: {x: 0, y: 0}
     content: 0101
-  icon: {fileID: 21300000, guid: 0db3dd7422d7b38469ef77d3ada6d8b1, type: 3}
+  icon: {fileID: 21300000, guid: a8b006ac562b58548b0cdeaf2a4266a3, type: 3}
   outputs:
   - moduleTriggerType: 0
     localPosition: {x: 1, y: 0}
@@ -54,8 +54,10 @@ MonoBehaviour:
           rid: 4696495337976365338
         <Damages>k__BackingField: 20
         DamageRadius:
+          Scale: 1
           radius: 2
     - rid: 7591883733765456131
       type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
       data:
+        Scale: 1
         radius: 0

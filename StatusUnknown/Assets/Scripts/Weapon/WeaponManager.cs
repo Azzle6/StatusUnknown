@@ -1,3 +1,5 @@
+using System;
+using Core.EventsSO.GameEventsTypes;
 using Input;
 
 namespace Weapon
@@ -15,6 +17,7 @@ namespace Weapon
         public Weapon[] weapons;
         public WeaponVariableSO[] weaponsSO;
         public FloatVariableSO[] weaponsAmmoSO;
+        public FloatGameEvent[] reloadEvents;
         public int currentWeaponIndex;
         [SerializeField] private PlayerStat playerStat;
         public EnemyStatusHandler enemyStatusHandler;
@@ -31,6 +34,7 @@ namespace Weapon
         {
             InitWeaponManager();
         }
+        
 
         private void InitWeaponManager()
         {
@@ -42,7 +46,14 @@ namespace Weapon
             SwitchWeapon(0);
 
             if (weapons[0].TryGetComponent(out RangedWeapon rangedWeapon))
+            {
+                rangedWeapon.reloadEvent = reloadEvents[0];
                 rangedWeapon.RestWeapon();
+            }
+            if (weapons[1].TryGetComponent(out RangedWeapon rangedWeapon1))
+            {
+                rangedWeapon1.reloadEvent = reloadEvents[1];
+            }
 
             for (int x = 0; x < weapons.Length - 1; x++)
                 weaponsSO[x].Value = weapons[x];
@@ -73,6 +84,15 @@ namespace Weapon
                 return;
             
             GamePadRumbleManager.StopRumble();
+            if (CheckIfRangedWeapon(currentWeaponIndex))
+            {
+                RangedWeapon currentRangedWeapon = weapons[currentWeaponIndex] as RangedWeapon;
+                if (currentRangedWeapon != null && currentRangedWeapon.reloading != null)
+                {
+                    currentRangedWeapon.ResetReloadTransform();
+                }
+            }
+            
             
             if (CheckIfMeleeWeapon(weaponNo))
             {
@@ -95,6 +115,7 @@ namespace Weapon
             weapons[weaponNo].gameObject.SetActive(true);
             weapons[weaponNo].Switched(playerAnimator, true);
             weapons[currentWeaponIndex].gameObject.SetActive(false);
+            Debug.Log("switched to weapon " + weaponNo + "old weapon " + currentWeaponIndex);
             currentWeaponIndex = weaponNo;
         }
 

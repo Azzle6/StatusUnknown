@@ -48,6 +48,10 @@ namespace Weapon
 
             if (charging != default)
                 return false;
+
+            if (reloading != default)
+                return false;
+            
             fullyCharged = false;
             tempPhotonPistolBullet = ComponentPooler.Instance.GetPooledObject<Projectile>(stat.projectilePool.prefab.name);
             tempPhotonPistolBulletTr = tempPhotonPistolBullet.transform;

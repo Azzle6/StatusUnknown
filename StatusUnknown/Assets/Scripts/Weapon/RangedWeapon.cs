@@ -1,4 +1,5 @@
 using System;
+using Core.EventsSO.GameEventsTypes;
 using Core.Pooler;
 
 namespace Weapon
@@ -21,6 +22,7 @@ namespace Weapon
         public Coroutine reloading;
         public Transform spawnPoint;
         [SerializeField] private Vector3 initMeshPos;
+        [HideInInspector] public FloatGameEvent reloadEvent;
 
         public WeaponStat weaponStat;
         public FloatVariableSO currentAmmo;
@@ -34,7 +36,11 @@ namespace Weapon
             currentAmmo.Value = weaponStat.magazineSize;
             initMeshPos = mesh.localPosition;
         }
-        
+
+        private void OnEnable()
+        {
+        }
+
         private void OnDisable()
         {
             reloading = default;
@@ -59,8 +65,10 @@ namespace Weapon
                 return false;
             }
 
-            if ((reloading != default) || (currentAmmo.Value <= 0))
+            if (currentAmmo.Value <= 0)
             {
+                Debug.Log("no ammo trying to launch reload");
+                ResetReloadTransform();
                 Reload(weaponManager.playerAnimator);
                 return false;
             }
@@ -75,7 +83,9 @@ namespace Weapon
             ModuleBehaviourHandler.Instance.CastModule(this.inventory, this.weaponDefinition,E_WeaponOutput.ON_RELOAD, spawnPoint, null);
             weaponManager.SwitchHandRigs(false);
             mesh.transform.parent = weaponManager.rHandTr;
+            mesh.transform.position = weaponManager.rHandTr.position;
             reloading = StartCoroutine(ReloadingTimer());
+            reloadEvent.RaiseEvent(weaponStat.reloadTime);
             playerAnimator.SetTrigger("Reload");
         }
         
@@ -86,6 +96,16 @@ namespace Weapon
             currentAmmo.Value = weaponStat.magazineSize;
             //isReloading = false;
             weaponManager.SwitchHandRigs(true);
+            ResetReloadTransform();
+   
+        }
+
+        public void ResetReloadTransform()
+        {
+            if (reloading != default)
+            {
+                StopCoroutine(reloading);
+            }
             mesh.transform.parent = meshPos;
             mesh.transform.localRotation = quaternion.identity;
             mesh.transform.localPosition = initMeshPos; 
