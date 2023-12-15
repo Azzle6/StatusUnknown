@@ -11,7 +11,7 @@ namespace Weapon
     
     public class Projectile : MonoBehaviour
     {
-        public Action onHit;
+        public Action<Collider> onHit;
         
         [HideInInspector] public float damage;
         [HideInInspector] public float fullyChargedDamage;
@@ -84,7 +84,7 @@ namespace Weapon
 
                 tempHitVFX.StartVFX(hitVFX,5);
                 tempHitVFX.transform.position = transform.position;
-                this.onHit?.Invoke();
+                this.onHit?.Invoke(firstCollider);
                 ComponentPooler.Instance.ReturnObjectToPool(this);
                 if (fullycharged)
                     Explode();

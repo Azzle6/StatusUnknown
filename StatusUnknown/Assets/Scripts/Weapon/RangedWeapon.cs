@@ -72,7 +72,7 @@ namespace Weapon
             if (reloading != default)
                 return;
             
-            ModuleBehaviourHandler.Instance.CastModule(this.inventory, this.weaponDefinition,E_WeaponOutput.ON_RELOAD, spawnPoint);
+            ModuleBehaviourHandler.Instance.CastModule(this.inventory, this.weaponDefinition,E_WeaponOutput.ON_RELOAD, spawnPoint, null);
             weaponManager.SwitchHandRigs(false);
             mesh.transform.parent = weaponManager.rHandTr;
             reloading = StartCoroutine(ReloadingTimer());

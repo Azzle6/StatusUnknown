@@ -40,36 +40,26 @@ namespace Module.Behaviours
             }
         }
         
-        public void CastModule(WeaponTriggerData data, Transform spawnPoint)
+        public void CastModule(WeaponTriggerData data, InstantiatedModuleInfo info)
         {
             if(data == null || data.compiledModules.FirstModule == null)
                 return;
             
             Instance.InstantiateModuleBehaviour(
                 data.compiledModules.FirstModule,
-                new InstantiatedModuleInfo(spawnPoint.position, spawnPoint.rotation));
+                info);
         }
         
-        public void CastModule(PlayerInventorySO inventory, WeaponDefinitionSO weaponDef, E_WeaponOutput trigger, Transform spawnPoint)
+        public void CastModule(PlayerInventorySO inventory, WeaponDefinitionSO weaponDef, E_WeaponOutput trigger, Vector3 spawnPoint, Quaternion rotation, Collider lastHit)
         {
             WeaponTriggerData data = inventory.GetWeaponTriggerData(weaponDef, trigger);
-            CastModule(data, spawnPoint);
+            CastModule(data, new InstantiatedModuleInfo(spawnPoint, rotation, lastHit));
         }
         
-        public void CastModule(WeaponTriggerData data, Vector3 spawnPoint, Quaternion rotation)
-        {
-            if(data == null || data.compiledModules.FirstModule == null)
-                return;
-            
-            Instance.InstantiateModuleBehaviour(
-                data.compiledModules.FirstModule,
-                new InstantiatedModuleInfo(spawnPoint, rotation));
-        }
-        
-        public void CastModule(PlayerInventorySO inventory, WeaponDefinitionSO weaponDef, E_WeaponOutput trigger, Vector3 spawnPoint, Quaternion rotation)
+        public void CastModule(PlayerInventorySO inventory, WeaponDefinitionSO weaponDef, E_WeaponOutput trigger, Transform spawnPoint, Collider lastHit)
         {
             WeaponTriggerData data = inventory.GetWeaponTriggerData(weaponDef, trigger);
-            CastModule(data, spawnPoint, rotation);
+            CastModule(data, new InstantiatedModuleInfo(spawnPoint.position, spawnPoint.rotation, lastHit));
         }
     }
 }

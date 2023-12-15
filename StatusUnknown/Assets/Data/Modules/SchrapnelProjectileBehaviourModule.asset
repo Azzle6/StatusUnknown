@@ -24,7 +24,7 @@ MonoBehaviour:
     localPosition: {x: 1, y: 0}
     direction: 3
   BehaviourData:
-    rid: 7591884003357229129
+    rid: 7591884051945881607
   references:
     version: 2
     RefIds:
@@ -34,31 +34,33 @@ MonoBehaviour:
         angle: 180
         regular: 0
         radius: 0
-    - rid: 7591884003357229129
+    - rid: 7591884003357229130
+      type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
+      data:
+        Scale: 1
+        radius: 0.2
+    - rid: 7591884051945881607
       type: {class: ProjectileBehaviourData, ns: Module.Definitions, asm: Assembly-CSharp}
       data:
         <Behaviour>k__BackingField:
-          scriptAsset: {fileID: 0}
-          typeName: 
+          scriptAsset: {fileID: 11500000, guid: 52ad6006665b33347bc6db8216731b6c, type: 3}
+          typeName: Module.Behaviours.Projectiles.BasicProjectileBehaviour, Assembly-CSharp,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         <LayerMask>k__BackingField:
           serializedVersion: 2
-          m_Bits: 0
+          m_Bits: 384
         <CollisionShape>k__BackingField:
           rid: 7591884003357229130
         <Mesh>k__BackingField: {fileID: 0}
         <Material>k__BackingField: {fileID: 0}
-        shootVFX: {fileID: 0}
-        projectileVFX: {fileID: 0}
-        hitVFX: {fileID: 0}
+        shootVFX: {fileID: 8926484042661614526, guid: 2fae113fc0200bf479e9b4e3923b5b47, type: 3}
+        projectileVFX: {fileID: 8926484042661614526, guid: 053cfcb6e2fcc79439af58bd416353a9, type: 3}
+        hitVFX: {fileID: 8926484042661614526, guid: 2fae113fc0200bf479e9b4e3923b5b47, type: 3}
         <TickRate>k__BackingField: 0
-        <LifeTime>k__BackingField: 0
-        <Quantity>k__BackingField: 0
+        <LifeTime>k__BackingField: 2
+        <Quantity>k__BackingField: 4
         <InstantiationRule>k__BackingField:
           rid: 4696495337976365320
         maxDamagedEnemies: 1
         <Damages>k__BackingField: 12
         speed: 20
-    - rid: 7591884003357229130
-      type: {class: HitSphere, ns: Combat.HitProcess, asm: Assembly-CSharp}
-      data:
-        radius: 0.2

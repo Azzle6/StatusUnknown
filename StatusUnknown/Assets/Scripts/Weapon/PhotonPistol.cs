@@ -125,11 +125,11 @@ namespace Weapon
             tempPhotonPistolBullet.Launch(currentDamage, spawnPoint.rotation, stat.projectileSpeed,stat.fullyChargedDamage,stat.fullyChargedRadius,fullyCharged);
             Transform pistolTransform = tempPhotonPistolBullet.transform;
             bool isFullyCharged = chargeTimer >= stat.maxTimeCharge;
-            tempPhotonPistolBullet.onHit += () => OnProjectileHit(isFullyCharged, pistolTransform);
+            tempPhotonPistolBullet.onHit += (col) => OnProjectileHit(isFullyCharged, pistolTransform, col);
             tempPhotonPistolBullet.StartCheckingCollision();
             tempPhotonPistolBullet.hitShape.radius = tempPhotonPistolBulletTr.localScale.y / 2;
             
-            ModuleBehaviourHandler.Instance.CastModule(this.inventory, this.weaponDefinition,E_WeaponOutput.ON_SPAWN, spawnPoint);
+            ModuleBehaviourHandler.Instance.CastModule(this.inventory, this.weaponDefinition,E_WeaponOutput.ON_SPAWN, spawnPoint, null);
             
             tempPhotonPistolBulletTr = default;
             tempPhotonPistolBullet = default;
@@ -137,13 +137,12 @@ namespace Weapon
             currentAmmo.Value--;
         }
 
-        private void OnProjectileHit(bool isFullCharged, Transform projectile)
+        private void OnProjectileHit(bool isFullCharged, Transform projectile, Collider col)
         {
-            ModuleBehaviourHandler.Instance.CastModule(this.inventory, this.weaponDefinition, E_WeaponOutput.ON_HIT, projectile);
+            
+            ModuleBehaviourHandler.Instance.CastModule(this.inventory, this.weaponDefinition, E_WeaponOutput.ON_HIT, projectile, col);
             if (isFullCharged)
-            {
-                ModuleBehaviourHandler.Instance.CastModule(this.inventory, this.weaponDefinition,E_WeaponOutput.ON_HIT_FULL_CHARGED, projectile);
-            }
+                ModuleBehaviourHandler.Instance.CastModule(this.inventory, this.weaponDefinition,E_WeaponOutput.ON_HIT_FULL_CHARGED, projectile, col);
         }
         
         public override void Hit()
