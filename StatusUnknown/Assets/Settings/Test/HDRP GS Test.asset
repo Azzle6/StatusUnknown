@@ -62,7 +62,11 @@ MonoBehaviour:
   m_RenderPipelineResources: {fileID: 11400000, guid: 3ce144cff5783da45aa5d4fdc2da14b7, type: 2}
   m_RenderPipelineRayTracingResources: {fileID: 11400000, guid: ba6e7f30e5cffc249a8bf7ee5756c196, type: 2}
   beforeTransparentCustomPostProcesses: []
-  beforePostProcessCustomPostProcesses: []
+  beforePostProcessCustomPostProcesses:
+  - UnityEngine.Rendering.HighDefinition.Compositor.ChromaKeying, Unity.RenderPipelines.HighDefinition.Runtime,
+    Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - UnityEngine.Rendering.HighDefinition.Compositor.AlphaInjection, Unity.RenderPipelines.HighDefinition.Runtime,
+    Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   afterPostProcessBlursCustomPostProcesses: []
   afterPostProcessCustomPostProcesses: []
   beforeTAACustomPostProcesses: []
@@ -352,7 +356,6 @@ MonoBehaviour:
       - 42c7e30151322b349958296233f1cacd
       - 87d46863c0ed7be49972dde60c4512f5
       - 233e2eb1c2721e64488853d1494cc767
-      - f96ae3ec3c39a264bb2215a81ca2a946
       settings:
         m_Version: 1
         dilationSettings:
@@ -465,7 +468,7 @@ MonoBehaviour:
       profile: {fileID: 11400000, guid: b86181cc341614a488d6b72674d12d92, type: 2}
       lightingScenarios:
       - New Lighting Scenario
-    m_LightingScenario: Lighting Scenario Test
+    m_LightingScenario: Lighting scenario 1
   m_Version: 5
   m_ShaderVariantLogLevel: 0
   m_ExportShaderVariants: 1
