@@ -65,10 +65,8 @@ namespace Weapon
                 return false;
             }
 
-            if (currentAmmo.Value <= 0)
+            if ((currentAmmo.Value <= 0) && (reloading == default))
             {
-                Debug.Log("no ammo trying to launch reload");
-                ResetReloadTransform();
                 Reload(weaponManager.playerAnimator);
                 return false;
             }
@@ -135,13 +133,14 @@ namespace Weapon
         {
             if (OnOff)
             {
+                ActionReleased();
                 playerAnimator.SetLayerWeight(2,0);
                 playerAnimator.SetLayerWeight(1,1);
                 
             }
             else
             {
-                ActionReleased();
+                ResetReloadTransform();
             }
         }
 
