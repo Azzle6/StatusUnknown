@@ -60,7 +60,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColorTexture_VP:
-        m_Texture: {fileID: 2800000, guid: 1d49c8be716b3a649a247d227cc8e565, type: 3}
+        m_Texture: {fileID: 2800000, guid: a9f70b3b00888c04482f4243c5df7aac, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColorTexture_WS:
@@ -124,7 +124,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap_VP:
-        m_Texture: {fileID: 2800000, guid: 12583504e74c3cb42862178ad7749f63, type: 3}
+        m_Texture: {fileID: 2800000, guid: e0eb940895a40154099cfc045f8756d1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap_WS:
@@ -136,7 +136,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ORM_VP:
-        m_Texture: {fileID: 2800000, guid: 3736eda81dbe15345b62f18bc4c761f0, type: 3}
+        m_Texture: {fileID: 2800000, guid: 25672882a46892945aa3dd4bb349a623, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ORM_WS:
@@ -207,7 +207,7 @@ Material:
     - _AlphaRemapMax: 1
     - _AlphaRemapMin: 0
     - _AlphaSrcBlend: 1
-    - _AmbientOcclusionIntensity_Main: 0.15
+    - _AmbientOcclusionIntensity_Main: 0.01
     - _AmbientOcclusionIntensity_VP: 1
     - _AmbientOcclusionIntensity_WS: 1
     - _Anisotropy: 0
@@ -259,7 +259,7 @@ Material:
     - _Ior: 1.5
     - _IridescenceMask: 1
     - _IridescenceThickness: 1
-    - _LerpContrast_VP: 0
+    - _LerpContrast_VP: 0.02
     - _LinkDetailsWithBase: 1
     - _MaterialID: 1
     - _MetalAdjust_Main: 0
@@ -297,11 +297,11 @@ Material:
     - _RefractionModel: 0
     - _RenderQueueType: 1
     - _RequireSplitLighting: 0
-    - _RoughnessAdjust_Main: 0.8
+    - _RoughnessAdjust_Main: 0.95
     - _RoughnessAdjust_VP: 0
     - _RoughnessAdjust_WS: 0
-    - _RoughnessContrast_Main: 0.33
-    - _RoughnessContrast_VP: 1
+    - _RoughnessContrast_Main: 0.6
+    - _RoughnessContrast_VP: 0
     - _RoughnessContrast_WS: 1
     - _SWITCH_TEST: 0
     - _Smoothness: 0.5
@@ -327,8 +327,8 @@ Material:
     - _TexWorldScale: 1
     - _TexWorldScaleEmissive: 1
     - _Thickness: 1
-    - _TintIntensity_Main: 0.7
-    - _TintIntensity_VP: 0
+    - _TintIntensity_Main: 0.85
+    - _TintIntensity_VP: -8
     - _TintIntensity_WS: 0
     - _TransmissionEnable: 1
     - _TransmissionMask: 1

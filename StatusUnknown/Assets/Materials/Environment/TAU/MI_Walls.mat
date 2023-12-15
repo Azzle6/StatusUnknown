@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5420013173955819652
+--- !u!114 &-5880654703002735588
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -31,8 +31,8 @@ Material:
   - _DISABLE_SSR_TRANSPARENT
   m_InvalidKeywords:
   - _NORMALMAP_TANGENT_SPACE
-  m_LightmapFlags: 2
-  m_EnableInstancingVariants: 1
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 2225
   stringTagMap:
@@ -60,11 +60,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColorTexture_VP:
-        m_Texture: {fileID: 2800000, guid: 8446341e0062f174c93c22751f78e648, type: 3}
+        m_Texture: {fileID: 2800000, guid: a9f70b3b00888c04482f4243c5df7aac, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColorTexture_WS:
-        m_Texture: {fileID: 2800000, guid: 8446341e0062f174c93c22751f78e648, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BentNormalMap:
@@ -128,7 +128,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap_WS:
-        m_Texture: {fileID: 2800000, guid: e0eb940895a40154099cfc045f8756d1, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ORM_Main:
@@ -140,7 +140,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ORM_WS:
-        m_Texture: {fileID: 2800000, guid: deff1c6dab2f691488943b811a163f15, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecularColorMap:
@@ -207,20 +207,19 @@ Material:
     - _AlphaRemapMax: 1
     - _AlphaRemapMin: 0
     - _AlphaSrcBlend: 1
-    - _AmbientOcclusionIntensity_Main: 0.34
+    - _AmbientOcclusionIntensity_Main: 0.46
     - _AmbientOcclusionIntensity_VP: 1
     - _AmbientOcclusionIntensity_WS: 1
     - _Anisotropy: 0
     - _BlendMode: 0
     - _CoatMask: 0
     - _ColorMax: 1
-    - _ColorMin: 0
-    - _ColorMin_1: 0
+    - _ColorMin: -0.58
     - _ConservativeDepthOffsetEnable: 0
     - _CullMode: 2
     - _CullModeForward: 2
     - _Cutoff: 0.5
-    - _DNIntensity_A_DDN: 0
+    - _DNIntensity_A_DDN: 0.2
     - _DNIntensity_B_DDN: 0
     - _DarkeningTint_VP: 1
     - _DepthOffsetEnable: 0
@@ -259,15 +258,15 @@ Material:
     - _Ior: 1.5
     - _IridescenceMask: 1
     - _IridescenceThickness: 1
-    - _LerpContrast_VP: 0.5
+    - _LerpContrast_VP: 0.15
     - _LinkDetailsWithBase: 1
     - _MaterialID: 1
-    - _MetalAdjust_Main: -0.01
+    - _MetalAdjust_Main: 0
     - _MetalAdjust_VP: 0
     - _MetalAdjust_WS: 0
     - _MetalContrast_Main: 0
-    - _MetalContrast_VP: 1
-    - _MetalContrast_WS: 1
+    - _MetalContrast_VP: 0
+    - _MetalContrast_WS: 0
     - _Metallic: 0
     - _MetallicRemapMax: 1
     - _MetallicRemapMin: 0
@@ -277,8 +276,8 @@ Material:
     - _NoiseMain_Max_WS: 0.8
     - _NoiseMain_Min_WS: 0.2
     - _NoiseMain_Tiling_WS: 3
-    - _NoiseStrength_WS: 0
-    - _NormalIntensity_Main: 1
+    - _NoiseStrength_WS: 1
+    - _NormalIntensity_Main: 1.2
     - _NormalIntensity_VP: 1
     - _NormalIntensity_WS: 1
     - _NormalMapSpace: 0
@@ -297,12 +296,12 @@ Material:
     - _RefractionModel: 0
     - _RenderQueueType: 1
     - _RequireSplitLighting: 0
-    - _RoughnessAdjust_Main: 0.53
+    - _RoughnessAdjust_Main: 0.1
     - _RoughnessAdjust_VP: 0
     - _RoughnessAdjust_WS: 0
-    - _RoughnessContrast_Main: 0
-    - _RoughnessContrast_VP: 1
-    - _RoughnessContrast_WS: 1
+    - _RoughnessContrast_Main: -0.22
+    - _RoughnessContrast_VP: 0.2
+    - _RoughnessContrast_WS: 0
     - _SWITCH_TEST: 0
     - _Smoothness: 0.5
     - _SmoothnessRemapMax: 1
@@ -327,8 +326,8 @@ Material:
     - _TexWorldScale: 1
     - _TexWorldScaleEmissive: 1
     - _Thickness: 1
-    - _TintIntensity_Main: 1
-    - _TintIntensity_VP: 0
+    - _TintIntensity_Main: 1.2
+    - _TintIntensity_VP: -0.4
     - _TintIntensity_WS: 0
     - _TransmissionEnable: 1
     - _TransmissionMask: 1
@@ -339,18 +338,18 @@ Material:
     - _TransparentSortPriority: 0
     - _TransparentWritingMotionVec: 0
     - _TransparentZWrite: 0
-    - _UTiling_DDN: 1
+    - _UTiling_DDN: 3
     - _UVBase: 0
     - _UVDetail: 0
     - _UVEmissive: 0
     - _U_Scale_Main: 1
-    - _U_Scale_VP: 1
+    - _U_Scale_VP: 5
     - _U_Scale_WS: 1
     - _UseEmissiveIntensity: 0
     - _UseShadowThreshold: 0
-    - _VTiling_DDN: 1
+    - _VTiling_DDN: 3
     - _V_Scale_Main: 1
-    - _V_Scale_VP: 1
+    - _V_Scale_VP: 5
     - _V_Scale_WS: 1
     - _X_Factor_WS: 1
     - _Y_Factor_WS: 1
@@ -362,8 +361,8 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
-    - _BaseColorTint_Main: {r: 0.6431373, g: 0.627451, b: 0.54901963, a: 1}
-    - _BaseColorTint_VP: {r: 0, g: 0, b: 0, a: 0}
+    - _BaseColorTint_Main: {r: 0.754717, g: 0.736667, b: 0.5731577, a: 1}
+    - _BaseColorTint_VP: {r: 0.427451, g: 0.45098042, b: 0.36078432, a: 0}
     - _BaseColorTint_WS: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
