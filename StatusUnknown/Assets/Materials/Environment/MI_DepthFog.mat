@@ -54,13 +54,13 @@ Material:
     m_Ints: []
     m_Floats:
     - _AddPrecomputedVelocity: 0
-    - _AdjustAlpha: 0.68
+    - _AdjustAlpha: 0.62
     - _AlphaCutoffEnable: 1
     - _AlphaDstBlend: 10
     - _AlphaSrcBlend: 1
     - _BlendMode: 0
     - _ConservativeDepthOffsetEnable: 0
-    - _ContrastAlpha: 0.45
+    - _ContrastAlpha: 0
     - _CullMode: 2
     - _CullModeForward: 2
     - _DepthOffsetEnable: 0
@@ -88,7 +88,8 @@ Material:
     - _Tiling: 0.03
     - _TilingAmplitude: 0.1
     - _TilingSpeedMult: 200
-    - _TintIntensity: 0
+    - _TiltingOffsetMult: 0.1
+    - _TintIntensity: 1
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
     - _TransparentDepthPostpassEnable: 0
@@ -104,7 +105,7 @@ Material:
     m_Colors:
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Tint: {r: 0, g: 0, b: 0, a: 0}
+    - _Tint: {r: 0.9398867, g: 1, b: 0.8915094, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &8234927613980069492
 MonoBehaviour:

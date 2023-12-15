@@ -207,20 +207,20 @@ Material:
     - _AlphaRemapMax: 1
     - _AlphaRemapMin: 0
     - _AlphaSrcBlend: 1
-    - _AmbientOcclusionIntensity_Main: 0.28
+    - _AmbientOcclusionIntensity_Main: 0.09
     - _AmbientOcclusionIntensity_VP: 1
     - _AmbientOcclusionIntensity_WS: 1
     - _Anisotropy: 0
     - _BlendMode: 0
     - _CoatMask: 0
-    - _ColorMax: 1.51
-    - _ColorMin: -1.76
+    - _ColorMax: 1
+    - _ColorMin: -0.17
     - _ColorMin_1: 0
     - _ConservativeDepthOffsetEnable: 0
     - _CullMode: 2
     - _CullModeForward: 2
     - _Cutoff: 0.5
-    - _DNIntensity_A_DDN: 0
+    - _DNIntensity_A_DDN: 1
     - _DNIntensity_B_DDN: 0
     - _DarkeningTint_VP: 0.1
     - _DepthOffsetEnable: 0
@@ -259,13 +259,13 @@ Material:
     - _Ior: 1.5
     - _IridescenceMask: 1
     - _IridescenceThickness: 1
-    - _LerpContrast_VP: 1
+    - _LerpContrast_VP: 0.15
     - _LinkDetailsWithBase: 1
     - _MaterialID: 1
     - _MetalAdjust_Main: 0
     - _MetalAdjust_VP: 0
     - _MetalAdjust_WS: 0
-    - _MetalContrast_Main: 0.1
+    - _MetalContrast_Main: 0
     - _MetalContrast_VP: 1
     - _MetalContrast_WS: 1
     - _Metallic: 0
@@ -297,7 +297,7 @@ Material:
     - _RefractionModel: 0
     - _RenderQueueType: 1
     - _RequireSplitLighting: 0
-    - _RoughnessAdjust_Main: 0.62
+    - _RoughnessAdjust_Main: 0.28
     - _RoughnessAdjust_VP: 0
     - _RoughnessAdjust_WS: 0
     - _RoughnessContrast_Main: -0.05
@@ -327,8 +327,8 @@ Material:
     - _TexWorldScale: 1
     - _TexWorldScaleEmissive: 1
     - _Thickness: 1
-    - _TintIntensity_Main: 0.4
-    - _TintIntensity_VP: 0
+    - _TintIntensity_Main: 0.82
+    - _TintIntensity_VP: 3
     - _TintIntensity_WS: 0
     - _TransmissionEnable: 1
     - _TransmissionMask: 1
@@ -339,7 +339,7 @@ Material:
     - _TransparentSortPriority: 0
     - _TransparentWritingMotionVec: 0
     - _TransparentZWrite: 0
-    - _UTiling_DDN: 1
+    - _UTiling_DDN: 8
     - _UVBase: 0
     - _UVDetail: 0
     - _UVEmissive: 0
@@ -348,7 +348,7 @@ Material:
     - _U_Scale_WS: 1
     - _UseEmissiveIntensity: 0
     - _UseShadowThreshold: 0
-    - _VTiling_DDN: 1
+    - _VTiling_DDN: 8
     - _V_Scale_Main: 1
     - _V_Scale_VP: 1
     - _V_Scale_WS: 1
@@ -362,8 +362,8 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
-    - _BaseColorTint_Main: {r: 1, g: 0.77062404, b: 0.24056602, a: 0}
-    - _BaseColorTint_VP: {r: 0, g: 0, b: 0, a: 0}
+    - _BaseColorTint_Main: {r: 0.63529414, g: 0.6509804, b: 0.5568628, a: 0}
+    - _BaseColorTint_VP: {r: 0.68235296, g: 0.57254905, b: 0.2784314, a: 0}
     - _BaseColorTint_WS: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
