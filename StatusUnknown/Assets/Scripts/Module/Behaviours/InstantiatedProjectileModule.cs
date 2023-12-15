@@ -72,7 +72,6 @@ namespace Module.Behaviours
             
             foreach (var col in collisions)
             {
-                Debug.Log("Collides");
                 if(this.alreadyHitColliders.Contains(col))
                     return;
 

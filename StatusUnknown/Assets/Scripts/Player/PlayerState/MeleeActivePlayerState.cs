@@ -94,8 +94,8 @@ namespace Player
                                 output = E_WeaponOutput.ON_HIT_FIRST_ATTACK;
                                 break;
                         }
-                        ModuleBehaviourHandler.Instance.CastModule(this.currentMeleeWeapon.inventory, this.currentMeleeWeapon.weaponDefinition, output, enemy.transform.position, finalRotation);
-                        ModuleBehaviourHandler.Instance.CastModule(this.currentMeleeWeapon.inventory, this.currentMeleeWeapon.weaponDefinition, E_WeaponOutput.ON_HIT, enemy.transform.position, finalRotation);
+                        ModuleBehaviourHandler.Instance.CastModule(this.currentMeleeWeapon.inventory, this.currentMeleeWeapon.weaponDefinition, output, enemy.transform.position, finalRotation, enemy);
+                        ModuleBehaviourHandler.Instance.CastModule(this.currentMeleeWeapon.inventory, this.currentMeleeWeapon.weaponDefinition, E_WeaponOutput.ON_HIT, enemy.transform.position, finalRotation, enemy);
                     }
                 }
             }
