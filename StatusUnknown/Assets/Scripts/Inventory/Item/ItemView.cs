@@ -25,7 +25,8 @@ namespace Inventory.Item
         private VisualElement iconElement;
         protected UISettings UiSettings;
         protected VisualElement[] visualSquareParents;
-        protected VisualElement[] visualSquare;
+        protected VisualElement[] visualSquares;
+        protected VisualElement[] visualHideSquares;
 
         #region CONSTRUCTOR
         protected ItemView(ItemData itemData, Vector2Int gridPosition, GridView gridView)
@@ -52,11 +53,13 @@ namespace Inventory.Item
             
             this.verticalRoot = itemView.Q<VisualElement>("verticalRoot");
             this.visualSquareParents = ShapeBuilder.BuildShape(shape, this.verticalRoot, this.UiSettings.itemSquareTemplate);
+            
             List<VisualElement> squares = new List<VisualElement>();
             foreach (var squareParent in this.visualSquareParents)
                 squares.Add(squareParent.Q<VisualElement>("square"));
-            this.visualSquare = squares.ToArray();
-            
+            this.visualSquares = squares.ToArray();
+
+            List<VisualElement> hideElements = new List<VisualElement>();
             for (int y = 0; y < shape.shapeSize.y; y++)
             {
                 for (int x = 0; x < shape.shapeSize.x; x++)
@@ -112,8 +115,10 @@ namespace Inventory.Item
                 itemView.Add(edgeHide);
                 edgeHide.transform.position = (Vector2)pos * this.UiSettings.slotSize + directionDisplacement;
                 edgeHide.style.rotate = new StyleRotate(new Rotate(rotation));
+                hideElements.Add(edgeHide.Q<VisualElement>("hider"));
             }
-            
+
+            this.visualHideSquares = hideElements.ToArray();
             this.iconElement.BringToFront();
             if (this.ViewRoot != null)
                 this.ViewRoot.RemoveFromHierarchy();
@@ -125,28 +130,46 @@ namespace Inventory.Item
 
         public void SetMoveState()
         {
-            foreach (var square in this.visualSquare)
+            foreach (var square in this.visualSquares)
             {
                 square.AddToClassList("movingElement");
+            }
+
+            foreach (var hideSquare in this.visualHideSquares)
+            {
+                hideSquare.RemoveFromClassList("hider");
+                hideSquare.AddToClassList("movingElement");
             }
         }
 
         public void SetPlaceItemFeedback(bool canPlace)
         {
-            foreach (var square in this.visualSquare)
+            foreach (var square in this.visualSquares)
             {
                 square.AddToClassList(canPlace ? "canPlace" : "cantPlace");
                 square.RemoveFromClassList(canPlace ? "cantPlace" : "canPlace");
+            }
+            foreach (var hideSquare in this.visualHideSquares)
+            {
+                hideSquare.AddToClassList(canPlace ? "canPlace" : "cantPlace");
+                hideSquare.RemoveFromClassList(canPlace ? "cantPlace" : "canPlace");
             }
         }
 
         public void PlacedState()
         {
-            foreach (var square in this.visualSquare)
+            foreach (var square in this.visualSquares)
             { 
                 square.RemoveFromClassList("movingElement");
                 square.RemoveFromClassList("canPlace");
                 square.RemoveFromClassList("cantPlace");
+            }
+            foreach (var hideSquare in this.visualHideSquares)
+            {
+                hideSquare.RemoveFromClassList("movingElement");
+                hideSquare.RemoveFromClassList("canPlace");
+                hideSquare.RemoveFromClassList("cantPlace");
+                hideSquare.AddToClassList("hider");
             }
         }
 

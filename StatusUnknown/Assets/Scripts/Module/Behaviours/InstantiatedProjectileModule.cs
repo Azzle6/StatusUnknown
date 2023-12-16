@@ -2,7 +2,6 @@ using pooler;
 
 namespace Module.Behaviours
 {
-    using System;
     using System.Collections.Generic;
     using Combat.HitProcess;
     using Core.Pooler;

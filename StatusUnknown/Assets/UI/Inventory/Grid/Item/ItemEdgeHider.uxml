@@ -1,4 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Global/GlobalUSS.uss?fileID=7433441132597879392&amp;guid=b957b32707326d646b329444c53afc3b&amp;type=3#GlobalUSS" />
-    <ui:VisualElement class="slotDimension" style="height: 20px; background-color: rgb(128, 128, 128); position: absolute;" />
+    <Style src="project://database/Assets/UI/Inventory/Grid/Item/ItemEdgeHider.uss?fileID=7433441132597879392&amp;guid=fbafbfe5af539cf4d959d84ad1e98e9b&amp;type=3#ItemEdgeHider" />
+    <ui:VisualElement name="hider" class="slotDimension hider" style="height: 20px; position: absolute;" />
 </ui:UXML>

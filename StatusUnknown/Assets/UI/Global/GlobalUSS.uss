@@ -2,7 +2,7 @@
 }
 
 .focusableElement:focus {
-    background-color: rgba(229, 220, 49, 0.82);
+    background-color: rgb(231, 215, 82);
 }
 
 .hiddenElement {
@@ -44,7 +44,7 @@
 }
 
 .selectionButton:focus {
-    background-color: rgba(137, 132, 90, 0.53);
+    background-color: rgb(137, 132, 90);
 }
 
 .halfTitle {
@@ -74,4 +74,8 @@
     scale: 1 1;
     transition-duration: 0.1s;
     transition-timing-function: ease-in;
+}
+
+.buttonHighlight {
+    background-color: rgb(185, 185, 185);
 }

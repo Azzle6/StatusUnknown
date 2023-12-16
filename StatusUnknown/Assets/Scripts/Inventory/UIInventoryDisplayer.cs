@@ -1,6 +1,7 @@
 namespace Inventory
 {
     using System;
+    using System.Collections.Generic;
     using Core;
     using Core.SingletonsSO;
     using Core.UI;
@@ -46,10 +47,14 @@ namespace Inventory
 
         private bool isDisplayed;
 
-        private WeaponData selectedWeaponData;
-        private ItemData selectedItemData;
+        //private WeaponData selectedWeaponData;
         private UISettings uiSettings;
         private OutputReferencesSO outputReferences;
+        private ItemData hoveredItemData;
+        private WeaponData selectedWeaponData => this.playerInventory.equippedWeaponsData[this.selectedWeaponIndex];
+        private int selectedWeaponIndex;
+        private VisualElement[] weaponButtons;
+        private VisualElement[] triggerButtons;
 
         private void OnEnable()
         {
@@ -65,7 +70,7 @@ namespace Inventory
 
             UIHandler.Instance.onSlotFocusEvent += this.OnSlotFocus;
             
-            this.RefreshWeaponsList();
+            this.SetupWeaponsList();
             this.InitInventoryView();
             this.InitWeaponGridView();
             
@@ -73,23 +78,7 @@ namespace Inventory
 
             this.inventoryRoot.style.display = DisplayStyle.None;
         }
-
-        private void RefreshWeaponsList()
-        {
-            this.weaponSelectionButtonsRoot.Clear();
-            foreach (WeaponData weapon in this.playerInventory.equippedWeaponsData)
-            {
-                VisualElement weaponSelectionButton =
-                    uiSettings.weaponSelectionButtonTemplate.Instantiate();
-                weaponSelectionButton.RegisterCallback<NavigationSubmitEvent>((e) => this.SelectWeapon(weapon));
-                weaponSelectionButton.Q<VisualElement>("weaponIcon").style.backgroundImage =
-                    weapon.definition.icon.texture;
-                weaponSelectionButton.Q<TextElement>("weaponName").text = weapon.definition.itemName;
-                
-                this.weaponSelectionButtonsRoot.Add(weaponSelectionButton);
-            }
-        }
-
+        
         private void InitInventoryView()
         {
             this.inventoryGridView = new BasicGridView(this.uiDocument.rootVisualElement.Q<VisualElement>(INVENTORY_GRID_NAME),
@@ -101,36 +90,56 @@ namespace Inventory
             this.triggerGridView = new TriggerGridView(this.uiDocument.rootVisualElement.Q<VisualElement>(WEAPON_GRID_NAME),
                 this.playerInventory.equippedWeaponsData[0].definition.triggers[0].shape, this.playerInventory.equippedWeaponsData[0].triggerInfoData[0], new E_ItemType[] { E_ItemType.MODULE});
         }
-
-        private void SelectWeapon(WeaponData weaponData)
+        
+        private void SetupWeaponsList()
         {
-            this.selectedWeaponData = weaponData;
-            this.RefreshWeaponTriggers();
-            this.SelectTriggerIndex(0, false);
+            List<VisualElement> buttons = new List<VisualElement>(); 
+            this.weaponSelectionButtonsRoot.Clear();
+            for (var i = 0; i < this.playerInventory.equippedWeaponsData.Length; i++)
+            {
+                var weapon = this.playerInventory.equippedWeaponsData[i];
+                int index = i;
+                VisualElement weaponSelectionButton =
+                    this.uiSettings.weaponSelectionButtonTemplate.Instantiate();
+                weaponSelectionButton.RegisterCallback<NavigationSubmitEvent>((e) => this.SelectWeaponIndex(index));
+                weaponSelectionButton.Q<VisualElement>("weaponIcon").style.backgroundImage =
+                    weapon.definition.icon.texture;
+                weaponSelectionButton.Q<TextElement>("weaponName").text = weapon.definition.itemName;
+
+                this.weaponSelectionButtonsRoot.Add(weaponSelectionButton);
+                buttons.Add(weaponSelectionButton.Q<VisualElement>("weaponButton"));
+            }
+
+            this.weaponButtons = buttons.ToArray();
         }
 
-        private void DisplayWeaponInfo(bool display)
+        private void SetupWeaponTriggers()
         {
-            this.weaponInfoPanel.style.display = display ? DisplayStyle.Flex : DisplayStyle.None;
-            this.triggerInfoPanel.style.display = display ? DisplayStyle.None : DisplayStyle.Flex;
-        }
-
-        private void RefreshWeaponTriggers()
-        {
+            List<VisualElement> buttons = new List<VisualElement>();
             this.triggersButtonsRoot.Clear();
-            for (var i = 0; i < this.selectedWeaponData.triggerInfoData.Length; i++)
+            for (var i = 0; i < selectedWeaponData.triggerInfoData.Length; i++)
             {
                 int index = i;
                 VisualElement triggerSelectionButton =
                     uiSettings.triggerSelectionButtonTemplate.Instantiate();
                 triggerSelectionButton.RegisterCallback<NavigationSubmitEvent>((e) => this.SelectTriggerIndex(index));
                 triggerSelectionButton.Q<VisualElement>("triggerIcon").style.backgroundImage =
-                    outputReferences.weaponOutputReferences[this.selectedWeaponData.triggerInfoData[i].weaponTriggerType].icon.texture;
-                triggerSelectionButton.Q<TextElement>("triggerName").text = this.selectedWeaponData.triggerInfoData[i].weaponTriggerType.ToString().Replace("_", " ");
+                    outputReferences.weaponOutputReferences[selectedWeaponData.triggerInfoData[i].weaponTriggerType].icon.texture;
+                triggerSelectionButton.Q<TextElement>("triggerName").text = selectedWeaponData.triggerInfoData[i].weaponTriggerType.ToString().Replace("_", " ");
                 triggerSelectionButton.Q<TextElement>("triggerIndex").text = $"T{i + 1}";
                 
                 this.triggersButtonsRoot.Add(triggerSelectionButton);
+                buttons.Add(triggerSelectionButton.Q<VisualElement>("triggerButton"));
             }
+            this.triggerButtons = buttons.ToArray();
+        }
+        
+        private void SelectWeaponIndex(int weaponIndex)
+        {
+            this.selectedWeaponIndex = weaponIndex;
+            this.SetupWeaponTriggers();
+            this.SelectTriggerIndex(0, false);
+            this.RefreshSelectedWeaponButtons();
         }
 
         private void SelectTriggerIndex(int index, bool forceDisplay = true)
@@ -145,8 +154,37 @@ namespace Inventory
                 DisplayWeaponInfo(false);
             
             this.triggerGridView.LoadNewData(this.selectedWeaponData.definition.triggers[index].shape, this.selectedWeaponData.triggerInfoData[index]);
+            this.RefreshSelectedTriggerButtons(index);
         }
 
+        private void RefreshSelectedWeaponButtons()
+        {
+            for (int i = 0; i < this.weaponButtons.Length; i++)
+            {
+                if(i == this.selectedWeaponIndex)
+                    this.weaponButtons[i].AddToClassList("buttonHighlight");
+                else
+                    this.weaponButtons[i].RemoveFromClassList("buttonHighlight");
+            }
+        }
+
+        private void RefreshSelectedTriggerButtons(int selectedIndex)
+        {
+            for (int i = 0; i < this.triggerButtons.Length; i++)
+            {
+                if(i == selectedIndex)
+                    this.triggerButtons[i].AddToClassList("buttonHighlight");
+                else
+                    this.triggerButtons[i].RemoveFromClassList("buttonHighlight");
+            }
+        }
+        
+        private void DisplayWeaponInfo(bool display)
+        {
+            this.weaponInfoPanel.style.display = display ? DisplayStyle.Flex : DisplayStyle.None;
+            this.triggerInfoPanel.style.display = display ? DisplayStyle.None : DisplayStyle.Flex;
+        }
+        
         private void OnSlotFocus(Slot slot)
         {
             this.OnHoverItem(slot.ItemView);
@@ -160,6 +198,7 @@ namespace Inventory
             {
                 SetName("");
                 SetDescription("");
+                this.hoveredItemData = null;
                 return;
             }
             
@@ -177,7 +216,7 @@ namespace Inventory
                             this.outputReferences.moduleOutputReferences[modDef.moduleTriggerType];
                         AddOutputList(def.icon, def.description, def.output.ToString());
                     }
-                    if(selectedItemData != data)
+                    if(this.hoveredItemData != data)
                         UIFeedbackHelper.BumpElement(this.itemInfoPanel);
                     break;
                 case E_ItemType.WEAPON:
@@ -190,13 +229,13 @@ namespace Inventory
                             this.outputReferences.weaponOutputReferences[weaponTrigger.weaponTrigger];
                         AddOutputList(def.icon, def.description, def.output.ToString());
                     }
-                    if(selectedItemData != data)
+                    if(this.hoveredItemData != data)
                         UIFeedbackHelper.BumpElement(this.itemInfoPanel);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            selectedItemData = data;
+            this.hoveredItemData = data;
             return;
 
             void SetName(string itemName)
@@ -230,7 +269,7 @@ namespace Inventory
             {
                 this.inventoryGridView.FocusOnGrid();
                 this.inventoryGridView.LoadContent();
-                this.SelectWeapon(this.playerInventory.equippedWeaponsData[0]);
+                this.SelectWeaponIndex(0);
             }
         }
 
