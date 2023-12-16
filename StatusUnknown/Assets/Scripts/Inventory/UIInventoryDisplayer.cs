@@ -183,6 +183,7 @@ namespace Inventory
         {
             this.weaponInfoPanel.style.display = display ? DisplayStyle.Flex : DisplayStyle.None;
             this.triggerInfoPanel.style.display = display ? DisplayStyle.None : DisplayStyle.Flex;
+            RefreshSelectedTriggerButtons(-1);
         }
         
         private void OnSlotFocus(Slot slot)
