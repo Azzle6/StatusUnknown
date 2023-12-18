@@ -1,0 +1,193 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-2218835765958426275
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 13
+  hdPluginSubTargetMaterialVersions:
+    m_Keys: []
+    m_Values: 
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MI_FailleEnnemi 3
+  m_Shader: {fileID: -6465566751694194690, guid: dfb1255adb2f921488253d755b2d96db, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _ENABLE_FOG_ON_TRANSPARENT
+  - _SURFACE_TYPE_TRANSPARENT
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 3000
+  stringTagMap:
+    MotionVector: User
+    RenderType: Transparent
+  disabledShaderPasses:
+  - TransparentDepthPrepass
+  - TransparentDepthPostpass
+  - TransparentBackface
+  - MOTIONVECTORS
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _EyeTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMapping_14ac68bfce4e45ada77da5a20f93a52e_Heightmap_1_Texture2D:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMapping_6da9911d747a424fa78938bf156c4720_Heightmap_1_Texture2D:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMapping_f50779ad39de49d3bf310fb06daf9c50_Heightmap_1_Texture2D:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_1d0cd9ba13cb447189ffda599e2e4300_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 353b170a2cb82014db888d6fe7feb3d3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_21286183d45e4f70887bbd51d2b6c42d_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 800d85c4316bbfa41b0829a9c6a16ce7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_214691e746e94ec3b41c6f0b0bca8f85_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 800d85c4316bbfa41b0829a9c6a16ce7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_46d609d04a3248acad55d6adeb1d8221_Texture_1_Texture2D:
+        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_486b7c6365274325a9cc5b9c02309960_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 800d85c4316bbfa41b0829a9c6a16ce7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_6cc04a8861a24c1b933d7e58bab4bf25_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 800d85c4316bbfa41b0829a9c6a16ce7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_8277636a0a274f1197f10067354283ff_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 800d85c4316bbfa41b0829a9c6a16ce7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_fc587d25d4e04957a0c68b359bfe7ff1_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 800d85c4316bbfa41b0829a9c6a16ce7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TintTexture:
+        m_Texture: {fileID: 2800000, guid: 353b170a2cb82014db888d6fe7feb3d3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AddPrecomputedVelocity: 0
+    - _AlphaCutoffEnable: 0
+    - _AlphaDstBlend: 10
+    - _AlphaSrcBlend: 1
+    - _BlackThreshold: 0.26
+    - _BlendMode: 0
+    - _BorderMaskPower: 0.3
+    - _ChromaticAberrationAmount: 0.015
+    - _ChromaticAberrationPower: 1.5
+    - _ChromaticAberrationSpeed: 3
+    - _ChromaticAberrationTiling: 3
+    - _CloudIntensity: 0.15
+    - _CloudPower: 0.65
+    - _CloudSineSpeed: 2
+    - _CloudSineTiling: 2
+    - _ConservativeDepthOffsetEnable: 0
+    - _CropSize: 0.55
+    - _CullMode: 2
+    - _CullModeForward: 2
+    - _DepthOffsetEnable: 0
+    - _DetaiLLoss: 0
+    - _DetailLossMidSectionThreshold: 0.8
+    - _DetailLossOpacityThreshold: 0.1
+    - _DoubleSidedEnable: 0
+    - _DoubleSidedGIMode: 0
+    - _DoubleSidedNormalMode: 2
+    - _DstBlend: 10
+    - _EnableBlendModePreserveSpecularLighting: 0
+    - _EnableFogOnTransparent: 1
+    - _EyeDepth: 0
+    - _EyeNoiseIntensity: 0
+    - _LeftBorderMask: 1
+    - _MidSectionThreshold: 0.65
+    - _OpacityPower: 1.67
+    - _OpacityThreshold: 0.075
+    - _OpaqueCullMode: 2
+    - _PanningSpeed: 0.075
+    - _ParallaxIntensity: -100
+    - _ParallaxLowIntensity: 0.15
+    - _ParallaxPower: 2
+    - _RadialMask: 0
+    - _RenderQueueType: 4
+    - _RightBorderMask: 1
+    - _SrcBlend: 1
+    - _StencilRef: 0
+    - _StencilRefDepth: 1
+    - _StencilRefDistortionVec: 4
+    - _StencilRefMV: 33
+    - _StencilWriteMask: 6
+    - _StencilWriteMaskDepth: 9
+    - _StencilWriteMaskDistortionVec: 4
+    - _StencilWriteMaskMV: 43
+    - _SurfaceType: 1
+    - _TextureStretch: 1.62
+    - _TextureTiling: 0.36
+    - _Threshold: 0.285
+    - _ThresholdSineIntensity: 0.01
+    - _ThresholdSineSpeed: 1.3
+    - _TintTextureIntensity: 0.85
+    - _TintTexturePower: 1
+    - _TintTextureTiling: 1
+    - _TransparentBackfaceEnable: 0
+    - _TransparentCullMode: 2
+    - _TransparentDepthPostpassEnable: 0
+    - _TransparentDepthPrepassEnable: 0
+    - _TransparentSortPriority: 0
+    - _TransparentWritingMotionVec: 0
+    - _TransparentZWrite: 0
+    - _UseShadowThreshold: 0
+    - _ZTestDepthEqualForOpaque: 4
+    - _ZTestTransparent: 4
+    - _ZWrite: 0
+    m_Colors:
+    - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _TintColor: {r: 0.0837698, g: 0, b: 2, a: 1}
+    - _TintTextureSmoothstep: {r: 0.2, g: 0.6, b: 0, a: 0}
+  m_BuildTextureStacks: []
