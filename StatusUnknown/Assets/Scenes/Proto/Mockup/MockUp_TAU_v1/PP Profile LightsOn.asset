@@ -153,7 +153,7 @@ MonoBehaviour:
     m_Value: 3
   intensity:
     m_OverrideState: 1
-    m_Value: 0.1
+    m_Value: 0.05
   response:
     m_OverrideState: 1
     m_Value: 0
@@ -551,7 +551,7 @@ MonoBehaviour:
     m_Value: 0
   contrast:
     m_OverrideState: 1
-    m_Value: 10
+    m_Value: -0
   colorFilter:
     m_OverrideState: 1
     m_Value: {r: 1, g: 0.96081275, b: 0.8726415, a: 1}
@@ -560,7 +560,7 @@ MonoBehaviour:
     m_Value: 0
   saturation:
     m_OverrideState: 1
-    m_Value: 10
+    m_Value: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -593,6 +593,7 @@ MonoBehaviour:
   - {fileID: 2340678196671459464}
   - {fileID: -7371065233353477809}
   - {fileID: 2762279896432914017}
+  - {fileID: 1841978028032241538}
 --- !u!114 &356583552544826210
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -710,6 +711,52 @@ MonoBehaviour:
   m_RayMaxIterationsRT:
     m_OverrideState: 1
     m_Value: 48
+--- !u!114 &1841978028032241538
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcf384b154398e341b6b29969c078198, type: 3}
+  m_Name: MotionBlur
+  m_EditorClassIdentifier: 
+  active: 1
+  quality:
+    m_OverrideState: 1
+    m_Value: 0
+  intensity:
+    m_OverrideState: 1
+    m_Value: 0
+  maximumVelocity:
+    m_OverrideState: 1
+    m_Value: 200
+  minimumVelocity:
+    m_OverrideState: 1
+    m_Value: 2
+  cameraMotionBlur:
+    m_OverrideState: 0
+    m_Value: 1
+  specialCameraClampMode:
+    m_OverrideState: 0
+    m_Value: 0
+  cameraVelocityClamp:
+    m_OverrideState: 0
+    m_Value: 0.05
+  cameraTranslationVelocityClamp:
+    m_OverrideState: 0
+    m_Value: 0.05
+  cameraRotationVelocityClamp:
+    m_OverrideState: 0
+    m_Value: 0.03
+  depthComparisonExtent:
+    m_OverrideState: 0
+    m_Value: 1
+  m_SampleCount:
+    m_OverrideState: 1
+    m_Value: 4
 --- !u!114 &2340678196671459464
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -958,8 +1005,8 @@ MonoBehaviour:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
-          time: 0.011363637
-          value: 0.038277507
+          time: 0.010025063
+          value: 0.04232806
           inSlope: 0
           outSlope: 0.7017543
           tangentMode: 0
@@ -967,8 +1014,8 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.98636365
-          value: 0.94258374
+          time: 1
+          value: 0.8941799
           inSlope: 1.3157895
           outSlope: 0
           tangentMode: 0
