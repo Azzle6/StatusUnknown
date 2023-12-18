@@ -42,6 +42,7 @@ namespace pooler
         {
             this.currentTimer = null;
             this.vfx.Stop();
+            this.vfx.visualEffectAsset = null;
             ComponentPooler.Instance.ReturnObjectToPool(this);
         }
     }
