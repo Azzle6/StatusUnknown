@@ -13,21 +13,16 @@ namespace Weapons
     {
         private WeaponTriggerData weaponTriggerData;
         
+        //Data
+        private VisualElement outputElement;
+        
         public TriggerGridView(VisualElement root, Shape shape, WeaponTriggerData container, E_ItemType[] typesContained) : base(root, shape, container, typesContained)
         {
             this.weaponTriggerData = container;
             this.weaponTriggerData.compiledModules.onNewCompilation += this.OnNewCompilation;
             this.weaponTriggerData.compiledModules.CompileWeaponModules(this.weaponTriggerData.triggerRowPosition, this.weaponTriggerData.modules);
-            
-            VisualElement outputElement = UIHandler.Instance.uiSettings.triggerTemplate.Instantiate();
-            outputElement.Q<VisualElement>("triggerIcon").style.backgroundImage = UIHandler.Instance.outputReferences
-                .weaponOutputReferences[this.weaponTriggerData.weaponTriggerType].icon.texture;
-            
-            outputElement.style.position = Position.Absolute;
-            this.gridRoot.Add(outputElement);
-            float triggerSize = UIHandler.Instance.uiSettings.triggerSize;
-            float slotSize = UIHandler.Instance.uiSettings.slotSize;
-            outputElement.transform.position = new Vector3(-triggerSize * 0.75f, slotSize * this.weaponTriggerData.triggerRowPosition + slotSize / 2 - triggerSize/2);
+
+            this.RefreshOutputElement();
         }
 
         private void OnNewCompilation(ModuleCompilation newCompilation)
@@ -62,8 +57,24 @@ namespace Weapons
             this.weaponTriggerData = (WeaponTriggerData)newContainer;
             this.weaponTriggerData.compiledModules.onNewCompilation += this.OnNewCompilation;
             this.weaponTriggerData.compiledModules.CompileWeaponModules(this.weaponTriggerData.triggerRowPosition, this.weaponTriggerData.modules);
+            this.RefreshOutputElement();
         }
-        
-        
+
+        private void RefreshOutputElement()
+        {
+            if (this.outputElement == null)
+            {
+                this.outputElement = UIHandler.Instance.uiSettings.triggerTemplate.Instantiate();
+                this.outputElement.style.position = Position.Absolute;
+                this.gridRoot.Add(outputElement);
+            }
+            
+            this.outputElement.Q<VisualElement>("triggerIcon").style.backgroundImage = UIHandler.Instance.outputReferences
+                .weaponOutputReferences[this.weaponTriggerData.weaponTriggerType].icon.texture;
+            
+            float triggerSize = UIHandler.Instance.uiSettings.triggerSize;
+            float slotSize = UIHandler.Instance.uiSettings.slotSize;
+            this.outputElement.transform.position = new Vector3(-triggerSize * 0.75f, slotSize * this.weaponTriggerData.triggerRowPosition + slotSize / 2 - triggerSize/2);
+        }
     }
 }

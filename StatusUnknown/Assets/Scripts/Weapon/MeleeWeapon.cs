@@ -23,9 +23,6 @@ namespace Weapon
                 cooldownCoroutine = default;
             }
             
-
-
-            
             weaponManager.playerAnimator.SetTrigger("MeleeHit");   
             weaponManager.playerAnimator.SetFloat("MeleeCombo", comboIndex);
             

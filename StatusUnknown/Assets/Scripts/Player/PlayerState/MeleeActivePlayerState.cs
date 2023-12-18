@@ -43,6 +43,7 @@ namespace Player
             currentMeleeWeapon.Active();
             currentAttack = currentMeleeWeapon.GetAttack();
             yield return new WaitForSeconds(currentAttack.activeTime);
+            ModuleBehaviourHandler.Instance.CastModule(this.currentMeleeWeapon.inventory, this.currentMeleeWeapon.weaponDefinition, E_WeaponOutput.ON_SPAWN, this.transform, null);
             DetectAndDamage();
             playerStateInterpretor.RemoveState(PlayerStateType.ACTION);
             activeCoroutine = null;
