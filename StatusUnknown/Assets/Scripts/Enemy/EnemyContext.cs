@@ -3,6 +3,7 @@
 namespace Enemy
 {
     using System;
+    using System.Collections;
     using UnityEngine;
 
     public abstract class EnemyContext : MonoBehaviour, IDamageable
@@ -21,7 +22,8 @@ namespace Enemy
         public event Action<EnemyContext> OnDeathEvent;
     
         [Header("Debug")]
-        [SerializeField] protected MeshRenderer meshRenderer;
+        public float hitFreq = 1;
+        [SerializeField] protected MeshRenderer[] meshRenderers;
         [SerializeField] GameObject deathVFXPrefab;
         float currentHealth;
         void OnEnable()
@@ -116,9 +118,34 @@ namespace Enemy
         {
             currentHealth -= damage;
             AddForce(force);
+            HurtProcess();
             //Debug.Log($"{gameObject.name} took {damage} damage {currentHealth}/{stats.health}");
             if (currentHealth <= 0)
                 Death();
+        }
+        void HurtProcess()
+        {
+            for (int i = 0; i < meshRenderers.Length; i++)
+            {
+                StartCoroutine(HurtBlink(meshRenderers[i]));
+            }
+        }
+        public IEnumerator HurtBlink( MeshRenderer meshRenderer)
+        {
+            float hit = 1;
+            meshRenderer.material.SetFloat("_Hit", hit);
+            float startTime = Time.time;
+            while (Time.time - startTime < hitFreq)
+            {
+                //Debug.Log($"blink {startTime}, {Time.time}, {startTime - Time.time}, {speed}");
+                hit = Mathf.PingPong(Time.time / hitFreq, 1);
+                meshRenderer?.material?.SetFloat("_Hit", 1);// debug hit
+                yield return null;
+            }
+            hit = 0;
+            meshRenderer.material.SetFloat("_Hit", hit);
+            yield return null;
+
         }
         protected virtual void Death()
         {
